@@ -1,0 +1,51 @@
+name: Relatório de bug
+description: Crie um relatório para nos ajudar a reproduzir e corrigir um problema.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por relatar o problema! Forneça o máximo de detalhes possível.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Componente afetado
+      options:
+        - Decode Launcher (Desktop/Rust)
+        - Catálogo Web (Site)
+        - CI / Empacotamento
+        - Documentação
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do problema
+      description: Explique o que aconteceu de forma clara e concisa.
+      placeholder: Ao clicar em...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Passos para reproduzir
+      description: Como reproduzir o comportamento observado?
+      placeholder: |
+        1. Executar '...'
+        2. Clicar em '...'
+        3. Observar o erro '...'
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Sistema operacional e versão
+      placeholder: ex.: Ubuntu 24.04, Windows 11, macOS Sequoia
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs ou mensagens de erro
+      description: Cole aqui logs de terminal ou stacktraces, se houver.
