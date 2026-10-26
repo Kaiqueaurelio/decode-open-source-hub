@@ -71,6 +71,23 @@ for path in root.rglob("*"):
         path.write_text(updated, encoding="utf-8")
         changed.append(path.relative_to(root).as_posix())
 
+# Replace the upstream brand artwork with a neutral Decode wordmark. The upstream
+# brand license file applies to ArtCraft marks, so it is not shipped as Decode artwork.
+brand_dir = root / "docs" / "brand"
+brand_dir.mkdir(parents=True, exist_ok=True)
+logo_template = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 120" role="img" aria-label="Decode">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#315be9"/><stop offset="1" stop-color="#47d7e7"/></linearGradient></defs>
+  <rect x="4" y="4" width="112" height="112" rx="28" fill="url(#g)"/>
+  <path d="M37 31h25c22 0 37 13 37 29s-15 29-37 29H37V31zm22 43c11 0 18-5 18-14s-7-14-18-14h-5v28h5z" fill="#fff"/>
+  <text x="142" y="82" font-family="Inter,Arial,sans-serif" font-size="70" font-weight="800" letter-spacing="-3" fill="CURRENT">Decode</text>
+</svg>
+"""
+(brand_dir / "artcraft-logo.svg").write_text(logo_template.replace("CURRENT", "#15213b"), encoding="utf-8")
+(brand_dir / "artcraft-logo-white.svg").write_text(logo_template.replace("CURRENT", "#ffffff"), encoding="utf-8")
+old_brand_license = brand_dir / "LICENSE-brand.txt"
+if old_brand_license.exists():
+    old_brand_license.unlink()
+
 print(f"Imported upstream tree to {root}")
 print(f"Updated branding strings in {len(changed)} text files.")
 print("NOTICE, ATTRIBUTION.md and license texts were preserved without modification.")
