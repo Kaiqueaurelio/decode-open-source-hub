@@ -13,7 +13,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: decode-launcher-source-import
+  group: decode-launcher-source-import-v2
   cancel-in-progress: true
 
 jobs:
