@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ArtCraft ecosystem catalog record",
+  "title": "ArtCraft Craft App Suite catalog",
   "type": "array",
-  "minItems": 15,
-  "maxItems": 15,
+  "minItems": 13,
+  "maxItems": 13,
   "items": {
     "type": "object",
     "required": [
@@ -27,7 +27,22 @@
     "properties": {
       "slug": {
         "type": "string",
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "enum": [
+          "photocraft",
+          "vectorcraft",
+          "filmcraft",
+          "lightcraft",
+          "pdfcraft",
+          "effectcraft",
+          "designcraft",
+          "figcraft",
+          "wordcraft",
+          "soundcraft",
+          "deckcraft",
+          "cadcraft",
+          "gridcraft"
+        ]
       },
       "name": {
         "type": "string",
@@ -43,9 +58,7 @@
       },
       "kind": {
         "enum": [
-          "Crafting App",
-          "Estúdio de IA",
-          "Launcher"
+          "Crafting App"
         ]
       },
       "tagline": {

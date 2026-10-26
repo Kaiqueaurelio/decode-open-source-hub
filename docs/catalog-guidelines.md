@@ -2,18 +2,19 @@
 
 ## Escopo permitido
 
-O catálogo contém os projetos do ecossistema oficial ArtCraft:
-- 13 Crafting Apps: PhotoCraft, VectorCraft, FilmCraft, LightCraft, PdfCraft, EffectCraft, DesignCraft, FigCraft, WordCraft, SoundCraft, DeckCraft, CADCraft e GridCraft.
-- ArtCraft Studio, o estúdio principal de criação visual com IA.
-- ArtCraft Launcher, o instalador e atualizador dos Crafting Apps.
+O catálogo contém somente os 13 aplicativos da Craft App Suite oficial:
+PhotoCraft, VectorCraft, FilmCraft, LightCraft, PdfCraft, EffectCraft, DesignCraft, FigCraft, WordCraft, SoundCraft, DeckCraft, CADCraft e GridCraft.
 
-Fonte primária da lista: https://getartcraft.com/apps. Código-fonte: https://github.com/storytold.
+Fontes primárias:
+- Lista dos produtos: https://getartcraft.com/apps
+- Catálogo embutido no ArtCraft Launcher: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/catalog.rs
+- Código-fonte dos aplicativos: https://github.com/storytold
 
-Não acrescente ferramentas de outros mantenedores só por serem semelhantes. O foco é documentar os produtos ArtCraft, não criar um diretório genérico de alternativas.
+O ArtCraft Studio e o ArtCraft Launcher não são entradas deste catálogo. O Launcher é usado somente como fonte oficial de conferência da lista. Não acrescente ferramentas de outros mantenedores só por serem semelhantes.
 
 ## Registros
 
-Cada entrada deve incluir slug exclusivo, nome, tipo, categoria, descrição objetiva, plataformas, licença, estágio atual e links HTTPS para site, repositório, licença e página oficial de download.
+Cada entrada inclui slug exclusivo, nome, tipo, categoria, descrição objetiva, plataformas, licença, estágio atual e links HTTPS para site, repositório, licença e página oficial do produto. A lista e a ordem devem corresponder aos 13 apps do catálogo oficial.
 
 ## Licença
 
@@ -25,6 +26,6 @@ Mantenha os rótulos de acordo com a página oficial. Não transforme "Alpha ini
 
 ## Downloads
 
-Prefira a página do produto em getartcraft.com/apps/<app>, que aponta para as opções atuais de instalação. Para ArtCraft Studio use getartcraft.com/download. Para o Launcher use a página de releases oficial do repositório.
+Prefira a página oficial de cada app em https://getartcraft.com/apps/<app>, onde ficam as opções de instalação atuais. O campo de download deve apontar para a mesma página oficial do produto, evitando links de instaladores que possam ficar desatualizados.
 
-A validação automatizada verifica sintaxe de URLs e domínios, mas não garante que uma página responda ou que um instalador seja seguro.
+A validação automatizada verifica o escopo, os valores esperados de estágio e plataforma, sintaxe de URLs e domínios. A disponibilidade dos links e a segurança dos instaladores ainda precisam de verificação externa.

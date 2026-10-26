@@ -4,13 +4,13 @@ Obrigado por ajudar a manter este catálogo correto e útil.
 
 ## Escopo
 
-Este catálogo é intencionalmente restrito ao ecossistema ArtCraft: os 13 Crafting Apps da página oficial https://getartcraft.com/apps, o ArtCraft Studio e o ArtCraft Launcher.
+Este catálogo contém somente os 13 Crafting Apps listados em https://getartcraft.com/apps e no catálogo-fonte oficial do ArtCraft Launcher: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/catalog.rs. O Launcher é uma fonte de conferência, não uma entrada catalogada.
 
-**Não adicione programas open source genéricos de outras equipes.** Isso quebraria o escopo deste projeto.
+**Não adicione programas open source genéricos de outras equipes.** Isso quebraria o escopo deste projeto. O ArtCraft Studio e o Launcher também não devem ser adicionados como itens do catálogo.
 
 ## Sugerir uma correção ou novo produto oficial
 
-1. Confirme a entrada no site oficial ArtCraft.
+1. Confirme que o app aparece no site oficial ArtCraft e no catálogo-fonte do Launcher.
 2. Confirme que o código-fonte está na organização https://github.com/storytold.
 3. Confira a licença nos arquivos oficiais LICENSE-MIT e LICENSE-APACHE.
 4. Use a página oficial do produto para detalhes, plataformas e opções de download.
@@ -23,7 +23,7 @@ python3 scripts/validate_catalog.py
 python3 -m unittest discover -s tests -v
 ```
 
-Se o ArtCraft publicar novos apps, atualize `data/software.json`, `data/schema.json`, `scripts/validate_catalog.py` e `tests/test_catalog.py` juntos. Não inclua produtos que não sejam confirmados pelo site oficial.
+Se a equipe ArtCraft adicionar um app à suíte oficial, confirme a presença dele nas duas listas oficiais; só então atualize `data/software.json`, `data/schema.json`, `scripts/validate_catalog.py` e `tests/test_catalog.py` juntos.
 
 ## Padrões
 
