@@ -71,6 +71,7 @@ class CatalogTests(unittest.TestCase):
         self.assertIn('id="view-table"', page)
         self.assertIn('id="status-tabs"', page)
         self.assertIn('id="reload-catalog"', page)
+        self.assertIn('og:title" content="Decode Launcher — Open Source App Suite"', page)
         self.assertIn("function setView(", script)
         self.assertIn("function renderStatusTabs(", script)
         self.assertIn("assets/app-icons/", script)
