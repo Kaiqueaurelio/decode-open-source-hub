@@ -1,8 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Decode Open Source Hub software record",
+  "title": "ArtCraft ecosystem catalog record",
   "type": "array",
-  "minItems": 20,
+  "minItems": 15,
+  "maxItems": 15,
   "items": {
     "type": "object",
     "required": [
@@ -10,6 +11,7 @@
       "name",
       "icon",
       "category",
+      "kind",
       "tagline",
       "description",
       "platforms",
@@ -19,6 +21,7 @@
       "sourceUrl",
       "downloadUrl",
       "tags",
+      "stage",
       "featured"
     ],
     "properties": {
@@ -38,6 +41,13 @@
         "type": "string",
         "minLength": 1
       },
+      "kind": {
+        "enum": [
+          "Crafting App",
+          "Estúdio de IA",
+          "Launcher"
+        ]
+      },
       "tagline": {
         "type": "string",
         "minLength": 1
@@ -56,23 +66,22 @@
         "uniqueItems": true
       },
       "license": {
-        "type": "string",
-        "minLength": 1
+        "const": "MIT OR Apache-2.0"
       },
       "licenseUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://"
+        "pattern": "^https://github\\.com/storytold/"
       },
       "websiteUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://"
+        "pattern": "^https://getartcraft\\.com"
       },
       "sourceUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://"
+        "pattern": "^https://github\\.com/storytold/"
       },
       "downloadUrl": {
         "type": "string",
@@ -85,6 +94,10 @@
           "type": "string"
         },
         "uniqueItems": true
+      },
+      "stage": {
+        "type": "string",
+        "minLength": 1
       },
       "featured": {
         "type": "boolean"

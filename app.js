@@ -54,7 +54,7 @@
   function getFiltered() {
     var term = currentSearch(), platform = platformFilter.value;
     var found = allSoftware.filter(function (item) {
-      var searchable = [item.name,item.tagline,item.description,item.category,item.license].concat(item.tags || []).join(" ").toLocaleLowerCase("pt-BR");
+      var searchable = [item.name,item.tagline,item.description,item.category,item.license,item.stage,item.kind].concat(item.tags || []).join(" ").toLocaleLowerCase("pt-BR");
       return (!term || searchable.indexOf(term) !== -1) && (!selectedCategory || item.category === selectedCategory) && (!platform || (item.platforms || []).indexOf(platform) !== -1);
     });
     var sort = sortFilter.value;
@@ -82,9 +82,13 @@
     var licenseMarkup = licenseUrl
       ? '<a class="license-value" href="' + escapeHtml(licenseUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.license) + ' ↗</a>'
       : '<span class="license-value">' + escapeHtml(item.license) + '</span>';
-    var featured = item.featured ? '<span class="featured-badge">✦ Em destaque</span>' : "";
-    return '<article class="software-card"><div class="card-top"><div class="app-icon" aria-hidden="true">' + escapeHtml(item.icon || "◈") + '</div>' + featured + '</div>' +
-      '<div class="card-category">' + escapeHtml(item.category) + '</div><div class="card-title-row"><h3 class="card-title">' + escapeHtml(item.name) + '</h3></div>' +
+    var featured = item.featured ? '<span class="featured-badge">✦ Destaque</span>' : "";
+    var stage = String(item.stage || "Status não informado");
+    var stageClass = /alpha/i.test(stage) ? "stage-badge stage-alpha" : /desenvolvimento/i.test(stage) ? "stage-badge stage-development" : "stage-badge stage-available";
+    var stageBadge = '<span class="' + stageClass + '">' + escapeHtml(stage) + '</span>';
+    var kindBadge = '<span class="kind-pill">' + escapeHtml(item.kind || "Projeto ArtCraft") + '</span>';
+    return '<article class="software-card"><div class="card-top"><div class="app-icon" aria-hidden="true">' + escapeHtml(item.icon || "◈") + '</div><div class="card-badges">' + featured + stageBadge + '</div></div>' +
+      '<div class="card-category-row"><div class="card-category">' + escapeHtml(item.category) + '</div>' + kindBadge + '</div><div class="card-title-row"><h3 class="card-title">' + escapeHtml(item.name) + '</h3></div>' +
       '<p class="card-tagline">' + escapeHtml(item.tagline) + '</p><p class="card-description">' + escapeHtml(item.description) + '</p>' +
       '<div class="platform-row" aria-label="Plataformas: ' + escapeHtml((item.platforms || []).join(", ")) + '">' + platforms + extra + '</div>' +
       '<div class="license-row"><span class="license-label">Licença</span>' + licenseMarkup + '</div>' +

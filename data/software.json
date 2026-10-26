@@ -1,1183 +1,428 @@
 [
   {
-    "slug": "blender",
-    "name": "Blender",
-    "icon": "🧊",
-    "category": "Criação visual",
-    "tagline": "Modelagem, animação e criação 3D",
-    "description": "Suíte completa para modelagem 3D, animação, renderização, composição e produção visual.",
+    "slug": "artcraft-studio",
+    "name": "ArtCraft Studio",
+    "icon": "🎨",
+    "category": "IA e criação",
+    "kind": "Estúdio de IA",
+    "tagline": "Criação de imagens e vídeos com IA e composição de cenas",
+    "description": "Estúdio de criação com IA para gerar imagens e vídeos, compor cenas 2D/3D, posicionar personagens e remover fundos, combinando geração e edição em um mesmo fluxo.",
     "platforms": [
       "Windows",
       "macOS",
-      "Linux"
+      "Web"
     ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.blender.org/about/license/",
-    "websiteUrl": "https://www.blender.org/",
-    "sourceUrl": "https://projects.blender.org/blender/blender",
-    "downloadUrl": "https://www.blender.org/download/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/artcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/",
+    "sourceUrl": "https://github.com/storytold/artcraft",
+    "downloadUrl": "https://getartcraft.com/download",
     "tags": [
+      "IA",
+      "imagem",
+      "vídeo",
+      "composição",
       "3D",
-      "modelagem",
-      "animação",
-      "render"
+      "remoção de fundo"
     ],
+    "stage": "Disponível · v0.41.0",
     "featured": true
   },
   {
-    "slug": "gimp",
-    "name": "GIMP",
-    "icon": "🎨",
-    "category": "Criação visual",
-    "tagline": "Edição e manipulação de imagens",
-    "description": "Editor de imagens para retoque fotográfico, composição, criação gráfica e fluxos de trabalho personalizados.",
+    "slug": "craft-launcher",
+    "name": "ArtCraft Launcher",
+    "icon": "🚀",
+    "category": "Instalação e atualização",
+    "kind": "Launcher",
+    "tagline": "Instale e atualize a suíte ArtCraft em um só lugar",
+    "description": "Aplicativo oficial para instalar, abrir e atualizar os 13 Crafting Apps, selecionar os pacotes adequados ao computador e manter a suíte atualizada.",
     "platforms": [
       "Windows",
       "macOS",
-      "Linux"
+      "Linux",
+      "FreeBSD"
     ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.gimp.org/docs/userfaq.html",
-    "websiteUrl": "https://www.gimp.org/",
-    "sourceUrl": "https://gitlab.gnome.org/GNOME/gimp",
-    "downloadUrl": "https://www.gimp.org/downloads/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/craft-launcher/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps",
+    "sourceUrl": "https://github.com/storytold/craft-launcher",
+    "downloadUrl": "https://github.com/storytold/craft-launcher/releases/latest",
+    "tags": [
+      "instalador",
+      "atualizador",
+      "launcher",
+      "suíte"
+    ],
+    "stage": "Disponível · v0.5.1",
+    "featured": true
+  },
+  {
+    "slug": "photocraft",
+    "name": "PhotoCraft",
+    "icon": "🖼️",
+    "category": "Imagem e fotografia",
+    "kind": "Crafting App",
+    "tagline": "Editor de imagens com camadas e máscaras",
+    "description": "Editor de imagens nativo com camadas, máscaras, ajustes, estilos, texto, vetores e pincéis. A página oficial também destaca fluxos com arquivos PSD e PSB.",
+    "platforms": [
+      "macOS",
+      "Windows",
+      "Linux",
+      "Web"
+    ],
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/photocraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/photocraft",
+    "sourceUrl": "https://github.com/storytold/photocraft",
+    "downloadUrl": "https://getartcraft.com/apps/photocraft",
     "tags": [
       "imagem",
-      "fotografia",
-      "design",
-      "raster"
+      "camadas",
+      "PSD",
+      "PSB",
+      "máscaras",
+      "edição"
     ],
+    "stage": "Alpha inicial",
     "featured": true
   },
   {
-    "slug": "krita",
-    "name": "Krita",
-    "icon": "🖌️",
-    "category": "Criação visual",
-    "tagline": "Pintura digital e ilustração",
-    "description": "Aplicativo de pintura digital voltado a ilustradores, artistas conceituais, quadrinhos e pintura com pincéis.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0",
-    "licenseUrl": "https://krita.org/en/about/license/",
-    "websiteUrl": "https://krita.org/",
-    "sourceUrl": "https://invent.kde.org/graphics/krita",
-    "downloadUrl": "https://krita.org/en/download/",
-    "tags": [
-      "ilustração",
-      "pintura",
-      "desenho",
-      "arte"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "inkscape",
-    "name": "Inkscape",
+    "slug": "vectorcraft",
+    "name": "VectorCraft",
     "icon": "✒️",
-    "category": "Criação visual",
-    "tagline": "Ilustração vetorial profissional",
-    "description": "Editor vetorial para logotipos, ícones, diagramas, ilustrações e artes escaláveis usando SVG.",
+    "category": "Design e publicação",
+    "kind": "Crafting App",
+    "tagline": "Ilustração vetorial",
+    "description": "Aplicativo de ilustração vetorial com ferramenta caneta, painéis e atalhos voltados a fluxos profissionais de desenho vetorial.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
+      "Windows",
+      "Linux",
+      "Web"
     ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://inkscape.org/about/license/",
-    "websiteUrl": "https://inkscape.org/",
-    "sourceUrl": "https://gitlab.com/inkscape/inkscape",
-    "downloadUrl": "https://inkscape.org/release/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/vectorcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/vectorcraft",
+    "sourceUrl": "https://github.com/storytold/vectorcraft",
+    "downloadUrl": "https://getartcraft.com/apps/vectorcraft",
     "tags": [
       "vetor",
+      "ilustração",
       "SVG",
-      "logotipo",
-      "ilustração"
+      "desenho"
     ],
-    "featured": true
+    "stage": "Em desenvolvimento",
+    "featured": false
   },
   {
-    "slug": "darktable",
-    "name": "darktable",
-    "icon": "📷",
-    "category": "Criação visual",
-    "tagline": "Fluxo fotográfico e revelação RAW",
-    "description": "Aplicativo de fotografia para revelar arquivos RAW, organizar imagens e realizar ajustes não destrutivos.",
+    "slug": "filmcraft",
+    "name": "FilmCraft",
+    "icon": "🎬",
+    "category": "Vídeo e motion",
+    "kind": "Crafting App",
+    "tagline": "Edição de vídeo com linha do tempo",
+    "description": "Editor de vídeo com monitores de origem e programa, linha do tempo e modos de corte para montagem audiovisual.",
     "platforms": [
-      "Windows",
       "macOS",
+      "Windows",
       "Linux"
     ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.darktable.org/about/",
-    "websiteUrl": "https://www.darktable.org/",
-    "sourceUrl": "https://github.com/darktable-org/darktable",
-    "downloadUrl": "https://www.darktable.org/install/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/filmcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/filmcraft",
+    "sourceUrl": "https://github.com/storytold/filmcraft",
+    "downloadUrl": "https://getartcraft.com/apps/filmcraft",
+    "tags": [
+      "vídeo",
+      "edição",
+      "timeline",
+      "montagem"
+    ],
+    "stage": "Em desenvolvimento",
+    "featured": false
+  },
+  {
+    "slug": "lightcraft",
+    "name": "LightCraft",
+    "icon": "📷",
+    "category": "Imagem e fotografia",
+    "kind": "Crafting App",
+    "tagline": "Biblioteca de fotos e revelação RAW",
+    "description": "Ferramenta para organizar bibliotecas fotográficas e revelar arquivos RAW com edição não destrutiva, mantendo o fluxo de trabalho no próprio dispositivo.",
+    "platforms": [
+      "macOS",
+      "Windows",
+      "Linux",
+      "Web"
+    ],
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/lightcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/lightcraft",
+    "sourceUrl": "https://github.com/storytold/lightcraft",
+    "downloadUrl": "https://getartcraft.com/apps/lightcraft",
     "tags": [
       "fotografia",
       "RAW",
-      "edição",
-      "imagem"
+      "biblioteca",
+      "revelação"
     ],
+    "stage": "Em desenvolvimento",
     "featured": false
   },
   {
-    "slug": "scribus",
-    "name": "Scribus",
-    "icon": "📰",
-    "category": "Criação visual",
-    "tagline": "Diagramação e publicação",
-    "description": "Ferramenta de editoração para produzir revistas, folhetos, cartazes, documentos e arquivos prontos para impressão.",
+    "slug": "pdfcraft",
+    "name": "PdfCraft",
+    "icon": "📄",
+    "category": "Documentos e produtividade",
+    "kind": "Crafting App",
+    "tagline": "Leitura e organização de PDFs",
+    "description": "Ferramenta de PDF para ler, organizar, combinar, dividir e proteger documentos sem depender de uma rotina centrada na nuvem.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://www.scribus.net/about/",
-    "websiteUrl": "https://www.scribus.net/",
-    "sourceUrl": "https://sourceforge.net/projects/scribus/",
-    "downloadUrl": "https://www.scribus.net/downloads/",
-    "tags": [
-      "diagramação",
-      "PDF",
-      "impressão",
-      "publicação"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "libreoffice",
-    "name": "LibreOffice",
-    "icon": "📊",
-    "category": "Produtividade",
-    "tagline": "Documentos, planilhas e apresentações",
-    "description": "Pacote de escritório com editor de texto, planilhas, apresentações, desenhos, fórmulas e ferramentas de banco de dados.",
-    "platforms": [
       "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "MPL-2.0 / LGPL-3.0-or-later",
-    "licenseUrl": "https://www.libreoffice.org/about-us/licenses/",
-    "websiteUrl": "https://www.libreoffice.org/",
-    "sourceUrl": "https://git.libreoffice.org/core",
-    "downloadUrl": "https://www.libreoffice.org/download/download-libreoffice/",
-    "tags": [
-      "office",
-      "planilha",
-      "documento",
-      "apresentação"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "firefox",
-    "name": "Mozilla Firefox",
-    "icon": "🦊",
-    "category": "Internet e comunicação",
-    "tagline": "Navegação na web com foco em privacidade",
-    "description": "Navegador web de código aberto com extensões, ferramentas de privacidade e recursos de sincronização.",
-    "platforms": [
-      "Windows",
-      "macOS",
       "Linux",
-      "Android",
-      "iOS"
+      "Web"
     ],
-    "license": "MPL-2.0",
-    "licenseUrl": "https://www.mozilla.org/en-US/MPL/2.0/",
-    "websiteUrl": "https://www.mozilla.org/firefox/",
-    "sourceUrl": "https://hg.mozilla.org/mozilla-central",
-    "downloadUrl": "https://www.mozilla.org/firefox/new/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/pdfcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/pdfcraft",
+    "sourceUrl": "https://github.com/storytold/pdfcraft",
+    "downloadUrl": "https://getartcraft.com/apps/pdfcraft",
     "tags": [
-      "navegador",
-      "web",
-      "privacidade"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "thunderbird",
-    "name": "Mozilla Thunderbird",
-    "icon": "✉️",
-    "category": "Internet e comunicação",
-    "tagline": "E-mail, calendário e contatos",
-    "description": "Cliente de e-mail de código aberto com suporte a múltiplas contas, calendários, contatos e extensões.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "MPL-2.0",
-    "licenseUrl": "https://www.mozilla.org/en-US/MPL/2.0/",
-    "websiteUrl": "https://www.thunderbird.net/",
-    "sourceUrl": "https://github.com/thunderbird/thunderbird",
-    "downloadUrl": "https://www.thunderbird.net/download/",
-    "tags": [
-      "e-mail",
-      "agenda",
-      "produtividade"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "keepassxc",
-    "name": "KeePassXC",
-    "icon": "🔐",
-    "category": "Segurança e privacidade",
-    "tagline": "Gerenciador local de senhas",
-    "description": "Gerenciador de senhas que mantém as credenciais em um banco de dados criptografado controlado pelo usuário.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://keepassxc.org/",
-    "websiteUrl": "https://keepassxc.org/",
-    "sourceUrl": "https://github.com/keepassxreboot/keepassxc",
-    "downloadUrl": "https://keepassxc.org/download/",
-    "tags": [
-      "senhas",
-      "criptografia",
-      "privacidade",
+      "PDF",
+      "documentos",
+      "juntar",
+      "dividir",
       "segurança"
     ],
+    "stage": "Alpha inicial",
     "featured": true
   },
   {
-    "slug": "syncthing",
-    "name": "Syncthing",
-    "icon": "🔄",
-    "category": "Utilitários",
-    "tagline": "Sincronização contínua entre dispositivos",
-    "description": "Sincroniza arquivos diretamente entre dispositivos, sem depender de um servidor central obrigatório.",
+    "slug": "effectcraft",
+    "name": "EffectCraft",
+    "icon": "✨",
+    "category": "Vídeo e motion",
+    "kind": "Crafting App",
+    "tagline": "Motion graphics e efeitos visuais",
+    "description": "Compositor para motion graphics e efeitos visuais com composições, camadas, keyframes, efeitos, câmeras e fila de renderização.",
     "platforms": [
-      "Windows",
       "macOS",
+      "Windows",
       "Linux",
-      "BSD"
+      "Web"
     ],
-    "license": "MPL-2.0",
-    "licenseUrl": "https://github.com/syncthing/syncthing/blob/main/LICENSE",
-    "websiteUrl": "https://syncthing.net/",
-    "sourceUrl": "https://github.com/syncthing/syncthing",
-    "downloadUrl": "https://syncthing.net/downloads/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/effectcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/effectcraft",
+    "sourceUrl": "https://github.com/storytold/effectcraft",
+    "downloadUrl": "https://getartcraft.com/apps/effectcraft",
     "tags": [
-      "sincronização",
-      "arquivos",
-      "backup",
-      "rede"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "nextcloud",
-    "name": "Nextcloud",
-    "icon": "☁️",
-    "category": "Infraestrutura e nuvem",
-    "tagline": "Nuvem privada para arquivos e colaboração",
-    "description": "Plataforma de hospedagem própria para arquivos, compartilhamento e colaboração, com aplicativos integrados.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux",
-      "Web",
-      "Android",
-      "iOS"
-    ],
-    "license": "AGPL-3.0",
-    "licenseUrl": "https://github.com/nextcloud/server/blob/master/COPYING",
-    "websiteUrl": "https://nextcloud.com/",
-    "sourceUrl": "https://github.com/nextcloud/server",
-    "downloadUrl": "https://nextcloud.com/install/",
-    "tags": [
-      "nuvem",
-      "arquivos",
-      "colaboração",
-      "self-hosted"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "vlc",
-    "name": "VLC media player",
-    "icon": "▶️",
-    "category": "Vídeo e áudio",
-    "tagline": "Reprodutor multimídia versátil",
-    "description": "Reprodutor de mídia que suporta uma ampla variedade de arquivos, discos, fluxos de rede e formatos de áudio e vídeo.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux",
-      "Android",
-      "iOS"
-    ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://www.videolan.org/vlc/",
-    "websiteUrl": "https://www.videolan.org/vlc/",
-    "sourceUrl": "https://code.videolan.org/videolan/vlc",
-    "downloadUrl": "https://www.videolan.org/vlc/#download",
-    "tags": [
-      "vídeo",
-      "áudio",
-      "player",
-      "multimídia"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "obs-studio",
-    "name": "OBS Studio",
-    "icon": "🎥",
-    "category": "Vídeo e áudio",
-    "tagline": "Gravação de tela e transmissão ao vivo",
-    "description": "Software para gravação de vídeo, captura de tela, composição de cenas e transmissão ao vivo.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0",
-    "licenseUrl": "https://github.com/obsproject/obs-studio/blob/master/COPYING",
-    "websiteUrl": "https://obsproject.com/",
-    "sourceUrl": "https://github.com/obsproject/obs-studio",
-    "downloadUrl": "https://obsproject.com/download",
-    "tags": [
-      "streaming",
-      "gravação",
-      "vídeo",
-      "captura"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "audacity",
-    "name": "Audacity",
-    "icon": "🎙️",
-    "category": "Vídeo e áudio",
-    "tagline": "Gravação e edição de áudio",
-    "description": "Editor e gravador de áudio multifaixa para podcasts, voz, música e edição de som.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.audacityteam.org/about/license/",
-    "websiteUrl": "https://www.audacityteam.org/",
-    "sourceUrl": "https://github.com/audacity/audacity",
-    "downloadUrl": "https://www.audacityteam.org/download/",
-    "tags": [
-      "som",
-      "podcast",
-      "gravação",
-      "edição"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "kdenlive",
-    "name": "Kdenlive",
-    "icon": "🎞️",
-    "category": "Vídeo e áudio",
-    "tagline": "Edição de vídeo multifaixa",
-    "description": "Editor de vídeo não linear com trilhas múltiplas, efeitos, transições, títulos e ferramentas para produção audiovisual.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://kdenlive.org/en/about/",
-    "websiteUrl": "https://kdenlive.org/",
-    "sourceUrl": "https://invent.kde.org/multimedia/kdenlive",
-    "downloadUrl": "https://kdenlive.org/en/download/",
-    "tags": [
-      "vídeo",
-      "edição",
-      "montagem",
-      "produção"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "shotcut",
-    "name": "Shotcut",
-    "icon": "🎬",
-    "category": "Vídeo e áudio",
-    "tagline": "Editor de vídeo multiplataforma",
-    "description": "Editor de vídeo com suporte a muitos formatos, filtros, áudio, vídeo e linha do tempo.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://shotcut.org/FAQ/",
-    "websiteUrl": "https://shotcut.org/",
-    "sourceUrl": "https://github.com/mltframework/shotcut",
-    "downloadUrl": "https://shotcut.org/download/",
-    "tags": [
-      "vídeo",
-      "editor",
-      "montagem"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "openshot",
-    "name": "OpenShot",
-    "icon": "✂️",
-    "category": "Vídeo e áudio",
-    "tagline": "Edição de vídeo acessível",
-    "description": "Editor de vídeo não linear com linha do tempo, transições, animações e títulos para projetos pessoais ou profissionais.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.openshot.org/license/",
-    "websiteUrl": "https://www.openshot.org/",
-    "sourceUrl": "https://github.com/OpenShot/openshot-qt",
-    "downloadUrl": "https://www.openshot.org/download/",
-    "tags": [
-      "vídeo",
-      "edição",
+      "VFX",
+      "motion graphics",
+      "efeitos",
       "animação"
     ],
+    "stage": "Em desenvolvimento",
     "featured": false
   },
   {
-    "slug": "handbrake",
-    "name": "HandBrake",
-    "icon": "🗜️",
-    "category": "Vídeo e áudio",
-    "tagline": "Conversão e compressão de vídeo",
-    "description": "Transcodificador de vídeo para converter arquivos e ajustar formatos, codecs, resolução e qualidade.",
+    "slug": "designcraft",
+    "name": "DesignCraft",
+    "icon": "📰",
+    "category": "Design e publicação",
+    "kind": "Crafting App",
+    "tagline": "Diagramação e publicação editorial",
+    "description": "Aplicativo de layout de páginas para publicação, com páginas-mestre, estilos, amostras de cores, composição tipográfica e ajuste de texto.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
+      "Windows",
+      "Linux",
+      "Web"
     ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://handbrake.fr/docs/en/latest/about/license.html",
-    "websiteUrl": "https://handbrake.fr/",
-    "sourceUrl": "https://github.com/HandBrake/HandBrake",
-    "downloadUrl": "https://handbrake.fr/downloads.php",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/designcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/designcraft",
+    "sourceUrl": "https://github.com/storytold/designcraft",
+    "downloadUrl": "https://getartcraft.com/apps/designcraft",
     "tags": [
-      "conversão",
-      "compressão",
-      "vídeo",
-      "codec"
+      "diagramação",
+      "publicação",
+      "layout",
+      "tipografia"
     ],
+    "stage": "Em desenvolvimento",
     "featured": false
   },
   {
-    "slug": "freecad",
-    "name": "FreeCAD",
-    "icon": "📐",
-    "category": "CAD e engenharia",
-    "tagline": "Modelagem CAD paramétrica 3D",
-    "description": "Modelador paramétrico para projetar peças, mecanismos, componentes e objetos técnicos com histórico editável.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "LGPL-2.1-or-later",
-    "licenseUrl": "https://github.com/FreeCAD/FreeCAD",
-    "websiteUrl": "https://www.freecad.org/",
-    "sourceUrl": "https://github.com/FreeCAD/FreeCAD",
-    "downloadUrl": "https://www.freecad.org/downloads.php",
-    "tags": [
-      "CAD",
-      "3D",
-      "engenharia",
-      "paramétrico"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "kicad",
-    "name": "KiCad",
-    "icon": "🔌",
-    "category": "CAD e engenharia",
-    "tagline": "Esquemáticos e placas eletrônicas",
-    "description": "Suíte de automação de projeto eletrônico para desenhar esquemáticos, projetar PCBs e gerar arquivos de fabricação.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.kicad.org/about/licenses/",
-    "websiteUrl": "https://www.kicad.org/",
-    "sourceUrl": "https://gitlab.com/kicad/code/kicad",
-    "downloadUrl": "https://www.kicad.org/download/",
-    "tags": [
-      "eletrônica",
-      "PCB",
-      "hardware",
-      "engenharia"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "openscad",
-    "name": "OpenSCAD",
+    "slug": "figcraft",
+    "name": "FigCraft",
     "icon": "🧩",
-    "category": "CAD e engenharia",
-    "tagline": "Modelagem 3D por código",
-    "description": "Ferramenta de CAD para criar modelos tridimensionais com uma linguagem de descrição baseada em código.",
+    "category": "Design e publicação",
+    "kind": "Crafting App",
+    "tagline": "Design de interfaces e prototipagem",
+    "description": "Ferramenta para criar interfaces com frames, auto layout, componentes, variantes, redes vetoriais, estilos, variáveis e protótipos.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://openscad.org/about.html",
-    "websiteUrl": "https://openscad.org/",
-    "sourceUrl": "https://github.com/openscad/openscad",
-    "downloadUrl": "https://openscad.org/downloads.html",
-    "tags": [
-      "CAD",
-      "3D",
-      "script",
-      "impressão 3D"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "qgis",
-    "name": "QGIS",
-    "icon": "🌍",
-    "category": "CAD e engenharia",
-    "tagline": "Sistemas de informação geográfica",
-    "description": "Plataforma de mapas e análise geoespacial para visualizar, editar, analisar e publicar dados geográficos.",
-    "platforms": [
       "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://qgis.org/project/overview/",
-    "websiteUrl": "https://qgis.org/",
-    "sourceUrl": "https://github.com/qgis/QGIS",
-    "downloadUrl": "https://qgis.org/download/",
-    "tags": [
-      "mapas",
-      "GIS",
-      "geografia",
-      "dados espaciais"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "godot",
-    "name": "Godot Engine",
-    "icon": "🎮",
-    "category": "Desenvolvimento",
-    "tagline": "Motor de jogos 2D e 3D",
-    "description": "Motor de jogos para desenvolver projetos 2D e 3D com ferramentas integradas, cenas, scripts e exportação multiplataforma.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "MIT",
-    "licenseUrl": "https://godotengine.org/license/",
-    "websiteUrl": "https://godotengine.org/",
-    "sourceUrl": "https://github.com/godotengine/godot",
-    "downloadUrl": "https://godotengine.org/download/",
-    "tags": [
-      "jogos",
-      "game dev",
-      "2D",
-      "3D"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "python",
-    "name": "Python",
-    "icon": "🐍",
-    "category": "Desenvolvimento",
-    "tagline": "Linguagem versátil para automação e software",
-    "description": "Linguagem de programação de alto nível usada em automação, aplicações, ciência de dados, web e inteligência artificial.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "PSF-2.0",
-    "licenseUrl": "https://docs.python.org/3/license.html",
-    "websiteUrl": "https://www.python.org/",
-    "sourceUrl": "https://github.com/python/cpython",
-    "downloadUrl": "https://www.python.org/downloads/",
-    "tags": [
-      "programação",
-      "automação",
-      "dados",
-      "IA"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "git",
-    "name": "Git",
-    "icon": "🌿",
-    "category": "Desenvolvimento",
-    "tagline": "Controle de versão distribuído",
-    "description": "Sistema distribuído de controle de versões para registrar alterações, colaborar e gerenciar o histórico do código.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0-only",
-    "licenseUrl": "https://git-scm.com/about/free-and-open-source",
-    "websiteUrl": "https://git-scm.com/",
-    "sourceUrl": "https://github.com/git/git",
-    "downloadUrl": "https://git-scm.com/downloads",
-    "tags": [
-      "desenvolvimento",
-      "versionamento",
-      "terminal"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "jupyterlab",
-    "name": "JupyterLab",
-    "icon": "📓",
-    "category": "Desenvolvimento",
-    "tagline": "Ambiente interativo para código e dados",
-    "description": "Ambiente baseado em navegador para notebooks, código, visualizações e fluxos de trabalho científicos.",
-    "platforms": [
-      "Windows",
-      "macOS",
       "Linux",
       "Web"
     ],
-    "license": "BSD-3-Clause",
-    "licenseUrl": "https://github.com/jupyterlab/jupyterlab/blob/main/LICENSE",
-    "websiteUrl": "https://jupyter.org/",
-    "sourceUrl": "https://github.com/jupyterlab/jupyterlab",
-    "downloadUrl": "https://jupyter.org/install",
-    "tags": [
-      "notebook",
-      "ciência de dados",
-      "Python",
-      "pesquisa"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "postgresql",
-    "name": "PostgreSQL",
-    "icon": "🐘",
-    "category": "Infraestrutura e nuvem",
-    "tagline": "Banco de dados relacional avançado",
-    "description": "Sistema de banco de dados objeto-relacional conhecido por extensibilidade, integridade e recursos SQL avançados.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux",
-      "BSD"
-    ],
-    "license": "PostgreSQL License",
-    "licenseUrl": "https://www.postgresql.org/about/licence/",
-    "websiteUrl": "https://www.postgresql.org/",
-    "sourceUrl": "https://git.postgresql.org/git/postgresql.git",
-    "downloadUrl": "https://www.postgresql.org/download/",
-    "tags": [
-      "SQL",
-      "banco de dados",
-      "backend"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "mariadb",
-    "name": "MariaDB",
-    "icon": "🗄️",
-    "category": "Infraestrutura e nuvem",
-    "tagline": "Banco de dados SQL de código aberto",
-    "description": "Servidor de banco de dados relacional compatível com muitos fluxos de trabalho MySQL e aplicações web.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0",
-    "licenseUrl": "https://mariadb.org/about/",
-    "websiteUrl": "https://mariadb.org/",
-    "sourceUrl": "https://github.com/MariaDB/server",
-    "downloadUrl": "https://mariadb.org/download/",
-    "tags": [
-      "SQL",
-      "banco de dados",
-      "servidor"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "dbeaver",
-    "name": "DBeaver Community",
-    "icon": "🧰",
-    "category": "Desenvolvimento",
-    "tagline": "Cliente universal para bancos de dados",
-    "description": "Aplicação para conectar a bancos de dados, executar consultas SQL e explorar tabelas e metadados.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "Apache-2.0 (Community Edition)",
-    "licenseUrl": "https://github.com/dbeaver/dbeaver/blob/devel/LICENSE",
-    "websiteUrl": "https://dbeaver.io/",
-    "sourceUrl": "https://github.com/dbeaver/dbeaver",
-    "downloadUrl": "https://dbeaver.io/download/",
-    "tags": [
-      "SQL",
-      "database",
-      "administração"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "wireshark",
-    "name": "Wireshark",
-    "icon": "🦈",
-    "category": "Segurança e privacidade",
-    "tagline": "Análise de protocolos e tráfego de rede",
-    "description": "Analisador de protocolos para inspecionar pacotes de rede e investigar problemas de conectividade e segurança.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://www.wireshark.org/about.html",
-    "websiteUrl": "https://www.wireshark.org/",
-    "sourceUrl": "https://gitlab.com/wireshark/wireshark",
-    "downloadUrl": "https://www.wireshark.org/download.html",
-    "tags": [
-      "rede",
-      "pacotes",
-      "diagnóstico",
-      "segurança"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "owasp-zap",
-    "name": "OWASP ZAP",
-    "icon": "🛡️",
-    "category": "Segurança e privacidade",
-    "tagline": "Testes de segurança para aplicações web",
-    "description": "Ferramenta de teste de segurança de aplicações web para apoiar análise dinâmica autorizada, aprendizagem e auditoria.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "Apache-2.0",
-    "licenseUrl": "https://github.com/zaproxy/zaproxy/blob/main/LICENSE",
-    "websiteUrl": "https://www.zaproxy.org/",
-    "sourceUrl": "https://github.com/zaproxy/zaproxy",
-    "downloadUrl": "https://www.zaproxy.org/download/",
-    "tags": [
-      "segurança",
-      "web",
-      "pentest",
-      "auditoria"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "jellyfin",
-    "name": "Jellyfin",
-    "icon": "📺",
-    "category": "Infraestrutura e nuvem",
-    "tagline": "Servidor multimídia autogerenciado",
-    "description": "Servidor multimídia para organizar e transmitir a própria coleção de filmes, programas, música e outros conteúdos.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux",
-      "Web",
-      "Android",
-      "iOS"
-    ],
-    "license": "GPL-2.0-or-later",
-    "licenseUrl": "https://github.com/jellyfin/jellyfin/blob/master/LICENSE",
-    "websiteUrl": "https://jellyfin.org/",
-    "sourceUrl": "https://github.com/jellyfin/jellyfin",
-    "downloadUrl": "https://jellyfin.org/downloads/",
-    "tags": [
-      "mídia",
-      "streaming local",
-      "servidor",
-      "self-hosted"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "gnu-octave",
-    "name": "GNU Octave",
-    "icon": "📈",
-    "category": "Ciência e dados",
-    "tagline": "Computação numérica e análise matemática",
-    "description": "Linguagem e ambiente para computação numérica, análise matemática, experimentos e visualização de dados.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "GPL-3.0-or-later",
-    "licenseUrl": "https://www.gnu.org/software/octave/",
-    "websiteUrl": "https://octave.org/",
-    "sourceUrl": "https://gitlab.com/octave/octave",
-    "downloadUrl": "https://octave.org/download",
-    "tags": [
-      "matemática",
-      "cálculo",
-      "ciência",
-      "dados"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "element",
-    "name": "Element",
-    "icon": "💬",
-    "category": "Internet e comunicação",
-    "tagline": "Mensagens e colaboração via Matrix",
-    "description": "Cliente de comunicação baseado no protocolo aberto Matrix para mensagens, chamadas e colaboração entre equipes.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux",
-      "Web",
-      "Android",
-      "iOS"
-    ],
-    "license": "AGPL-3.0 (Element Web)",
-    "licenseUrl": "https://github.com/element-hq/element-web/blob/develop/LICENSE",
-    "websiteUrl": "https://element.io/",
-    "sourceUrl": "https://github.com/element-hq/element-web",
-    "downloadUrl": "https://element.io/download",
-    "tags": [
-      "mensagens",
-      "chat",
-      "Matrix",
-      "colaboração"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "firefox-developer-edition",
-    "name": "Firefox Developer Edition",
-    "icon": "🧪",
-    "category": "Desenvolvimento",
-    "tagline": "Navegador com ferramentas para desenvolvimento web",
-    "description": "Edição do Firefox que reúne ferramentas e recursos voltados a desenvolvimento e depuração de sites.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "MPL-2.0",
-    "licenseUrl": "https://www.mozilla.org/en-US/MPL/2.0/",
-    "websiteUrl": "https://www.mozilla.org/firefox/developer/",
-    "sourceUrl": "https://hg.mozilla.org/mozilla-central",
-    "downloadUrl": "https://www.mozilla.org/firefox/developer/",
-    "tags": [
-      "web",
-      "depuração",
-      "desenvolvimento"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "zotero",
-    "name": "Zotero",
-    "icon": "📚",
-    "category": "Produtividade",
-    "tagline": "Organize referências e pesquisas acadêmicas",
-    "description": "Gerenciador de referências para coletar fontes, organizar bibliotecas, anotar materiais e gerar citações e bibliografias.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "AGPL-3.0 (salvo indicação específica em componentes)",
-    "licenseUrl": "https://www.zotero.org/support/dev/source_code",
-    "websiteUrl": "https://www.zotero.org/",
-    "sourceUrl": "https://github.com/zotero/zotero",
-    "downloadUrl": "https://www.zotero.org/download/",
-    "tags": [
-      "pesquisa",
-      "referências",
-      "citações",
-      "academia"
-    ],
-    "featured": true
-  },
-  {
-    "slug": "neovim",
-    "name": "Neovim",
-    "icon": "⌨️",
-    "category": "Desenvolvimento",
-    "tagline": "Editor de texto extensível para programação",
-    "description": "Editor de código orientado a teclado, com automação, extensões e integração com ferramentas modernas de desenvolvimento.",
-    "platforms": [
-      "Windows",
-      "macOS",
-      "Linux",
-      "BSD"
-    ],
-    "license": "Apache-2.0, com partes sob licença Vim",
-    "licenseUrl": "https://github.com/neovim/neovim/blob/master/LICENSE.txt",
-    "websiteUrl": "https://neovim.io/",
-    "sourceUrl": "https://github.com/neovim/neovim",
-    "downloadUrl": "https://github.com/neovim/neovim/releases",
-    "tags": [
-      "editor",
-      "terminal",
-      "programação",
-      "plugins"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "penpot",
-    "name": "Penpot",
-    "icon": "✏️",
-    "category": "Criação visual",
-    "tagline": "Design de interfaces e prototipagem colaborativa",
-    "description": "Plataforma de design de produtos digitais com vetores, protótipos interativos, componentes, sistemas de design e colaboração entre design e desenvolvimento.",
-    "platforms": [
-      "Web"
-    ],
-    "license": "MPL-2.0 (verifique módulos e componentes individuais)",
-    "licenseUrl": "https://github.com/penpot/penpot",
-    "websiteUrl": "https://penpot.app/",
-    "sourceUrl": "https://github.com/penpot/penpot",
-    "downloadUrl": "https://penpot.app/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/figcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/figcraft",
+    "sourceUrl": "https://github.com/storytold/figcraft",
+    "downloadUrl": "https://getartcraft.com/apps/figcraft",
     "tags": [
       "UI",
       "UX",
+      "interfaces",
       "protótipo",
-      "design system"
+      "componentes"
     ],
+    "stage": "Alpha inicial",
     "featured": true
   },
   {
-    "slug": "lmms",
-    "name": "LMMS",
-    "icon": "🎹",
-    "category": "Vídeo e áudio",
-    "tagline": "Produção musical e criação de batidas",
-    "description": "Estação de trabalho de áudio digital para compor, sequenciar, sintetizar e mixar música com instrumentos e efeitos.",
+    "slug": "wordcraft",
+    "name": "WordCraft",
+    "icon": "📝",
+    "category": "Documentos e produtividade",
+    "kind": "Crafting App",
+    "tagline": "Editor de texto com suporte a DOCX",
+    "description": "Editor de documentos com estilos, tabelas, controle de alterações, referências e mala direta, com leitura e gravação de arquivos .docx.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
-    ],
-    "license": "GPL-2.0",
-    "licenseUrl": "https://github.com/LMMS/lmms",
-    "websiteUrl": "https://lmms.io/",
-    "sourceUrl": "https://github.com/LMMS/lmms",
-    "downloadUrl": "https://lmms.io/download",
-    "tags": [
-      "música",
-      "MIDI",
-      "sintetizador",
-      "produção"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "home-assistant",
-    "name": "Home Assistant",
-    "icon": "🏠",
-    "category": "Infraestrutura e nuvem",
-    "tagline": "Automação residencial com controle local",
-    "description": "Plataforma de automação residencial que integra dispositivos e serviços para criar rotinas e controlar a casa com foco em controle local.",
-    "platforms": [
+      "Windows",
       "Linux",
       "Web"
     ],
-    "license": "Apache-2.0",
-    "licenseUrl": "https://github.com/home-assistant/core",
-    "websiteUrl": "https://www.home-assistant.io/",
-    "sourceUrl": "https://github.com/home-assistant/core",
-    "downloadUrl": "https://www.home-assistant.io/installation/",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/wordcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/wordcraft",
+    "sourceUrl": "https://github.com/storytold/wordcraft",
+    "downloadUrl": "https://getartcraft.com/apps/wordcraft",
     "tags": [
-      "casa inteligente",
-      "IoT",
-      "automação",
-      "privacidade"
+      "editor de texto",
+      "DOCX",
+      "documentos",
+      "escrita"
     ],
+    "stage": "Em desenvolvimento",
     "featured": false
   },
   {
-    "slug": "cmake",
-    "name": "CMake",
-    "icon": "⚙️",
-    "category": "Desenvolvimento",
-    "tagline": "Configuração e geração de builds",
-    "description": "Ferramenta multiplataforma para configurar projetos de software e gerar arquivos de compilação para diferentes ambientes e toolchains.",
+    "slug": "soundcraft",
+    "name": "SoundCraft",
+    "icon": "🎙️",
+    "category": "Áudio",
+    "kind": "Crafting App",
+    "tagline": "Gravação, edição e mixagem de áudio",
+    "description": "Estação de trabalho de áudio digital com janelas de edição e mixagem, faixas de áudio e MIDI, panorâmica e processamento offline.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
-    ],
-    "license": "BSD-3-Clause",
-    "licenseUrl": "https://cmake.org/licensing/",
-    "websiteUrl": "https://cmake.org/",
-    "sourceUrl": "https://github.com/Kitware/CMake",
-    "downloadUrl": "https://cmake.org/download/",
-    "tags": [
-      "compilação",
-      "build",
-      "C++",
-      "toolchain"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "qbittorrent",
-    "name": "qBittorrent",
-    "icon": "⬇️",
-    "category": "Internet e comunicação",
-    "tagline": "Cliente BitTorrent de código aberto",
-    "description": "Cliente BitTorrent para gerenciar downloads P2P, filas, limites de velocidade e conexões com suporte a várias plataformas.",
-    "platforms": [
       "Windows",
-      "macOS",
       "Linux",
-      "BSD"
+      "Web"
     ],
-    "license": "GPL (o repositório contém arquivos de licença para GPLv2 e GPLv3)",
-    "licenseUrl": "https://github.com/qbittorrent/qBittorrent",
-    "websiteUrl": "https://www.qbittorrent.org/",
-    "sourceUrl": "https://github.com/qbittorrent/qBittorrent",
-    "downloadUrl": "https://www.qbittorrent.org/download",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/soundcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/soundcraft",
+    "sourceUrl": "https://github.com/storytold/soundcraft",
+    "downloadUrl": "https://getartcraft.com/apps/soundcraft",
     "tags": [
-      "BitTorrent",
-      "P2P",
-      "downloads",
-      "rede"
+      "áudio",
+      "DAW",
+      "MIDI",
+      "gravação",
+      "mixagem"
     ],
+    "stage": "Em desenvolvimento",
     "featured": false
   },
   {
-    "slug": "openrefine",
-    "name": "OpenRefine",
-    "icon": "🧹",
-    "category": "Ciência e dados",
-    "tagline": "Limpeza e transformação de conjuntos de dados",
-    "description": "Ferramenta para explorar, limpar, reconciliar e transformar dados desorganizados, com operações reproduzíveis em conjuntos de informações.",
+    "slug": "deckcraft",
+    "name": "DeckCraft",
+    "icon": "📽️",
+    "category": "Documentos e produtividade",
+    "kind": "Crafting App",
+    "tagline": "Apresentações de slides dinâmicas",
+    "description": "Criador de apresentações com mestres de slide, temas, formas vetoriais, transições, animações e modo de apresentação.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
+      "Windows",
+      "Linux",
+      "Web"
     ],
-    "license": "BSD-3-Clause",
-    "licenseUrl": "https://github.com/OpenRefine/OpenRefine",
-    "websiteUrl": "https://openrefine.org/",
-    "sourceUrl": "https://github.com/OpenRefine/OpenRefine",
-    "downloadUrl": "https://openrefine.org/download",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/deckcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/deckcraft",
+    "sourceUrl": "https://github.com/storytold/deckcraft",
+    "downloadUrl": "https://getartcraft.com/apps/deckcraft",
     "tags": [
-      "dados",
-      "limpeza",
-      "ETL",
-      "pesquisa"
+      "apresentações",
+      "slides",
+      "transições",
+      "animações"
     ],
+    "stage": "Em desenvolvimento",
     "featured": false
   },
   {
-    "slug": "ollama",
-    "name": "Ollama",
-    "icon": "🦙",
-    "category": "Desenvolvimento",
-    "tagline": "Execute modelos de IA localmente",
-    "description": "Ferramenta para baixar, executar e gerenciar modelos de linguagem em ambientes locais, com uma interface de linha de comando e API.",
+    "slug": "cadcraft",
+    "name": "CADCraft",
+    "icon": "📐",
+    "category": "CAD e engenharia",
+    "kind": "Crafting App",
+    "tagline": "CAD e desenho técnico",
+    "description": "Ferramenta de desenho técnico com linha de comando, encaixes de objetos, camadas, cotas, hachuras, blocos e recursos voltados à automação.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
+      "Windows",
+      "Linux",
+      "Web"
     ],
-    "license": "MIT (código do Ollama; modelos possuem licenças próprias)",
-    "licenseUrl": "https://github.com/ollama/ollama/blob/main/LICENSE",
-    "websiteUrl": "https://ollama.com/",
-    "sourceUrl": "https://github.com/ollama/ollama",
-    "downloadUrl": "https://ollama.com/download",
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/cadcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/cadcraft",
+    "sourceUrl": "https://github.com/storytold/cadcraft",
+    "downloadUrl": "https://getartcraft.com/apps/cadcraft",
     "tags": [
-      "IA",
-      "LLM",
-      "modelos locais",
-      "API"
+      "CAD",
+      "desenho técnico",
+      "engenharia",
+      "arquitetura"
     ],
+    "stage": "Em desenvolvimento",
     "featured": true
   },
   {
-    "slug": "anki",
-    "name": "Anki",
-    "icon": "🧠",
-    "category": "Produtividade",
-    "tagline": "Memorização com cartões e repetição espaçada",
-    "description": "Aplicativo de cartões de estudo com programação de revisões espaçadas, sincronização e suporte a baralhos personalizados.",
+    "slug": "gridcraft",
+    "name": "GridCraft",
+    "icon": "📊",
+    "category": "Documentos e produtividade",
+    "kind": "Crafting App",
+    "tagline": "Planilhas e análise de dados",
+    "description": "Aplicativo de planilhas com barra de fórmulas, centenas de funções de cálculo, matrizes dinâmicas, tabelas dinâmicas e gráficos, com suporte a .xlsx.",
     "platforms": [
-      "Windows",
       "macOS",
-      "Linux"
-    ],
-    "license": "AGPL-3.0-or-later (com componentes sob outras licenças)",
-    "licenseUrl": "https://github.com/ankitects/anki/blob/main/LICENSE",
-    "websiteUrl": "https://apps.ankiweb.net/",
-    "sourceUrl": "https://github.com/ankitects/anki",
-    "downloadUrl": "https://apps.ankiweb.net/",
-    "tags": [
-      "estudo",
-      "flashcards",
-      "memória",
-      "aprendizagem"
-    ],
-    "featured": false
-  },
-  {
-    "slug": "podman",
-    "name": "Podman",
-    "icon": "📦",
-    "category": "Infraestrutura e nuvem",
-    "tagline": "Gerenciamento de contêineres",
-    "description": "Ferramenta para criar, executar e administrar contêineres e pods, inclusive em fluxos de trabalho sem daemon central obrigatório.",
-    "platforms": [
       "Windows",
-      "macOS",
-      "Linux"
-    ],
-    "license": "Apache-2.0",
-    "licenseUrl": "https://github.com/containers/podman/blob/main/LICENSE",
-    "websiteUrl": "https://podman.io/",
-    "sourceUrl": "https://github.com/containers/podman",
-    "downloadUrl": "https://podman.io/getting-started/installation",
-    "tags": [
-      "contêineres",
-      "DevOps",
       "Linux",
-      "infraestrutura"
+      "Web"
     ],
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/storytold/gridcraft/blob/main/LICENSE-MIT",
+    "websiteUrl": "https://getartcraft.com/apps/gridcraft",
+    "sourceUrl": "https://github.com/storytold/gridcraft",
+    "downloadUrl": "https://getartcraft.com/apps/gridcraft",
+    "tags": [
+      "planilha",
+      "dados",
+      "XLSX",
+      "fórmulas",
+      "gráficos"
+    ],
+    "stage": "Em desenvolvimento",
     "featured": false
   }
 ]

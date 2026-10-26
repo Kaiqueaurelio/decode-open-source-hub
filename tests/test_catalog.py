@@ -1,50 +1,37 @@
-"""Basic integrity tests for the software catalog."""
-
-import json
-import subprocess
-import sys
-import unittest
+"""Tests for the ArtCraft-specific catalog."""
+import json, subprocess, sys, unittest
 from pathlib import Path
 from urllib.parse import urlparse
-
-ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "software.json"
-
-
+ROOT=Path(__file__).resolve().parents[1]
+DATA=ROOT/"data"/"software.json"
+EXPECTED={"artcraft-studio","craft-launcher","photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"}
 class CatalogTests(unittest.TestCase):
     @classmethod
-    def setUpClass(cls):
-        cls.items = json.loads(DATA.read_text(encoding="utf-8"))
-
-    def test_catalog_contains_a_useful_starter_set(self):
-        self.assertGreaterEqual(len(self.items), 20)
-
-    def test_slugs_are_unique(self):
-        slugs = [item["slug"] for item in self.items]
-        self.assertEqual(len(slugs), len(set(slugs)))
-
-    def test_every_record_has_https_links(self):
-        for item in self.items:
-            for field in ("licenseUrl", "websiteUrl", "sourceUrl", "downloadUrl"):
-                parsed = urlparse(item[field])
-                self.assertEqual(parsed.scheme, "https", f"{item['name']}: {field}")
-                self.assertTrue(parsed.netloc, f"{item['name']}: {field}")
-
-    def test_every_record_has_a_category_and_license(self):
-        for item in self.items:
-            self.assertTrue(item["category"].strip())
-            self.assertTrue(item["license"].strip())
-
+    def setUpClass(cls): cls.items=json.loads(DATA.read_text(encoding="utf-8"))
+    def test_catalog_contains_only_artcraft_projects(self):
+        self.assertEqual({x["slug"] for x in self.items},EXPECTED)
+        self.assertEqual(len(self.items),15)
+    def test_thirteen_apps_plus_studio_and_launcher(self):
+        self.assertEqual(sum(x["kind"]=="Crafting App" for x in self.items),13)
+        self.assertEqual(sum(x["kind"]=="Estúdio de IA" for x in self.items),1)
+        self.assertEqual(sum(x["kind"]=="Launcher" for x in self.items),1)
+    def test_slugs_and_names_are_unique(self):
+        self.assertEqual(len({x["slug"] for x in self.items}),len(self.items))
+        self.assertEqual(len({x["name"].casefold() for x in self.items}),len(self.items))
+    def test_links_use_https_and_official_sources(self):
+        for x in self.items:
+            for key in ("licenseUrl","websiteUrl","sourceUrl","downloadUrl"):
+                p=urlparse(x[key]); self.assertEqual(p.scheme,"https",f'{x["name"]}: {key}'); self.assertTrue(p.netloc)
+            self.assertEqual(urlparse(x["sourceUrl"]).netloc,"github.com")
+            self.assertTrue(urlparse(x["sourceUrl"]).path.startswith("/storytold/"))
+            self.assertEqual(urlparse(x["websiteUrl"]).netloc,"getartcraft.com")
+    def test_published_dual_license_label(self):
+        for x in self.items:
+            self.assertEqual(x["license"],"MIT OR Apache-2.0")
+            self.assertTrue(x["licenseUrl"].endswith("/LICENSE-MIT"))
+    def test_stage_is_present(self):
+        for x in self.items: self.assertTrue(x["stage"].strip())
     def test_validator_passes(self):
-        result = subprocess.run(
-            [sys.executable, str(ROOT / "scripts" / "validate_catalog.py")],
-            cwd=ROOT,
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-
-
-if __name__ == "__main__":
-    unittest.main()
+        r=subprocess.run([sys.executable,str(ROOT/"scripts"/"validate_catalog.py")],cwd=ROOT,capture_output=True,text=True,check=False)
+        self.assertEqual(r.returncode,0,r.stdout+r.stderr)
+if __name__=="__main__": unittest.main()

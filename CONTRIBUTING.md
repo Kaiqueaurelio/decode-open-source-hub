@@ -1,56 +1,34 @@
 # Como contribuir
 
-Obrigado por ajudar a melhorar o Decode Open Source Hub! Queremos um catálogo útil, acessível, transparente e com informações fáceis de verificar.
+Obrigado por ajudar a manter este catálogo correto e útil.
 
-## Sugerir um programa
+## Escopo
 
-Antes de enviar uma sugestão:
+Este catálogo é intencionalmente restrito ao ecossistema ArtCraft: os 13 Crafting Apps da página oficial https://getartcraft.com/apps, o ArtCraft Studio e o ArtCraft Launcher.
 
-1. Confirme que existe uma licença open source verificável. Ser gratuito não é suficiente.
-2. Procure a página oficial do projeto e o repositório de código-fonte, quando disponível.
-3. Confira o nome, a descrição, as plataformas e a licença nas fontes originais.
-4. Verifique se o programa já existe em data/software.json.
-5. Abra uma issue com o modelo de sugestão ou envie um pull request.
+**Não adicione programas open source genéricos de outras equipes.** Isso quebraria o escopo deste projeto.
 
-Não cadastre sites de download de terceiros como fonte primária quando houver uma página oficial.
+## Sugerir uma correção ou novo produto oficial
 
-## Alterar o catálogo
-
-Os registros ficam em data/software.json. Cada registro deve conter:
-
-- slug: identificador único e estável, em letras minúsculas e hífens.
-- name: nome oficial do programa.
-- icon: emoji simples usado como marcador visual, não um logotipo de terceiro.
-- category: categoria existente ou uma nova categoria justificada.
-- tagline: frase curta sobre a finalidade.
-- description: resumo objetivo escrito pela equipe do catálogo.
-- platforms: lista de plataformas confirmadas.
-- license: licença declarada pelo projeto.
-- licenseUrl: fonte para conferir a licença.
-- websiteUrl, sourceUrl e downloadUrl: links HTTPS oficiais relevantes.
-- tags: palavras-chave úteis para a pesquisa.
-- featured: valor booleano para definir destaque editorial.
+1. Confirme a entrada no site oficial ArtCraft.
+2. Confirme que o código-fonte está na organização https://github.com/storytold.
+3. Confira a licença nos arquivos oficiais LICENSE-MIT e LICENSE-APACHE.
+4. Use a página oficial do produto para detalhes, plataformas e opções de download.
+5. Descreva as fontes usadas no pull request.
 
 ## Testes locais
 
-Execute a validação de dados:
+```bash
+python3 scripts/validate_catalog.py
+python3 -m unittest discover -s tests -v
+```
 
-    python3 scripts/validate_catalog.py
+Se o ArtCraft publicar novos apps, atualize `data/software.json`, `data/schema.json`, `scripts/validate_catalog.py` e `tests/test_catalog.py` juntos. Não inclua produtos que não sejam confirmados pelo site oficial.
 
-Execute a suíte de testes:
+## Padrões
 
-    python3 -m unittest discover -s tests -v
-
-Antes de abrir um pull request, verifique também a interface em computador e celular, os links recém-adicionados e a acessibilidade básica.
-
-## Padrões para pull requests
-
-- Faça mudanças pequenas e com um objetivo claro.
-- Explique o que mudou e por quê.
-- Inclua fontes oficiais para novos registros ou correções de licenças.
-- Não adicione chaves, senhas, tokens, dados pessoais ou arquivos de instalação ao repositório.
-- Não copie logotipos, capturas de tela ou materiais de terceiros sem verificar os direitos.
-- Não apresente verificações manuais como testes automatizados.
-- Informe explicitamente se uma licença ou informação não pôde ser confirmada.
-
-Ao contribuir, você confirma que tem autorização para enviar o conteúdo proposto e que ele não viola direitos de terceiros.
+- Não adivinhe licença, versão, plataformas ou estágio.
+- Não copie logotipos, imagens ou capturas de tela sem confirmar os direitos.
+- Não inclua tokens, senhas, dados pessoais ou instaladores.
+- Não apresente testes locais como auditoria de segurança.
+- Preserve os avisos de direito autoral e os créditos dos projetos originais.

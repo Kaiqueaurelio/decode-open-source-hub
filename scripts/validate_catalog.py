@@ -1,108 +1,70 @@
 #!/usr/bin/env python3
-"""Validate the static software catalog using only the Python standard library."""
-
-import json
-import re
-import sys
+"""Validate the ArtCraft-specific catalog using only the Python standard library."""
+import json, re, sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-ROOT = Path(__file__).resolve().parents[1]
-CATALOG = ROOT / "data" / "software.json"
-REQUIRED = {
-    "slug", "name", "icon", "category", "tagline", "description",
-    "platforms", "license", "licenseUrl", "websiteUrl", "sourceUrl",
-    "downloadUrl", "tags", "featured",
-}
-SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-KNOWN_CATEGORIES = {
-    "Criação visual",
-    "Produtividade",
-    "Internet e comunicação",
-    "Segurança e privacidade",
-    "Utilitários",
-    "Infraestrutura e nuvem",
-    "Vídeo e áudio",
-    "CAD e engenharia",
-    "Desenvolvimento",
-    "Ciência e dados",
-}
+ROOT=Path(__file__).resolve().parents[1]
+CATALOG=ROOT/"data"/"software.json"
+REQUIRED={"slug","name","icon","category","kind","tagline","description","platforms","license","licenseUrl","websiteUrl","sourceUrl","downloadUrl","tags","stage","featured"}
+EXPECTED={"artcraft-studio","craft-launcher","photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"}
+CATEGORIES={"IA e criação","Instalação e atualização","Imagem e fotografia","Design e publicação","Vídeo e motion","Documentos e produtividade","Áudio","CAD e engenharia"}
+SLUG_RE=re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
-
-def is_https_url(value):
-    if not isinstance(value, str) or not value.strip():
-        return False
-    parsed = urlparse(value.strip())
-    return parsed.scheme == "https" and bool(parsed.netloc)
-
+def https(value):
+    if not isinstance(value,str) or not value.strip(): return False
+    p=urlparse(value.strip())
+    return p.scheme=="https" and bool(p.netloc)
 
 def main():
-    errors = []
+    errors=[]
     if not CATALOG.exists():
-        print("ERRO: data/software.json não foi encontrado.")
-        return 1
-    try:
-        items = json.loads(CATALOG.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as exc:
-        print(f"ERRO: não foi possível ler o JSON: {exc}")
-        return 1
-    if not isinstance(items, list):
-        print("ERRO: a raiz de data/software.json deve ser uma lista.")
-        return 1
-    if len(items) < 20:
-        errors.append(f"Catálogo muito pequeno: esperados pelo menos 20 registros; encontrados {len(items)}.")
-
-    seen_slugs = set()
-    seen_names = set()
-    for index, item in enumerate(items):
-        prefix = f"Registro #{index + 1}"
-        if not isinstance(item, dict):
-            errors.append(f"{prefix}: deve ser um objeto JSON.")
-            continue
-        missing = sorted(REQUIRED - set(item))
-        if missing:
-            errors.append(f"{prefix}: campos obrigatórios ausentes: {', '.join(missing)}.")
-            continue
-        slug = item["slug"]
-        name = item["name"]
-        if not isinstance(slug, str) or not SLUG_RE.fullmatch(slug):
-            errors.append(f"{prefix}: slug inválido: {slug!r}.")
-        elif slug in seen_slugs:
-            errors.append(f"{prefix}: slug duplicado: {slug}.")
-        seen_slugs.add(slug)
-        normalized_name = name.strip().casefold() if isinstance(name, str) else ""
-        if not normalized_name:
-            errors.append(f"{prefix}: nome vazio ou inválido.")
-        elif normalized_name in seen_names:
-            errors.append(f"{prefix}: nome duplicado: {name}.")
-        seen_names.add(normalized_name)
-        for field in ("name", "category", "tagline", "description", "license"):
-            if not isinstance(item[field], str) or not item[field].strip():
-                errors.append(f"{prefix}: {field} deve ser texto não vazio.")
-        if item["category"] not in KNOWN_CATEGORIES:
-            errors.append(f"{prefix}: categoria desconhecida: {item['category']!r}.")
-        if not isinstance(item["platforms"], list) or not item["platforms"]:
-            errors.append(f"{prefix}: platforms deve ser uma lista não vazia.")
-        elif any(not isinstance(platform, str) or not platform.strip() for platform in item["platforms"]):
-            errors.append(f"{prefix}: platforms contém valor inválido.")
-        if not isinstance(item["tags"], list) or any(not isinstance(tag, str) for tag in item["tags"]):
-            errors.append(f"{prefix}: tags deve ser uma lista de textos.")
-        if not isinstance(item["featured"], bool):
-            errors.append(f"{prefix}: featured deve ser true ou false.")
-        for field in ("licenseUrl", "websiteUrl", "sourceUrl", "downloadUrl"):
-            if not is_https_url(item[field]):
-                errors.append(f"{prefix}: {field} precisa ser uma URL HTTPS válida.")
-
+        print("ERRO: data/software.json não foi encontrado."); return 1
+    try: items=json.loads(CATALOG.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError,OSError) as exc:
+        print(f"ERRO: não foi possível ler o JSON: {exc}"); return 1
+    if not isinstance(items,list):
+        print("ERRO: raiz do catálogo deve ser uma lista."); return 1
+    if len(items)!=15: errors.append(f"Esperadas 15 entradas oficiais do ecossistema ArtCraft; encontradas {len(items)}.")
+    slugs=set(); names=set()
+    for i,item in enumerate(items):
+        pre=f"Registro #{i+1}"
+        if not isinstance(item,dict): errors.append(f"{pre}: deve ser objeto JSON."); continue
+        missing=sorted(REQUIRED-set(item))
+        if missing: errors.append(f"{pre}: campos ausentes: {', '.join(missing)}."); continue
+        slug=item["slug"]; name=item["name"]
+        if not isinstance(slug,str) or not SLUG_RE.fullmatch(slug): errors.append(f"{pre}: slug inválido.")
+        if slug in slugs: errors.append(f"{pre}: slug duplicado {slug}.")
+        slugs.add(slug)
+        norm=name.strip().casefold() if isinstance(name,str) else ""
+        if not norm: errors.append(f"{pre}: nome vazio.")
+        if norm in names: errors.append(f"{pre}: nome duplicado {name}.")
+        names.add(norm)
+        for key in ("name","category","kind","tagline","description","license","stage"):
+            if not isinstance(item[key],str) or not item[key].strip(): errors.append(f"{pre}: {key} deve ser texto não vazio.")
+        if item["category"] not in CATEGORIES: errors.append(f"{pre}: categoria inesperada {item['category']!r}.")
+        if item["kind"] not in {"Crafting App","Estúdio de IA","Launcher"}: errors.append(f"{pre}: tipo inválido.")
+        if item["license"]!="MIT OR Apache-2.0": errors.append(f"{pre}: licença declarada inconsistente.")
+        if not isinstance(item["platforms"],list) or not item["platforms"] or any(not isinstance(v,str) or not v.strip() for v in item["platforms"]):
+            errors.append(f"{pre}: platforms deve conter nomes válidos.")
+        if not isinstance(item["tags"],list) or any(not isinstance(v,str) or not v.strip() for v in item["tags"]): errors.append(f"{pre}: tags inválidas.")
+        if not isinstance(item["featured"],bool): errors.append(f"{pre}: featured deve ser booleano.")
+        for key in ("licenseUrl","websiteUrl","sourceUrl","downloadUrl"):
+            if not https(item[key]): errors.append(f"{pre}: {key} precisa ser URL HTTPS.")
+        if https(item["licenseUrl"]) and urlparse(item["licenseUrl"]).netloc!="github.com": errors.append(f"{pre}: licença fora do GitHub.")
+        if https(item["sourceUrl"]):
+            parsed=urlparse(item["sourceUrl"])
+            if parsed.netloc!="github.com" or not parsed.path.startswith("/storytold/"): errors.append(f"{pre}: repositório não é da organização oficial storytold.")
+        if https(item["websiteUrl"]) and urlparse(item["websiteUrl"]).netloc!="getartcraft.com": errors.append(f"{pre}: site não é do domínio oficial getartcraft.com.")
+    if slugs-EXPECTED: errors.append("Entradas fora do escopo ArtCraft: "+", ".join(sorted(slugs-EXPECTED))+".")
+    if EXPECTED-slugs: errors.append("Entradas oficiais ausentes: "+", ".join(sorted(EXPECTED-slugs))+".")
     if errors:
-        print("Validação do catálogo: FALHOU")
-        for error in errors:
-            print(" - " + error)
+        print("Validação do catálogo ArtCraft: FALHOU")
+        for e in errors: print(" - "+e)
         return 1
-    category_count = len({item["category"] for item in items})
-    print(f"Validação do catálogo: OK — {len(items)} registros, {category_count} categorias; campos obrigatórios, identificadores e URLs HTTPS passaram.")
-    print("Observação: o teste não confirma disponibilidade online, titularidade dos domínios, validade jurídica das licenças ou segurança dos instaladores.")
+    cats=len({x["category"] for x in items})
+    apps=sum(x["kind"]=="Crafting App" for x in items)
+    print(f"Validação do catálogo ArtCraft: OK — {len(items)} projetos ({apps} Crafting Apps), {cats} categorias.")
+    print("Observação: estrutura e escopo passaram; os links não foram consultados ao vivo e os binários não foram auditados.")
     return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+if __name__=="__main__": sys.exit(main())

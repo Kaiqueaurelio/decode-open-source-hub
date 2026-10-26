@@ -1,30 +1,21 @@
-# Verificação e manutenção dos registros
+# Verificação e manutenção
 
-## O que o validador automático faz
+## Verificações automáticas
 
-O script scripts/validate_catalog.py verifica o formato geral do JSON, os campos obrigatórios, os slugs e nomes duplicados, as categorias, as listas de plataformas e a presença de URLs HTTPS. O workflow executa esses controles em alterações enviadas ao GitHub.
+`scripts/validate_catalog.py` verifica que o catálogo contém exatamente os 15 projetos do escopo atual, incluindo os 13 Crafting Apps, ArtCraft Studio e ArtCraft Launcher. Confere também campos obrigatórios, slugs únicos, tipos, categorias, licenças, HTTPS e domínios oficiais.
 
-## O que ele não faz
+A suíte `tests/test_catalog.py` verifica escopo, unicidade, links sintaticamente válidos e execução do validador.
 
-A validação automática atual não acessa a internet para confirmar que:
-- o domínio ainda pertence ao projeto;
-- um link está respondendo;
-- a licença declarada continua sendo a versão atual;
-- a última versão foi identificada corretamente;
-- o instalador é seguro ou livre de malware;
-- o produto continua recebendo manutenção.
+## Limites
 
-Uma URL sintaticamente válida não equivale a uma fonte verificada.
+Os testes não auditam o código dos aplicativos, não executam instaladores e não confirmam em tempo real a disponibilidade de todas as URLs. O catálogo não garante a estabilidade dos produtos: vários Crafting Apps continuam em alpha inicial ou em desenvolvimento.
 
-## Procedimento recomendado para revisão
+## Processo de revisão
 
-1. Abra o site oficial do programa.
-2. Confira a licença no site oficial ou nos arquivos de licença do repositório de origem.
-3. Confirme as plataformas e a página oficial de download.
-4. Revise a descrição para evitar promessas não comprovadas.
-5. Execute os testes automáticos.
-6. Registre as páginas utilizadas na descrição do pull request.
+1. Compare a lista com https://getartcraft.com/apps.
+2. Confira o site e o repositório oficial em github.com/storytold.
+3. Confira os arquivos de licença e eventuais avisos sobre componentes de terceiros.
+4. Atualize estágio e plataformas conforme as páginas atuais.
+5. Execute o validador e a suíte de testes antes de abrir um pull request.
 
-## Estado de verificação
-
-O catálogo inicial foi montado como uma primeira curadoria editorial. Os links e licenças devem ser revisados individualmente antes de considerar os registros auditados. O repositório não deve exibir um selo geral de "verificado" até existir um processo de verificação rastreável e aplicado aos itens.
+Este catálogo é independente e não é um produto oficial do ArtCraft. Evite sugerir afiliação ou endosso dos mantenedores.
