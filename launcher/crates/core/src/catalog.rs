@@ -1,4 +1,4 @@
-//! The Craft App Suite: the thirteen apps the launcher knows about.
+//! The Decode App Suite: the thirteen apps the launcher knows about.
 //!
 //! The list is data so a later version can fetch it from an API; [`SUITE`] is the built-in copy.
 //!
@@ -7,10 +7,10 @@
 
 /// One app in the suite.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct CraftApp {
+pub struct DecodeApp {
     /// Machine name: repo, binary, package and asset stem (`photocraft`).
     pub id: &'static str,
-    /// Display name (`PhotoCraft`).
+    /// Display name (`PhotoDecode`).
     pub name: &'static str,
     /// What it's for, in a few words (English; the UI translates it by app id).
     pub tagline: &'static str,
@@ -22,13 +22,13 @@ pub struct CraftApp {
     pub ink_dark: [u8; 3],
     /// GitHub `owner/repo`.
     pub repo: &'static str,
-    /// Older names its release assets may carry (PdfCraft shipped as PrintCraft until 0.2.1).
+    /// Older names its release assets may carry (PdfDecode shipped as PrintDecode until 0.2.1).
     pub former_ids: &'static [&'static str],
-    /// Older display names its installers registered (PdfCraft's MSI said PrintCraft until 0.2.1).
+    /// Older display names its installers registered (PdfDecode's MSI said PrintDecode until 0.2.1).
     pub former_names: &'static [&'static str],
 }
 
-impl CraftApp {
+impl DecodeApp {
     /// `ai.storyteller.<id>`: macOS bundle id, Flatpak id and Linux desktop-file id.
     pub fn bundle_id(&self) -> String {
         format!("ai.storyteller.{}", self.id)
@@ -57,7 +57,7 @@ impl CraftApp {
         std::iter::once(self.name).chain(self.former_names.iter().copied())
     }
 
-    pub fn by_id(id: &str) -> Option<&'static CraftApp> {
+    pub fn by_id(id: &str) -> Option<&'static DecodeApp> {
         SUITE.iter().find(|a| a.id == id)
     }
 }
@@ -68,93 +68,85 @@ const fn app(
     tagline: &'static str,
     [color, ink_light, ink_dark]: [[u8; 3]; 3],
     repo: &'static str,
-) -> CraftApp {
-    CraftApp { id, name, tagline, color, ink_light, ink_dark, repo, former_ids: &[], former_names: &[] }
+) -> DecodeApp {
+    DecodeApp { id, name, tagline, color, ink_light, ink_dark, repo, former_ids: &[], former_names: &[] }
 }
 
-/// The Craft App Suite, in display order matching getartcraft.com:
-pub const SUITE: [CraftApp; 13] = [
-    app("photocraft", "PhotoCraft", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "storytold/photocraft"),
-    app("vectorcraft", "VectorCraft", "Vector illustration", [[0xe8, 0x57, 0x3f], [0xb8, 0x3a, 0x24], [0xff, 0x8a, 0x70]], "storytold/vectorcraft"),
-    app(
-        "filmcraft",
-        "FilmCraft",
+/// The Decode App Suite, in display order matching getartcraft.com:
+pub const SUITE: [DecodeApp; 13] = [
+    DecodeApp { former_names: &["PhotoCraft"], ..app("photocraft", "PhotoDecode", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "storytold/photocraft") },
+    DecodeApp { former_names: &["VectorCraft"], ..app("vectorcraft", "VectorDecode", "Vector illustration", [[0xe8, 0x57, 0x3f], [0xb8, 0x3a, 0x24], [0xff, 0x8a, 0x70]], "storytold/vectorcraft") },
+    DecodeApp { former_names: &["FilmCraft"], ..app("filmcraft",
+        "FilmDecode",
         "Video editing, color and sound",
         [[0x8b, 0x5c, 0xf6], [0x6a, 0x3f, 0xd6], [0xb6, 0x9c, 0xff]],
         "storytold/filmcraft",
-    ),
-    app(
-        "lightcraft",
-        "LightCraft",
+    ) },
+    DecodeApp { former_names: &["LightCraft"], ..app("lightcraft",
+        "LightDecode",
         "Photo library and raw development",
         [[0xf2, 0xa5, 0x16], [0x8a, 0x58, 0x00], [0xff, 0xc1, 0x4d]],
         "storytold/lightcraft",
-    ),
-    CraftApp {
+    ) },
+    DecodeApp {
         former_ids: &["printcraft"],
-        former_names: &["PrintCraft"],
+        former_names: &["PrintDecode"],
         ..app(
             "pdfcraft",
-            "PdfCraft",
+            "PdfDecode",
             "Reading, organizing and protecting PDFs",
             [[0x12, 0xa5, 0x8a], [0x0a, 0x75, 0x63], [0x3f, 0xd6, 0xb8]],
             "storytold/pdfcraft",
         )
     },
-    app(
-        "effectcraft",
-        "EffectCraft",
+    DecodeApp { former_names: &["EffectCraft"], ..app("effectcraft",
+        "EffectDecode",
         "Motion graphics and visual effects",
         [[0xe0, 0x36, 0x8f], [0xb0, 0x20, 0x6c], [0xff, 0x7a, 0xb8]],
         "storytold/effectcraft",
-    ),
-    app(
-        "designcraft",
-        "DesignCraft",
+    ) },
+    DecodeApp { former_names: &["DesignCraft"], ..app("designcraft",
+        "DesignDecode",
         "Page layout and publishing",
         [[0x7b, 0xb5, 0x1c], [0x45, 0x70, 0x08], [0xa6, 0xe0, 0x4a]],
         "storytold/designcraft",
-    ),
-    app(
-        "figcraft",
-        "FigCraft",
+    ) },
+    DecodeApp { former_names: &["FigCraft"], ..app("figcraft",
+        "FigDecode",
         "Interface design and prototyping",
         [[0x02, 0xda, 0x96], [0x04, 0x7a, 0x56], [0x4f, 0xe8, 0xb6]],
         "storytold/figcraft",
-    ),
-    app("wordcraft", "WordCraft", "Writing and document design", [[0x3f, 0x5f, 0xe0], [0x2a, 0x44, 0xb8], [0x8e, 0xa2, 0xff]], "storytold/wordcraft"),
-    app(
-        "soundcraft",
-        "SoundCraft",
+    ) },
+    DecodeApp { former_names: &["WordCraft"], ..app("wordcraft", "WordDecode", "Writing and document design", [[0x3f, 0x5f, 0xe0], [0x2a, 0x44, 0xb8], [0x8e, 0xa2, 0xff]], "storytold/wordcraft") },
+    DecodeApp { former_names: &["SoundCraft"], ..app("soundcraft",
+        "SoundDecode",
         "Recording, editing and mixing audio",
         [[0x1f, 0xa5, 0xc9], [0x0e, 0x72, 0x90], [0x5f, 0xd0, 0xee]],
         "storytold/soundcraft",
-    ),
-    app(
-        "deckcraft",
-        "DeckCraft",
+    ) },
+    DecodeApp { former_names: &["DeckCraft"], ..app("deckcraft",
+        "DeckDecode",
         "Presentations and slide shows",
         [[0xf0, 0x7a, 0x1e], [0xa8, 0x4f, 0x0a], [0xff, 0xa0, 0x60]],
         "storytold/deckcraft",
-    ),
-    app(
-        "cadcraft",
-        "CADCraft",
+    ) },
+    DecodeApp { former_names: &["CADCraft"], ..app("cadcraft",
+        "CADDecode",
         "Computer-aided design and drafting",
         [[0x3e, 0xa6, 0xe8], [0x1a, 0x6f, 0xa8], [0x7c, 0xc8, 0xff]],
         "storytold/cadcraft",
-    ),
-    app("gridcraft", "GridCraft", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "storytold/gridcraft"),
+    ) },
+    DecodeApp { former_names: &["GridCraft"], ..app("gridcraft", "GridDecode", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "storytold/gridcraft") },
 ];
 
-/// ArtCraft's website.
+/// Decode's website.
 pub const WEBSITE_URL: &str = "https://getartcraft.com";
-/// The GitHub account every Craft App's repository lives under: the only one the launcher
+/// The GitHub account every Decode App's repository lives under: the only one the launcher
 /// installs from, whatever the release feed says.
 pub const GITHUB_OWNER: &str = "storytold";
-/// ArtCraft on GitHub: every Craft App's source.
+/// Decode on GitHub: every Decode App's source.
 pub const GITHUB_URL: &str = "https://github.com/storytold";
-/// ArtCraft's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
+/// Decode's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
 pub const SOCIAL: [(&str, &str); 5] = [
     ("X", "https://x.com/get_artcraft"),
     ("Instagram", "https://www.instagram.com/officialartcraftstudios"),
@@ -163,28 +155,32 @@ pub const SOCIAL: [(&str, &str); 5] = [
     ("TikTok", "https://www.tiktok.com/@artcraft.studios"),
 ];
 
-/// The ArtCraft community on Discord.
+/// The Decode community on Discord.
 pub const DISCORD_URL: &str = "https://discord.gg/artcraft";
-/// Deep link into the Discord application for the ArtCraft server invite.
+/// Deep link into the Discord application for the Decode server invite.
 pub const DISCORD_APP_URL: &str = "discord://-/invite/artcraft";
 
-/// ArtCraft Launcher itself, described like a Craft App so it can update itself with the same
-/// machinery (asset names `artcraft-launcher-<ver>-…`, bundle id `ai.storyteller.artcraft-launcher`,
-/// `ArtCraft Launcher.app`). Not part of [`SUITE`].
-pub const LAUNCHER: CraftApp = app(
-    "artcraft-launcher",
-    "ArtCraft Launcher",
-    "Installs and updates the Craft App Suite",
+/// Decode Launcher itself, described like a Decode App so it can update itself with the same
+/// machinery (asset names `decode-launcher-<ver>-…`, bundle id `com.decode.launcher`,
+/// `Decode Launcher.app`). Not part of [`SUITE`].
+pub const LAUNCHER: DecodeApp = DecodeApp {
+    former_ids: &["artcraft-launcher"],
+    former_names: &["ArtCraft Launcher"],
+    ..app(
+    "decode-launcher",
+    "Decode Launcher",
+    "Installs and updates the Decode App Suite",
     [[0x0b, 0x0b, 0x0c], [0x0b, 0x0b, 0x0c], [0xf2, 0xf1, 0xee]],
     "storytold/craft-launcher",
-);
+    ),
+};
 
 /// The launcher's own repo, checked so it can say when a newer launcher is out.
 pub const LAUNCHER_REPO: &str = "storytold/craft-launcher";
 /// The launcher's own asset stem.
-pub const LAUNCHER_ID: &str = "artcraft-launcher";
+pub const LAUNCHER_ID: &str = "decode-launcher";
 
-/// A Craft App's 128 px icon (PNG), as copied from its repo into `assets/app-icons`: the UI
+/// A Decode App's 128 px icon (PNG), as copied from its repo into `assets/app-icons`: the UI
 /// draws it, and the Linux install puts it in the desktop menu.
 pub fn app_icon_png(id: &str) -> Option<&'static [u8]> {
     Some(match id {
@@ -227,16 +223,16 @@ mod tests {
         assert_eq!(ids.len(), SUITE.len());
         for a in &SUITE {
             assert_eq!(a.repo, format!("storytold/{}", a.id));
-            assert_eq!(a.name.to_lowercase(), a.id);
+            assert_eq!(a.name.to_lowercase().replace("decode", "craft"), a.id);
         }
     }
 
     #[test]
     fn pdfcraft_also_answers_to_printcraft() {
-        let pdf = CraftApp::by_id("pdfcraft").unwrap();
+        let pdf = DecodeApp::by_id("pdfcraft").unwrap();
         assert_eq!(pdf.stems().collect::<Vec<_>>(), ["pdfcraft", "printcraft"]);
-        assert_eq!(pdf.names().collect::<Vec<_>>(), ["PdfCraft", "PrintCraft"]);
+        assert_eq!(pdf.names().collect::<Vec<_>>(), ["PdfDecode", "PdfCraft", "PrintCraft"]);
         assert_eq!(pdf.website(), "https://getartcraft.com/apps/pdfcraft");
-        assert_eq!(CraftApp::by_id("wordcraft").unwrap().website(), "https://getartcraft.com/apps/wordcraft");
+        assert_eq!(DecodeApp::by_id("wordcraft").unwrap().website(), "https://getartcraft.com/apps/wordcraft");
     }
 }

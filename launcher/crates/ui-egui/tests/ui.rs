@@ -1,5 +1,5 @@
 //! Drives the launcher UI against a fake backend: what's shown for each status, and which
-//! commands the buttons send. `ARTCRAFT_LAUNCHER_SNAPSHOTS=<dir>` also saves screenshots; run that
+//! commands the buttons send. `DECODE_LAUNCHER_SNAPSHOTS=<dir>` also saves screenshots; run that
 //! with `-- --test-threads=1`, as rendering on several threads at once can crash Vulkan loaders
 //! older than 1.4.350 (KhronosGroup/Vulkan-Loader#1863).
 
@@ -7,15 +7,15 @@ use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 use std::sync::OnceLock;
 
-use artcraft_launcher_core::details::AppDetails;
-use artcraft_launcher_core::protocol::{
+use decode_launcher_core::details::AppDetails;
+use decode_launcher_core::protocol::{
     Backend, CANCELLED, Capabilities, Command, Event, INSTALL_CANCELLED, JobPhase, LatestRelease, Origin, PausedDownload, Source,
 };
-use artcraft_launcher_core::release::{Asset, Release};
-use artcraft_launcher_core::status::InstallSource;
-use artcraft_launcher_core::{Arch, Installed, Os, Platform, SUITE, version};
-use artcraft_launcher_ui_egui::settings::ViewMode;
-use artcraft_launcher_ui_egui::{Host, LauncherUi, Settings};
+use decode_launcher_core::release::{Asset, Release};
+use decode_launcher_core::status::InstallSource;
+use decode_launcher_core::{Arch, Installed, Os, Platform, SUITE, version};
+use decode_launcher_ui_egui::settings::ViewMode;
+use decode_launcher_ui_egui::{Host, LauncherUi, Settings};
 use egui_kittest::Harness;
 use egui_kittest::kittest::{NodeT, Queryable};
 
@@ -122,9 +122,9 @@ impl Host for NoHost {}
 /// never paints a synthetic cursor into saved images.
 fn test_harness_builder<State>(theme: egui::Theme) -> egui_kittest::HarnessBuilder<State> {
     let choice = if theme == egui::Theme::Dark {
-        artcraft_launcher_ui_egui::theme::ThemeChoice::Dark
+        decode_launcher_ui_egui::theme::ThemeChoice::Dark
     } else {
-        artcraft_launcher_ui_egui::theme::ThemeChoice::Light
+        decode_launcher_ui_egui::theme::ThemeChoice::Light
     };
     egui_kittest::HarnessBuilder::default()
         // 0.37 defaults: strict accessible names and a panic on a missing glyph. Neither is
@@ -133,9 +133,9 @@ fn test_harness_builder<State>(theme: egui::Theme) -> egui_kittest::HarnessBuild
         .with_accessibility_check(true)
         .with_render_cursor(false)
         .with_context_setup(move |ctx| {
-            artcraft_launcher_ui_egui::theme::install_fonts(ctx, None);
+            decode_launcher_ui_egui::theme::install_fonts(ctx, None);
             egui_extras::install_image_loaders(ctx);
-            artcraft_launcher_ui_egui::theme::apply(ctx, choice);
+            decode_launcher_ui_egui::theme::apply(ctx, choice);
         })
 }
 
@@ -178,10 +178,10 @@ fn events() -> Vec<Event> {
         ev.push(Event::Latest {
             app: (*id).into(),
             latest: LatestRelease::Found(release(id, v, NOW - 86_400 - i as i64 * 600)),
-            from: Origin::ArtCraftApi,
+            from: Origin::DecodeApi,
         });
     }
-    ev.push(Event::Latest { app: "soundcraft".into(), latest: LatestRelease::None, from: Origin::ArtCraftApi });
+    ev.push(Event::Latest { app: "soundcraft".into(), latest: LatestRelease::None, from: Origin::DecodeApi });
     let installed = [("photocraft", "0.4.1"), ("lightcraft", "0.4.0"), ("wordcraft", "0.3.0"), ("effectcraft", "0.5.0")];
     for app in &SUITE {
         let inst = installed.iter().find(|(id, _)| *id == app.id).map(|(_, v)| Installed {
@@ -215,7 +215,7 @@ fn harness_with(
     manage: bool,
     scale: f32,
 ) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
-    harness_full(events, view, theme, manage, scale, artcraft_launcher_ui_egui::TitleBar::Native, Rc::default(), None, None)
+    harness_full(events, view, theme, manage, scale, decode_launcher_ui_egui::TitleBar::Native, Rc::default(), None, None)
 }
 
 /// Like `harness_with`, with the details pictures answered as `pictures` says (changeable during the test).
@@ -227,7 +227,7 @@ fn harness_pictures(
     scale: f32,
     pictures: Rc<Cell<Pictures>>,
 ) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
-    harness_full(events, view, theme, manage, scale, artcraft_launcher_ui_egui::TitleBar::Native, pictures, None, None)
+    harness_full(events, view, theme, manage, scale, decode_launcher_ui_egui::TitleBar::Native, pictures, None, None)
 }
 
 fn harness_with_title_bar(
@@ -236,7 +236,7 @@ fn harness_with_title_bar(
     theme: egui::Theme,
     manage: bool,
     scale: f32,
-    bar: artcraft_launcher_ui_egui::TitleBar,
+    bar: decode_launcher_ui_egui::TitleBar,
 ) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
     harness_full(events, view, theme, manage, scale, bar, Rc::default(), None, None)
 }
@@ -248,7 +248,7 @@ fn harness_with_discord(discord_url: Option<&'static str>) -> (Harness<'static, 
         egui::Theme::Dark,
         true,
         1.0,
-        artcraft_launcher_ui_egui::TitleBar::Native,
+        decode_launcher_ui_egui::TitleBar::Native,
         Rc::default(),
         None,
         discord_url,
@@ -265,23 +265,23 @@ fn harness_full(
     theme: egui::Theme,
     manage: bool,
     scale: f32,
-    bar: artcraft_launcher_ui_egui::TitleBar,
+    bar: decode_launcher_ui_egui::TitleBar,
     pictures: Rc<Cell<Pictures>>,
     platform: Option<Platform>,
     discord_url: Option<&'static str>,
 ) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
-    struct HeaderHost(artcraft_launcher_ui_egui::TitleBar, Option<&'static str>);
+    struct HeaderHost(decode_launcher_ui_egui::TitleBar, Option<&'static str>);
     impl Host for HeaderHost {
-        fn title_bar(&self) -> artcraft_launcher_ui_egui::TitleBar {
+        fn title_bar(&self) -> decode_launcher_ui_egui::TitleBar {
             self.0
         }
         fn discord_url(&self) -> &'static str {
-            self.1.unwrap_or(artcraft_launcher_core::catalog::DISCORD_URL)
+            self.1.unwrap_or(decode_launcher_core::catalog::DISCORD_URL)
         }
     }
     // Integration tests compile without cfg!(test), so system_lang() picks up the
     // developer's locale. Force English so labels match the assertions.
-    artcraft_launcher_ui_egui::i18n::set_test_lang(artcraft_launcher_ui_egui::i18n::Lang::EN);
+    decode_launcher_ui_egui::i18n::set_test_lang(decode_launcher_ui_egui::i18n::Lang::EN);
     let sent = Rc::new(RefCell::new(Vec::new()));
     let sent2 = sent.clone();
     let fake = Fake { events, sent: sent2, manage, pictures, asked: Vec::new(), clock: Rc::new(Cell::new(NOW)) };
@@ -299,9 +299,9 @@ fn harness_full(
             {
                 let mut s = settings.clone();
                 s.theme = if theme == egui::Theme::Dark {
-                    artcraft_launcher_ui_egui::theme::ThemeChoice::Dark
+                    decode_launcher_ui_egui::theme::ThemeChoice::Dark
                 } else {
-                    artcraft_launcher_ui_egui::theme::ThemeChoice::Light
+                    decode_launcher_ui_egui::theme::ThemeChoice::Light
                 };
                 *state = Some(LauncherUi::new(ui.ctx(), b, s));
             }
@@ -315,11 +315,11 @@ fn harness_full(
     (harness, sent)
 }
 
-/// Save a PNG under `ARTCRAFT_LAUNCHER_SNAPSHOTS` when that is set. `name` is a test-owned file
+/// Save a PNG under `DECODE_LAUNCHER_SNAPSHOTS` when that is set. `name` is a test-owned file
 /// stem (the test names and sizes make each one unique), never a path: a separator is rejected so
 /// no caller can write outside the evidence directory.
 fn snapshot(h: &mut Harness<'_, Option<LauncherUi>>, name: &str) {
-    let Some(dir) = std::env::var_os("ARTCRAFT_LAUNCHER_SNAPSHOTS") else { return };
+    let Some(dir) = std::env::var_os("DECODE_LAUNCHER_SNAPSHOTS") else { return };
     assert!(
         !name.is_empty() && !name.contains(['/', '\\']) && name != "." && name != "..",
         "snapshot name must be one pathless file stem, got {name:?}"
@@ -328,7 +328,7 @@ fn snapshot(h: &mut Harness<'_, Option<LauncherUi>>, name: &str) {
     img.save(std::path::Path::new(&dir).join(format!("{name}.png"))).unwrap();
 }
 
-/// A managing macOS fixture with a fresh PhotoCraft release and a scripted folder picker, for
+/// A managing macOS fixture with a fresh PhotoDecode release and a scripted folder picker, for
 /// the install-folder flow.
 fn folder_harness(picked: Rc<RefCell<Option<String>>>) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
     struct Picker(Rc<RefCell<Option<String>>>);
@@ -337,7 +337,7 @@ fn folder_harness(picked: Rc<RefCell<Option<String>>>) -> (Harness<'static, Opti
             self.0.borrow_mut().take()
         }
     }
-    artcraft_launcher_ui_egui::i18n::set_test_lang(artcraft_launcher_ui_egui::i18n::Lang::EN);
+    decode_launcher_ui_egui::i18n::set_test_lang(decode_launcher_ui_egui::i18n::Lang::EN);
     let sent = Rc::new(RefCell::new(Vec::new()));
     let mut backend = Some(Fake {
         events: vec![
@@ -382,10 +382,10 @@ fn a_fresh_install_confirms_the_folder_and_configures_before_installing() {
     h.run_steps(4);
     h.get_by_label("Browse…").scroll_to_me();
     h.run_steps(4);
-    *picked.borrow_mut() = Some("/Volumes/Craft Apps".into());
+    *picked.borrow_mut() = Some("/Volumes/Decode Apps".into());
     h.get_by_label("Browse…").click();
     h.run_steps(3);
-    assert_eq!(h.state().as_ref().unwrap().settings.install_locations.root.as_deref(), Some("/Volumes/Craft Apps"));
+    assert_eq!(h.state().as_ref().unwrap().settings.install_locations.root.as_deref(), Some("/Volumes/Decode Apps"));
     h.get_by_label("Done").click();
     h.run_steps(3);
     sent.borrow_mut().clear();
@@ -419,7 +419,7 @@ fn a_fresh_install_confirms_the_folder_and_configures_before_installing() {
     h.run_steps(2);
     let commands = install_commands(&sent);
     assert!(matches!(commands.first(), Some(Command::Configure(options))
-        if options.install_locations.root.as_deref() == Some("/Volumes/Craft Apps")
+        if options.install_locations.root.as_deref() == Some("/Volumes/Decode Apps")
         && options.install_locations.folder("photocraft") == Some("/Volumes/Typed Photo")));
     assert_eq!(commands.get(1), Some(&Command::Install { app: "photocraft".into() }));
 }
@@ -429,7 +429,7 @@ fn use_default_removes_an_app_override_and_settings_can_reset_the_root() {
     let picked = Rc::new(RefCell::new(Some("/Volumes/Photo".into())));
     let (mut h, sent) = folder_harness(picked);
     h.run_steps(8);
-    h.state_mut().as_mut().unwrap().settings.install_locations.root = Some("/Volumes/Craft Apps".into());
+    h.state_mut().as_mut().unwrap().settings.install_locations.root = Some("/Volumes/Decode Apps".into());
     h.state_mut().as_mut().unwrap().settings.install_locations.per_app.insert("photocraft".into(), "/Volumes/Old Photo".into());
     h.run_steps(2);
     h.get_by_label("Install").scroll_to_me();
@@ -443,7 +443,7 @@ fn use_default_removes_an_app_override_and_settings_can_reset_the_root() {
     h.run_steps(2);
     assert!(h.state().as_ref().unwrap().settings.install_locations.per_app.is_empty());
     assert!(
-        matches!(install_commands(&sent).first(), Some(Command::Configure(options)) if options.install_locations.folder("photocraft") == Some("/Volumes/Craft Apps"))
+        matches!(install_commands(&sent).first(), Some(Command::Configure(options)) if options.install_locations.folder("photocraft") == Some("/Volumes/Decode Apps"))
     );
     h.get_by_label("Settings").click();
     h.run_steps(3);
@@ -463,7 +463,7 @@ fn windows_package_choice_can_select_portable_and_configures_the_backend() {
         egui::Theme::Light,
         true,
         1.0,
-        artcraft_launcher_ui_egui::TitleBar::Native,
+        decode_launcher_ui_egui::TitleBar::Native,
         Rc::default(),
         Some(Platform { os: Os::Windows, arch: Arch::X64 }),
         None,
@@ -475,11 +475,11 @@ fn windows_package_choice_can_select_portable_and_configures_the_backend() {
     h.run_steps(2);
     h.get_by_label("Portable (.zip)").click();
     h.run_steps(3);
-    assert_eq!(h.state().as_ref().unwrap().settings.preferred_kinds, [artcraft_launcher_core::PackageKind::PortableZip]);
+    assert_eq!(h.state().as_ref().unwrap().settings.preferred_kinds, [decode_launcher_core::PackageKind::PortableZip]);
     assert!(
         sent.borrow()
             .iter()
-            .any(|command| matches!(command, Command::Configure(options) if options.kinds == [artcraft_launcher_core::PackageKind::PortableZip]))
+            .any(|command| matches!(command, Command::Configure(options) if options.kinds == [decode_launcher_core::PackageKind::PortableZip]))
     );
 }
 
@@ -494,7 +494,7 @@ fn a_narrow_settings_row_keeps_its_control_clear_of_its_label() {
         egui::Theme::Light,
         true,
         1.0,
-        artcraft_launcher_ui_egui::TitleBar::Native,
+        decode_launcher_ui_egui::TitleBar::Native,
         Rc::default(),
         Some(Platform { os: Os::Windows, arch: Arch::X64 }),
         None,
@@ -694,10 +694,10 @@ fn the_actual_open_button_launches_once_across_a_discarded_pass() {
 /// A toast created by logic while no window ran is shown once on the first drawing pass and
 /// expires relative to that pass.
 fn a_job_finished_while_hidden_shows_one_fresh_toast_on_the_next_frame() {
-    artcraft_launcher_ui_egui::i18n::set_test_lang(artcraft_launcher_ui_egui::i18n::Lang::EN);
+    decode_launcher_ui_egui::i18n::set_test_lang(decode_launcher_ui_egui::i18n::Lang::EN);
     let sent = Rc::new(RefCell::new(Vec::new()));
     let backend = Fake {
-        events: vec![Event::JobFinished { app: "photocraft".into(), result: Ok("PhotoCraft updated to 0.5.0".into()) }],
+        events: vec![Event::JobFinished { app: "photocraft".into(), result: Ok("PhotoDecode updated to 0.5.0".into()) }],
         sent: sent.clone(),
         manage: true,
         pictures: Rc::default(),
@@ -736,14 +736,14 @@ fn a_job_finished_while_hidden_shows_one_fresh_toast_on_the_next_frame() {
     // must be fresh on the first drawing pass and must expire relative to it.
     h.input_mut().time = Some(1000.0);
     h.run_steps(2);
-    assert_eq!(h.query_all_by_label("PhotoCraft updated to 0.5.0").count(), 1, "the hidden result is shown once");
+    assert_eq!(h.query_all_by_label("PhotoDecode updated to 0.5.0").count(), 1, "the hidden result is shown once");
     h.run_steps(2);
-    assert_eq!(h.query_all_by_label("PhotoCraft updated to 0.5.0").count(), 1, "a discarded/next pass must not duplicate it");
+    assert_eq!(h.query_all_by_label("PhotoDecode updated to 0.5.0").count(), 1, "a discarded/next pass must not duplicate it");
     // A stale expiry (old logic time + 4.5 s) would already have dropped it; at 1004.6 the real
     // 1000.0 + 4.5 deadline has passed, so the toast goes.
     h.input_mut().time = Some(1004.6);
     h.run_steps(2);
-    assert!(h.query_by_label("PhotoCraft updated to 0.5.0").is_none(), "the toast expires relative to the drawing pass");
+    assert!(h.query_by_label("PhotoDecode updated to 0.5.0").is_none(), "the toast expires relative to the drawing pass");
 }
 
 #[test]
@@ -757,7 +757,7 @@ fn a_narrow_toolbar_names_its_controls_and_passes_strict_accessibility() {
     h.get_by_role_and_label(egui::accesskit::Role::Button, "Check for updates");
     h.get_by_role_and_label(egui::accesskit::Role::Button, "Settings");
     h.get_by_role_and_label(egui::accesskit::Role::ComboBox, "Sort");
-    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for PhotoCraft");
+    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for PhotoDecode");
     let unnamed = h.unnamed_widgets();
     assert!(unnamed.is_empty(), "narrow toolbar has unnamed input widgets: {unnamed:?}");
     h.check_accessibility();
@@ -769,11 +769,11 @@ fn install_locations_survive_settings_save_and_older_settings_use_system_default
     assert!(old.auto_update);
     assert_eq!(old.install_locations, Default::default());
     let mut settings = old;
-    settings.install_locations.root = Some("/Volumes/Craft Apps".into());
+    settings.install_locations.root = Some("/Volumes/Decode Apps".into());
     settings.install_locations.per_app.insert("photocraft".into(), "/Volumes/Photo".into());
     let restored: Settings = serde_json::from_str(&serde_json::to_string(&settings).unwrap()).unwrap();
     assert_eq!(restored.install_locations.folder("photocraft"), Some("/Volumes/Photo"));
-    assert_eq!(restored.install_locations.folder("filmcraft"), Some("/Volumes/Craft Apps"));
+    assert_eq!(restored.install_locations.folder("filmcraft"), Some("/Volumes/Decode Apps"));
 }
 
 #[test]
@@ -828,7 +828,7 @@ fn grid_shows_every_status_and_installs_on_click() {
     // The window has no title bar of its own here (the web build, and the tests).
     assert!(h.query_by_label("Close").is_none());
     assert!(h.query_all_by_label_contains("Discord").count() >= 1); // the footer icon (the header has none)
-    assert!(h.query_by_label("Join the ArtCraft community on Discord").is_none(), "no Discord link in the header");
+    assert!(h.query_by_label("Join the Decode community on Discord").is_none(), "no Discord link in the header");
     assert!(h.query_all_by_label("Coming soon").count() >= 1);
     h.get_by_label_contains("48 MB of 131 MB");
     h.get_by_label("Update all (2)").click();
@@ -844,7 +844,7 @@ fn downloads_can_be_paused_resumed_and_discarded() {
     h.run_steps(4);
     // Bring the paused and reconnecting apps on screen.
     if let Some(l) = h.state_mut().as_mut() {
-        l.settings.filter = artcraft_launcher_ui_egui::settings::Filter::NotInstalled;
+        l.settings.filter = decode_launcher_ui_egui::settings::Filter::NotInstalled;
     }
     h.run_steps(6);
     snapshot(&mut h, "grid-downloads-dark");
@@ -870,7 +870,7 @@ fn a_kept_download_offers_retry_install_and_download_again() {
     let (mut h, sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(4);
     if let Some(l) = h.state_mut().as_mut() {
-        l.settings.filter = artcraft_launcher_ui_egui::settings::Filter::NotInstalled;
+        l.settings.filter = decode_launcher_ui_egui::settings::Filter::NotInstalled;
     }
     h.run_steps(6);
     // Below the fold in the restyled grid: bring the card on screen first.
@@ -935,8 +935,8 @@ fn a_kept_update_names_its_version_and_an_up_to_date_app_is_not_downloaded_again
     h.get_by_label("Retry update to 0.6.0").click();
     h.run_steps(2);
     assert_eq!(*sent.borrow(), [Command::Install { app: "effectcraft".into() }]);
-    // WordCraft is up to date: its menu offers Reinstall, which uses the kept file.
-    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "WordCraft").rect().center().y;
+    // WordDecode is up to date: its menu offers Reinstall, which uses the kept file.
+    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "WordDecode").rect().center().y;
     h.get_all_by_label_contains("More actions").find(|n| (n.rect().center().y - row).abs() < 25.0).unwrap().click();
     h.run_steps(3);
     h.get_by_label("Reinstall");
@@ -965,8 +965,8 @@ fn an_install_waiting_for_another_says_so_and_can_be_cancelled() {
 #[test]
 fn the_launcher_update_waiting_for_other_installs_can_be_cancelled() {
     let mut ev = events();
-    ev.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
-    ev.push(Event::Progress { app: "artcraft-launcher".into(), phase: JobPhase::Waiting });
+    ev.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
+    ev.push(Event::Progress { app: "decode-launcher".into(), phase: JobPhase::Waiting });
     let (mut h, sent) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, true, 1.0);
     h.run_steps(6);
     snapshot(&mut h, "grid-launcher-waiting-dark");
@@ -974,15 +974,15 @@ fn the_launcher_update_waiting_for_other_installs_can_be_cancelled() {
     sent.borrow_mut().clear();
     h.get_by_label("Cancel update").click();
     h.run_steps(2);
-    assert_eq!(*sent.borrow(), [Command::Cancel { app: "artcraft-launcher".into() }]);
+    assert_eq!(*sent.borrow(), [Command::Cancel { app: "decode-launcher".into() }]);
 }
 
 #[test]
 /// The launcher banner's Cancel crosses the action boundary once per visible frame.
 fn the_launcher_banner_cancel_is_sent_once_across_discarded_passes() {
     let mut ev = events();
-    ev.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
-    ev.push(Event::Progress { app: "artcraft-launcher".into(), phase: JobPhase::Waiting });
+    ev.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
+    ev.push(Event::Progress { app: "decode-launcher".into(), phase: JobPhase::Waiting });
     let (mut h, sent) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, true, 1.0);
     h.run_steps(6);
     let at = h.get_by_label("Cancel update").rect().center();
@@ -1003,9 +1003,9 @@ fn each_cancellation_says_what_it_called_off() {
     ev.push(Event::Progress { app: "lightcraft".into(), phase: JobPhase::Waiting });
     ev.push(finished("lightcraft", CANCELLED));
     // The launcher's own update, cancelled while it waited.
-    ev.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
-    ev.push(Event::Progress { app: "artcraft-launcher".into(), phase: JobPhase::Waiting });
-    ev.push(finished("artcraft-launcher", CANCELLED));
+    ev.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
+    ev.push(Event::Progress { app: "decode-launcher".into(), phase: JobPhase::Waiting });
+    ev.push(finished("decode-launcher", CANCELLED));
     // A download cancelled mid-way.
     ev.push(finished("filmcraft", CANCELLED));
     let (mut h, _) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, true, 1.0);
@@ -1034,26 +1034,26 @@ fn table_view_and_light_theme() {
 fn hiding_an_app_removes_it_until_it_is_unhidden() {
     let (mut h, _) = harness(ViewMode::Table, egui::Theme::Dark, true);
     h.run_steps(6);
-    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft").rect().center().y;
+    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").rect().center().y;
     h.get_all_by_label_contains("More actions").find(|n| (n.rect().center().y - row).abs() < 25.0).unwrap().click();
     h.run_steps(3);
     h.get_by_label("Hide App").click();
     h.run_steps(4);
-    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft").is_none());
+    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").is_none());
     assert!(h.state().as_ref().unwrap().settings.hidden.contains("photocraft"));
     h.get_by_label("Hidden Apps 1").click();
     h.run_steps(4);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft");
-    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "WordCraft").is_none());
-    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft").rect().center().y;
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode");
+    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "WordDecode").is_none());
+    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").rect().center().y;
     h.get_all_by_label_contains("More actions").find(|n| (n.rect().center().y - row).abs() < 25.0).unwrap().click();
     h.run_steps(3);
     h.get_by_label("Unhide App").click();
     h.run_steps(4);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode");
     assert!(h.query_by_label("Hidden Apps 1").is_none());
     assert!(h.state().as_ref().unwrap().settings.hidden.is_empty());
-    assert_eq!(h.state().as_ref().unwrap().settings.filter, artcraft_launcher_ui_egui::settings::Filter::All);
+    assert_eq!(h.state().as_ref().unwrap().settings.filter, decode_launcher_ui_egui::settings::Filter::All);
 }
 
 #[test]
@@ -1065,14 +1065,14 @@ fn switching_views() {
     h.get_by_label("Show apps as a table").click();
     h.run_steps(4);
     assert_eq!(h.state().as_ref().unwrap().settings.view, ViewMode::Table);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft");
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "WordCraft");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "WordDecode");
     // The row icon is decorative; the wordmark carries the name exactly once.
-    assert_eq!(h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoCraft").count(), 0, "the table icon must not repeat the wordmark");
+    assert_eq!(h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoDecode").count(), 0, "the table icon must not repeat the wordmark");
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").count(),
         1,
-        "the table wordmark names PhotoCraft exactly once"
+        "the table wordmark names PhotoDecode exactly once"
     );
 }
 
@@ -1095,12 +1095,12 @@ fn name_and_tagline_are_centred_on_the_icon() {
         let (mut h, _) = harness_at(ViewMode::Grid, egui::Theme::Dark, true, scale);
         h.run_steps(8);
         snapshot(&mut h, &format!("grid-dark{suffix}"));
-        let off = below_icon_centre(&h, &["PhotoCraft", "Image editing"]);
+        let off = below_icon_centre(&h, &["PhotoDecode", "Image editing"]);
         assert!(off.abs() < 0.25, "grid at {scale}x: {off}");
         let (mut h, _) = harness_at(ViewMode::Table, egui::Theme::Light, true, scale);
         h.run_steps(8);
         snapshot(&mut h, &format!("table-light{suffix}"));
-        let off = below_icon_centre(&h, &["PhotoCraft", "Image editing"]);
+        let off = below_icon_centre(&h, &["PhotoDecode", "Image editing"]);
         assert!(off.abs() < 0.25, "table at {scale}x: {off}");
     }
 }
@@ -1131,13 +1131,13 @@ fn every_table_column_sorts_both_ways() {
     h.get_by_label("Status").click();
     h.run_steps(3);
     let o = order(&h);
-    assert_eq!(&o[..4], ["PhotoCraft", "EffectCraft", "LightCraft", "WordCraft"], "{o:?}");
+    assert_eq!(&o[..4], ["PhotoDecode", "EffectDecode", "LightDecode", "WordDecode"], "{o:?}");
     // Reversed: the apps not installed first, then up to date, then the updates last. The table
     // keeps its column's order; only the grid puts installed apps above the rest.
     h.get_by_label("Status").click();
     h.run_steps(3);
     let o = order(&h);
-    assert_eq!(&o[o.len().saturating_sub(4)..], ["LightCraft", "WordCraft", "PhotoCraft", "EffectCraft"], "{o:?}");
+    assert_eq!(&o[o.len().saturating_sub(4)..], ["LightDecode", "WordDecode", "PhotoDecode", "EffectDecode"], "{o:?}");
     // The old Installed and Latest columns are gone; Version shows the number, and from and to for an update.
     assert!(h.query_by_label("Latest").is_none());
     h.get_by_label("Version");
@@ -1151,7 +1151,7 @@ fn every_table_column_sorts_both_ways() {
     h.get_by_label("App").click();
     h.run_steps(3);
     let o = order(&h);
-    assert_eq!(o.first().map(String::as_str), Some("WordCraft"), "{o:?}");
+    assert_eq!(o.first().map(String::as_str), Some("WordDecode"), "{o:?}");
 }
 
 /// The first close to the tray is explained once, by a system notification (#45, #215).
@@ -1172,7 +1172,7 @@ fn the_first_close_to_the_tray_is_explained_once() {
     l.hidden_to_tray(&mut host);
     assert!(l.settings.tray_hint_shown);
     assert_eq!(host.0.len(), 1, "{:?}", host.0);
-    assert_eq!(host.0[0].0, "ArtCraft Launcher is still running");
+    assert_eq!(host.0[0].0, "Decode Launcher is still running");
     assert!(host.0[0].1.contains("tray icon"), "{}", host.0[0].1);
 }
 
@@ -1191,7 +1191,7 @@ fn settings_link_to_discord() {
         "the Settings hero icon must not repeat its heading"
     );
     snapshot(&mut h, "settings-dark");
-    h.get_by_label("Questions, ideas and news from the ArtCraft team");
+    h.get_by_label("Questions, ideas and news from the Decode team");
     // The footer icon and the button in Settings.
     assert!(h.query_all_by_label_contains("Discord").count() >= 2);
 }
@@ -1207,14 +1207,14 @@ fn the_uninstall_prompt_keeps_its_own_size_after_a_taller_dialog() {
     h.run_steps(4);
     h.get_by_label("Done").click();
     h.run_steps(3);
-    // PhotoCraft is installed, so its … menu offers Uninstall.
-    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for PhotoCraft").click();
+    // PhotoDecode is installed, so its … menu offers Uninstall.
+    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for PhotoDecode").click();
     h.run_steps(3);
     h.get_by_label("Uninstall…").click();
     h.run_steps(4);
     h.check_accessibility();
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "Uninstall PhotoCraft?");
-    assert_eq!(h.query_all_by_label_contains("Uninstall PhotoCraft?").count(), 1, "the title icon is decorative, not a second copy of the heading");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "Uninstall PhotoDecode?");
+    assert_eq!(h.query_all_by_label_contains("Uninstall PhotoDecode?").count(), 1, "the title icon is decorative, not a second copy of the heading");
     snapshot(&mut h, "uninstall-prompt-dark");
     // The buttons follow the text closely, not somewhere down the height Settings had (#88).
     let text = h.get_by_label("The app will be moved to the Trash. Your documents and settings stay.").rect();
@@ -1244,10 +1244,10 @@ fn links_to_the_website_github_and_each_apps_pages() {
     // The table's … menu has the app's website and GitHub repo.
     let (mut h, _) = harness(ViewMode::Table, egui::Theme::Dark, true);
     h.run_steps(6);
-    h.get_all_by_label_contains("More actions").nth(8).unwrap().click(); // WordCraft
+    h.get_all_by_label_contains("More actions").nth(8).unwrap().click(); // WordDecode
     h.run_steps(3);
     h.get_by_label("GitHub repository");
-    // The footer's Website link and WordCraft's now-live one in the menu.
+    // The footer's Website link and WordDecode's now-live one in the menu.
     assert!(h.query_all_by_label_contains("Website").count() >= 2);
 }
 
@@ -1284,7 +1284,7 @@ fn links_open_the_right_pages() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
     assert_eq!(click_opens(&mut h, "Discord").as_deref(), Some("https://discord.gg/artcraft"));
-    // The footer's ArtCraft links and each card's own pages.
+    // The footer's Decode links and each card's own pages.
     let github = all_opened(&mut h, "GitHub");
     assert!(github.contains(&"https://github.com/storytold".to_string()), "{github:?}");
     assert!(github.contains(&"https://github.com/storytold/photocraft".to_string()), "{github:?}");
@@ -1327,7 +1327,7 @@ fn hostile_release_asset_urls_never_reach_the_opener() {
     assert!(!opened.iter().any(|url| url.as_str() == HOSTILE), "a hostile card asset URL reached the opener: {opened:?}");
 
     let mut ev = events();
-    let mut launcher_release = release("artcraft-launcher", "0.2.0", NOW);
+    let mut launcher_release = release("decode-launcher", "0.2.0", NOW);
     launcher_release.assets[0].url = HOSTILE.to_string();
     ev.push(Event::LauncherUpdate(launcher_release));
     let (mut h, _) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, false, 1.0);
@@ -1339,7 +1339,7 @@ fn hostile_release_asset_urls_never_reach_the_opener() {
 
 #[test]
 fn discord_link_opens_app_when_discord_is_installed() {
-    let (mut h, _) = harness_with_discord(Some(artcraft_launcher_core::catalog::DISCORD_APP_URL));
+    let (mut h, _) = harness_with_discord(Some(decode_launcher_core::catalog::DISCORD_APP_URL));
     h.run_steps(6);
     assert_eq!(click_opens(&mut h, "Discord").as_deref(), Some("discord://-/invite/artcraft"));
 }
@@ -1389,7 +1389,7 @@ fn the_launcher_updates_itself_and_quits_to_restart() {
     }
     let sent = Rc::new(RefCell::new(Vec::new()));
     let mut events = events();
-    events.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
+    events.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
     let shared_events = Rc::new(RefCell::new(Vec::new()));
     struct Scripted {
         inner: Fake,
@@ -1435,9 +1435,9 @@ fn the_launcher_updates_itself_and_quits_to_restart() {
         None,
     );
     h.run_steps(6);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "ArtCraft Launcher 0.2.0 is available.");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "Decode Launcher 0.2.0 is available.");
     assert_eq!(
-        h.query_all_by_label_contains("ArtCraft Launcher 0.2.0 is available").count(),
+        h.query_all_by_label_contains("Decode Launcher 0.2.0 is available").count(),
         1,
         "the update title is announced once, not once by the icon and once by the heading"
     );
@@ -1447,7 +1447,7 @@ fn the_launcher_updates_itself_and_quits_to_restart() {
     // Downloading: the banner shows progress instead of the button.
     shared_events
         .borrow_mut()
-        .push(Event::Progress { app: "artcraft-launcher".into(), phase: JobPhase::Downloading { done: 5 << 20, total: 10 << 20 } });
+        .push(Event::Progress { app: "decode-launcher".into(), phase: JobPhase::Downloading { done: 5 << 20, total: 10 << 20 } });
     h.run_steps(3);
     assert!(h.query_by_label("Update and restart").is_none());
     assert!(!quit.get());
@@ -1462,13 +1462,13 @@ fn the_launcher_updates_itself_and_quits_to_restart() {
 /// toolbar banner.
 fn launcher_update_prompts_to_relaunch_with_updated_version() {
     let mut ev = events();
-    ev.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
+    ev.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
     let (mut h, _) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, true, 1.0);
     h.run_steps(6);
     // Dialog pops up on launch with the update prompt
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "ArtCraft Launcher 0.2.0 is available.");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "Decode Launcher 0.2.0 is available.");
     assert_eq!(
-        h.query_all_by_label_contains("ArtCraft Launcher 0.2.0 is available").count(),
+        h.query_all_by_label_contains("Decode Launcher 0.2.0 is available").count(),
         1,
         "the update title is announced once, not once by the icon and once by the heading"
     );
@@ -1498,7 +1498,7 @@ fn the_current_desktop_setting_is_only_offered_where_the_os_has_desktops() {
 /// A feed alert is acknowledged only by OK (persisted), while an inline announcement stays until
 /// its own Dismiss is clicked.
 fn feed_announcements_and_alerts_show_until_dismissed() {
-    use artcraft_launcher_core::feed::Notice;
+    use decode_launcher_core::feed::Notice;
     let notice = |id: &str, title: &str, link: Option<&str>| Notice {
         id: id.into(),
         title: title.into(),
@@ -1509,7 +1509,7 @@ fn feed_announcements_and_alerts_show_until_dismissed() {
     let sent = Rc::new(RefCell::new(Vec::new()));
     let mut evs = events();
     evs.push(Event::Notices {
-        announcements: vec![notice("a1", "CADCraft 1.0 is out", Some("https://getartcraft.com/news"))],
+        announcements: vec![notice("a1", "CADDecode 1.0 is out", Some("https://getartcraft.com/news"))],
         alerts: vec![notice("x1", "Security update", Some("https://getartcraft.com/security"))],
     });
     let mut backend = Some(Fake { events: evs, sent, manage: true, pictures: Rc::default(), asked: Vec::new(), clock: Rc::new(Cell::new(NOW)) });
@@ -1536,17 +1536,17 @@ fn feed_announcements_and_alerts_show_until_dismissed() {
     assert!(h.query_by_label("Security update").is_none());
     assert!(h.state().as_ref().unwrap().settings.dismissed_notices.contains("x1"));
     // The announcement stays inline until dismissed.
-    h.get_by_label("CADCraft 1.0 is out");
+    h.get_by_label("CADDecode 1.0 is out");
     h.get_by_label("Learn more");
     h.get_all_by_label("Dismiss").next().unwrap().click();
     h.run_steps(4);
-    assert!(h.query_by_label("CADCraft 1.0 is out").is_none());
+    assert!(h.query_by_label("CADDecode 1.0 is out").is_none());
     assert!(h.state().as_ref().unwrap().settings.dismissed_notices.contains("a1"));
 }
 
 #[test]
 fn automatic_checks_run_every_five_minutes() {
-    use artcraft_launcher_ui_egui::settings::CheckEvery;
+    use decode_launcher_ui_egui::settings::CheckEvery;
     assert_eq!(Settings::default().check_every.seconds(), Some(300));
     // Older saved choices still load, and mean "automatically" now.
     assert_eq!(CheckEvery::Day.seconds(), Some(300));
@@ -1558,7 +1558,7 @@ fn automatic_checks_run_every_five_minutes() {
 /// `UpdateLauncher`.
 fn automatic_updates_queue_installs_for_outdated_apps_and_launcher() {
     let mut ev = events();
-    ev.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
+    ev.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
     let sent = Rc::new(RefCell::new(Vec::new()));
     let sent2 = sent.clone();
     let mut backend =
@@ -1588,7 +1588,7 @@ fn automatic_updates_queue_installs_for_outdated_apps_and_launcher() {
 /// With auto-update off, no app install or launcher update is queued.
 fn automatic_updates_are_disabled_by_default() {
     let mut ev = events();
-    ev.push(Event::LauncherUpdate(release("artcraft-launcher", "0.2.0", NOW)));
+    ev.push(Event::LauncherUpdate(release("decode-launcher", "0.2.0", NOW)));
     let sent = Rc::new(RefCell::new(Vec::new()));
     let sent2 = sent.clone();
     let mut backend =
@@ -1641,10 +1641,10 @@ fn the_footer_names_the_services_behind_what_is_on_screen() {
             h.get_by_label_contains("Checked ").accesskit_node().label().or_else(|| h.get_by_label_contains("Checked ").accesskit_node().value());
         label.unwrap_or_default()
     };
-    assert_eq!(footer(Vec::new()), "Checked 3 min ago · using ArtCraft API");
+    assert_eq!(footer(Vec::new()), "Checked 3 min ago · using Decode API");
     let from_github =
         vec![Event::Latest { app: "wordcraft".into(), latest: LatestRelease::Found(release("wordcraft", "0.3.1", NOW)), from: Origin::GitHub }];
-    assert_eq!(footer(from_github), "Checked 3 min ago · using ArtCraft API and GitHub");
+    assert_eq!(footer(from_github), "Checked 3 min ago · using Decode API and GitHub");
 }
 
 #[test]
@@ -1662,8 +1662,8 @@ fn web_build_offers_downloads() {
 fn custom_title_bar_has_window_buttons() {
     struct FramelessHost;
     impl Host for FramelessHost {
-        fn title_bar(&self) -> artcraft_launcher_ui_egui::TitleBar {
-            artcraft_launcher_ui_egui::TitleBar::Custom
+        fn title_bar(&self) -> decode_launcher_ui_egui::TitleBar {
+            decode_launcher_ui_egui::TitleBar::Custom
         }
     }
     let mut backend = Some(Fake {
@@ -1702,7 +1702,7 @@ fn custom_title_bar_has_window_buttons() {
 /// so it belongs to the close button, as it does with Windows' own caption buttons (#374).
 #[test]
 fn maximized_the_close_button_reaches_the_screens_corner() {
-    let (mut h, _) = harness_with_title_bar(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, artcraft_launcher_ui_egui::TitleBar::Custom);
+    let (mut h, _) = harness_with_title_bar(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, decode_launcher_ui_egui::TitleBar::Custom);
     h.run_steps(6);
     let set_maximized = |h: &mut Harness<'_, Option<LauncherUi>>, maximized: bool| {
         h.input_mut().viewports.entry(egui::ViewportId::ROOT).or_default().maximized = Some(maximized);
@@ -1746,18 +1746,18 @@ fn clicking_a_card_opens_its_details_drawer() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
     // Every app has a page: a card of each generation opens one.
-    h.get_by_label("VectorCraft details");
-    h.get_by_label("WordCraft details");
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("VectorDecode details");
+    h.get_by_label("WordDecode details");
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     h.check_accessibility();
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoCraft").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoDecode").count(),
         0,
         "the hero icon is decorative; the wordmark carries the app name"
     );
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").count(),
         2,
         "exactly the grid card's wordmark and the details drawer's wordmark carry the app name"
     );
@@ -1786,7 +1786,7 @@ fn clicking_a_card_opens_its_details_drawer() {
 fn details_drawer_in_the_light_theme() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Light, true);
     h.run_steps(8);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-light");
     h.get_all_by_label_contains("The image editor you already know how to use").last().unwrap();
@@ -1801,30 +1801,30 @@ fn opening_a_page_asks_for_its_pictures_once_and_only_while_it_lacks_some() {
     let (mut h, sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
     assert_eq!(fetches(&sent, "photocraft"), 0, "nothing is fetched before a page is opened");
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "photocraft"), 1);
     h.get_by_label("Enlarge picture");
     // Closed and opened again: the pictures are in hand, so nothing is asked.
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "photocraft"), 1);
     h.get_by_label("Enlarge picture");
     // Another page asks for its own, and a page without pictures asks for nothing.
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("VectorCraft details").scroll_to_me();
+    h.get_by_label("VectorDecode details").scroll_to_me();
     h.run_steps(3);
-    h.get_by_label("VectorCraft details").click();
+    h.get_by_label("VectorDecode details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "vectorcraft"), 1);
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("PdfCraft details").scroll_to_me();
+    h.get_by_label("PdfDecode details").scroll_to_me();
     h.run_steps(3);
-    h.get_by_label("PdfCraft details").click();
+    h.get_by_label("PdfDecode details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "pdfcraft"), 0);
 }
@@ -1834,7 +1834,7 @@ fn a_frame_stands_in_for_the_pictures_until_they_arrive() {
     let pictures = Rc::new(Cell::new(Pictures::Silent));
     let (mut h, sent) = harness_pictures(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, pictures.clone());
     h.run_steps(8);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-loading-dark");
     h.get_by_label("Loading pictures…");
@@ -1857,7 +1857,7 @@ fn offline_the_frame_says_so_and_opening_the_page_again_retries() {
     let pictures = Rc::new(Cell::new(Pictures::Offline));
     let (mut h, sent) = harness_pictures(events(), ViewMode::Grid, egui::Theme::Light, true, 1.0, pictures.clone());
     h.run_steps(8);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-offline-light");
     h.get_by_label("Pictures couldn't be loaded. Reopen this page to try again.");
@@ -1868,7 +1868,7 @@ fn offline_the_frame_says_so_and_opening_the_page_again_retries() {
     pictures.set(Pictures::Online);
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "photocraft"), 2);
     h.get_by_label("Enlarge picture");
@@ -1880,7 +1880,7 @@ fn the_enlarged_view_shows_a_frame_for_a_picture_still_missing() {
     let pictures = Rc::new(Cell::new(Pictures::SecondFails));
     let (mut h, _sent) = harness_pictures(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, pictures);
     h.run_steps(8);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     h.get_by_label("Enlarge picture").click();
     h.run_steps(3);
@@ -1899,10 +1899,10 @@ fn the_enlarged_view_shows_a_frame_for_a_picture_still_missing() {
 fn a_page_without_pictures_has_no_gallery() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
-    // PdfCraft's screenshots still show its old name (PrintCraft), so its page has none for now.
-    h.get_by_label("PdfCraft details").scroll_to_me();
+    // PdfDecode's screenshots still show its old name (PrintDecode), so its page has none for now.
+    h.get_by_label("PdfDecode details").scroll_to_me();
     h.run_steps(3);
-    h.get_by_label("PdfCraft details").click();
+    h.get_by_label("PdfDecode details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-no-pictures-dark");
     h.get_all_by_label_contains("The open-source PDF workbench.").last().unwrap();
@@ -1917,7 +1917,7 @@ fn a_page_without_pictures_has_no_gallery() {
 fn the_lead_picture_can_be_enlarged() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     // The drawer has one "Close (Esc)"; the enlarged view adds its own.
     assert_eq!(h.query_all_by_label("Close (Esc)").count(), 1);
@@ -1941,7 +1941,7 @@ fn the_lead_picture_can_be_enlarged() {
     assert_eq!(h.query_all_by_label_contains("The image editor you already know").count(), 1);
 }
 
-/// Every page, whatever it holds: no pictures (PdfCraft), one (DesignCraft) or several. The arrow keys are
+/// Every page, whatever it holds: no pictures (PdfDecode), one (DesignDecode) or several. The arrow keys are
 /// pressed more often than there are pictures, both ways, to wrap around the list and to do nothing on a
 /// page that has one or none; the enlarged view is opened wherever there is a picture to enlarge.
 #[test]
@@ -1950,7 +1950,7 @@ fn every_page_opens_and_pages_through_its_pictures() {
     // Tall enough to show all thirteen cards at once.
     h.set_size(egui::vec2(1180.0, 3000.0));
     h.run_steps(8);
-    for d in &artcraft_launcher_core::details::DETAILS {
+    for d in &decode_launcher_core::details::DETAILS {
         let name = SUITE.iter().find(|a| a.id == d.id).map(|a| a.name).unwrap_or(d.id);
         h.get_by_label(&format!("{name} details")).scroll_to_me();
         h.run_steps(3);
@@ -1996,7 +1996,7 @@ fn every_page_opens_and_pages_through_its_pictures() {
 fn the_drawer_and_the_enlarged_picture_survive_any_window_size() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(10);
     let sizes = [(1180.0, 900.0), (720.0, 500.0), (480.0, 320.0), (320.0, 200.0), (120.0, 90.0), (40.0, 30.0), (4000.0, 2400.0)];
     for zoom in [false, true] {
@@ -2097,7 +2097,7 @@ fn toolbar_keeps_navigation_refresh_search_and_view_on_one_unclipped_row() {
 
 #[test]
 fn the_toolbar_has_no_filter_dropdown() {
-    use artcraft_launcher_ui_egui::settings::Filter;
+    use decode_launcher_ui_egui::settings::Filter;
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
     for label in ["All 13", "Installed 4", "Updates 2", "Not installed 9"] {
@@ -2110,7 +2110,7 @@ fn the_toolbar_has_no_filter_dropdown() {
 
 #[test]
 fn saved_filters_are_migrated_on_ui_construction() {
-    use artcraft_launcher_ui_egui::settings::Filter;
+    use decode_launcher_ui_egui::settings::Filter;
 
     for (saved, expected) in [
         (r#"{"filter":"All"}"#, Filter::All),
@@ -2139,15 +2139,15 @@ fn saved_filters_are_migrated_on_ui_construction() {
 /// Checks that, at one window width, every header control stays inside the window and clear of
 /// the brand text, that a custom title bar's buttons are there and inside, and snapshots the
 /// three widths that matter visually.
-fn assert_header_at_width(h: &mut Harness<'_, Option<LauncherUi>>, bar: artcraft_launcher_ui_egui::TitleBar, theme: egui::Theme, width: f32) {
+fn assert_header_at_width(h: &mut Harness<'_, Option<LauncherUi>>, bar: decode_launcher_ui_egui::TitleBar, theme: egui::Theme, width: f32) {
     for label in ["Show apps as cards", "Show apps as a table", "Settings", "Check for updates"] {
         let rect = h.get_by_label(label).rect();
         assert!(rect.left() >= 0.0 && rect.right() <= width, "{bar:?} {width}: {label} {rect:?}");
-        if let Some(text) = h.query_by_label("Craft App Suite") {
-            assert!(!rect.intersects(text.rect()), "{bar:?} {width}: Craft App Suite overlaps {label} {rect:?}");
+        if let Some(text) = h.query_by_label("Decode App Suite") {
+            assert!(!rect.intersects(text.rect()), "{bar:?} {width}: Decode App Suite overlaps {label} {rect:?}");
         }
     }
-    if bar == artcraft_launcher_ui_egui::TitleBar::Custom {
+    if bar == decode_launcher_ui_egui::TitleBar::Custom {
         for label in ["Minimize", "Maximize", "Close"] {
             let rect = h.get_by_label(label).rect();
             assert!(rect.left() >= 0.0 && rect.right() <= width, "{width}: {label} {rect:?}");
@@ -2155,7 +2155,7 @@ fn assert_header_at_width(h: &mut Harness<'_, Option<LauncherUi>>, bar: artcraft
     }
     if width == 1180.0 {
         assert!(h.query_by_label("Launcher").is_none());
-        h.get_by_label("Craft App Suite");
+        h.get_by_label("Decode App Suite");
     }
     if [720.0, 800.0, 1180.0].contains(&width) {
         snapshot(h, &format!("header-{theme:?}-{bar:?}-{width}"));
@@ -2164,7 +2164,7 @@ fn assert_header_at_width(h: &mut Harness<'_, Option<LauncherUi>>, bar: artcraft
 
 #[test]
 fn narrow_header_keeps_the_view_switch_clear_of_brand_text() {
-    use artcraft_launcher_ui_egui::TitleBar;
+    use decode_launcher_ui_egui::TitleBar;
     for theme in [egui::Theme::Dark, egui::Theme::Light] {
         for bar in [TitleBar::Native, TitleBar::MacOs, TitleBar::Custom] {
             let (mut h, _) = harness_with_title_bar(events(), ViewMode::Grid, theme, true, 1.0, bar);
@@ -2193,7 +2193,7 @@ impl Host for OsMotion {
 /// animations (`reduce`) or not. Nothing is downloading, so the window is still unless something
 /// animates.
 fn short_window(reduce: Rc<Cell<bool>>) -> Harness<'static, Option<LauncherUi>> {
-    artcraft_launcher_ui_egui::i18n::set_test_lang(artcraft_launcher_ui_egui::i18n::Lang::EN);
+    decode_launcher_ui_egui::i18n::set_test_lang(decode_launcher_ui_egui::i18n::Lang::EN);
     let events = events().into_iter().filter(|e| !matches!(e, Event::Progress { .. })).collect();
     let mut backend =
         Some(Fake { events, sent: Rc::default(), manage: true, pictures: Rc::default(), asked: Vec::new(), clock: Rc::new(Cell::new(NOW)) });
@@ -2339,18 +2339,18 @@ fn changelog_shortcuts_zoom_only_the_notes_text() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(4);
     // The grid's default order is name A-Z, so pick the app explicitly: the first card is not
-    // PhotoCraft, and the heading assertion below is about this release's own page.
-    h.get_by_label("More actions for PhotoCraft").click();
+    // PhotoDecode, and the heading assertion below is about this release's own page.
+    h.get_by_label("More actions for PhotoDecode").click();
     h.run_steps(2);
     h.get_by_label("Release notes").click();
     h.run_steps(4);
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoCraft 0.5.0").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoDecode 0.5.0").count(),
         0,
         "the Notes hero icon is decorative and must not repeat the release heading"
     );
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoCraft 0.5.0").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode 0.5.0").count(),
         1,
         "the release heading appears exactly once"
     );
@@ -2390,7 +2390,7 @@ fn changelog_shortcuts_zoom_only_the_notes_text() {
 
 #[test]
 fn command_m_minimizes_the_mac_window_only() {
-    use artcraft_launcher_ui_egui::TitleBar;
+    use decode_launcher_ui_egui::TitleBar;
     for bar in [TitleBar::MacOs, TitleBar::Native, TitleBar::Custom] {
         let (mut h, _) = harness_with_title_bar(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, bar);
         h.run_steps(4);
@@ -2409,13 +2409,13 @@ fn command_m_minimizes_the_mac_window_only() {
 
 #[test]
 fn an_occupied_folder_asks_before_replacing_it() {
-    let path = "/Volumes/Craft Apps/PhotoCraft.app";
+    let path = "/Volumes/Decode Apps/PhotoDecode.app";
     let mut ev = events();
     ev.push(Event::Occupied { app: "photocraft".into(), path: path.into() });
     ev.push(Event::JobFinished { app: "photocraft".into(), result: Err(format!("{path} already exists")) });
     let (mut h, sent) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, true, 1.0);
     h.run_steps(6);
-    h.get_by_label(&format!("{path} already exists. Installing PhotoCraft will overwrite it."));
+    h.get_by_label(&format!("{path} already exists. Installing PhotoDecode will overwrite it."));
     assert!(h.query_by_label(&format!("{path} already exists")).is_none());
     sent.borrow_mut().clear();
     h.get_by_label("Replace").click();
@@ -2429,7 +2429,7 @@ fn a_not_installed_card_is_grey_until_the_pointer_is_over_it() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.set_size(egui::vec2(1180.0, 1100.0));
     h.run_steps(8);
-    let icon = h.get_by_label("CADCraft icon").rect();
+    let icon = h.get_by_label("CADDecode icon").rect();
     // The most colourful pixel in the icon: how far apart its red, green and blue are.
     let colour = |h: &mut Harness<'_, Option<LauncherUi>>| {
         let image = h.render().unwrap();
@@ -2464,7 +2464,7 @@ fn a_not_installed_card_is_grey_until_the_pointer_is_over_it() {
 
 #[test]
 fn the_sort_offers_name_both_ways_recently_updated_and_frequently_used() {
-    use artcraft_launcher_ui_egui::settings::SortKey;
+    use decode_launcher_ui_egui::settings::SortKey;
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
     h.get_by_value("Name (A–Z)").click();
@@ -2485,7 +2485,7 @@ fn the_sort_offers_name_both_ways_recently_updated_and_frequently_used() {
 
 #[test]
 fn opening_an_app_counts_and_frequently_used_puts_the_most_opened_first() {
-    use artcraft_launcher_ui_egui::settings::SortKey;
+    use decode_launcher_ui_egui::settings::SortKey;
     let (mut h, sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
     h.state_mut().as_mut().unwrap().settings.sort = SortKey::Frequent;
@@ -2493,24 +2493,24 @@ fn opening_an_app_counts_and_frequently_used_puts_the_most_opened_first() {
     // Installed apps in name order: Effect (updates), Light (Open), Photo (updates), Word (Open).
     let opens: Vec<_> = h.get_all_by_label("Open").collect();
     assert_eq!(opens.len(), 2);
-    opens[1].click(); // WordCraft
+    opens[1].click(); // WordDecode
     h.run_steps(3);
     assert!(sent.borrow().contains(&Command::Launch { app: "wordcraft".into() }));
     assert_eq!(h.state().as_ref().unwrap().settings.launches.get("wordcraft"), Some(&1));
     h.run_steps(4);
-    let word = h.get_by_label("WordCraft details").rect();
-    let light = h.get_by_label("LightCraft details").rect();
+    let word = h.get_by_label("WordDecode details").rect();
+    let light = h.get_by_label("LightDecode details").rect();
     assert!(word.min.y < light.min.y || (word.min.y == light.min.y && word.min.x < light.min.x), "{word:?} {light:?}");
 }
 
 #[test]
 fn an_apps_page_is_a_card_in_the_middle_with_next_and_previous_arrows_and_closes_from_outside() {
-    use artcraft_launcher_core::details::AppDetails;
+    use decode_launcher_core::details::AppDetails;
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
     let headline = |id: &str| AppDetails::by_id(id).unwrap().headline;
     let showing = |h: &Harness<'_, Option<LauncherUi>>, id: &str| h.query_all_by_label_contains(headline(id)).count() >= 2;
-    h.get_by_label("PhotoCraft details").click();
+    h.get_by_label("PhotoDecode details").click();
     h.run_steps(12);
     assert!(showing(&h, "photocraft"));
     // A card with a margin of window all round, not a panel against one edge.

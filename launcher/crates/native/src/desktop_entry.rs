@@ -11,13 +11,13 @@
 
 use std::path::Path;
 
-use artcraft_launcher_core::CraftApp;
+use decode_launcher_core::DecodeApp;
 
 /// The key that marks an entry as written by the launcher.
-pub const MARKER: &str = "X-ArtCraft-Launcher=true";
+pub const MARKER: &str = "X-Decode-Launcher=true";
 
 /// The menu categories and the window class each app's own `.desktop` file declares.
-pub fn meta(app: &CraftApp) -> (&'static str, Option<&'static str>) {
+pub fn meta(app: &DecodeApp) -> (&'static str, Option<&'static str>) {
     match app.id {
         "photocraft" => ("Graphics;2DGraphics;RasterGraphics;Photography;", Some("photocraft")),
         "pdfcraft" => ("Office;Viewer;", Some("pdfcraft")),
@@ -70,7 +70,7 @@ fn value(s: &str) -> String {
 
 /// The entry for `app` installed as the AppImage `appimage`; `icon` when its icon is installed
 /// under the app's id. `None` when the path can't be put in an `Exec=` line.
-pub fn render(app: &CraftApp, appimage: &Path, icon: bool) -> Option<String> {
+pub fn render(app: &DecodeApp, appimage: &Path, icon: bool) -> Option<String> {
     let exec = exec_quote(appimage)?;
     let (categories, wm_class) = meta(app);
     let mut text = String::from("[Desktop Entry]\nType=Application\n");
@@ -137,18 +137,18 @@ mod tests {
 
     use super::*;
 
-    fn app(id: &str) -> &'static CraftApp {
-        CraftApp::by_id(id).unwrap()
+    fn app(id: &str) -> &'static DecodeApp {
+        DecodeApp::by_id(id).unwrap()
     }
 
     #[test]
     fn writes_a_complete_entry() {
         let text = render(app("photocraft"), Path::new("/home/ana/Applications/photocraft-0.6.0-linux-x86_64.AppImage"), true).unwrap();
         let expected = format!(
-            "[Desktop Entry]\nType=Application\nName=PhotoCraft\nComment={}\n\
+            "[Desktop Entry]\nType=Application\nName=PhotoDecode\nComment={}\n\
              Exec=\"/home/ana/Applications/photocraft-0.6.0-linux-x86_64.AppImage\" %F\n\
              Icon=ai.storyteller.photocraft\nTerminal=false\nCategories=Graphics;2DGraphics;RasterGraphics;Photography;\n\
-             StartupWMClass=photocraft\nX-ArtCraft-Launcher=true\n",
+             StartupWMClass=photocraft\nX-Decode-Launcher=true\n",
             app("photocraft").tagline
         );
         assert_eq!(text, expected);
@@ -176,8 +176,8 @@ mod tests {
             let text = render(app("gridcraft"), Path::new(p), false).unwrap();
             assert_eq!(exec_program(&text).map(PathBuf::from), Some(PathBuf::from(p)), "{p}");
         }
-        // PhotoCraft's AppRun writes its own entry, unmarked.
-        let theirs = "[Desktop Entry]\nName=PhotoCraft\nExec=\"/home/ana/Applications/photocraft-0.5.0-linux-x86_64.AppImage\" %F\n";
+        // PhotoDecode's AppRun writes its own entry, unmarked.
+        let theirs = "[Desktop Entry]\nName=PhotoDecode\nExec=\"/home/ana/Applications/photocraft-0.5.0-linux-x86_64.AppImage\" %F\n";
         assert_eq!(exec_program(theirs).as_deref(), Some("/home/ana/Applications/photocraft-0.5.0-linux-x86_64.AppImage"));
         assert!(!is_ours(theirs));
         assert_eq!(exec_program("[Desktop Entry]\nExec=photocraft %F\n").as_deref(), Some("photocraft"));

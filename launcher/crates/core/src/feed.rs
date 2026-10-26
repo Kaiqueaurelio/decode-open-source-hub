@@ -1,6 +1,6 @@
-//! The release feed from storyteller-web: `GET https://api.storyteller.ai/v1/craft_apps/release_info`.
+//! The release feed from storyteller-web: `GET https://api.storyteller.ai/v1/decode_apps/release_info`.
 //!
-//! storyteller-web polls GitHub for every Craft App on a schedule and serves the result, so the
+//! storyteller-web polls GitHub for every Decode App on a schedule and serves the result, so the
 //! launcher doesn't have to (GitHub allows 60 unauthenticated requests an hour). GitHub stays the
 //! fallback: for apps the feed doesn't list, apps it hasn't fetched within [`MAX_AGE`], or when
 //! the feed doesn't answer.
@@ -17,13 +17,13 @@ use std::collections::BTreeMap;
 use serde::Deserialize;
 use serde::de::{DeserializeOwned, Deserializer};
 
-use crate::catalog::{CraftApp, GITHUB_OWNER};
+use crate::catalog::{DecodeApp, GITHUB_OWNER};
 use crate::release::{self, Asset, Release, truncate};
 use crate::time::parse_rfc3339;
 use crate::version;
 
 /// Where the feed lives.
-pub const FEED_URL: &str = "https://api.storyteller.ai/v1/craft_apps/release_info";
+pub const FEED_URL: &str = "https://api.storyteller.ai/v1/decode_apps/release_info";
 
 /// An app's entry is trusted for this long after storyteller-web fetched it.
 pub const MAX_AGE: i64 = 24 * 3600;
@@ -142,8 +142,8 @@ impl Feed {
     }
 
     /// The repo to ask GitHub about for `app`, following the feed's repo renames. Always under
-    /// [`GITHUB_OWNER`]: the feed can move an app within ArtCraft's account, never out of it.
-    pub fn repo_for(&self, app: &CraftApp) -> String {
+    /// [`GITHUB_OWNER`]: the feed can move an app within Decode's account, never out of it.
+    pub fn repo_for(&self, app: &DecodeApp) -> String {
         let mut repo = app.repo.to_string();
         // Follow a chain of moves (a → b → c), without looping forever.
         for _ in 0..8 {
@@ -156,7 +156,7 @@ impl Feed {
     }
 
     /// What the feed says about `app` at `now`.
-    pub fn answer(&self, app: &CraftApp, now: i64) -> FeedAnswer {
+    pub fn answer(&self, app: &DecodeApp, now: i64) -> FeedAnswer {
         let Some(entry) = self.apps.get(app.id) else { return FeedAnswer::AskGitHub };
         let Some(fetched_at) = entry.fetched_at else { return FeedAnswer::AskGitHub };
         // A timestamp from the future (clock skew) counts as just now; one too old doesn't count.
@@ -433,12 +433,12 @@ impl RawNotice {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::catalog::{CraftApp, LAUNCHER};
+    use crate::catalog::{DecodeApp, LAUNCHER};
 
     const NOW: i64 = 1_791_500_000; // 2026-10-09T…
     const HASH: &str = "8a5edab282632443219e051e4ade2d1d5bbc671c781051bf1437897cbdfea0f1";
 
-    /// What storyteller-web serves (its `GetCraftAppsReleaseInfoResponse`), abridged.
+    /// What storyteller-web serves (its `GetDecodeAppsReleaseInfoResponse`), abridged.
     fn sample() -> String {
         format!(
             r#"{{
@@ -446,9 +446,9 @@ mod tests {
         "release_info": {{
           "apps": {{
             "photocraft": {{
-              "name": "PhotoCraft", "repo": "storytold/photocraft",
+              "name": "PhotoDecode", "repo": "storytold/photocraft",
               "latest_release": {{
-                "tag": "v0.6.0", "version": "0.6.0", "name": "PhotoCraft v0.6.0",
+                "tag": "v0.6.0", "version": "0.6.0", "name": "PhotoDecode v0.6.0",
                 "published_at": "2026-10-09T10:00:00Z",
                 "html_url": "https://github.com/storytold/photocraft/releases/tag/v0.6.0",
                 "prerelease": false, "notes_markdown": "Notes",
@@ -461,9 +461,9 @@ mod tests {
               }},
               "app_last_fetched": "2026-10-09T13:00:00Z"
             }},
-            "soundcraft": {{ "name": "SoundCraft", "repo": "storytold/soundcraft", "latest_release": null,
+            "soundcraft": {{ "name": "SoundDecode", "repo": "storytold/soundcraft", "latest_release": null,
                              "app_last_fetched": "2026-10-09T13:00:00Z" }},
-            "filmcraft": {{ "name": "FilmCraft", "repo": "storytold/filmcraft", "latest_release": null, "app_last_fetched": null }},
+            "filmcraft": {{ "name": "FilmDecode", "repo": "storytold/filmcraft", "latest_release": null, "app_last_fetched": null }},
             "vectorcraft": {{ "repo": "storytold/vectorcraft", "app_last_fetched": "2026-10-01T00:00:00Z",
                               "latest_release": {{ "tag": "v0.7.0" }} }},
             "brandnewcraft": {{ "repo": "storytold/brandnewcraft", "app_last_fetched": "2026-10-09T13:00:00Z" }}
@@ -478,8 +478,8 @@ mod tests {
         )
     }
 
-    fn app(id: &str) -> &'static CraftApp {
-        CraftApp::by_id(id).unwrap()
+    fn app(id: &str) -> &'static DecodeApp {
+        DecodeApp::by_id(id).unwrap()
     }
 
     #[test]
@@ -530,8 +530,8 @@ mod tests {
                 r#""repo_renames": [{"old_name": "Storytold/photocraft", "new_name": "storytold/photocraft-app", "renamed_at": null}]"#,
             )
             .replace(
-                "\"name\": \"PhotoCraft\", \"repo\": \"storytold/photocraft\"",
-                "\"name\": \"PhotoCraft\", \"repo\": \"storytold/photocraft-app\"",
+                "\"name\": \"PhotoDecode\", \"repo\": \"storytold/photocraft\"",
+                "\"name\": \"PhotoDecode\", \"repo\": \"storytold/photocraft-app\"",
             )
             .replace("github.com/storytold/photocraft/releases", "github.com/storytold/photocraft-app/releases");
         let feed = Feed::parse(&moved).unwrap();
@@ -555,7 +555,7 @@ mod tests {
                                   {"old_name": "art/photocraft", "new_name": "storytold/photocraft", "renamed_at": null},
                                   {"old_name": "storytold/photocraft", "new_name": "storytold.evil.example/photocraft", "renamed_at": null}]"#,
             )
-            .replace("\"name\": \"PhotoCraft\", \"repo\": \"storytold/photocraft\"", "\"name\": \"PhotoCraft\", \"repo\": \"art/photocraft\"")
+            .replace("\"name\": \"PhotoDecode\", \"repo\": \"storytold/photocraft\"", "\"name\": \"PhotoDecode\", \"repo\": \"art/photocraft\"")
             .replace("github.com/storytold/photocraft/releases", "github.com/art/photocraft/releases");
         let feed = Feed::parse(&moved).unwrap();
         assert!(feed.repo_renames.is_empty(), "{:?}", feed.repo_renames);
@@ -617,18 +617,18 @@ mod tests {
         let with_notices = sample()
             .replace(
                 "\"announcements\": []",
-                r#""announcements": [{"title": "New: CADCraft 1.0", "body": "It's here.", "created_at": "2026-10-09T09:00:00Z"}]"#,
+                r#""announcements": [{"title": "New: CADDecode 1.0", "body": "It's here.", "created_at": "2026-10-09T09:00:00Z"}]"#,
             )
             .replace(
                 "\"alerts\": []",
                 r#""alerts": [
-            {"title": "Security update", "body": "Update PdfCraft now.", "maybe_web_link": "https://getartcraft.com/security", "created_at": null},
+            {"title": "Security update", "body": "Update PdfDecode now.", "maybe_web_link": "https://getartcraft.com/security", "created_at": null},
             {"title": "Bad link", "body": "x", "maybe_web_link": "javascript:alert(1)"},
             {"title": "Shell link", "body": "x", "maybe_web_link": "https://getartcraft.com/a|calc.exe"}]"#,
             )
             .replace(
                 "\"app_renames\": []",
-                r#""app_renames": [{"old_name": "PdfCraft", "old_name_lower": "pdfcraft", "new_name": "DocuCraft",
+                r#""app_renames": [{"old_name": "PdfDecode", "old_name_lower": "pdfcraft", "new_name": "DocuCraft",
             "new_name_lower": "docucraft", "description": "Same app, new name.", "renamed_at": "2026-10-09T08:00:00Z"}]"#,
             );
         let feed = Feed::parse(&with_notices).unwrap();
@@ -637,7 +637,7 @@ mod tests {
         assert_eq!(feed.alerts[1].link, None, "only web links are kept");
         assert_eq!(feed.alerts[2].link, None, "a link with shell metacharacters is dropped");
         let titles: Vec<&str> = feed.announcements.iter().map(|n| n.title.as_str()).collect();
-        assert_eq!(titles, ["New: CADCraft 1.0", "PdfCraft is now DocuCraft"]);
+        assert_eq!(titles, ["New: CADDecode 1.0", "PdfDecode is now DocuCraft"]);
         // Ids are stable across parses, so dismissals stick.
         assert_eq!(Feed::parse(&with_notices).unwrap().alerts[0].id, feed.alerts[0].id);
     }

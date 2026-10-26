@@ -3,13 +3,13 @@
 //! and screenshots come from `core::details`; the live facts (version, date, download size, release
 //! notes) from the app's latest GitHub release.
 
-use artcraft_launcher_core::CraftApp;
+use decode_launcher_core::DecodeApp;
 use std::sync::Arc;
 
-use artcraft_launcher_core::details::AppDetails;
-use artcraft_launcher_core::platform::pick_asset;
-use artcraft_launcher_core::protocol::Command;
-use artcraft_launcher_core::status::AppStatus;
+use decode_launcher_core::details::AppDetails;
+use decode_launcher_core::platform::pick_asset;
+use decode_launcher_core::protocol::Command;
+use decode_launcher_core::status::AppStatus;
 use egui::{Color32, CornerRadius, Id, Margin, Order, Rect, RichText, Sense, Stroke, Ui, emath::easing, pos2, vec2};
 
 use crate::app::LauncherUi;
@@ -43,7 +43,7 @@ impl Picture {
         match result {
             // The backend already enforces the pixel budget; re-check here so bytes can never
             // reach egui's image loader (which allocates from the JPEG header) unvalidated.
-            Ok(bytes) if artcraft_launcher_core::details::screenshot_within_budget(&bytes) => Self::Ready(bytes.into()),
+            Ok(bytes) if decode_launcher_core::details::screenshot_within_budget(&bytes) => Self::Ready(bytes.into()),
             Ok(_) => Self::Failed("the picture's dimensions are too large".into()),
             Err(why) => Self::Failed(why),
         }
@@ -246,7 +246,7 @@ impl LauncherUi {
     fn neighbour_apps(&self, id: &str) -> (Option<String>, Option<String>) {
         let mut ids: Vec<&str> = self.visible_ids().into_iter().filter(|i| AppDetails::by_id(i).is_some()).collect();
         if !ids.contains(&id) {
-            ids = artcraft_launcher_core::SUITE.iter().map(|a| a.id).filter(|i| AppDetails::by_id(i).is_some()).collect();
+            ids = decode_launcher_core::SUITE.iter().map(|a| a.id).filter(|i| AppDetails::by_id(i).is_some()).collect();
         }
         let Some(at) = ids.iter().position(|i| *i == id) else { return (None, None) };
         if ids.len() < 2 {
@@ -434,7 +434,7 @@ impl LauncherUi {
             .order(Order::Tooltip)
             .fixed_pos(full.min)
             .role(egui::Role::Dialog)
-            .accessible_name(format!("{}: {}", tl!("Enlarge picture"), CraftApp::by_id(details.id).map_or("", |app| app.name)))
+            .accessible_name(format!("{}: {}", tl!("Enlarge picture"), DecodeApp::by_id(details.id).map_or("", |app| app.name)))
             .show(ctx, |ui| {
                 let (rect, backdrop) = ui.allocate_exact_size(full.size(), Sense::click());
                 ui.painter().rect_filled(rect, CornerRadius::ZERO, theme::backdrop());
@@ -582,7 +582,7 @@ fn step_button(ui: &mut Ui, left: bool, tip: &str, t: &Tokens) -> bool {
 
 /// The app's links as a row of buttons each as wide as its label; the ↗ says each opens the
 /// browser, like the links on the cards.
-fn link_buttons(ui: &mut Ui, app: &CraftApp) {
+fn link_buttons(ui: &mut Ui, app: &DecodeApp) {
     let links = [(tl!("Website"), app.website()), (tl!("GitHub"), app.repo_url()), (tl!("Releases"), app.releases_url())];
     ui.horizontal(|ui| {
         ui.spacing_mut().item_spacing.x = 8.0;
@@ -595,7 +595,7 @@ fn link_buttons(ui: &mut Ui, app: &CraftApp) {
 }
 
 /// The numbered feature cells.
-fn features(ui: &mut Ui, details: &AppDetails, app: &CraftApp, t: &Tokens) {
+fn features(ui: &mut Ui, details: &AppDetails, app: &DecodeApp, t: &Tokens) {
     widgets::eyebrow(ui, "01", tl!("Features"));
     ui.add_space(4.0);
     for (i, f) in details.features.iter().enumerate() {

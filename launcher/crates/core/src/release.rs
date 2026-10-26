@@ -24,7 +24,7 @@ pub struct Asset {
 pub struct Release {
     pub tag: String,
     pub version: Option<Version>,
-    /// `PhotoCraft v0.5.0`
+    /// `PhotoDecode v0.5.0`
     pub name: String,
     /// Unix seconds; `None` when only the tag is known.
     pub published_at: Option<i64>,
@@ -118,7 +118,7 @@ pub fn download_prefix(repo: &str) -> String {
 /// Whether `url` is a download that truly belongs to `repo`.
 ///
 /// A raw `starts_with(prefix)` check is not enough: a value such as
-/// `https://github.com/storytold/craft-launcher/releases/download/../../../ATTACKER/REPO/releases/download/v1/x`
+/// `https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher/releases/download/../../../ATTACKER/REPO/releases/download/v1/x`
 /// shares the prefix textually, yet its interpreted path escapes the repository. The link is
 /// accepted only when the text after the prefix is exactly `<tag>/<name>` — two non-empty path
 /// segments with no traversal (`.`/`..`), no additional slashes, no query or fragment, and no
@@ -326,7 +326,7 @@ mod tests {
 
     fn api_json(url: &str) -> String {
         format!(
-            r#"{{"tag_name":"v0.5.0","name":"PhotoCraft v0.5.0","html_url":"https://github.com/storytold/photocraft/releases/tag/v0.5.0",
+            r#"{{"tag_name":"v0.5.0","name":"PhotoDecode v0.5.0","html_url":"https://github.com/storytold/photocraft/releases/tag/v0.5.0",
             "published_at":"2026-10-08T14:52:50Z","prerelease":false,"body":"Notes",
             "assets":[{{"name":"photocraft-0.5.0-macos-universal.dmg","size":123,"browser_download_url":"{url}","digest":"sha256:{HASH}"}}]}}"#
         )
@@ -340,7 +340,7 @@ mod tests {
         )
         .unwrap();
         assert_eq!(r.version, Some(Version::new(0, 5, 0)));
-        assert_eq!(r.name, "PhotoCraft v0.5.0");
+        assert_eq!(r.name, "PhotoDecode v0.5.0");
         assert_eq!(r.published_at, Some(1_791_471_170));
         assert_eq!(r.assets.len(), 1);
         assert_eq!(r.assets[0].sha256.as_deref(), Some(HASH));

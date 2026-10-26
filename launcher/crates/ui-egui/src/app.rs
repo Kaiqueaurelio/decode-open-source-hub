@@ -2,12 +2,12 @@
 
 use std::time::Duration;
 
-use artcraft_launcher_core::protocol::{
+use decode_launcher_core::protocol::{
     Backend, BackendOptions, CANCELLED, Capabilities, Command, Event, INSTALL_CANCELLED, JobPhase, LatestRelease, PAUSED, Source,
 };
-use artcraft_launcher_core::release::Release;
-use artcraft_launcher_core::status::AppStatus;
-use artcraft_launcher_core::{Platform, SUITE};
+use decode_launcher_core::release::Release;
+use decode_launcher_core::status::AppStatus;
+use decode_launcher_core::{Platform, SUITE};
 
 use crate::i18n::set_current;
 use crate::model::AppEntry;
@@ -63,7 +63,7 @@ pub trait Host {
     }
     /// The URL to open when Discord is clicked. Defaults to the web link.
     fn discord_url(&self) -> &'static str {
-        artcraft_launcher_core::catalog::DISCORD_URL
+        decode_launcher_core::catalog::DISCORD_URL
     }
     /// Quit the launcher for real (not just hide to the tray).
     fn quit(&mut self) {}
@@ -107,7 +107,7 @@ pub(crate) enum Dialog {
     Install { app: String, folder: String },
     Replace { app: String, path: String },
     Settings,
-    LauncherUpdate(artcraft_launcher_core::Release),
+    LauncherUpdate(decode_launcher_core::Release),
 }
 
 impl Dialog {
@@ -136,13 +136,13 @@ pub struct LauncherUi {
     pub(crate) rate_limited_until: Option<i64>,
     pub(crate) launcher_update: Option<Release>,
     /// The launcher's own update, while it downloads and installs.
-    pub(crate) launcher_job: Option<artcraft_launcher_core::protocol::JobPhase>,
+    pub(crate) launcher_job: Option<decode_launcher_core::protocol::JobPhase>,
     /// The new launcher is in place: quit so it can start.
     restart_requested: bool,
-    /// News from ArtCraft's release feed, shown inline until dismissed.
-    pub(crate) announcements: Vec<artcraft_launcher_core::feed::Notice>,
+    /// News from Decode's release feed, shown inline until dismissed.
+    pub(crate) announcements: Vec<decode_launcher_core::feed::Notice>,
     /// Alerts from the feed, shown as popups until acknowledged.
-    pub(crate) alerts: Vec<artcraft_launcher_core::feed::Notice>,
+    pub(crate) alerts: Vec<decode_launcher_core::feed::Notice>,
     pub(crate) search: String,
     pub(crate) toasts: Vec<Toast>,
     pub(crate) dialog: Option<Dialog>,
@@ -265,7 +265,7 @@ impl LauncherUi {
             last_detect: 0,
             was_focused: true,
             auto_update_attempted: std::collections::BTreeSet::new(),
-            discord_url: artcraft_launcher_core::catalog::DISCORD_URL,
+            discord_url: decode_launcher_core::catalog::DISCORD_URL,
             pending: Vec::new(),
             frame: None,
             flushed: Vec::new(),
@@ -430,7 +430,7 @@ impl LauncherUi {
     pub(crate) fn custom_install_folders(&self) -> bool {
         self.caps.manage_apps
             && self.platform.is_some_and(|p| {
-                matches!(p.os, artcraft_launcher_core::Os::Windows | artcraft_launcher_core::Os::MacOs | artcraft_launcher_core::Os::Linux)
+                matches!(p.os, decode_launcher_core::Os::Windows | decode_launcher_core::Os::MacOs | decode_launcher_core::Os::Linux)
             })
             && !crate::settings::is_flatpak_sandbox()
     }
@@ -561,7 +561,7 @@ impl LauncherUi {
     }
 
     // A failed check keeps the release we already know about (and where it came from).
-    fn on_latest(&mut self, app: String, latest: LatestRelease, from: artcraft_launcher_core::protocol::Origin) {
+    fn on_latest(&mut self, app: String, latest: LatestRelease, from: decode_launcher_core::protocol::Origin) {
         if let Some(e) = self.entry_mut(&app)
             && !(matches!(latest, LatestRelease::Failed(_)) && matches!(e.latest, Some(LatestRelease::Found(_))))
         {
@@ -572,7 +572,7 @@ impl LauncherUi {
 
     // Routes a job phase to the launcher's own slot or to the app card it belongs to.
     fn on_progress(&mut self, app: String, phase: JobPhase) {
-        if app == artcraft_launcher_core::catalog::LAUNCHER_ID {
+        if app == decode_launcher_core::catalog::LAUNCHER_ID {
             self.launcher_job = Some(phase);
             if matches!(self.dialog, Some(Dialog::LauncherUpdate(_))) {
                 self.dialog = None;
@@ -584,7 +584,7 @@ impl LauncherUi {
 
     /// Summarizes a job's end as a toast; cancellations have their own messages.
     fn on_job_finished(&mut self, app: String, result: Result<String, String>) {
-        let launcher = app == artcraft_launcher_core::catalog::LAUNCHER_ID;
+        let launcher = app == decode_launcher_core::catalog::LAUNCHER_ID;
         // What the job was doing when it ended says what a cancellation called off.
         let last = if launcher { self.launcher_job.take() } else { self.entry(&app).and_then(|e| e.job) };
         if let Some(e) = self.entry_mut(&app) {
@@ -643,7 +643,7 @@ impl LauncherUi {
         if self.settings.notify {
             let (title, body) = match fresh.as_slice() {
                 [(_, name, v)] => {
-                    let body: String = tl!("Open ArtCraft Launcher to update.").to_string();
+                    let body: String = tl!("Open Decode Launcher to update.").to_string();
                     (crate::i18n::fmt(tl!("{name} {v} is available"), &[("name", name), ("v", v)]), body)
                 }
                 many => {
@@ -667,7 +667,7 @@ impl LauncherUi {
         }
         self.settings.tray_hint_shown = true;
         host.notify(
-            tl!("ArtCraft Launcher is still running"),
+            tl!("Decode Launcher is still running"),
             tl!("It's in the tray: open it or quit it from the tray icon, or turn this off in the settings."),
         );
     }
@@ -695,7 +695,7 @@ impl LauncherUi {
             && let Some(r) = &self.launcher_update
             && self.launcher_job.is_none()
         {
-            let id = artcraft_launcher_core::catalog::LAUNCHER_ID.to_string();
+            let id = decode_launcher_core::catalog::LAUNCHER_ID.to_string();
             let v = r.version_label();
             if !self.auto_update_attempted.contains(&(id.clone(), v.clone())) {
                 log::info!("auto-update: queuing launcher self-update to {v}");
@@ -893,24 +893,24 @@ impl LauncherUi {
         self.entry(id).is_some_and(|e| e.status(self.platform, self.caps.manage_apps).is_installed())
     }
 
-    /// "ArtCraft API", "GitHub" or "ArtCraft API and GitHub": the services behind the releases on
+    /// "Decode API", "GitHub" or "Decode API and GitHub": the services behind the releases on
     /// screen right now. `None` until something has loaded.
     pub(crate) fn sources_label(&self) -> Option<String> {
-        use artcraft_launcher_core::protocol::Origin;
+        use decode_launcher_core::protocol::Origin;
         let mut api = false;
         let mut github = false;
         for e in &self.entries {
             if matches!(e.latest, Some(LatestRelease::Found(_) | LatestRelease::None)) {
                 match e.origin {
-                    Some(Origin::ArtCraftApi) => api = true,
+                    Some(Origin::DecodeApi) => api = true,
                     Some(Origin::GitHub) => github = true,
                     None => {}
                 }
             }
         }
         match (api, github) {
-            (true, true) => Some(crate::i18n::fmt(tl!("{a} and {b}"), &[("a", Origin::ArtCraftApi.label()), ("b", Origin::GitHub.label())])),
-            (true, false) => Some(Origin::ArtCraftApi.label().to_string()),
+            (true, true) => Some(crate::i18n::fmt(tl!("{a} and {b}"), &[("a", Origin::DecodeApi.label()), ("b", Origin::GitHub.label())])),
+            (true, false) => Some(Origin::DecodeApi.label().to_string()),
             (false, true) => Some(Origin::GitHub.label().to_string()),
             (false, false) => None,
         }
@@ -1172,7 +1172,7 @@ mod tests {
         // The fonts gate pass draws nothing and shows no toast.
         frame(&mut launcher, &ctx, 0.0);
         // A job finished while the window was hidden, when `logic`'s input time was old (0).
-        launcher.toast("PhotoCraft updated", false);
+        launcher.toast("PhotoDecode updated", false);
         frame(&mut launcher, &ctx, 1000.0);
         let toast = launcher.toasts.first().expect("the first drawing pass shows the pending toast");
         assert_eq!(toast.until, 1004.5, "expiry must be relative to the drawing pass, not the old logic time");
@@ -1185,7 +1185,7 @@ mod tests {
     /// Moving to a new window preserves a queued toast that has not yet been shown.
     fn attaching_a_window_keeps_messages_still_waiting_to_be_shown() {
         let (mut launcher, _sent, ctx) = launcher();
-        launcher.toast("PhotoCraft updated", false);
+        launcher.toast("PhotoDecode updated", false);
         launcher.attach(&ctx);
         assert_eq!(launcher.pending_toasts.len(), 1, "a message from logic is not tied to the old window");
     }

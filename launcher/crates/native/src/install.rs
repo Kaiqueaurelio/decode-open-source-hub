@@ -1,4 +1,4 @@
-//! Installing, updating, removing and starting Craft Apps.
+//! Installing, updating, removing and starting Decode Apps.
 //!
 //! Apps go where their platform keeps applications, installed the platform's own way:
 //!
@@ -21,9 +21,9 @@
 
 use std::path::{Path, PathBuf};
 
-use artcraft_launcher_core::protocol::{CANCELLED, INSTALL_CANCELLED, InstallLocations, JobPhase};
-use artcraft_launcher_core::release::{self, Asset, Release};
-use artcraft_launcher_core::{CraftApp, InstallSource, Installed, PackageKind, version};
+use decode_launcher_core::protocol::{CANCELLED, INSTALL_CANCELLED, InstallLocations, JobPhase};
+use decode_launcher_core::release::{self, Asset, Release};
+use decode_launcher_core::{DecodeApp, InstallSource, Installed, PackageKind, version};
 
 use crate::http::{Http, Stop, Transfer};
 use crate::manifest::Record;
@@ -45,7 +45,7 @@ pub struct Job<'a> {
 /// result (portable ZIP, AppImage, macOS bundle, tarball); MSI installs are found in the registry.
 /// `previous` is the launcher's record of the copy being replaced, if it installed it.
 pub fn install(
-    app: &CraftApp,
+    app: &DecodeApp,
     release: &Release,
     asset: &Asset,
     kind: PackageKind,
@@ -60,7 +60,7 @@ type RecordCommit<'a> = Option<&'a mut dyn FnMut(&Record) -> Result<(), String>>
 
 #[allow(clippy::too_many_arguments)]
 pub fn install_at(
-    app: &CraftApp,
+    app: &DecodeApp,
     release: &Release,
     asset: &Asset,
     kind: PackageKind,
@@ -156,14 +156,14 @@ pub fn install_at(
 /// bypassing the guard and recording a false installed version (finding: version not bound to the
 /// release). We require the version encoded in the asset filename and the release tag embedded in
 /// the download URL to agree with the release version before any bytes are fetched.
-pub(crate) fn bind_artifact_version(app: &CraftApp, release: &Release, asset: &Asset) -> Result<(), String> {
+pub(crate) fn bind_artifact_version(app: &DecodeApp, release: &Release, asset: &Asset) -> Result<(), String> {
     let mismatch = || format!("{}'s download does not match the advertised version {}.", app.name, release.version_label());
     let release_version = release.version.as_ref();
 
     // The version in the asset filename (`<stem>-<version>-<os>-<arch>.<ext>`), when it carries one.
     let stems: Vec<&str> = app.stems().collect();
     if let Some(release_version) = release_version
-        && let Some(parsed) = artcraft_launcher_core::platform::parse_asset_name(&asset.name, &stems)
+        && let Some(parsed) = decode_launcher_core::platform::parse_asset_name(&asset.name, &stems)
         && version::parse(&parsed.version).as_ref() != Some(release_version)
     {
         return Err(mismatch());
@@ -190,7 +190,7 @@ pub(crate) fn bind_artifact_version(app: &CraftApp, release: &Release, asset: &A
 /// What a new install would write over: something already at its destination that the launcher
 /// didn't put there.
 pub fn occupied(
-    app: &CraftApp,
+    app: &DecodeApp,
     #[cfg_attr(not(target_os = "linux"), allow(unused_variables))] asset: &Asset,
     kind: PackageKind,
     existing: Option<&Installed>,
@@ -216,7 +216,7 @@ pub fn occupied(
 /// The folder a new copy goes in: beside the launcher's copy it replaces, else the user's choice,
 /// else the platform default (`None`). macOS updates find their bundle's folder themselves.
 fn destination(
-    app: &CraftApp,
+    app: &DecodeApp,
     kind: PackageKind,
     existing: Option<&Installed>,
     previous: Option<&Record>,
@@ -261,7 +261,7 @@ fn selected_folder(folder: &str, writable: bool) -> Result<PathBuf, String> {
     }
     if writable {
         let probe = path.join(format!(
-            ".artcraft-launcher-write-test-{}-{}",
+            ".decode-launcher-write-test-{}-{}",
             std::process::id(),
             std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_nanos())
         ));
@@ -296,14 +296,14 @@ fn record(version: &str, kind: PackageKind, path: PathBuf, files: Vec<PathBuf>, 
 ///
 /// Returns an empty `Vec` when `app` is already installed outside the launcher (such as an AUR
 /// or repository Arch package) and must not be updated or replaced by the launcher.
-pub fn choose_kinds(app: &CraftApp, existing: Option<&Installed>, record: Option<&Record>, preferred: &[PackageKind]) -> Vec<PackageKind> {
+pub fn choose_kinds(app: &DecodeApp, existing: Option<&Installed>, record: Option<&Record>, preferred: &[PackageKind]) -> Vec<PackageKind> {
     let available = available_kinds();
     let can_pacman = available.contains(&PackageKind::ArchPkg) || can_pacman();
     choose_kinds_with(app, existing, record, preferred, &available, can_pacman)
 }
 
 pub(crate) fn choose_kinds_with(
-    app: &CraftApp,
+    app: &DecodeApp,
     existing: Option<&Installed>,
     record: Option<&Record>,
     preferred: &[PackageKind],
@@ -351,7 +351,7 @@ fn can_pacman() -> bool {
 /// release names it by the bundle id (`ai.storyteller.<app>`), which no AUR package uses
 /// (they are `<app>`, `<app>-bin` and `<app>-git`), so an AUR helper never mistakes it
 /// for one of its own and rebuilds it from source.
-pub fn is_release_arch_package(app: &CraftApp, installed: &Installed) -> bool {
+pub fn is_release_arch_package(app: &DecodeApp, installed: &Installed) -> bool {
     installed.source == InstallSource::Pacman && installed.package.as_deref() == Some(&app.bundle_id())
 }
 
@@ -412,11 +412,11 @@ fn published_checksum(release: &Release, asset: &Asset, http: &Http) -> Result<O
 /// through pacman like any system package, but updated by whatever they came from: a system
 /// update for a repository package (Omarchy's, Chaotic-AUR, ...), the user's AUR helper (which
 /// builds as the user and can't run behind the password prompt) for anything else.
-pub fn managed_elsewhere(app: &CraftApp, installed: &Installed, uninstall: bool) -> Option<String> {
+pub fn managed_elsewhere(app: &DecodeApp, installed: &Installed, uninstall: bool) -> Option<String> {
     managed_elsewhere_with(app, installed, uninstall, pacman_repo)
 }
 
-fn managed_elsewhere_with(app: &CraftApp, installed: &Installed, uninstall: bool, repo_fn: impl Fn(&str) -> Option<String>) -> Option<String> {
+fn managed_elsewhere_with(app: &DecodeApp, installed: &Installed, uninstall: bool, repo_fn: impl Fn(&str) -> Option<String>) -> Option<String> {
     match installed.source {
         InstallSource::Pacman if !uninstall && !is_release_arch_package(app, installed) => {
             let pkg = installed.package.clone().unwrap_or_else(|| app.id.to_string());
@@ -429,7 +429,7 @@ fn managed_elsewhere_with(app: &CraftApp, installed: &Installed, uninstall: bool
 
 /// How to update an Arch package the launcher doesn't own: `repo` is the sync repository it
 /// comes from, or `None` for a foreign (AUR) package.
-fn pacman_update_hint(app: &CraftApp, pkg: &str, repo: Option<&str>) -> String {
+fn pacman_update_hint(app: &DecodeApp, pkg: &str, repo: Option<&str>) -> String {
     let helper = ["paru", "yay"].into_iter().find(|h| which(h).is_some());
     let cmd = match helper {
         Some(h) => format!("{h} -S {pkg}"),
@@ -471,7 +471,7 @@ fn parse_pacman_repo(si: &str) -> Option<String> {
 /// Removes an installed copy. `phase` hears when the removal has to wait for another install;
 /// `stop` cancels it while it waits.
 pub fn uninstall(
-    app: &CraftApp,
+    app: &DecodeApp,
     installed: &Installed,
     record: Option<&Record>,
     paths: &Paths,
@@ -521,7 +521,7 @@ pub fn uninstall(
 /// Deletes an AppImage, the menu entry and icon the launcher wrote for it, and the menu entry
 /// the app may have written for itself on first run.
 #[cfg(target_os = "linux")]
-fn remove_appimage(app: &CraftApp, path: &Path, record: Option<&Record>) -> Result<(), String> {
+fn remove_appimage(app: &DecodeApp, path: &Path, record: Option<&Record>) -> Result<(), String> {
     if path.extension().is_none_or(|e| !e.eq_ignore_ascii_case("AppImage")) || !path.is_file() {
         return Err(format!("{} isn't an AppImage, so it was left alone", path.display()));
     }
@@ -538,7 +538,7 @@ fn remove_appimage(app: &CraftApp, path: &Path, record: Option<&Record>) -> Resu
 }
 
 /// Starts an installed app.
-pub fn launch(app: &CraftApp, installed: &Installed, paths: &Paths) -> Result<(), String> {
+pub fn launch(app: &DecodeApp, installed: &Installed, paths: &Paths) -> Result<(), String> {
     let _ = paths;
     let path = Path::new(&installed.location);
     match installed.source {
@@ -576,7 +576,7 @@ pub fn launch(app: &CraftApp, installed: &Installed, paths: &Paths) -> Result<()
     .map_err(|e| format!("Couldn't open {}: {e}", app.name))
 }
 
-/// The environment a Craft App unpacked by the launcher runs with: its own `HOME` and the XDG
+/// The environment a Decode App unpacked by the launcher runs with: its own `HOME` and the XDG
 /// base directories inside it. Apps read their settings from these, so everything they keep
 /// (settings, projects, caches) stays in that one folder.
 #[cfg(target_os = "linux")]
@@ -591,7 +591,7 @@ fn home_env(home: &Path) -> [(&'static str, PathBuf); 5] {
 }
 
 /// Creates the folders an app unpacked by the launcher expects to find, and links the host's
-/// `~/.vst3` and `~/.clap` (SoundCraft's plugin folders) in when they exist, so an app running
+/// `~/.vst3` and `~/.clap` (SoundDecode's plugin folders) in when they exist, so an app running
 /// inside the sandbox still sees the plugins installed on the host. Every failure here is
 /// ignored: the app is worth starting even if its home is not quite ready.
 #[cfg(target_os = "linux")]
@@ -619,7 +619,7 @@ fn prepare_home(home: &Path) {
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 fn staging_dir(dir: &Path) -> Result<tempfile::TempDir, String> {
     tempfile::Builder::new()
-        .prefix(".artcraft-launcher-")
+        .prefix(".decode-launcher-")
         .tempdir_in(dir)
         .map_err(|e| format!("couldn't create a staging folder in {} ({e})", dir.display()))
 }
@@ -636,7 +636,7 @@ fn swap_into_place_via(staged: &Path, dest: &Path, rename: impl Fn(&Path, &Path)
     let backup = if dest.exists() {
         let parent = dest.parent().ok_or("the installed app has no parent folder")?;
         let backup = tempfile::Builder::new()
-            .prefix(".artcraft-launcher-backup-")
+            .prefix(".decode-launcher-backup-")
             .tempdir_in(parent)
             .map_err(|e| format!("couldn't create a backup folder in {} ({e})", parent.display()))?;
         rename(dest, &backup.path().join("old")).map_err(|e| format!("couldn't move the old copy aside ({e})"))?;
@@ -672,7 +672,7 @@ fn single_top_folder(dir: &Path) -> Result<PathBuf, String> {
 
 /// The app binary inside an unpacked archive: `bin/<id>`, `<id>` or `<id>.exe`.
 #[allow(dead_code)]
-fn find_binary(root: &Path, app: &CraftApp) -> Option<PathBuf> {
+fn find_binary(root: &Path, app: &DecodeApp) -> Option<PathBuf> {
     let exe = if cfg!(windows) { format!("{}.exe", app.id) } else { app.id.to_string() };
     [root.join("bin").join(&exe), root.join(&exe)].into_iter().find(|p| p.is_file())
 }
@@ -763,7 +763,7 @@ fn turn<'a>(phase: &'a mut dyn FnMut(JobPhase), working: JobPhase) -> impl FnMut
 /// For [`INSTALLER`]: whether the user cancelled the job while it waits.
 #[cfg(any(target_os = "linux", windows))]
 fn cancelled(stop: &Stop) -> impl Fn() -> bool + '_ {
-    || stop.check().is_err_and(|e| e == artcraft_launcher_core::protocol::CANCELLED)
+    || stop.check().is_err_and(|e| e == decode_launcher_core::protocol::CANCELLED)
 }
 
 #[cfg(target_os = "linux")]
@@ -771,11 +771,11 @@ pub(crate) mod linux {
     use std::ffi::{OsStr, OsString};
     use std::os::unix::fs::PermissionsExt;
 
-    use artcraft_launcher_core::distro;
-    use artcraft_launcher_core::protocol::CANCELLED;
+    use decode_launcher_core::distro;
+    use decode_launcher_core::protocol::CANCELLED;
 
     use super::{
-        CraftApp, INSTALLER, InstallSource, Installed, JobPhase, PackageKind, Path, PathBuf, Paths, Record, SHARED_CALL, SYSTEM_BIN_DIRS, Stop,
+        DecodeApp, INSTALLER, InstallSource, Installed, JobPhase, PackageKind, Path, PathBuf, Paths, Record, SHARED_CALL, SYSTEM_BIN_DIRS, Stop,
         cancelled, find_in, pkexec, process, run_as_root, swap_into_place, tree, turn,
     };
 
@@ -954,7 +954,7 @@ pub(crate) mod linux {
         }
     }
 
-    pub fn remove_package(app: &CraftApp, installed: &Installed, stop: &Stop, phase: &mut dyn FnMut(JobPhase)) -> Result<(), String> {
+    pub fn remove_package(app: &DecodeApp, installed: &Installed, stop: &Stop, phase: &mut dyn FnMut(JobPhase)) -> Result<(), String> {
         let mut remove = |command: &[&str], package: &str| as_root(&SYSTEM, command, OsStr::new(package), stop, phase, JobPhase::Removing);
         match installed.source {
             InstallSource::Deb if system_tool("apt-get").is_some() => remove(&["apt-get", "-o", APT_WAITS, "remove", "-y"], app.id),
@@ -1005,7 +1005,7 @@ pub(crate) mod linux {
         let dest = dir.join(name);
         let ours = previous.is_some_and(|r| r.kind == PackageKind::AppImage && r.path == dest);
         if std::fs::symlink_metadata(&dest).is_ok_and(|m| m.is_dir() || !(replace || ours && m.is_file())) {
-            return Err(format!("{} already exists and wasn't installed by ArtCraft Launcher", dest.display()));
+            return Err(format!("{} already exists and wasn't installed by Decode Launcher", dest.display()));
         }
         let staging = super::staging_dir(&dir)?;
         let partial = staging.path().join(name);
@@ -1028,14 +1028,14 @@ pub(crate) mod linux {
     /// Flatpak launcher when the host has no usable Flatpak: the app then runs inside the
     /// sandbox instead of on the host. `bin` and `share` are swapped in one at a time, so an
     /// update leaves the app's own `home/` beside them untouched.
-    pub fn install_tree(app: &CraftApp, file: &Path, paths: &Paths) -> Result<PathBuf, String> {
+    pub fn install_tree(app: &DecodeApp, file: &Path, paths: &Paths) -> Result<PathBuf, String> {
         let staged = paths.cache.join(format!("{}.new", app.id));
         let result = unpack_tree(app, file, &staged, paths);
         let _ = std::fs::remove_dir_all(&staged);
         result
     }
 
-    fn unpack_tree(app: &CraftApp, file: &Path, staged: &Path, paths: &Paths) -> Result<PathBuf, String> {
+    fn unpack_tree(app: &DecodeApp, file: &Path, staged: &Path, paths: &Paths) -> Result<PathBuf, String> {
         let tree = tree::unpack(app, file, staged)?;
         // Verify tree root is strictly within staged and is not a symlink (CWE-59).
         let rel_tree = tree.strip_prefix(staged).map_err(|_| "staging layout escapes staging".to_string())?;
@@ -1097,7 +1097,7 @@ pub(crate) mod linux {
     /// Removes a tree the launcher unpacked in [`install_tree`], keeping the app's `home/`: the
     /// settings and projects in it are the user's, not the installer's. Only the two folders the
     /// launcher put there are removed, and only inside the launcher's own apps folder.
-    pub fn remove_tree(app: &CraftApp, paths: &Paths) -> Result<(), String> {
+    pub fn remove_tree(app: &DecodeApp, paths: &Paths) -> Result<(), String> {
         let root = paths.apps().join(app.id);
         let mut removed = false;
         for dir in ["bin", "share"] {
@@ -1123,21 +1123,21 @@ pub(crate) mod linux {
     }
 
     /// The app's 128 px icon, as bundled in `assets/app-icons`.
-    fn icon_png(app: &CraftApp) -> Option<&'static [u8]> {
-        artcraft_launcher_core::catalog::app_icon_png(app.id)
+    fn icon_png(app: &DecodeApp) -> Option<&'static [u8]> {
+        decode_launcher_core::catalog::app_icon_png(app.id)
     }
 
-    fn desktop_path(data: &Path, app: &CraftApp) -> PathBuf {
+    fn desktop_path(data: &Path, app: &DecodeApp) -> PathBuf {
         data.join("applications").join(format!("{}.desktop", app.bundle_id()))
     }
 
-    fn icon_path(data: &Path, app: &CraftApp) -> PathBuf {
+    fn icon_path(data: &Path, app: &DecodeApp) -> PathBuf {
         data.join("icons/hicolor/128x128/apps").join(format!("{}.png", app.bundle_id()))
     }
 
     /// Adds `appimage` to the desktop's menu. Best effort: a failure here never fails the
     /// install. Returns the files written, for the record.
-    pub fn integrate(app: &CraftApp, appimage: &Path, replaced: &[PathBuf], previous: Option<&Record>) -> Vec<PathBuf> {
+    pub fn integrate(app: &DecodeApp, appimage: &Path, replaced: &[PathBuf], previous: Option<&Record>) -> Vec<PathBuf> {
         match host_data_dir() {
             Some(data) => integrate_into(&data, app, appimage, replaced, previous),
             None => Vec::new(),
@@ -1147,7 +1147,7 @@ pub(crate) mod linux {
     /// [`integrate`] into the data folder `data`. Only writes over files the launcher wrote
     /// before: its own marked menu entry, an entry pointing at a copy this install replaced, and
     /// an icon listed in `previous`.
-    pub(crate) fn integrate_into(data: &Path, app: &CraftApp, appimage: &Path, replaced: &[PathBuf], previous: Option<&Record>) -> Vec<PathBuf> {
+    pub(crate) fn integrate_into(data: &Path, app: &DecodeApp, appimage: &Path, replaced: &[PathBuf], previous: Option<&Record>) -> Vec<PathBuf> {
         let ours_before = |p: &Path| previous.is_some_and(|r| r.files.iter().any(|f| f == p));
         let mut written = Vec::new();
         let icon = icon_path(data, app);
@@ -1190,7 +1190,7 @@ pub(crate) mod linux {
     }
 
     /// Takes away what [`integrate`] added for the removed AppImage `appimage`.
-    pub fn unintegrate(app: &CraftApp, appimage: &Path, record: Option<&Record>) {
+    pub fn unintegrate(app: &DecodeApp, appimage: &Path, record: Option<&Record>) {
         if let Some(data) = host_data_dir() {
             unintegrate_from(&data, app, appimage, record);
         }
@@ -1199,7 +1199,7 @@ pub(crate) mod linux {
     /// [`unintegrate`] from the data folder `data`: the menu entry when it runs the removed copy,
     /// or when the launcher wrote it and what it runs is gone; the icon only when the
     /// launcher's record lists it.
-    pub(crate) fn unintegrate_from(data: &Path, app: &CraftApp, appimage: &Path, record: Option<&Record>) {
+    pub(crate) fn unintegrate_from(data: &Path, app: &DecodeApp, appimage: &Path, record: Option<&Record>) {
         let desktop = desktop_path(data, app);
         if let Ok(text) = std::fs::read_to_string(&desktop) {
             let program = crate::desktop_entry::exec_program(&text).map(PathBuf::from);
@@ -1220,9 +1220,9 @@ pub(crate) mod linux {
 pub mod macos {
     use std::time::Duration;
 
-    use artcraft_launcher_core::version::Version;
+    use decode_launcher_core::version::Version;
 
-    use super::{CraftApp, InstallSource, Installed, Path, PathBuf, Paths, Release, process, staging_dir, swap_into_place};
+    use super::{DecodeApp, InstallSource, Installed, Path, PathBuf, Paths, Release, process, staging_dir, swap_into_place};
 
     /// `/Applications` when we can write there, else `~/Applications`.
     fn applications_dir(existing: Option<&Installed>, destination: Option<&Path>) -> Result<PathBuf, String> {
@@ -1235,7 +1235,7 @@ pub mod macos {
             return Ok(dir.to_path_buf());
         }
         let system = PathBuf::from("/Applications");
-        let probe = system.join(".artcraft-launcher-write-test");
+        let probe = system.join(".decode-launcher-write-test");
         if std::fs::write(&probe, b"").is_ok() {
             let _ = std::fs::remove_file(&probe);
             return Ok(system);
@@ -1245,7 +1245,7 @@ pub mod macos {
         Ok(user)
     }
 
-    /// The Apple Developer team that signs every Craft App and ArtCraft Launcher (Learning
+    /// The Apple Developer team that signs every Decode App and Decode Launcher (Learning
     /// Machines LLC): the macOS side of the Windows publisher check.
     pub const TEAM_ID: &str = "DJ6XS33FX8";
 
@@ -1276,7 +1276,7 @@ pub mod macos {
     const CODESIGN: &str = "/usr/bin/codesign";
 
     pub fn install_dmg(
-        app: &CraftApp,
+        app: &DecodeApp,
         dmg: &Path,
         existing: Option<&Installed>,
         destination: Option<&Path>,
@@ -1329,7 +1329,7 @@ pub mod macos {
     }
 
     fn copy_app(
-        app: &CraftApp,
+        app: &DecodeApp,
         mount: &Path,
         existing: Option<&Installed>,
         destination: Option<&Path>,
@@ -1345,7 +1345,7 @@ pub mod macos {
             && std::fs::symlink_metadata(&dest).is_ok()
             && (std::fs::symlink_metadata(&dest).is_ok_and(|m| m.file_type().is_symlink()) || crate::detect::macos::read_bundle(app, &dest).is_none())
         {
-            return Err(format!("{} already exists and wasn't installed by ArtCraft Launcher", dest.display()));
+            return Err(format!("{} already exists and wasn't installed by Decode Launcher", dest.display()));
         }
         let staging = super::staging_dir(&dir)?;
         let staged = staging.path().join(&bundle);
@@ -1424,10 +1424,10 @@ pub mod macos {
 #[cfg(unix)]
 #[allow(dead_code)]
 mod tree {
-    use super::{CraftApp, Path, PathBuf, single_top_folder};
+    use super::{DecodeApp, Path, PathBuf, single_top_folder};
 
     /// Unpacks `file` and returns a staging folder laid out like `/usr/local`.
-    pub fn unpack(app: &CraftApp, file: &Path, staging: &Path) -> Result<PathBuf, String> {
+    pub fn unpack(app: &DecodeApp, file: &Path, staging: &Path) -> Result<PathBuf, String> {
         let _ = std::fs::remove_dir_all(staging);
         std::fs::create_dir_all(staging).map_err(|e| format!("couldn't create {} ({e})", staging.display()))?;
         let gz = std::fs::File::open(file).map_err(|e| e.to_string())?;
@@ -1553,19 +1553,19 @@ mod tree {
 mod freebsd {
     use std::ffi::OsStr;
 
-    use super::{CraftApp, Path, PathBuf, Paths, pkexec, process, run_as_root, tree};
+    use super::{DecodeApp, Path, PathBuf, Paths, pkexec, process, run_as_root, tree};
 
     /// Copies the release's tree into `/usr/local` (asking for permission through polkit), or
     /// into `~/.local` when polkit isn't installed. Returns the binary, every file installed,
     /// and whether removing them needs root.
-    pub fn install_tree(app: &CraftApp, file: &Path, paths: &Paths) -> Result<(PathBuf, Vec<PathBuf>, bool), String> {
+    pub fn install_tree(app: &DecodeApp, file: &Path, paths: &Paths) -> Result<(PathBuf, Vec<PathBuf>, bool), String> {
         let staging = paths.cache.join(format!("{}.new", app.id));
         let result = install_from(app, file, &staging);
         let _ = std::fs::remove_dir_all(&staging);
         result
     }
 
-    fn install_from(app: &CraftApp, file: &Path, staging: &Path) -> Result<(PathBuf, Vec<PathBuf>, bool), String> {
+    fn install_from(app: &DecodeApp, file: &Path, staging: &Path) -> Result<(PathBuf, Vec<PathBuf>, bool), String> {
         let tree = tree::unpack(app, file, staging)?;
         let rel = tree::files(&tree)?;
         let mut source = tree.into_os_string();
@@ -1677,9 +1677,9 @@ pub(crate) fn msi_path(msi: &Path) -> Result<PathBuf, String> {
 
 #[cfg(windows)]
 pub mod windows {
-    use artcraft_launcher_core::protocol::CANCELLED;
+    use decode_launcher_core::protocol::CANCELLED;
 
-    use super::{CraftApp, INSTALLER, JobPhase, Path, PathBuf, Stop, cancelled, msi_command, msi_folder_argument, msi_log, process, turn};
+    use super::{DecodeApp, INSTALLER, JobPhase, Path, PathBuf, Stop, cancelled, msi_command, msi_folder_argument, msi_log, process, turn};
 
     fn msiexec() -> PathBuf {
         std::env::var_os("SystemRoot").map_or_else(|| PathBuf::from(r"C:\Windows"), PathBuf::from).join(r"System32\msiexec.exe")
@@ -1725,7 +1725,7 @@ pub mod windows {
         INSTALLER.alone(&cancelled(stop), &mut turn(phase, working), work).unwrap_or_else(|| Err(CANCELLED.into()))
     }
 
-    pub fn uninstall_msi(app: &CraftApp, stop: &Stop, phase: &mut dyn FnMut(JobPhase)) -> Result<(), String> {
+    pub fn uninstall_msi(app: &DecodeApp, stop: &Stop, phase: &mut dyn FnMut(JobPhase)) -> Result<(), String> {
         let installs = crate::detect::windows::msi_installs(app);
         if installs.is_empty() {
             return Err(format!("{} isn't registered with the Windows Installer", app.name));
@@ -1753,11 +1753,11 @@ mod tests {
         let dir = tempfile::tempdir().unwrap();
         let cache = dir.path().join("persistent cache");
         std::fs::create_dir(&cache).unwrap();
-        let file = cache.join("PhotoCraft.msi");
+        let file = cache.join("PhotoDecode.msi");
         std::fs::write(&file, b"test package").unwrap();
         let link = dir.path().join("current cache");
         std::os::unix::fs::symlink(&cache, &link).unwrap();
-        let command = msi_command(Path::new("msiexec.exe"), &link.join("PhotoCraft.msi")).unwrap();
+        let command = msi_command(Path::new("msiexec.exe"), &link.join("PhotoDecode.msi")).unwrap();
         let args: Vec<_> = command.get_args().collect();
         assert_eq!(
             args,
@@ -1807,27 +1807,27 @@ mod tests {
         assert!(!missing.exists());
         assert!(selected_folder("relative/folder", true).is_err());
         assert!(selected_folder("bad\nfolder", true).is_err());
-        let app = CraftApp::by_id("photocraft").unwrap();
+        let app = DecodeApp::by_id("photocraft").unwrap();
         let locations = InstallLocations { root: Some(dir.path().display().to_string()), ..Default::default() };
-        assert_eq!(destination(app, PackageKind::Msi, None, None, &locations).unwrap(), Some(dir.path().join("PhotoCraft")));
+        assert_eq!(destination(app, PackageKind::Msi, None, None, &locations).unwrap(), Some(dir.path().join("PhotoDecode")));
         assert_eq!(destination(app, PackageKind::PortableZip, None, None, &locations).unwrap(), Some(dir.path().to_path_buf()));
-        let old = record("0.5.0", PackageKind::PortableZip, dir.path().join("PhotoCraft/photocraft.exe"), vec![], false);
+        let old = record("0.5.0", PackageKind::PortableZip, dir.path().join("PhotoDecode/photocraft.exe"), vec![], false);
         let unavailable = InstallLocations { root: Some(dir.path().join("missing").display().to_string()), ..Default::default() };
         assert_eq!(destination(app, PackageKind::PortableZip, None, Some(&old), &unavailable).unwrap(), None);
         let msi = Installed {
             version: None,
             source: InstallSource::Msi,
-            location: dir.path().join("MSI/PhotoCraft/photocraft.exe").display().to_string(),
+            location: dir.path().join("MSI/PhotoDecode/photocraft.exe").display().to_string(),
             package: None,
         };
-        assert_eq!(destination(app, PackageKind::Msi, Some(&msi), Some(&old), &unavailable).unwrap(), Some(dir.path().join("MSI/PhotoCraft")));
+        assert_eq!(destination(app, PackageKind::Msi, Some(&msi), Some(&old), &unavailable).unwrap(), Some(dir.path().join("MSI/PhotoDecode")));
         assert!(destination(app, PackageKind::TarGz, None, None, &locations).unwrap_err().contains("aren't supported"));
     }
 
     #[test]
     fn updates_stay_beside_the_launchers_copy_and_new_installs_use_the_chosen_folder() {
         let dir = tempfile::tempdir().unwrap();
-        let app = CraftApp::by_id("photocraft").unwrap();
+        let app = DecodeApp::by_id("photocraft").unwrap();
         let path = dir.path().join("old.AppImage");
         let rec = record("0.5.0", PackageKind::AppImage, path.clone(), vec![], false);
         let launcher = Installed { version: None, source: InstallSource::Launcher, location: path.display().to_string(), package: None };
@@ -1848,9 +1848,9 @@ mod tests {
     fn msi_folder_assignment_preserves_spaces_unicode_and_root_separators() {
         for (value, argument) in [
             (r"D:\", r#"INSTALLFOLDER="D:\""#),
-            (r"D:\Craft Apps\PhotoCraft", r#"INSTALLFOLDER="D:\Craft Apps\PhotoCraft""#),
+            (r"D:\Decode Apps\PhotoDecode", r#"INSTALLFOLDER="D:\Decode Apps\PhotoDecode""#),
             (r"\\server\apps\绘画", r#"INSTALLFOLDER="\\server\apps\绘画""#),
-            (r"D:\Craft Apps\", r#"INSTALLFOLDER="D:\Craft Apps\""#),
+            (r"D:\Decode Apps\", r#"INSTALLFOLDER="D:\Decode Apps\""#),
         ] {
             assert_eq!(msi_folder_argument(Path::new(value)).unwrap(), argument);
         }
@@ -1862,7 +1862,7 @@ mod tests {
     #[test]
     fn appimage_updates_replace_only_the_recorded_file_in_the_same_folder() {
         let dir = tempfile::tempdir().unwrap();
-        let folder = dir.path().join("Craft Apps");
+        let folder = dir.path().join("Decode Apps");
         std::fs::create_dir(&folder).unwrap();
         let download = dir.path().join("download");
         std::fs::write(&download, "first").unwrap();
@@ -1915,7 +1915,7 @@ mod tests {
     #[test]
     fn a_new_install_reports_what_it_would_write_over() {
         let dir = tempfile::tempdir().unwrap();
-        let app = CraftApp::by_id("photocraft").unwrap();
+        let app = DecodeApp::by_id("photocraft").unwrap();
         let paths = Paths::under(dir.path());
         let locations = InstallLocations { root: Some(dir.path().display().to_string()), ..Default::default() };
         let asset = Asset { name: "photocraft.zip".into(), ..Default::default() };
@@ -2024,7 +2024,7 @@ mod tests {
     #[test]
     fn a_failed_install_keeps_the_download_for_the_next_try() {
         use crate::http::tests::{Reply, body, serve};
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let (body, sha) = body();
         let (url, requests) = serve(body.clone(), vec![Reply::Full, Reply::Full]);
         let asset = Asset { name: "wordcraft-0.3.0-test.pkg".into(), size: body.len() as u64, url, sha256: Some(sha) };
@@ -2056,7 +2056,7 @@ mod tests {
     #[test]
     fn an_unavailable_custom_folder_is_rejected_before_downloading() {
         use crate::http::tests::{Reply, body, serve};
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let (body, sha) = body();
         let (url, requests) = serve(body.clone(), vec![Reply::Full]);
         let asset = Asset { name: "wordcraft-0.3.0-linux-x86_64.AppImage".into(), size: body.len() as u64, url, sha256: Some(sha) };
@@ -2079,7 +2079,7 @@ mod tests {
     #[test]
     fn a_release_without_a_checksum_is_refused_before_anything_is_fetched() {
         use crate::http::tests::{Reply, body, serve};
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let (body, _) = body();
         let (url, requests) = serve(body.clone(), vec![Reply::Full]);
         // Neither a per-file digest nor a SHA256SUMS.txt in the release.
@@ -2123,7 +2123,7 @@ mod tests {
     #[cfg(unix)]
     #[test]
     fn lays_out_both_freebsd_tarball_styles_like_usr_local() {
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let dir = tempfile::tempdir().unwrap();
         let tree_style = dir.path().join("tree.tar.gz");
         tarball(
@@ -2197,7 +2197,7 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn a_tarball_install_lives_in_the_launchers_folder_and_keeps_the_apps_home() {
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let dir = tempfile::tempdir().unwrap();
         let paths = Paths::under(dir.path());
         let file = dir.path().join("wordcraft-0.3.0-linux-x86_64.tar.gz");
@@ -2236,7 +2236,7 @@ mod tests {
     fn a_tarball_binary_that_is_a_symlink_out_of_the_tree_is_refused() {
         use std::io::Write;
         use std::os::unix::fs::PermissionsExt;
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let dir = tempfile::tempdir().unwrap();
         let paths = Paths::under(dir.path());
 
@@ -2429,7 +2429,7 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn adds_and_removes_only_its_own_menu_entry_and_icon() {
-        let app = CraftApp::by_id("wordcraft").unwrap();
+        let app = DecodeApp::by_id("wordcraft").unwrap();
         let root = tempfile::tempdir().unwrap();
         let data = root.path().join("share");
         let desktop = data.join("applications/ai.storyteller.wordcraft.desktop");
@@ -2500,7 +2500,7 @@ mod tests {
     #[test]
     fn updates_keep_the_installed_format() {
         let inst = |source| Installed { version: None, source, location: String::new(), package: None };
-        let app = artcraft_launcher_core::CraftApp::by_id("photocraft").unwrap();
+        let app = decode_launcher_core::DecodeApp::by_id("photocraft").unwrap();
         let available = available_kinds();
         if let Some(first) = available.first() {
             assert_eq!(choose_kinds(app, None, None, &[]).first(), Some(first));
@@ -2517,7 +2517,7 @@ mod tests {
     #[test]
     fn only_the_release_arch_package_is_updated_by_the_launcher() {
         let pacman = |name: &str| Installed { version: None, source: InstallSource::Pacman, location: String::new(), package: Some(name.into()) };
-        let app = artcraft_launcher_core::CraftApp::by_id("wordcraft").unwrap();
+        let app = decode_launcher_core::DecodeApp::by_id("wordcraft").unwrap();
         assert!(is_release_arch_package(app, &pacman("ai.storyteller.wordcraft")));
         for aur in ["wordcraft", "wordcraft-bin", "wordcraft-git"] {
             assert!(!is_release_arch_package(app, &pacman(aur)), "{aur}");
@@ -2528,13 +2528,13 @@ mod tests {
 
     #[test]
     fn arch_packages_from_a_repository_are_updated_with_the_system() {
-        let app = artcraft_launcher_core::CraftApp::by_id("wordcraft").unwrap();
+        let app = decode_launcher_core::DecodeApp::by_id("wordcraft").unwrap();
         let hint = pacman_update_hint(app, "wordcraft-bin", Some("omarchy"));
-        assert!(hint.starts_with("WordCraft was installed from the omarchy repository or the AUR (wordcraft-bin)."));
+        assert!(hint.starts_with("WordDecode was installed from the omarchy repository or the AUR (wordcraft-bin)."));
         assert!(hint.ends_with("or sudo pacman -Syu"));
 
         let aur_hint = pacman_update_hint(app, "wordcraft-bin", None);
-        assert!(aur_hint.starts_with("WordCraft was installed from the AUR (wordcraft-bin)."));
+        assert!(aur_hint.starts_with("WordDecode was installed from the AUR (wordcraft-bin)."));
 
         let si = "Repository      : omarchy\nName            : wordcraft-bin\nVersion         : 0.6.1-1\n";
         assert_eq!(parse_pacman_repo(si).as_deref(), Some("omarchy"));
@@ -2545,7 +2545,7 @@ mod tests {
     #[test]
     fn aur_packages_are_not_updated_as_arch_pkg() {
         let pacman = |name: &str| Installed { version: None, source: InstallSource::Pacman, location: String::new(), package: Some(name.into()) };
-        let app = artcraft_launcher_core::CraftApp::by_id("filmcraft").unwrap();
+        let app = decode_launcher_core::DecodeApp::by_id("filmcraft").unwrap();
         let installed = pacman("filmcraft-bin");
         assert!(managed_elsewhere_with(app, &installed, false, |_| None).is_some());
         assert_eq!(choose_kinds_with(app, Some(&installed), None, &[], &[], false), Vec::<PackageKind>::new());
@@ -2555,7 +2555,7 @@ mod tests {
     #[test]
     fn release_arch_packages_are_updated_as_arch_pkg() {
         let pacman = |name: &str| Installed { version: None, source: InstallSource::Pacman, location: String::new(), package: Some(name.into()) };
-        let app = artcraft_launcher_core::CraftApp::by_id("filmcraft").unwrap();
+        let app = decode_launcher_core::DecodeApp::by_id("filmcraft").unwrap();
         let installed = pacman("ai.storyteller.filmcraft");
         assert_eq!(managed_elsewhere_with(app, &installed, false, |_| None), None);
         assert_eq!(choose_kinds_with(app, Some(&installed), None, &[], &[], true), vec![PackageKind::ArchPkg]);
@@ -2564,7 +2564,7 @@ mod tests {
 
     #[test]
     fn unavailable_arch_package_not_selected_for_new_install() {
-        let app = artcraft_launcher_core::CraftApp::by_id("filmcraft").unwrap();
+        let app = decode_launcher_core::DecodeApp::by_id("filmcraft").unwrap();
         assert_eq!(choose_kinds_with(app, None, None, &[PackageKind::ArchPkg], &[], true), Vec::<PackageKind>::new());
         assert_eq!(choose_kinds_with(app, None, None, &[PackageKind::ArchPkg], &[], false), Vec::<PackageKind>::new());
         assert_eq!(choose_kinds_with(app, None, None, &[PackageKind::ArchPkg], &[PackageKind::ArchPkg], false), vec![PackageKind::ArchPkg]);
@@ -2577,13 +2577,13 @@ mod tests {
         let http = Http::new().unwrap();
         let phase = &mut |_| ();
         let locations = InstallLocations::default();
-        let app = CraftApp::by_id("photocraft").unwrap();
+        let app = DecodeApp::by_id("photocraft").unwrap();
         let release = Release { version: version::parse("0.4.0"), tag: "v0.4.0".into(), ..Release::default() };
         let asset = Asset { name: "photocraft-0.4.0-linux-x86_64.AppImage".into(), ..Asset::default() };
         let installed = Installed {
             version: version::parse("0.5.0"),
             source: InstallSource::Launcher,
-            location: dir.path().join("PhotoCraft.AppImage").display().to_string(),
+            location: dir.path().join("PhotoDecode.AppImage").display().to_string(),
             package: None,
         };
         let stop = Stop::default();
@@ -2602,7 +2602,7 @@ mod tests {
         let http = Http::new().unwrap();
         let phase = &mut |_| ();
         let locations = InstallLocations::default();
-        let app = CraftApp::by_id("photocraft").unwrap();
+        let app = DecodeApp::by_id("photocraft").unwrap();
         let release = Release { version: version::parse("99.0.0"), tag: "v99.0.0".into(), ..Release::default() };
         let asset = Asset {
             name: "photocraft-0.4.0-linux-x86_64.AppImage".into(),
@@ -2687,18 +2687,18 @@ mod tests {
 
     #[cfg(target_os = "macos")]
     mod macos_checks {
-        use artcraft_launcher_core::{SUITE, version};
+        use decode_launcher_core::{SUITE, version};
 
         use super::macos::{Expect, TEAM_ID, install_dmg, signed_by};
         use super::*;
 
-        fn photocraft() -> &'static CraftApp {
+        fn photocraft() -> &'static DecodeApp {
             SUITE.iter().find(|a| a.id == "photocraft").unwrap()
         }
 
-        /// A minimal `PhotoCraft.app` at `dir`, reporting `version`.
+        /// A minimal `PhotoDecode.app` at `dir`, reporting `version`.
         fn bundle(dir: &Path, version: &str) -> PathBuf {
-            let app = dir.join("PhotoCraft.app");
+            let app = dir.join("PhotoDecode.app");
             let contents = app.join("Contents");
             std::fs::create_dir_all(contents.join("MacOS")).unwrap();
             std::fs::write(
@@ -2706,16 +2706,16 @@ mod tests {
                 format!(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict>\
                      <key>CFBundleIdentifier</key><string>ai.storyteller.photocraft</string>\
-                     <key>CFBundleExecutable</key><string>PhotoCraft</string>\
+                     <key>CFBundleExecutable</key><string>PhotoDecode</string>\
                      <key>CFBundleShortVersionString</key><string>{version}</string></dict></plist>"
                 ),
             )
             .unwrap();
-            std::fs::write(contents.join("MacOS/PhotoCraft"), version).unwrap();
+            std::fs::write(contents.join("MacOS/PhotoDecode"), version).unwrap();
             app
         }
 
-        /// A release-style disk image holding a `PhotoCraft.app` that reports `version`. The
+        /// A release-style disk image holding a `PhotoDecode.app` that reports `version`. The
         /// disk-image helper turns requests away while it is busy (`attach` retries for the same
         /// reason), so `hdiutil create` is tried a few times, and what it said is kept for the
         /// failure message.
@@ -2731,7 +2731,7 @@ mod tests {
                     let _ = std::fs::remove_file(&dmg);
                 }
                 let output = std::process::Command::new("hdiutil")
-                    .args(["create", "-quiet", "-format", "UDZO", "-volname", "PhotoCraft", "-srcfolder"])
+                    .args(["create", "-quiet", "-format", "UDZO", "-volname", "PhotoDecode", "-srcfolder"])
                     .arg(&src)
                     .arg(&dmg)
                     .output()
@@ -2747,13 +2747,13 @@ mod tests {
         #[test]
         fn custom_bundles_are_detected_and_updates_stay_in_their_actual_location() {
             let dir = tempfile::tempdir().unwrap();
-            let apps = dir.path().join("Craft Apps");
+            let apps = dir.path().join("Decode Apps");
             std::fs::create_dir(&apps).unwrap();
             let paths = Paths::under(dir.path());
             let image = dmg(dir.path(), "0.6.0");
             let expect = Expect { team: None, version: None };
             let placed = install_dmg(photocraft(), &image, None, Some(&apps), false, &paths, &expect).unwrap();
-            assert_eq!(placed, apps.join("PhotoCraft.app"));
+            assert_eq!(placed, apps.join("PhotoDecode.app"));
             let mut manifest = crate::manifest::Manifest::default();
             manifest.apps.insert("photocraft".into(), record("0.6.0", PackageKind::Dmg, placed.clone(), vec![], false));
             let existing = crate::detect::detect(photocraft(), &manifest, &crate::detect::Snapshot::default()).unwrap();
@@ -2765,7 +2765,7 @@ mod tests {
             std::fs::create_dir(&new_default).unwrap();
             let update = dmg(dir.path(), "0.7.0");
             assert_eq!(install_dmg(photocraft(), &update, Some(&existing), Some(&new_default), false, &paths, &expect).unwrap(), placed);
-            assert!(!new_default.join("PhotoCraft.app").exists());
+            assert!(!new_default.join("PhotoDecode.app").exists());
             let detected = crate::detect::detect(photocraft(), &manifest, &crate::detect::Snapshot::default()).unwrap();
             assert_eq!(detected.version.unwrap().to_string(), "0.7.0");
             std::fs::write(placed.join("Contents/Info.plist"), "invalid").unwrap();
@@ -2787,7 +2787,7 @@ mod tests {
                 install_dmg(photocraft(), &image, None, Some(dir.path()), false, &Paths::under(dir.path()), &Expect { team: None, version: None });
             assert!(result.unwrap_err().contains("already exists"));
             assert_eq!(std::fs::read_to_string(plist).unwrap(), unrelated);
-            assert_eq!(std::fs::read(placed.join("Contents/MacOS/PhotoCraft")).unwrap(), b"0.5.0");
+            assert_eq!(std::fs::read(placed.join("Contents/MacOS/PhotoDecode")).unwrap(), b"0.5.0");
         }
 
         #[test]
@@ -2816,19 +2816,19 @@ mod tests {
             let image = dmg(dir.path(), "0.6.0");
 
             for (release, ok) in [("0.6.0", true), ("0.7.0", false), ("0.6.0-rc.1", true), ("0.5.0", false)] {
-                std::fs::write(current.join("Contents/MacOS/PhotoCraft"), "0.5.0").unwrap();
+                std::fs::write(current.join("Contents/MacOS/PhotoDecode"), "0.5.0").unwrap();
                 let want = version::parse(release).unwrap();
                 let expect = Expect { team: None, version: Some(&want) };
                 let result = install_dmg(photocraft(), &image, Some(&existing), None, false, &paths, &expect);
                 assert_eq!(result.is_ok(), ok, "release {release}: {result:?}");
-                let now = std::fs::read_to_string(current.join("Contents/MacOS/PhotoCraft")).unwrap();
+                let now = std::fs::read_to_string(current.join("Contents/MacOS/PhotoDecode")).unwrap();
                 assert_eq!(now, if ok { "0.6.0" } else { "0.5.0" }, "release {release}");
                 if !ok {
                     assert_eq!(result, Err(format!("the app inside isn't version {release}, so it wasn't installed")));
                 }
                 assert_eq!(
                     std::fs::read_dir(&apps).unwrap().map(|e| e.unwrap().file_name()).collect::<Vec<_>>(),
-                    [std::ffi::OsString::from("PhotoCraft.app")]
+                    [std::ffi::OsString::from("PhotoDecode.app")]
                 );
             }
 
@@ -2850,19 +2850,19 @@ mod tests {
 
             let result = install_dmg(photocraft(), &image, Some(&existing), None, false, &Paths::under(dir.path()), &Expect::release(&release));
             assert_eq!(result, Err("the app isn't signed by its developer, so it wasn't installed".into()));
-            assert_eq!(std::fs::read_to_string(current.join("Contents/MacOS/PhotoCraft")).unwrap(), "0.5.0");
+            assert_eq!(std::fs::read_to_string(current.join("Contents/MacOS/PhotoDecode")).unwrap(), "0.5.0");
             assert_eq!(
                 std::fs::read_dir(&apps).unwrap().map(|e| e.unwrap().file_name()).collect::<Vec<_>>(),
-                [std::ffi::OsString::from("PhotoCraft.app")]
+                [std::ffi::OsString::from("PhotoDecode.app")]
             );
         }
 
-        /// A real release passes. Run with `CRAFT_APP=/path/to/PhotoCraft.app cargo test -p
-        /// artcraft-launcher-native -- --ignored a_real_craft_app`.
+        /// A real release passes. Run with `CRAFT_APP=/path/to/PhotoDecode.app cargo test -p
+        /// decode-launcher-native -- --ignored a_real_decode_app`.
         #[test]
-        #[ignore = "needs a Craft App from a real release"]
-        fn a_real_craft_app_carries_the_teams_signature() {
-            let app = std::env::var("CRAFT_APP").expect("set CRAFT_APP to a Craft App bundle");
+        #[ignore = "needs a Decode App from a real release"]
+        fn a_real_decode_app_carries_the_teams_signature() {
+            let app = std::env::var("CRAFT_APP").expect("set CRAFT_APP to a Decode App bundle");
             assert!(signed_by(Path::new(&app), TEAM_ID), "{app} isn't signed by {TEAM_ID}");
         }
     }

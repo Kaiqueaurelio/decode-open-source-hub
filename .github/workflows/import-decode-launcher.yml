@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/import-decode-launcher.yml"
       - "scripts/import_upstream_launcher.sh"
+      - "assets/**"
   workflow_dispatch:
 
 permissions:
@@ -13,7 +14,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: decode-launcher-source-import-v2
+  group: decode-launcher-source-import-v3
   cancel-in-progress: true
 
 jobs:
@@ -65,10 +66,19 @@ jobs:
           BRANCH="automation/decode-launcher-source-import"
           git checkout -B "$BRANCH"
           git add launcher
-          git commit -m "Import upstream launcher source for Decode branding"
-          git push --force-with-lease origin "$BRANCH"
+          if ! git diff --cached --quiet; then
+            git commit -m "Import upstream launcher source for Decode branding"
+            git push --force-with-lease origin "$BRANCH"
+          else
+            echo "Working tree clean; no new changes to commit."
+          fi
           if gh pr view "$BRANCH" --repo "$REPOSITORY" >/dev/null 2>&1; then
             echo "Pull request already exists for $BRANCH"
           else
-            gh pr create               --repo "$REPOSITORY"               --head "$BRANCH"               --base main               --title "Import upstream launcher source for Decode"               --body "Imports the upstream Rust launcher and assets into launcher/ with first-pass Decode branding. Upstream license and attribution notices are preserved. CI/build checks are advisory at this stage; review package identifiers, artwork, installer metadata, release feeds, and all branding before merging."
+            gh pr create \
+              --repo "$REPOSITORY" \
+              --head "$BRANCH" \
+              --base main \
+              --title "Import upstream launcher source for Decode" \
+              --body "Imports the upstream Rust launcher and assets into launcher/ with first-pass Decode branding. Upstream license and attribution notices are preserved."
           fi

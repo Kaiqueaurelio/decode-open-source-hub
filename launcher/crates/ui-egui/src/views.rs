@@ -1,11 +1,11 @@
 //! The header, toolbar, footer, the grid of cards and the table, laid out like the apps page on
 //! getartcraft.com: hairline cells, mono labels and square controls.
 
-use artcraft_launcher_core::details::AppDetails;
-use artcraft_launcher_core::platform::pick_asset;
-use artcraft_launcher_core::protocol::{Command, JobPhase};
-use artcraft_launcher_core::status::AppStatus;
-use artcraft_launcher_core::time;
+use decode_launcher_core::details::AppDetails;
+use decode_launcher_core::platform::pick_asset;
+use decode_launcher_core::protocol::{Command, JobPhase};
+use decode_launcher_core::status::AppStatus;
+use decode_launcher_core::time;
 use egui::{Color32, CornerRadius, FontId, Rect, RichText, Sense, Stroke, Ui, vec2};
 
 use crate::app::{Dialog, LauncherUi, TitleBar};
@@ -75,10 +75,10 @@ impl LauncherUi {
             if bar == TitleBar::MacOs {
                 ui.add_space(TRAFFIC_LIGHTS_W);
             }
-            // The ArtCraft wordmark exactly as supplied, in its own cell.
-            let logo = vec2(14.0 * crate::icons::ARTCRAFT_LOGO_ASPECT, 14.0);
+            // The Decode wordmark exactly as supplied, in its own cell.
+            let logo = vec2(14.0 * crate::icons::DECODE_LOGO_ASPECT, 14.0);
             let (cell, _) = ui.allocate_exact_size(vec2(logo.x + 40.0, h), Sense::hover());
-            egui::Image::new(crate::icons::artcraft_logo(t.dark)).alt_text(tl!("ArtCraft")).paint_at(ui, Rect::from_center_size(cell.center(), logo));
+            egui::Image::new(crate::icons::decode_logo(t.dark)).alt_text(tl!("Decode")).paint_at(ui, Rect::from_center_size(cell.center(), logo));
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if bar == TitleBar::Custom {
                     widgets::window_buttons(ui, h);
@@ -88,10 +88,10 @@ impl LauncherUi {
                 }
                 // The controls reserve their actual widths before the secondary text gets space.
                 ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
-                    if ui.available_width() >= 17.0 + widgets::hud_galley(ui, tl!("Craft App Suite"), t.muted).size().x {
+                    if ui.available_width() >= 17.0 + widgets::hud_galley(ui, tl!("Decode App Suite"), t.muted).size().x {
                         widgets::rule(ui, h);
                         ui.add_space(16.0);
-                        widgets::hud(ui, tl!("Craft App Suite"), t.muted);
+                        widgets::hud(ui, tl!("Decode App Suite"), t.muted);
                     }
                 });
             });
@@ -117,9 +117,9 @@ impl LauncherUi {
         }
     }
 
-    /// A banner over the toolbar when a newer ArtCraft Launcher release is known: either the
+    /// A banner over the toolbar when a newer Decode Launcher release is known: either the
     /// update-in-place controls, or a plain link when this build can't update itself.
-    fn launcher_update_banner(&mut self, ui: &mut Ui, t: &Tokens, r: &artcraft_launcher_core::Release) {
+    fn launcher_update_banner(&mut self, ui: &mut Ui, t: &Tokens, r: &decode_launcher_core::Release) {
         egui::Frame::new()
             .fill(tint(t.accent, if t.dark { 0.10 } else { 0.07 }))
             .stroke(Stroke::new(1.0, tint(t.accent, 0.6)))
@@ -129,7 +129,7 @@ impl LauncherUi {
                     widgets::tag(ui, tl!("Update"), t.accent, Color32::WHITE);
                     ui.add_space(4.0);
                     ui.label(
-                        RichText::new(fmt(tl!("ArtCraft Launcher {version} is available."), &[("version", &r.version_label())]))
+                        RichText::new(fmt(tl!("Decode Launcher {version} is available."), &[("version", &r.version_label())]))
                             .family(theme::medium())
                             .color(t.ink_strong),
                     );
@@ -140,7 +140,7 @@ impl LauncherUi {
 
     /// The banner's right side: the download's progress and cancel while it runs, otherwise the
     /// update (or download) buttons plus the release link.
-    fn banner_actions(&mut self, ui: &mut Ui, t: &Tokens, r: &artcraft_launcher_core::Release) {
+    fn banner_actions(&mut self, ui: &mut Ui, t: &Tokens, r: &decode_launcher_core::Release) {
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
             if let Some(phase) = self.launcher_job {
                 let (fraction, caption) = match phase {
@@ -159,7 +159,7 @@ impl LauncherUi {
                         .on_hover_text(tl!("Stop waiting; the update can be started again later"))
                         .clicked()
                 {
-                    self.act_command(Command::Cancel { app: artcraft_launcher_core::catalog::LAUNCHER_ID.to_string() });
+                    self.act_command(Command::Cancel { app: decode_launcher_core::catalog::LAUNCHER_ID.to_string() });
                 }
                 widgets::progress(ui, fraction, &caption, t.accent, 220.0);
                 return;
@@ -290,10 +290,10 @@ impl LauncherUi {
         }
     }
 
-    /// News from ArtCraft's release feed (and app renames), until the user dismisses each.
+    /// News from Decode's release feed (and app renames), until the user dismisses each.
     fn announcements(&mut self, ui: &mut Ui) {
         let t = Tokens::get(ui.ctx());
-        let shown: Vec<artcraft_launcher_core::feed::Notice> =
+        let shown: Vec<decode_launcher_core::feed::Notice> =
             self.announcements.iter().filter(|n| !self.settings.dismissed_notices.contains(&n.id)).take(3).cloned().collect();
         for notice in shown {
             egui::Frame::new().fill(t.sunken).stroke(t.hairline()).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
@@ -342,7 +342,7 @@ impl LauncherUi {
             let short = fmt(tl!("GitHub limit hit; back in {min} min"), &[("min", &min)]);
             (format!("· {full}"), format!("· {short}"))
         });
-        use artcraft_launcher_core::catalog::{GITHUB_URL, SOCIAL, WEBSITE_URL};
+        use decode_launcher_core::catalog::{GITHUB_URL, SOCIAL, WEBSITE_URL};
         // Every link is an icon, reading Website, GitHub, Discord, then the social accounts.
         let named =
             |name: &'static str, label: &str, url: &'static str| widgets::IconLink { name, label: label.to_string(), tip: label.to_string(), url };
@@ -352,14 +352,14 @@ impl LauncherUi {
             widgets::IconLink {
                 name: "Discord",
                 label: tl!("Discord").to_string(),
-                tip: tl!("Join the ArtCraft community on Discord").to_string(),
+                tip: tl!("Join the Decode community on Discord").to_string(),
                 url: self.discord_url,
             },
         ];
         links.extend(SOCIAL.iter().map(|(name, url)| widgets::IconLink {
             name,
             label: (*name).to_string(),
-            tip: fmt(tl!("ArtCraft on {name}"), &[("name", name)]),
+            tip: fmt(tl!("Decode on {name}"), &[("name", name)]),
             url,
         }));
         let icon = 13.0;
@@ -1120,14 +1120,14 @@ pub(crate) fn version_line(e: &AppEntry, status: &AppStatus) -> String {
 /// The launcher's own download for this platform. `flatpak` is whether this copy runs as a
 /// Flatpak; such a copy's download stays the `.flatpak` bundle — offering it an AppImage (or a
 /// `.deb`) would point at replacing the sandboxed install with a different one.
-pub(crate) fn launcher_download(r: &artcraft_launcher_core::Release, p: artcraft_launcher_core::Platform, flatpak: bool) -> Option<String> {
-    use artcraft_launcher_core::PackageKind;
+pub(crate) fn launcher_download(r: &decode_launcher_core::Release, p: decode_launcher_core::Platform, flatpak: bool) -> Option<String> {
+    use decode_launcher_core::PackageKind;
     let kinds: &[PackageKind] = match p.os {
-        artcraft_launcher_core::Os::Linux if flatpak => &[PackageKind::Flatpak],
-        artcraft_launcher_core::Os::Linux => &[PackageKind::AppImage, PackageKind::Deb],
+        decode_launcher_core::Os::Linux if flatpak => &[PackageKind::Flatpak],
+        decode_launcher_core::Os::Linux => &[PackageKind::AppImage, PackageKind::Deb],
         _ => p.default_kinds(),
     };
-    pick_asset(r, &[artcraft_launcher_core::catalog::LAUNCHER_ID], p, kinds).map(|(a, _)| a.url.clone())
+    pick_asset(r, &[decode_launcher_core::catalog::LAUNCHER_ID], p, kinds).map(|(a, _)| a.url.clone())
 }
 
 /// A column of single-line texts, one per font and `gap` apart, centred across the row it is in.
@@ -1150,17 +1150,17 @@ fn lines_height(ui: &Ui, fonts: &[&FontId], gap: f32) -> f32 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use artcraft_launcher_core::catalog::LAUNCHER_ID;
-    use artcraft_launcher_core::{Arch, Asset, Platform, Release};
+    use decode_launcher_core::catalog::LAUNCHER_ID;
+    use decode_launcher_core::{Arch, Asset, Platform, Release};
 
     fn release() -> Release {
         let asset = |name: &str| Asset { name: name.into(), size: 0, url: format!("https://dl.example/{name}"), sha256: None };
         Release {
             tag: "v0.4.1".into(),
             version: None,
-            name: "ArtCraft Launcher v0.4.1".into(),
+            name: "Decode Launcher v0.4.1".into(),
             published_at: None,
-            html_url: "https://github.com/storytold/craft-launcher/releases/tag/v0.4.1".into(),
+            html_url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher/releases/tag/v0.4.1".into(),
             notes: String::new(),
             prerelease: false,
             assets: vec![
@@ -1172,7 +1172,7 @@ mod tests {
     }
 
     fn platform() -> Platform {
-        Platform { os: artcraft_launcher_core::Os::Linux, arch: Arch::X64 }
+        Platform { os: decode_launcher_core::Os::Linux, arch: Arch::X64 }
     }
 
     #[test]

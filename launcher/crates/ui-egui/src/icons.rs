@@ -1,14 +1,14 @@
-//! Bundled images: each Craft App's icon and the launcher's own.
+//! Bundled images: each Decode App's icon and the launcher's own.
 
 use egui::ImageSource;
 
-/// The 128 px icon of a Craft App ([`catalog::app_icon_png`](artcraft_launcher_core::catalog::app_icon_png)).
+/// The 128 px icon of a Decode App ([`catalog::app_icon_png`](decode_launcher_core::catalog::app_icon_png)).
 pub fn app(id: &str) -> Option<ImageSource<'static>> {
-    let png = artcraft_launcher_core::catalog::app_icon_png(id)?;
+    let png = decode_launcher_core::catalog::app_icon_png(id)?;
     Some(ImageSource::Bytes { uri: format!("bytes://app-icons/{id}.png").into(), bytes: png.into() })
 }
 
-/// A Craft App's icon: in colour, or in greys for an app that is not installed. The grey copy is
+/// A Decode App's icon: in colour, or in greys for an app that is not installed. The grey copy is
 /// made once per app from the same bundled picture and kept in the context.
 pub fn app_image(ctx: &egui::Context, id: &str, in_colour: bool) -> Option<egui::Image<'static>> {
     let colour = app(id).map(egui::Image::new);
@@ -44,18 +44,18 @@ fn desaturate(pixels: &mut [u8]) {
     }
 }
 
-/// The ArtCraft wordmark, as supplied: dark ink for light backgrounds, white for dark ones.
-/// An ArtCraft trademark, not covered by the MIT/Apache license (`docs/brand/LICENSE-brand.txt`).
-pub fn artcraft_logo(dark_background: bool) -> ImageSource<'static> {
+/// The Decode wordmark, as supplied: dark ink for light backgrounds, white for dark ones.
+/// An Decode trademark, not covered by the MIT/Apache license (`docs/brand/LICENSE-brand.txt`).
+pub fn decode_logo(dark_background: bool) -> ImageSource<'static> {
     if dark_background {
-        egui::include_image!("../../../docs/brand/artcraft-logo-white.svg")
+        egui::include_image!("../../../docs/brand/decode-logo-white.svg")
     } else {
-        egui::include_image!("../../../docs/brand/artcraft-logo.svg")
+        egui::include_image!("../../../docs/brand/decode-logo.svg")
     }
 }
 
-/// The ArtCraft wordmark's width / height (its SVG view box: 1038.05 × 108).
-pub const ARTCRAFT_LOGO_ASPECT: f32 = 1038.05 / 108.0;
+/// The Decode wordmark's width / height (its SVG view box: 1038.05 × 108).
+pub const DECODE_LOGO_ASPECT: f32 = 640.0 / 120.0;
 
 /// A social service's logo (Simple Icons, white, for tinting), by its name in `catalog::SOCIAL`.
 pub fn social(service: &str) -> Option<ImageSource<'static>> {
@@ -72,9 +72,9 @@ pub fn social(service: &str) -> Option<ImageSource<'static>> {
     })
 }
 
-/// The ArtCraft "A" mark in blue, as supplied: the launcher's app icon and getartcraft.com's favicon.
-pub fn artcraft_mark() -> ImageSource<'static> {
-    egui::include_image!("../../../docs/brand/artcraft-mark.svg")
+/// The Decode "A" mark in blue, as supplied: the launcher's app icon and getartcraft.com's favicon.
+pub fn decode_mark() -> ImageSource<'static> {
+    egui::include_image!("../../../docs/brand/decode-mark.svg")
 }
 
 #[cfg(test)]

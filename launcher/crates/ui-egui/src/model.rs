@@ -1,23 +1,23 @@
 //! What the UI knows about each app.
 
-use artcraft_launcher_core::platform::{Platform, pick_asset};
-use artcraft_launcher_core::protocol::{JobPhase, LatestRelease, PausedDownload};
-use artcraft_launcher_core::release::Release;
-use artcraft_launcher_core::status::{self, AppStatus, Latest};
-use artcraft_launcher_core::{CraftApp, Installed};
+use decode_launcher_core::platform::{Platform, pick_asset};
+use decode_launcher_core::protocol::{JobPhase, LatestRelease, PausedDownload};
+use decode_launcher_core::release::Release;
+use decode_launcher_core::status::{self, AppStatus, Latest};
+use decode_launcher_core::{DecodeApp, Installed};
 
 use crate::i18n::t;
 
 #[derive(Clone, Debug)]
 pub struct AppEntry {
-    pub app: &'static CraftApp,
+    pub app: &'static DecodeApp,
     pub latest: Option<LatestRelease>,
     pub installed: Option<Installed>,
     /// Detection has answered at least once.
     pub detected: bool,
     pub job: Option<JobPhase>,
     /// The service `latest` came from.
-    pub origin: Option<artcraft_launcher_core::protocol::Origin>,
+    pub origin: Option<decode_launcher_core::protocol::Origin>,
     /// A download waiting to be resumed.
     pub paused: Option<PausedDownload>,
     /// A finished download waiting for another try at installing it.
@@ -25,7 +25,7 @@ pub struct AppEntry {
 }
 
 impl AppEntry {
-    pub fn new(app: &'static CraftApp) -> Self {
+    pub fn new(app: &'static DecodeApp) -> Self {
         Self { app, latest: None, installed: None, detected: false, job: None, origin: None, paused: None, ready: false }
     }
 

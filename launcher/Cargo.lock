@@ -271,12 +271,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
 
 [[package]]
-name = "artcraft-launcher"
+name = "decode-launcher"
 version = "0.8.1"
 dependencies = [
- "artcraft-launcher-core",
- "artcraft-launcher-native",
- "artcraft-launcher-ui-egui",
+ "decode-launcher-core",
+ "decode-launcher-native",
+ "decode-launcher-ui-egui",
  "craft-quit",
  "eframe",
  "egui",
@@ -297,7 +297,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "artcraft-launcher-core"
+name = "decode-launcher-core"
 version = "0.8.1"
 dependencies = [
  "jiff",
@@ -307,10 +307,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "artcraft-launcher-native"
+name = "decode-launcher-native"
 version = "0.8.1"
 dependencies = [
- "artcraft-launcher-core",
+ "decode-launcher-core",
  "craft-update",
  "dirs 6.0.0",
  "dunce",
@@ -331,10 +331,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "artcraft-launcher-ui-egui"
+name = "decode-launcher-ui-egui"
 version = "0.8.1"
 dependencies = [
- "artcraft-launcher-core",
+ "decode-launcher-core",
  "egui",
  "egui_extras",
  "egui_kittest",
@@ -350,11 +350,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "artcraft-launcher-web"
+name = "decode-launcher-web"
 version = "0.8.1"
 dependencies = [
- "artcraft-launcher-core",
- "artcraft-launcher-ui-egui",
+ "decode-launcher-core",
+ "decode-launcher-ui-egui",
  "eframe",
  "egui",
  "js-sys",

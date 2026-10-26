@@ -3,7 +3,7 @@
 # exports VERSION and NFPM_ARCH.
 #
 #   nfpm package -f packaging/linux/nfpm.yaml -p deb -t dist/release/
-name: artcraft-launcher
+name: decode-launcher
 arch: ${NFPM_ARCH}
 platform: linux
 version: ${VERSION}
@@ -12,15 +12,15 @@ version_schema: semver
 release: 1
 section: utils
 priority: optional
-maintainer: ${ARTCRAFT_LAUNCHER_MAINTAINER}
+maintainer: ${DECODE_LAUNCHER_MAINTAINER}
 vendor: Learning Machines LLC
-homepage: https://github.com/storytold/craft-launcher
+homepage: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher
 license: MIT OR Apache-2.0
 description: |-
-  Install, update and launch the Craft App Suite.
-  ArtCraft Launcher lists PhotoCraft, LightCraft, FilmCraft, DesignCraft,
-  VectorCraft, PdfCraft, EffectCraft, WordCraft, DeckCraft, GridCraft, CADCraft,
-  SoundCraft and FigCraft, installs the right build for this computer and keeps
+  Install, update and launch the Decode App Suite.
+  Decode Launcher lists PhotoDecode, LightDecode, FilmDecode, DesignDecode,
+  VectorDecode, PdfDecode, EffectDecode, WordDecode, DeckDecode, GridDecode, CADDecode,
+  SoundDecode and FigDecode, installs the right build for this computer and keeps
   them up to date from GitHub releases. It can live in the system tray.
 
 # The binary links only glibc and libgcc_s directly. Windowing (X11/Wayland, xkbcommon) and the
@@ -65,8 +65,8 @@ overrides:
       - xdg-desktop-portal
 
 contents:
-  - src: ${STAGE}/usr/bin/artcraft-launcher
-    dst: /usr/bin/artcraft-launcher
+  - src: ${STAGE}/usr/bin/decode-launcher
+    dst: /usr/bin/decode-launcher
     file_info: { mode: 0755 }
   - src: ${STAGE}/usr/share/
     dst: /usr/share/

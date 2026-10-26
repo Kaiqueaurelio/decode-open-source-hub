@@ -28,7 +28,7 @@ const fn shot(key: &'static str, caption: &'static str) -> Shot {
 /// The editorial half of an app's page.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct AppDetails {
-    /// Matches [`crate::CraftApp::id`].
+    /// Matches [`crate::DecodeApp::id`].
     pub id: &'static str,
     /// One line under the name.
     pub headline: &'static str,
@@ -136,7 +136,7 @@ pub fn screenshot_within_budget(bytes: &[u8]) -> bool {
     }
 }
 
-/// Where every Craft App runs (getartcraft.com lists the same for each of them).
+/// Where every Decode App runs (getartcraft.com lists the same for each of them).
 const PLATFORMS: &str = "macOS, Windows, Linux, FreeBSD, web";
 
 pub const DETAILS: [AppDetails; 13] = [
@@ -145,7 +145,7 @@ pub const DETAILS: [AppDetails; 13] = [
         headline: "The image editor you already know how to use.",
         about: "Layers, masks, adjustment layers, layer styles, type, vectors and brushes in a native app \
             written in Rust. Open source, offline, and yours.\n\n\
-            PhotoCraft keeps the menus, shortcuts and panels your hands already know, so there is \
+            PhotoDecode keeps the menus, shortcuts and panels your hands already know, so there is \
             nothing to relearn.",
         features: &[
             feature("Native GPU canvas", "No Electron and no web view: a fast native compositor."),
@@ -495,13 +495,13 @@ impl AppDetails {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{CraftApp, SUITE};
+    use crate::{DecodeApp, SUITE};
 
     #[test]
     fn every_page_belongs_to_a_suite_app_once() {
         let mut ids: Vec<_> = DETAILS.iter().map(|d| d.id).collect();
         for id in &ids {
-            assert!(CraftApp::by_id(id).is_some(), "{id}");
+            assert!(DecodeApp::by_id(id).is_some(), "{id}");
         }
         ids.sort_unstable();
         ids.dedup();

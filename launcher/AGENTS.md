@@ -1,16 +1,16 @@
 # AGENTS.md: guide for AI agents and contributors
 
-ArtCraft Launcher installs, updates and launches the **Craft App Suite** (PhotoCraft, LightCraft,
-FilmCraft, DesignCraft, VectorCraft, PdfCraft, EffectCraft, WordCraft, DeckCraft, GridCraft,
-CADCraft, SoundCraft, FigCraft). It is written in **Rust only** (no JavaScript or TypeScript): the desktop
+Decode Launcher installs, updates and launches the **Decode App Suite** (PhotoDecode, LightDecode,
+FilmDecode, DesignDecode, VectorDecode, PdfDecode, EffectDecode, WordDecode, DeckDecode, GridDecode,
+CADDecode, SoundDecode, FigDecode). It is written in **Rust only** (no JavaScript or TypeScript): the desktop
 app is native egui/eframe, and the web build is the same Rust compiled to WebAssembly (trunk +
 wasm-bindgen). **No Tauri, Electron or webview shells**, ever.
 
-The product name is always **ArtCraft Launcher** in user-facing text: UI, window titles, About,
-tray menu, notifications, installers, release names, docs prose. The suite is the **Craft App
-Suite**. Machine names stay lowercase: crates and binaries (`artcraft-launcher`,
-`artcraft-launcher-*`), file names, and the app id `ai.storyteller.artcraft-launcher`. Note the
-GitHub repo is `storytold/craft-launcher`, while every file and package is `artcraft-launcher-*`.
+The product name is always **Decode Launcher** in user-facing text: UI, window titles, About,
+tray menu, notifications, installers, release names, docs prose. The suite is the **Decode App
+Suite**. Machine names stay lowercase: crates and binaries (`decode-launcher`,
+`decode-launcher-*`), file names, and the app id `com.decode.launcher`. Note the
+GitHub repo is `storytold/craft-launcher`, while every file and package is `decode-launcher-*`.
 
 Standards and learnings shared across the Craft apps live in `../craftrules` (read its
 `README.md` and `AGENTS.md`). Contribute reusable learnings there, never code.
@@ -19,14 +19,14 @@ Standards and learnings shared across the Craft apps live in `../craftrules` (re
 
 ```text
 crates/
-  core      artcraft-launcher-core      pure and wasm-safe: the app catalog, versions, GitHub
+  core      decode-launcher-core      pure and wasm-safe: the app catalog, versions, GitHub
                                         release parsing, picking the right asset per platform
-  native    artcraft-launcher-native    desktop only: HTTP, detecting installed apps, download,
+  native    decode-launcher-native    desktop only: HTTP, detecting installed apps, download,
                                         verify and install
-  ui-egui   artcraft-launcher-ui-egui   the shared egui UI (desktop and web)
+  ui-egui   decode-launcher-ui-egui   the shared egui UI (desktop and web)
 apps/
-  artcraft-launcher                     desktop shell (eframe): window, tray icon, notifications
-  artcraft-launcher-web                 the same UI in the browser (trunk; catalog and downloads only)
+  decode-launcher                     desktop shell (eframe): window, tray icon, notifications
+  decode-launcher-web                 the same UI in the browser (trunk; catalog and downloads only)
 xtask/                                  cargo xtask ci | wasm | version | ico
 packaging/                              macOS, Windows, Linux, FreeBSD and web packaging scripts
 assets/app-icon/                        the launcher's own icon (master SVG, renders, tray icons)
@@ -58,7 +58,7 @@ settings file must produce an error the user can act on, never a panic. Shared s
 ### Installing other people's software safely
 
 - Download only from `https://github.com/storytold/<app>/releases` (and GitHub's asset CDN).
-  The one exception is a developer's own loopback mirror (`ARTCRAFT_LAUNCHER_DOWNLOAD_BASE`,
+  The one exception is a developer's own loopback mirror (`DECODE_LAUNCHER_DOWNLOAD_BASE`,
   `cargo xtask local`); keep it loopback-only and behind the `local-mirror` cargo feature, which
   release builds never enable.
 - Verify each download against the release's `SHA256SUMS.txt` before running or installing it.
@@ -92,18 +92,18 @@ Every user-facing string goes through `crates/ui-egui/src/i18n` (`tl!("…")` fo
 for `{placeholders}`, `tn` for counts). English in the code is the lookup key; adding a string
 means adding its row to every catalog marked `complete_menus` (the `*.tsv` files in
 `crates/ui-egui/src/i18n/`), which the i18n tests check. Translate clean-room from the meaning of
-the English text, never through another catalog. Product and app names (ArtCraft Launcher, Craft
-App Suite, PhotoCraft…) stay in English.
+the English text, never through another catalog. Product and app names (Decode Launcher, Craft
+App Suite, PhotoDecode…) stay in English.
 A CJK language is drawn with the system's own CJK font (`crates/ui-egui/src/cjk_font.rs`, desktop
 only; English where there is none): never bundle a CJK font, they are 10 MB and more.
 
 ### Other rules
 
 1. **Assets need attribution.** Every bundled asset gets a row in `ATTRIBUTION.md` (path, title,
-   author, source, license) in the same change. The ArtCraft name, logo and "A" mark in
+   author, source, license) in the same change. The Decode name, logo and "A" mark in
    `docs/brand/` (the header logo and the tray icon) are trademarks, **not MIT/Apache**
    (`docs/brand/LICENSE-brand.txt`): use them exactly as supplied, never redraw or recolor them.
-2. **Icons are generated.** The app icon and the tray icon are the supplied ArtCraft "A" mark from
+2. **Icons are generated.** The app icon and the tray icon are the supplied Decode "A" mark from
    `docs/brand/` (a trademark, not MIT/Apache); never edit the renders by hand. Run `packaging/icons.sh` (needs `resvg`; runs on any OS) and commit the outputs.
    `assets/app-icons/` is copied verbatim from each app's repo (`assets/app-icon/hicolor/128x128/apps/ai.storyteller.<app>.png`);
    refresh it from there, never redraw.
@@ -111,7 +111,7 @@ only; English where there is none): never bundle a CJK font, they are 10 MB and 
    `cfg(not(target_arch = "wasm32"))`.
 4. **Tests are the gate.** Release parsing and asset picking in `core` get unit tests with real
    GitHub release JSON fixtures (small, committed under `crates/core/tests/fixtures/`).
-5. When fetching anything, use a generic `ArtCraft-Launcher/<version>` User-Agent and never put
+5. When fetching anything, use a generic `Decode-Launcher/<version>` User-Agent and never put
    a person's name, email or other personal details in requests.
 6. **Time goes through `jiff`** (workspace dependency). Never hand-roll UTC/calendar conversion
    (days-to-date algorithms, leap-year math); a module owns only its output format string. The one
@@ -135,32 +135,32 @@ packaging/linux/AppRun` and `actionlint`.
 The version lives only in `[workspace.package] version` in the root `Cargo.toml`
 (`cargo xtask version`, `cargo xtask version set X.Y.Z[-pre]`). Pushing to the `release` branch runs
 `.github/workflows/release.yml`, which builds every platform and creates the draft GitHub Release
-**ArtCraft Launcher v<version>** with `SHA256SUMS.txt`. The canonical recipe is
+**Decode Launcher v<version>** with `SHA256SUMS.txt`. The canonical recipe is
 `../craftrules/release/playbook.md`; cutting a release is `../craftrules/release/cut-a-release.md`.
 
 Release assets (keep these names exact; the launcher's own self-update and the README rely on them):
 
 | Platform | Files |
 |---|---|
-| Windows | `artcraft-launcher-<ver>-windows-{x64,x86,arm64}.msi`, `…-windows-{x64,x86,arm64}-portable.zip` |
-| macOS | `artcraft-launcher-<ver>-macos-universal.dmg` |
-| Linux | `artcraft-launcher-<ver>-linux-{x86_64,aarch64}.{AppImage,AppImage.zsync,deb,rpm,tar.gz,flatpak}`, `artcraft-launcher-<ver>-linux-riscv64.{deb,rpm,tar.gz}` |
-| FreeBSD | `artcraft-launcher-<ver>-freebsd-x86_64.tar.gz` |
-| Web | `artcraft-launcher-web-<ver>.zip` |
+| Windows | `decode-launcher-<ver>-windows-{x64,x86,arm64}.msi`, `…-windows-{x64,x86,arm64}-portable.zip` |
+| macOS | `decode-launcher-<ver>-macos-universal.dmg` |
+| Linux | `decode-launcher-<ver>-linux-{x86_64,aarch64}.{AppImage,AppImage.zsync,deb,rpm,tar.gz,flatpak}`, `decode-launcher-<ver>-linux-riscv64.{deb,rpm,tar.gz}` |
+| FreeBSD | `decode-launcher-<ver>-freebsd-x86_64.tar.gz` |
+| Web | `decode-launcher-web-<ver>.zip` |
 
 Packaging facts the code relies on:
 
 - The Windows MSI is **per-user** (no UAC prompt), by default into
-  `%LOCALAPPDATA%\Programs\ArtCraft Launcher`. Double-clicked it opens a WixUI setup wizard
+  `%LOCALAPPDATA%\Programs\Decode Launcher`. Double-clicked it opens a WixUI setup wizard
   (Welcome; a folder page with a "Create a desktop shortcut" box; Ready; progress; Finish with
   "Launch"), whose art `package.ps1` draws at build time; self-update runs it with `/passive`, no
   wizard. The folder and the shortcut choice are recorded under
-  `HKCU\Software\Learning Machines LLC\ArtCraft Launcher` (`InstallDir`,
+  `HKCU\Software\Learning Machines LLC\Decode Launcher` (`InstallDir`,
   `DesktopShortcutChoice`) and reused by the next version, and `self_update.rs` reads `InstallDir`
   to know the running copy came from the MSI. Its shortcuts set AppUserModelID
-  `ai.storyteller.artcraft-launcher`, which toast notifications need. `portable.txt` beside the exe switches on portable mode
-  (`ArtCraftLauncherData\` next to the exe).
-- The macOS bundle is `ArtCraft Launcher.app` (executable `Contents/MacOS/ArtCraft Launcher`), a
+  `com.decode.launcher`, which toast notifications need. `portable.txt` beside the exe switches on portable mode
+  (`DecodeLauncherData\` next to the exe).
+- The macOS bundle is `Decode Launcher.app` (executable `Contents/MacOS/Decode Launcher`), a
   normal Dock app that can also sit in the menu bar: `LSUIElement` must never be set.
 - Linux: the tray uses StatusNotifierItem over D-Bus and notifications use
   `org.freedesktop.Notifications`, both in pure Rust (no GTK, appindicator or libdbus).
@@ -168,15 +168,15 @@ Packaging facts the code relies on:
   and run through `flatpak-spawn --host`. When the host has no usable Flatpak — none installed,
   or `flatpak-spawn` not allowed — `linux::order_available_kinds` offers the release tarball
   instead: it is unpacked into `<data>/apps/<app>` (`bin/`, `share/`) and run with `HOME` =
-  `<data>/apps/<app>/home`, so a Craft App's settings stay in the sandbox. An update swaps
+  `<data>/apps/<app>/home`, so a Decode App's settings stay in the sandbox. An update swaps
   `bin/` and `share/` and keeps `home/`; removing the app takes those two folders only. Outside
   a sandbox the tarball is not on offer at all.
 - `--socket=pulseaudio` in the launcher manifests is for an app running *inside* the sandbox
-  (SoundCraft's ALSA reaches the runtime's PulseAudio plugin through it); it also covers the
-  microphone, which SoundCraft records through.
-- `build.rs` reads `ARTCRAFT_LAUNCHER_BUILD_SHA` / `ARTCRAFT_LAUNCHER_BUILD_DATE` and, on Windows,
-  embeds `assets/app-icon/artcraft-launcher.ico`, failing the build when
-  `ARTCRAFT_LAUNCHER_REQUIRE_WINRES=1` and it can't.
+  (SoundDecode's ALSA reaches the runtime's PulseAudio plugin through it); it also covers the
+  microphone, which SoundDecode records through.
+- `build.rs` reads `DECODE_LAUNCHER_BUILD_SHA` / `DECODE_LAUNCHER_BUILD_DATE` and, on Windows,
+  embeds `assets/app-icon/decode-launcher.ico`, failing the build when
+  `DECODE_LAUNCHER_REQUIRE_WINRES=1` and it can't.
 
 ## 5. Parallel agents
 

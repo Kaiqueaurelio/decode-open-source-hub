@@ -1,13 +1,13 @@
-//! ArtCraft Launcher updating itself.
+//! Decode Launcher updating itself.
 //!
 //! Delegated to [`craft_update::self_update`].
 
 use std::ffi::OsString;
 
-use artcraft_launcher_core::platform::Platform;
-use artcraft_launcher_core::protocol::JobPhase;
-use artcraft_launcher_core::release::Release;
-use artcraft_launcher_core::version::Version;
+use decode_launcher_core::platform::Platform;
+use decode_launcher_core::protocol::JobPhase;
+use decode_launcher_core::release::Release;
+use decode_launcher_core::version::Version;
 
 use crate::http::{Http, Stop};
 use crate::paths::Paths;
@@ -48,16 +48,16 @@ fn to_update_release(release: &Release) -> craft_update::Release {
 fn to_update_platform(platform: Platform) -> craft_update::Platform {
     craft_update::Platform {
         os: match platform.os {
-            artcraft_launcher_core::Os::Windows => craft_update::Os::Windows,
-            artcraft_launcher_core::Os::MacOs => craft_update::Os::MacOs,
-            artcraft_launcher_core::Os::Linux => craft_update::Os::Linux,
-            artcraft_launcher_core::Os::FreeBsd => craft_update::Os::FreeBsd,
+            decode_launcher_core::Os::Windows => craft_update::Os::Windows,
+            decode_launcher_core::Os::MacOs => craft_update::Os::MacOs,
+            decode_launcher_core::Os::Linux => craft_update::Os::Linux,
+            decode_launcher_core::Os::FreeBsd => craft_update::Os::FreeBsd,
         },
         arch: match platform.arch {
-            artcraft_launcher_core::Arch::X64 => craft_update::Arch::X64,
-            artcraft_launcher_core::Arch::Arm64 => craft_update::Arch::Arm64,
-            artcraft_launcher_core::Arch::X86 => craft_update::Arch::X86,
-            artcraft_launcher_core::Arch::Riscv64 => craft_update::Arch::Riscv64,
+            decode_launcher_core::Arch::X64 => craft_update::Arch::X64,
+            decode_launcher_core::Arch::Arm64 => craft_update::Arch::Arm64,
+            decode_launcher_core::Arch::X86 => craft_update::Arch::X86,
+            decode_launcher_core::Arch::Riscv64 => craft_update::Arch::Riscv64,
         },
     }
 }
@@ -92,7 +92,7 @@ pub fn update(
     let update_release = to_update_release(release);
     let update_platform = to_update_platform(platform);
     let update_paths = to_update_paths(paths);
-    let update_http = craft_update::Http::new("ArtCraft-Launcher/SelfUpdate")?;
+    let update_http = craft_update::Http::new("Decode-Launcher/SelfUpdate")?;
     let mut update_phase = |p: craft_update::JobPhase| {
         phase(match p {
             craft_update::JobPhase::Downloading { done, total } => JobPhase::Downloading { done, total },

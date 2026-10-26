@@ -3,12 +3,12 @@
 use std::cell::Cell;
 use std::rc::Rc;
 
-use artcraft_launcher_core::protocol::{Backend, Capabilities, Command, Event, JobPhase, LatestRelease, Origin, Source};
-use artcraft_launcher_core::release::{Asset, Release};
-use artcraft_launcher_core::status::InstallSource;
-use artcraft_launcher_core::{Arch, Installed, Os, Platform, SUITE, version};
-use artcraft_launcher_ui_egui::settings::ViewMode;
-use artcraft_launcher_ui_egui::{Host, LauncherUi, Settings};
+use decode_launcher_core::protocol::{Backend, Capabilities, Command, Event, JobPhase, LatestRelease, Origin, Source};
+use decode_launcher_core::release::{Asset, Release};
+use decode_launcher_core::status::InstallSource;
+use decode_launcher_core::{Arch, Installed, Os, Platform, SUITE, version};
+use decode_launcher_ui_egui::settings::ViewMode;
+use decode_launcher_ui_egui::{Host, LauncherUi, Settings};
 use egui_kittest::Harness;
 use egui_kittest::kittest::Queryable;
 
@@ -61,7 +61,7 @@ fn events() -> Vec<Event> {
     let mut ev = Vec::new();
     for (i, app) in SUITE.iter().enumerate() {
         let latest = LatestRelease::Found(release(app.id, "0.5.0", NOW - 40 * 86_400 - i as i64 * 600));
-        ev.push(Event::Latest { app: app.id.into(), latest, from: Origin::ArtCraftApi });
+        ev.push(Event::Latest { app: app.id.into(), latest, from: Origin::DecodeApi });
         let installed = matches!(app.id, "photocraft" | "lightcraft").then(|| Installed {
             version: version::parse(if app.id == "photocraft" { "0.4.1" } else { "0.5.0" }),
             source: InstallSource::Msi,
@@ -72,15 +72,15 @@ fn events() -> Vec<Event> {
     }
     ev.push(Event::Progress { app: "filmcraft".into(), phase: JobPhase::Verifying });
     ev.push(Event::CheckFinished { at: NOW - 180, source: Source::Feed, rate_limited_until: None });
-    ev.push(Event::JobFinished { app: "lightcraft".into(), result: Ok("LightCraft updated to 0.5.0".into()) });
+    ev.push(Event::JobFinished { app: "lightcraft".into(), result: Ok("LightDecode updated to 0.5.0".into()) });
     ev
 }
 
 fn harness(view: ViewMode) -> Harness<'static, Option<LauncherUi>> {
-    artcraft_launcher_ui_egui::i18n::set_test_lang(artcraft_launcher_ui_egui::i18n::Lang::EN);
+    decode_launcher_ui_egui::i18n::set_test_lang(decode_launcher_ui_egui::i18n::Lang::EN);
     let mut backend = Some(Fake { events: events(), clock: Rc::new(Cell::new(NOW)) });
     let settings =
-        Settings { view, notify: false, language: "pt-BR".into(), theme: artcraft_launcher_ui_egui::theme::ThemeChoice::Dark, ..Settings::default() };
+        Settings { view, notify: false, language: "pt-BR".into(), theme: decode_launcher_ui_egui::theme::ThemeChoice::Dark, ..Settings::default() };
     Harness::builder().with_size(egui::vec2(1180.0, 900.0)).with_theme(egui::Theme::Dark).build_ui_state(
         move |ui, state: &mut Option<LauncherUi>| {
             if state.is_none()
@@ -102,12 +102,12 @@ fn portuguese_ui_translates_labels_dates_and_messages() {
     let mut h = harness(ViewMode::Grid);
     h.run_steps(8);
     assert!(h.query_by_label("Launcher").is_none());
-    h.get_by_label("Craft App Suite");
+    h.get_by_label("Decode App Suite");
     h.get_by_label("Edição de imagens");
     h.get_by_label("Atualizar para 0.5.0");
     h.get_by_label_contains("Conferindo a soma de verificação…");
-    h.get_by_label_contains("Verificado há 3 min · via ArtCraft API");
-    h.get_by_label("LightCraft atualizado para 0.5.0");
+    h.get_by_label_contains("Verificado há 3 min · via Decode API");
+    h.get_by_label("LightDecode atualizado para 0.5.0");
 
     let mut table = harness(ViewMode::Table);
     table.run_steps(8);

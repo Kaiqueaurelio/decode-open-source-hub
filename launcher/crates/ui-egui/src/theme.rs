@@ -91,7 +91,7 @@ impl Tokens {
         accent_ink: hex(0x74aaff),
         invert_bg: hex(0xffffff),
         invert_fg: hex(0x0b0b0c),
-        // PdfCraft's and LightCraft's inks, so status colours come from the site's palette.
+        // PdfDecode's and LightDecode's inks, so status colours come from the site's palette.
         good: hex(0x3fd6b8),
         warn: hex(0xffc14d),
         bad: hex(0xff6259),
@@ -125,7 +125,7 @@ impl Tokens {
     }
 
     /// An app's text colour (`--app-ink`): readable on this appearance's background.
-    pub fn app_ink(&self, app: &artcraft_launcher_core::CraftApp) -> Color32 {
+    pub fn app_ink(&self, app: &decode_launcher_core::DecodeApp) -> Color32 {
         rgb(if self.dark { app.ink_dark } else { app.ink_light })
     }
 }
@@ -479,7 +479,7 @@ mod tests {
         use egui::{FontFamily, FontId};
         const DYNAMIC_TEXT: &str = concat!(
             "What's Changed: Faster exports 🚀 and fewer bugs 🐛 — New templates 🎨, ",
-            "warnings ⚠ and a celebration 🎉 — ArtCraft news: ✨ ✅ ❌ 💡 🔒"
+            "warnings ⚠ and a celebration 🎉 — Decode news: ✨ ✅ ❌ 💡 🔒"
         );
         let fonts = font_definitions(None);
         assert_eq!(
