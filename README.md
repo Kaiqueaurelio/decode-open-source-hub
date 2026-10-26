@@ -2,6 +2,8 @@
 
 **Descubra. Compare. Explore. Use software livre.**
 
+**Site publicado:** [decode-open-source-hub-catalog.vercel.app](https://decode-open-source-hub-catalog.vercel.app)
+
 O **Decode Open Source Hub** é um catálogo visual de softwares de código aberto, organizado por categoria, plataforma e licença. O objetivo é ajudar estudantes, profissionais, desenvolvedores e qualquer pessoa interessada em tecnologia a encontrar ferramentas úteis e acessar suas fontes oficiais sem precisar vasculhar dezenas de páginas.
 
 > **Estado atual:** MVP estático funcional, com pesquisa, filtros, fichas de software e links para sites, códigos-fonte e downloads oficiais. O catálogo inicial é curado manualmente; ele não rastreia automaticamente todos os programas existentes.
@@ -12,11 +14,11 @@ O **Decode Open Source Hub** é um catálogo visual de softwares de código aber
 - Catálogo inicial com mais de 30 ferramentas de código aberto em várias categorias.
 - Pesquisa por nome, finalidade e palavras-chave.
 - Filtros por categoria e plataforma, além de ordenação.
-- Cartões com resumo, licença declarada e links oficiais.
+- Cartões com resumo, licença clicável e botões para download, site oficial e código-fonte.
 - Fonte de dados separada do código da interface.
 - Script de validação do catálogo e testes automatizados.
 - GitHub Actions para validar alterações.
-- Workflow de publicação no GitHub Pages.
+- Deploy do site integrado ao repositório por meio do Vercel.
 
 ## Categorias iniciais
 
@@ -92,7 +94,9 @@ A licença declarada em cada ficha é informativa e deve ser conferida na fonte 
 
 ## Publicação
 
-O workflow em .github/workflows/pages.yml prepara uma publicação estática no GitHub Pages após alterações na branch main. A disponibilidade do site depende de o GitHub Pages estar habilitado e de as permissões da conta e do repositório permitirem a publicação. Consulte a execução do workflow na aba Actions para verificar o resultado real.
+O site está publicado em **https://decode-open-source-hub-catalog.vercel.app**. O projeto Vercel **decode-open-source-hub-catalog** está conectado ao repositório e à branch main; alterações na branch de produção disparam novas implantações pelo GitHub.
+
+O primeiro deployment do catálogo foi concluído com estado READY. A disponibilidade pública pode mudar por configurações do provedor, então consulte o painel do projeto caso o endereço deixe de responder. O workflow de CI do GitHub valida os registros antes das alterações, mas não substitui a verificação da implantação depois de cada publicação.
 
 ## Limitações conhecidas
 

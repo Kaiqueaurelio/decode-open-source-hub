@@ -75,15 +75,20 @@
   function cardMarkup(item) {
     var platforms = (item.platforms || []).slice(0,4).map(function (platform) { return '<span class="platform-pill">' + escapeHtml(platform) + '</span>'; }).join("");
     var extra = (item.platforms || []).length > 4 ? '<span class="platform-pill">+' + ((item.platforms || []).length - 4) + '</span>' : "";
-    var official = externalLink(item.websiteUrl,"Site oficial","primary");
+    var download = externalLink(item.downloadUrl,"Download","primary");
+    var official = externalLink(item.websiteUrl,"Site oficial","secondary");
     var source = externalLink(item.sourceUrl,"Código-fonte","secondary");
+    var licenseUrl = safeUrl(item.licenseUrl);
+    var licenseMarkup = licenseUrl
+      ? '<a class="license-value" href="' + escapeHtml(licenseUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.license) + ' ↗</a>'
+      : '<span class="license-value">' + escapeHtml(item.license) + '</span>';
     var featured = item.featured ? '<span class="featured-badge">✦ Em destaque</span>' : "";
     return '<article class="software-card"><div class="card-top"><div class="app-icon" aria-hidden="true">' + escapeHtml(item.icon || "◈") + '</div>' + featured + '</div>' +
       '<div class="card-category">' + escapeHtml(item.category) + '</div><div class="card-title-row"><h3 class="card-title">' + escapeHtml(item.name) + '</h3></div>' +
       '<p class="card-tagline">' + escapeHtml(item.tagline) + '</p><p class="card-description">' + escapeHtml(item.description) + '</p>' +
       '<div class="platform-row" aria-label="Plataformas: ' + escapeHtml((item.platforms || []).join(", ")) + '">' + platforms + extra + '</div>' +
-      '<div class="license-row"><span class="license-label">Licença declarada</span><span class="license-value">' + escapeHtml(item.license) + '</span></div>' +
-      '<div class="card-actions">' + official + source + '</div></article>';
+      '<div class="license-row"><span class="license-label">Licença</span>' + licenseMarkup + '</div>' +
+      '<div class="card-actions">' + download + official + source + '</div></article>';
   }
   function render() {
     var filtered = getFiltered(), toShow = filtered.slice(0,visibleCount);
