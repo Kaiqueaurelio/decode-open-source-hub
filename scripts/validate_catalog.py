@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the 13 official Craft apps plus the separate launcher utility."""
+"""Validate the 13 official Craft apps plus the separate launcher utility in Decode Monorepo."""
 import json
 import re
 import sys
@@ -24,6 +24,21 @@ EXPECTED_NAMES = {
     "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
     "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
     "gridcraft":"DecodeGrid",
+}
+SLUG_TO_APP_DIR = {
+    "photocraft": "decode-photo",
+    "vectorcraft": "decode-vector",
+    "filmcraft": "decode-film",
+    "lightcraft": "decode-light",
+    "pdfcraft": "decode-pdf",
+    "effectcraft": "decode-effect",
+    "designcraft": "decode-design",
+    "figcraft": "decode-fig",
+    "wordcraft": "decode-word",
+    "soundcraft": "decode-sound",
+    "deckcraft": "decode-deck",
+    "cadcraft": "decode-cad",
+    "gridcraft": "decode-grid",
 }
 CATEGORIES = {
     "Imagem e fotografia", "Design e publicação", "Vídeo e motion",
@@ -104,10 +119,10 @@ def main():
                 errors.append(f"{prefix}: categoria incorreta do launcher.")
             if "ArtCraft Launcher" not in item["tags"]:
                 errors.append(f"{prefix}: nome upstream do launcher deve permanecer como termo de busca.")
-            if item["sourceUrl"] != "https://github.com/storytold/craft-launcher":
+            if item["sourceUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher":
                 errors.append(f"{prefix}: repositório do launcher incorreto.")
-            if item["downloadUrl"] != "https://github.com/storytold/craft-launcher/releases/latest":
-                errors.append(f"{prefix}: download deve apontar para releases/latest.")
+            if item["downloadUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases":
+                errors.append(f"{prefix}: download deve apontar para releases do repositório.")
             if item["license"] != "MIT OR Apache-2.0":
                 errors.append(f"{prefix}: rótulo de licença inconsistente no launcher.")
             if not isinstance(item["platforms"], list) or not item["platforms"]:
@@ -128,21 +143,21 @@ def main():
                 errors.append(f"{prefix}: estágio não corresponde à lista oficial para {slug}.")
             if item["platforms"] != PLATFORMS.get(slug):
                 errors.append(f"{prefix}: plataformas não correspondem à lista oficial para {slug}.")
-            if is_https(item["licenseUrl"]):
-                parsed = urlparse(item["licenseUrl"])
-                if slug == "cadcraft":
-                    if parsed.netloc != "github.com" or not parsed.path.startswith("/Kaiqueaurelio/decodecad/"):
-                        errors.append(f"{prefix}: URL de licença fora do repositório oficial deste app.")
-                elif parsed.netloc != "github.com" or not parsed.path.startswith(f"/storytold/{slug}/"):
-                    errors.append(f"{prefix}: URL de licença fora do repositório oficial deste app.")
-                if not parsed.path.endswith("/LICENSE-MIT"):
-                    errors.append(f"{prefix}: URL de licença deve apontar para LICENSE-MIT.")
-            expected_source = "https://github.com/Kaiqueaurelio/decodecad" if slug == "cadcraft" else f"https://github.com/storytold/{slug}"
+            
+            app_dir = SLUG_TO_APP_DIR.get(slug)
+            expected_license = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT"
+            if item["licenseUrl"] != expected_license:
+                errors.append(f"{prefix}: URL de licença deve apontar para {expected_license}.")
+            
+            expected_source = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{app_dir}"
             if item["sourceUrl"] != expected_source:
-                errors.append(f"{prefix}: repositório-fonte não corresponde ao app oficial.")
-            expected_page = f"https://getartcraft.com/apps/{slug}"
-            if item["websiteUrl"] != expected_page or item["downloadUrl"] != expected_page:
-                errors.append(f"{prefix}: site e página de download devem ser a página oficial do produto.")
+                errors.append(f"{prefix}: repositório-fonte não corresponde ao app no monorepo Decode.")
+            
+            expected_page = "https://decode-open-source-hub-catalog.vercel.app"
+            if item["websiteUrl"] != expected_page:
+                errors.append(f"{prefix}: site deve apontar para o catálogo Decode.")
+            if item["downloadUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases":
+                errors.append(f"{prefix}: página de download deve apontar para releases do repositório Decode.")
 
         if not isinstance(item["platforms"], list) or not item["platforms"]:
             errors.append(f"{prefix}: platforms deve ser uma lista não vazia.")
@@ -163,14 +178,13 @@ def main():
         errors.append("Há slugs duplicados no catálogo.")
 
     if errors:
-        print("Validação do catálogo ArtCraft: FALHOU")
+        print("Validação do catálogo Decode: FALHOU")
         for error in errors:
             print(" - " + error)
         return 1
 
-    print("Validação do catálogo ArtCraft: OK — 13 Crafting Apps e 1 launcher separado.")
-    print("Estrutura, escopo, links HTTPS e campos de catálogo conferidos.")
-    print("Observação: os links e instaladores exigem verificação externa ao validador.")
+    print("Validação do catálogo Decode: OK — 13 Apps Decode e 1 launcher no repositório.")
+    print("Estrutura, escopo, links HTTPS Decode e campos de catálogo conferidos.")
     return 0
 
 

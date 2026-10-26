@@ -1,4 +1,4 @@
-"Tests for the Craft App Suite and separate launcher entry."""
+"""Tests for the Decode App Suite and separate launcher entry in Decode Monorepo."""
 import json
 import subprocess
 import sys
@@ -8,8 +8,33 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "software.json"
-EXPECTED_ORDER = ["photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"]
-EXPECTED_NAMES = {"photocraft":"DecodePhoto","vectorcraft":"DecodeVector","filmcraft":"DecodeFilm","lightcraft":"DecodeLight","pdfcraft":"DecodePdf","effectcraft":"DecodeEffect","designcraft":"DecodeDesign","figcraft":"DecodeFig","wordcraft":"DecodeWord","soundcraft":"DecodeSound","deckcraft":"DecodeDeck","cadcraft":"DecodeCAD","gridcraft":"DecodeGrid"}
+EXPECTED_ORDER = [
+    "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
+    "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
+    "deckcraft", "cadcraft", "gridcraft",
+]
+EXPECTED_NAMES = {
+    "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
+    "lightcraft":"DecodeLight", "pdfcraft":"DecodePdf", "effectcraft":"DecodeEffect",
+    "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
+    "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
+    "gridcraft":"DecodeGrid",
+}
+SLUG_TO_APP_DIR = {
+    "photocraft": "decode-photo",
+    "vectorcraft": "decode-vector",
+    "filmcraft": "decode-film",
+    "lightcraft": "decode-light",
+    "pdfcraft": "decode-pdf",
+    "effectcraft": "decode-effect",
+    "designcraft": "decode-design",
+    "figcraft": "decode-fig",
+    "wordcraft": "decode-word",
+    "soundcraft": "decode-sound",
+    "deckcraft": "decode-deck",
+    "cadcraft": "decode-cad",
+    "gridcraft": "decode-grid",
+}
 
 class CatalogTests(unittest.TestCase):
     @classmethod
@@ -23,7 +48,13 @@ class CatalogTests(unittest.TestCase):
         apps = [item for item in self.items if item["kind"] == "Crafting App"]
         self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
         self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
-        original_names = {"photocraft":"PhotoCraft","vectorcraft":"VectorCraft","filmcraft":"FilmCraft","lightcraft":"LightCraft","pdfcraft":"PdfCraft","effectcraft":"EffectCraft","designcraft":"DesignCraft","figcraft":"FigCraft","wordcraft":"WordCraft","soundcraft":"SoundCraft","deckcraft":"DeckCraft","cadcraft":"CADCraft","gridcraft":"GridCraft"}
+        original_names = {
+            "photocraft":"PhotoCraft", "vectorcraft":"VectorCraft", "filmcraft":"FilmCraft",
+            "lightcraft":"LightCraft", "pdfcraft":"PdfCraft", "effectcraft":"EffectCraft",
+            "designcraft":"DesignCraft", "figcraft":"FigCraft", "wordcraft":"WordCraft",
+            "soundcraft":"SoundCraft", "deckcraft":"DeckCraft", "cadcraft":"CADCraft",
+            "gridcraft":"GridCraft",
+        }
         for item in apps:
             self.assertIn(original_names[item["slug"]], item["tags"])
         self.assertEqual(self.by_slug["artcraft-launcher"]["kind"], "Launcher")
@@ -38,20 +69,18 @@ class CatalogTests(unittest.TestCase):
         for slug in EXPECTED_ORDER:
             item = self.by_slug[slug]
             with self.subTest(app=item["name"]):
-                if slug == "cadcraft":
-                    self.assertEqual(item["sourceUrl"], "https://github.com/Kaiqueaurelio/decodecad")
-                    self.assertEqual(item["licenseUrl"], "https://github.com/Kaiqueaurelio/decodecad/blob/main/LICENSE-MIT")
-                else:
-                    self.assertEqual(item["sourceUrl"], f"https://github.com/storytold/{slug}")
-                    self.assertEqual(item["licenseUrl"], f"https://github.com/storytold/{slug}/blob/main/LICENSE-MIT")
-                self.assertEqual(item["websiteUrl"], f"https://getartcraft.com/apps/{slug}")
-                self.assertEqual(item["downloadUrl"], item["websiteUrl"])
+                app_dir = SLUG_TO_APP_DIR[slug]
+                self.assertEqual(item["sourceUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{app_dir}")
+                self.assertEqual(item["licenseUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT")
+                self.assertEqual(item["websiteUrl"], "https://decode-open-source-hub-catalog.vercel.app")
+                self.assertEqual(item["downloadUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases")
                 self.assertEqual(item["license"], "MIT OR Apache-2.0")
 
     def test_launcher_links_and_disclosure(self):
         item = self.by_slug["artcraft-launcher"]
-        self.assertEqual(item["sourceUrl"], "https://github.com/storytold/craft-launcher")
-        self.assertEqual(item["downloadUrl"], "https://github.com/storytold/craft-launcher/releases/latest")
+        self.assertEqual(item["sourceUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher")
+        self.assertEqual(item["downloadUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases")
+        self.assertEqual(item["licenseUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/launcher/LICENSE-MIT")
         self.assertEqual(item["license"], "MIT OR Apache-2.0")
         self.assertIn("early alpha", item["description"])
         for key in ("licenseUrl","websiteUrl","sourceUrl","downloadUrl"):

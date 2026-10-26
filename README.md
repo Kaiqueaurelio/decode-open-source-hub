@@ -20,12 +20,40 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 - Matriz de paridade funcional que documenta os recursos do Decode Launcher e seu estado de implementação.
 - Dados estruturados em JSON, validador, testes automatizados e fluxo de validação no GitHub Actions.
 
+## 📥 Downloads e Acesso aos Aplicativos da Suíte
+
+Todos os 13 aplicativos da suíte Decode e o Decode Launcher estão integrados diretamente neste repositório.
+
+### Links Diretos de Download:
+- 🚀 **[Releases e Binários Compilados (GitHub Releases)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)**
+- 📦 **[Baixar Código-Fonte Completo de Todos os Apps (.ZIP)](https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip)**
+- 🌐 **[Catálogo Web Interativo (Vercel)](https://decode-open-source-hub-catalog.vercel.app)**
+
+### Aplicativos Disponíveis no Repositório:
+
+| Aplicativo | Pasta no Repositório | Categoria | Como Compilar e Rodar (Rust) |
+| :--- | :--- | :--- | :--- |
+| **Decode Launcher** | [`launcher/`](launcher/) | Gerenciador & Atualizador Desktop | `cd launcher && cargo run --release -p decode-launcher` |
+| **Decode Photo** | [`apps/decode-photo/`](apps/decode-photo/) | Edição e Retoque de Imagens | `cd apps/decode-photo && cargo run --release` |
+| **Decode Vector** | [`apps/decode-vector/`](apps/decode-vector/) | Ilustração e Desenho Vetorial | `cd apps/decode-vector && cargo run --release` |
+| **Decode Film** | [`apps/decode-film/`](apps/decode-film/) | Edição de Vídeo e Linha do Tempo | `cd apps/decode-film && cargo run --release` |
+| **Decode Light** | [`apps/decode-light/`](apps/decode-light/) | Catálogo Fotográfico e RAW | `cd apps/decode-light && cargo run --release` |
+| **Decode PDF** | [`apps/decode-pdf/`](apps/decode-pdf/) | Leitura, Proteção e Edição PDF | `cd apps/decode-pdf && cargo run --release` |
+| **Decode Effect** | [`apps/decode-effect/`](apps/decode-effect/) | Efeitos Visuais VFX e Motion | `cd apps/decode-effect && cargo run --release` |
+| **Decode Design** | [`apps/decode-design/`](apps/decode-design/) | Diagramação e Publicação Editorial | `cd apps/decode-design && cargo run --release` |
+| **Decode Fig** | [`apps/decode-fig/`](apps/decode-fig/) | Design de Interfaces UI/UX | `cd apps/decode-fig && cargo run --release` |
+| **Decode Word** | [`apps/decode-word/`](apps/decode-word/) | Processador de Textos e Documentos | `cd apps/decode-word && cargo run --release` |
+| **Decode Sound** | [`apps/decode-sound/`](apps/decode-sound/) | Estação de Áudio Digital (DAW) | `cd apps/decode-sound && cargo run --release` |
+| **Decode Deck** | [`apps/decode-deck/`](apps/decode-deck/) | Apresentações e Slides | `cd apps/decode-deck && cargo run --release` |
+| **Decode CAD** | [`apps/decode-cad/`](apps/decode-cad/) | Desenho Técnico 2D/3D (CAD) | `cd apps/decode-cad && cargo run --release` |
+| **Decode Grid** | [`apps/decode-grid/`](apps/decode-grid/) | Planilhas e Modelagem de Dados | `cd apps/decode-grid && cargo run --release` |
+
 ## Fontes e referências
 
-- [Catálogo oficial Decode Open Source Hub](https://kaiqueaurelio.github.io/decode-open-source-hub/)
+- [Catálogo oficial Decode Open Source Hub](https://decode-open-source-hub-catalog.vercel.app/)
+- [Suíte de Aplicativos (Monorepo)](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps)
 - [Código-fonte do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher)
-- [Releases do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest)
-- [Repositório DecodeCAD](https://github.com/Kaiqueaurelio/decodecad)
+- [Releases e Downloads do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)
 
 Cada registro aponta para páginas do projeto correspondente. Os estágios e requisitos podem mudar: confirme os detalhes nas páginas oficiais antes de utilizar versões alfa em produção.
 

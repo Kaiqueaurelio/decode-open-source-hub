@@ -96,22 +96,22 @@
       "licenseUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://github\\.com/storytold/"
+        "pattern": "^https://github\\.com/Kaiqueaurelio/decode-open-source-hub/"
       },
       "websiteUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://(getartcraft\\.com|github\\.com/storytold/craft-launcher)"
+        "pattern": "^https://(decode-open-source-hub-catalog\\.vercel\\.app|kaiqueaurelio\\.github\\.io)"
       },
       "sourceUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://github\\.com/storytold/"
+        "pattern": "^https://github\\.com/Kaiqueaurelio/decode-open-source-hub/"
       },
       "downloadUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://"
+        "pattern": "^https://github\\.com/Kaiqueaurelio/decode-open-source-hub/"
       },
       "tags": {
         "type": "array",

@@ -14,10 +14,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/photocraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/photocraft",
-    "sourceUrl": "https://github.com/storytold/photocraft",
-    "downloadUrl": "https://getartcraft.com/apps/photocraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-photo/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-photo",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "imagem",
       "camadas",
@@ -45,10 +45,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/vectorcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/vectorcraft",
-    "sourceUrl": "https://github.com/storytold/vectorcraft",
-    "downloadUrl": "https://getartcraft.com/apps/vectorcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-vector/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-vector",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "vetor",
       "ilustração",
@@ -73,10 +73,10 @@
       "Linux"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/filmcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/filmcraft",
-    "sourceUrl": "https://github.com/storytold/filmcraft",
-    "downloadUrl": "https://getartcraft.com/apps/filmcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-film/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-film",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "vídeo",
       "edição",
@@ -102,10 +102,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/lightcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/lightcraft",
-    "sourceUrl": "https://github.com/storytold/lightcraft",
-    "downloadUrl": "https://getartcraft.com/apps/lightcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-light/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-light",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "fotografia",
       "RAW",
@@ -131,10 +131,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/pdfcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/pdfcraft",
-    "sourceUrl": "https://github.com/storytold/pdfcraft",
-    "downloadUrl": "https://getartcraft.com/apps/pdfcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-pdf/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-pdf",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "PDF",
       "documentos",
@@ -161,10 +161,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/effectcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/effectcraft",
-    "sourceUrl": "https://github.com/storytold/effectcraft",
-    "downloadUrl": "https://getartcraft.com/apps/effectcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-effect/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-effect",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "VFX",
       "motion graphics",
@@ -190,10 +190,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/designcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/designcraft",
-    "sourceUrl": "https://github.com/storytold/designcraft",
-    "downloadUrl": "https://getartcraft.com/apps/designcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-design/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-design",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "diagramação",
       "publicação",
@@ -219,10 +219,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/figcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/figcraft",
-    "sourceUrl": "https://github.com/storytold/figcraft",
-    "downloadUrl": "https://getartcraft.com/apps/figcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-fig/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-fig",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "UI",
       "UX",
@@ -249,10 +249,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/wordcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/wordcraft",
-    "sourceUrl": "https://github.com/storytold/wordcraft",
-    "downloadUrl": "https://getartcraft.com/apps/wordcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-word/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-word",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "editor de texto",
       "DOCX",
@@ -278,10 +278,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/soundcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/soundcraft",
-    "sourceUrl": "https://github.com/storytold/soundcraft",
-    "downloadUrl": "https://getartcraft.com/apps/soundcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-sound/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-sound",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "áudio",
       "DAW",
@@ -308,10 +308,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/deckcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/deckcraft",
-    "sourceUrl": "https://github.com/storytold/deckcraft",
-    "downloadUrl": "https://getartcraft.com/apps/deckcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-deck/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-deck",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "apresentações",
       "slides",
@@ -337,10 +337,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/Kaiqueaurelio/decodecad/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/cadcraft",
-    "sourceUrl": "https://github.com/Kaiqueaurelio/decodecad",
-    "downloadUrl": "https://getartcraft.com/apps/cadcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-cad/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-cad",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "CAD",
       "desenho técnico",
@@ -367,10 +367,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/gridcraft/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/apps/gridcraft",
-    "sourceUrl": "https://github.com/storytold/gridcraft",
-    "downloadUrl": "https://getartcraft.com/apps/gridcraft",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-grid/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-grid",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "planilha",
       "dados",
@@ -398,10 +398,10 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/craft-launcher/blob/main/LICENSE-MIT",
-    "websiteUrl": "https://getartcraft.com/",
-    "sourceUrl": "https://github.com/storytold/craft-launcher",
-    "downloadUrl": "https://github.com/storytold/craft-launcher/releases/latest",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/launcher/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
       "launcher",
       "Rust",
