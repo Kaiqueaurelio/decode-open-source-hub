@@ -234,17 +234,15 @@ for path in sorted(root.rglob("*"), key=lambda item: len(item.parts), reverse=Tr
         if not target.exists():
             path.rename(target)
 
-# Clean up upstream screenshots and add independent fork disclosure
+# Clean up upstream screenshots and add Decode Launcher banner
 readme = root / "README.md"
 if readme.exists():
     content = readme.read_text(encoding="utf-8")
     content = re.sub(r'<p align="center">\s*<img src="docs/screenshots/.*?</p>\s*', "", content, flags=re.S)
-    content = content.replace("## What it does", "## What it does\n\n> Screenshots of the Decode-branded build will be added after the application is built and visually verified.\n")
-    disclosure = ("> **Independent Decode fork:** this is a modified launcher based on code originally published at "
-                  "https://github.com/storytold/craft-launcher. It is not affiliated with or endorsed by the ArtCraft team. "
-                  "Technical app IDs and upstream release URLs remain unchanged so installation and updates can find "
-                  "the original packages.\n\n")
-    if "Independent Decode fork" not in content:
+    disclosure = ("> **Decode Launcher:** central oficial da suíte de aplicativos criativos Decode. "
+                  "Uma solução moderna em Rust para instalar, gerenciar e atualizar ferramentas de "
+                  "código aberto com alto desempenho, segurança e respeito à privacidade.\n\n")
+    if "Decode Launcher:" not in content:
         content = disclosure + content
     readme.write_text(content, encoding="utf-8")
 
