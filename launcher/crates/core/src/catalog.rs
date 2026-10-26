@@ -204,11 +204,11 @@ pub const GITHUB_OWNER: &str = "storytold";
 pub const GITHUB_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub";
 /// Decode's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
 pub const SOCIAL: [(&str, &str); 5] = [
+    ("X", "https://x.com/decoanalytics"),
     ("Instagram", "https://www.instagram.com/decode.analytics/"),
-    ("GitHub", "https://github.com/Kaiqueaurelio/decode-open-source-hub"),
     ("LinkedIn", "https://www.linkedin.com/company/decodeanalytics"),
-    ("Website", "https://kaiqueaurelio.github.io/decode-open-source-hub/"),
-    ("X", "https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions"),
+    ("YouTube", "https://www.youtube.com/@OfficialArtcraftStudios"),
+    ("TikTok", "https://www.tiktok.com/@decode.analytics"),
 ];
 
 /// The Decode community on Discord.
