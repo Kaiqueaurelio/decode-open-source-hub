@@ -143,7 +143,7 @@
     if (item.kind !== "Crafting App" || !/^[a-z0-9-]+$/.test(item.slug || "")) {
       return '<div class="app-icon" style="--app-color:' + color + '"><span class="app-icon-fallback">' + fallback + '</span></div>';
     }
-    var src = "https://raw.githubusercontent.com/storytold/craft-launcher/main/assets/app-icons/" + item.slug + ".png";
+    var src = "assets/app-icons/" + item.slug + ".png";
     return '<div class="app-icon" style="--app-color:' + color + '"><span class="app-icon-fallback">' + fallback + '</span><img data-app-icon src="' + src + '" alt="" loading="lazy"></div>';
   }
   function wireImageFallbacks() {

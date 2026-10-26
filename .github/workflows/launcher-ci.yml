@@ -42,6 +42,11 @@ jobs:
           rustc --version
           cargo --version
 
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: launcher -> target
+
       - name: Check formatting
         working-directory: launcher
         run: cargo fmt --all -- --check
