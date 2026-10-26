@@ -947,9 +947,7 @@ fn local_mirror() -> Option<String> {
     let base = std::env::var("DECODE_LAUNCHER_DOWNLOAD_BASE").ok()?;
     let base = base.trim();
     if !is_loopback(base) || base.contains(['?', '#', '\\']) {
-        log::warn!(
-            "ignoring DECODE_LAUNCHER_DOWNLOAD_BASE={base}: only http://127.0.0.1:<port>/, http://localhost:<port>/ or http://[::1]:<port>/"
-        );
+        log::warn!("ignoring DECODE_LAUNCHER_DOWNLOAD_BASE={base}: only http://127.0.0.1:<port>/, http://localhost:<port>/ or http://[::1]:<port>/");
         return None;
     }
     Some(if base.ends_with('/') { base.to_string() } else { format!("{base}/") })

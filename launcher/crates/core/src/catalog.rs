@@ -74,20 +74,40 @@ const fn app(
 
 /// The Decode App Suite, in display order matching getartcraft.com:
 pub const SUITE: [DecodeApp; 13] = [
-    DecodeApp { former_names: &["PhotoCraft"], ..app("photocraft", "PhotoDecode", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "storytold/photocraft") },
-    DecodeApp { former_names: &["VectorCraft"], ..app("vectorcraft", "VectorDecode", "Vector illustration", [[0xe8, 0x57, 0x3f], [0xb8, 0x3a, 0x24], [0xff, 0x8a, 0x70]], "storytold/vectorcraft") },
-    DecodeApp { former_names: &["FilmCraft"], ..app("filmcraft",
-        "FilmDecode",
-        "Video editing, color and sound",
-        [[0x8b, 0x5c, 0xf6], [0x6a, 0x3f, 0xd6], [0xb6, 0x9c, 0xff]],
-        "storytold/filmcraft",
-    ) },
-    DecodeApp { former_names: &["LightCraft"], ..app("lightcraft",
-        "LightDecode",
-        "Photo library and raw development",
-        [[0xf2, 0xa5, 0x16], [0x8a, 0x58, 0x00], [0xff, 0xc1, 0x4d]],
-        "storytold/lightcraft",
-    ) },
+    DecodeApp {
+        former_names: &["PhotoCraft"],
+        ..app("photocraft", "PhotoDecode", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "storytold/photocraft")
+    },
+    DecodeApp {
+        former_names: &["VectorCraft"],
+        ..app(
+            "vectorcraft",
+            "VectorDecode",
+            "Vector illustration",
+            [[0xe8, 0x57, 0x3f], [0xb8, 0x3a, 0x24], [0xff, 0x8a, 0x70]],
+            "storytold/vectorcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["FilmCraft"],
+        ..app(
+            "filmcraft",
+            "FilmDecode",
+            "Video editing, color and sound",
+            [[0x8b, 0x5c, 0xf6], [0x6a, 0x3f, 0xd6], [0xb6, 0x9c, 0xff]],
+            "storytold/filmcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["LightCraft"],
+        ..app(
+            "lightcraft",
+            "LightDecode",
+            "Photo library and raw development",
+            [[0xf2, 0xa5, 0x16], [0x8a, 0x58, 0x00], [0xff, 0xc1, 0x4d]],
+            "storytold/lightcraft",
+        )
+    },
     DecodeApp {
         former_ids: &["printcraft"],
         former_names: &["PdfCraft", "PrintCraft"],
@@ -99,44 +119,80 @@ pub const SUITE: [DecodeApp; 13] = [
             "storytold/pdfcraft",
         )
     },
-    DecodeApp { former_names: &["EffectCraft"], ..app("effectcraft",
-        "EffectDecode",
-        "Motion graphics and visual effects",
-        [[0xe0, 0x36, 0x8f], [0xb0, 0x20, 0x6c], [0xff, 0x7a, 0xb8]],
-        "storytold/effectcraft",
-    ) },
-    DecodeApp { former_names: &["DesignCraft"], ..app("designcraft",
-        "DesignDecode",
-        "Page layout and publishing",
-        [[0x7b, 0xb5, 0x1c], [0x45, 0x70, 0x08], [0xa6, 0xe0, 0x4a]],
-        "storytold/designcraft",
-    ) },
-    DecodeApp { former_names: &["FigCraft"], ..app("figcraft",
-        "FigDecode",
-        "Interface design and prototyping",
-        [[0x02, 0xda, 0x96], [0x04, 0x7a, 0x56], [0x4f, 0xe8, 0xb6]],
-        "storytold/figcraft",
-    ) },
-    DecodeApp { former_names: &["WordCraft"], ..app("wordcraft", "WordDecode", "Writing and document design", [[0x3f, 0x5f, 0xe0], [0x2a, 0x44, 0xb8], [0x8e, 0xa2, 0xff]], "storytold/wordcraft") },
-    DecodeApp { former_names: &["SoundCraft"], ..app("soundcraft",
-        "SoundDecode",
-        "Recording, editing and mixing audio",
-        [[0x1f, 0xa5, 0xc9], [0x0e, 0x72, 0x90], [0x5f, 0xd0, 0xee]],
-        "storytold/soundcraft",
-    ) },
-    DecodeApp { former_names: &["DeckCraft"], ..app("deckcraft",
-        "DeckDecode",
-        "Presentations and slide shows",
-        [[0xf0, 0x7a, 0x1e], [0xa8, 0x4f, 0x0a], [0xff, 0xa0, 0x60]],
-        "storytold/deckcraft",
-    ) },
-    DecodeApp { former_names: &["CADCraft"], ..app("cadcraft",
-        "CADDecode",
-        "Computer-aided design and drafting",
-        [[0x3e, 0xa6, 0xe8], [0x1a, 0x6f, 0xa8], [0x7c, 0xc8, 0xff]],
-        "storytold/cadcraft",
-    ) },
-    DecodeApp { former_names: &["GridCraft"], ..app("gridcraft", "GridDecode", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "storytold/gridcraft") },
+    DecodeApp {
+        former_names: &["EffectCraft"],
+        ..app(
+            "effectcraft",
+            "EffectDecode",
+            "Motion graphics and visual effects",
+            [[0xe0, 0x36, 0x8f], [0xb0, 0x20, 0x6c], [0xff, 0x7a, 0xb8]],
+            "storytold/effectcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["DesignCraft"],
+        ..app(
+            "designcraft",
+            "DesignDecode",
+            "Page layout and publishing",
+            [[0x7b, 0xb5, 0x1c], [0x45, 0x70, 0x08], [0xa6, 0xe0, 0x4a]],
+            "storytold/designcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["FigCraft"],
+        ..app(
+            "figcraft",
+            "FigDecode",
+            "Interface design and prototyping",
+            [[0x02, 0xda, 0x96], [0x04, 0x7a, 0x56], [0x4f, 0xe8, 0xb6]],
+            "storytold/figcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["WordCraft"],
+        ..app(
+            "wordcraft",
+            "WordDecode",
+            "Writing and document design",
+            [[0x3f, 0x5f, 0xe0], [0x2a, 0x44, 0xb8], [0x8e, 0xa2, 0xff]],
+            "storytold/wordcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["SoundCraft"],
+        ..app(
+            "soundcraft",
+            "SoundDecode",
+            "Recording, editing and mixing audio",
+            [[0x1f, 0xa5, 0xc9], [0x0e, 0x72, 0x90], [0x5f, 0xd0, 0xee]],
+            "storytold/soundcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["DeckCraft"],
+        ..app(
+            "deckcraft",
+            "DeckDecode",
+            "Presentations and slide shows",
+            [[0xf0, 0x7a, 0x1e], [0xa8, 0x4f, 0x0a], [0xff, 0xa0, 0x60]],
+            "storytold/deckcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["CADCraft"],
+        ..app(
+            "cadcraft",
+            "CADDecode",
+            "Computer-aided design and drafting",
+            [[0x3e, 0xa6, 0xe8], [0x1a, 0x6f, 0xa8], [0x7c, 0xc8, 0xff]],
+            "storytold/cadcraft",
+        )
+    },
+    DecodeApp {
+        former_names: &["GridCraft"],
+        ..app("gridcraft", "GridDecode", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "storytold/gridcraft")
+    },
 ];
 
 /// Decode's website.
@@ -167,11 +223,11 @@ pub const LAUNCHER: DecodeApp = DecodeApp {
     former_ids: &["artcraft-launcher"],
     former_names: &["ArtCraft Launcher"],
     ..app(
-    "decode-launcher",
-    "Decode Launcher",
-    "Installs and updates the Decode App Suite",
-    [[0x0b, 0x0b, 0x0c], [0x0b, 0x0b, 0x0c], [0xf2, 0xf1, 0xee]],
-    "storytold/craft-launcher",
+        "decode-launcher",
+        "Decode Launcher",
+        "Installs and updates the Decode App Suite",
+        [[0x0b, 0x0b, 0x0c], [0x0b, 0x0b, 0x0c], [0xf2, 0xf1, 0xee]],
+        "storytold/craft-launcher",
     )
 };
 

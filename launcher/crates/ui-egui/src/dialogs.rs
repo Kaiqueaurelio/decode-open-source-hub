@@ -198,9 +198,7 @@ impl LauncherUi {
                 tl!("Windows will remove it like any installed program. Your documents and settings stay.")
             }
             Some(
-                decode_launcher_core::InstallSource::Deb
-                | decode_launcher_core::InstallSource::Rpm
-                | decode_launcher_core::InstallSource::Pacman,
+                decode_launcher_core::InstallSource::Deb | decode_launcher_core::InstallSource::Rpm | decode_launcher_core::InstallSource::Pacman,
             ) => tl!("Your system's package manager will remove it, and may ask for your password. Your documents and settings stay."),
             _ => tl!("The app will be removed. Your documents and settings stay."),
         };
