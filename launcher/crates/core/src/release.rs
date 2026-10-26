@@ -24,7 +24,7 @@ pub struct Asset {
 pub struct Release {
     pub tag: String,
     pub version: Option<Version>,
-    /// `PhotoDecode v0.5.0`
+    /// `DecodePhoto v0.5.0`
     pub name: String,
     /// Unix seconds; `None` when only the tag is known.
     pub published_at: Option<i64>,
@@ -326,7 +326,7 @@ mod tests {
 
     fn api_json(url: &str) -> String {
         format!(
-            r#"{{"tag_name":"v0.5.0","name":"PhotoDecode v0.5.0","html_url":"https://github.com/storytold/photocraft/releases/tag/v0.5.0",
+            r#"{{"tag_name":"v0.5.0","name":"DecodePhoto v0.5.0","html_url":"https://github.com/storytold/photocraft/releases/tag/v0.5.0",
             "published_at":"2026-10-08T14:52:50Z","prerelease":false,"body":"Notes",
             "assets":[{{"name":"photocraft-0.5.0-macos-universal.dmg","size":123,"browser_download_url":"{url}","digest":"sha256:{HASH}"}}]}}"#
         )
@@ -340,7 +340,7 @@ mod tests {
         )
         .unwrap();
         assert_eq!(r.version, Some(Version::new(0, 5, 0)));
-        assert_eq!(r.name, "PhotoDecode v0.5.0");
+        assert_eq!(r.name, "DecodePhoto v0.5.0");
         assert_eq!(r.published_at, Some(1_791_471_170));
         assert_eq!(r.assets.len(), 1);
         assert_eq!(r.assets[0].sha256.as_deref(), Some(HASH));

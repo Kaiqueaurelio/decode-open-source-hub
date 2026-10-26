@@ -19,19 +19,19 @@ use std::time::{SystemTime, UNIX_EPOCH};
 
 /// Every Decode App: (id = folder name, display name). Keep in step with `catalog::SUITE`.
 const APPS: &[(&str, &str)] = &[
-    ("photocraft", "PhotoDecode"),
-    ("vectorcraft", "VectorDecode"),
-    ("filmcraft", "FilmDecode"),
-    ("lightcraft", "LightDecode"),
-    ("pdfcraft", "PdfDecode"),
-    ("effectcraft", "EffectDecode"),
-    ("designcraft", "DesignDecode"),
-    ("figcraft", "FigDecode"),
-    ("wordcraft", "WordDecode"),
-    ("soundcraft", "SoundDecode"),
-    ("deckcraft", "DeckDecode"),
-    ("cadcraft", "CADDecode"),
-    ("gridcraft", "GridDecode"),
+    ("photocraft", "DecodePhoto"),
+    ("vectorcraft", "DecodeVector"),
+    ("filmcraft", "DecodeFilm"),
+    ("lightcraft", "DecodeLight"),
+    ("pdfcraft", "DecodePdf"),
+    ("effectcraft", "DecodeEffect"),
+    ("designcraft", "DecodeDesign"),
+    ("figcraft", "DecodeFig"),
+    ("wordcraft", "DecodeWord"),
+    ("soundcraft", "DecodeSound"),
+    ("deckcraft", "DecodeDeck"),
+    ("cadcraft", "DecodeCAD"),
+    ("gridcraft", "DecodeGrid"),
 ];
 
 const DEFAULT_PORT: u16 = 8787;

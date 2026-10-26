@@ -1,7 +1,7 @@
 [
   {
     "slug": "photocraft",
-    "name": "PhotoDecode",
+    "name": "DecodePhoto",
     "icon": "🖼️",
     "category": "Imagem e fotografia",
     "kind": "Crafting App",
@@ -32,7 +32,7 @@
   },
   {
     "slug": "vectorcraft",
-    "name": "VectorDecode",
+    "name": "DecodeVector",
     "icon": "✒️",
     "category": "Design e publicação",
     "kind": "Crafting App",
@@ -61,7 +61,7 @@
   },
   {
     "slug": "filmcraft",
-    "name": "FilmDecode",
+    "name": "DecodeFilm",
     "icon": "🎬",
     "category": "Vídeo e motion",
     "kind": "Crafting App",
@@ -89,7 +89,7 @@
   },
   {
     "slug": "lightcraft",
-    "name": "LightDecode",
+    "name": "DecodeLight",
     "icon": "📷",
     "category": "Imagem e fotografia",
     "kind": "Crafting App",
@@ -118,7 +118,7 @@
   },
   {
     "slug": "pdfcraft",
-    "name": "PdfDecode",
+    "name": "DecodePdf",
     "icon": "📄",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -148,7 +148,7 @@
   },
   {
     "slug": "effectcraft",
-    "name": "EffectDecode",
+    "name": "DecodeEffect",
     "icon": "✨",
     "category": "Vídeo e motion",
     "kind": "Crafting App",
@@ -177,7 +177,7 @@
   },
   {
     "slug": "designcraft",
-    "name": "DesignDecode",
+    "name": "DecodeDesign",
     "icon": "📰",
     "category": "Design e publicação",
     "kind": "Crafting App",
@@ -206,7 +206,7 @@
   },
   {
     "slug": "figcraft",
-    "name": "FigDecode",
+    "name": "DecodeFig",
     "icon": "🧩",
     "category": "Design e publicação",
     "kind": "Crafting App",
@@ -236,7 +236,7 @@
   },
   {
     "slug": "wordcraft",
-    "name": "WordDecode",
+    "name": "DecodeWord",
     "icon": "📝",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -265,7 +265,7 @@
   },
   {
     "slug": "soundcraft",
-    "name": "SoundDecode",
+    "name": "DecodeSound",
     "icon": "🎙️",
     "category": "Áudio",
     "kind": "Crafting App",
@@ -295,7 +295,7 @@
   },
   {
     "slug": "deckcraft",
-    "name": "DeckDecode",
+    "name": "DecodeDeck",
     "icon": "📽️",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -324,7 +324,7 @@
   },
   {
     "slug": "cadcraft",
-    "name": "CADDecode",
+    "name": "DecodeCAD",
     "icon": "📐",
     "category": "CAD e engenharia",
     "kind": "Crafting App",
@@ -337,23 +337,24 @@
       "Web"
     ],
     "license": "MIT OR Apache-2.0",
-    "licenseUrl": "https://github.com/storytold/cadcraft/blob/main/LICENSE-MIT",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decodecad/blob/main/LICENSE-MIT",
     "websiteUrl": "https://getartcraft.com/apps/cadcraft",
-    "sourceUrl": "https://github.com/storytold/cadcraft",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decodecad",
     "downloadUrl": "https://getartcraft.com/apps/cadcraft",
     "tags": [
       "CAD",
       "desenho técnico",
       "engenharia",
       "arquitetura",
-      "CADCraft"
+      "CADCraft",
+      "DecodeCAD"
     ],
     "stage": "Em desenvolvimento",
     "featured": true
   },
   {
     "slug": "gridcraft",
-    "name": "GridDecode",
+    "name": "DecodeGrid",
     "icon": "📊",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",

@@ -242,17 +242,7 @@ fn harness_with_title_bar(
 }
 
 fn harness_with_discord(discord_url: Option<&'static str>) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
-    harness_full(
-        events(),
-        ViewMode::Grid,
-        egui::Theme::Dark,
-        true,
-        1.0,
-        decode_launcher_ui_egui::TitleBar::Native,
-        Rc::default(),
-        None,
-        discord_url,
-    )
+    harness_full(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, decode_launcher_ui_egui::TitleBar::Native, Rc::default(), None, discord_url)
 }
 
 #[allow(clippy::too_many_arguments)] // Test fixture inputs vary independently across existing cases.
@@ -328,7 +318,7 @@ fn snapshot(h: &mut Harness<'_, Option<LauncherUi>>, name: &str) {
     img.save(std::path::Path::new(&dir).join(format!("{name}.png"))).unwrap();
 }
 
-/// A managing macOS fixture with a fresh PhotoDecode release and a scripted folder picker, for
+/// A managing macOS fixture with a fresh DecodePhoto release and a scripted folder picker, for
 /// the install-folder flow.
 fn folder_harness(picked: Rc<RefCell<Option<String>>>) -> (Harness<'static, Option<LauncherUi>>, Rc<RefCell<Vec<Command>>>) {
     struct Picker(Rc<RefCell<Option<String>>>);
@@ -697,7 +687,7 @@ fn a_job_finished_while_hidden_shows_one_fresh_toast_on_the_next_frame() {
     decode_launcher_ui_egui::i18n::set_test_lang(decode_launcher_ui_egui::i18n::Lang::EN);
     let sent = Rc::new(RefCell::new(Vec::new()));
     let backend = Fake {
-        events: vec![Event::JobFinished { app: "photocraft".into(), result: Ok("PhotoDecode updated to 0.5.0".into()) }],
+        events: vec![Event::JobFinished { app: "photocraft".into(), result: Ok("DecodePhoto updated to 0.5.0".into()) }],
         sent: sent.clone(),
         manage: true,
         pictures: Rc::default(),
@@ -736,14 +726,14 @@ fn a_job_finished_while_hidden_shows_one_fresh_toast_on_the_next_frame() {
     // must be fresh on the first drawing pass and must expire relative to it.
     h.input_mut().time = Some(1000.0);
     h.run_steps(2);
-    assert_eq!(h.query_all_by_label("PhotoDecode updated to 0.5.0").count(), 1, "the hidden result is shown once");
+    assert_eq!(h.query_all_by_label("DecodePhoto updated to 0.5.0").count(), 1, "the hidden result is shown once");
     h.run_steps(2);
-    assert_eq!(h.query_all_by_label("PhotoDecode updated to 0.5.0").count(), 1, "a discarded/next pass must not duplicate it");
+    assert_eq!(h.query_all_by_label("DecodePhoto updated to 0.5.0").count(), 1, "a discarded/next pass must not duplicate it");
     // A stale expiry (old logic time + 4.5 s) would already have dropped it; at 1004.6 the real
     // 1000.0 + 4.5 deadline has passed, so the toast goes.
     h.input_mut().time = Some(1004.6);
     h.run_steps(2);
-    assert!(h.query_by_label("PhotoDecode updated to 0.5.0").is_none(), "the toast expires relative to the drawing pass");
+    assert!(h.query_by_label("DecodePhoto updated to 0.5.0").is_none(), "the toast expires relative to the drawing pass");
 }
 
 #[test]
@@ -757,7 +747,7 @@ fn a_narrow_toolbar_names_its_controls_and_passes_strict_accessibility() {
     h.get_by_role_and_label(egui::accesskit::Role::Button, "Check for updates");
     h.get_by_role_and_label(egui::accesskit::Role::Button, "Settings");
     h.get_by_role_and_label(egui::accesskit::Role::ComboBox, "Sort");
-    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for PhotoDecode");
+    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for DecodePhoto");
     let unnamed = h.unnamed_widgets();
     assert!(unnamed.is_empty(), "narrow toolbar has unnamed input widgets: {unnamed:?}");
     h.check_accessibility();
@@ -935,8 +925,8 @@ fn a_kept_update_names_its_version_and_an_up_to_date_app_is_not_downloaded_again
     h.get_by_label("Retry update to 0.6.0").click();
     h.run_steps(2);
     assert_eq!(*sent.borrow(), [Command::Install { app: "effectcraft".into() }]);
-    // WordDecode is up to date: its menu offers Reinstall, which uses the kept file.
-    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "WordDecode").rect().center().y;
+    // DecodeWord is up to date: its menu offers Reinstall, which uses the kept file.
+    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodeWord").rect().center().y;
     h.get_all_by_label_contains("More actions").find(|n| (n.rect().center().y - row).abs() < 25.0).unwrap().click();
     h.run_steps(3);
     h.get_by_label("Reinstall");
@@ -1034,23 +1024,23 @@ fn table_view_and_light_theme() {
 fn hiding_an_app_removes_it_until_it_is_unhidden() {
     let (mut h, _) = harness(ViewMode::Table, egui::Theme::Dark, true);
     h.run_steps(6);
-    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").rect().center().y;
+    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto").rect().center().y;
     h.get_all_by_label_contains("More actions").find(|n| (n.rect().center().y - row).abs() < 25.0).unwrap().click();
     h.run_steps(3);
     h.get_by_label("Hide App").click();
     h.run_steps(4);
-    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").is_none());
+    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto").is_none());
     assert!(h.state().as_ref().unwrap().settings.hidden.contains("photocraft"));
     h.get_by_label("Hidden Apps 1").click();
     h.run_steps(4);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode");
-    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "WordDecode").is_none());
-    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").rect().center().y;
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto");
+    assert!(h.query_by_role_and_label(egui::accesskit::Role::Label, "DecodeWord").is_none());
+    let row = h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto").rect().center().y;
     h.get_all_by_label_contains("More actions").find(|n| (n.rect().center().y - row).abs() < 25.0).unwrap().click();
     h.run_steps(3);
     h.get_by_label("Unhide App").click();
     h.run_steps(4);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto");
     assert!(h.query_by_label("Hidden Apps 1").is_none());
     assert!(h.state().as_ref().unwrap().settings.hidden.is_empty());
     assert_eq!(h.state().as_ref().unwrap().settings.filter, decode_launcher_ui_egui::settings::Filter::All);
@@ -1065,14 +1055,14 @@ fn switching_views() {
     h.get_by_label("Show apps as a table").click();
     h.run_steps(4);
     assert_eq!(h.state().as_ref().unwrap().settings.view, ViewMode::Table);
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode");
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "WordDecode");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "DecodeWord");
     // The row icon is decorative; the wordmark carries the name exactly once.
-    assert_eq!(h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoDecode").count(), 0, "the table icon must not repeat the wordmark");
+    assert_eq!(h.query_all_by_role_and_label(egui::accesskit::Role::Image, "DecodePhoto").count(), 0, "the table icon must not repeat the wordmark");
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto").count(),
         1,
-        "the table wordmark names PhotoDecode exactly once"
+        "the table wordmark names DecodePhoto exactly once"
     );
 }
 
@@ -1095,12 +1085,12 @@ fn name_and_tagline_are_centred_on_the_icon() {
         let (mut h, _) = harness_at(ViewMode::Grid, egui::Theme::Dark, true, scale);
         h.run_steps(8);
         snapshot(&mut h, &format!("grid-dark{suffix}"));
-        let off = below_icon_centre(&h, &["PhotoDecode", "Image editing"]);
+        let off = below_icon_centre(&h, &["DecodePhoto", "Image editing"]);
         assert!(off.abs() < 0.25, "grid at {scale}x: {off}");
         let (mut h, _) = harness_at(ViewMode::Table, egui::Theme::Light, true, scale);
         h.run_steps(8);
         snapshot(&mut h, &format!("table-light{suffix}"));
-        let off = below_icon_centre(&h, &["PhotoDecode", "Image editing"]);
+        let off = below_icon_centre(&h, &["DecodePhoto", "Image editing"]);
         assert!(off.abs() < 0.25, "table at {scale}x: {off}");
     }
 }
@@ -1131,13 +1121,13 @@ fn every_table_column_sorts_both_ways() {
     h.get_by_label("Status").click();
     h.run_steps(3);
     let o = order(&h);
-    assert_eq!(&o[..4], ["PhotoDecode", "EffectDecode", "LightDecode", "WordDecode"], "{o:?}");
+    assert_eq!(&o[..4], ["DecodePhoto", "DecodeEffect", "DecodeLight", "DecodeWord"], "{o:?}");
     // Reversed: the apps not installed first, then up to date, then the updates last. The table
     // keeps its column's order; only the grid puts installed apps above the rest.
     h.get_by_label("Status").click();
     h.run_steps(3);
     let o = order(&h);
-    assert_eq!(&o[o.len().saturating_sub(4)..], ["LightDecode", "WordDecode", "PhotoDecode", "EffectDecode"], "{o:?}");
+    assert_eq!(&o[o.len().saturating_sub(4)..], ["DecodeLight", "DecodeWord", "DecodePhoto", "DecodeEffect"], "{o:?}");
     // The old Installed and Latest columns are gone; Version shows the number, and from and to for an update.
     assert!(h.query_by_label("Latest").is_none());
     h.get_by_label("Version");
@@ -1151,7 +1141,7 @@ fn every_table_column_sorts_both_ways() {
     h.get_by_label("App").click();
     h.run_steps(3);
     let o = order(&h);
-    assert_eq!(o.first().map(String::as_str), Some("WordDecode"), "{o:?}");
+    assert_eq!(o.first().map(String::as_str), Some("DecodeWord"), "{o:?}");
 }
 
 /// The first close to the tray is explained once, by a system notification (#45, #215).
@@ -1207,14 +1197,14 @@ fn the_uninstall_prompt_keeps_its_own_size_after_a_taller_dialog() {
     h.run_steps(4);
     h.get_by_label("Done").click();
     h.run_steps(3);
-    // PhotoDecode is installed, so its … menu offers Uninstall.
-    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for PhotoDecode").click();
+    // DecodePhoto is installed, so its … menu offers Uninstall.
+    h.get_by_role_and_label(egui::accesskit::Role::Button, "More actions for DecodePhoto").click();
     h.run_steps(3);
     h.get_by_label("Uninstall…").click();
     h.run_steps(4);
     h.check_accessibility();
-    h.get_by_role_and_label(egui::accesskit::Role::Label, "Uninstall PhotoDecode?");
-    assert_eq!(h.query_all_by_label_contains("Uninstall PhotoDecode?").count(), 1, "the title icon is decorative, not a second copy of the heading");
+    h.get_by_role_and_label(egui::accesskit::Role::Label, "Uninstall DecodePhoto?");
+    assert_eq!(h.query_all_by_label_contains("Uninstall DecodePhoto?").count(), 1, "the title icon is decorative, not a second copy of the heading");
     snapshot(&mut h, "uninstall-prompt-dark");
     // The buttons follow the text closely, not somewhere down the height Settings had (#88).
     let text = h.get_by_label("The app will be moved to the Trash. Your documents and settings stay.").rect();
@@ -1244,10 +1234,10 @@ fn links_to_the_website_github_and_each_apps_pages() {
     // The table's … menu has the app's website and GitHub repo.
     let (mut h, _) = harness(ViewMode::Table, egui::Theme::Dark, true);
     h.run_steps(6);
-    h.get_all_by_label_contains("More actions").nth(8).unwrap().click(); // WordDecode
+    h.get_all_by_label_contains("More actions").nth(8).unwrap().click(); // DecodeWord
     h.run_steps(3);
     h.get_by_label("GitHub repository");
-    // The footer's Website link and WordDecode's now-live one in the menu.
+    // The footer's Website link and DecodeWord's now-live one in the menu.
     assert!(h.query_all_by_label_contains("Website").count() >= 2);
 }
 
@@ -1509,7 +1499,7 @@ fn feed_announcements_and_alerts_show_until_dismissed() {
     let sent = Rc::new(RefCell::new(Vec::new()));
     let mut evs = events();
     evs.push(Event::Notices {
-        announcements: vec![notice("a1", "CADDecode 1.0 is out", Some("https://getartcraft.com/news"))],
+        announcements: vec![notice("a1", "DecodeCAD 1.0 is out", Some("https://getartcraft.com/news"))],
         alerts: vec![notice("x1", "Security update", Some("https://getartcraft.com/security"))],
     });
     let mut backend = Some(Fake { events: evs, sent, manage: true, pictures: Rc::default(), asked: Vec::new(), clock: Rc::new(Cell::new(NOW)) });
@@ -1536,11 +1526,11 @@ fn feed_announcements_and_alerts_show_until_dismissed() {
     assert!(h.query_by_label("Security update").is_none());
     assert!(h.state().as_ref().unwrap().settings.dismissed_notices.contains("x1"));
     // The announcement stays inline until dismissed.
-    h.get_by_label("CADDecode 1.0 is out");
+    h.get_by_label("DecodeCAD 1.0 is out");
     h.get_by_label("Learn more");
     h.get_all_by_label("Dismiss").next().unwrap().click();
     h.run_steps(4);
-    assert!(h.query_by_label("CADDecode 1.0 is out").is_none());
+    assert!(h.query_by_label("DecodeCAD 1.0 is out").is_none());
     assert!(h.state().as_ref().unwrap().settings.dismissed_notices.contains("a1"));
 }
 
@@ -1746,18 +1736,18 @@ fn clicking_a_card_opens_its_details_drawer() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
     // Every app has a page: a card of each generation opens one.
-    h.get_by_label("VectorDecode details");
-    h.get_by_label("WordDecode details");
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodeVector details");
+    h.get_by_label("DecodeWord details");
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     h.check_accessibility();
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoDecode").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "DecodePhoto").count(),
         0,
         "the hero icon is decorative; the wordmark carries the app name"
     );
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto").count(),
         2,
         "exactly the grid card's wordmark and the details drawer's wordmark carry the app name"
     );
@@ -1786,7 +1776,7 @@ fn clicking_a_card_opens_its_details_drawer() {
 fn details_drawer_in_the_light_theme() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Light, true);
     h.run_steps(8);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-light");
     h.get_all_by_label_contains("The image editor you already know how to use").last().unwrap();
@@ -1801,30 +1791,30 @@ fn opening_a_page_asks_for_its_pictures_once_and_only_while_it_lacks_some() {
     let (mut h, sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
     assert_eq!(fetches(&sent, "photocraft"), 0, "nothing is fetched before a page is opened");
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "photocraft"), 1);
     h.get_by_label("Enlarge picture");
     // Closed and opened again: the pictures are in hand, so nothing is asked.
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "photocraft"), 1);
     h.get_by_label("Enlarge picture");
     // Another page asks for its own, and a page without pictures asks for nothing.
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("VectorDecode details").scroll_to_me();
+    h.get_by_label("DecodeVector details").scroll_to_me();
     h.run_steps(3);
-    h.get_by_label("VectorDecode details").click();
+    h.get_by_label("DecodeVector details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "vectorcraft"), 1);
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("PdfDecode details").scroll_to_me();
+    h.get_by_label("DecodePdf details").scroll_to_me();
     h.run_steps(3);
-    h.get_by_label("PdfDecode details").click();
+    h.get_by_label("DecodePdf details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "pdfcraft"), 0);
 }
@@ -1834,7 +1824,7 @@ fn a_frame_stands_in_for_the_pictures_until_they_arrive() {
     let pictures = Rc::new(Cell::new(Pictures::Silent));
     let (mut h, sent) = harness_pictures(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, pictures.clone());
     h.run_steps(8);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-loading-dark");
     h.get_by_label("Loading pictures…");
@@ -1857,7 +1847,7 @@ fn offline_the_frame_says_so_and_opening_the_page_again_retries() {
     let pictures = Rc::new(Cell::new(Pictures::Offline));
     let (mut h, sent) = harness_pictures(events(), ViewMode::Grid, egui::Theme::Light, true, 1.0, pictures.clone());
     h.run_steps(8);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-offline-light");
     h.get_by_label("Pictures couldn't be loaded. Reopen this page to try again.");
@@ -1868,7 +1858,7 @@ fn offline_the_frame_says_so_and_opening_the_page_again_retries() {
     pictures.set(Pictures::Online);
     h.key_press(egui::Key::Escape);
     h.run_steps(10);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     assert_eq!(fetches(&sent, "photocraft"), 2);
     h.get_by_label("Enlarge picture");
@@ -1880,7 +1870,7 @@ fn the_enlarged_view_shows_a_frame_for_a_picture_still_missing() {
     let pictures = Rc::new(Cell::new(Pictures::SecondFails));
     let (mut h, _sent) = harness_pictures(events(), ViewMode::Grid, egui::Theme::Dark, true, 1.0, pictures);
     h.run_steps(8);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     h.get_by_label("Enlarge picture").click();
     h.run_steps(3);
@@ -1899,10 +1889,10 @@ fn the_enlarged_view_shows_a_frame_for_a_picture_still_missing() {
 fn a_page_without_pictures_has_no_gallery() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
-    // PdfDecode's screenshots still show its old name (PrintDecode), so its page has none for now.
-    h.get_by_label("PdfDecode details").scroll_to_me();
+    // DecodePdf's screenshots still show its old name (DecodePrint), so its page has none for now.
+    h.get_by_label("DecodePdf details").scroll_to_me();
     h.run_steps(3);
-    h.get_by_label("PdfDecode details").click();
+    h.get_by_label("DecodePdf details").click();
     h.run_steps(10);
     snapshot(&mut h, "details-no-pictures-dark");
     h.get_all_by_label_contains("The open-source PDF workbench.").last().unwrap();
@@ -1917,7 +1907,7 @@ fn a_page_without_pictures_has_no_gallery() {
 fn the_lead_picture_can_be_enlarged() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     // The drawer has one "Close (Esc)"; the enlarged view adds its own.
     assert_eq!(h.query_all_by_label("Close (Esc)").count(), 1);
@@ -1941,7 +1931,7 @@ fn the_lead_picture_can_be_enlarged() {
     assert_eq!(h.query_all_by_label_contains("The image editor you already know").count(), 1);
 }
 
-/// Every page, whatever it holds: no pictures (PdfDecode), one (DesignDecode) or several. The arrow keys are
+/// Every page, whatever it holds: no pictures (DecodePdf), one (DecodeDesign) or several. The arrow keys are
 /// pressed more often than there are pictures, both ways, to wrap around the list and to do nothing on a
 /// page that has one or none; the enlarged view is opened wherever there is a picture to enlarge.
 #[test]
@@ -1996,7 +1986,7 @@ fn every_page_opens_and_pages_through_its_pictures() {
 fn the_drawer_and_the_enlarged_picture_survive_any_window_size() {
     let (mut h, _sent) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(8);
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(10);
     let sizes = [(1180.0, 900.0), (720.0, 500.0), (480.0, 320.0), (320.0, 200.0), (120.0, 90.0), (40.0, 30.0), (4000.0, 2400.0)];
     for zoom in [false, true] {
@@ -2339,18 +2329,18 @@ fn changelog_shortcuts_zoom_only_the_notes_text() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(4);
     // The grid's default order is name A-Z, so pick the app explicitly: the first card is not
-    // PhotoDecode, and the heading assertion below is about this release's own page.
-    h.get_by_label("More actions for PhotoDecode").click();
+    // DecodePhoto, and the heading assertion below is about this release's own page.
+    h.get_by_label("More actions for DecodePhoto").click();
     h.run_steps(2);
     h.get_by_label("Release notes").click();
     h.run_steps(4);
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "PhotoDecode 0.5.0").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Image, "DecodePhoto 0.5.0").count(),
         0,
         "the Notes hero icon is decorative and must not repeat the release heading"
     );
     assert_eq!(
-        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "PhotoDecode 0.5.0").count(),
+        h.query_all_by_role_and_label(egui::accesskit::Role::Label, "DecodePhoto 0.5.0").count(),
         1,
         "the release heading appears exactly once"
     );
@@ -2409,13 +2399,13 @@ fn command_m_minimizes_the_mac_window_only() {
 
 #[test]
 fn an_occupied_folder_asks_before_replacing_it() {
-    let path = "/Volumes/Decode Apps/PhotoDecode.app";
+    let path = "/Volumes/Decode Apps/DecodePhoto.app";
     let mut ev = events();
     ev.push(Event::Occupied { app: "photocraft".into(), path: path.into() });
     ev.push(Event::JobFinished { app: "photocraft".into(), result: Err(format!("{path} already exists")) });
     let (mut h, sent) = harness_with(ev, ViewMode::Grid, egui::Theme::Dark, true, 1.0);
     h.run_steps(6);
-    h.get_by_label(&format!("{path} already exists. Installing PhotoDecode will overwrite it."));
+    h.get_by_label(&format!("{path} already exists. Installing DecodePhoto will overwrite it."));
     assert!(h.query_by_label(&format!("{path} already exists")).is_none());
     sent.borrow_mut().clear();
     h.get_by_label("Replace").click();
@@ -2429,7 +2419,7 @@ fn a_not_installed_card_is_grey_until_the_pointer_is_over_it() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.set_size(egui::vec2(1180.0, 1100.0));
     h.run_steps(8);
-    let icon = h.get_by_label("CADDecode icon").rect();
+    let icon = h.get_by_label("DecodeCAD icon").rect();
     // The most colourful pixel in the icon: how far apart its red, green and blue are.
     let colour = |h: &mut Harness<'_, Option<LauncherUi>>| {
         let image = h.render().unwrap();
@@ -2493,13 +2483,13 @@ fn opening_an_app_counts_and_frequently_used_puts_the_most_opened_first() {
     // Installed apps in name order: Effect (updates), Light (Open), Photo (updates), Word (Open).
     let opens: Vec<_> = h.get_all_by_label("Open").collect();
     assert_eq!(opens.len(), 2);
-    opens[1].click(); // WordDecode
+    opens[1].click(); // DecodeWord
     h.run_steps(3);
     assert!(sent.borrow().contains(&Command::Launch { app: "wordcraft".into() }));
     assert_eq!(h.state().as_ref().unwrap().settings.launches.get("wordcraft"), Some(&1));
     h.run_steps(4);
-    let word = h.get_by_label("WordDecode details").rect();
-    let light = h.get_by_label("LightDecode details").rect();
+    let word = h.get_by_label("DecodeWord details").rect();
+    let light = h.get_by_label("DecodeLight details").rect();
     assert!(word.min.y < light.min.y || (word.min.y == light.min.y && word.min.x < light.min.x), "{word:?} {light:?}");
 }
 
@@ -2510,7 +2500,7 @@ fn an_apps_page_is_a_card_in_the_middle_with_next_and_previous_arrows_and_closes
     h.run_steps(6);
     let headline = |id: &str| AppDetails::by_id(id).unwrap().headline;
     let showing = |h: &Harness<'_, Option<LauncherUi>>, id: &str| h.query_all_by_label_contains(headline(id)).count() >= 2;
-    h.get_by_label("PhotoDecode details").click();
+    h.get_by_label("DecodePhoto details").click();
     h.run_steps(12);
     assert!(showing(&h, "photocraft"));
     // A card with a margin of window all round, not a panel against one edge.

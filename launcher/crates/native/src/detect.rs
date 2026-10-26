@@ -110,7 +110,7 @@ fn exe_candidates(app: &DecodeApp, location: Option<&Path>, program_files: &[Pat
 }
 
 /// Version from `<app> --version` output. Binaries print the machine id (`photocraft 0.7.0`),
-/// the display name (`SoundDecode 0.5.0`), or a former id (`printcraft 0.2.1` for PdfDecode).
+/// the display name (`DecodeSound 0.5.0`), or a former id (`printcraft 0.2.1` for DecodePdf).
 #[cfg_attr(not(any(target_os = "linux", target_os = "freebsd")), allow(dead_code))]
 fn parse_cli_version(line: &str, app: &DecodeApp) -> Option<version::Version> {
     let line = line.trim();
@@ -516,7 +516,7 @@ mod linux_tests {
             std::fs::set_permissions(&bin, std::fs::Permissions::from_mode(0o755)).unwrap();
             bin
         };
-        let sound = write("soundcraft", "#!/bin/sh\necho 'SoundDecode 0.5.0'\n");
+        let sound = write("soundcraft", "#!/bin/sh\necho 'DecodeSound 0.5.0'\n");
         assert_eq!(binary_version_of_new_script(&sound, DecodeApp::by_id("soundcraft").unwrap()).unwrap().to_string(), "0.5.0");
         let pdf = write("pdfcraft", "#!/bin/sh\necho 'printcraft 0.2.1'\n");
         assert_eq!(binary_version_of_new_script(&pdf, DecodeApp::by_id("pdfcraft").unwrap()).unwrap().to_string(), "0.2.1");
@@ -684,9 +684,9 @@ mod tests {
         let sound = DecodeApp::by_id("soundcraft").unwrap();
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
         assert_eq!(parse_cli_version("photocraft 0.7.0 (dev build)", photo).unwrap().to_string(), "0.7.0");
-        assert_eq!(parse_cli_version("SoundDecode 0.5.0", sound).unwrap().to_string(), "0.5.0");
+        assert_eq!(parse_cli_version("DecodeSound 0.5.0", sound).unwrap().to_string(), "0.5.0");
         assert_eq!(parse_cli_version("printcraft 0.2.1", pdf).unwrap().to_string(), "0.2.1");
-        assert_eq!(parse_cli_version("PdfDecode 0.6.0", pdf).unwrap().to_string(), "0.6.0");
+        assert_eq!(parse_cli_version("DecodePdf 0.6.0", pdf).unwrap().to_string(), "0.6.0");
         assert!(strip_cli_prefix("photocraft-cli 1.0.0", "photocraft").is_none());
     }
 
@@ -725,20 +725,20 @@ mod tests {
     #[test]
     fn pdfcraft_matches_its_former_printcraft_installer_name() {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
-        assert!(is_installer_entry(pdf, "PrintCraft", LEARNING_MACHINES), "a PrintCraft entry from {LEARNING_MACHINES} should be PdfDecode's");
+        assert!(is_installer_entry(pdf, "PrintCraft", LEARNING_MACHINES), "a PrintCraft entry from {LEARNING_MACHINES} should be DecodePdf's");
     }
 
     #[test]
     fn pdfcraft_still_matches_its_own_installer_name() {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
-        assert!(is_installer_entry(pdf, "PdfDecode", LEARNING_MACHINES));
+        assert!(is_installer_entry(pdf, "DecodePdf", LEARNING_MACHINES));
     }
 
     #[test]
     fn printcraft_entries_match_nothing_else() {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
         assert!(!is_installer_entry(pdf, "PrintCraft", "Some Other Publisher"));
-        assert!(!is_installer_entry(pdf, "PhotoDecode", LEARNING_MACHINES));
+        assert!(!is_installer_entry(pdf, "DecodePhoto", LEARNING_MACHINES));
         for a in SUITE.iter().filter(|a| a.id != "pdfcraft") {
             assert!(!is_installer_entry(a, "PrintCraft", LEARNING_MACHINES), "PrintCraft matched {}", a.name);
         }
@@ -751,7 +751,7 @@ mod tests {
         let roots = roots();
         let mut want = vec![location.join("pdfcraft.exe"), location.join("printcraft.exe")];
         for root in &roots {
-            for dir in ["PdfDecode", "PdfCraft", "PrintCraft"] {
+            for dir in ["DecodePdf", "PdfCraft", "PrintCraft"] {
                 want.push(root.join(dir).join("pdfcraft.exe"));
                 want.push(root.join(dir).join("printcraft.exe"));
             }

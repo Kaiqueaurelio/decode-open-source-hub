@@ -19,11 +19,11 @@ EXPECTED_ORDER = [
     "deckcraft", "cadcraft", "gridcraft",
 ]
 EXPECTED_NAMES = {
-    "photocraft":"PhotoDecode", "vectorcraft":"VectorDecode", "filmcraft":"FilmDecode",
-    "lightcraft":"LightDecode", "pdfcraft":"PdfDecode", "effectcraft":"EffectDecode",
-    "designcraft":"DesignDecode", "figcraft":"FigDecode", "wordcraft":"WordDecode",
-    "soundcraft":"SoundDecode", "deckcraft":"DeckDecode", "cadcraft":"CADDecode",
-    "gridcraft":"GridDecode",
+    "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
+    "lightcraft":"DecodeLight", "pdfcraft":"DecodePdf", "effectcraft":"DecodeEffect",
+    "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
+    "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
+    "gridcraft":"DecodeGrid",
 }
 CATEGORIES = {
     "Imagem e fotografia", "Design e publicação", "Vídeo e motion",
@@ -130,11 +130,15 @@ def main():
                 errors.append(f"{prefix}: plataformas não correspondem à lista oficial para {slug}.")
             if is_https(item["licenseUrl"]):
                 parsed = urlparse(item["licenseUrl"])
-                if parsed.netloc != "github.com" or not parsed.path.startswith(f"/storytold/{slug}/"):
+                if slug == "cadcraft":
+                    if parsed.netloc != "github.com" or not parsed.path.startswith("/Kaiqueaurelio/decodecad/"):
+                        errors.append(f"{prefix}: URL de licença fora do repositório oficial deste app.")
+                elif parsed.netloc != "github.com" or not parsed.path.startswith(f"/storytold/{slug}/"):
                     errors.append(f"{prefix}: URL de licença fora do repositório oficial deste app.")
                 if not parsed.path.endswith("/LICENSE-MIT"):
                     errors.append(f"{prefix}: URL de licença deve apontar para LICENSE-MIT.")
-            if item["sourceUrl"] != f"https://github.com/storytold/{slug}":
+            expected_source = "https://github.com/Kaiqueaurelio/decodecad" if slug == "cadcraft" else f"https://github.com/storytold/{slug}"
+            if item["sourceUrl"] != expected_source:
                 errors.append(f"{prefix}: repositório-fonte não corresponde ao app oficial.")
             expected_page = f"https://getartcraft.com/apps/{slug}"
             if item["websiteUrl"] != expected_page or item["downloadUrl"] != expected_page:

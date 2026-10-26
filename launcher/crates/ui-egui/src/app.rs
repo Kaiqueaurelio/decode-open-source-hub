@@ -1172,7 +1172,7 @@ mod tests {
         // The fonts gate pass draws nothing and shows no toast.
         frame(&mut launcher, &ctx, 0.0);
         // A job finished while the window was hidden, when `logic`'s input time was old (0).
-        launcher.toast("PhotoDecode updated", false);
+        launcher.toast("DecodePhoto updated", false);
         frame(&mut launcher, &ctx, 1000.0);
         let toast = launcher.toasts.first().expect("the first drawing pass shows the pending toast");
         assert_eq!(toast.until, 1004.5, "expiry must be relative to the drawing pass, not the old logic time");
@@ -1185,7 +1185,7 @@ mod tests {
     /// Moving to a new window preserves a queued toast that has not yet been shown.
     fn attaching_a_window_keeps_messages_still_waiting_to_be_shown() {
         let (mut launcher, _sent, ctx) = launcher();
-        launcher.toast("PhotoDecode updated", false);
+        launcher.toast("DecodePhoto updated", false);
         launcher.attach(&ctx);
         assert_eq!(launcher.pending_toasts.len(), 1, "a message from logic is not tied to the old window");
     }

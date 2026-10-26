@@ -446,9 +446,9 @@ mod tests {
         "release_info": {{
           "apps": {{
             "photocraft": {{
-              "name": "PhotoDecode", "repo": "storytold/photocraft",
+              "name": "DecodePhoto", "repo": "storytold/photocraft",
               "latest_release": {{
-                "tag": "v0.6.0", "version": "0.6.0", "name": "PhotoDecode v0.6.0",
+                "tag": "v0.6.0", "version": "0.6.0", "name": "DecodePhoto v0.6.0",
                 "published_at": "2026-10-09T10:00:00Z",
                 "html_url": "https://github.com/storytold/photocraft/releases/tag/v0.6.0",
                 "prerelease": false, "notes_markdown": "Notes",
@@ -461,9 +461,9 @@ mod tests {
               }},
               "app_last_fetched": "2026-10-09T13:00:00Z"
             }},
-            "soundcraft": {{ "name": "SoundDecode", "repo": "storytold/soundcraft", "latest_release": null,
+            "soundcraft": {{ "name": "DecodeSound", "repo": "storytold/soundcraft", "latest_release": null,
                              "app_last_fetched": "2026-10-09T13:00:00Z" }},
-            "filmcraft": {{ "name": "FilmDecode", "repo": "storytold/filmcraft", "latest_release": null, "app_last_fetched": null }},
+            "filmcraft": {{ "name": "DecodeFilm", "repo": "storytold/filmcraft", "latest_release": null, "app_last_fetched": null }},
             "vectorcraft": {{ "repo": "storytold/vectorcraft", "app_last_fetched": "2026-10-01T00:00:00Z",
                               "latest_release": {{ "tag": "v0.7.0" }} }},
             "brandnewcraft": {{ "repo": "storytold/brandnewcraft", "app_last_fetched": "2026-10-09T13:00:00Z" }}
@@ -530,8 +530,8 @@ mod tests {
                 r#""repo_renames": [{"old_name": "Storytold/photocraft", "new_name": "storytold/photocraft-app", "renamed_at": null}]"#,
             )
             .replace(
-                "\"name\": \"PhotoDecode\", \"repo\": \"storytold/photocraft\"",
-                "\"name\": \"PhotoDecode\", \"repo\": \"storytold/photocraft-app\"",
+                "\"name\": \"DecodePhoto\", \"repo\": \"storytold/photocraft\"",
+                "\"name\": \"DecodePhoto\", \"repo\": \"storytold/photocraft-app\"",
             )
             .replace("github.com/storytold/photocraft/releases", "github.com/storytold/photocraft-app/releases");
         let feed = Feed::parse(&moved).unwrap();
@@ -555,7 +555,7 @@ mod tests {
                                   {"old_name": "art/photocraft", "new_name": "storytold/photocraft", "renamed_at": null},
                                   {"old_name": "storytold/photocraft", "new_name": "storytold.evil.example/photocraft", "renamed_at": null}]"#,
             )
-            .replace("\"name\": \"PhotoDecode\", \"repo\": \"storytold/photocraft\"", "\"name\": \"PhotoDecode\", \"repo\": \"art/photocraft\"")
+            .replace("\"name\": \"DecodePhoto\", \"repo\": \"storytold/photocraft\"", "\"name\": \"DecodePhoto\", \"repo\": \"art/photocraft\"")
             .replace("github.com/storytold/photocraft/releases", "github.com/art/photocraft/releases");
         let feed = Feed::parse(&moved).unwrap();
         assert!(feed.repo_renames.is_empty(), "{:?}", feed.repo_renames);
@@ -617,18 +617,18 @@ mod tests {
         let with_notices = sample()
             .replace(
                 "\"announcements\": []",
-                r#""announcements": [{"title": "New: CADDecode 1.0", "body": "It's here.", "created_at": "2026-10-09T09:00:00Z"}]"#,
+                r#""announcements": [{"title": "New: DecodeCAD 1.0", "body": "It's here.", "created_at": "2026-10-09T09:00:00Z"}]"#,
             )
             .replace(
                 "\"alerts\": []",
                 r#""alerts": [
-            {"title": "Security update", "body": "Update PdfDecode now.", "maybe_web_link": "https://getartcraft.com/security", "created_at": null},
+            {"title": "Security update", "body": "Update DecodePdf now.", "maybe_web_link": "https://getartcraft.com/security", "created_at": null},
             {"title": "Bad link", "body": "x", "maybe_web_link": "javascript:alert(1)"},
             {"title": "Shell link", "body": "x", "maybe_web_link": "https://getartcraft.com/a|calc.exe"}]"#,
             )
             .replace(
                 "\"app_renames\": []",
-                r#""app_renames": [{"old_name": "PdfDecode", "old_name_lower": "pdfcraft", "new_name": "DocuCraft",
+                r#""app_renames": [{"old_name": "DecodePdf", "old_name_lower": "pdfcraft", "new_name": "DocuCraft",
             "new_name_lower": "docucraft", "description": "Same app, new name.", "renamed_at": "2026-10-09T08:00:00Z"}]"#,
             );
         let feed = Feed::parse(&with_notices).unwrap();
@@ -637,7 +637,7 @@ mod tests {
         assert_eq!(feed.alerts[1].link, None, "only web links are kept");
         assert_eq!(feed.alerts[2].link, None, "a link with shell metacharacters is dropped");
         let titles: Vec<&str> = feed.announcements.iter().map(|n| n.title.as_str()).collect();
-        assert_eq!(titles, ["New: CADDecode 1.0", "PdfDecode is now DocuCraft"]);
+        assert_eq!(titles, ["New: DecodeCAD 1.0", "DecodePdf is now DocuCraft"]);
         // Ids are stable across parses, so dismissals stick.
         assert_eq!(Feed::parse(&with_notices).unwrap().alerts[0].id, feed.alerts[0].id);
     }

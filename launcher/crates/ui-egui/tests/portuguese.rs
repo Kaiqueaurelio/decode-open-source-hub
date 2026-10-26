@@ -72,7 +72,7 @@ fn events() -> Vec<Event> {
     }
     ev.push(Event::Progress { app: "filmcraft".into(), phase: JobPhase::Verifying });
     ev.push(Event::CheckFinished { at: NOW - 180, source: Source::Feed, rate_limited_until: None });
-    ev.push(Event::JobFinished { app: "lightcraft".into(), result: Ok("LightDecode updated to 0.5.0".into()) });
+    ev.push(Event::JobFinished { app: "lightcraft".into(), result: Ok("DecodeLight updated to 0.5.0".into()) });
     ev
 }
 
@@ -107,7 +107,7 @@ fn portuguese_ui_translates_labels_dates_and_messages() {
     h.get_by_label("Atualizar para 0.5.0");
     h.get_by_label_contains("Conferindo a soma de verificação…");
     h.get_by_label_contains("Verificado há 3 min · via Decode API");
-    h.get_by_label("LightDecode atualizado para 0.5.0");
+    h.get_by_label("DecodeLight atualizado para 0.5.0");
 
     let mut table = harness(ViewMode::Table);
     table.run_steps(8);

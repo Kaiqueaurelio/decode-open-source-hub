@@ -263,7 +263,7 @@ mod tests {
 
     #[test]
     fn macos_prefers_the_published_universal_build() {
-        // PhotoDecode v0.9.0's GitHub metadata, trimmed to its desktop DMG.
+        // DecodePhoto v0.9.0's GitHub metadata, trimmed to its desktop DMG.
         let mut r = crate::release::parse_github_release(include_str!("../tests/fixtures/photocraft-release.json"), "storytold/photocraft").unwrap();
         // Split builds must not outrank the published universal DMG, even when listed first.
         r.assets.splice(0..0, release(&["photocraft-0.9.0-macos-arm64.dmg", "photocraft-0.9.0-macos-x86_64.dmg"]).assets);
@@ -276,7 +276,7 @@ mod tests {
 
     #[test]
     fn freebsd_picks_the_tarball_for_the_processor() {
-        // SoundDecode v0.10.0's GitHub metadata, trimmed to its FreeBSD tarballs.
+        // DecodeSound v0.10.0's GitHub metadata, trimmed to its FreeBSD tarballs.
         let r = crate::release::parse_github_release(include_str!("../tests/fixtures/soundcraft-release.json"), "storytold/soundcraft").unwrap();
         let pick = |arch| {
             let platform = Platform { os: Os::FreeBsd, arch };
@@ -338,7 +338,7 @@ mod tests {
         {
             assert_eq!(parse_asset_name(other, &["photocraft"]), None, "{other}");
         }
-        // FigDecode also ships its collaboration server; that tarball is not the app.
+        // DecodeFig also ships its collaboration server; that tarball is not the app.
         assert_eq!(parse_asset_name("figcraft-server-0.5.1-linux-x86_64.tar.gz", &["figcraft"]), None);
         assert!(parse_asset_name("figcraft-0.5.1-linux-x86_64.tar.gz", &["figcraft"]).is_some());
     }

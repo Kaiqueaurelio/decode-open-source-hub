@@ -75,7 +75,7 @@ fn events() -> Vec<Event> {
     ev.push(Event::Progress { app: "filmcraft".into(), phase: JobPhase::Verifying });
     ev.push(Event::CheckFinished { at: NOW - 180, source: Source::Feed, rate_limited_until: None });
     // A backend message, translated through its `@msg` template where it's shown.
-    ev.push(Event::JobFinished { app: "lightcraft".into(), result: Ok("LightDecode updated to 0.5.0".into()) });
+    ev.push(Event::JobFinished { app: "lightcraft".into(), result: Ok("DecodeLight updated to 0.5.0".into()) });
     ev
 }
 
@@ -119,7 +119,7 @@ fn russian_ui_translates_labels_dates_and_messages() {
     h.get_by_label("Обновить до 0.5.0");
     h.get_by_label_contains("Проверка контрольной суммы…");
     h.get_by_label_contains("Проверено 3 минуты назад · через Decode API");
-    h.get_by_label("Приложение LightDecode обновлено до 0.5.0");
+    h.get_by_label("Приложение DecodeLight обновлено до 0.5.0");
 
     let mut table = harness(ViewMode::Table);
     table.run_steps(8);

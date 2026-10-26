@@ -6,7 +6,7 @@ Este repositório começou como catálogo informativo independente do ecossistem
 
 ## O que você encontra
 
-- **13 apps Decode:** PhotoDecode, VectorDecode, FilmDecode, LightDecode, PdfDecode, EffectDecode, DesignDecode, FigDecode, WordDecode, SoundDecode, DeckDecode, CADDecode e GridDecode. Os nomes originais continuam disponíveis para pesquisa.
+- **13 apps Decode:** DecodePhoto, DecodeVector, DecodeFilm, DecodeLight, DecodePdf, DecodeEffect, DecodeDesign, DecodeFig, DecodeWord, DecodeSound, DecodeDeck, DecodeCAD e DecodeGrid. Os nomes originais continuam disponíveis para pesquisa.
 - **Decode Launcher (projeto original: ArtCraft Launcher):** utilitário separado, com links para o repositório oficial e suas releases.
 - Busca por nome, finalidade, recursos e palavras-chave.
 - Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.

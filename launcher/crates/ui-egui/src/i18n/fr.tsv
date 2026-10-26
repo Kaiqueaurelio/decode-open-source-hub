@@ -11,8 +11,8 @@
 #
 # Coverage: the whole interface: every menu string and tl! literal (complete_menus = true).
 # Left in English on purpose: product name "Decode Launcher" (and its "Launcher" tag), suite
-# name "Decode App Suite", app names (PhotoDecode, LightDecode, FilmDecode, DesignDecode, VectorDecode,
-# PdfDecode, EffectDecode, WordDecode, DeckDecode, GridDecode, CADDecode, SoundDecode, FigDecode), "GitHub",
+# name "Decode App Suite", app names (DecodePhoto, DecodeLight, DecodeFilm, DecodeDesign, DecodeVector,
+# DecodePdf, DecodeEffect, DecodeWord, DecodeDeck, DecodeGrid, DecodeCAD, DecodeSound, DecodeFig), "GitHub",
 # "Discord".
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.

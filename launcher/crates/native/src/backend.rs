@@ -947,9 +947,7 @@ fn local_mirror() -> Option<String> {
     let base = std::env::var("DECODE_LAUNCHER_DOWNLOAD_BASE").ok()?;
     let base = base.trim();
     if !is_loopback(base) || base.contains(['?', '#', '\\']) {
-        log::warn!(
-            "ignoring DECODE_LAUNCHER_DOWNLOAD_BASE={base}: only http://127.0.0.1:<port>/, http://localhost:<port>/ or http://[::1]:<port>/"
-        );
+        log::warn!("ignoring DECODE_LAUNCHER_DOWNLOAD_BASE={base}: only http://127.0.0.1:<port>/, http://localhost:<port>/ or http://[::1]:<port>/");
         return None;
     }
     Some(if base.ends_with('/') { base.to_string() } else { format!("{base}/") })
@@ -1325,13 +1323,13 @@ mod tests {
         let word = DecodeApp::by_id("wordcraft").unwrap();
         let feed = feed();
 
-        // The feed vouches for PhotoDecode: GitHub isn't asked.
+        // The feed vouches for DecodePhoto: GitHub isn't asked.
         let (latest, _, used) = latest_for(photo, Some(&feed), LOADED, &github, &shared, false, false, NOW);
         assert!(matches!(latest, Some(LatestRelease::Found(ref r)) if r.tag == "v0.6.0"));
         assert_eq!(used, Some(Source::Feed));
         assert_eq!(github.0.load(Ordering::SeqCst), 0);
 
-        // The feed doesn't list WordDecode: GitHub is asked once…
+        // The feed doesn't list DecodeWord: GitHub is asked once…
         let (_, _, used) = latest_for(word, Some(&feed), LOADED, &github, &shared, false, false, NOW);
         assert_eq!(used, Some(Source::GitHubApi));
         assert_eq!(github.0.load(Ordering::SeqCst), 1);
@@ -1382,7 +1380,7 @@ mod tests {
             }
         }
         let photo = DecodeApp::by_id("photocraft").unwrap();
-        let feed = feed(); // vouches for PhotoDecode v0.6.0
+        let feed = feed(); // vouches for DecodePhoto v0.6.0
         let github = |newest| Ahead { newest, asked: AtomicUsize::new(0) };
 
         // GitHub names the release the feed has: Refresh takes the feed's answer, asking nothing more.
@@ -1410,7 +1408,7 @@ mod tests {
 
     const APP: &str = "photocraft";
 
-    /// A PhotoDecode release with one file per platform and format, so whichever this machine
+    /// A DecodePhoto release with one file per platform and format, so whichever this machine
     /// installs is there.
     fn release(version: &str) -> Release {
         let suffixes = ["-portable.zip", ".tar.gz", ".msi", ".dmg", ".AppImage", ".deb", ".rpm", ".flatpak"];
@@ -1444,14 +1442,14 @@ mod tests {
         let msi = Installed {
             version: None,
             source: decode_launcher_core::InstallSource::Msi,
-            location: r"C:\Apps\PhotoDecode\photocraft.exe".into(),
+            location: r"C:\Apps\DecodePhoto\photocraft.exe".into(),
             package: None,
         };
         assert_eq!(planned_asset(app, &release, platform, &portable_options, Some(&msi), None).unwrap().1, PackageKind::Msi);
         let launcher = Installed {
             version: None,
             source: decode_launcher_core::InstallSource::Launcher,
-            location: r"D:\Decode Apps\PhotoDecode\photocraft.exe".into(),
+            location: r"D:\Decode Apps\DecodePhoto\photocraft.exe".into(),
             package: None,
         };
         let record = crate::manifest::Record {
@@ -1713,9 +1711,9 @@ mod tests {
         }
         let restarting = AtomicBool::new(false);
         let error = claim_restart(&jobs, &restarting, &Stop::default(), Duration::from_millis(300), &mut || {}).unwrap_err();
-        assert!(error.contains("PhotoDecode was still installing") && error.contains("cancel it"), "{error}");
+        assert!(error.contains("DecodePhoto was still installing") && error.contains("cancel it"), "{error}");
         assert!(!restarting.load(Ordering::SeqCst));
-        assert!(restart_blocked(vec!["WordDecode", "FilmDecode"]).contains("FilmDecode, WordDecode were still installing"));
+        assert!(restart_blocked(vec!["DecodeWord", "DecodeFilm"]).contains("DecodeFilm, DecodeWord were still installing"));
     }
 
     #[test]

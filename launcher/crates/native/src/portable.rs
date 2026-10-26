@@ -581,17 +581,17 @@ mod tests {
                 "app.zip",
                 &[
                     (&format!("{prefix}photocraft-cli.exe"), b"cli"),
-                    (&format!("{prefix}PhotoDecode.exe"), version.as_bytes()),
+                    (&format!("{prefix}DecodePhoto.exe"), version.as_bytes()),
                     (&format!("{prefix}lib/runtime.dll"), b"library"),
                     (&format!("{prefix}LICENSE-MIT"), b"license"),
                 ],
             );
             let record = install(app, &zip, version, previous.as_ref(), &paths, Some(&parent), false, &mut |_| Ok(())).unwrap();
             let root = std::fs::canonicalize(parent.join(app.id)).unwrap();
-            assert_eq!(record.path, root.join("PhotoDecode.exe"));
+            assert_eq!(record.path, root.join("DecodePhoto.exe"));
             assert_eq!(std::fs::read(&record.path).unwrap(), version.as_bytes());
             assert_eq!(std::fs::read(root.join("lib/runtime.dll")).unwrap(), b"library");
-            assert_eq!(record.files, ["photocraft-cli.exe", "PhotoDecode.exe", "lib/runtime.dll", "LICENSE-MIT"].map(|p| root.join(p)));
+            assert_eq!(record.files, ["photocraft-cli.exe", "DecodePhoto.exe", "lib/runtime.dll", "LICENSE-MIT"].map(|p| root.join(p)));
             let personal = root.join("settings.json");
             if previous.is_some() {
                 assert_eq!(std::fs::read(&personal).unwrap(), b"personal");
@@ -731,7 +731,7 @@ mod tests {
         let personal = parent.join("photocraft").join("settings.json");
         std::fs::write(&personal, b"personal").unwrap();
         for (version, exe) in [("0.6.0", b"new".as_slice()), ("0.4.0", b"older".as_slice())] {
-            let executable = if version == "0.4.0" { "PhotoDecode.exe" } else { "photocraft.exe" };
+            let executable = if version == "0.4.0" { "DecodePhoto.exe" } else { "photocraft.exe" };
             let package = archive(dir.path(), "next.zip", &[(executable, exe), ("lib/runtime.dll", b"dll")]);
             record = install(app, &package, version, Some(&record), &paths, Some(&dir.path().join("Ignored")), false, &mut |_| Ok(())).unwrap();
             assert_eq!(std::fs::read(&record.path).unwrap(), exe);
@@ -843,7 +843,7 @@ mod tests {
         for (name, files) in [
             ("traversal.zip", vec![("../escape.exe", b"bad".as_slice())]),
             ("colon.zip", vec![("data:stream", b"bad".as_slice())]),
-            ("duplicate.zip", vec![("PhotoDecode.exe", b"one".as_slice()), ("photocraft.exe", b"two".as_slice())]),
+            ("duplicate.zip", vec![("DecodePhoto.exe", b"one".as_slice()), ("photocraft.exe", b"two".as_slice())]),
         ] {
             let zip = archive(dir.path(), name, &files);
             let output = dir.path().join(name.replace('.', "-"));

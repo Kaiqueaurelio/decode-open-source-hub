@@ -515,10 +515,10 @@ mod tests {
     fn running_paths_are_matched_literally() {
         let root = format!("/tmp/decode-launcher-process-{}", std::process::id());
         for (actual, requested, expected) in [
-            ("plain/PhotoDecode.app", "plain/PhotoDecode.app", true),
-            ("Apps (work)/PhotoDecode.app", "Apps (work)/PhotoDecode.app", true),
-            ("Apps [work]/PhotoDecode.app", "Apps [work]/PhotoDecode.app", true),
-            ("other/PhotoDecodeXapp", "other/PhotoDecode.app", false),
+            ("plain/DecodePhoto.app", "plain/DecodePhoto.app", true),
+            ("Apps (work)/DecodePhoto.app", "Apps (work)/DecodePhoto.app", true),
+            ("Apps [work]/DecodePhoto.app", "Apps [work]/DecodePhoto.app", true),
+            ("other/DecodePhotoXapp", "other/DecodePhoto.app", false),
             ("symbols/应用.^$*+?()[]{}|\\.app", "symbols/应用.^$*+?()[]{}|\\.app", true),
         ] {
             let actual = format!("{root}/{actual}");
@@ -602,8 +602,8 @@ mod explorer_tests {
 
     #[test]
     fn explorer_select_quotes_only_the_path() {
-        let arg = explorer_select_arg(Path::new(r"C:\Program Files\PhotoDecode\photocraft.exe"));
-        assert_eq!(arg.unwrap(), r#"/select,"C:\Program Files\PhotoDecode\photocraft.exe""#);
+        let arg = explorer_select_arg(Path::new(r"C:\Program Files\DecodePhoto\photocraft.exe"));
+        assert_eq!(arg.unwrap(), r#"/select,"C:\Program Files\DecodePhoto\photocraft.exe""#);
     }
 
     #[test]

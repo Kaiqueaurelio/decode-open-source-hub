@@ -24,10 +24,10 @@ finish-args:
   - --share=ipc
   # GPU access for egui's wgpu renderer (Vulkan, or GL as a fallback).
   - --device=dri
-  # SoundDecode's audio, for the case where it runs inside this sandbox rather than on the host
+  # DecodeSound's audio, for the case where it runs inside this sandbox rather than on the host
   # (the launcher falls back to its release tarball when the host has no usable Flatpak): its
   # ALSA goes through the runtime's PulseAudio plugin to this socket, which PipeWire's pulse
-  # server provides on modern desktops. Note this socket also covers the microphone (SoundDecode
+  # server provides on modern desktops. Note this socket also covers the microphone (DecodeSound
   # records, so it needs it); it grants recording, not raw hardware access.
   - --socket=pulseaudio
   # The launcher reads the Craft apps' GitHub releases and downloads them.

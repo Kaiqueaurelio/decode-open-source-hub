@@ -1,7 +1,7 @@
 # Simplified Chinese (zh-CN) catalog for Decode Launcher.
 # Format: context<TAB>English source<TAB>translation.
 # Original translations from the English UI. Product and app names (Decode Launcher and its
-# "Launcher" tag, Decode App Suite, PhotoDecode…) and third-party names stay unchanged.
+# "Launcher" tag, Decode App Suite, DecodePhoto…) and third-party names stay unchanged.
 # Shown with the system's Chinese font (PingFang, Microsoft YaHei, Noto Sans CJK…): see cjk_font.rs.
 # Chinese has one plural form. Placeholders and trailing ellipses are preserved.
 

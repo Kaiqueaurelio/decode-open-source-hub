@@ -1,8 +1,8 @@
 # AGENTS.md: guide for AI agents and contributors
 
-Decode Launcher installs, updates and launches the **Decode App Suite** (PhotoDecode, LightDecode,
-FilmDecode, DesignDecode, VectorDecode, PdfDecode, EffectDecode, WordDecode, DeckDecode, GridDecode,
-CADDecode, SoundDecode, FigDecode). It is written in **Rust only** (no JavaScript or TypeScript): the desktop
+Decode Launcher installs, updates and launches the **Decode App Suite** (DecodePhoto, DecodeLight,
+DecodeFilm, DecodeDesign, DecodeVector, DecodePdf, DecodeEffect, DecodeWord, DecodeDeck, DecodeGrid,
+DecodeCAD, DecodeSound, DecodeFig). It is written in **Rust only** (no JavaScript or TypeScript): the desktop
 app is native egui/eframe, and the web build is the same Rust compiled to WebAssembly (trunk +
 wasm-bindgen). **No Tauri, Electron or webview shells**, ever.
 
@@ -93,7 +93,7 @@ for `{placeholders}`, `tn` for counts). English in the code is the lookup key; a
 means adding its row to every catalog marked `complete_menus` (the `*.tsv` files in
 `crates/ui-egui/src/i18n/`), which the i18n tests check. Translate clean-room from the meaning of
 the English text, never through another catalog. Product and app names (Decode Launcher, Craft
-App Suite, PhotoDecode…) stay in English.
+App Suite, DecodePhoto…) stay in English.
 A CJK language is drawn with the system's own CJK font (`crates/ui-egui/src/cjk_font.rs`, desktop
 only; English where there is none): never bundle a CJK font, they are 10 MB and more.
 
@@ -172,8 +172,8 @@ Packaging facts the code relies on:
   `bin/` and `share/` and keeps `home/`; removing the app takes those two folders only. Outside
   a sandbox the tarball is not on offer at all.
 - `--socket=pulseaudio` in the launcher manifests is for an app running *inside* the sandbox
-  (SoundDecode's ALSA reaches the runtime's PulseAudio plugin through it); it also covers the
-  microphone, which SoundDecode records through.
+  (DecodeSound's ALSA reaches the runtime's PulseAudio plugin through it); it also covers the
+  microphone, which DecodeSound records through.
 - `build.rs` reads `DECODE_LAUNCHER_BUILD_SHA` / `DECODE_LAUNCHER_BUILD_DATE` and, on Windows,
   embeds `assets/app-icon/decode-launcher.ico`, failing the build when
   `DECODE_LAUNCHER_REQUIRE_WINRES=1` and it can't.

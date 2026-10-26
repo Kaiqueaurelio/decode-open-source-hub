@@ -32,4 +32,4 @@ A validação automatizada verifica o escopo, os valores esperados de estágio e
 
 ## Nomes de apresentação
 
-Na interface, use PhotoDecode, VectorDecode, FilmDecode, LightDecode, PdfDecode, EffectDecode, DesignDecode, FigDecode, WordDecode, SoundDecode, DeckDecode, CADDecode e GridDecode. Preserve os slugs oficiais, URLs e nomes originais nos termos de busca. Não sugira que os mantenedores renomearam os aplicativos.
+Na interface, use DecodePhoto, DecodeVector, DecodeFilm, DecodeLight, DecodePdf, DecodeEffect, DecodeDesign, DecodeFig, DecodeWord, DecodeSound, DecodeDeck, DecodeCAD e DecodeGrid. Preserve os slugs oficiais, URLs e nomes originais nos termos de busca. Não sugira que os mantenedores renomearam os aplicativos.

@@ -302,7 +302,7 @@ fn german_counts_dates_and_messages_work() {
     assert_eq!(trn(Lang::DE, 1, "{n} day ago", "{n} days ago"), "vor 1 Tag");
     assert_eq!(super::tr_ctx(Lang::DE, "month", "Mar"), "März");
     assert_eq!(tr(Lang::DE, "{month} {day}, {year}"), "{day}. {month} {year}");
-    assert_eq!(message(Lang::DE, "PhotoDecode updated to 0.5.0"), "PhotoDecode auf 0.5.0 aktualisiert");
+    assert_eq!(message(Lang::DE, "DecodePhoto updated to 0.5.0"), "DecodePhoto auf 0.5.0 aktualisiert");
     assert_eq!(tr(Lang::DE, "Untranslated diagnostic"), "Untranslated diagnostic");
 }
 
@@ -320,7 +320,7 @@ fn hungarian_locales_and_plurals_work() {
     assert_eq!(trn(Lang::HU, 1, "{n} day ago", "{n} days ago"), "1 napja");
     assert_eq!(super::tr_ctx(Lang::HU, "month", "Mar"), "márc.");
     assert_eq!(tr(Lang::HU, "{month} {day}, {year}"), "{year}. {month} {day}.");
-    assert_eq!(message(Lang::HU, "PhotoDecode updated to 0.5.0"), "PhotoDecode frissítve. Verzió: 0.5.0");
+    assert_eq!(message(Lang::HU, "DecodePhoto updated to 0.5.0"), "DecodePhoto frissítve. Verzió: 0.5.0");
     assert_eq!(tr(Lang::HU, "Untranslated diagnostic"), "Untranslated diagnostic");
 }
 
@@ -348,7 +348,7 @@ fn spanish_locales_and_plurals_work() {
     assert_eq!(trn(Lang::ES, 1, "{n} app", "{n} apps"), "1 aplicación");
     assert_eq!(trn(Lang::ES, 3, "{n} day ago", "{n} days ago"), "hace 3 días");
     assert_eq!(tr(Lang::ES, "{month} {day}, {year}"), "{day} {month} {year}");
-    assert_eq!(message(Lang::ES, "PhotoDecode updated to 0.5.0"), "PhotoDecode actualizada a 0.5.0");
+    assert_eq!(message(Lang::ES, "DecodePhoto updated to 0.5.0"), "DecodePhoto actualizada a 0.5.0");
 }
 
 #[test]
@@ -379,7 +379,7 @@ fn chinese_counts_and_english_fallback_work() {
     }
     assert_eq!(trn(Lang::ZH_CN, 2, "{n} unknown item", "{n} unknown items"), "2 unknown items");
     assert_eq!(tr(Lang::ZH_CN, "Untranslated diagnostic"), "Untranslated diagnostic");
-    assert_eq!(message(Lang::ZH_CN, "PhotoDecode updated to 0.5.0"), "PhotoDecode 已更新至 0.5.0");
+    assert_eq!(message(Lang::ZH_CN, "DecodePhoto updated to 0.5.0"), "DecodePhoto 已更新至 0.5.0");
 }
 
 #[test]
@@ -397,7 +397,7 @@ fn japanese_locales_and_counts_work() {
     assert_eq!(tr(Lang::JA, "Untranslated diagnostic"), "Untranslated diagnostic");
     assert_eq!(super::tr_ctx(Lang::JA, "month", "Mar"), "3月");
     assert_eq!(tr(Lang::JA, "{month} {day}, {year}"), "{year}年{month}{day}日");
-    assert_eq!(message(Lang::JA, "PhotoDecode updated to 0.5.0"), "PhotoDecode を 0.5.0 に更新しました");
+    assert_eq!(message(Lang::JA, "DecodePhoto updated to 0.5.0"), "DecodePhoto を 0.5.0 に更新しました");
 }
 
 /// With the system's Chinese font installed, every UI family can draw the whole Chinese catalog.
@@ -518,10 +518,10 @@ fn message_templates_match_real_messages() {
          @msg\t{a}{b}\tnever\n",
     );
     assert_eq!(cat.message("Download cancelled").as_deref(), Some("Скачивание отменено"));
-    assert_eq!(cat.message("Couldn't open PhotoDecode: no such file: x").as_deref(), Some("Не удалось открыть PhotoDecode: no such file: x"));
-    assert_eq!(cat.message("PhotoDecode updated to 0.5.0").as_deref(), Some("PhotoDecode обновлено до 0.5.0"));
+    assert_eq!(cat.message("Couldn't open DecodePhoto: no such file: x").as_deref(), Some("Не удалось открыть DecodePhoto: no such file: x"));
+    assert_eq!(cat.message("DecodePhoto updated to 0.5.0").as_deref(), Some("DecodePhoto обновлено до 0.5.0"));
     // The template that spells out more of the message wins.
-    assert_eq!(cat.message("PhotoDecode updated to 0.5.0 (no checksum)").as_deref(), Some("PhotoDecode обновлено до 0.5.0 (без суммы)"));
+    assert_eq!(cat.message("DecodePhoto updated to 0.5.0 (no checksum)").as_deref(), Some("DecodePhoto обновлено до 0.5.0 (без суммы)"));
     // Placeholders never match nothing, and unknown messages aren't touched.
     assert_eq!(cat.message("Couldn't open : x"), None);
     assert_eq!(cat.message("Something else"), None);

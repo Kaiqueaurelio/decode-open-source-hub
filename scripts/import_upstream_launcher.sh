@@ -61,21 +61,22 @@ replacements = [
     ("craft app", "decode app"),
     ("Crafting Apps", "Decode Apps"),
     ("Crafting App", "Decode App"),
-    ("PhotoCraft", "PhotoDecode"),
-    ("VectorCraft", "VectorDecode"),
-    ("FilmCraft", "FilmDecode"),
-    ("LightCraft", "LightDecode"),
-    ("PdfCraft", "PdfDecode"),
-    ("EffectCraft", "EffectDecode"),
-    ("DesignCraft", "DesignDecode"),
-    ("FigCraft", "FigDecode"),
-    ("WordCraft", "WordDecode"),
-    ("SoundCraft", "SoundDecode"),
-    ("DeckCraft", "DeckDecode"),
-    ("CADCraft", "CADDecode"),
-    ("CadCraft", "CadDecode"),
-    ("GridCraft", "GridDecode"),
-    ("PrintCraft", "PrintDecode"),
+    ("PhotoCraft", "DecodePhoto"),
+    ("VectorCraft", "DecodeVector"),
+    ("FilmCraft", "DecodeFilm"),
+    ("LightCraft", "DecodeLight"),
+    ("PdfCraft", "DecodePdf"),
+    ("EffectCraft", "DecodeEffect"),
+    ("DesignCraft", "DecodeDesign"),
+    ("FigCraft", "DecodeFig"),
+    ("WordCraft", "DecodeWord"),
+    ("SoundCraft", "DecodeSound"),
+    ("DeckCraft", "DecodeDeck"),
+    ("CADCraft", "DecodeCAD"),
+    ("CadCraft", "DecodeCad"),
+    ("GridCraft", "DecodeGrid"),
+    ("PrintCraft", "DecodePrint"),
+    ("storytold/cadcraft", "Kaiqueaurelio/decodecad"),
     ("ArtCraft API", "Decode API"),
     ("CraftApp", "DecodeApp"),
     ("craft_app", "decode_app"),
@@ -162,11 +163,11 @@ if catalog_source.exists():
     source = catalog_source.read_text(encoding="utf-8")
     source = source.replace(
         "assert_eq!(a.name.to_lowercase(), a.id);",
-        'assert_eq!(a.name.to_lowercase().replace("decode", "craft"), a.id);'
+        'if a.id == "cadcraft" { assert_eq!(a.repo, "Kaiqueaurelio/decodecad"); } else { assert_eq!(a.repo, format!("storytold/{}", a.id)); }\n            assert_eq!(a.name.to_lowercase().replace("decode", "") + "craft", a.id);'
     )
     source = source.replace(
-        'assert_eq!(pdf.names().collect::<Vec<_>>(), ["PdfDecode", "PrintDecode"]);',
-        'assert_eq!(pdf.names().collect::<Vec<_>>(), ["PdfDecode", "PdfCraft", "PrintCraft"]);'
+        'assert_eq!(pdf.names().collect::<Vec<_>>(), ["DecodePdf", "DecodePrint"]);',
+        'assert_eq!(pdf.names().collect::<Vec<_>>(), ["DecodePdf", "PdfCraft", "PrintCraft"]);'
     )
 
     apps_pairs = [
@@ -191,9 +192,10 @@ if catalog_source.exists():
             source = source[:m.start()] + repl + source[m.end():]
 
     source = source.replace(
-        'former_names: &["PrintDecode"],',
+        'former_names: &["DecodePrint"],',
         'former_names: &["PdfCraft", "PrintCraft"],'
     )
+    source = source.replace('"storytold/cadcraft"', '"Kaiqueaurelio/decodecad"')
 
     launcher_match = re.search(r"pub const LAUNCHER: DecodeApp = app\(\n.*?\n\);", source, re.S)
     if launcher_match:

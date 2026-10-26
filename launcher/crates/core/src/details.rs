@@ -145,7 +145,7 @@ pub const DETAILS: [AppDetails; 13] = [
         headline: "The image editor you already know how to use.",
         about: "Layers, masks, adjustment layers, layer styles, type, vectors and brushes in a native app \
             written in Rust. Open source, offline, and yours.\n\n\
-            PhotoDecode keeps the menus, shortcuts and panels your hands already know, so there is \
+            DecodePhoto keeps the menus, shortcuts and panels your hands already know, so there is \
             nothing to relearn.",
         features: &[
             feature("Native GPU canvas", "No Electron and no web view: a fast native compositor."),

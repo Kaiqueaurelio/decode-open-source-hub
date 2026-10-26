@@ -111,7 +111,7 @@ mod tests {
             parse_flatpak_list("ai.storyteller.wordcraft\t\nai.storyteller.cadcraft\t0.3.0\n"),
             [("ai.storyteller.wordcraft".into(), String::new()), ("ai.storyteller.cadcraft".into(), "0.3.0".into())]
         );
-        let info = "\nWordDecode - Word processor\n\n          ID: ai.storyteller.wordcraft\n     Version: 0.3.0\n      Branch: master\n";
+        let info = "\nDecodeWord - Word processor\n\n          ID: ai.storyteller.wordcraft\n     Version: 0.3.0\n      Branch: master\n";
         assert_eq!(parse_flatpak_info(info).as_deref(), Some("0.3.0"));
         assert_eq!(parse_flatpak_info("Version: \n"), None);
     }
@@ -142,7 +142,7 @@ mod tests {
         let hit = find(photo, &installed, &[InstallSource::Pacman]).unwrap();
         assert_eq!(hit.name, "photocraft-git");
         assert_eq!(version_of(hit).unwrap().to_string(), "0.3.0");
-        // PdfDecode under its old name.
+        // DecodePdf under its old name.
         assert_eq!(find(pdf, &installed, &[InstallSource::Pacman]).unwrap().name, "printcraft-bin");
         assert!(find(DecodeApp::by_id("wordcraft").unwrap(), &installed, &[InstallSource::Pacman]).is_none());
     }

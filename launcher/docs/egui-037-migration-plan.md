@@ -1522,13 +1522,13 @@ performance or real-screen-reader acceptance is claimed by this amendment.
 The managed `review-tests-18` job ran after the F2–F5 repair and exited 1 with four failures in
 `crates/ui-egui/tests/ui.rs` (65 passed, 4 failed):
 
-- `clicking_a_card_opens_its_details_drawer` expected one `Role::Label` named `PhotoDecode`, but the
+- `clicking_a_card_opens_its_details_drawer` expected one `Role::Label` named `DecodePhoto`, but the
   open drawer has two legitimate wordmarks: the grid card's and the drawer's. The icon assertion
-  remains "no `Role::Image` named `PhotoDecode`"; the label assertion now expects exactly those two
+  remains "no `Role::Image` named `DecodePhoto`"; the label assertion now expects exactly those two
   wordmarks, so a restored decorative alt text or a third duplicate still fails.
 - `changelog_shortcuts_zoom_only_the_notes_text` opened the first card's menu, but the grid's
-  default order is name A–Z, so that was CadDecode, not PhotoDecode. The test now targets
-  `More actions for PhotoDecode` explicitly and checks both that the Notes hero icon is not an
+  default order is name A–Z, so that was DecodeCad, not DecodePhoto. The test now targets
+  `More actions for DecodePhoto` explicitly and checks both that the Notes hero icon is not an
   image with the release title and that the title label appears once.
 - `the_actual_update_button_queues_once_across_a_discarded_pass` and
   `the_actual_open_button_launches_once_across_a_discarded_pass` inserted the AccessKit

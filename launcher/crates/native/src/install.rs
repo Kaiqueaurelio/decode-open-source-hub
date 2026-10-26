@@ -591,7 +591,7 @@ fn home_env(home: &Path) -> [(&'static str, PathBuf); 5] {
 }
 
 /// Creates the folders an app unpacked by the launcher expects to find, and links the host's
-/// `~/.vst3` and `~/.clap` (SoundDecode's plugin folders) in when they exist, so an app running
+/// `~/.vst3` and `~/.clap` (DecodeSound's plugin folders) in when they exist, so an app running
 /// inside the sandbox still sees the plugins installed on the host. Every failure here is
 /// ignored: the app is worth starting even if its home is not quite ready.
 #[cfg(target_os = "linux")]
@@ -1753,11 +1753,11 @@ mod tests {
         let dir = tempfile::tempdir().unwrap();
         let cache = dir.path().join("persistent cache");
         std::fs::create_dir(&cache).unwrap();
-        let file = cache.join("PhotoDecode.msi");
+        let file = cache.join("DecodePhoto.msi");
         std::fs::write(&file, b"test package").unwrap();
         let link = dir.path().join("current cache");
         std::os::unix::fs::symlink(&cache, &link).unwrap();
-        let command = msi_command(Path::new("msiexec.exe"), &link.join("PhotoDecode.msi")).unwrap();
+        let command = msi_command(Path::new("msiexec.exe"), &link.join("DecodePhoto.msi")).unwrap();
         let args: Vec<_> = command.get_args().collect();
         assert_eq!(
             args,
@@ -1809,18 +1809,18 @@ mod tests {
         assert!(selected_folder("bad\nfolder", true).is_err());
         let app = DecodeApp::by_id("photocraft").unwrap();
         let locations = InstallLocations { root: Some(dir.path().display().to_string()), ..Default::default() };
-        assert_eq!(destination(app, PackageKind::Msi, None, None, &locations).unwrap(), Some(dir.path().join("PhotoDecode")));
+        assert_eq!(destination(app, PackageKind::Msi, None, None, &locations).unwrap(), Some(dir.path().join("DecodePhoto")));
         assert_eq!(destination(app, PackageKind::PortableZip, None, None, &locations).unwrap(), Some(dir.path().to_path_buf()));
-        let old = record("0.5.0", PackageKind::PortableZip, dir.path().join("PhotoDecode/photocraft.exe"), vec![], false);
+        let old = record("0.5.0", PackageKind::PortableZip, dir.path().join("DecodePhoto/photocraft.exe"), vec![], false);
         let unavailable = InstallLocations { root: Some(dir.path().join("missing").display().to_string()), ..Default::default() };
         assert_eq!(destination(app, PackageKind::PortableZip, None, Some(&old), &unavailable).unwrap(), None);
         let msi = Installed {
             version: None,
             source: InstallSource::Msi,
-            location: dir.path().join("MSI/PhotoDecode/photocraft.exe").display().to_string(),
+            location: dir.path().join("MSI/DecodePhoto/photocraft.exe").display().to_string(),
             package: None,
         };
-        assert_eq!(destination(app, PackageKind::Msi, Some(&msi), Some(&old), &unavailable).unwrap(), Some(dir.path().join("MSI/PhotoDecode")));
+        assert_eq!(destination(app, PackageKind::Msi, Some(&msi), Some(&old), &unavailable).unwrap(), Some(dir.path().join("MSI/DecodePhoto")));
         assert!(destination(app, PackageKind::TarGz, None, None, &locations).unwrap_err().contains("aren't supported"));
     }
 
@@ -1848,7 +1848,7 @@ mod tests {
     fn msi_folder_assignment_preserves_spaces_unicode_and_root_separators() {
         for (value, argument) in [
             (r"D:\", r#"INSTALLFOLDER="D:\""#),
-            (r"D:\Decode Apps\PhotoDecode", r#"INSTALLFOLDER="D:\Decode Apps\PhotoDecode""#),
+            (r"D:\Decode Apps\DecodePhoto", r#"INSTALLFOLDER="D:\Decode Apps\DecodePhoto""#),
             (r"\\server\apps\绘画", r#"INSTALLFOLDER="\\server\apps\绘画""#),
             (r"D:\Decode Apps\", r#"INSTALLFOLDER="D:\Decode Apps\""#),
         ] {
@@ -2530,11 +2530,11 @@ mod tests {
     fn arch_packages_from_a_repository_are_updated_with_the_system() {
         let app = decode_launcher_core::DecodeApp::by_id("wordcraft").unwrap();
         let hint = pacman_update_hint(app, "wordcraft-bin", Some("omarchy"));
-        assert!(hint.starts_with("WordDecode was installed from the omarchy repository or the AUR (wordcraft-bin)."));
+        assert!(hint.starts_with("DecodeWord was installed from the omarchy repository or the AUR (wordcraft-bin)."));
         assert!(hint.ends_with("or sudo pacman -Syu"));
 
         let aur_hint = pacman_update_hint(app, "wordcraft-bin", None);
-        assert!(aur_hint.starts_with("WordDecode was installed from the AUR (wordcraft-bin)."));
+        assert!(aur_hint.starts_with("DecodeWord was installed from the AUR (wordcraft-bin)."));
 
         let si = "Repository      : omarchy\nName            : wordcraft-bin\nVersion         : 0.6.1-1\n";
         assert_eq!(parse_pacman_repo(si).as_deref(), Some("omarchy"));
@@ -2583,7 +2583,7 @@ mod tests {
         let installed = Installed {
             version: version::parse("0.5.0"),
             source: InstallSource::Launcher,
-            location: dir.path().join("PhotoDecode.AppImage").display().to_string(),
+            location: dir.path().join("DecodePhoto.AppImage").display().to_string(),
             package: None,
         };
         let stop = Stop::default();
@@ -2696,9 +2696,9 @@ mod tests {
             SUITE.iter().find(|a| a.id == "photocraft").unwrap()
         }
 
-        /// A minimal `PhotoDecode.app` at `dir`, reporting `version`.
+        /// A minimal `DecodePhoto.app` at `dir`, reporting `version`.
         fn bundle(dir: &Path, version: &str) -> PathBuf {
-            let app = dir.join("PhotoDecode.app");
+            let app = dir.join("DecodePhoto.app");
             let contents = app.join("Contents");
             std::fs::create_dir_all(contents.join("MacOS")).unwrap();
             std::fs::write(
@@ -2706,16 +2706,16 @@ mod tests {
                 format!(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict>\
                      <key>CFBundleIdentifier</key><string>ai.storyteller.photocraft</string>\
-                     <key>CFBundleExecutable</key><string>PhotoDecode</string>\
+                     <key>CFBundleExecutable</key><string>DecodePhoto</string>\
                      <key>CFBundleShortVersionString</key><string>{version}</string></dict></plist>"
                 ),
             )
             .unwrap();
-            std::fs::write(contents.join("MacOS/PhotoDecode"), version).unwrap();
+            std::fs::write(contents.join("MacOS/DecodePhoto"), version).unwrap();
             app
         }
 
-        /// A release-style disk image holding a `PhotoDecode.app` that reports `version`. The
+        /// A release-style disk image holding a `DecodePhoto.app` that reports `version`. The
         /// disk-image helper turns requests away while it is busy (`attach` retries for the same
         /// reason), so `hdiutil create` is tried a few times, and what it said is kept for the
         /// failure message.
@@ -2731,7 +2731,7 @@ mod tests {
                     let _ = std::fs::remove_file(&dmg);
                 }
                 let output = std::process::Command::new("hdiutil")
-                    .args(["create", "-quiet", "-format", "UDZO", "-volname", "PhotoDecode", "-srcfolder"])
+                    .args(["create", "-quiet", "-format", "UDZO", "-volname", "DecodePhoto", "-srcfolder"])
                     .arg(&src)
                     .arg(&dmg)
                     .output()
@@ -2753,7 +2753,7 @@ mod tests {
             let image = dmg(dir.path(), "0.6.0");
             let expect = Expect { team: None, version: None };
             let placed = install_dmg(photocraft(), &image, None, Some(&apps), false, &paths, &expect).unwrap();
-            assert_eq!(placed, apps.join("PhotoDecode.app"));
+            assert_eq!(placed, apps.join("DecodePhoto.app"));
             let mut manifest = crate::manifest::Manifest::default();
             manifest.apps.insert("photocraft".into(), record("0.6.0", PackageKind::Dmg, placed.clone(), vec![], false));
             let existing = crate::detect::detect(photocraft(), &manifest, &crate::detect::Snapshot::default()).unwrap();
@@ -2765,7 +2765,7 @@ mod tests {
             std::fs::create_dir(&new_default).unwrap();
             let update = dmg(dir.path(), "0.7.0");
             assert_eq!(install_dmg(photocraft(), &update, Some(&existing), Some(&new_default), false, &paths, &expect).unwrap(), placed);
-            assert!(!new_default.join("PhotoDecode.app").exists());
+            assert!(!new_default.join("DecodePhoto.app").exists());
             let detected = crate::detect::detect(photocraft(), &manifest, &crate::detect::Snapshot::default()).unwrap();
             assert_eq!(detected.version.unwrap().to_string(), "0.7.0");
             std::fs::write(placed.join("Contents/Info.plist"), "invalid").unwrap();
@@ -2787,7 +2787,7 @@ mod tests {
                 install_dmg(photocraft(), &image, None, Some(dir.path()), false, &Paths::under(dir.path()), &Expect { team: None, version: None });
             assert!(result.unwrap_err().contains("already exists"));
             assert_eq!(std::fs::read_to_string(plist).unwrap(), unrelated);
-            assert_eq!(std::fs::read(placed.join("Contents/MacOS/PhotoDecode")).unwrap(), b"0.5.0");
+            assert_eq!(std::fs::read(placed.join("Contents/MacOS/DecodePhoto")).unwrap(), b"0.5.0");
         }
 
         #[test]
@@ -2816,19 +2816,19 @@ mod tests {
             let image = dmg(dir.path(), "0.6.0");
 
             for (release, ok) in [("0.6.0", true), ("0.7.0", false), ("0.6.0-rc.1", true), ("0.5.0", false)] {
-                std::fs::write(current.join("Contents/MacOS/PhotoDecode"), "0.5.0").unwrap();
+                std::fs::write(current.join("Contents/MacOS/DecodePhoto"), "0.5.0").unwrap();
                 let want = version::parse(release).unwrap();
                 let expect = Expect { team: None, version: Some(&want) };
                 let result = install_dmg(photocraft(), &image, Some(&existing), None, false, &paths, &expect);
                 assert_eq!(result.is_ok(), ok, "release {release}: {result:?}");
-                let now = std::fs::read_to_string(current.join("Contents/MacOS/PhotoDecode")).unwrap();
+                let now = std::fs::read_to_string(current.join("Contents/MacOS/DecodePhoto")).unwrap();
                 assert_eq!(now, if ok { "0.6.0" } else { "0.5.0" }, "release {release}");
                 if !ok {
                     assert_eq!(result, Err(format!("the app inside isn't version {release}, so it wasn't installed")));
                 }
                 assert_eq!(
                     std::fs::read_dir(&apps).unwrap().map(|e| e.unwrap().file_name()).collect::<Vec<_>>(),
-                    [std::ffi::OsString::from("PhotoDecode.app")]
+                    [std::ffi::OsString::from("DecodePhoto.app")]
                 );
             }
 
@@ -2850,14 +2850,14 @@ mod tests {
 
             let result = install_dmg(photocraft(), &image, Some(&existing), None, false, &Paths::under(dir.path()), &Expect::release(&release));
             assert_eq!(result, Err("the app isn't signed by its developer, so it wasn't installed".into()));
-            assert_eq!(std::fs::read_to_string(current.join("Contents/MacOS/PhotoDecode")).unwrap(), "0.5.0");
+            assert_eq!(std::fs::read_to_string(current.join("Contents/MacOS/DecodePhoto")).unwrap(), "0.5.0");
             assert_eq!(
                 std::fs::read_dir(&apps).unwrap().map(|e| e.unwrap().file_name()).collect::<Vec<_>>(),
-                [std::ffi::OsString::from("PhotoDecode.app")]
+                [std::ffi::OsString::from("DecodePhoto.app")]
             );
         }
 
-        /// A real release passes. Run with `CRAFT_APP=/path/to/PhotoDecode.app cargo test -p
+        /// A real release passes. Run with `CRAFT_APP=/path/to/DecodePhoto.app cargo test -p
         /// decode-launcher-native -- --ignored a_real_decode_app`.
         #[test]
         #[ignore = "needs a Decode App from a real release"]

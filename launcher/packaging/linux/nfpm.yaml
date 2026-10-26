@@ -18,9 +18,9 @@ homepage: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/laun
 license: MIT OR Apache-2.0
 description: |-
   Install, update and launch the Decode App Suite.
-  Decode Launcher lists PhotoDecode, LightDecode, FilmDecode, DesignDecode,
-  VectorDecode, PdfDecode, EffectDecode, WordDecode, DeckDecode, GridDecode, CADDecode,
-  SoundDecode and FigDecode, installs the right build for this computer and keeps
+  Decode Launcher lists DecodePhoto, DecodeLight, DecodeFilm, DecodeDesign,
+  DecodeVector, DecodePdf, DecodeEffect, DecodeWord, DecodeDeck, DecodeGrid, DecodeCAD,
+  DecodeSound and DecodeFig, installs the right build for this computer and keeps
   them up to date from GitHub releases. It can live in the system tray.
 
 # The binary links only glibc and libgcc_s directly. Windowing (X11/Wayland, xkbcommon) and the

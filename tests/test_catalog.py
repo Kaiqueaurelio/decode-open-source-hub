@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "software.json"
 EXPECTED_ORDER = ["photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"]
-EXPECTED_NAMES = {"photocraft":"PhotoDecode","vectorcraft":"VectorDecode","filmcraft":"FilmDecode","lightcraft":"LightDecode","pdfcraft":"PdfDecode","effectcraft":"EffectDecode","designcraft":"DesignDecode","figcraft":"FigDecode","wordcraft":"WordDecode","soundcraft":"SoundDecode","deckcraft":"DeckDecode","cadcraft":"CADDecode","gridcraft":"GridDecode"}
+EXPECTED_NAMES = {"photocraft":"DecodePhoto","vectorcraft":"DecodeVector","filmcraft":"DecodeFilm","lightcraft":"DecodeLight","pdfcraft":"DecodePdf","effectcraft":"DecodeEffect","designcraft":"DecodeDesign","figcraft":"DecodeFig","wordcraft":"DecodeWord","soundcraft":"DecodeSound","deckcraft":"DecodeDeck","cadcraft":"DecodeCAD","gridcraft":"DecodeGrid"}
 
 class CatalogTests(unittest.TestCase):
     @classmethod
@@ -38,10 +38,14 @@ class CatalogTests(unittest.TestCase):
         for slug in EXPECTED_ORDER:
             item = self.by_slug[slug]
             with self.subTest(app=item["name"]):
-                self.assertEqual(item["sourceUrl"], f"https://github.com/storytold/{slug}")
+                if slug == "cadcraft":
+                    self.assertEqual(item["sourceUrl"], "https://github.com/Kaiqueaurelio/decodecad")
+                    self.assertEqual(item["licenseUrl"], "https://github.com/Kaiqueaurelio/decodecad/blob/main/LICENSE-MIT")
+                else:
+                    self.assertEqual(item["sourceUrl"], f"https://github.com/storytold/{slug}")
+                    self.assertEqual(item["licenseUrl"], f"https://github.com/storytold/{slug}/blob/main/LICENSE-MIT")
                 self.assertEqual(item["websiteUrl"], f"https://getartcraft.com/apps/{slug}")
                 self.assertEqual(item["downloadUrl"], item["websiteUrl"])
-                self.assertEqual(item["licenseUrl"], f"https://github.com/storytold/{slug}/blob/main/LICENSE-MIT")
                 self.assertEqual(item["license"], "MIT OR Apache-2.0")
 
     def test_launcher_links_and_disclosure(self):
