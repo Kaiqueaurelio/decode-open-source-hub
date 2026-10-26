@@ -275,7 +275,8 @@ if old_brand_license.exists():
 
 print(f"Imported upstream tree to {root}")
 print(f"Updated branding strings in {len(changed)} text files.")
-print("NOTICE, ATTRIBUTION.md and source license texts were preserved without modification.")\nprint("Original app IDs and release URLs remain intact for installation/update compatibility.")
+print("NOTICE, ATTRIBUTION.md and source license texts were preserved without modification.")
+print("Original app IDs and release URLs remain intact for installation/update compatibility.")
 print("IMPORTANT: review identifiers, icon assets, signing/package IDs and all changes before building.")
 PY
 
