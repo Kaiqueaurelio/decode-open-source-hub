@@ -905,5 +905,279 @@
       "desenvolvimento"
     ],
     "featured": false
+  },
+  {
+    "slug": "zotero",
+    "name": "Zotero",
+    "icon": "📚",
+    "category": "Produtividade",
+    "tagline": "Organize referências e pesquisas acadêmicas",
+    "description": "Gerenciador de referências para coletar fontes, organizar bibliotecas, anotar materiais e gerar citações e bibliografias.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "AGPL-3.0 (salvo indicação específica em componentes)",
+    "licenseUrl": "https://www.zotero.org/support/dev/source_code",
+    "websiteUrl": "https://www.zotero.org/",
+    "sourceUrl": "https://github.com/zotero/zotero",
+    "downloadUrl": "https://www.zotero.org/download/",
+    "tags": [
+      "pesquisa",
+      "referências",
+      "citações",
+      "academia"
+    ],
+    "featured": true
+  },
+  {
+    "slug": "neovim",
+    "name": "Neovim",
+    "icon": "⌨️",
+    "category": "Desenvolvimento",
+    "tagline": "Editor de texto extensível para programação",
+    "description": "Editor de código orientado a teclado, com automação, extensões e integração com ferramentas modernas de desenvolvimento.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux",
+      "BSD"
+    ],
+    "license": "Apache-2.0, com partes sob licença Vim",
+    "licenseUrl": "https://github.com/neovim/neovim/blob/master/LICENSE.txt",
+    "websiteUrl": "https://neovim.io/",
+    "sourceUrl": "https://github.com/neovim/neovim",
+    "downloadUrl": "https://github.com/neovim/neovim/releases",
+    "tags": [
+      "editor",
+      "terminal",
+      "programação",
+      "plugins"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "penpot",
+    "name": "Penpot",
+    "icon": "✏️",
+    "category": "Criação visual",
+    "tagline": "Design de interfaces e prototipagem colaborativa",
+    "description": "Plataforma de design de produtos digitais com vetores, protótipos interativos, componentes, sistemas de design e colaboração entre design e desenvolvimento.",
+    "platforms": [
+      "Web"
+    ],
+    "license": "MPL-2.0 (verifique módulos e componentes individuais)",
+    "licenseUrl": "https://github.com/penpot/penpot",
+    "websiteUrl": "https://penpot.app/",
+    "sourceUrl": "https://github.com/penpot/penpot",
+    "downloadUrl": "https://penpot.app/",
+    "tags": [
+      "UI",
+      "UX",
+      "protótipo",
+      "design system"
+    ],
+    "featured": true
+  },
+  {
+    "slug": "lmms",
+    "name": "LMMS",
+    "icon": "🎹",
+    "category": "Vídeo e áudio",
+    "tagline": "Produção musical e criação de batidas",
+    "description": "Estação de trabalho de áudio digital para compor, sequenciar, sintetizar e mixar música com instrumentos e efeitos.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "GPL-2.0",
+    "licenseUrl": "https://github.com/LMMS/lmms",
+    "websiteUrl": "https://lmms.io/",
+    "sourceUrl": "https://github.com/LMMS/lmms",
+    "downloadUrl": "https://lmms.io/download",
+    "tags": [
+      "música",
+      "MIDI",
+      "sintetizador",
+      "produção"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "home-assistant",
+    "name": "Home Assistant",
+    "icon": "🏠",
+    "category": "Infraestrutura e nuvem",
+    "tagline": "Automação residencial com controle local",
+    "description": "Plataforma de automação residencial que integra dispositivos e serviços para criar rotinas e controlar a casa com foco em controle local.",
+    "platforms": [
+      "Linux",
+      "Web"
+    ],
+    "license": "Apache-2.0",
+    "licenseUrl": "https://github.com/home-assistant/core",
+    "websiteUrl": "https://www.home-assistant.io/",
+    "sourceUrl": "https://github.com/home-assistant/core",
+    "downloadUrl": "https://www.home-assistant.io/installation/",
+    "tags": [
+      "casa inteligente",
+      "IoT",
+      "automação",
+      "privacidade"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "cmake",
+    "name": "CMake",
+    "icon": "⚙️",
+    "category": "Desenvolvimento",
+    "tagline": "Configuração e geração de builds",
+    "description": "Ferramenta multiplataforma para configurar projetos de software e gerar arquivos de compilação para diferentes ambientes e toolchains.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "BSD-3-Clause",
+    "licenseUrl": "https://cmake.org/licensing/",
+    "websiteUrl": "https://cmake.org/",
+    "sourceUrl": "https://github.com/Kitware/CMake",
+    "downloadUrl": "https://cmake.org/download/",
+    "tags": [
+      "compilação",
+      "build",
+      "C++",
+      "toolchain"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "qbittorrent",
+    "name": "qBittorrent",
+    "icon": "⬇️",
+    "category": "Internet e comunicação",
+    "tagline": "Cliente BitTorrent de código aberto",
+    "description": "Cliente BitTorrent para gerenciar downloads P2P, filas, limites de velocidade e conexões com suporte a várias plataformas.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux",
+      "BSD"
+    ],
+    "license": "GPL (o repositório contém arquivos de licença para GPLv2 e GPLv3)",
+    "licenseUrl": "https://github.com/qbittorrent/qBittorrent",
+    "websiteUrl": "https://www.qbittorrent.org/",
+    "sourceUrl": "https://github.com/qbittorrent/qBittorrent",
+    "downloadUrl": "https://www.qbittorrent.org/download",
+    "tags": [
+      "BitTorrent",
+      "P2P",
+      "downloads",
+      "rede"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "openrefine",
+    "name": "OpenRefine",
+    "icon": "🧹",
+    "category": "Ciência e dados",
+    "tagline": "Limpeza e transformação de conjuntos de dados",
+    "description": "Ferramenta para explorar, limpar, reconciliar e transformar dados desorganizados, com operações reproduzíveis em conjuntos de informações.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "BSD-3-Clause",
+    "licenseUrl": "https://github.com/OpenRefine/OpenRefine",
+    "websiteUrl": "https://openrefine.org/",
+    "sourceUrl": "https://github.com/OpenRefine/OpenRefine",
+    "downloadUrl": "https://openrefine.org/download",
+    "tags": [
+      "dados",
+      "limpeza",
+      "ETL",
+      "pesquisa"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "ollama",
+    "name": "Ollama",
+    "icon": "🦙",
+    "category": "Desenvolvimento",
+    "tagline": "Execute modelos de IA localmente",
+    "description": "Ferramenta para baixar, executar e gerenciar modelos de linguagem em ambientes locais, com uma interface de linha de comando e API.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "MIT (código do Ollama; modelos possuem licenças próprias)",
+    "licenseUrl": "https://github.com/ollama/ollama/blob/main/LICENSE",
+    "websiteUrl": "https://ollama.com/",
+    "sourceUrl": "https://github.com/ollama/ollama",
+    "downloadUrl": "https://ollama.com/download",
+    "tags": [
+      "IA",
+      "LLM",
+      "modelos locais",
+      "API"
+    ],
+    "featured": true
+  },
+  {
+    "slug": "anki",
+    "name": "Anki",
+    "icon": "🧠",
+    "category": "Produtividade",
+    "tagline": "Memorização com cartões e repetição espaçada",
+    "description": "Aplicativo de cartões de estudo com programação de revisões espaçadas, sincronização e suporte a baralhos personalizados.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "AGPL-3.0-or-later (com componentes sob outras licenças)",
+    "licenseUrl": "https://github.com/ankitects/anki/blob/main/LICENSE",
+    "websiteUrl": "https://apps.ankiweb.net/",
+    "sourceUrl": "https://github.com/ankitects/anki",
+    "downloadUrl": "https://apps.ankiweb.net/",
+    "tags": [
+      "estudo",
+      "flashcards",
+      "memória",
+      "aprendizagem"
+    ],
+    "featured": false
+  },
+  {
+    "slug": "podman",
+    "name": "Podman",
+    "icon": "📦",
+    "category": "Infraestrutura e nuvem",
+    "tagline": "Gerenciamento de contêineres",
+    "description": "Ferramenta para criar, executar e administrar contêineres e pods, inclusive em fluxos de trabalho sem daemon central obrigatório.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "license": "Apache-2.0",
+    "licenseUrl": "https://github.com/containers/podman/blob/main/LICENSE",
+    "websiteUrl": "https://podman.io/",
+    "sourceUrl": "https://github.com/containers/podman",
+    "downloadUrl": "https://podman.io/getting-started/installation",
+    "tags": [
+      "contêineres",
+      "DevOps",
+      "Linux",
+      "infraestrutura"
+    ],
+    "featured": false
   }
 ]
