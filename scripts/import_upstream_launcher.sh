@@ -48,9 +48,12 @@ replacements = [
     ("ArtCraft launcher", "Decode Launcher"),
     ("ArtCraft's", "Decode's"),
     ("ArtCraft", "Decode"),
-    ("artcraft-launcher", "decode-launcher"),
+    ("artcraft_launcher", "decode_launcher"),
+    ("ARTCRAFT_LOGO", "DECODE_LOGO"),
     ("ARTCRAFT_LAUNCHER", "DECODE_LAUNCHER"),
-    ("ai.storyteller.artcraft-launcher", "com.decode.launcher"),
+    ("artcraft-launcher", "decode-launcher"),
+    ("ai.storyteller.decode-launcher", "com.decode.launcher"),
+    ("https://github.com/storytold/craft-launcher", "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher"),
 ]
 skip_names = {"LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "ATTRIBUTION.md"}
 changed = []
