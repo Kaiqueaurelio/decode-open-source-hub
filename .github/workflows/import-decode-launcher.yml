@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/import-decode-launcher.yml"
+      - "scripts/import_upstream_launcher.sh"
   workflow_dispatch:
 
 permissions:
