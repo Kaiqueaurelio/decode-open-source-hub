@@ -271,100 +271,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
 
 [[package]]
-name = "decode-launcher"
-version = "0.8.1"
-dependencies = [
- "decode-launcher-core",
- "decode-launcher-native",
- "decode-launcher-ui-egui",
- "craft-quit",
- "eframe",
- "egui",
- "env_logger",
- "image",
- "log",
- "notify-rust",
- "objc2 0.6.5",
- "objc2-app-kit 0.3.2",
- "objc2-foundation 0.3.2",
- "rfd",
- "ron",
- "serde",
- "tray-icon",
- "winreg",
- "winresource",
- "zbus",
-]
-
-[[package]]
-name = "decode-launcher-core"
-version = "0.8.1"
-dependencies = [
- "jiff",
- "semver",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "decode-launcher-native"
-version = "0.8.1"
-dependencies = [
- "decode-launcher-core",
- "craft-update",
- "dirs 6.0.0",
- "dunce",
- "flate2",
- "getrandom 0.3.4",
- "log",
- "plist",
- "serde",
- "serde_json",
- "sha2",
- "tar",
- "tempfile",
- "ureq",
- "verifysign",
- "winreg",
- "winsafe",
- "zip 8.6.0",
-]
-
-[[package]]
-name = "decode-launcher-ui-egui"
-version = "0.8.1"
-dependencies = [
- "decode-launcher-core",
- "egui",
- "egui_extras",
- "egui_kittest",
- "image",
- "jiff",
- "js-sys",
- "log",
- "serde",
- "serde_json",
- "skrifa",
- "sys-locale",
- "wasm-bindgen",
-]
-
-[[package]]
-name = "decode-launcher-web"
-version = "0.8.1"
-dependencies = [
- "decode-launcher-core",
- "decode-launcher-ui-egui",
- "eframe",
- "egui",
- "js-sys",
- "log",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
-]
-
-[[package]]
 name = "as-raw-xcb-connection"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1057,6 +963,100 @@ name = "data-url"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "be1e0bca6c3637f992fc1cc7cbc52a78c1ef6db076dbf1059c4323d6a2048376"
+
+[[package]]
+name = "decode-launcher"
+version = "0.8.1"
+dependencies = [
+ "craft-quit",
+ "decode-launcher-core",
+ "decode-launcher-native",
+ "decode-launcher-ui-egui",
+ "eframe",
+ "egui",
+ "env_logger",
+ "image",
+ "log",
+ "notify-rust",
+ "objc2 0.6.5",
+ "objc2-app-kit 0.3.2",
+ "objc2-foundation 0.3.2",
+ "rfd",
+ "ron",
+ "serde",
+ "tray-icon",
+ "winreg",
+ "winresource",
+ "zbus",
+]
+
+[[package]]
+name = "decode-launcher-core"
+version = "0.8.1"
+dependencies = [
+ "jiff",
+ "semver",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "decode-launcher-native"
+version = "0.8.1"
+dependencies = [
+ "craft-update",
+ "decode-launcher-core",
+ "dirs 6.0.0",
+ "dunce",
+ "flate2",
+ "getrandom 0.3.4",
+ "log",
+ "plist",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tar",
+ "tempfile",
+ "ureq",
+ "verifysign",
+ "winreg",
+ "winsafe",
+ "zip 8.6.0",
+]
+
+[[package]]
+name = "decode-launcher-ui-egui"
+version = "0.8.1"
+dependencies = [
+ "decode-launcher-core",
+ "egui",
+ "egui_extras",
+ "egui_kittest",
+ "image",
+ "jiff",
+ "js-sys",
+ "log",
+ "serde",
+ "serde_json",
+ "skrifa",
+ "sys-locale",
+ "wasm-bindgen",
+]
+
+[[package]]
+name = "decode-launcher-web"
+version = "0.8.1"
+dependencies = [
+ "decode-launcher-core",
+ "decode-launcher-ui-egui",
+ "eframe",
+ "egui",
+ "js-sys",
+ "log",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
 
 [[package]]
 name = "defmt"
