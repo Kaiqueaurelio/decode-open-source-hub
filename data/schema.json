@@ -96,12 +96,12 @@
       "licenseUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://github\\\\.com/storytold/"
+        "pattern": "^https://github\\.com/storytold/"
       },
       "websiteUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://(getartcraft\\\\.com|github\\\\.com/storytold/craft-launcher)"
+        "pattern": "^https://(getartcraft\\.com|github\\.com/storytold/craft-launcher)"
       },
       "sourceUrl": {
         "type": "string",
