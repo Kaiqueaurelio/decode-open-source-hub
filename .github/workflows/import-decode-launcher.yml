@@ -41,13 +41,19 @@ jobs:
           echo "Imported files: $(find launcher -type f | wc -l)"
           echo "Imported source size: $(du -sh launcher | cut -f1)"
 
-      - name: Run Rust formatting and tests when toolchain is available
-        working-directory: launcher
+      - name: Install stable Rust toolchain
         run: |
           rustup toolchain install stable --profile minimal
           rustup default stable
-          cargo fmt --all -- --check
-          cargo test --workspace --locked
+
+      - name: Apply Rust formatting
+        working-directory: launcher
+        run: cargo fmt --all
+        continue-on-error: true
+
+      - name: Run Rust tests
+        working-directory: launcher
+        run: cargo test --workspace --locked
         continue-on-error: true
 
       - name: Create migration branch and pull request
