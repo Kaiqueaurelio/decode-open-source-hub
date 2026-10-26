@@ -13,7 +13,7 @@
   <key>CFBundleExecutable</key>
   <string>FigCraft</string>
   <key>CFBundleIdentifier</key>
-  <string>ai.storyteller.figcraft</string>
+  <string>com.decode.figcraft</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundlePackageType</key>
@@ -50,7 +50,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>ai.storyteller.figcraft.document</string>
+      <string>com.decode.figcraft.document</string>
       <key>UTTypeDescription</key>
       <string>FigCraft Document</string>
       <key>UTTypeConformsTo</key>
@@ -97,7 +97,7 @@
   <array>
     <dict>
       <key>CFBundleURLName</key>
-      <string>ai.storyteller.figcraft.invite</string>
+      <string>com.decode.figcraft.invite</string>
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLSchemes</key>
@@ -117,7 +117,7 @@
       <key>CFBundleTypeIconFile</key>
       <string>FigCraft</string>
       <key>LSItemContentTypes</key>
-      <array><string>ai.storyteller.figcraft.document</string></array>
+      <array><string>com.decode.figcraft.document</string></array>
     </dict>
     <!-- Offered under "Open With", never forced as the default. -->
     <dict>

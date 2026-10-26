@@ -43,7 +43,7 @@
   <key>CFBundleExecutable</key>
   <string>VectorCraft</string>
   <key>CFBundleIdentifier</key>
-  <string>ai.storyteller.vectorcraft</string>
+  <string>com.decode.vectorcraft</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundlePackageType</key>
@@ -84,7 +84,7 @@
   <array>
     <dict>
       <key>CFBundleTypeName</key><string>VectorCraft Document</string>
-      <key>LSItemContentTypes</key><array><string>ai.storyteller.vectorcraft.document</string></array>
+      <key>LSItemContentTypes</key><array><string>com.decode.vectorcraft.document</string></array>
       <key>CFBundleTypeRole</key><string>Editor</string>
       <key>LSHandlerRank</key><string>Owner</string>
     </dict>
@@ -153,7 +153,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>ai.storyteller.vectorcraft.document</string>
+      <string>com.decode.vectorcraft.document</string>
       <key>UTTypeDescription</key>
       <string>VectorCraft Document</string>
       <key>UTTypeConformsTo</key>

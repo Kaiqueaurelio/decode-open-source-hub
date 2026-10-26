@@ -13,7 +13,7 @@
   <key>CFBundleExecutable</key>
   <string>DesignCraft</string>
   <key>CFBundleIdentifier</key>
-  <string>ai.storyteller.designcraft</string>
+  <string>com.decode.designcraft</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundlePackageType</key>
@@ -59,7 +59,7 @@
       <key>CFBundleTypeIconFile</key>
       <string>DesignCraft</string>
       <key>LSItemContentTypes</key>
-      <array><string>ai.storyteller.designcraft.document</string></array>
+      <array><string>com.decode.designcraft.document</string></array>
     </dict>
     <dict>
       <key>CFBundleTypeName</key>
@@ -70,7 +70,7 @@
       <key>LSHandlerRank</key>
       <string>Alternate</string>
       <key>LSItemContentTypes</key>
-      <array><string>ai.storyteller.designcraft.idml</string></array>
+      <array><string>com.decode.designcraft.idml</string></array>
     </dict>
   </array>
 
@@ -80,7 +80,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>ai.storyteller.designcraft.document</string>
+      <string>com.decode.designcraft.document</string>
       <key>UTTypeDescription</key>
       <string>DesignCraft Document</string>
       <key>UTTypeConformsTo</key>
@@ -104,7 +104,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>ai.storyteller.designcraft.idml</string>
+      <string>com.decode.designcraft.idml</string>
       <key>UTTypeDescription</key>
       <string>IDML Document</string>
       <key>UTTypeConformsTo</key>

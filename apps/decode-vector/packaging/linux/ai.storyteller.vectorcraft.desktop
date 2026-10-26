@@ -1,14 +1,14 @@
 [Desktop Entry]
 Type=Application
-Name=VectorCraft
-GenericName=Vector Graphics Editor
+Name=DecodeVector
+GenericName=Decode Vector
 Comment=Draw and edit vector illustrations, SVG and PDF
 Exec=vectorcraft %F
 TryExec=vectorcraft
-Icon=ai.storyteller.vectorcraft
+Icon=com.decode.vectorcraft
 Terminal=false
 StartupNotify=true
-StartupWMClass=ai.storyteller.vectorcraft
+StartupWMClass=vectorcraft
 Categories=Graphics;2DGraphics;VectorGraphics;
 Keywords=vector;illustration;svg;pdf;drawing;bezier;
 # MimeType lists the formats File › Open reads that Info.plist.in declares for macOS. The type of .ai

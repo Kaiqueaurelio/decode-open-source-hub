@@ -196,25 +196,25 @@ pub const SUITE: [DecodeApp; 13] = [
 ];
 
 /// Decode's website.
-pub const WEBSITE_URL: &str = "https://getartcraft.com";
+pub const WEBSITE_URL: &str = "https://kaiqueaurelio.github.io/decode-open-source-hub/";
 /// The GitHub account every Decode App's repository lives under: the only one the launcher
 /// installs from, whatever the release feed says.
 pub const GITHUB_OWNER: &str = "storytold";
 /// Decode on GitHub: every Decode App's source.
-pub const GITHUB_URL: &str = "https://github.com/storytold";
+pub const GITHUB_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub";
 /// Decode's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
 pub const SOCIAL: [(&str, &str); 5] = [
-    ("X", "https://x.com/get_artcraft"),
-    ("Instagram", "https://www.instagram.com/officialartcraftstudios"),
-    ("LinkedIn", "https://www.linkedin.com/company/artcraft-ai"),
-    ("YouTube", "https://www.youtube.com/@OfficialArtcraftStudios"),
-    ("TikTok", "https://www.tiktok.com/@artcraft.studios"),
+    ("Instagram", "https://www.instagram.com/decode.analytics/"),
+    ("GitHub", "https://github.com/Kaiqueaurelio/decode-open-source-hub"),
+    ("LinkedIn", "https://www.linkedin.com/company/decodeanalytics"),
+    ("Website", "https://kaiqueaurelio.github.io/decode-open-source-hub/"),
+    ("X", "https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions"),
 ];
 
 /// The Decode community on Discord.
-pub const DISCORD_URL: &str = "https://discord.gg/artcraft";
+pub const DISCORD_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions";
 /// Deep link into the Discord application for the Decode server invite.
-pub const DISCORD_APP_URL: &str = "discord://-/invite/artcraft";
+pub const DISCORD_APP_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions";
 
 /// Decode Launcher itself, described like a Decode App so it can update itself with the same
 /// machinery (asset names `decode-launcher-<ver>-…`, bundle id `com.decode.launcher`,

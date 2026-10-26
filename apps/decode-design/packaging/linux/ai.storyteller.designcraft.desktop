@@ -1,14 +1,14 @@
 [Desktop Entry]
 Type=Application
-Name=DesignCraft
-GenericName=Page Layout
+Name=DecodeDesign
+GenericName=Decode Design
 Comment=Lay out magazines, books and print documents
 Exec=designcraft %F
 TryExec=designcraft
-Icon=ai.storyteller.designcraft
+Icon=com.decode.designcraft
 Terminal=false
 StartupNotify=true
-StartupWMClass=ai.storyteller.designcraft
+StartupWMClass=designcraft
 Categories=Graphics;Publishing;
 MimeType=application/x-designcraft;application/vnd.adobe.indesign-idml-package;
 Keywords=layout;page;desktop publishing;dtp;magazine;book;indesign;idml;typesetting;
