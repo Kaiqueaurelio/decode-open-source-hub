@@ -86,7 +86,8 @@
     var stage = String(item.stage || "Status não informado");
     var stageClass = /alpha/i.test(stage) ? "stage-badge stage-alpha" : /desenvolvimento/i.test(stage) ? "stage-badge stage-development" : "stage-badge stage-available";
     var stageBadge = '<span class="' + stageClass + '">' + escapeHtml(stage) + '</span>';
-    var kindBadge = '<span class="kind-pill">' + escapeHtml(item.kind || "Projeto ArtCraft") + '</span>';
+    var kindLabel = item.kind === "Crafting App" ? "App Decode" : (item.kind || "Projeto Decode");
+    var kindBadge = '<span class="kind-pill">' + escapeHtml(kindLabel) + '</span>';
     return '<article class="software-card"><div class="card-top"><div class="app-icon" aria-hidden="true">' + escapeHtml(item.icon || "◈") + '</div><div class="card-badges">' + featured + stageBadge + '</div></div>' +
       '<div class="card-category-row"><div class="card-category">' + escapeHtml(item.category) + '</div>' + kindBadge + '</div><div class="card-title-row"><h3 class="card-title">' + escapeHtml(item.name) + '</h3></div>' +
       '<p class="card-tagline">' + escapeHtml(item.tagline) + '</p><p class="card-description">' + escapeHtml(item.description) + '</p>' +

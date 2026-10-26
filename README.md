@@ -1,6 +1,6 @@
-# Decode Open Source Hub — ArtCraft Edition
+# Decode Open Source Hub — Decode Edition
 
-**O catálogo independente dos 13 Crafting Apps open source do ArtCraft.**
+**Coleção independente de 13 ferramentas com nomes de apresentação Decode, baseadas em projetos open source do ArtCraft.**
 
 Este repositório é intencionalmente focado na suíte oficial de aplicativos do ArtCraft — não em um diretório genérico de softwares de código aberto.
 
@@ -15,6 +15,24 @@ O catálogo contém somente os 13 aplicativos que compõem a Craft App Suite e a
 **Total nesta edição: 13 aplicativos.** O ArtCraft Studio e o ArtCraft Launcher não são listados como itens do catálogo: o objetivo é reproduzir apenas os apps da suíte que o Launcher instala e gerencia.
 
 > Este catálogo é independente, mantido neste repositório. Não é um site oficial do ArtCraft, não é afiliado à equipe ArtCraft e não representa endosso dos desenvolvedores.
+
+## Mapeamento de nomes
+
+| Nome exibido no Decode | Nome oficial do projeto |
+|---|---|
+| PhotoDecode | PhotoCraft |
+| VectorDecode | VectorCraft |
+| FilmDecode | FilmCraft |
+| LightDecode | LightCraft |
+| PdfDecode | PdfCraft |
+| EffectDecode | EffectCraft |
+| DesignDecode | DesignCraft |
+| FigDecode | FigCraft |
+| WordDecode | WordCraft |
+| SoundDecode | SoundCraft |
+| DeckDecode | DeckCraft |
+| CADDecode | CADCraft |
+| GridDecode | GridCraft |
 
 ## Recursos
 

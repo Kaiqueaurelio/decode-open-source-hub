@@ -1,4 +1,4 @@
-# Diretrizes do catálogo ArtCraft
+# Diretrizes do catálogo Decode
 
 ## Escopo permitido
 
@@ -29,3 +29,7 @@ Mantenha os rótulos de acordo com a página oficial. Não transforme "Alpha ini
 Prefira a página oficial de cada app em https://getartcraft.com/apps/<app>, onde ficam as opções de instalação atuais. O campo de download deve apontar para a mesma página oficial do produto, evitando links de instaladores que possam ficar desatualizados.
 
 A validação automatizada verifica o escopo, os valores esperados de estágio e plataforma, sintaxe de URLs e domínios. A disponibilidade dos links e a segurança dos instaladores ainda precisam de verificação externa.
+
+## Nomes de apresentação
+
+Na interface, use PhotoDecode, VectorDecode, FilmDecode, LightDecode, PdfDecode, EffectDecode, DesignDecode, FigDecode, WordDecode, SoundDecode, DeckDecode, CADDecode e GridDecode. Preserve os slugs oficiais, URLs e nomes originais nos termos de busca. Não sugira que os mantenedores renomearam os aplicativos.

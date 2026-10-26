@@ -23,3 +23,7 @@ A validação estática não substitui uma consulta ao vivo dos endereços, não
 5. Execute o validador e a suíte de testes antes de abrir um pull request.
 
 Este catálogo é independente e não é um produto oficial do ArtCraft. Evite sugerir afiliação ou endosso dos mantenedores.
+
+## Validação dos nomes Decode
+
+O validador e os testes exigem os 13 nomes personalizados Decode, preservam os slugs oficiais e verificam que os nomes originais continuam disponíveis como termos de busca. O selo “App Decode” é uma escolha editorial desta coleção e não o tipo oficial do projeto.

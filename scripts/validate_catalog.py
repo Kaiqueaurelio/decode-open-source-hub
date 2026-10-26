@@ -15,6 +15,7 @@ REQUIRED = {
 }
 EXPECTED_ORDER = ["photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"]
 EXPECTED = set(EXPECTED_ORDER)
+EXPECTED_NAMES = {"photocraft":"PhotoDecode","vectorcraft":"VectorDecode","filmcraft":"FilmDecode","lightcraft":"LightDecode","pdfcraft":"PdfDecode","effectcraft":"EffectDecode","designcraft":"DesignDecode","figcraft":"FigDecode","wordcraft":"WordDecode","soundcraft":"SoundDecode","deckcraft":"DeckDecode","cadcraft":"CADDecode","gridcraft":"GridDecode"}
 CATEGORIES = {"Imagem e fotografia", "Design e publicação", "Vídeo e motion", "Documentos e produtividade", "Áudio", "CAD e engenharia"}
 STAGES = {
     "photocraft": "Alpha inicial",
@@ -77,6 +78,8 @@ def main():
         slug = item["slug"]
         name = item["name"]
         slugs.append(slug)
+        if name != EXPECTED_NAMES.get(slug):
+            errors.append(f"{prefix}: nome de apresentação Decode incorreto para {slug}.")
         if not isinstance(slug, str) or not SLUG_RE.fullmatch(slug):
             errors.append(f"{prefix}: slug inválido.")
         if not isinstance(name, str) or not name.strip():

@@ -1,7 +1,7 @@
 [
   {
     "slug": "photocraft",
-    "name": "PhotoCraft",
+    "name": "PhotoDecode",
     "icon": "🖼️",
     "category": "Imagem e fotografia",
     "kind": "Crafting App",
@@ -24,14 +24,15 @@
       "PSD",
       "PSB",
       "máscaras",
-      "edição"
+      "edição",
+      "PhotoCraft"
     ],
     "stage": "Alpha inicial",
     "featured": true
   },
   {
     "slug": "vectorcraft",
-    "name": "VectorCraft",
+    "name": "VectorDecode",
     "icon": "✒️",
     "category": "Design e publicação",
     "kind": "Crafting App",
@@ -52,14 +53,15 @@
       "vetor",
       "ilustração",
       "SVG",
-      "desenho"
+      "desenho",
+      "VectorCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "filmcraft",
-    "name": "FilmCraft",
+    "name": "FilmDecode",
     "icon": "🎬",
     "category": "Vídeo e motion",
     "kind": "Crafting App",
@@ -79,14 +81,15 @@
       "vídeo",
       "edição",
       "timeline",
-      "montagem"
+      "montagem",
+      "FilmCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "lightcraft",
-    "name": "LightCraft",
+    "name": "LightDecode",
     "icon": "📷",
     "category": "Imagem e fotografia",
     "kind": "Crafting App",
@@ -107,14 +110,15 @@
       "fotografia",
       "RAW",
       "biblioteca",
-      "revelação"
+      "revelação",
+      "LightCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "pdfcraft",
-    "name": "PdfCraft",
+    "name": "PdfDecode",
     "icon": "📄",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -136,14 +140,15 @@
       "documentos",
       "juntar",
       "dividir",
-      "segurança"
+      "segurança",
+      "PdfCraft"
     ],
     "stage": "Alpha inicial",
     "featured": true
   },
   {
     "slug": "effectcraft",
-    "name": "EffectCraft",
+    "name": "EffectDecode",
     "icon": "✨",
     "category": "Vídeo e motion",
     "kind": "Crafting App",
@@ -164,14 +169,15 @@
       "VFX",
       "motion graphics",
       "efeitos",
-      "animação"
+      "animação",
+      "EffectCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "designcraft",
-    "name": "DesignCraft",
+    "name": "DesignDecode",
     "icon": "📰",
     "category": "Design e publicação",
     "kind": "Crafting App",
@@ -192,14 +198,15 @@
       "diagramação",
       "publicação",
       "layout",
-      "tipografia"
+      "tipografia",
+      "DesignCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "figcraft",
-    "name": "FigCraft",
+    "name": "FigDecode",
     "icon": "🧩",
     "category": "Design e publicação",
     "kind": "Crafting App",
@@ -221,14 +228,15 @@
       "UX",
       "interfaces",
       "protótipo",
-      "componentes"
+      "componentes",
+      "FigCraft"
     ],
     "stage": "Alpha inicial",
     "featured": true
   },
   {
     "slug": "wordcraft",
-    "name": "WordCraft",
+    "name": "WordDecode",
     "icon": "📝",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -249,14 +257,15 @@
       "editor de texto",
       "DOCX",
       "documentos",
-      "escrita"
+      "escrita",
+      "WordCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "soundcraft",
-    "name": "SoundCraft",
+    "name": "SoundDecode",
     "icon": "🎙️",
     "category": "Áudio",
     "kind": "Crafting App",
@@ -278,14 +287,15 @@
       "DAW",
       "MIDI",
       "gravação",
-      "mixagem"
+      "mixagem",
+      "SoundCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "deckcraft",
-    "name": "DeckCraft",
+    "name": "DeckDecode",
     "icon": "📽️",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -306,14 +316,15 @@
       "apresentações",
       "slides",
       "transições",
-      "animações"
+      "animações",
+      "DeckCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false
   },
   {
     "slug": "cadcraft",
-    "name": "CADCraft",
+    "name": "CADDecode",
     "icon": "📐",
     "category": "CAD e engenharia",
     "kind": "Crafting App",
@@ -334,14 +345,15 @@
       "CAD",
       "desenho técnico",
       "engenharia",
-      "arquitetura"
+      "arquitetura",
+      "CADCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": true
   },
   {
     "slug": "gridcraft",
-    "name": "GridCraft",
+    "name": "GridDecode",
     "icon": "📊",
     "category": "Documentos e produtividade",
     "kind": "Crafting App",
@@ -363,7 +375,8 @@
       "dados",
       "XLSX",
       "fórmulas",
-      "gráficos"
+      "gráficos",
+      "GridCraft"
     ],
     "stage": "Em desenvolvimento",
     "featured": false

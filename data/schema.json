@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ArtCraft Craft App Suite catalog",
+  "title": "Decode display-name catalog based on ArtCraft projects",
   "type": "array",
   "minItems": 13,
   "maxItems": 13,
@@ -46,7 +46,8 @@
       },
       "name": {
         "type": "string",
-        "minLength": 1
+        "minLength": 1,
+        "description": "Personalized Decode display name; the official project name is preserved as a search tag."
       },
       "icon": {
         "type": "string",

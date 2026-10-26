@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "software.json"
 EXPECTED_ORDER = ["photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"]
 EXPECTED = set(EXPECTED_ORDER)
+EXPECTED_NAMES = {"photocraft":"PhotoDecode","vectorcraft":"VectorDecode","filmcraft":"FilmDecode","lightcraft":"LightDecode","pdfcraft":"PdfDecode","effectcraft":"EffectDecode","designcraft":"DesignDecode","figcraft":"FigDecode","wordcraft":"WordDecode","soundcraft":"SoundDecode","deckcraft":"DeckDecode","cadcraft":"CADDecode","gridcraft":"GridDecode"}
 
 
 class CatalogTests(unittest.TestCase):
@@ -22,6 +23,10 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER)
         self.assertEqual({item["slug"] for item in self.items}, EXPECTED)
         self.assertTrue(all(item["kind"] == "Crafting App" for item in self.items))
+        self.assertEqual({item["slug"]: item["name"] for item in self.items}, EXPECTED_NAMES)
+        original_names = {"photocraft":"PhotoCraft","vectorcraft":"VectorCraft","filmcraft":"FilmCraft","lightcraft":"LightCraft","pdfcraft":"PdfCraft","effectcraft":"EffectCraft","designcraft":"DesignCraft","figcraft":"FigCraft","wordcraft":"WordCraft","soundcraft":"SoundCraft","deckcraft":"DeckCraft","cadcraft":"CADCraft","gridcraft":"GridCraft"}
+        for item in self.items:
+            self.assertIn(original_names[item["slug"]], item["tags"])
         self.assertNotIn("artcraft-studio", {item["slug"] for item in self.items})
         self.assertNotIn("craft-launcher", {item["slug"] for item in self.items})
 
