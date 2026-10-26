@@ -10,4 +10,4 @@ Terminal=false
 StartupNotify=true
 StartupWMClass=decode-launcher
 Categories=Utility;PackageManager;
-Keywords=artcraft;craft;launcher;installer;updater;photocraft;filmcraft;apps;
+Keywords=decode;launcher;installer;updater;decodelabs;analytics;apps;

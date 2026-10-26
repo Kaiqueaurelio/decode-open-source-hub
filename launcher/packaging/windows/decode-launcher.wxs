@@ -49,9 +49,9 @@
          (build.rs embeds it), at a path every update keeps. -->
     <Icon Id="DecodeLauncherIcon.exe" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="DecodeLauncherIcon.exe" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher/releases" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://kaiqueaurelio.github.io/decode-open-source-hub/" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/issues" />
 
     <StandardDirectory Id="LocalAppDataFolder">
       <Directory Id="LocalProgramsFolder" Name="Programs">

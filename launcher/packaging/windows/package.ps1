@@ -28,8 +28,8 @@ $ErrorActionPreference = 'Stop'
 $Root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 
 # ---- app-specific values ----------------------------------------------------------------------
-$Pkg = 'artcraft-launcher'          # cargo package and binary
-$AppName = 'ArtCraft Launcher'      # display name
+$Pkg = 'decode-launcher'          # cargo package and binary
+$AppName = 'Decode Launcher'      # display name
 
 function Invoke-Native([string] $What, [scriptblock] $Block) {
   Write-Output "==> $What"
@@ -114,8 +114,8 @@ function New-InstallerArt([string] $BannerOut, [string] $DialogOut) {
   # The Craft App Suite, in the launcher's order (crates/core/src/catalog.rs).
   $apps = 'photocraft', 'vectorcraft', 'filmcraft', 'lightcraft', 'pdfcraft', 'effectcraft',
     'designcraft', 'figcraft', 'wordcraft', 'soundcraft', 'deckcraft', 'cadcraft', 'gridcraft'
-  $mark = [System.Drawing.Image]::FromFile((Join-Path $Root 'assets\app-icon\hicolor\256x256\apps\ai.storyteller.artcraft-launcher.png'))
-  $wordmark = [System.Drawing.Image]::FromFile((Join-Path $Root 'docs\brand\artcraft-logo-white.png'))
+  $mark = [System.Drawing.Image]::FromFile((Join-Path $Root 'assets\app-icon\hicolor\256x256\apps\com.decode.launcher.png'))
+  $wordmark = [System.Drawing.Image]::FromFile((Join-Path $Root 'docs\brand\decode-logo-white.png'))
   $icons = $apps | ForEach-Object { [System.Drawing.Image]::FromFile((Join-Path $Root "assets\app-icons\$_.png")) }
   # The site's label face; GDI+ draws a variable font at its default instance (Regular).
   $fonts = New-Object System.Drawing.Text.PrivateFontCollection

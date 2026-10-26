@@ -11,10 +11,10 @@
   notifications need it).
 #>
 param(
-  [string] $WxsPath = (Join-Path $PSScriptRoot 'artcraft-launcher.wxs')
+  [string] $WxsPath = (Join-Path $PSScriptRoot 'decode-launcher.wxs')
 )
 $ErrorActionPreference = 'Stop'
-$AppId = 'ai.storyteller.artcraft-launcher'
+$AppId = 'com.decode.launcher'
 [xml] $Wxs = Get-Content -LiteralPath $WxsPath -Raw
 $Ns = [Xml.XmlNamespaceManager]::new($Wxs.NameTable)
 $Ns.AddNamespace('w', 'http://wixtoolset.org/schemas/v4/wxs')

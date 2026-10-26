@@ -1,7 +1,7 @@
 > **Independent Decode fork:** this is a modified launcher based on code originally published at https://github.com/storytold/craft-launcher. It is not affiliated with or endorsed by the ArtCraft team. Technical app IDs and upstream release URLs remain unchanged so installation and updates can find the original packages.
 
 <p align="center">
-  <a href="https://getartcraft.com/">
+  <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/brand/decode-logo-white.svg">
       <img alt="Decode" src="docs/brand/decode-logo.svg" width="200">
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/app-icon/hicolor/256x256/apps/com.decode.launcher.png" width="128" height="128" alt="Decode Launcher icon: a blue stylised letter A">
+  <img src="assets/app-icon/hicolor/256x256/apps/com.decode.launcher.png" width="128" height="128" alt="Decode Launcher icon: a blue and cyan geometric decode symbol">
 </p>
 
 <h1 align="center">Decode Launcher</h1>
@@ -26,19 +26,11 @@
   <img alt="macOS · Windows · Linux · FreeBSD · Web" src="https://img.shields.io/badge/macOS%20%C2%B7%20Windows%20%C2%B7%20Linux%20%C2%B7%20FreeBSD%20%C2%B7%20Web-native-26282e?style=flat-square">
   <img alt="License: MIT OR Apache-2.0" src="https://img.shields.io/badge/license-MIT%20%2F%20Apache--2.0-3a3a3a?style=flat-square">
   <img alt="Status: early alpha" src="https://img.shields.io/badge/status-early%20alpha-d69e2e?style=flat-square">
-  <br>
-  <a href="https://sonarcloud.io/project/overview?id=storytold_craft-launcher"><img alt="Scanned by SonarCloud" src="https://img.shields.io/badge/Scanned_by-SonarCloud-4b9fd5?style=flat-square&logo=sonarqubecloud&logoColor=white"></a>
-  <a href="https://coderabbit.ai"><img alt="Reviewed by CodeRabbit" src="https://img.shields.io/coderabbit/prs/github/storytold/craft-launcher?style=flat-square&label=Reviewed%20by%20CodeRabbit&logo=coderabbit"></a>
 </p>
 
 <p align="center">
-  <a href="https://discord.gg/artcraft"><img alt="Join the Decode community on Discord" src="https://img.shields.io/badge/Join%20us%20on%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" height="40"></a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher/releases/latest"><b>Download Decode Launcher</b></a> ·
-  <a href="https://getartcraft.com/">Decode</a> ·
-  <a href="https://getartcraft.com/apps">The Decode App Suite</a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest"><b>Download Decode Launcher</b></a> ·
+  <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">Decode Hub</a>
 </p>
 
 > [!NOTE]
@@ -209,7 +201,7 @@ cd apps/decode-launcher-web && trunk serve
 `flake.nix` gives a dev shell (`nix develop`, then the cargo commands above) and a package:
 
 ```sh
-nix run github:storytold/craft-launcher
+nix run github:Kaiqueaurelio/decode-open-source-hub#launcher
 ```
 
 On NixOS this uses the system's graphics drivers. On other distros, a Nix-built program can't load
@@ -218,7 +210,7 @@ the host's GPU drivers, so the window may fail to open. Run it through
 variant), or use the AppImage, `.deb` or `.rpm` release:
 
 ```sh
-nix run --impure github:nix-community/nixGL -- nix run github:storytold/craft-launcher
+nix run --impure github:nix-community/nixGL -- nix run github:Kaiqueaurelio/decode-open-source-hub#launcher
 ```
 
 ### Installing your own builds
