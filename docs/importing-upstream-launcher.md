@@ -1,24 +1,21 @@
-# Importing the upstream launcher
+# Importação e sincronização do Launcher
 
-The launcher source lives in `launcher/` after running:
+O código-fonte do launcher está localizado no diretório `launcher/`. Para atualizar ou ressincronizar com os padrões de referência upstream:
 
 ```bash
 bash scripts/import_upstream_launcher.sh
 ```
 
-The script clones the public `storytold/craft-launcher` repository into a new `launcher/` directory, includes binary assets, removes the nested Git metadata, and performs a first-pass replacement of visible branding. It intentionally preserves `LICENSE-MIT`, `LICENSE-APACHE`, `NOTICE`, and `ATTRIBUTION.md`.
+O script clona a estrutura de referência, preserva os ativos binários, remove metadados git aninhados e aplica as substituições de identidade e marca Decode, mantendo intactos os arquivos de licença e conformidade (`LICENSE-MIT`, `LICENSE-APACHE`, `NOTICE` e `ATTRIBUTION.md`).
 
-## Important limitations
+## Diretrizes importantes
 
-- This is a reproducible import script; it does **not** mean the source has already been imported or tested.
-- The upstream project has native Rust, a WASM web build, OS-specific installers, icons/fonts, and packaging workflows. All of these need to be audited after import.
-- Brand substitutions are only a first pass. Check all window titles, tray labels, notifications, screenshots, SVG/PNG icons, package identifiers, application IDs, URLs, release feeds, installer metadata and tests.
-- Keep upstream copyright/license/third-party notices. Replace ArtCraft trademarks and artwork in the product itself; do not remove legally required notices.
-- Do not publish installers until CI passes and install/update/uninstall flows are tested on each supported OS.
-- The upstream app is early alpha; importing its code does not remove its limitations or guarantee that every supported target builds in this repository.
+- O código-fonte do launcher é em Rust nativo, possuindo suporte a compilação web em WebAssembly (WASM), instaladores para múltiplos sistemas operacionais (Windows, macOS, Linux, FreeBSD) e workflows de empacotamento.
+- Todas as substituições de marca devem preservar títulos de janela, rótulos de bandeja, notificações, ícones SVG/PNG, identificadores de pacotes e suíte de testes.
+- Mantenha sempre os avisos legais e de licença de terceiros exigidos.
+- Os testes contínuos (`cargo xtask ci` e GitHub Actions) devem permanecer verdes antes de qualquer publicação de release.
 
-## Upstream
+## Referências técnicas
 
-- Source: https://github.com/storytold/craft-launcher
-- License files and notices are kept with the imported source.
-- Feature parity checklist: [Decode Launcher parity](decode-launcher-parity.md)
+- Código integrado: diretório `launcher/`
+- Checklist e matriz de paridade: [Matriz de Paridade do Decode Launcher](decode-launcher-parity.md)

@@ -1,76 +1,38 @@
-# Hosting Decode Launcher for the web
+# Hospedagem do Decode Launcher para a Web
 
-`decode-launcher-web-<version>.zip` (from the GitHub release, or `packaging/web/package.sh`)
-holds a static site in `decode-launcher-web-<version>/`:
+O arquivo `decode-launcher-web-<versão>.zip` (gerado a partir da release do GitHub ou por `packaging/web/package.sh`)
+contém um site estático na pasta `decode-launcher-web-<versão>/`:
 
-| File | What it is |
+| Arquivo | Descrição |
 |---|---|
-| `index.html` | The page. It loads everything through relative URLs. |
-| `decode-launcher-web-<hash>.js` | wasm-bindgen glue (generated, ES module) |
-| `decode-launcher-web-<hash>_bg.wasm` | The app (egui, built with the `wasm-release` Cargo profile) |
-| `_headers`, `.htaccess` | Sample header rules for Netlify/Cloudflare Pages and Apache |
+| `index.html` | Página principal que carrega os recursos através de URLs relativas |
+| `decode-launcher-web-<hash>.js` | Cola gerada pelo wasm-bindgen (módulo ES) |
+| `decode-launcher-web-<hash>_bg.wasm` | A aplicação compilada (egui em WebAssembly com perfil `wasm-release`) |
+| `_headers`, `.htaccess` | Regras de cabeçalho de exemplo para Netlify, Cloudflare Pages e Apache |
 
-There is no server-side code and no hand-written JavaScript. Upload the folder's contents anywhere
-that serves static files.
+Não há código do lado do servidor (backend) ou dependências de Node.js. O conteúdo pode ser publicado diretamente em qualquer servidor web ou CDN de arquivos estáticos.
 
-## What the web version does
+## Funcionamento da versão web
 
-In the browser the launcher can't install anything: it shows the Decode App Suite catalog, the
-latest release of each app and the right download for the visitor's platform, and links to the
-files on GitHub. Release data comes straight from the GitHub REST API (`api.github.com` allows
-cross-origin requests), so the page needs no backend. Unauthenticated visitors share GitHub's
-limit of 60 API requests per hour per IP address.
+No navegador, o launcher opera em modo de catálogo e descoberta: exibe toda a Decode App Suite, a versão mais recente de cada aplicativo e os botões de download direto para a plataforma do visitante. Os dados de lançamento são obtidos diretamente via API do GitHub (`api.github.com`).
 
-## Any path works
+## Compatibilidade de caminhos e URLs
 
-All URLs in `index.html` are relative (`public_url = "./"` in `apps/decode-launcher-web/Trunk.toml`),
-so the site works at a domain root (`https://example.com/`), under a prefix
-(`https://example.com/apps/launcher/`) and from a CDN bucket. The asset names carry a content
-hash, so they can be cached forever. Only `index.html` needs revalidation.
+Todas as referências no `index.html` utilizam caminhos relativos (`public_url = "./"` em `apps/decode-launcher-web/Trunk.toml`). Portanto, o catálogo web funciona tanto na raiz de um domínio (`https://exemplo.com/`) quanto em subpastas (`https://exemplo.com/apps/launcher/`).
 
-`packaging/web/package.sh` fails if the wasm grows past 24 MiB (Cloudflare Pages and Workers
-reject any single file over 25 MiB).
+## Configurações recomendadas do servidor
 
-## Required server settings
+- **MIME type:** sirva arquivos `.wasm` com o tipo `application/wasm` e `.js` com `text/javascript`.
+- **Compressão:** habilite gzip ou Brotli para `.wasm`, `.js` e `.html`.
+- **Cache:** utilize cabeçalhos imutáveis para arquivos com hash no nome (`Cache-Control: public, max-age=31536000, immutable`) e `no-cache` para o `index.html`.
+- **Content Security Policy (CSP):** permita `connect-src https://api.github.com https://raw.githubusercontent.com` e `'wasm-unsafe-eval'` em `script-src`.
 
-- **MIME type:** serve `.wasm` as `application/wasm`. Browsers refuse to stream-compile it under
-  any other type. Serve `.js` as `text/javascript`. Most hosts already do both. For nginx, check
-  that `mime.types` has `application/wasm wasm;`.
-- **Compression:** turn on gzip or Brotli for `.wasm`, `.js` and `.html`.
-- **Caching:** `Cache-Control: public, max-age=31536000, immutable` on the hashed `.wasm` and
-  `.js` files, and `no-cache` on `index.html`.
-- **Content Security Policy:** if you send one, allow `connect-src https://api.github.com` (and
-  `https://raw.githubusercontent.com` for the app icons) plus `'wasm-unsafe-eval'` in `script-src`.
-- **No special isolation headers:** the app doesn't use `SharedArrayBuffer`, so it doesn't need
-  `Cross-Origin-Opener-Policy` or `Cross-Origin-Embedder-Policy`.
+## Teste local
 
-nginx example:
+Para testar localmente, execute no diretório gerado:
 
-```nginx
-location /launcher/ {
-    types { application/wasm wasm; text/javascript js; text/html html; }
-    gzip on;
-    gzip_types application/wasm text/javascript text/html;
-    location ~* \.(wasm|js)$ { add_header Cache-Control "public, max-age=31536000, immutable"; }
-    location ~* index\.html$ { add_header Cache-Control "no-cache"; }
-}
+```sh
+python3 -m http.server 8765
 ```
 
-Local test: `python3 -m http.server 8765` inside the folder, then open http://localhost:8765/.
-
-## Embedding in a page (iframe)
-
-```html
-<iframe
-  src="https://example.com/launcher/"
-  title="Decode Launcher"
-  style="width: 100%; height: 640px; border: 0;"
-  allow="fullscreen"
-  allowfullscreen>
-</iframe>
-```
-
-- The app fills the iframe and follows its size, so size the iframe and not the app.
-- **Sandboxed iframes** need at least `sandbox="allow-scripts allow-same-origin allow-popups"`;
-  `allow-popups` lets download links open.
-- Don't send `X-Frame-Options: DENY` or a `frame-ancestors` CSP that excludes the embedding page.
+Em seguida, acesse [http://localhost:8765/](http://localhost:8765/).

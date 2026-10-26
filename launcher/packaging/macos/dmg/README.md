@@ -1,47 +1,23 @@
-# macOS DMG window
+# Janela do instalador DMG para macOS
 
-What Finder shows when the DMG opens: a 660 × 400 pt background with the app icon and the
-`Applications` link side by side, laid out like the other Craft apps' DMGs. `package.sh` copies
-these files into the image; nothing here is generated at build time, so the DMG builds with a plain
-`hdiutil create -srcfolder` (no Finder scripting on CI, nothing extra installed in the signing job).
+Apresentação visual exibida pelo Finder ao abrir o arquivo DMG: uma tela de fundo de 660 × 400 pt com o ícone do Decode Launcher e o atalho da pasta `Applications` lado a lado. O script `package.sh` inclui esses arquivos na imagem durante a compilação.
 
-| File | What |
+| Arquivo | Descrição |
 |---|---|
-| `background.svg` | Source of the background: the Decode mark in black (`docs/brand/decode-mark-black.svg`, linked, not copied) whole on the mark's blue (`#4e7bfb`), Ink and Paper. The mark is a trademark: it stays exactly as supplied, never cropped or recoloured (`docs/brand/LICENSE-brand.txt`), unlike the cropped icons on the other apps' DMGs. Its text (Inter, Geist Mono from `assets/fonts`) is outlined, so rendering it needs no fonts. No paper grain: noise doesn't compress, and this keeps `background.tiff` small. |
-| `background.tiff` | The background at 1x (660 × 400 px, 72 dpi) and 2x (1320 × 800 px, 144 dpi) in one HiDPI TIFF (16-colour palette, Deflate, sRGB). Goes to `.background/background.tiff`. |
-| `dmg-layout.DS_Store` | Finder's view settings for the volume: window size, icon size 128, Decode Launcher.app at (326, 205), `Applications` at (574, 205), and the background. Goes to `.DS_Store` in the image; named so it isn't mistaken for (or ignored like) a Finder-generated `.DS_Store`. |
-| `generate.py` | Writes `background.tiff` and `dmg-layout.DS_Store` from the SVG and the layout above. |
+| `background.svg` | Arte vetorial do plano de fundo com o símbolo Decode |
+| `background.tiff` | Imagem renderizada em 1x e 2x (HiDPI) com paleta otimizada |
+| `dmg-layout.DS_Store` | Configurações de layout do Finder: dimensões da janela, tamanho dos ícones e posições |
+| `generate.py` | Script que gera `background.tiff` e `dmg-layout.DS_Store` a partir do SVG |
 
-## The volume name has no version
+## Nome do volume
 
-The mounted volume is called `Decode Launcher`, not `Decode Launcher <version>`. The layout
-points at the background through an alias that includes the volume name, and Finder resolves it by
-that name: with a versioned name the window keeps its size and icon positions but shows no
-background. The DMG file name (`decode-launcher-<version>-macos-<arch>.dmg`) still carries the
-version.
+O volume montado é nomeado `Decode Launcher`. O layout aponta para a imagem de fundo através de um alias vinculado a esse nome exato. O nome do arquivo DMG (`decode-launcher-<versão>-macos-<arch>.dmg`) contém o número da versão.
 
-## Rules
+## Como regenerar
 
-- **Finder draws the icon labels in black in light and dark mode** when a window has a background,
-  so the area under both icons stays light (Paper).
-- **Nothing goes inside the icon boxes:** artwork keeps 10 pt clear of each 128 pt icon box and of
-  the label strip under it.
-
-## Regenerate
-
-Edit `background.svg` (or the layout constants in `generate.py`), then run, on any OS:
+Após editar `background.svg` ou as constantes de layout em `generate.py`, execute:
 
 ```sh
 pip install 'pillow>=12' ds_store==1.3.3 mac_alias==2.2.3
-python3 packaging/macos/dmg/generate.py   # needs resvg on PATH
+python3 packaging/macos/dmg/generate.py
 ```
-
-Both outputs are byte-for-byte reproducible and carry nothing from the machine that ran it: the
-SVG renders without any fonts, and `dmg-layout.DS_Store` is written from scratch, its background
-alias holding only the volume name and `/.background/background.tiff`. If you add text to the SVG,
-outline it (`usvg --skip-system-fonts --use-font-file assets/fonts/Inter-Variable.ttf
---use-font-file assets/fonts/GeistMono-Variable.ttf` converts text to paths). The window is
-660 × 432 with Finder's 32 pt title bar; the content area is 660 × 400.
-
-This follows the other Craft apps' `packaging/macos/dmg/` (storytold/wordcraft#21,
-storytold/photocraft#1201, first in storytold/vectorcraft#493).

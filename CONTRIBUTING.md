@@ -1,34 +1,41 @@
 # Como contribuir
 
-Obrigado por ajudar a manter este catálogo correto e útil.
+Agradecemos pelo interesse em contribuir com o **Decode Open Source Hub** e o **Decode Launcher**. Sua ajuda é fundamental para manter este ecossistema atualizado, acessível e de alta qualidade.
 
 ## Escopo
 
-Este catálogo contém somente os 13 Crafting Apps listados em https://getartcraft.com/apps e no catálogo-fonte oficial do ArtCraft Launcher: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/catalog.rs. O Launcher é uma fonte de conferência, não uma entrada catalogada.
+O catálogo contempla os 13 aplicativos da Decode App Suite (DecodePhoto, DecodeVector, DecodeFilm, DecodeLight, DecodePdf, DecodeEffect, DecodeDesign, DecodeFig, DecodeWord, DecodeSound, DecodeDeck, DecodeCAD e DecodeGrid) e o Decode Launcher como ferramenta nativa de gerenciamento.
 
-**Não adicione programas open source genéricos de outras equipes.** Isso quebraria o escopo deste projeto. O ArtCraft Studio e o Launcher também não devem ser adicionados como itens do catálogo.
+**Não inclua programas arbitrários de terceiros que não façam parte da suíte Decode.** Isso garante consistência, foco na experiência do usuário e aderência aos padrões técnicos do projeto.
 
-## Sugerir uma correção ou novo produto oficial
+## Sugerir correções ou atualizações
 
-1. Confirme que o app aparece no site oficial ArtCraft e no catálogo-fonte do Launcher.
-2. Confirme que o código-fonte está na organização https://github.com/storytold.
-3. Confira a licença nos arquivos oficiais LICENSE-MIT e LICENSE-APACHE.
-4. Use a página oficial do produto para detalhes, plataformas e opções de download.
-5. Descreva as fontes usadas no pull request.
+1. Confirme as informações nas fontes oficiais do projeto (releases, tags e documentação).
+2. Para o DecodeCAD, utilize o repositório oficial [Kaiqueaurelio/decodecad](https://github.com/Kaiqueaurelio/decodecad).
+3. Verifique as licenças nos arquivos oficiais (MIT, Apache-2.0, etc.).
+4. Indique links oficiais para documentação, plataformas suportadas e notas de lançamento.
+5. Descreva detalhadamente as mudanças e motivações no seu Pull Request.
 
 ## Testes locais
 
+Antes de submeter sua contribuição, execute os testes automatizados do catálogo e do launcher:
+
 ```bash
+# Validação e testes do catálogo web
 python3 scripts/validate_catalog.py
 python3 -m unittest discover -s tests -v
+
+# Validação do launcher Rust
+cd launcher
+cargo fmt --all -- --check
+cargo test --workspace --locked
 ```
 
-Se a equipe ArtCraft adicionar um app à suíte oficial, confirme a presença dele nas duas listas oficiais; só então atualize `data/software.json`, `data/schema.json`, `scripts/validate_catalog.py` e `tests/test_catalog.py` juntos.
+Ao alterar qualquer dado estruturado dos 13 aplicativos da suíte, certifique-se de sincronizar `data/software.json`, `data/schema.json`, `scripts/validate_catalog.py` e `tests/test_catalog.py` em conjunto.
 
-## Padrões
+## Padrões e boas práticas
 
-- Não adivinhe licença, versão, plataformas ou estágio.
-- Não copie logotipos, imagens ou capturas de tela sem confirmar os direitos.
-- Não inclua tokens, senhas, dados pessoais ou instaladores.
-- Não apresente testes locais como auditoria de segurança.
-- Preserve os avisos de direito autoral e os créditos dos projetos originais.
+- Não assuma ou altere licenças, versões ou plataformas sem conferência das fontes.
+- Não copie ativos protegidos sem os devidos direitos ou conformidade de marca.
+- Não submeta credenciais, tokens, dados sensíveis ou instaladores binários não verificados.
+- Preserve todos os avisos de direito autoral, atribuições e termos de licença exigidos por lei.

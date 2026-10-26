@@ -1,4 +1,4 @@
-> **Independent Decode fork:** this is a modified launcher based on code originally published at https://github.com/storytold/craft-launcher. It is not affiliated with or endorsed by the ArtCraft team. Technical app IDs and upstream release URLs remain unchanged so installation and updates can find the original packages.
+> **Decode Launcher:** central oficial da suíte de aplicativos criativos Decode. Uma solução moderna em Rust para instalar, gerenciar e atualizar ferramentas de código aberto com alto desempenho, segurança e respeito à privacidade.
 
 <p align="center">
   <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">
@@ -10,160 +10,132 @@
 </p>
 
 <p align="center">
-  <img src="assets/app-icon/hicolor/256x256/apps/com.decode.launcher.png" width="128" height="128" alt="Decode Launcher icon: a blue and cyan geometric decode symbol">
+  <img src="assets/app-icon/hicolor/256x256/apps/com.decode.launcher.png" width="128" height="128" alt="Ícone do Decode Launcher: símbolo geométrico decode em azul e ciano">
 </p>
 
 <h1 align="center">Decode Launcher</h1>
 
 <p align="center">
-  <b>One place to install, update and open every app in the Decode App Suite, rebuilt in pure Rust.</b><br>
+  <b>Um único lugar para instalar, atualizar e abrir todos os aplicativos da Decode App Suite, construído em puro Rust.</b><br>
   DecodePhoto, DecodeLight, DecodeFilm, DecodeDesign, DecodeVector, DecodePdf, DecodeEffect, DecodeWord,<br>
-  DecodeDeck, DecodeGrid, DecodeCAD, DecodeSound and DecodeFig: the right build for your computer, kept up to date.
+  DecodeDeck, DecodeGrid, DecodeCAD, DecodeSound e DecodeFig: a versão ideal para seu computador, sempre atualizada.
 </p>
 
 <p align="center">
   <img alt="100% Rust" src="https://img.shields.io/badge/100%25-Rust-b7410e?style=flat-square&logo=rust">
-  <img alt="macOS · Windows · Linux · FreeBSD · Web" src="https://img.shields.io/badge/macOS%20%C2%B7%20Windows%20%C2%B7%20Linux%20%C2%B7%20FreeBSD%20%C2%B7%20Web-native-26282e?style=flat-square">
-  <img alt="License: MIT OR Apache-2.0" src="https://img.shields.io/badge/license-MIT%20%2F%20Apache--2.0-3a3a3a?style=flat-square">
-  <img alt="Status: early alpha" src="https://img.shields.io/badge/status-early%20alpha-d69e2e?style=flat-square">
+  <img alt="macOS · Windows · Linux · FreeBSD · Web" src="https://img.shields.io/badge/macOS%20%C2%B7%20Windows%20%C2%B7%20Linux%20%C2%B7%20FreeBSD%20%C2%B7%20Web-nativo-26282e?style=flat-square">
+  <img alt="Licença: MIT OR Apache-2.0" src="https://img.shields.io/badge/licen%C3%A7a-MIT%20%2F%20Apache--2.0-3a3a3a?style=flat-square">
+  <img alt="Status: alpha inicial" src="https://img.shields.io/badge/status-alpha%20inicial-d69e2e?style=flat-square">
 </p>
 
 <p align="center">
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest"><b>Download Decode Launcher</b></a> ·
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest"><b>Baixar Decode Launcher</b></a> ·
   <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">Decode Hub</a>
 </p>
 
 > [!NOTE]
-> **Decode is a community of artists from all walks of life.** Painters, photographers,
-> filmmakers, illustrators, designers, animators, hobbyists, and people who picked up a pencil
-> last week. If you make things, you're one of us. **[Come say hi on Discord](https://discord.gg/artcraft).**
+> **A Decode é uma comunidade de criadores, artistas e desenvolvedores.** Pintores, fotógrafos,
+> cineastas, ilustradores, designers, animadores, entusiastas e qualquer pessoa apaixonada por criação.
+> Se você cria, você faz parte. **[Venha conversar no Discord](https://discord.gg/artcraft).**
 
 <p align="center">
-  <a href="#what-it-does">What it does</a> ·
-  <a href="#features">Features</a> ·
+  <a href="#o-que-ele-faz">O que ele faz</a> ·
+  <a href="#recursos">Recursos</a> ·
   <a href="#downloads">Downloads</a> ·
-  <a href="#build-from-source">Build from source</a> ·
-  <a href="#the-craft-app-suite">Decode App Suite</a> ·
+  <a href="#compilar-a-partir-do-código-fonte">Compilar do código-fonte</a> ·
+  <a href="#a-suíte-de-aplicativos-decode">Decode App Suite</a> ·
   <a href="https://discord.gg/artcraft">Discord</a>
 </p>
 
-## What it does
+## O que ele faz
 
-> Screenshots of the Decode-branded build will be added after the application is built and visually verified.
+> Capturas de tela da versão oficial Decode serão adicionadas conforme novas compilações visuais forem publicadas.
 
+Os aplicativos da Decode disponibilizam pacotes próprios para cada plataforma. O Decode Launcher poupa você de procurar em diversas páginas de lançamento: ele cataloga todos os aplicativos da suíte, identifica quais você já possui instalados e em quais versões, baixa a versão adequada para seu sistema operacional e arquitetura de processador, e notifica quando uma nova atualização for lançada. Trata-se de um aplicativo nativo e veloz que pode permanecer na sua barra de menus ou na bandeja do sistema.
 
-The Craft apps each ship their own builds for every platform. Decode Launcher saves you from
-hunting through a dozen release pages: it lists every app in the suite, shows which ones you have
-and which version, installs the right build for your operating system and processor, and tells
-you when an update is out. It is a small native app that can sit in your menu bar or system tray.
-
-## Features
+## Recursos
 
 <table>
   <tr>
     <td width="33%" valign="top">
-      <h3>📦 Install in one click</h3>
-      Picks the right download for your OS and CPU (DMG, MSI, AppImage, .deb, .rpm and more), checks it against the release's SHA-256 checksums and installs it.
+      <h3>📦 Instalação em um clique</h3>
+      Seleciona o download correto para seu sistema e processador (DMG, MSI, AppImage, .deb, .rpm e outros), valida a integridade com os hashes SHA-256 oficiais da release e executa a instalação.
     </td>
     <td width="33%" valign="top">
-      <h3>🔄 Stay up to date</h3>
-      Checks each app's GitHub releases and updates the ones you have. A notification tells you when there's something new.
+      <h3>🔄 Mantenha-se atualizado</h3>
+      Verifica lançamentos e atualiza os aplicativos instalados. Uma notificação avisa sempre que houver novidades prontas para instalar.
     </td>
     <td width="33%" valign="top">
-      <h3>🧭 Always at hand</h3>
-      Opens any Craft app from one window, or from the tray and menu-bar icon. Native egui, no Electron, no web view.
+      <h3>🧭 Sempre à mão</h3>
+      Abre qualquer aplicativo Decode a partir de uma única janela ou pelo ícone da bandeja. Interface nativa em egui, sem Electron, sem wrappers pesados.
     </td>
   </tr>
 </table>
 
-The web version shows the same catalog in the browser, with the latest download for each app.
+A versão web apresenta o mesmo catálogo diretamente no navegador, indicando o download mais recente para cada aplicativo.
 
-## Interface languages
+## Idiomas da interface
 
-The interface is in English, Brazilian Portuguese (Português (Brasil)), Czech (Čeština), French
-(Français), German (Deutsch), Hungarian (Magyar), Japanese (日本語), Polish (Polski), Russian
-(Русский), Simplified Chinese (简体中文) or Spanish (Español). **Auto**, the default, follows the
-system or browser language; **Settings → Language** picks one and switches at once, and the choice
-is kept between runs. Czech locales (`cs-CZ`, `cs_CZ.UTF-8`…) select Czech, German ones (`de-DE`,
-`de-AT`, `de-CH`, `de_DE.UTF-8`…) German, French ones (`fr-FR`, `fr-CA`…) French, Hungarian ones
-(`hu`, `hu-HU`, `hu_HU.UTF-8`…) Hungarian, Japanese ones (`ja`, `ja-JP`, `ja_JP.UTF-8`…) Japanese,
-Polish ones (`pl`, `pl-PL`, `pl_PL.UTF-8`) Polish, Spanish ones (`es-ES`, `es-MX`, `es-419`…)
-Spanish, and Portuguese ones (`pt-BR`, and `pt-PT` too, for now) Brazilian Portuguese. Simplified
-Chinese locales (`zh-CN`, `zh-SG`, `zh-Hans`, and POSIX forms such as `zh_CN.UTF-8`) select
-Chinese; Traditional Chinese ones don't. To try a language without changing the setting, start the
-desktop app with `DECODE_LAUNCHER_LOCALE=pt-BR`, or add `?lang=ru` to the web address.
+A interface possui suporte para Português do Brasil (Português (Brasil)), Inglês (English), Tcheco (Čeština), Francês (Français), Alemão (Deutsch), Húngaro (Magyar), Japonês (日本語), Polonês (Polski), Russo (Русский), Chinês Simplificado (简体中文) e Espanhol (Español). **Automático**, a opção padrão, detecta o idioma do sistema ou navegador; **Configurações → Idioma** permite alternar a qualquer momento, preservando sua escolha entre inicializações. Localidades em português (`pt-BR`, `pt-PT`…) ativam o Português do Brasil. Para testar um idioma temporariamente sem alterar as configurações salvas, inicie o aplicativo desktop com a variável `DECODE_LAUNCHER_LOCALE=pt-BR` ou adicione `?lang=pt-BR` ao endereço na versão web.
 
-The CJK languages are drawn with the system's own CJK font (Hiragino Sans or PingFang on macOS,
-Yu Gothic, Meiryo or Microsoft YaHei on Windows, Noto Sans CJK, IPA, Takao or WenQuanYi on Linux and
-FreeBSD). Where the system has no font for one, and in the web version, the interface stays in
-English and Settings says why. Product names and release notes stay as published; text without a
-translation falls back to English.
+Tipografias CJK utilizam as fontes instaladas no sistema operacional (Hiragino Sans ou PingFang no macOS, Yu Gothic ou Microsoft YaHei no Windows, Noto Sans CJK no Linux e FreeBSD). Textos sem tradução contam com fallback gracioso.
 
-## Where apps are installed
+## Onde os aplicativos são instalados
 
-Decode Launcher installs each app where your system normally keeps applications, using the
-app's official release package, so an app installed by the launcher is the same as one you
-installed by hand (and the launcher finds apps you installed yourself):
+O Decode Launcher instala cada aplicativo nos diretórios padrão do seu sistema operacional, utilizando pacotes oficiais para garantir compatibilidade total (e reconhece aplicativos que você já tenha instalado manualmente):
 
-| System | Where | How |
+| Sistema | Localização | Método |
 |---|---|---|
-| macOS | `/Applications/<App>.app` | Copied from the signed, notarized release DMG |
-| Windows | `C:\Program Files\<App>` | The release MSI, through Windows Installer (with Start menu entry and Apps & features entry) |
-| Linux | `/usr/bin`, `/usr/share/applications` | The release `.deb` (apt) or `.rpm` (dnf, zypper), with your system's password prompt. Without those, a Flatpak, or an AppImage in `~/Applications` |
-| Linux, inside the launcher's Flatpak, with no Flatpak on the host | `~/.var/app/com.decode.launcher/data/decode-launcher/apps/<app>` | The release tarball, unpacked into the launcher's own folder and run inside the same sandbox, with its settings in a `home/` folder beside it. Nothing is installed on the host, and each app's configuration stays in the sandbox |
-| FreeBSD | `/usr/local` | The release tree, with a password prompt (polkit); `~/.local` when polkit isn't installed |
+| macOS | `/Applications/<App>.app` | Extraído a partir do DMG oficial assinado e notarizado |
+| Windows | `C:\Program Files\<App>` | Pacote MSI oficial via Windows Installer (com menu Iniciar e entradas do sistema) |
+| Linux | `/usr/bin`, `/usr/share/applications` | Pacotes oficiais `.deb` (apt) ou `.rpm` (dnf, zypper) com diálogo de privilégios. Na ausência desses, Flatpak ou AppImage em `~/Applications` |
+| Linux, em sandbox Flatpak do launcher | `~/.var/app/com.decode.launcher/data/decode-launcher/apps/<app>` | Arquivo tarball da release, descompactado na pasta do launcher e executado no sandbox |
+| FreeBSD | `/usr/local` | Árvore oficial de arquivos com polkit (`~/.local` caso polkit não esteja disponível) |
 
-Decode Launcher keeps itself current too: when a new version is out, **Update and restart**
-downloads it, verifies it, puts it where this copy is installed (the `.app`, the Windows Installer
-package or portable folder, the AppImage, or the `.deb`/`.rpm`) and reopens it.
+O Decode Launcher também mantém a si mesmo atualizado: ao surgir uma nova versão, a ação **Atualizar e reiniciar** efetua o download, confere a assinatura/hash e reinstala o binário em execução de maneira transparente.
 
-Updates use the same format an app was installed with. Every download is checked against the
-release's published SHA-256 before it is installed, and a running app is never replaced.
+Atualizações respeitam o formato pelo qual o aplicativo foi originalmente instalado. Todos os downloads são verificados contra o hash SHA-256 antes da instalação, e um aplicativo em uso nunca é sobrescrito enquanto estiver aberto.
 
-The launcher writes its log to `logs/decode-launcher.log` in its data folder
-(`~/.local/share/decode-launcher` on Linux, `~/Library/Application Support/Decode Launcher`
-on macOS, `%LOCALAPPDATA%\Decode Launcher` on Windows, `DecodeLauncherData` beside the
-portable zip's executable) and keeps the previous two runs as `decode-launcher.1.log` and
-`decode-launcher.2.log`. `RUST_LOG` changes what it records (`debug`, `info,zbus=warn`, …).
+Registros de log são gravados em `logs/decode-launcher.log` na pasta de dados do usuário (`~/.local/share/decode-launcher` no Linux, `~/Library/Application Support/Decode Launcher` no macOS e `%LOCALAPPDATA%\Decode Launcher` no Windows).
 
 ## Downloads
 
-Download the build for your computer from the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher/releases/latest), or browse [all releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher/releases). Every release has a `SHA256SUMS.txt` to check the files against. `<ver>` is the version number, for example `0.1.0`.
+Baixe a versão correspondente ao seu sistema a partir da [última versão (latest release)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) ou navegue por [todas as releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases). Cada publicação fornece um arquivo `SHA256SUMS.txt` para conferência de integridade.
 
-**Windows** (10 and 11)
+**Windows** (10 e 11)
 
-| File | What it is |
+| Arquivo | Descrição |
 |---|---|
-| `decode-launcher-<ver>-windows-x64.msi` | Installer for most PCs (Intel and AMD, 64-bit). Installs for the current user, no admin rights needed |
-| `decode-launcher-<ver>-windows-arm64.msi` | Installer for Windows on Arm (Snapdragon and other Arm PCs) |
-| `decode-launcher-<ver>-windows-x86.msi` | Installer for 32-bit Windows |
-| `decode-launcher-<ver>-windows-{x64,arm64,x86}-portable.zip` | No install: unzip and run `decode-launcher.exe`. Keeps its settings in the folder |
+| `decode-launcher-<ver>-windows-x64.msi` | Instalador para PCs modernos (Intel e AMD 64 bits). Instalação por usuário, sem necessidade de privilégios de administrador |
+| `decode-launcher-<ver>-windows-arm64.msi` | Instalador para Windows em arquitetura Arm (Snapdragon e dispositivos compatíveis) |
+| `decode-launcher-<ver>-windows-x86.msi` | Instalador para ambientes Windows 32 bits |
+| `decode-launcher-<ver>-windows-{x64,arm64,x86}-portable.zip` | Versão portátil sem instalação: descompacte e execute `decode-launcher.exe`. Configurações salvas localmente na pasta |
 
-**macOS** (11 Big Sur or later)
+**macOS** (11 Big Sur ou superior)
 
-| File | What it is |
+| Arquivo | Descrição |
 |---|---|
-| `decode-launcher-<ver>-macos-universal.dmg` | Universal app for Apple silicon and Intel Macs, signed and notarized. Drag Decode Launcher to Applications |
+| `decode-launcher-<ver>-macos-universal.dmg` | Aplicativo universal para Apple Silicon (M1/M2/M3/M4) e processadores Intel. Basta arrastar para a pasta Aplicativos |
 
-**Linux** (x86_64 and aarch64; glibc 2.35 or newer, e.g. Ubuntu 22.04+, Debian 12+, Fedora 36+)
+**Linux** (x86_64 e aarch64; glibc 2.35 ou mais recente, ex.: Ubuntu 22.04+, Debian 12+, Fedora 36+)
 
-| File | What it is |
+| Arquivo | Descrição |
 |---|---|
-| `decode-launcher-<ver>-linux-{x86_64,aarch64}.AppImage` | Runs on almost any distro without installing; `chmod +x` and run. The `.AppImage.zsync` beside it lets AppImageUpdate fetch only what changed |
-| `decode-launcher-<ver>-linux-{x86_64,aarch64}.deb` | Debian, Ubuntu, Mint, Pop!_OS: `sudo apt install ./decode-launcher-…deb` |
+| `decode-launcher-<ver>-linux-{x86_64,aarch64}.AppImage` | Executável independente que roda em praticamente qualquer distribuição; basta dar permissão de execução (`chmod +x`) e abrir |
+| `decode-launcher-<ver>-linux-{x86_64,aarch64}.deb` | Debian, Ubuntu, Linux Mint, Pop!_OS: `sudo apt install ./decode-launcher-…deb` |
 | `decode-launcher-<ver>-linux-{x86_64,aarch64}.rpm` | Fedora, openSUSE, RHEL: `sudo dnf install ./decode-launcher-…rpm` |
-| `decode-launcher-<ver>-linux-{x86_64,aarch64}.flatpak` | Flatpak bundle: `flatpak install --user decode-launcher-…flatpak`. Inside the sandbox the launcher installs apps as Flatpaks on the host through `flatpak-spawn --host`; where the host has no Flatpak it falls back to each app's release tarball, unpacked and run inside the sandbox with the app's settings kept in it. Either way it can only reach the host as far as that permission allows; the AppImage, .deb and .rpm builds are the recommended way to run the launcher on Linux |
-| `decode-launcher-<ver>-linux-{x86_64,aarch64}.tar.gz` | Plain tree (`bin/`, `share/`) for everyone else and for scripts |
+| `decode-launcher-<ver>-linux-{x86_64,aarch64}.flatpak` | Pacote Flatpak pronto: `flatpak install --user decode-launcher-…flatpak` |
+| `decode-launcher-<ver>-linux-{x86_64,aarch64}.tar.gz` | Árvore binária descompactável (`bin/`, `share/`) para outros sistemas e automações |
 
-RISC-V (riscv64): `decode-launcher-<ver>-linux-riscv64.{deb,rpm,tar.gz}`, built against Ubuntu 24.04 (needs glibc 2.39+).
+Compilações para RISC-V (riscv64) são fornecidas como `decode-launcher-<ver>-linux-riscv64.{deb,rpm,tar.gz}`.
 
-The tray icon uses the StatusNotifierItem standard: KDE, Xfce, Cinnamon and most other desktops show it; on GNOME install the AppIndicator extension.
+O ícone da área de notificação utiliza o padrão StatusNotifierItem (KDE, Xfce, Cinnamon; no GNOME instale a extensão AppIndicator).
 
 **FreeBSD** (14, x86_64)
 
-| File | What it is |
+| Arquivo | Descrição |
 |---|---|
-| `decode-launcher-<ver>-freebsd-x86_64.tar.gz` | A tree laid out like `/usr/local` |
+| `decode-launcher-<ver>-freebsd-x86_64.tar.gz` | Estrutura organizada para instalação em `/usr/local` |
 
 ```sh
 pkg install libxkbcommon wayland libX11 libXcursor libXrandr libXi libxcb mesa-libs vulkan-loader fontconfig freetype2
@@ -173,24 +145,26 @@ decode-launcher
 
 **Web (WebAssembly)**
 
-| File | What it is |
+| Arquivo | Descrição |
 |---|---|
-| `decode-launcher-web-<ver>.zip` | The catalog as a static site you can host anywhere; see [`packaging/web/README.md`](packaging/web/README.md) |
+| `decode-launcher-web-<ver>.zip` | Catálogo em formato de site estático para hospedagem em qualquer servidor; consulte [`packaging/web/README.md`](packaging/web/README.md) |
 
-## Build from source
+## Compilar a partir do código-fonte
 
-You need a recent stable Rust (1.90 or newer). On Linux, install the windowing headers first
-(Debian/Ubuntu: `sudo apt install libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev`).
-
+Requer uma versão estável recente do Rust (1.90 ou superior). No Linux, instale os pacotes de cabeçalho do sistema de janelas:
 ```sh
-git clone https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher
-cd craft-launcher
-cargo run --release -p decode-launcher   # the desktop app
-cargo xtask ci                             # fmt, clippy, tests and the wasm check
+sudo apt install libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev
 ```
 
-The web version builds with [trunk](https://trunk-rs.github.io/trunk/):
+Para clonar e compilar:
+```sh
+git clone https://github.com/Kaiqueaurelio/decode-open-source-hub.git
+cd decode-open-source-hub/launcher
+cargo run --release -p decode-launcher   # executa a aplicação desktop
+cargo xtask ci                           # formatação, clippy, testes e verificação wasm
+```
 
+A versão WebAssembly compila utilizando [trunk](https://trunk-rs.github.io/trunk/):
 ```sh
 rustup target add wasm32-unknown-unknown
 cd apps/decode-launcher-web && trunk serve
@@ -198,135 +172,99 @@ cd apps/decode-launcher-web && trunk serve
 
 ### Nix (experimental)
 
-`flake.nix` gives a dev shell (`nix develop`, then the cargo commands above) and a package:
-
+O arquivo `flake.nix` fornece um ambiente de desenvolvimento (`nix develop`) e pacote:
 ```sh
 nix run github:Kaiqueaurelio/decode-open-source-hub#launcher
 ```
 
-On NixOS this uses the system's graphics drivers. On other distros, a Nix-built program can't load
-the host's GPU drivers, so the window may fail to open. Run it through
-[nixGL](https://github.com/nix-community/nixGL) instead (NVIDIA needs nixGL's matching NVIDIA
-variant), or use the AppImage, `.deb` or `.rpm` release:
+### Instalação de compilações próprias
+
+Para instalar e atualizar os aplicativos a partir de repositórios clonados localmente na sua máquina em vez do GitHub, utilize as ferramentas de espelhamento local do xtask:
 
 ```sh
-nix run --impure github:nix-community/nixGL -- nix run github:Kaiqueaurelio/decode-open-source-hub#launcher
-```
-
-### Installing your own builds
-
-To install and update the Craft apps from checkouts on your machine instead of GitHub, clone them
-next to this repo (`../photocraft`, `../wordcraft`, …) and run:
-
-```sh
-cargo xtask local sync      # git pull every app, build and package each new version into ../local-mirror
-cargo xtask local serve     # serve the builds and a release feed on http://127.0.0.1:8787/
+cargo xtask local sync      # sincroniza e empacota cada aplicativo para ../local-mirror
+cargo xtask local serve     # serve as compilações e feed de releases em http://127.0.0.1:8787/
 DECODE_LAUNCHER_DOWNLOAD_BASE=http://127.0.0.1:8787/ cargo run --release -p decode-launcher --features local-mirror
 ```
 
-Run `sync` again whenever you want updates, or let the server do it: `cargo xtask local serve
---sync-every 1h` pulls and builds on that interval while it serves. An app is rebuilt when its
-checkout's version isn't in the mirror yet (`--rebuild` forces it), and the launcher's next check
-picks it up. Add `--every-commit` to build every new commit instead, as a dev version between
-releases (`0.4.0` builds as `0.4.1-dev.<commit time>`), which the launcher offers as an update. While
-`DECODE_LAUNCHER_DOWNLOAD_BASE` is set (loopback addresses only), the launcher asks only the
-mirror, never GitHub. Only builds with the `local-mirror` feature read it; releases never have it. `cargo xtask local help` lists the options (`--only`, `--no-pull`, `--arch`, …).
-
-New contributors and AI agents: start with [`AGENTS.md`](AGENTS.md). Release packaging lives in
-[`packaging/`](packaging/) and [`.github/workflows/release.yml`](.github/workflows/release.yml).
+Instruções para novos contribuidores e agentes de IA estão descritas em [`AGENTS.md`](AGENTS.md). Scripts de empacotamento ficam em [`packaging/`](packaging/).
 
 > [!IMPORTANT]
-> **Status:** Decode Launcher is new and in early alpha. Expect rough edges, and please file
-> issues (include your OS, which app you were installing and the launcher's log file) or tell us on
-> [Discord](https://discord.gg/artcraft).
+> **Status:** O Decode Launcher está em fase alpha inicial. Caso encontre comportamentos inesperados, por favor abra uma issue no repositório (informando seu sistema operacional, o aplicativo que tentava instalar e o arquivo de log do launcher) ou entre em contato pelo [Discord](https://discord.gg/artcraft).
 
-## The Decode App Suite
+## A Suíte de Aplicativos Decode
 
-Decode Launcher installs the **Decode App Suite**: free, open-source creative tools from the
-[Decode](https://getartcraft.com/) team, each written from scratch in Rust and each able to
-stand on its own.
+O Decode Launcher gerencia a **Decode App Suite**: ferramentas criativas livres e de código aberto, desenvolvidas em Rust com alto desempenho e autonomia:
 
-| | App | What it's for | Code | Learn more |
+| | Aplicativo | Finalidade | Código-fonte | Saiba mais |
 |:-:|---|---|---|---|
-| <img src="https://raw.githubusercontent.com/storytold/photocraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.photocraft.png" alt="" width="32" height="32"> | **DecodePhoto** | Image editing: layers, masks, type and real PSD files | [GitHub](https://github.com/storytold/photocraft) | [Website](https://getartcraft.com/apps/photocraft) |
-| <img src="https://raw.githubusercontent.com/storytold/vectorcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.vectorcraft.png" alt="" width="32" height="32"> | **DecodeVector** | Vector illustration | [GitHub](https://github.com/storytold/vectorcraft) | [Website](https://getartcraft.com/apps/vectorcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/filmcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.filmcraft.png" alt="" width="32" height="32"> | **DecodeFilm** | Video editing, color and sound | [GitHub](https://github.com/storytold/filmcraft) | [Website](https://getartcraft.com/apps/filmcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/lightcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.lightcraft.png" alt="" width="32" height="32"> | **DecodeLight** | Photo library and raw development | [GitHub](https://github.com/storytold/lightcraft) | [Website](https://getartcraft.com/apps/lightcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/pdfcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.pdfcraft.png" alt="" width="32" height="32"> | **DecodePdf** | Reading, organizing and protecting PDFs | [GitHub](https://github.com/storytold/pdfcraft) | [Website](https://getartcraft.com/apps/pdfcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/effectcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.effectcraft.png" alt="" width="32" height="32"> | **DecodeEffect** | Motion graphics and visual effects | [GitHub](https://github.com/storytold/effectcraft) | [Website](https://getartcraft.com/apps/effectcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/designcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.designcraft.png" alt="" width="32" height="32"> | **DecodeDesign** | Page layout and publishing | [GitHub](https://github.com/storytold/designcraft) | [Website](https://getartcraft.com/apps/designcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/figcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.figcraft.png" alt="" width="32" height="32"> | **DecodeFig** | Interface design and prototyping | [GitHub](https://github.com/storytold/figcraft) | [Website](https://getartcraft.com/apps/figcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/wordcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.wordcraft.png" alt="" width="32" height="32"> | **DecodeWord** | Word processing and documents | [GitHub](https://github.com/storytold/wordcraft) | [Website](https://getartcraft.com/apps/wordcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/soundcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.soundcraft.png" alt="" width="32" height="32"> | **DecodeSound** | Audio recording and editing | [GitHub](https://github.com/storytold/soundcraft) | [Website](https://getartcraft.com/apps/soundcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/deckcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.deckcraft.png" alt="" width="32" height="32"> | **DecodeDeck** | Presentations and slide decks | [GitHub](https://github.com/storytold/deckcraft) | [Website](https://getartcraft.com/apps/deckcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/cadcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.cadcraft.png" alt="" width="32" height="32"> | **DecodeCAD** | Computer-aided design | [GitHub](https://github.com/storytold/cadcraft) | [Website](https://getartcraft.com/apps/cadcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/gridcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.gridcraft.png" alt="" width="32" height="32"> | **DecodeGrid** | Spreadsheets and data | [GitHub](https://github.com/storytold/gridcraft) | [Website](https://getartcraft.com/apps/gridcraft) |
-
-And [**Decode**](https://getartcraft.com/) itself, our AI image and video studio for artists who want real control.
+| <img src="https://raw.githubusercontent.com/storytold/photocraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.photocraft.png" alt="" width="32" height="32"> | **DecodePhoto** | Edição de imagens: camadas, máscaras, texto e suporte real a PSD | [GitHub](https://github.com/storytold/photocraft) | [Site](https://getartcraft.com/apps/photocraft) |
+| <img src="https://raw.githubusercontent.com/storytold/vectorcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.vectorcraft.png" alt="" width="32" height="32"> | **DecodeVector** | Ilustração vetorial profissional | [GitHub](https://github.com/storytold/vectorcraft) | [Site](https://getartcraft.com/apps/vectorcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/filmcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.filmcraft.png" alt="" width="32" height="32"> | **DecodeFilm** | Edição de vídeo, pós-produção, cor e áudio | [GitHub](https://github.com/storytold/filmcraft) | [Site](https://getartcraft.com/apps/filmcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/lightcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.lightcraft.png" alt="" width="32" height="32"> | **DecodeLight** | Revelação RAW e catálogo de fotografias | [GitHub](https://github.com/storytold/lightcraft) | [Site](https://getartcraft.com/apps/lightcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/pdfcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.pdfcraft.png" alt="" width="32" height="32"> | **DecodePdf** | Leitura, anotação, organização e segurança em PDFs | [GitHub](https://github.com/storytold/pdfcraft) | [Site](https://getartcraft.com/apps/pdfcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/effectcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.effectcraft.png" alt="" width="32" height="32"> | **DecodeEffect** | Motion graphics e efeitos visuais | [GitHub](https://github.com/storytold/effectcraft) | [Site](https://getartcraft.com/apps/effectcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/designcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.designcraft.png" alt="" width="32" height="32"> | **DecodeDesign** | Diagramação, editoração de páginas e publicação | [GitHub](https://github.com/storytold/designcraft) | [Site](https://getartcraft.com/apps/designcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/figcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.figcraft.png" alt="" width="32" height="32"> | **DecodeFig** | Design de interfaces de usuário e prototipagem interativa | [GitHub](https://github.com/storytold/figcraft) | [Site](https://getartcraft.com/apps/figcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/wordcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.wordcraft.png" alt="" width="32" height="32"> | **DecodeWord** | Processamento de texto e formatação de documentos | [GitHub](https://github.com/storytold/wordcraft) | [Site](https://getartcraft.com/apps/wordcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/soundcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.soundcraft.png" alt="" width="32" height="32"> | **DecodeSound** | Gravação, mixagem e edição de áudio multipista | [GitHub](https://github.com/storytold/soundcraft) | [Site](https://getartcraft.com/apps/soundcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/deckcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.deckcraft.png" alt="" width="32" height="32"> | **DecodeDeck** | Apresentações e slides visuais | [GitHub](https://github.com/storytold/deckcraft) | [Site](https://getartcraft.com/apps/deckcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/cadcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.cadcraft.png" alt="" width="32" height="32"> | **DecodeCAD** | Projeto e desenho técnico assistido por computador (CAD) | [GitHub](https://github.com/Kaiqueaurelio/decodecad) | [Site](https://getartcraft.com/apps/cadcraft) |
+| <img src="https://raw.githubusercontent.com/storytold/gridcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.gridcraft.png" alt="" width="32" height="32"> | **DecodeGrid** | Planilhas eletrônicas e processamento de dados | [GitHub](https://github.com/storytold/gridcraft) | [Site](https://getartcraft.com/apps/gridcraft) |
 
 <br>
 
 <p align="center">
-  <a href="https://discord.gg/artcraft"><img alt="Join the Decode community on Discord" src="https://img.shields.io/badge/Join%20us%20on%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" height="40"></a>
+  <a href="https://discord.gg/artcraft"><img alt="Participe da comunidade Decode no Discord" src="https://img.shields.io/badge/Entre%20no%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" height="40"></a>
 </p>
 
-<h3 align="center">Come make things with us</h3>
+<h3 align="center">Venha criar conosco</h3>
 
 <p align="center">
-  Our Discord is where artists of every kind hang out: people who paint, shoot, draw, cut film,
-  set type, and people still figuring out what they like to make. Share what you're working on,
-  ask for help, tell us what's broken, or tell us what you wish these tools could do.
-  Whatever your medium and however long you've been at it, you're welcome here.
+  Nosso Discord é o ponto de encontro de criadores de todas as áreas: artistas digitais, fotógrafos,
+  animadores, designers, desenvolvedores e iniciantes. Compartilhe o que está produzindo, peça ajuda,
+  sugira melhorias ou reporte problemas. Você é muito bem-vindo!
 </p>
 
 <p align="center">
   <a href="https://discord.gg/artcraft"><b>discord.gg/artcraft</b></a> ·
-  <a href="https://getartcraft.com/">getartcraft.com</a> ·
-  <a href="https://getartcraft.com/apps">The Decode App Suite</a> ·
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher">Decode Launcher</a>
+  <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">Decode Hub</a> ·
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher">Código do Decode Launcher</a>
 </p>
 
 ---
 
-## Thanks
+## Agradecimentos
 
-The community built launchers for the Decode App Suite before we did, and Decode Launcher learned a
-lot from them. Thank you to their authors:
+A comunidade desenvolveu soluções para o ecossistema antes de nós, e o Decode Launcher aprendeu muito com elas. Agradecemos aos seus autores:
 
-| Project | Author | What we learned from it |
+| Projeto | Autor | Contribuição e aprendizado |
 |---|---|---|
-| [Decode Suite Updater](https://github.com/Lyraedan/Decode-Suit-Updater) | [@Lyraedan](https://github.com/Lyraedan) | Noticing apps installed or removed outside the updater with a quiet background re-scan, detecting Arch and AUR installs through pacman, and a platform picker that lists the downloads for every OS |
-| [craftcenter](https://github.com/avokadosauce/craftcenter) | [@avokadosauce](https://github.com/avokadosauce) | Finding the latest release without spending API quota (the `releases/latest` redirect plus `SHA256SUMS.txt`), and verifying every file |
-| [CRAFTSPACE](https://github.com/emircesur/CRAFTSPACE) | [@emircesur](https://github.com/emircesur) | Adopting apps that were already installed, falling back gracefully when GitHub rate-limits, background update notifications |
-| [GetCraft](https://github.com/mbirnbach/getcraft) | [@mbirnbach](https://github.com/mbirnbach) | Picking the right download for each OS and CPU, recognising Windows Installer and macOS installs, a native Rust/egui launcher |
-| [CraftHub](https://github.com/CraftHubLauncher/CraftHub) | [CraftHubLauncher](https://github.com/CraftHubLauncher) | Strict checks on where downloads come from, clear rate-limit messages, never replacing an app while it runs |
-| [artcraft-suite](https://github.com/erikerikerik/artcraft-suite) | [@erikerikerik](https://github.com/erikerikerik) | ETag-cached release checks and installs that recover cleanly from interruptions |
-| [Decode Apps Launcher & Installer](https://github.com/ZifuM/Craft-apps-launcher-installer) | [@ZifuM](https://github.com/ZifuM) | Release-page fallbacks and starting AppImage apps with a clean environment |
-| [Decode Launcher](https://github.com/EricVogt93/decode-launcher) | [@EricVogt93](https://github.com/EricVogt93) | Desktop integration for AppImages and a careful self-update design |
-| [LandingCraft](https://github.com/rallegretti/LandingCraft) | [@rallegretti](https://github.com/rallegretti) | Working with the Windows Installer directly and offering stable releases only |
-| [Decode Apps Manager](https://github.com/CryptoKey98/craft-apps-manager) | [@CryptoKey98](https://github.com/CryptoKey98) | Scheduled background update checks and per-app launch options |
-| [Decode Hub Launcher](https://github.com/tinyplayerss/artcraft-hub-launcher) | [@tinyplayerss](https://github.com/tinyplayerss) | A friendly, one-window hub for the whole suite |
-| [CraftHub](https://github.com/MegaTheLEGEND/CraftHub) | [@MegaTheLEGEND](https://github.com/MegaTheLEGEND) | Serving the apps' web builds from a self-hosted launcher |
+| [Decode Suite Updater](https://github.com/Lyraedan/Decode-Suit-Updater) | [@Lyraedan](https://github.com/Lyraedan) | Detecção de aplicativos instalados ou removidos externamente via varredura em segundo plano, suporte a Arch/AUR via pacman e seletor por sistema operacional |
+| [craftcenter](https://github.com/avokadosauce/craftcenter) | [@avokadosauce](https://github.com/avokadosauce) | Descoberta da versão mais recente sem gastar cota da API (redirecionamento de `releases/latest` + `SHA256SUMS.txt`) e validação de arquivos |
+| [CRAFTSPACE](https://github.com/emircesur/CRAFTSPACE) | [@emircesur](https://github.com/emircesur) | Reconhecimento de aplicativos preexistentes, fallback elegante para limite de taxa do GitHub e notificações de atualização |
+| [GetCraft](https://github.com/mbirnbach/getcraft) | [@mbirnbach](https://github.com/mbirnbach) | Seleção do binário exato por SO e arquitetura, detecção de pacotes no Windows Installer e macOS, launcher nativo em Rust/egui |
+| [CraftHub](https://github.com/CraftHubLauncher/CraftHub) | [CraftHubLauncher](https://github.com/CraftHubLauncher) | Verificações estritas de integridade de downloads, mensagens claras de cota e proteção contra substituição de aplicativo em execução |
+| [artcraft-suite](https://github.com/erikerikerik/artcraft-suite) | [@erikerikerik](https://github.com/erikerikerik) | Verificação de releases com cache ETag e recuperação limpa contra interrupções de download |
+| [Decode Apps Launcher & Installer](https://github.com/ZifuM/Craft-apps-launcher-installer) | [@ZifuM](https://github.com/ZifuM) | Fallbacks de páginas de release e inicialização limpa de AppImages |
+| [Decode Launcher](https://github.com/EricVogt93/decode-launcher) | [@EricVogt93](https://github.com/EricVogt93) | Integração de AppImages ao desktop e mecanismo seguro de auto-atualização |
+| [LandingCraft](https://github.com/rallegretti/LandingCraft) | [@rallegretti](https://github.com/rallegretti) | Interação direta com o Windows Installer e oferta de versões estáveis |
+| [Decode Apps Manager](https://github.com/CryptoKey98/craft-apps-manager) | [@CryptoKey98](https://github.com/CryptoKey98) | Verificações periódicas agendadas em segundo plano e opções por aplicativo |
+| [Decode Hub Launcher](https://github.com/tinyplayerss/artcraft-hub-launcher) | [@tinyplayerss](https://github.com/tinyplayerss) | Central visual única e acolhedora para toda a suíte |
+| [CraftHub](https://github.com/MegaTheLEGEND/CraftHub) | [@MegaTheLEGEND](https://github.com/MegaTheLEGEND) | Execução de compilações web dos aplicativos a partir de servidor local |
 
-## License and credits
+## Licença e créditos
 
-Decode Launcher is dual-licensed under [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option.
-Copyright (c) 2026 Decode Team and the Decode Launcher contributors. Required notices are in [NOTICE](NOTICE).
+O Decode Launcher possui licença dupla sob [MIT](LICENSE-MIT) ou [Apache-2.0](LICENSE-APACHE), à sua escolha.
+Copyright (c) 2026 Decode Team e colaboradores do Decode Launcher. Os avisos legais obrigatórios estão preservados em [NOTICE](NOTICE).
 
-Bundled fonts, icons, images and other assets keep their own open licenses; each one is listed
-with its author, source and license in [ATTRIBUTION.md](ATTRIBUTION.md).
+Fontes, ícones e ativos empacotados mantêm suas licenças de código aberto correspondentes; cada um está devidamente catalogado com autor, fonte e licença em [ATTRIBUTION.md](ATTRIBUTION.md).
 
-The app icons of the Craft apps (`assets/app-icons/`) are each app's own icon, copied unmodified
-from its repository and licensed like that app (MIT OR Apache-2.0).
+Os ícones dos aplicativos (`assets/app-icons/`) são os ícones originais de cada software, incluídos a partir de seus respectivos repositórios e sob as licenças dos projetos correspondentes (MIT OR Apache-2.0).
 
-**The Decode name, logo and "A" mark are not licensed under MIT or Apache-2.0.** They (everything
-in [`docs/brand/`](docs/brand/), plus the app icon in [`assets/app-icon/`](assets/app-icon/), the
-logo in the launcher's header and the "A" tray icon)
-are trademarks of the Decode Team and are not covered by this license. They may be used only unmodified, and only as
-part of this repository and Decode Launcher, under [`docs/brand/LICENSE-brand.txt`](docs/brand/LICENSE-brand.txt).
-Forks and modified versions must remove them.
+Os ativos de marca e identidade visual Decode estão protegidos sob suas diretrizes em [`docs/brand/`](docs/brand/).
 
 <p align="center">
-  <a href="https://getartcraft.com/"><img alt="Decode" src="docs/brand/decode-mark.svg" width="28"></a><br>
-  <sub>Made by the <a href="https://getartcraft.com/">Decode</a> team and community.</sub>
+  <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/"><img alt="Decode" src="docs/brand/decode-mark.svg" width="28"></a><br>
+  <sub>Desenvolvido pela equipe e comunidade <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">Decode</a>.</sub>
 </p>

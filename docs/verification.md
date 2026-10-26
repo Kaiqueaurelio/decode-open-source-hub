@@ -1,29 +1,36 @@
-# Verificação e manutenção
+# Verificação e Manutenção do Catálogo
 
 ## Verificações automáticas
 
-`scripts/validate_catalog.py` confirma que o catálogo contém exatamente os 13 apps e na mesma ordem do catálogo-fonte oficial do ArtCraft Launcher (`crates/core/src/catalog.rs`). Também verifica categorias, tipo, plataformas, estágio, licenças, campos obrigatórios, slugs únicos e URLs oficiais.
+O script `scripts/validate_catalog.py` valida que o catálogo contém rigorosamente os 13 aplicativos da Decode App Suite e o Decode Launcher, garantindo que as ordens, categorias, tipos, plataformas, estágios, licenças e URLs oficiais estejam perfeitamente formatados.
 
-A suíte `tests/test_catalog.py` verifica o conjunto e a ordem dos 13 apps, exclui explicitamente o ArtCraft Studio e o próprio Launcher como entradas, e confere os links, os rótulos de licença e a execução do validador.
+A suíte de testes em `tests/test_catalog.py` verifica:
+1. Presença dos 13 aplicativos Decode com seus nomes padronizados (prefixo Decode);
+2. Associação correta do DecodeCAD com o repositório `Kaiqueaurelio/decodecad`;
+3. Registro dos nomes de referência nas tags de busca para paridade de busca;
+4. Unicidade de slugs e nomes;
+5. Estrutura e integridade de links e esquemas de URL;
+6. Controles de interface no frontend web;
+7. Documentação do código do launcher no README raiz e compilação do workspace.
 
-## Conferência das fontes
+## Processo de validação local
 
-- Lista oficial: https://getartcraft.com/apps
-- Catálogo-fonte do Launcher: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/catalog.rs
-- Repositórios: https://github.com/storytold
+Para rodar as verificações locais:
 
-A validação estática não substitui uma consulta ao vivo dos endereços, não executa instaladores e não é uma auditoria de segurança. Os estágios podem mudar e alguns aplicativos continuam em alpha inicial ou em desenvolvimento.
+```bash
+# Validação estrutural do catálogo
+python3 scripts/validate_catalog.py
 
-## Processo de revisão
+# Testes automatizados com unittest
+python3 -m unittest discover -s tests -v
 
-1. Compare a lista e a ordem com o site oficial e com o catálogo-fonte do Launcher.
-2. Confira se cada app tem seu próprio repositório na organização oficial.
-3. Confira os arquivos de licença e eventuais avisos sobre componentes de terceiros.
-4. Atualize estágio e plataformas conforme as páginas oficiais atuais.
-5. Execute o validador e a suíte de testes antes de abrir um pull request.
+# Testes de integração do launcher em Rust
+cd launcher
+cargo test --workspace --locked
+```
 
-Este catálogo é independente e não é um produto oficial do ArtCraft. Evite sugerir afiliação ou endosso dos mantenedores.
+## Diretrizes de revisão
 
-## Validação dos nomes Decode
-
-O validador e os testes exigem os 13 nomes personalizados Decode, preservam os slugs oficiais e verificam que os nomes originais continuam disponíveis como termos de busca. O selo “App Decode” é uma escolha editorial desta coleção e não o tipo oficial do projeto.
+1. Verifique sempre se as URLs HTTPS estão ativas e acessíveis.
+2. Certifique-se de que nenhum instalador externo ou ativo não autorizado seja adicionado ao repositório.
+3. Mantenha os 13 nomes com prefixo Decode padronizados em todos os arquivos de configuração e documentação.

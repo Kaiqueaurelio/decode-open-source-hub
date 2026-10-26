@@ -1,0 +1,264 @@
+name: Windows and Linux installers
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to build (empty = version in Cargo.toml)"
+        required: false
+        type: string
+        default: ""
+      publish_release:
+        description: "Publish a public GitHub Release after both package builds succeed"
+        required: false
+        type: boolean
+        default: false
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    paths:
+      - ".github/workflows/desktop-release.yml"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "crates/**"
+      - "apps/**"
+      - "packaging/**"
+      - "assets/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  # New commits supersede stale package builds on the same branch/tag.
+  cancel-in-progress: true
+
+jobs:
+  release_preflight:
+    name: Check release version
+    runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.inspect.outputs.should_publish }}
+      version: ${{ steps.inspect.outputs.version }}
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect release version bump or missing release
+        id: inspect
+        shell: bash
+        env:
+          PREVIOUS_SHA: ${{ github.event.before || '' }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          CURRENT_VERSION="$(awk -F '"' '/^version = / {print $2; exit}' Cargo.toml)"
+          SHOULD_PUBLISH=false
+          if [[ "$GITHUB_EVENT_NAME" == "push" && "$GITHUB_REF" == "refs/heads/main" ]]; then
+            if [[ -n "$PREVIOUS_SHA" && "$PREVIOUS_SHA" != "0000000000000000000000000000000000000000" ]]; then
+              PREVIOUS_VERSION="$(git show "${PREVIOUS_SHA}:Cargo.toml" | awk -F '"' '/^version = / {print $2; exit}')"
+              if [[ -n "$PREVIOUS_VERSION" && "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]]; then
+                SHOULD_PUBLISH=true
+              fi
+            fi
+            # Recover a version bump whose first publishing run was cancelled or failed.
+            # Build and publish only while this exact version has no GitHub Release.
+            if ! gh release view "v$CURRENT_VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+              SHOULD_PUBLISH=true
+            fi
+          fi
+          [[ -n "$CURRENT_VERSION" ]] || { echo 'Could not determine package version' >&2; exit 1; }
+          echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "should_publish=$SHOULD_PUBLISH" >> "$GITHUB_OUTPUT"
+
+  windows:
+    name: Windows x64 installer
+    if: github.event_name == 'pull_request' || startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.release_preflight.outputs.should_publish == 'true')
+    needs: [release_preflight]
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out Decode CAD
+        uses: actions/checkout@v4
+
+      - name: Check out licensed embedded fonts
+        uses: actions/checkout@v4
+        with:
+          repository: storytold/craft-fonts
+          ref: 3d9ab3a132ed0eff457e424226a435a901da30d3
+          path: craft-fonts
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Install WiX Toolset
+        shell: pwsh
+        run: |
+          dotnet tool install --global wix --version 5.0.2
+          wix extension add -g WixToolset.UI.wixext/5.0.2
+          "${env:USERPROFILE}\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Build and package MSI + portable ZIP
+        shell: pwsh
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}\craft-fonts
+          CRAFT_FONTS_REQUIRED: "1"
+          CADCRAFT_BUILD_SHA: ${{ github.sha }}
+          CADCRAFT_BUILD_DATE: ""
+          CADCRAFT_VERSION: ${{ inputs.version }}
+          DIST: ${{ github.workspace }}\dist\release
+        run: |
+          if (-not $env:CADCRAFT_VERSION -and $env:GITHUB_REF -like 'refs/tags/v*') {
+            $env:CADCRAFT_VERSION = $env:GITHUB_REF -replace '^refs/tags/v', ''
+          }
+          if (-not $env:CADCRAFT_BUILD_DATE -or $env:CADCRAFT_BUILD_DATE -eq 'null') {
+            $env:CADCRAFT_BUILD_DATE = (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd')
+          }
+          ./packaging/windows/package.ps1 -Arch x64
+          Get-ChildItem dist/release
+          if (-not (Get-ChildItem dist/release -Filter '*.msi')) { throw 'MSI installer was not generated' }
+          if (-not (Get-ChildItem dist/release -Filter '*portable.zip')) { throw 'Portable ZIP was not generated' }
+
+      - name: Upload Windows installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: decode-cad-windows-x64
+          path: dist/release/*
+          if-no-files-found: error
+          retention-days: 14
+
+  linux:
+    name: Linux x86_64 packages
+    if: github.event_name == 'pull_request' || startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.release_preflight.outputs.should_publish == 'true')
+    needs: [release_preflight]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out Decode CAD
+        uses: actions/checkout@v4
+
+      - name: Check out licensed embedded fonts
+        uses: actions/checkout@v4
+        with:
+          repository: storytold/craft-fonts
+          ref: 3d9ab3a132ed0eff457e424226a435a901da30d3
+          path: craft-fonts
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libxkbcommon-dev libwayland-dev libx11-dev libxcb1-dev libxcursor-dev libxrandr-dev libxi-dev libfontconfig1-dev libfreetype-dev mesa-vulkan-drivers libgl1-mesa-dev zsync
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install nfpm
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.4"
+
+      - name: Install nfpm package builder
+        run: |
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.47.0
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+      - name: Build and package DEB + AppImage
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+          CRAFT_FONTS_REQUIRED: "1"
+          CADCRAFT_BUILD_SHA: ${{ github.sha }}
+          CADCRAFT_BUILD_DATE: ""
+          CADCRAFT_VERSION: ${{ inputs.version }}
+          DIST: ${{ github.workspace }}/dist/release
+        run: |
+          set -euo pipefail
+          if [[ -z "$CADCRAFT_VERSION" && "$GITHUB_REF" == refs/tags/v* ]]; then
+            export CADCRAFT_VERSION="${GITHUB_REF#refs/tags/v}"
+          fi
+          if [[ -z "$CADCRAFT_BUILD_DATE" || "$CADCRAFT_BUILD_DATE" == "null" ]]; then
+            CADCRAFT_BUILD_DATE="$(date -u +%Y-%m-%d)"
+            export CADCRAFT_BUILD_DATE
+          fi
+          bash packaging/linux/package.sh --formats "appimage deb tar"
+          test -s dist/release/decode-cad-*-linux-x86_64.deb
+          test -s dist/release/decode-cad-*-linux-x86_64.AppImage
+          chmod +x dist/release/*.AppImage
+          rm -f dist/release/SHA256SUMS
+          (cd dist/release && sha256sum -- * > SHA256SUMS)
+
+      - name: Upload Linux packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: decode-cad-linux-x64
+          path: dist/release/*
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    name: Publish GitHub Release
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.publish_release == true) || (github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.release_preflight.outputs.should_publish == 'true')
+    needs: [windows, linux, release_preflight]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out source to resolve release version
+        uses: actions/checkout@v4
+
+      - name: Download Windows packages
+        uses: actions/download-artifact@v4
+        with:
+          name: decode-cad-windows-x64
+          path: release-assets/windows
+
+      - name: Download Linux packages
+        uses: actions/download-artifact@v4
+        with:
+          name: decode-cad-linux-x64
+          path: release-assets/linux
+
+      - name: Create release with installers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+          REQUESTED_VERSION: ${{ inputs.version }}
+          PUSHED_VERSION: ${{ needs.release_preflight.outputs.version }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          TAG="$RELEASE_TAG"
+          if [[ -z "$TAG" ]]; then
+            VERSION="$REQUESTED_VERSION"
+            if [[ -z "$VERSION" ]]; then
+              VERSION="$PUSHED_VERSION"
+            fi
+            if [[ -z "$VERSION" ]]; then
+              VERSION="$(awk -F '\"' '/^version = / {print $2; exit}' Cargo.toml)"
+            fi
+            [[ -n "$VERSION" ]] || { echo 'Could not determine release version' >&2; exit 1; }
+            TAG="v$VERSION"
+          fi
+          find release-assets -maxdepth 3 -type f -print
+          test -n "$(find release-assets/windows -type f -name '*.msi' -print -quit)"
+          test -n "$(find release-assets/linux -type f -name '*.deb' -print -quit)"
+          test -n "$(find release-assets/linux -type f -name '*.AppImage' -print -quit)"
+          TITLE="Decode CAD ${TAG#v}"
+          ASSETS=(release-assets/windows/* release-assets/linux/*)
+          if gh release view "$TAG" --repo "$REPOSITORY" >/dev/null 2>&1; then
+            # A release created in the GitHub UI already created the tag; attach the build outputs.
+            gh release upload "$TAG" "${ASSETS[@]}" --repo "$REPOSITORY" --clobber
+            gh release edit "$TAG" --repo "$REPOSITORY" --title "$TITLE"
+          else
+            gh release create "$TAG" "${ASSETS[@]}" \
+              --repo "$REPOSITORY" \
+              --title "$TITLE" \
+              --target "$GITHUB_SHA" \
+              --generate-notes
+          fi

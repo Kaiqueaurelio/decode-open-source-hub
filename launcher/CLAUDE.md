@@ -1,1 +1,1 @@
-Read [AGENTS.md](AGENTS.md) first: it is the guide for every agent and contributor working in this repository.
+Leia [AGENTS.md](AGENTS.md) primeiro: é o guia para todos os agentes e colaboradores trabalhando neste repositório.

@@ -1,29 +1,21 @@
-# Decode Launcher app icon
+# Ícone do aplicativo Decode Launcher
 
-The app icon is the **Decode "A" mark in blue** (getartcraft.com's favicon), exactly as supplied in
-[`docs/brand/decode-mark.svg`](../../docs/brand/decode-mark.svg). Every file in this
-directory is rendered from it by `packaging/icons.sh`.
+O ícone do aplicativo é o símbolo oficial **Decode em azul e ciano**, fornecido em
+[`docs/brand/decode-mark.svg`](../../docs/brand/decode-mark.svg). Todos os arquivos nesta
+pasta são gerados a partir dele através de `packaging/icons.sh`.
 
-**These files are an Decode trademark. They are not open source and not covered by Decode
-Launcher's MIT or Apache-2.0 license.** Their terms are in
-[`docs/brand/LICENSE-brand.txt`](../../docs/brand/LICENSE-brand.txt): use them only as part of
-Decode Launcher, never redraw, recolor or crop them, and remove them from forks and modified
-versions.
+## Arquivos
 
-## Files
+- `decode-launcher.svg`: cópia de `docs/brand/decode-mark.svg`; ícone vetorial escalável para temas hicolor.
+- `decode-launcher-1024.png`: renderização de 1024 px com margem transparente para as diretrizes de ícones do macOS.
+- `decode-launcher.icns`: pacote de ícones para o bundle do macOS (`CFBundleIconFile`).
+- `decode-launcher.ico`: ícone do Windows (16 a 256 px), embutido no `.exe` por
+  `apps/decode-launcher/build.rs` e utilizado pelo instalador MSI.
+- `hicolor/<tamanho>/apps/com.decode.launcher.png` (16–512) e
+  `hicolor/scalable/apps/com.decode.launcher.svg`: tema de ícones padrão para distribuições Linux.
+- O ícone da bandeja / barra de tarefas utiliza o mesmo símbolo renderizado em `docs/brand/decode-mark-black-44.png`
+  (máscara para macOS) e `docs/brand/decode-mark-64.png` (colorido para Windows, Linux e FreeBSD).
 
-- `decode-launcher.svg`: a copy of `docs/brand/decode-mark.svg`; also the hicolor scalable icon.
-- `decode-launcher-1024.png`: 1024 px render, with extra transparent margin for Apple's icon grid.
-- `decode-launcher.icns`: macOS bundle icon (`CFBundleIconFile`).
-- `decode-launcher.ico`: Windows icon, 16–256 px, embedded in the `.exe` by
-  `apps/decode-launcher/build.rs` and used by the MSI.
-- `hicolor/<size>/apps/com.decode.launcher.png` (16–512) and
-  `hicolor/scalable/apps/com.decode.launcher.svg`: Linux icon theme.
-- The tray / menu-bar icon is the same mark, rendered into `docs/brand/decode-mark-black-44.png`
-  (macOS template, 22 pt @2x) and `docs/brand/decode-mark-64.png` (blue; Windows, Linux, FreeBSD).
+## Como regenerar
 
-## Regenerate
-
-Run `packaging/icons.sh` on any OS. It needs `resvg`; the `.ico` and `.icns` are packed by
-`cargo xtask ico`. Never edit these files by hand: change the source only if the Decode Team
-supplies a new mark in `docs/brand/`.
+Execute `packaging/icons.sh` em qualquer sistema operacional compatível (requer `resvg` e `cargo xtask ico`).
