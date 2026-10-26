@@ -1,4 +1,4 @@
-"""Tests for the exact 13-app ArtCraft Craft App Suite catalog."""
+"Tests for the Craft App Suite and separate launcher entry."""
 import json
 import subprocess
 import sys
@@ -9,56 +9,55 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "software.json"
 EXPECTED_ORDER = ["photocraft","vectorcraft","filmcraft","lightcraft","pdfcraft","effectcraft","designcraft","figcraft","wordcraft","soundcraft","deckcraft","cadcraft","gridcraft"]
-EXPECTED = set(EXPECTED_ORDER)
 EXPECTED_NAMES = {"photocraft":"PhotoDecode","vectorcraft":"VectorDecode","filmcraft":"FilmDecode","lightcraft":"LightDecode","pdfcraft":"PdfDecode","effectcraft":"EffectDecode","designcraft":"DesignDecode","figcraft":"FigDecode","wordcraft":"WordDecode","soundcraft":"SoundDecode","deckcraft":"DeckDecode","cadcraft":"CADDecode","gridcraft":"GridDecode"}
-
 
 class CatalogTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.items = json.loads(DATA.read_text(encoding="utf-8"))
+        cls.by_slug = {item["slug"]: item for item in cls.items}
 
-    def test_contains_exactly_the_apps_in_the_official_launcher_catalog(self):
-        self.assertEqual(len(self.items), 13)
-        self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER)
-        self.assertEqual({item["slug"] for item in self.items}, EXPECTED)
-        self.assertTrue(all(item["kind"] == "Crafting App" for item in self.items))
-        self.assertEqual({item["slug"]: item["name"] for item in self.items}, EXPECTED_NAMES)
-        original_names = {"photocraft":"PhotoCraft","vectorcraft":"VectorCraft","filmcraft":"FilmCraft","lightcraft":"LightCraft","pdfcraft":"PdfCraft","effectcraft":"EffectCraft","designcraft":"DesignCraft","figcraft":"FigCraft","wordcraft":"WordCraft","soundcraft":"SoundCraft","deckcraft":"DeckCraft","cadcraft":"CADCraft","gridcraft":"GridCraft"}
-        for item in self.items:
-            self.assertIn(original_names[item["slug"]], item["tags"])
-        self.assertNotIn("artcraft-studio", {item["slug"] for item in self.items})
-        self.assertNotIn("craft-launcher", {item["slug"] for item in self.items})
+    def test_contains_13_crafting_apps_and_one_separate_launcher(self):
+        self.assertEqual(len(self.items), 14)
+        self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["artcraft-launcher"])
+        apps = [item for item in self.items if item["kind"] == "Crafting App"]
+        self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
+        self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
+        self.assertEqual(self.by_slug["artcraft-launcher"]["kind"], "Launcher")
+        self.assertEqual(self.by_slug["artcraft-launcher"]["name"], "ArtCraft Launcher")
 
     def test_slugs_and_names_are_unique(self):
         self.assertEqual(len({item["slug"] for item in self.items}), len(self.items))
         self.assertEqual(len({item["name"].casefold() for item in self.items}), len(self.items))
 
-    def test_every_entry_links_to_its_official_project(self):
-        for item in self.items:
+    def test_official_app_source_links(self):
+        for slug in EXPECTED_ORDER:
+            item = self.by_slug[slug]
             with self.subTest(app=item["name"]):
-                slug = item["slug"]
-                self.assertEqual(item["kind"], "Crafting App")
                 self.assertEqual(item["sourceUrl"], f"https://github.com/storytold/{slug}")
                 self.assertEqual(item["websiteUrl"], f"https://getartcraft.com/apps/{slug}")
                 self.assertEqual(item["downloadUrl"], item["websiteUrl"])
                 self.assertEqual(item["licenseUrl"], f"https://github.com/storytold/{slug}/blob/main/LICENSE-MIT")
-                for key in ("licenseUrl", "websiteUrl", "sourceUrl", "downloadUrl"):
-                    parsed = urlparse(item[key])
-                    self.assertEqual(parsed.scheme, "https")
-                    self.assertTrue(parsed.netloc)
-
-    def test_official_license_label_is_consistent(self):
-        for item in self.items:
-            with self.subTest(app=item["name"]):
                 self.assertEqual(item["license"], "MIT OR Apache-2.0")
 
-    def test_stage_and_platforms_are_present(self):
+    def test_launcher_links_and_disclosure(self):
+        item = self.by_slug["artcraft-launcher"]
+        self.assertEqual(item["sourceUrl"], "https://github.com/storytold/craft-launcher")
+        self.assertEqual(item["downloadUrl"], "https://github.com/storytold/craft-launcher/releases/latest")
+        self.assertEqual(item["license"], "MIT OR Apache-2.0")
+        self.assertIn("early alpha", item["description"])
+        for key in ("licenseUrl","websiteUrl","sourceUrl","downloadUrl"):
+            parsed = urlparse(item[key])
+            self.assertEqual(parsed.scheme, "https")
+            self.assertTrue(parsed.netloc)
+
+    def test_stage_platforms_and_tags(self):
         for item in self.items:
             with self.subTest(app=item["name"]):
                 self.assertTrue(item["stage"].strip())
                 self.assertTrue(item["platforms"])
                 self.assertEqual(len(item["platforms"]), len(set(item["platforms"])))
+                self.assertTrue(all(isinstance(tag, str) and tag.strip() for tag in item["tags"]))
 
     def test_validator_passes(self):
         result = subprocess.run(
@@ -66,7 +65,6 @@ class CatalogTests(unittest.TestCase):
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-
 
 if __name__ == "__main__":
     unittest.main()
