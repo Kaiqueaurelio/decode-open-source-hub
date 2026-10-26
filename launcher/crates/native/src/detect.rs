@@ -662,7 +662,7 @@ mod tests {
         assert_eq!(v("pdfcraft-0.3.0-rc.1-linux-x86_64.AppImage"), Some(Some("0.3.0-rc.1".into())));
         // Gear Lever's rename, and a plain rename by hand.
         assert_eq!(v("pdfcraft.appimage"), Some(None));
-        assert_eq!(v("PdfDecode.AppImage"), Some(None));
+        assert_eq!(v("PdfCraft.AppImage"), Some(None));
         for other in [
             "pdfcraft-0.3.0-linux-x86_64.AppImage.zsync",
             "pdfcraft-0.3.0-linux-x86_64.deb",
@@ -725,7 +725,7 @@ mod tests {
     #[test]
     fn pdfcraft_matches_its_former_printcraft_installer_name() {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
-        assert!(is_installer_entry(pdf, "PrintDecode", LEARNING_MACHINES), "a PrintDecode entry from {LEARNING_MACHINES} should be PdfDecode's");
+        assert!(is_installer_entry(pdf, "PrintCraft", LEARNING_MACHINES), "a PrintCraft entry from {LEARNING_MACHINES} should be PdfDecode's");
     }
 
     #[test]
@@ -737,21 +737,21 @@ mod tests {
     #[test]
     fn printcraft_entries_match_nothing_else() {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
-        assert!(!is_installer_entry(pdf, "PrintDecode", "Some Other Publisher"));
+        assert!(!is_installer_entry(pdf, "PrintCraft", "Some Other Publisher"));
         assert!(!is_installer_entry(pdf, "PhotoDecode", LEARNING_MACHINES));
         for a in SUITE.iter().filter(|a| a.id != "pdfcraft") {
-            assert!(!is_installer_entry(a, "PrintDecode", LEARNING_MACHINES), "PrintDecode matched {}", a.name);
+            assert!(!is_installer_entry(a, "PrintCraft", LEARNING_MACHINES), "PrintCraft matched {}", a.name);
         }
     }
 
     #[test]
     fn pdfcraft_exe_is_sought_under_every_name_it_has_shipped_as() {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
-        let location = PathBuf::from(r"D:\Apps\PrintDecode");
+        let location = PathBuf::from(r"D:\Apps\PrintCraft");
         let roots = roots();
         let mut want = vec![location.join("pdfcraft.exe"), location.join("printcraft.exe")];
         for root in &roots {
-            for dir in ["PdfDecode", "PrintDecode"] {
+            for dir in ["PdfDecode", "PdfCraft", "PrintCraft"] {
                 want.push(root.join(dir).join("pdfcraft.exe"));
                 want.push(root.join(dir).join("printcraft.exe"));
             }

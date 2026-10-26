@@ -212,6 +212,15 @@ if catalog_source.exists():
 
     catalog_source.write_text(source, encoding="utf-8")
 
+# Update detect.rs test assertions for Decode names vs former PrintCraft / PdfCraft names
+detect_source = root / "crates" / "native" / "src" / "detect.rs"
+if detect_source.exists():
+    ds = detect_source.read_text(encoding="utf-8")
+    ds = ds.replace('assert_eq!(v("PdfDecode.AppImage"), Some(None));', 'assert_eq!(v("PdfCraft.AppImage"), Some(None));')
+    ds = ds.replace('"PrintDecode"', '"PrintCraft"')
+    ds = ds.replace('for dir in ["PdfDecode", "PrintCraft"] {', 'for dir in ["PdfDecode", "PdfCraft", "PrintCraft"] {')
+    detect_source.write_text(ds, encoding="utf-8")
+
 # Rename branded asset and packaging paths
 for path in sorted(root.rglob("*"), key=lambda item: len(item.parts), reverse=True):
     if not path.exists():
