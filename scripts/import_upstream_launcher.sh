@@ -246,8 +246,11 @@ with __import__("tempfile").TemporaryDirectory() as temp_dir:
         file = temp / f"icns-{size}.png"
         write_decode_png(file, size)
         icns_pngs.append(str(file))
-    subprocess.run(["cargo", "run", "-q", "-p", "xtask", "--", "ico", str(icon_dir / "decode-launcher.ico"), *ico_pngs], cwd=root, check=True)
-    subprocess.run(["cargo", "run", "-q", "-p", "xtask", "--", "icns", str(icon_dir / "decode-launcher.icns"), *icns_pngs], cwd=root, check=True)
+    if shutil.which("cargo"):
+        subprocess.run(["cargo", "run", "-q", "-p", "xtask", "--", "ico", str(icon_dir / "decode-launcher.ico"), *ico_pngs], cwd=root, check=True)
+        subprocess.run(["cargo", "run", "-q", "-p", "xtask", "--", "icns", str(icon_dir / "decode-launcher.icns"), *icns_pngs], cwd=root, check=True)
+    else:
+        print("cargo not found; skipping .ico and .icns conversion.")
 
 # Upstream screenshots visibly contain the old product identity; do not ship them.
 readme = root / "README.md"
