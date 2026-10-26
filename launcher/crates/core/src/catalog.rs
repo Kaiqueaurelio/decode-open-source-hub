@@ -90,7 +90,7 @@ pub const SUITE: [DecodeApp; 13] = [
     ) },
     DecodeApp {
         former_ids: &["printcraft"],
-        former_names: &["PrintDecode"],
+        former_names: &["PdfCraft", "PrintCraft"],
         ..app(
             "pdfcraft",
             "PdfDecode",

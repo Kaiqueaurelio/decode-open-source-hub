@@ -72,7 +72,7 @@ pub fn social(service: &str) -> Option<ImageSource<'static>> {
     })
 }
 
-/// The Decode "A" mark in blue, as supplied: the launcher's app icon and getartcraft.com's favicon.
+/// The Decode mark in blue: the launcher's app icon.
 pub fn decode_mark() -> ImageSource<'static> {
     egui::include_image!("../../../docs/brand/decode-mark.svg")
 }

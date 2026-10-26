@@ -191,8 +191,8 @@ if catalog_source.exists():
             source = source[:m.start()] + repl + source[m.end():]
 
     source = source.replace(
-        'former_ids: &["printdecode"],\n        former_names: &["PrintDecode"],',
-        'former_ids: &["printcraft"],\n        former_names: &["PdfCraft", "PrintCraft"],'
+        'former_names: &["PrintDecode"],',
+        'former_names: &["PdfCraft", "PrintCraft"],'
     )
 
     launcher_match = re.search(r"pub const LAUNCHER: DecodeApp = app\(\n.*?\n\);", source, re.S)
