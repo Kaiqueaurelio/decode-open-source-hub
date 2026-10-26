@@ -31,9 +31,8 @@ mkdir -p "$DEST"
 cp -a "$TMP/upstream/." "$DEST/"
 rm -rf "$DEST/.git"
 
-# Keep upstream license/attribution documents intact. Brand replacement is limited
-# to user-facing text and HTML; machine identifiers and package IDs are intentionally
-# not mass-renamed because doing so blindly can break install/update compatibility.
+# Preserve required upstream license/attribution files, replace product branding and rename
+# launcher package identifiers/assets. The resulting identifiers still require build and install tests.
 python3 - "$DEST" <<'PY'
 from pathlib import Path
 import re
