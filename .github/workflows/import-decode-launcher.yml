@@ -50,14 +50,13 @@ jobs:
       - name: Apply Rust formatting
         working-directory: launcher
         run: cargo fmt --all
-        continue-on-error: true
 
       - name: Run Rust tests
         working-directory: launcher
         run: cargo test --workspace
-        continue-on-error: true
 
       - name: Create migration branch and pull request
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
