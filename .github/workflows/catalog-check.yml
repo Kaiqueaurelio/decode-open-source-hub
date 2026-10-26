@@ -1,0 +1,26 @@
+name: Catalog checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate software catalog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Validate catalog data
+        run: python scripts/validate_catalog.py
+      - name: Run tests
+        run: python -m unittest discover -s tests -v

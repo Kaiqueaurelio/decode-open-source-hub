@@ -1,0 +1,52 @@
+name: Sugerir software
+description: Sugira um programa open source para o catálogo.
+title: "[Catálogo] "
+labels: ["catalog", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por sugerir um programa. Preencha o que souber e inclua fontes oficiais.
+  - type: input
+    id: name
+    attributes:
+      label: Nome do software
+      placeholder: Nome oficial do programa
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Site oficial
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Repositório ou fonte do código
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: Licença open source
+      placeholder: Ex. MIT, GPL-3.0-or-later
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Fontes de verificação
+      description: Link para a página oficial da licença ou outra documentação confiável.
+      placeholder: Links e observações
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Para que serve?
+      description: Descrição curta e objetiva.
+    validations:
+      required: true
