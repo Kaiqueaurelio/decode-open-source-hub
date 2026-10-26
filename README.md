@@ -11,7 +11,7 @@ O **Decode Open Source Hub** é um catálogo visual de softwares de código aber
 ## O que já está implementado
 
 - Interface responsiva em português, sem frameworks ou dependências de terceiros.
-- Catálogo inicial com mais de 30 ferramentas de código aberto em várias categorias.
+- Catálogo inicial com 47 ferramentas de código aberto em várias categorias.
 - Pesquisa por nome, finalidade e palavras-chave.
 - Filtros por categoria e plataforma, além de ordenação.
 - Cartões com resumo, licença clicável e botões para download, site oficial e código-fonte.
