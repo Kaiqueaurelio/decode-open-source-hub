@@ -172,7 +172,7 @@ pub const LAUNCHER: DecodeApp = DecodeApp {
     "Installs and updates the Decode App Suite",
     [[0x0b, 0x0b, 0x0c], [0x0b, 0x0b, 0x0c], [0xf2, 0xf1, 0xee]],
     "storytold/craft-launcher",
-    ),
+    )
 };
 
 /// The launcher's own repo, checked so it can say when a newer launcher is out.

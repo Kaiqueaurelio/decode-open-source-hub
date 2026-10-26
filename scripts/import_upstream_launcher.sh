@@ -207,7 +207,7 @@ if catalog_source.exists():
             1,
         )
         if launcher_block.endswith("\n);"):
-            launcher_block = launcher_block[:-3] + "\n    ),\n};"
+            launcher_block = launcher_block[:-3] + "\n    )\n};"
             source = source[:launcher_match.start()] + launcher_block + source[launcher_match.end():]
 
     catalog_source.write_text(source, encoding="utf-8")
