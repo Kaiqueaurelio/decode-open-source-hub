@@ -214,7 +214,7 @@ pub const SOCIAL: [(&str, &str); 5] = [
 /// The Decode community on Discord.
 pub const DISCORD_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions";
 /// Deep link into the Discord application for the Decode server invite.
-pub const DISCORD_APP_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions";
+pub const DISCORD_APP_URL: &str = "discord://-/invite/artcraft";
 
 /// Decode Launcher itself, described like a Decode App so it can update itself with the same
 /// machinery (asset names `decode-launcher-<ver>-…`, bundle id `com.decode.launcher`,
