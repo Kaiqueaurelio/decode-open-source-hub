@@ -2,7 +2,7 @@
 
 **Catálogo independente de 13 apps Decode e do Decode Launcher, baseado nos projetos open source do ArtCraft.**
 
-Este repositório reúne informações editoriais, categorias, plataformas, estágio de desenvolvimento, licenças e links para fontes oficiais do ecossistema ArtCraft. É mantido de forma independente e **não é um site oficial, nem afiliado à equipe ArtCraft**.
+Este repositório começou como catálogo informativo independente do ecossistema ArtCraft. A meta de produto é evoluí-lo para o **Decode Launcher**, com identidade própria e paridade funcional com o launcher de referência, sem apresentar o projeto como oficial ou afiliado à ArtCraft. Consulte a [matriz de paridade funcional](docs/decode-launcher-parity.md) para distinguir o que existe hoje do que ainda precisa ser implementado.
 
 ## O que você encontra
 
@@ -11,6 +11,7 @@ Este repositório reúne informações editoriais, categorias, plataformas, est�
 - Busca por nome, finalidade, recursos e palavras-chave.
 - Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.
 - Interface responsiva em português, sem frameworks ou dependências externas.
+- Matriz de paridade funcional que documenta os recursos exigidos para o Decode Launcher e seu estado real de implementação.
 - Dados separados em JSON, validador, testes automatizados e fluxo de validação no GitHub Actions.
 
 ## Fontes oficiais
@@ -28,7 +29,7 @@ O [Decode Launcher (nome original: ArtCraft Launcher)](https://github.com/storyt
 
 **Status indicado pelo projeto original:** early alpha. A disponibilidade de pacotes varia por versão, sistema e arquitetura. Veja sempre a página de [releases](https://github.com/storytold/craft-launcher/releases/latest) antes de baixar.
 
-Este catálogo **não incorpora nem compila o código do launcher**; apresenta uma ficha informativa e ligações ao repositório original, preservando a separação dos projetos e seus avisos legais.
+**Importante:** o código do launcher nativo ainda não foi importado para este repositório. Por enquanto, a entrada é informativa e aponta para o upstream. O trabalho de portabilidade e rebranding está especificado em [docs/decode-launcher-parity.md](docs/decode-launcher-parity.md); não considere as funções nativas como implementadas até serem portadas e testadas.
 
 ## Executar localmente
 
@@ -53,6 +54,7 @@ Abra [http://localhost:8080](http://localhost:8080). Use um servidor HTTP porque
 - `tests/test_catalog.py`: testes automatizados.
 - `docs/catalog-guidelines.md`: regras de manutenção do catálogo.
 - `docs/verification.md`: processo e limites de verificação.
+- `docs/decode-launcher-parity.md`: matriz de paridade funcional e checklist de implementação do Decode Launcher.
 
 ## Validar e testar
 
