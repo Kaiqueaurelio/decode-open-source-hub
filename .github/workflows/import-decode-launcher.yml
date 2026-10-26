@@ -1,0 +1,68 @@
+name: Import Decode Launcher source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-decode-launcher.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: decode-launcher-source-import
+  cancel-in-progress: false
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Decode repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Import upstream source and apply first-pass branding
+        run: bash scripts/import_upstream_launcher.sh
+
+      - name: Preserve licenses and report imported project size
+        run: |
+          test -f launcher/LICENSE-MIT
+          test -f launcher/LICENSE-APACHE
+          test -f launcher/NOTICE
+          test -f launcher/ATTRIBUTION.md
+          echo "Imported files: $(find launcher -type f | wc -l)"
+          echo "Imported source size: $(du -sh launcher | cut -f1)"
+
+      - name: Run Rust formatting and tests when toolchain is available
+        working-directory: launcher
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          cargo fmt --all -- --check
+          cargo test --workspace --locked
+        continue-on-error: true
+
+      - name: Create migration branch and pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -Eeuo pipefail
+          BRANCH="automation/decode-launcher-source-import"
+          git checkout -B "$BRANCH"
+          git add launcher
+          git commit -m "Import upstream launcher source for Decode branding"
+          git push --force-with-lease origin "$BRANCH"
+          if gh pr view "$BRANCH" --repo "$REPOSITORY" >/dev/null 2>&1; then
+            echo "Pull request already exists for $BRANCH"
+          else
+            gh pr create               --repo "$REPOSITORY"               --head "$BRANCH"               --base main               --title "Import upstream launcher source for Decode"               --body "Imports the upstream Rust launcher and assets into launcher/ with first-pass Decode branding. Upstream license and attribution notices are preserved. CI/build checks are advisory at this stage; review package identifiers, artwork, installer metadata, release feeds, and all branding before merging."
+          fi
