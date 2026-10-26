@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Decode display-name catalog based on ArtCraft projects",
+  "title": "Decode catalog: 13 ArtCraft apps plus launcher utility",
   "type": "array",
-  "minItems": 13,
-  "maxItems": 13,
+  "minItems": 14,
+  "maxItems": 14,
   "items": {
     "type": "object",
     "required": [
@@ -41,7 +41,8 @@
           "soundcraft",
           "deckcraft",
           "cadcraft",
-          "gridcraft"
+          "gridcraft",
+          "artcraft-launcher"
         ]
       },
       "name": {
@@ -55,11 +56,21 @@
       },
       "category": {
         "type": "string",
-        "minLength": 1
+        "minLength": 1,
+        "enum": [
+          "Imagem e fotografia",
+          "Design e publicação",
+          "Vídeo e motion",
+          "Documentos e produtividade",
+          "Áudio",
+          "CAD e engenharia",
+          "Launchers e utilitários"
+        ]
       },
       "kind": {
         "enum": [
-          "Crafting App"
+          "Crafting App",
+          "Launcher"
         ]
       },
       "tagline": {
@@ -85,12 +96,12 @@
       "licenseUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://github\\.com/storytold/"
+        "pattern": "^https://github\\\\.com/storytold/"
       },
       "websiteUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://getartcraft\\.com"
+        "pattern": "^https://(getartcraft\\\\.com|github\\\\.com/storytold/craft-launcher)"
       },
       "sourceUrl": {
         "type": "string",
