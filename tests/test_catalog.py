@@ -23,8 +23,12 @@ class CatalogTests(unittest.TestCase):
         apps = [item for item in self.items if item["kind"] == "Crafting App"]
         self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
         self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
+        original_names = {"photocraft":"PhotoCraft","vectorcraft":"VectorCraft","filmcraft":"FilmCraft","lightcraft":"LightCraft","pdfcraft":"PdfCraft","effectcraft":"EffectCraft","designcraft":"DesignCraft","figcraft":"FigCraft","wordcraft":"WordCraft","soundcraft":"SoundCraft","deckcraft":"DeckCraft","cadcraft":"CADCraft","gridcraft":"GridCraft"}
+        for item in apps:
+            self.assertIn(original_names[item["slug"]], item["tags"])
         self.assertEqual(self.by_slug["artcraft-launcher"]["kind"], "Launcher")
-        self.assertEqual(self.by_slug["artcraft-launcher"]["name"], "ArtCraft Launcher")
+        self.assertEqual(self.by_slug["artcraft-launcher"]["name"], "Decode Launcher")
+        self.assertIn("ArtCraft Launcher", self.by_slug["artcraft-launcher"]["tags"])
 
     def test_slugs_and_names_are_unique(self):
         self.assertEqual(len({item["slug"] for item in self.items}), len(self.items))

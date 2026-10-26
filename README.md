@@ -1,13 +1,13 @@
-# Decode Open Source Hub — ArtCraft Edition
+# Decode Open Source Hub — Decode Edition
 
-**Catálogo independente dos 13 Crafting Apps e do ArtCraft Launcher.**
+**Catálogo independente de 13 apps Decode e do Decode Launcher, baseado nos projetos open source do ArtCraft.**
 
 Este repositório reúne informações editoriais, categorias, plataformas, estágio de desenvolvimento, licenças e links para fontes oficiais do ecossistema ArtCraft. É mantido de forma independente e **não é um site oficial, nem afiliado à equipe ArtCraft**.
 
 ## O que você encontra
 
-- **13 aplicativos da Craft App Suite:** PhotoCraft, VectorCraft, FilmCraft, LightCraft, PdfCraft, EffectCraft, DesignCraft, FigCraft, WordCraft, SoundCraft, DeckCraft, CADCraft e GridCraft.
-- **ArtCraft Launcher:** o utilitário que centraliza instalação, inicialização e atualizações da suíte. Aparece como entrada adicional e não é contado como um dos 13 Crafting Apps.
+- **13 apps Decode:** PhotoDecode, VectorDecode, FilmDecode, LightDecode, PdfDecode, EffectDecode, DesignDecode, FigDecode, WordDecode, SoundDecode, DeckDecode, CADDecode e GridDecode. Os nomes originais continuam disponíveis para pesquisa.
+- **Decode Launcher (projeto original: ArtCraft Launcher):** utilitário separado, com links para o repositório oficial e suas releases.
 - Busca por nome, finalidade, recursos e palavras-chave.
 - Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.
 - Interface responsiva em português, sem frameworks ou dependências externas.
@@ -22,9 +22,9 @@ Este repositório reúne informações editoriais, categorias, plataformas, est�
 
 Cada registro aponta para páginas do projeto correspondente. Os estágios e requisitos podem mudar: confirme os detalhes nas fontes oficiais antes de utilizar versões alfa em trabalho importante.
 
-## ArtCraft Launcher em destaque
+## Decode Launcher em destaque
 
-O [ArtCraft Launcher](https://github.com/storytold/craft-launcher) é um projeto nativo em Rust que centraliza a descoberta, instalação, abertura e atualização dos aplicativos da Craft App Suite. O README upstream documenta downloads para Linux (incluindo AppImage, DEB e RPM), Windows, macOS, FreeBSD e WebAssembly, bem como verificação de downloads por SHA-256.
+O [Decode Launcher (nome original: ArtCraft Launcher)](https://github.com/storytold/craft-launcher) é um projeto nativo em Rust que centraliza a descoberta, instalação, abertura e atualização dos aplicativos da Craft App Suite. O README upstream documenta downloads para Linux (incluindo AppImage, DEB e RPM), Windows, macOS, FreeBSD e WebAssembly, bem como verificação de downloads por SHA-256.
 
 **Status indicado pelo projeto original:** early alpha. A disponibilidade de pacotes varia por versão, sistema e arquitetura. Veja sempre a página de [releases](https://github.com/storytold/craft-launcher/releases/latest) antes de baixar.
 

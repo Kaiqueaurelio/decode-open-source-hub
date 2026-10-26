@@ -98,10 +98,12 @@ def main():
             names.add(name.strip().casefold())
 
         if slug == "artcraft-launcher":
-            if name != "ArtCraft Launcher" or item["kind"] != "Launcher":
+            if name != "Decode Launcher" or item["kind"] != "Launcher":
                 errors.append(f"{prefix}: launcher deve ser identificado separadamente.")
             if item["category"] != "Launchers e utilitários":
                 errors.append(f"{prefix}: categoria incorreta do launcher.")
+            if "ArtCraft Launcher" not in item["tags"]:
+                errors.append(f"{prefix}: nome upstream do launcher deve permanecer como termo de busca.")
             if item["sourceUrl"] != "https://github.com/storytold/craft-launcher":
                 errors.append(f"{prefix}: repositório do launcher incorreto.")
             if item["downloadUrl"] != "https://github.com/storytold/craft-launcher/releases/latest":

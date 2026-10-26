@@ -383,7 +383,7 @@
   },
   {
     "slug": "artcraft-launcher",
-    "name": "ArtCraft Launcher",
+    "name": "Decode Launcher",
     "icon": "🚀",
     "category": "Launchers e utilitários",
     "kind": "Launcher",
@@ -411,7 +411,8 @@
       "RPM",
       "Flatpak",
       "WebAssembly",
-      "Craft App Suite"
+      "Craft App Suite",
+      "ArtCraft Launcher"
     ],
     "stage": "Alpha inicial",
     "featured": true
