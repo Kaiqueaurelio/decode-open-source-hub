@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a31">
+  <meta name="description" content="Descubra, compare e explore softwares de código aberto. Catálogo visual com categorias, plataformas, licenças e links oficiais.">
+  <meta property="og:title" content="Decode Open Source Hub">
+  <meta property="og:description" content="Um catálogo visual para descobrir ferramentas de código aberto e acessar suas fontes oficiais.">
+  <meta property="og:type" content="website">
+  <title>Decode Open Source Hub — descubra software aberto</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#catalogo">Pular para o catálogo</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="Decode Open Source Hub - início">
+        <span class="brand-mark" aria-hidden="true"><span>OS</span></span>
+        <span class="brand-copy"><strong>Decode</strong><small>OPEN SOURCE HUB</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#sobre">Sobre o projeto</a>
+      </nav>
+      <a class="header-github" href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">
+        <span aria-hidden="true">↗</span> GitHub
+      </a>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div><div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> TECNOLOGIA ABERTA, ESCOLHAS MELHORES</div>
+        <h1>Seu próximo software<br><span>começa aqui.</span></h1>
+        <p class="hero-lede">Encontre ferramentas de código aberto para criar, trabalhar, desenvolver e explorar novas possibilidades — com informações claras e links para as fontes oficiais.</p>
+        <form class="hero-search" id="search-form" role="search">
+          <span class="search-symbol" aria-hidden="true">⌕</span>
+          <label class="visually-hidden" for="search-input">Pesquisar programas</label>
+          <input id="search-input" type="search" autocomplete="off" placeholder="Buscar por programa, categoria ou finalidade..." aria-describedby="search-hint">
+          <button type="submit">Buscar <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="search-hint" id="search-hint">Ex.: edição de vídeo, desenho 3D, senhas, programação</p>
+        <div class="hero-stats" aria-label="Resumo do catálogo">
+          <div><strong id="stat-total">—</strong><span>programas catalogados</span></div>
+          <div><strong id="stat-categories">—</strong><span>categorias para explorar</span></div>
+          <div><strong>Oficiais</strong><span>links para as fontes dos projetos</span></div>
+        </div>
+      </div>
+      <div class="hero-side-art" aria-hidden="true">
+        <div class="orbit orbit-large"></div><div class="orbit orbit-small"></div>
+        <div class="orbit-core"><span>OS</span><i>✦</i></div>
+        <div class="floating-tile tile-one">⌘</div><div class="floating-tile tile-two">◇</div><div class="floating-tile tile-three">✳</div><div class="floating-tile tile-four">⌬</div>
+      </div>
+    </section>
+    <section class="category-band" aria-label="Atalhos por categoria">
+      <div class="container">
+        <div class="band-heading"><span>EXPLORE POR ÁREA</span><span class="band-note">Escolha um caminho para começar</span></div>
+        <div class="category-chips" id="category-chips"><span class="loading-text">Carregando categorias…</span></div>
+      </div>
+    </section>
+    <section class="catalog-section" id="catalogo">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">A BIBLIOTECA</span><h2>Encontre sua ferramenta</h2><p>Resumos diretos, informações essenciais e acesso aos canais oficiais.</p></div>
+          <div class="result-counter" id="result-count" aria-live="polite">Carregando catálogo…</div>
+        </div>
+        <div class="filter-bar">
+          <div class="filter-search"><span aria-hidden="true">⌕</span><label class="visually-hidden" for="filter-search-input">Filtrar catálogo</label><input id="filter-search-input" type="search" autocomplete="off" placeholder="Filtrar resultados…"></div>
+          <div class="filter-field"><label for="platform-filter">Plataforma</label><select id="platform-filter"><option value="">Todas</option></select></div>
+          <div class="filter-field"><label for="sort-filter">Ordenar por</label><select id="sort-filter"><option value="featured">Em destaque</option><option value="name">Nome: A–Z</option><option value="category">Categoria</option></select></div>
+          <button type="button" id="clear-filters" class="clear-button">Limpar filtros</button>
+        </div>
+        <div class="active-filters" id="active-filters" aria-live="polite"></div>
+        <div class="software-grid" id="software-grid" aria-live="polite"><div class="loading-state"><span class="loader"></span><p>Preparando a biblioteca…</p></div></div>
+        <div class="load-more-wrap" id="load-more-wrap" hidden><button class="load-more-button" id="load-more" type="button">Mostrar mais programas <span aria-hidden="true">↓</span></button></div>
+        <div class="error-state" id="error-state" hidden><div class="error-icon">!</div><h3>Não foi possível carregar o catálogo</h3><p>Verifique se data/software.json está disponível. Para testar localmente, inicie um servidor HTTP conforme as instruções do README.</p><button type="button" id="retry-load">Tentar novamente</button></div>
+      </div>
+    </section>
+    <section class="how-section" id="como-funciona">
+      <div class="container how-inner">
+        <div class="how-intro"><span class="section-kicker">SEM COMPLICAÇÃO</span><h2>Do que você precisa ao programa certo.</h2><p>A ideia é reduzir a pesquisa desnecessária e deixar as informações importantes em primeiro plano.</p></div>
+        <div class="how-steps">
+          <article class="step"><div class="step-number">01</div><div><h3>Explore</h3><p>Pesquise por nome, finalidade ou categoria para descobrir alternativas.</p></div></article>
+          <article class="step"><div class="step-number">02</div><div><h3>Compare</h3><p>Confira plataformas compatíveis e a licença indicada no registro.</p></div></article>
+          <article class="step"><div class="step-number">03</div><div><h3>Confira a fonte</h3><p>Acesse o site do desenvolvedor ou o código-fonte antes de baixar.</p></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="about-section" id="sobre">
+      <div class="container about-card">
+        <div class="about-emblem" aria-hidden="true"><span>✦</span></div>
+        <div class="about-copy"><span class="section-kicker">SOBRE O HUB</span><h2>Mais acesso. Mais transparência. Mais possibilidades.</h2><p>O Decode Open Source Hub é um projeto independente da Decode Analytics para organizar descobertas de software aberto. A lista é curada e pode crescer com contribuições da comunidade.</p><p class="about-note">As fichas são informativas. Licenças, versões e links podem mudar; confira sempre os detalhes nas fontes oficiais antes de redistribuir ou instalar um programa.</p></div>
+        <a class="about-link" href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">Contribuir no GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand footer-brand" href="#"><span class="brand-mark" aria-hidden="true"><span>OS</span></span><span class="brand-copy"><strong>Decode</strong><small>OPEN SOURCE HUB</small></span></a>
+      <p>Feito para facilitar a descoberta de software aberto.</p>
+      <div class="footer-links"><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">Código-fonte</a><a href="LICENSE">Licença MIT</a><a href="LICENSE-DATA.md">Licença dos dados</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="current-year">2026</span> Decode Open Source Hub</span><span>Projetos listados mantêm suas próprias licenças e marcas.</span></div>
+  </footer>
+</body>
+</html>
