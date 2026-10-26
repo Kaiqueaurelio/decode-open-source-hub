@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: decode-launcher-source-import
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   import-source:
