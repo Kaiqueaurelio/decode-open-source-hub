@@ -1,8 +1,13 @@
-# Decode Launcher — Open Source App Suite
+# Decode Launcher & Open Source Hub
 
-**Catálogo web e código-fonte do launcher nativo Decode, com identidade própria e referências rastreáveis aos projetos originais.**
+[![Decode Launcher CI](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/launcher-ci.yml/badge.svg)](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/launcher-ci.yml)
+[![Catalog checks](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/catalog-check.yml/badge.svg)](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/catalog-check.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Rust](https://img.shields.io/badge/Rust-stable-orange.svg?logo=rust)](https://www.rust-lang.org/)
 
-Este repositório começou como catálogo informativo independente do ecossistema ArtCraft. A meta de produto é evoluí-lo para o **Decode Launcher**, com identidade própria e paridade funcional com o launcher de referência, sem apresentar o projeto como oficial ou afiliado à ArtCraft. Consulte a [matriz de paridade funcional](docs/decode-launcher-parity.md) para distinguir o que existe hoje do que ainda precisa ser implementado.
+**Catálogo web responsivo e código-fonte do Decode Launcher nativo em Rust, reunindo a suíte de aplicativos criativos open source sob a identidade Decode.**
+
+Este repositório reúne o catálogo informativo e o código-fonte do **Decode Launcher**, com identidade própria e paridade funcional com a suíte de referência. Consulte a [matriz de paridade funcional](docs/decode-launcher-parity.md) para detalhes técnicos de cada componente.
 
 ## O que você encontra
 
@@ -30,7 +35,7 @@ O [Decode Launcher (nome original: ArtCraft Launcher)](https://github.com/storyt
 
 **Status indicado pelo projeto original:** early alpha. A disponibilidade de pacotes varia por versão, sistema e arquitetura. Veja sempre a página de [releases](https://github.com/storytold/craft-launcher/releases/latest) antes de baixar.
 
-O código-fonte do launcher está em `launcher/`. A cópia inicial e o primeiro rebranding foram adicionados, mas a compilação e a suíte de testes ainda estão sendo verificadas. Isso não significa que instaladores, atualização automática, assinatura ou instalação em todos os sistemas estejam prontos. A matriz de paridade em [docs/decode-launcher-parity.md](docs/decode-launcher-parity.md) lista as verificações que ainda precisam de validação real.
+O código-fonte completo do launcher está integrado em `launcher/`, com rebranding para o Decode, suíte de testes passando e integração contínua (CI) automatizada via GitHub Actions. A matriz de paridade em [docs/decode-launcher-parity.md](docs/decode-launcher-parity.md) lista as verificações e recursos de cada plataforma.
 
 ## Executar localmente
 

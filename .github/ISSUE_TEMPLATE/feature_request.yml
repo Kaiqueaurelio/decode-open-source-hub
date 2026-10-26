@@ -1,0 +1,33 @@
+name: Sugestão de melhoria ou funcionalidade
+description: Sugira uma nova ideia, recurso ou aprimoramento para o Decode Hub ou Launcher.
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ideias e sugestões são muito bem-vindas!
+  - type: dropdown
+    id: component
+    attributes:
+      label: Área de interesse
+      options:
+        - Decode Launcher (Desktop/Rust)
+        - Catálogo Web (Interface/Filtros)
+        - Suporte a Novas Plataformas
+        - Documentação e Guias
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Qual é a sua proposta?
+      description: Descreva a funcionalidade ou melhoria desejada.
+      placeholder: Seria ótimo se o Decode Launcher...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Motivação ou caso de uso
+      description: Como isso ajuda você ou outros usuários?
