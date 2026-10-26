@@ -158,7 +158,12 @@
   }
   function displayedName(item) {
     var name = escapeHtml(item.name || "App Decode");
-    if (item.name && item.name.endsWith("Decode")) return name.slice(0, -6) + '<span class="name-accent">Decode</span>';
+    if (item.name && item.name.startsWith("Decode")) {
+      return '<span class="name-accent">Decode</span>' + name.slice(6);
+    }
+    if (item.name && item.name.endsWith("Decode")) {
+      return name.slice(0, -6) + '<span class="name-accent">Decode</span>';
+    }
     return name;
   }
   function cardMarkup(item, index) {
