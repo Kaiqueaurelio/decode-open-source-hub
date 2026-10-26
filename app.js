@@ -140,7 +140,7 @@
   function appIconMarkup(item) {
     var color = appColors[item.slug] || "#353535";
     var fallback = escapeHtml(item.icon || "◈");
-    if (item.kind !== "Crafting App" || !/^[a-z0-9-]+$/.test(item.slug || "")) {
+    if (!/^[a-z0-9-]+$/.test(item.slug || "")) {
       return '<div class="app-icon" style="--app-color:' + color + '"><span class="app-icon-fallback">' + fallback + '</span></div>';
     }
     var src = "assets/app-icons/" + item.slug + ".png";

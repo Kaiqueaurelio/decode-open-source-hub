@@ -1,0 +1,41 @@
+name: Build & Package Decode Suite Apps
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  package-apps:
+    name: Package All 13 Decode Suite Apps
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Package App Bundles
+        run: |
+          mkdir -p dist
+          for app_dir in apps/decode-*; do
+            if [ -d "$app_dir" ]; then
+              app_name=$(basename "$app_dir")
+              echo "Packaging $app_name..."
+              tar -czvf "dist/${app_name}-release-package.tar.gz" -C apps "$app_name"
+              sha256sum "dist/${app_name}-release-package.tar.gz" > "dist/${app_name}-release-package.tar.gz.sha256"
+            fi
+          done
+          ls -lh dist/
+
+      - name: Upload App Packages to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            dist/decode-*-release-package.tar.gz
+            dist/decode-*-release-package.tar.gz.sha256
