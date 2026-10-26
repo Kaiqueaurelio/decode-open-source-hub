@@ -1,6 +1,6 @@
-# Decode Open Source Hub — Decode Edition
+# Decode Launcher — Open Source App Suite
 
-**Catálogo independente de 13 apps Decode e do Decode Launcher, baseado nos projetos open source do ArtCraft.**
+**Catálogo web e código-fonte do launcher nativo Decode, com identidade própria e referências rastreáveis aos projetos originais.**
 
 Este repositório começou como catálogo informativo independente do ecossistema ArtCraft. A meta de produto é evoluí-lo para o **Decode Launcher**, com identidade própria e paridade funcional com o launcher de referência, sem apresentar o projeto como oficial ou afiliado à ArtCraft. Consulte a [matriz de paridade funcional](docs/decode-launcher-parity.md) para distinguir o que existe hoje do que ainda precisa ser implementado.
 
@@ -10,7 +10,8 @@ Este repositório começou como catálogo informativo independente do ecossistem
 - **Decode Launcher (projeto original: ArtCraft Launcher):** utilitário separado, com links para o repositório oficial e suas releases.
 - Busca por nome, finalidade, recursos e palavras-chave.
 - Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.
-- Interface responsiva em português, sem frameworks ou dependências externas.
+- Interface web responsiva com modos de grade e tabela, busca sincronizada, filtros por estágio, categoria e plataforma, ícones e links oficiais.
+- Código-fonte Rust do launcher em `launcher/`, com crates para catálogo/release, backend nativo, UI egui, shell desktop, WebAssembly e scripts de empacotamento.
 - Matriz de paridade funcional que documenta os recursos exigidos para o Decode Launcher e seu estado real de implementação.
 - Dados separados em JSON, validador, testes automatizados e fluxo de validação no GitHub Actions.
 
@@ -23,13 +24,13 @@ Este repositório começou como catálogo informativo independente do ecossistem
 
 Cada registro aponta para páginas do projeto correspondente. Os estágios e requisitos podem mudar: confirme os detalhes nas fontes oficiais antes de utilizar versões alfa em trabalho importante.
 
-## Decode Launcher em destaque
+## Decode Launcher nativo
 
 O [Decode Launcher (nome original: ArtCraft Launcher)](https://github.com/storytold/craft-launcher) é um projeto nativo em Rust que centraliza a descoberta, instalação, abertura e atualização dos aplicativos da Craft App Suite. O README upstream documenta downloads para Linux (incluindo AppImage, DEB e RPM), Windows, macOS, FreeBSD e WebAssembly, bem como verificação de downloads por SHA-256.
 
 **Status indicado pelo projeto original:** early alpha. A disponibilidade de pacotes varia por versão, sistema e arquitetura. Veja sempre a página de [releases](https://github.com/storytold/craft-launcher/releases/latest) antes de baixar.
 
-**Importante:** o código do launcher nativo ainda não foi importado para este repositório. Por enquanto, a entrada é informativa e aponta para o upstream. O trabalho de portabilidade e rebranding está especificado em [docs/decode-launcher-parity.md](docs/decode-launcher-parity.md); não considere as funções nativas como implementadas até serem portadas e testadas.
+O código-fonte do launcher está em `launcher/`. A cópia inicial e o primeiro rebranding foram adicionados, mas a compilação e a suíte de testes ainda estão sendo verificadas. Isso não significa que instaladores, atualização automática, assinatura ou instalação em todos os sistemas estejam prontos. A matriz de paridade em [docs/decode-launcher-parity.md](docs/decode-launcher-parity.md) lista as verificações que ainda precisam de validação real.
 
 ## Executar localmente
 
@@ -54,7 +55,14 @@ Abra [http://localhost:8080](http://localhost:8080). Use um servidor HTTP porque
 - `tests/test_catalog.py`: testes automatizados.
 - `docs/catalog-guidelines.md`: regras de manutenção do catálogo.
 - `docs/verification.md`: processo e limites de verificação.
-- `docs/decode-launcher-parity.md`: matriz de paridade funcional e checklist de implementação do Decode Launcher.
+- `docs/decode-launcher-parity.md`: matriz de paridade funcional e checklist de portabilidade do Decode Launcher.
+- `launcher/Cargo.toml`: workspace Rust do launcher.
+- `launcher/apps/`: shell desktop e aplicação web.
+- `launcher/crates/core/`: catálogo, releases e parsing.
+- `launcher/crates/native/`: detecção, downloads e instalação nativa.
+- `launcher/crates/ui-egui/`: interface compartilhada e traduções.
+- `launcher/packaging/`: scripts de empacotamento por plataforma.
+- `launcher/LICENSE-MIT`, `launcher/LICENSE-APACHE`, `launcher/NOTICE`, `launcher/ATTRIBUTION.md`: avisos e atribuições upstream.
 
 ## Validar e testar
 
@@ -64,6 +72,18 @@ python3 -m unittest discover -s tests -v
 ```
 
 Esses testes verificam estrutura e regras codificadas, mas não garantem que cada URL esteja respondendo no momento e não substituem uma revisão manual das fontes.
+
+## Compilar e testar o launcher Rust
+
+Requer Rust estável, Cargo e dependências nativas da plataforma. No Linux, o workflow instala os headers de sistema usados pelo egui/winit.
+
+```bash
+cd launcher
+cargo fmt --all -- --check
+cargo test --workspace --locked
+```
+
+Os testes do workspace não substituem validações de instalação e atualização reais em Linux, Windows, macOS, FreeBSD e WebAssembly. Não distribua instaladores Decode antes de validar IDs de pacotes, feeds de atualização, assinatura, instalação, desinstalação e migração por plataforma.
 
 ## Licenças e atribuição
 

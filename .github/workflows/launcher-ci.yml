@@ -1,0 +1,51 @@
+name: Decode Launcher CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "launcher/**"
+      - ".github/workflows/launcher-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "launcher/**"
+      - ".github/workflows/launcher-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: decode-launcher-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-linux:
+    name: Format and Rust tests (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev
+
+      - name: Install stable Rust
+        run: |
+          rustup toolchain install stable --profile minimal --component rustfmt
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Check formatting
+        working-directory: launcher
+        run: cargo fmt --all -- --check
+
+      - name: Run workspace tests
+        working-directory: launcher
+        run: cargo test --workspace --locked

@@ -63,6 +63,26 @@ class CatalogTests(unittest.TestCase):
                 self.assertEqual(len(item["platforms"]), len(set(item["platforms"])))
                 self.assertTrue(all(isinstance(tag, str) and tag.strip() for tag in item["tags"]))
 
+    def test_launcher_style_ui_controls_are_present(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        script = (ROOT / "app.js").read_text(encoding="utf-8")
+        stylesheet = (ROOT / "styles.css").read_text(encoding="utf-8")
+        self.assertIn('id="view-grid"', page)
+        self.assertIn('id="view-table"', page)
+        self.assertIn('id="status-tabs"', page)
+        self.assertIn('id="reload-catalog"', page)
+        self.assertIn("function setView(", script)
+        self.assertIn("function renderStatusTabs(", script)
+        self.assertIn("assets/app-icons/", script)
+        self.assertIn(".software-grid.table-view", stylesheet)
+        self.assertIn(".status-tab", stylesheet)
+
+    def test_root_readme_documents_imported_launcher_source(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("launcher/", readme)
+        self.assertIn("cargo test --workspace --locked", readme)
+        self.assertNotIn("o código do launcher nativo ainda não foi importado", readme.lower())
+
     def test_validator_passes(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "validate_catalog.py")],
