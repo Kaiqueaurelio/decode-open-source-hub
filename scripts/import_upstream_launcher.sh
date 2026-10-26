@@ -122,8 +122,8 @@ for path in sorted(root.rglob("*"), key=lambda item: len(item.parts), reverse=Tr
 readme = root / "README.md"
 if readme.exists():
     content = readme.read_text(encoding="utf-8")
-    content = re.sub(r'<p align="center">\\s*<img src="docs/screenshots/.*?</p>\\s*', "", content, flags=re.S)
-    content = content.replace("## What it does", "## What it does\\n\\n> Screenshots of the Decode-branded build will be added after the application is built and visually verified.\\n")
+    content = re.sub(r'<p align="center">\s*<img src="docs/screenshots/.*?</p>\s*', "", content, flags=re.S)
+    content = content.replace("## What it does", "## What it does\n\n> Screenshots of the Decode-branded build will be added after the application is built and visually verified.\n")
     readme.write_text(content, encoding="utf-8")
 screenshots = root / "docs" / "screenshots"
 if screenshots.exists():
