@@ -53,7 +53,7 @@ jobs:
 
       - name: Run Rust tests
         working-directory: launcher
-        run: cargo test --workspace --locked
+        run: cargo test --workspace
         continue-on-error: true
 
       - name: Create migration branch and pull request
