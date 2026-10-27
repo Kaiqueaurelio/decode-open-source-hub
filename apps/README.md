@@ -28,6 +28,8 @@ Cada aplicativo é um workspace modular em Rust com interface nativa acelerada p
 | **[DecodeDeck](decode-deck/)** | [`apps/decode-deck`](decode-deck/) | Apresentações visuais e slides dinâmicos | `cd decode-deck && cargo run --release` |
 | **[DecodeCAD](decode-cad/)** | [`apps/decode-cad`](decode-cad/) | Projeto e desenho técnico 2D/3D assistido por computador | `cd decode-cad && cargo run --release` |
 | **[DecodeGrid](decode-grid/)** | [`apps/decode-grid`](decode-grid/) | Planilhas eletrônicas e análise de dados | `cd decode-grid && cargo run --release` |
+| **[DecodeCraft](decode-craft/)** | [`apps/decode-craft`](decode-craft/) | IDE criativa com IA: composição 2D/3D e criação generativa | `cd decode-craft && cargo run --release` |
+| **[DecodeCraftX](decode-craftx/)** | [`apps/decode-craftx`](decode-craftx/) | Runtime de aceleração e extensões para o DecodeCraft | `cd decode-craftx && cargo run --release` |
 
 ---
 
