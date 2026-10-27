@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the 13 official Craft apps plus the separate launcher utility in Decode Monorepo."""
+"""Validate the 13 Decode suite apps plus the separate launcher utility in Decode Monorepo."""
 import json
 import re
 import sys
@@ -82,7 +82,7 @@ def main():
         print("ERRO: a raiz do catálogo deve ser uma lista.")
         return 1
     if len(items) != 14:
-        errors.append(f"Esperados 13 Crafting Apps e 1 launcher; encontrados {len(items)} registros.")
+        errors.append(f"Esperados 13 apps Decode e 1 launcher; encontrados {len(items)} registros.")
 
     slugs = []
     names = set()
@@ -133,8 +133,8 @@ def main():
                 continue
             if name != EXPECTED_NAMES.get(slug):
                 errors.append(f"{prefix}: nome de apresentação Decode incorreto para {slug}.")
-            if item["kind"] != "Crafting App":
-                errors.append(f"{prefix}: tipo deve ser Crafting App.")
+            if item["kind"] != "Aplicativo Decode":
+                errors.append(f"{prefix}: tipo deve ser Aplicativo Decode.")
             if item["category"] not in CATEGORIES:
                 errors.append(f"{prefix}: categoria inesperada {item['category']!r}.")
             if item["license"] != "MIT OR Apache-2.0":
