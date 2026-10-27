@@ -16,13 +16,13 @@
   <?endif ?>
   <Package
       Name="DeckCraft"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Decode Analytics"
       Version="$(var.Version)"
       UpgradeCode="6F9C69E7-7825-40D2-BF26-C274DA676425"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="DeckCraft presentations and slide shows" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="DeckCraft presentations and slide shows" Manufacturer="Decode Analytics" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -31,9 +31,9 @@
 
     <Icon Id="DeckcraftIcon.ico" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="DeckcraftIcon.ico" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/deckcraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/deckcraft" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions" />
 
     <StandardDirectory Id="ProgramFiles6432Folder">
       <Directory Id="INSTALLFOLDER" Name="DeckCraft" />

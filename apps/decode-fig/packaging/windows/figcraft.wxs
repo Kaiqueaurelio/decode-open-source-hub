@@ -23,13 +23,13 @@
   <?endif ?>
   <Package
       Name="FigCraft"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Decode Analytics"
       Version="$(var.Version)"
       UpgradeCode="7F8B9827-D065-41B7-A514-2A454B21F484"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="FigCraft interface design and prototyping tool" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="FigCraft interface design and prototyping tool" Manufacturer="Decode Analytics" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -40,9 +40,9 @@
          .exe need an .exe icon identifier (ICE50), even when the source is an ICO. -->
     <Icon Id="FigcraftIcon.exe" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="FigcraftIcon.exe" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/figcraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/figcraft" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions" />
 
     <StandardDirectory Id="ProgramFiles6432Folder">
       <Directory Id="INSTALLFOLDER" Name="FigCraft" />

@@ -188,7 +188,7 @@
       version: "v0.8.2",
       accent: "#fbbf24",
       iconBg: "#382905",
-      icon: "artcraft-launcher.png",
+      icon: "decode-launcher.png",
       upstream: "Decode Launcher",
       appClass: "app-artcraft-launcher",
       cmd: "cd launcher && cargo run --release -p decode-launcher"

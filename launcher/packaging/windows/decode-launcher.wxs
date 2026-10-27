@@ -28,13 +28,13 @@
      xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
   <Package
       Name="Decode Launcher"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Decode Analytics"
       Version="$(var.Version)"
       UpgradeCode="1AC08DBF-D4CF-4BA4-A81E-CAA5C1004974"
       Scope="perUser"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="Decode Launcher: install and update the Decode App Suite" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="Decode Launcher: install and update the Decode App Suite" Manufacturer="Decode Analytics" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -64,7 +64,7 @@
     <!-- An update installs where the user put the previous version (recorded by
          DecodeLauncherApp below; every version since 0.1.0 records it). -->
     <Property Id="INSTALLFOLDER">
-      <RegistrySearch Id="PreviousInstallFolder" Root="HKCU" Key="Software\Learning Machines LLC\Decode Launcher" Name="InstallDir" Type="raw" />
+      <RegistrySearch Id="PreviousInstallFolder" Root="HKCU" Key="Software\Decode Analytics\Decode Launcher" Name="InstallDir" Type="raw" />
     </Property>
 
     <!-- The desktop shortcut: the folder page's box sets INSTALLDESKTOPSHORTCUT to 1. It starts
@@ -72,7 +72,7 @@
          from a version that never asked (0.1.0, 0.1.1) adds none. A value given on the command
          line (msiexec ... INSTALLDESKTOPSHORTCUT=0 or 1) wins. -->
     <Property Id="PREVIOUSDESKTOPSHORTCUT">
-      <RegistrySearch Id="PreviousDesktopShortcut" Root="HKCU" Key="Software\Learning Machines LLC\Decode Launcher" Name="DesktopShortcutChoice" Type="raw" />
+      <RegistrySearch Id="PreviousDesktopShortcut" Root="HKCU" Key="Software\Decode Analytics\Decode Launcher" Name="DesktopShortcutChoice" Type="raw" />
     </Property>
     <SetProperty Id="INSTALLDESKTOPSHORTCUT" Value="1" After="AppSearch" Sequence="first"
         Condition="NOT INSTALLDESKTOPSHORTCUT AND ((NOT Installed AND NOT WIX_UPGRADE_DETECTED AND NOT PREVIOUSDESKTOPSHORTCUT) OR PREVIOUSDESKTOPSHORTCUT = &quot;1&quot;)" />
@@ -151,8 +151,8 @@
         <File Id="DecodeLauncherNotice" Source="$(var.BinDir)\NOTICE" KeyPath="no" />
         <File Id="DecodeLauncherExe" Source="$(var.BinDir)\decode-launcher.exe" KeyPath="no" />
         <!-- Read back by the next version's installer and by the launcher (self_update.rs). -->
-        <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\Decode Launcher" Name="InstallDir" Value="[INSTALLFOLDER]" Type="string" KeyPath="yes" />
-        <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\Decode Launcher" Name="DesktopShortcutChoice" Value="[DESKTOPSHORTCUTCHOICE]" Type="string" />
+        <RegistryValue Root="HKCU" Key="Software\Decode Analytics\Decode Launcher" Name="InstallDir" Value="[INSTALLFOLDER]" Type="string" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="Software\Decode Analytics\Decode Launcher" Name="DesktopShortcutChoice" Value="[DESKTOPSHORTCUTCHOICE]" Type="string" />
         <!-- Win+R "decode-launcher". -->
         <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\decode-launcher.exe" Value="[#DecodeLauncherExe]" Type="string" />
         <RemoveFolder Id="RemoveInstallFolder" Directory="INSTALLFOLDER" On="uninstall" />
@@ -165,7 +165,7 @@
             Target="[#DecodeLauncherExe]" WorkingDirectory="INSTALLFOLDER">
           <ShortcutProperty Key="System.AppUserModel.ID" Value="com.decode.launcher" />
         </Shortcut>
-        <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\Decode Launcher" Name="StartMenuShortcut" Value="1" Type="integer" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="Software\Decode Analytics\Decode Launcher" Name="StartMenuShortcut" Value="1" Type="integer" KeyPath="yes" />
       </Component>
 
       <!-- Only when the folder page's box is ticked; removed on uninstall like everything else. -->
@@ -176,7 +176,7 @@
             Target="[#DecodeLauncherExe]" WorkingDirectory="INSTALLFOLDER">
           <ShortcutProperty Key="System.AppUserModel.ID" Value="com.decode.launcher" />
         </Shortcut>
-        <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\Decode Launcher" Name="DesktopShortcut" Value="1" Type="integer" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="Software\Decode Analytics\Decode Launcher" Name="DesktopShortcut" Value="1" Type="integer" KeyPath="yes" />
       </Component>
     </ComponentGroup>
   </Fragment>

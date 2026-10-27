@@ -31,13 +31,13 @@
   <?endif ?>
   <Package
       Name="WordCraft"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Decode Analytics"
       Version="$(var.Version)"
       UpgradeCode="075497F9-E861-45D0-9C7F-A74F8C34E6BA"
       Scope="$(var.Scope)"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="WordCraft word processor" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="WordCraft word processor" Manufacturer="Decode Analytics" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -46,9 +46,9 @@
 
     <Icon Id="WordcraftIcon.ico" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="WordcraftIcon.ico" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/wordcraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/wordcraft" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions" />
 
     <!-- Installer UI (#198): WixUI_Minimal is welcome + license, progress, then a finish page so
          people can see the install worked. Its dialogs and bitmaps are WiX's own

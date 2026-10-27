@@ -14,13 +14,13 @@
   <?endif ?>
   <Package
       Name="DesignCraft"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Decode Analytics"
       Version="$(var.Version)"
       UpgradeCode="49E87D30-BB68-4896-AA1D-F45C833CFC3C"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="DesignCraft page layout and publishing" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="DesignCraft page layout and publishing" Manufacturer="Decode Analytics" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -29,9 +29,9 @@
 
     <Icon Id="DesigncraftIcon.ico" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="DesigncraftIcon.ico" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/designcraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/designcraft" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://decode-open-source-hub.vercel.app/" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/Kaiqueaurelio/decode-open-source-hub/discussions" />
 
     <!-- Shared native setup UI, including install/uninstall completion. -->
 

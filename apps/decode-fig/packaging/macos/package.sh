@@ -171,7 +171,7 @@ if [[ "$HAS_CLI" = 1 ]]; then
   copy_docs "$CLI_DIR"
   # Same Developer ID and hardened runtime as the app, with an explicit reverse-DNS identifier
   # (codesign would otherwise use the bare file name).
-  sign --options runtime --identifier ai.storyteller.figcraft-cli "$CLI_DIR/figcraft-cli"
+  sign --options runtime --identifier com.decode.figcraft-cli "$CLI_DIR/figcraft-cli"
   codesign --verify --strict --verbose=2 "$CLI_DIR/figcraft-cli"
   rm -f "$CLI_ZIP"
   ditto -c -k --keepParent "$CLI_DIR" "$CLI_ZIP"

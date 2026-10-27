@@ -13,7 +13,7 @@ release: 1
 section: utils
 priority: optional
 maintainer: ${DECODE_LAUNCHER_MAINTAINER}
-vendor: Learning Machines LLC
+vendor: Decode Analytics
 homepage: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher
 license: MIT OR Apache-2.0
 description: |-

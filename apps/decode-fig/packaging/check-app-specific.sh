@@ -13,10 +13,10 @@ fi
 python3 - <<'PYEOF'
 import yaml
 manifests = []
-for name in ("ai.storyteller.figcraft.yml", "ai.storyteller.figcraft.bundle.yml"):
+for name in ("com.decode.figcraft.yml", "com.decode.figcraft.bundle.yml"):
     with open("packaging/linux/flatpak/" + name) as source:
         manifest = yaml.safe_load(source)
-    assert manifest["id"] == "ai.storyteller.figcraft" and manifest["command"] == "figcraft", name
+    assert manifest["id"] == "com.decode.figcraft" and manifest["command"] == "figcraft", name
     manifests.append(manifest)
 for key in ("runtime", "runtime-version", "sdk", "finish-args"):
     assert manifests[0][key] == manifests[1][key], f"Flatpak manifests disagree on {key}"

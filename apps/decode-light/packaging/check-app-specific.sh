@@ -13,10 +13,10 @@ grep -qF '<DialogRef Id="ExitDialog" />' packaging/windows/lightcraft.wxs \
 python3 - <<'PYEOF'
 import yaml
 manifests = []
-for name in ("ai.storyteller.lightcraft.yml", "ai.storyteller.lightcraft.bundle.yml"):
+for name in ("com.decode.lightcraft.yml", "com.decode.lightcraft.bundle.yml"):
     with open("packaging/linux/flatpak/" + name) as source:
         manifest = yaml.safe_load(source)
-    assert manifest["id"] == "ai.storyteller.lightcraft" and manifest["command"] == "lightcraft", name
+    assert manifest["id"] == "com.decode.lightcraft" and manifest["command"] == "lightcraft", name
     manifests.append(manifest)
 for key in ("runtime", "runtime-version", "sdk", "finish-args"):
     assert manifests[0][key] == manifests[1][key], f"Flatpak manifests disagree on {key}"
@@ -33,7 +33,7 @@ import plistlib
 with open("packaging/macos/Info.plist.in", "rb") as source:
     plist = plistlib.load(source)
 for key, value in {
-    "CFBundleIdentifier": "ai.storyteller.lightcraft",
+    "CFBundleIdentifier": "com.decode.lightcraft",
     "CFBundleExecutable": "LightCraft",
     "CFBundleIconFile": "LightCraft",
     "LSMinimumSystemVersion": "11.0",
@@ -53,8 +53,8 @@ unsupported = {name.lower() for name in declared} & {
     "psb",
     "qoi",
     "application/x-lightcraft",
-    "ai.storyteller.lightcraft.document",
-    "ai.storyteller.lightcraft.qoi",
+    "com.decode.lightcraft.document",
+    "com.decode.lightcraft.qoi",
     "com.adobe.photoshop-large-image",
 }
 assert not unsupported, f"Info.plist declares types LightCraft cannot open: {sorted(unsupported)}"

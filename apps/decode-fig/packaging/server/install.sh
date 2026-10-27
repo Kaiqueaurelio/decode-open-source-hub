@@ -27,7 +27,7 @@
 #   -h, --help         this text
 set -euo pipefail
 
-REPO="storytold/figcraft"
+REPO="Kaiqueaurelio/decode-open-source-hub"
 CONFIG_DIR=/etc/figcraft-server
 CONFIG="$CONFIG_DIR/server.toml"
 DATA=/var/lib/figcraft-server
