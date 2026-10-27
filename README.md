@@ -18,6 +18,7 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 - Interface web responsiva com modos de grade e tabela, busca sincronizada, filtros por estágio, categoria e plataforma, ícones e links oficiais.
 - Código-fonte Rust do launcher em `launcher/`, com crates para catálogo/release, backend nativo, UI egui, shell desktop, WebAssembly e scripts de empacotamento.
 - Matriz de paridade funcional que documenta os recursos do Decode Launcher e seu estado de implementação.
+- **Integração upstream documentada:** [mapa de funcionalidades e plano de portabilidade](launcher-upstream/UPSTREAM-REFERENCE.md), com limites de marca/licença e pontos a validar.
 - Dados estruturados em JSON, validador, testes automatizados e fluxo de validação no GitHub Actions.
 
 ## 📥 Downloads e Acesso aos Aplicativos da Suíte
