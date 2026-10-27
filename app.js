@@ -28,98 +28,98 @@
     photocraft: {
       number: "01",
       role: "Image editor",
-      upstream: "PhotoCraft",
+      upstream: "DecodePhoto",
       appClass: "app-photocraft",
       cmd: "cd apps/decode-photo && cargo run --release"
     },
     vectorcraft: {
       number: "02",
       role: "Vector illustration",
-      upstream: "VectorCraft",
+      upstream: "DecodeVector",
       appClass: "app-vectorcraft",
       cmd: "cd apps/decode-vector && cargo run --release"
     },
     filmcraft: {
       number: "03",
       role: "Video editor",
-      upstream: "FilmCraft",
+      upstream: "DecodeFilm",
       appClass: "app-filmcraft",
       cmd: "cd apps/decode-film && cargo run --release"
     },
     lightcraft: {
       number: "04",
       role: "Photo library & raw developer",
-      upstream: "LightCraft",
+      upstream: "DecodeLight",
       appClass: "app-lightcraft",
       cmd: "cd apps/decode-light && cargo run --release"
     },
     pdfcraft: {
       number: "05",
       role: "PDF workbench",
-      upstream: "PdfCraft",
+      upstream: "DecodePdf",
       appClass: "app-pdfcraft",
       cmd: "cd apps/decode-pdf && cargo run --release"
     },
     effectcraft: {
       number: "06",
       role: "Motion graphics & VFX",
-      upstream: "EffectCraft",
+      upstream: "DecodeEffect",
       appClass: "app-effectcraft",
       cmd: "cd apps/decode-effect && cargo run --release"
     },
     designcraft: {
       number: "07",
       role: "Page layout & publishing",
-      upstream: "DesignCraft",
+      upstream: "DecodeDesign",
       appClass: "app-designcraft",
       cmd: "cd apps/decode-design && cargo run --release"
     },
     figcraft: {
       number: "08",
       role: "Interface design",
-      upstream: "FigCraft",
+      upstream: "DecodeFig",
       appClass: "app-figcraft",
       cmd: "cd apps/decode-fig && cargo run --release"
     },
     wordcraft: {
       number: "09",
       role: "Word processing",
-      upstream: "WordCraft",
+      upstream: "DecodeWord",
       appClass: "app-wordcraft",
       cmd: "cd apps/decode-word && cargo run --release"
     },
     soundcraft: {
       number: "10",
       role: "Digital audio workstation",
-      upstream: "SoundCraft",
+      upstream: "DecodeSound",
       appClass: "app-soundcraft",
       cmd: "cd apps/decode-sound && cargo run --release"
     },
     deckcraft: {
       number: "11",
       role: "Presentations & slide shows",
-      upstream: "DeckCraft",
+      upstream: "DecodeDeck",
       appClass: "app-deckcraft",
       cmd: "cd apps/decode-deck && cargo run --release"
     },
     cadcraft: {
       number: "12",
       role: "Computer-aided design & drafting",
-      upstream: "CADCraft",
+      upstream: "DecodeCAD",
       appClass: "app-cadcraft",
       cmd: "cd apps/decode-cad && cargo run --release"
     },
     gridcraft: {
       number: "13",
       role: "Spreadsheets & data analysis",
-      upstream: "GridCraft",
+      upstream: "DecodeGrid",
       appClass: "app-gridcraft",
       cmd: "cd apps/decode-grid && cargo run --release"
     },
     "artcraft-launcher": {
       number: "14",
       role: "Desktop App Launcher",
-      upstream: "ArtCraft Launcher",
+      upstream: "Decode Launcher",
       appClass: "app-artcraft-launcher",
       cmd: "cd launcher && cargo run --release -p decode-launcher"
     }
@@ -448,7 +448,7 @@
     if (!modal) return;
 
     document.getElementById("modal-title").textContent = item.name;
-    document.getElementById("modal-role").textContent = meta.number + " · " + meta.role + " (Origem: " + meta.upstream + ")";
+    document.getElementById("modal-role").textContent = meta.number + " · " + meta.role + " · Suíte Decode";
     document.getElementById("modal-desc").textContent = item.description;
     document.getElementById("modal-cmd").textContent = meta.cmd;
     document.getElementById("modal-hero-img").src = getHeroImg(slug);
