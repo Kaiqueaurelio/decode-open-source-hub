@@ -42,13 +42,13 @@ class CatalogTests(unittest.TestCase):
         cls.items = json.loads(DATA.read_text(encoding="utf-8"))
         cls.by_slug = {item["slug"]: item for item in cls.items}
 
-    def test_contains_13_crafting_apps_and_one_separate_launcher(self):
+    def test_contains_13_decode_apps_and_one_separate_launcher(self):
         self.assertEqual(len(self.items), 14)
         self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["artcraft-launcher"])
-        apps = [item for item in self.items if item["kind"] == "Crafting App"]
+        apps = [item for item in self.items if item["kind"] == "Aplicativo Decode"]
         self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
         self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
-        original_names = {
+        upstream_search_names = {
             "photocraft":"PhotoCraft", "vectorcraft":"VectorCraft", "filmcraft":"FilmCraft",
             "lightcraft":"LightCraft", "pdfcraft":"PdfCraft", "effectcraft":"EffectCraft",
             "designcraft":"DesignCraft", "figcraft":"FigCraft", "wordcraft":"WordCraft",
@@ -56,7 +56,7 @@ class CatalogTests(unittest.TestCase):
             "gridcraft":"GridCraft",
         }
         for item in apps:
-            self.assertIn(original_names[item["slug"]], item["tags"])
+            self.assertIn(upstream_search_names[item["slug"]], item["tags"])
         self.assertEqual(self.by_slug["artcraft-launcher"]["kind"], "Launcher")
         self.assertEqual(self.by_slug["artcraft-launcher"]["name"], "Decode Launcher")
         self.assertIn("ArtCraft Launcher", self.by_slug["artcraft-launcher"]["tags"])
