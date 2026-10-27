@@ -1,0 +1,5 @@
+[alias]
+xtask = "run -p xtask --"
+
+
+# Source: https://github.com/storytold/craft-launcher/blob/main/.cargo/config.toml
