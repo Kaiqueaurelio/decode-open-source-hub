@@ -31,22 +31,22 @@ Todos os 13 aplicativos da suíte Decode e o Decode Launcher estão integrados d
 
 ### Aplicativos Disponíveis no Repositório:
 
-| Aplicativo | Pasta no Repositório | Categoria | Como Compilar e Rodar (Rust) |
-| :--- | :--- | :--- | :--- |
-| **Decode Launcher** | [`launcher/`](launcher/) | Gerenciador & Atualizador Desktop | `cd launcher && cargo run --release -p decode-launcher` |
-| **Decode Photo** | [`apps/decode-photo/`](apps/decode-photo/) | Edição e Retoque de Imagens | `cd apps/decode-photo && cargo run --release` |
-| **Decode Vector** | [`apps/decode-vector/`](apps/decode-vector/) | Ilustração e Desenho Vetorial | `cd apps/decode-vector && cargo run --release` |
-| **Decode Film** | [`apps/decode-film/`](apps/decode-film/) | Edição de Vídeo e Linha do Tempo | `cd apps/decode-film && cargo run --release` |
-| **Decode Light** | [`apps/decode-light/`](apps/decode-light/) | Catálogo Fotográfico e RAW | `cd apps/decode-light && cargo run --release` |
-| **Decode PDF** | [`apps/decode-pdf/`](apps/decode-pdf/) | Leitura, Proteção e Edição PDF | `cd apps/decode-pdf && cargo run --release` |
-| **Decode Effect** | [`apps/decode-effect/`](apps/decode-effect/) | Efeitos Visuais VFX e Motion | `cd apps/decode-effect && cargo run --release` |
-| **Decode Design** | [`apps/decode-design/`](apps/decode-design/) | Diagramação e Publicação Editorial | `cd apps/decode-design && cargo run --release` |
-| **Decode Fig** | [`apps/decode-fig/`](apps/decode-fig/) | Design de Interfaces UI/UX | `cd apps/decode-fig && cargo run --release` |
-| **Decode Word** | [`apps/decode-word/`](apps/decode-word/) | Processador de Textos e Documentos | `cd apps/decode-word && cargo run --release` |
-| **Decode Sound** | [`apps/decode-sound/`](apps/decode-sound/) | Estação de Áudio Digital (DAW) | `cd apps/decode-sound && cargo run --release` |
-| **Decode Deck** | [`apps/decode-deck/`](apps/decode-deck/) | Apresentações e Slides | `cd apps/decode-deck && cargo run --release` |
-| **Decode CAD** | [`apps/decode-cad/`](apps/decode-cad/) | Desenho Técnico 2D/3D (CAD) | `cd apps/decode-cad && cargo run --release` |
-| **Decode Grid** | [`apps/decode-grid/`](apps/decode-grid/) | Planilhas e Modelagem de Dados | `cd apps/decode-grid && cargo run --release` |
+| Aplicativo | Pasta no Repositório | Categoria | Pacote Release (v0.8.2) | Checksum | Como Compilar e Rodar (Rust) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Decode Launcher** | [`launcher/`](launcher/) | Gerenciador & Atualizador Desktop | [decode-launcher-linux-x86_64.tar.gz (16.6 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-launcher-linux-x86_64.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-launcher-linux-x86_64.tar.gz.sha256) | `cd launcher && cargo run --release -p decode-launcher` |
+| **Decode Photo** | [`apps/decode-photo/`](apps/decode-photo/) | Edição e Retoque de Imagens | [decode-photo-release-package.tar.gz (22.7 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-photo-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-photo-release-package.tar.gz.sha256) | `cd apps/decode-photo && cargo run --release` |
+| **Decode Vector** | [`apps/decode-vector/`](apps/decode-vector/) | Ilustração e Desenho Vetorial | [decode-vector-release-package.tar.gz (23.9 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-vector-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-vector-release-package.tar.gz.sha256) | `cd apps/decode-vector && cargo run --release` |
+| **Decode Film** | [`apps/decode-film/`](apps/decode-film/) | Edição de Vídeo e Linha do Tempo | [decode-film-release-package.tar.gz (21.5 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-film-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-film-release-package.tar.gz.sha256) | `cd apps/decode-film && cargo run --release` |
+| **Decode Light** | [`apps/decode-light/`](apps/decode-light/) | Catálogo Fotográfico e RAW | [decode-light-release-package.tar.gz (19.5 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-light-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-light-release-package.tar.gz.sha256) | `cd apps/decode-light && cargo run --release` |
+| **Decode PDF** | [`apps/decode-pdf/`](apps/decode-pdf/) | Leitura, Proteção e Edição PDF | [decode-pdf-release-package.tar.gz (18.7 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-pdf-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-pdf-release-package.tar.gz.sha256) | `cd apps/decode-pdf && cargo run --release` |
+| **Decode Effect** | [`apps/decode-effect/`](apps/decode-effect/) | Efeitos Visuais VFX e Motion | [decode-effect-release-package.tar.gz (13.7 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-effect-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-effect-release-package.tar.gz.sha256) | `cd apps/decode-effect && cargo run --release` |
+| **Decode Design** | [`apps/decode-design/`](apps/decode-design/) | Diagramação e Publicação Editorial | [decode-design-release-package.tar.gz (10.6 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-design-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-design-release-package.tar.gz.sha256) | `cd apps/decode-design && cargo run --release` |
+| **Decode Fig** | [`apps/decode-fig/`](apps/decode-fig/) | Design de Interfaces UI/UX | [decode-fig-release-package.tar.gz (11.2 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-fig-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-fig-release-package.tar.gz.sha256) | `cd apps/decode-fig && cargo run --release` |
+| **Decode Word** | [`apps/decode-word/`](apps/decode-word/) | Processador de Textos e Documentos | [decode-word-release-package.tar.gz (12.3 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-word-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-word-release-package.tar.gz.sha256) | `cd apps/decode-word && cargo run --release` |
+| **Decode Sound** | [`apps/decode-sound/`](apps/decode-sound/) | Estação de Áudio Digital (DAW) | [decode-sound-release-package.tar.gz (6.9 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-sound-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-sound-release-package.tar.gz.sha256) | `cd apps/decode-sound && cargo run --release` |
+| **Decode Deck** | [`apps/decode-deck/`](apps/decode-deck/) | Apresentações e Slides | [decode-deck-release-package.tar.gz (5.8 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-deck-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-deck-release-package.tar.gz.sha256) | `cd apps/decode-deck && cargo run --release` |
+| **Decode CAD** | [`apps/decode-cad/`](apps/decode-cad/) | Desenho Técnico 2D/3D (CAD) | [decode-cad-release-package.tar.gz (5.8 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-cad-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-cad-release-package.tar.gz.sha256) | `cd apps/decode-cad && cargo run --release` |
+| **Decode Grid** | [`apps/decode-grid/`](apps/decode-grid/) | Planilhas e Modelagem de Dados | [decode-grid-release-package.tar.gz (6.4 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-grid-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-grid-release-package.tar.gz.sha256) | `cd apps/decode-grid && cargo run --release` |
 
 ## Fontes e referências
 
@@ -54,8 +54,21 @@ Todos os 13 aplicativos da suíte Decode e o Decode Launcher estão integrados d
 - [Suíte de Aplicativos (Monorepo)](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps)
 - [Código-fonte do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher)
 - [Releases e Downloads do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)
+- [Upstream Storytold (ArtCraft Creative Suite)](https://github.com/storytold)
+- [Design Reference (GetArtCraft Apps)](https://getartcraft.com/apps)
 
-Cada registro aponta para páginas do projeto correspondente. Os estágios e requisitos podem mudar: confirme os detalhes nas páginas oficiais antes de utilizar versões alfa em produção.
+Cada registro aponta para páginas do projeto correspondente. Os softwares utilizam a arquitetura modular da suíte Craft da Storytold, mantidos e customizados sob a identidade visual Decode Analytics.
+
+## Princípios de Engenharia da Suíte Decode
+
+Inspirado na arquitetura e design system de excelência do [ArtCraft](https://getartcraft.com/apps) da [Storytold](https://github.com/storytold), a suíte segue 6 princípios fundamentais:
+
+1. **Código Aberto:** Licenças permissivas (MIT ou Apache-2.0) com repositório transparente e monorepo auditável.
+2. **Nativo em Rust, Sem Electron:** Compilação direta para código de máquina em macOS, Windows e Linux com aceleração por GPU via WGPU. Sem Chromium e sem WebViews pesadas.
+3. **Familiar desde o 1º Dia:** Workflows, atalhos de teclado e painéis alinhados às ferramentas líderes de mercado.
+4. **Seus Arquivos, Sua Máquina:** Arquitetura local-first, formatos padronizados, sem cloud compulsória e sem telemetria invasiva.
+5. **Pronto para Agentes & IA:** Automação e controle via CLI, canal de eventos JSON e integração com servidores MCP (Model Context Protocol).
+6. **Também no Navegador:** Compilação cruzada para WebAssembly (WASM), permitindo execução instantânea na web sem instalação.
 
 ## Decode Launcher nativo
 

@@ -966,7 +966,7 @@ checksum = "be1e0bca6c3637f992fc1cc7cbc52a78c1ef6db076dbf1059c4323d6a2048376"
 
 [[package]]
 name = "decode-launcher"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "craft-quit",
  "decode-launcher-core",
@@ -992,7 +992,7 @@ dependencies = [
 
 [[package]]
 name = "decode-launcher-core"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "jiff",
  "semver",
@@ -1002,7 +1002,7 @@ dependencies = [
 
 [[package]]
 name = "decode-launcher-native"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "craft-update",
  "decode-launcher-core",
@@ -1026,7 +1026,7 @@ dependencies = [
 
 [[package]]
 name = "decode-launcher-ui-egui"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "decode-launcher-core",
  "egui",
@@ -1045,7 +1045,7 @@ dependencies = [
 
 [[package]]
 name = "decode-launcher-web"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "decode-launcher-core",
  "decode-launcher-ui-egui",
@@ -6020,7 +6020,7 @@ checksum = "ec7a2a501ed189703dba8b08142f057e887dfc4b2cc4db2d343ac6376ba3e0b9"
 
 [[package]]
 name = "xtask"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "jiff",
  "semver",

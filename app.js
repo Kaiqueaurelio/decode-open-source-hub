@@ -1,12 +1,13 @@
 (function () {
   "use strict";
+
   var allSoftware = [];
   var selectedCategory = "";
   var selectedStatus = "all";
   var selectedView = "grid";
-  var visibleCount = 12;
-  var pageSize = 12;
-  var loadSequence = 0;
+  var visibleCount = 14;
+  var pageSize = 14;
+
   var searchInput = document.getElementById("search-input");
   var filterSearchInput = document.getElementById("filter-search-input");
   var platformFilter = document.getElementById("platform-filter");
@@ -21,52 +22,168 @@
   var viewGridButton = document.getElementById("view-grid");
   var viewTableButton = document.getElementById("view-table");
   var reloadButton = document.getElementById("reload-catalog");
+  var themeToggle = document.getElementById("theme-toggle");
+
+  var appMetadata = {
+    photocraft: {
+      number: "01",
+      role: "Image editor",
+      upstream: "PhotoCraft",
+      appClass: "app-photocraft",
+      cmd: "cd apps/decode-photo && cargo run --release"
+    },
+    vectorcraft: {
+      number: "02",
+      role: "Vector illustration",
+      upstream: "VectorCraft",
+      appClass: "app-vectorcraft",
+      cmd: "cd apps/decode-vector && cargo run --release"
+    },
+    filmcraft: {
+      number: "03",
+      role: "Video editor",
+      upstream: "FilmCraft",
+      appClass: "app-filmcraft",
+      cmd: "cd apps/decode-film && cargo run --release"
+    },
+    lightcraft: {
+      number: "04",
+      role: "Photo library & raw developer",
+      upstream: "LightCraft",
+      appClass: "app-lightcraft",
+      cmd: "cd apps/decode-light && cargo run --release"
+    },
+    pdfcraft: {
+      number: "05",
+      role: "PDF workbench",
+      upstream: "PdfCraft",
+      appClass: "app-pdfcraft",
+      cmd: "cd apps/decode-pdf && cargo run --release"
+    },
+    effectcraft: {
+      number: "06",
+      role: "Motion graphics & VFX",
+      upstream: "EffectCraft",
+      appClass: "app-effectcraft",
+      cmd: "cd apps/decode-effect && cargo run --release"
+    },
+    designcraft: {
+      number: "07",
+      role: "Page layout & publishing",
+      upstream: "DesignCraft",
+      appClass: "app-designcraft",
+      cmd: "cd apps/decode-design && cargo run --release"
+    },
+    figcraft: {
+      number: "08",
+      role: "Interface design",
+      upstream: "FigCraft",
+      appClass: "app-figcraft",
+      cmd: "cd apps/decode-fig && cargo run --release"
+    },
+    wordcraft: {
+      number: "09",
+      role: "Word processing",
+      upstream: "WordCraft",
+      appClass: "app-wordcraft",
+      cmd: "cd apps/decode-word && cargo run --release"
+    },
+    soundcraft: {
+      number: "10",
+      role: "Digital audio workstation",
+      upstream: "SoundCraft",
+      appClass: "app-soundcraft",
+      cmd: "cd apps/decode-sound && cargo run --release"
+    },
+    deckcraft: {
+      number: "11",
+      role: "Presentations & slide shows",
+      upstream: "DeckCraft",
+      appClass: "app-deckcraft",
+      cmd: "cd apps/decode-deck && cargo run --release"
+    },
+    cadcraft: {
+      number: "12",
+      role: "Computer-aided design & drafting",
+      upstream: "CADCraft",
+      appClass: "app-cadcraft",
+      cmd: "cd apps/decode-cad && cargo run --release"
+    },
+    gridcraft: {
+      number: "13",
+      role: "Spreadsheets & data analysis",
+      upstream: "GridCraft",
+      appClass: "app-gridcraft",
+      cmd: "cd apps/decode-grid && cargo run --release"
+    },
+    "artcraft-launcher": {
+      number: "14",
+      role: "Desktop App Launcher",
+      upstream: "ArtCraft Launcher",
+      appClass: "app-artcraft-launcher",
+      cmd: "cd launcher && cargo run --release -p decode-launcher"
+    }
+  };
+
   var appColors = {
-    photocraft:"#2f7bf5", vectorcraft:"#e8573f", filmcraft:"#8b5cf6",
-    lightcraft:"#f2a516", pdfcraft:"#12a58a", effectcraft:"#e0368f",
-    designcraft:"#7bb51c", figcraft:"#02da96", wordcraft:"#3f5fe0",
-    soundcraft:"#1fa5c9", deckcraft:"#f07a1e", cadcraft:"#3ea6e8",
-    gridcraft:"#1f9d55", "artcraft-launcher":"#d9d9d9"
+    photocraft: "#2f7bf5",
+    vectorcraft: "#e8573f",
+    filmcraft: "#8b5cf6",
+    lightcraft: "#f2a516",
+    pdfcraft: "#12a58a",
+    effectcraft: "#e0368f",
+    designcraft: "#7bb51c",
+    figcraft: "#02da96",
+    wordcraft: "#4c6ef5",
+    soundcraft: "#14a9c4",
+    deckcraft: "#f26b1d",
+    cadcraft: "#14a3c7",
+    gridcraft: "#1f9d55",
+    "artcraft-launcher": "#2d81ff"
   };
 
   function escapeHtml(value) {
     return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
-      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char];
     });
   }
+
   function safeUrl(value) {
     try {
       var parsed = new URL(value);
       return parsed.protocol === "https:" ? parsed.href : "";
-    } catch (error) { return ""; }
+    } catch (error) {
+      return "";
+    }
   }
-  function externalLink(value, label, extraClass) {
-    var url = safeUrl(value);
-    if (!url) return "";
-    return '<a class="card-action ' + extraClass + '" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(label) + ' <span aria-hidden="true">↗</span></a>';
-  }
-  function referenceLink(value, label) {
-    var url = safeUrl(value);
-    if (!url) return "";
-    return '<a class="card-ref-link" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' + label + ' <span aria-hidden="true">↗</span></a>';
-  }
+
   function getCategories() {
     var counts = {};
-    allSoftware.forEach(function (item) { counts[item.category] = (counts[item.category] || 0) + 1; });
-    return Object.keys(counts).sort(function (a, b) { return a.localeCompare(b, "pt-BR"); }).map(function (name) {
-      return {name:name,count:counts[name]};
+    allSoftware.forEach(function (item) {
+      counts[item.category] = (counts[item.category] || 0) + 1;
     });
+    return Object.keys(counts)
+      .sort(function (a, b) { return a.localeCompare(b, "pt-BR"); })
+      .map(function (name) {
+        return { name: name, count: counts[name] };
+      });
   }
+
   function renderCategories() {
+    if (!categoryChips) return;
     var categories = getCategories();
     var html = '<button class="category-chip ' + (selectedCategory === "" ? "active" : "") + '" type="button" data-category="">Todas <span class="chip-count">' + allSoftware.length + '</span></button>';
     categories.forEach(function (category) {
       html += '<button class="category-chip ' + (selectedCategory === category.name ? "active" : "") + '" type="button" data-category="' + escapeHtml(category.name) + '">' + escapeHtml(category.name) + '<span class="chip-count">' + category.count + '</span></button>';
     });
     categoryChips.innerHTML = html;
-    document.getElementById("stat-total").textContent = String(allSoftware.length);
-    document.getElementById("stat-categories").textContent = String(categories.length);
+
+    var statTotal = document.getElementById("stat-total");
+    if (statTotal) statTotal.textContent = String(allSoftware.length);
+    var statCategories = document.getElementById("stat-categories");
+    if (statCategories) statCategories.textContent = String(categories.length);
   }
+
   function statusMatches(item, status) {
     var stage = String(item.stage || "");
     if (status === "alpha") return /alpha/i.test(stage);
@@ -75,19 +192,23 @@
     if (status === "utility") return item.kind === "Launcher";
     return true;
   }
+
   function renderStatusTabs() {
+    if (!statusTabs) return;
     var statuses = [
-      {id:"all",label:"ALL",count:allSoftware.length},
-      {id:"alpha",label:"ALPHA",count:allSoftware.filter(function(item){return statusMatches(item,"alpha");}).length},
-      {id:"development",label:"EM DESENVOLVIMENTO",count:allSoftware.filter(function(item){return statusMatches(item,"development");}).length},
-      {id:"featured",label:"DESTAQUES",count:allSoftware.filter(function(item){return statusMatches(item,"featured");}).length},
-      {id:"utility",label:"UTILITÁRIO",count:allSoftware.filter(function(item){return statusMatches(item,"utility");}).length}
+      { id: "all", label: "ALL", count: allSoftware.length },
+      { id: "alpha", label: "ALPHA", count: allSoftware.filter(function (i) { return statusMatches(i, "alpha"); }).length },
+      { id: "development", label: "EM DESENVOLVIMENTO", count: allSoftware.filter(function (i) { return statusMatches(i, "development"); }).length },
+      { id: "featured", label: "DESTAQUES", count: allSoftware.filter(function (i) { return statusMatches(i, "featured"); }).length },
+      { id: "utility", label: "UTILITÁRIO", count: allSoftware.filter(function (i) { return statusMatches(i, "utility"); }).length }
     ];
     statusTabs.innerHTML = statuses.map(function (status) {
       return '<button type="button" class="status-tab ' + (selectedStatus === status.id ? "active" : "") + '" data-status="' + status.id + '" aria-pressed="' + String(selectedStatus === status.id) + '"><span>' + status.label + '</span><b>' + status.count + '</b></button>';
     }).join("");
   }
+
   function renderPlatformOptions() {
+    if (!platformFilter) return;
     var platforms = [];
     allSoftware.forEach(function (item) {
       (item.platforms || []).forEach(function (platform) {
@@ -101,21 +222,25 @@
     }).join("");
     platformFilter.value = platforms.indexOf(old) >= 0 ? old : "";
   }
+
   function currentSearch() {
-    return (filterSearchInput.value || searchInput.value || "").trim().toLocaleLowerCase("pt-BR");
+    var fVal = filterSearchInput ? filterSearchInput.value : "";
+    var sVal = searchInput ? searchInput.value : "";
+    return (fVal || sVal || "").trim().toLocaleLowerCase("pt-BR");
   }
+
   function getFiltered() {
     var term = currentSearch();
-    var platform = platformFilter.value;
+    var platform = platformFilter ? platformFilter.value : "";
     var found = allSoftware.filter(function (item) {
-      var searchable = [item.name,item.tagline,item.description,item.category,item.license,item.stage,item.kind,item.slug]
+      var searchable = [item.name, item.tagline, item.description, item.category, item.license, item.stage, item.kind, item.slug]
         .concat(item.tags || []).join(" ").toLocaleLowerCase("pt-BR");
       return (!term || searchable.indexOf(term) !== -1)
         && (!selectedCategory || item.category === selectedCategory)
         && (!platform || (item.platforms || []).indexOf(platform) !== -1)
         && (selectedStatus === "all" || statusMatches(item, selectedStatus));
     });
-    var sort = sortFilter.value;
+    var sort = sortFilter ? sortFilter.value : "featured";
     found.sort(function (a, b) {
       if (sort === "name") return a.name.localeCompare(b.name, "pt-BR");
       if (sort === "category") {
@@ -126,185 +251,398 @@
     });
     return found;
   }
+
   function renderFiltersSummary() {
+    if (!activeFilters) return;
     var labels = [];
     if (selectedCategory) labels.push(selectedCategory);
-    if (platformFilter.value) labels.push(platformFilter.value);
-    var statusLabel = {"alpha":"Alpha","development":"Em desenvolvimento","featured":"Destaques","utility":"Utilitário"}[selectedStatus];
+    if (platformFilter && platformFilter.value) labels.push(platformFilter.value);
+    var statusLabel = { "alpha": "Alpha", "development": "Em desenvolvimento", "featured": "Destaques", "utility": "Utilitário" }[selectedStatus];
     if (statusLabel) labels.push(statusLabel);
     if (currentSearch()) labels.push("Busca: " + currentSearch());
     activeFilters.innerHTML = labels.map(function (label) {
       return '<span class="active-filter">' + escapeHtml(label) + '</span>';
     }).join("");
   }
-  function appIconMarkup(item) {
-    var color = appColors[item.slug] || "#353535";
-    var fallback = escapeHtml(item.icon || "◈");
-    if (!/^[a-z0-9-]+$/.test(item.slug || "")) {
-      return '<div class="app-icon" style="--app-color:' + color + '"><span class="app-icon-fallback">' + fallback + '</span></div>';
-    }
-    var src = "assets/app-icons/" + item.slug + ".png";
-    return '<div class="app-icon" style="--app-color:' + color + '"><span class="app-icon-fallback">' + fallback + '</span><img data-app-icon src="' + src + '" alt="" loading="lazy"></div>';
+
+  function getHeroImg(slug) {
+    return "assets/apps/" + slug + "/hero.webp";
   }
-  function wireImageFallbacks() {
-    softwareGrid.querySelectorAll("img[data-app-icon]").forEach(function (img) {
-      img.addEventListener("error", function () { img.hidden = true; }, {once:true});
-    });
+
+  function getIconImg(slug) {
+    return "assets/apps/" + slug + "/icon.webp";
   }
-  function stageMarkup(item) {
-    var stage = String(item.stage || "Status não informado");
-    var cls = /alpha/i.test(stage) ? "stage-alpha" : /desenvolvimento/i.test(stage) ? "stage-development" : "stage-available";
-    return '<span class="stage-badge ' + cls + '">' + escapeHtml(stage) + '</span>';
+
+  function getLegacyIcon(slug) {
+    // Preserve for tests and fallback
+    return "assets/app-icons/" + slug + ".png";
   }
-  function displayedName(item) {
-    var name = escapeHtml(item.name || "App Decode");
-    if (item.name && item.name.startsWith("Decode")) {
-      return '<span class="name-accent">Decode</span>' + name.slice(6);
-    }
-    if (item.name && item.name.endsWith("Decode")) {
-      return name.slice(0, -6) + '<span class="name-accent">Decode</span>';
-    }
-    return name;
-  }
+
   function cardMarkup(item, index) {
-    var color = appColors[item.slug] || "#dedede";
-    var platforms = (item.platforms || []).map(function (platform) {
-      return '<span class="platform-pill">' + escapeHtml(platform) + '</span>';
+    var meta = appMetadata[item.slug] || {
+      number: String(index + 1).padStart(2, "0"),
+      role: item.category,
+      upstream: item.name,
+      appClass: "app-" + item.slug,
+      cmd: "cargo run --release"
+    };
+
+    var heroSrc = getHeroImg(item.slug);
+    var iconSrc = getIconImg(item.slug);
+    var legacySrc = getLegacyIcon(item.slug);
+
+    var platforms = (item.platforms || []).map(function (p) {
+      return '<span class="pill-item pill-platform">' + escapeHtml(p) + '</span>';
     }).join("");
-    var licenseUrl = safeUrl(item.licenseUrl);
-    var licenseMarkup = licenseUrl
-      ? '<a class="license-value" href="' + escapeHtml(licenseUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.license || "Licença") + ' ↗</a>'
-      : '<span class="license-value">' + escapeHtml(item.license || "Não informada") + '</span>';
-    var kindLabel = item.kind === "Launcher" ? "DECODE UTILITY" : "DECODE APP";
-    var number = String(index + 1).padStart(2, "0");
-    return '<article class="software-card" style="--app-color:' + color + '">'
-      + '<div class="card-head"><span class="app-order">' + number + '</span><div class="card-ref-links">' + referenceLink(item.websiteUrl, "WEBSITE") + referenceLink(item.sourceUrl, "GITHUB") + '</div></div>'
-      + '<div class="card-identity">' + appIconMarkup(item) + '<div class="card-name-wrap"><h3 class="card-title">' + displayedName(item) + '</h3><p class="card-tagline">' + escapeHtml(item.tagline || "") + '</p><p class="card-category">' + escapeHtml(item.category || "") + '</p></div></div>'
-      + '<div class="card-status-row">' + stageMarkup(item) + '<span class="kind-pill">' + kindLabel + '</span></div>'
-      + '<p class="card-description">' + escapeHtml(item.description || "") + '</p>'
-      + '<div class="platform-row" aria-label="Plataformas: ' + escapeHtml((item.platforms || []).join(", ")) + '">' + platforms + '</div>'
-      + '<div class="card-bottom"><div class="license-row"><span class="license-label">LICENSE</span>' + licenseMarkup + '</div><div class="card-actions">' + externalLink(item.downloadUrl, item.kind === "Launcher" ? "VER RELEASES" : "VER DOWNLOADS", "primary") + '</div></div>'
-      + '</article>';
-  }
-  function rowMarkup(item) {
-    return '<div class="software-row" style="--app-color:' + (appColors[item.slug] || "#dedede") + '">'
-      + '<div class="table-app-cell">' + appIconMarkup(item) + '<div class="table-name-wrap"><h3 class="card-title">' + displayedName(item) + '</h3><p class="card-tagline">' + escapeHtml(item.tagline || "") + '</p></div></div>'
-      + '<div class="table-category">' + escapeHtml(item.category || "") + '</div>'
-      + '<div class="table-status">' + stageMarkup(item) + '</div>'
-      + '<div class="table-platforms">' + escapeHtml((item.platforms || []).join(" · ")) + '</div>'
-      + '<div class="table-links">' + referenceLink(item.sourceUrl, "GITHUB") + externalLink(item.downloadUrl, item.kind === "Launcher" ? "RELEASES" : "DOWNLOADS", "primary") + '</div>'
+
+    var stagePill = '<span class="pill-item pill-highlight">' + escapeHtml(item.stage || "Ativo") + '</span>';
+    var nativePill = '<span class="pill-item pill-highlight">Puro Rust</span>';
+
+    var displayedNameHtml = item.name.startsWith("Decode")
+      ? '<span class="brand-prefix">Decode</span><span class="craft-suffix">' + escapeHtml(item.name.slice(6)) + '</span>'
+      : escapeHtml(item.name);
+
+    return '<div class="software-card ' + meta.appClass + '" id="card-' + item.slug + '" data-slug="' + item.slug + '">'
+      + '<span aria-hidden="true" class="card-hover-accent"></span>'
+      + '<div class="card-header-bar">'
+      + '  <span class="card-order-badge">' + meta.number + '</span>'
+      + '  <p class="card-role-label">' + escapeHtml(meta.role) + '</p>'
+      + '</div>'
+      + '<div class="card-preview-wrap">'
+      + '  <img class="card-preview-img" src="' + heroSrc + '" alt="' + escapeHtml(item.name) + '" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
+      + '</div>'
+      + '<div class="card-body-content">'
+      + '  <img class="card-app-icon-img" src="' + iconSrc + '" alt="" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
+      + '  <h3 class="card-title">' + displayedNameHtml + '</h3>'
+      + '  <p class="card-tagline">' + escapeHtml(item.tagline || item.description || "") + '</p>'
+      + '  <div class="card-pills-row">'
+      +      stagePill + nativePill + platforms
+      + '  </div>'
+      + '  <button type="button" class="card-explore-trigger" data-open-modal="' + item.slug + '">'
+      + '    <span>Explorar ' + escapeHtml(item.name) + '</span>'
+      + '    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>'
+      + '  </button>'
+      + '</div>'
       + '</div>';
   }
+
+  function rowMarkup(item) {
+    var meta = appMetadata[item.slug] || {
+      number: "00",
+      role: item.category,
+      upstream: item.name,
+      appClass: "app-" + item.slug
+    };
+
+    var iconSrc = getIconImg(item.slug);
+    var legacySrc = getLegacyIcon(item.slug);
+
+    return '<div class="software-row ' + meta.appClass + '" data-slug="' + item.slug + '">'
+      + '<div class="table-app-cell">'
+      + '  <img class="table-app-icon-img" src="' + iconSrc + '" alt="" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
+      + '  <div>'
+      + '    <h3 class="table-title">' + escapeHtml(item.name) + '</h3>'
+      + '    <p class="table-tagline">' + escapeHtml(item.tagline || "") + '</p>'
+      + '  </div>'
+      + '</div>'
+      + '<div class="table-category">' + escapeHtml(item.category || "") + '</div>'
+      + '<div class="table-status"><span class="pill-item pill-highlight">' + escapeHtml(item.stage || "") + '</span></div>'
+      + '<div class="table-platforms">' + escapeHtml((item.platforms || []).join(" · ")) + '</div>'
+      + '<div class="table-links">'
+      + '  <button type="button" class="table-action-link" data-open-modal="' + item.slug + '">Detalhes ↗</button>'
+      + '  <a class="table-action-link" href="' + escapeHtml(item.sourceUrl) + '" target="_blank" rel="noopener noreferrer">GitHub ↗</a>'
+      + '</div>'
+      + '</div>';
+  }
+
+  function nextUpCardMarkup() {
+    return '<div class="next-up-card">'
+      + '<p class="hud-label text-faint">Em Breve</p>'
+      + '<h3>Mais ferramentas <span>a caminho</span>.</h3>'
+      + '<p>Diga-nos o que reconstruir a seguir, teste compilações iniciais e acompanhe o desenvolvimento com a equipe Decode Analytics.</p>'
+      + '<div class="mt-auto" style="margin-top:auto; padding-top:24px;">'
+      + '  <a class="next-up-btn" href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">'
+      + '    <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>'
+      + '    <span>Participe no GitHub</span>'
+      + '  </a>'
+      + '</div>'
+      + '</div>';
+  }
+
+  function openModal(slug) {
+    var item = allSoftware.find(function (i) { return i.slug === slug; });
+    if (!item) return;
+    var meta = appMetadata[slug] || {
+      number: "00",
+      role: item.category,
+      upstream: item.name,
+      cmd: "cargo run --release"
+    };
+
+    var modal = document.getElementById("app-modal");
+    if (!modal) return;
+
+    document.getElementById("modal-title").textContent = item.name;
+    document.getElementById("modal-role").textContent = meta.number + " · " + meta.role + " (Origem: " + meta.upstream + ")";
+    document.getElementById("modal-desc").textContent = item.description;
+    document.getElementById("modal-cmd").textContent = meta.cmd;
+    document.getElementById("modal-hero-img").src = getHeroImg(slug);
+    document.getElementById("modal-icon-img").src = getIconImg(slug);
+    document.getElementById("modal-github-link").href = item.sourceUrl;
+    document.getElementById("modal-download-link").href = item.downloadUrl;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    var modal = document.getElementById("app-modal");
+    if (!modal) return;
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  function wireModalTriggers() {
+    document.querySelectorAll("[data-open-modal]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openModal(btn.getAttribute("data-open-modal"));
+      });
+    });
+  }
+
   function render() {
     var filtered = getFiltered();
     var toShow = filtered.slice(0, visibleCount);
-    resultCount.textContent = filtered.length === allSoftware.length ? filtered.length + " programas" : filtered.length + " de " + allSoftware.length + " programas";
+
+    if (resultCount) {
+      resultCount.textContent = filtered.length === allSoftware.length
+        ? filtered.length + " programas"
+        : filtered.length + " de " + allSoftware.length + " programas";
+    }
+
     renderFiltersSummary();
+
+    if (!softwareGrid) return;
+
     softwareGrid.classList.toggle("table-view", selectedView === "table");
+
     if (!filtered.length) {
-      softwareGrid.innerHTML = '<div class="empty-state"><div class="empty-symbol" aria-hidden="true">⌕</div><h3>Nenhum aplicativo encontrado</h3><p>Tente outra busca ou remova algum filtro.</p><button type="button" id="empty-clear">Limpar filtros</button></div>';
-      loadMoreWrap.hidden = true;
-      document.getElementById("empty-clear").addEventListener("click", clearFilters);
+      softwareGrid.innerHTML = '<div class="empty-state"><h3>Nenhum aplicativo encontrado</h3><p>Tente outra busca ou remova algum filtro.</p><button type="button" id="empty-clear" class="clear-button" style="margin-top:12px;">Limpar filtros</button></div>';
+      if (loadMoreWrap) loadMoreWrap.hidden = true;
+      var emptyClear = document.getElementById("empty-clear");
+      if (emptyClear) emptyClear.addEventListener("click", clearFilters);
       return;
     }
-    softwareGrid.innerHTML = selectedView === "table"
-      ? '<div class="table-heading"><span>APP</span><span>CATEGORIA</span><span>STATUS</span><span>PLATAFORMAS</span><span>AÇÕES</span></div>' + toShow.map(rowMarkup).join("")
-      : toShow.map(function (item) { return cardMarkup(item, allSoftware.indexOf(item)); }).join("");
-    wireImageFallbacks();
-    loadMoreWrap.hidden = filtered.length <= visibleCount;
-    if (filtered.length > visibleCount) document.getElementById("load-more").textContent = "Mostrar mais aplicativos (" + (filtered.length - visibleCount) + ") ↓";
+
+    if (selectedView === "table") {
+      softwareGrid.innerHTML = '<div class="table-heading"><span>APP</span><span>CATEGORIA</span><span>STATUS</span><span>PLATAFORMAS</span><span>AÇÕES</span></div>'
+        + toShow.map(rowMarkup).join("");
+    } else {
+      var cardsHtml = toShow.map(function (item, idx) {
+        return cardMarkup(item, allSoftware.indexOf(item));
+      }).join("");
+
+      if (toShow.length === allSoftware.length || selectedCategory === "") {
+        cardsHtml += nextUpCardMarkup();
+      }
+
+      softwareGrid.innerHTML = cardsHtml;
+    }
+
+    wireModalTriggers();
+
+    if (loadMoreWrap) {
+      loadMoreWrap.hidden = filtered.length <= visibleCount;
+      var loadMoreBtn = document.getElementById("load-more");
+      if (loadMoreBtn && filtered.length > visibleCount) {
+        loadMoreBtn.textContent = "Mostrar mais programas (" + (filtered.length - visibleCount) + ") ↓";
+      }
+    }
   }
+
   function syncSearch(value) {
-    searchInput.value = value;
-    filterSearchInput.value = value;
+    if (searchInput) searchInput.value = value;
+    if (filterSearchInput) filterSearchInput.value = value;
     visibleCount = pageSize;
     render();
   }
+
   function clearFilters() {
     selectedCategory = "";
     selectedStatus = "all";
-    searchInput.value = "";
-    filterSearchInput.value = "";
-    platformFilter.value = "";
-    sortFilter.value = "featured";
+    if (searchInput) searchInput.value = "";
+    if (filterSearchInput) filterSearchInput.value = "";
+    if (platformFilter) platformFilter.value = "";
+    if (sortFilter) sortFilter.value = "featured";
     visibleCount = pageSize;
     renderCategories();
     renderStatusTabs();
     render();
   }
+
   function setCategory(category) {
     selectedCategory = category || "";
     visibleCount = pageSize;
     renderCategories();
     render();
-    document.getElementById("catalogo").scrollIntoView({behavior:"smooth",block:"start"});
+    var lineupSec = document.getElementById("lineup") || document.getElementById("catalogo");
+    if (lineupSec) lineupSec.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
   function setView(view) {
     selectedView = view === "table" ? "table" : "grid";
-    viewGridButton.classList.toggle("active", selectedView === "grid");
-    viewTableButton.classList.toggle("active", selectedView === "table");
-    viewGridButton.setAttribute("aria-pressed", String(selectedView === "grid"));
-    viewTableButton.setAttribute("aria-pressed", String(selectedView === "table"));
+    if (viewGridButton) {
+      viewGridButton.classList.toggle("active", selectedView === "grid");
+      viewGridButton.setAttribute("aria-pressed", String(selectedView === "grid"));
+    }
+    if (viewTableButton) {
+      viewTableButton.classList.toggle("active", selectedView === "table");
+      viewTableButton.setAttribute("aria-pressed", String(selectedView === "table"));
+    }
     render();
   }
-  function showError() {
-    softwareGrid.hidden = true;
-    loadMoreWrap.hidden = true;
-    errorState.hidden = false;
-    resultCount.textContent = "Catálogo indisponível";
-    statusTabs.innerHTML = "";
+
+  function setupTheme() {
+    var stored = localStorage.getItem("decode-theme");
+    if (stored === "dark" || stored === "light") {
+      document.documentElement.setAttribute("data-theme", stored);
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", function () {
+        var current = document.documentElement.getAttribute("data-theme");
+        var isDark = current === "dark" || (!current && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        var next = isDark ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("decode-theme", next);
+      });
+    }
   }
-  function loadCatalog() {
-    var requestId = ++loadSequence;
-    errorState.hidden = true;
-    softwareGrid.hidden = false;
-    softwareGrid.innerHTML = '<div class="loading-state"><span class="loader"></span><p>Preparando a biblioteca…</p></div>';
-    fetch("data/software.json", {cache:"no-cache"}).then(function (response) {
-      if (!response.ok) throw new Error("Não foi possível carregar data/software.json");
-      return response.json();
-    }).then(function (items) {
-      if (requestId !== loadSequence) return;
-      if (!Array.isArray(items) || !items.length || items.some(function (item) { return !item || typeof item !== "object" || !item.slug || !item.name; })) {
-        throw new Error("O catálogo está vazio ou em formato inválido");
-      }
-      allSoftware = items;
-      renderCategories();
-      renderStatusTabs();
-      renderPlatformOptions();
-      render();
-    }).catch(function (error) {
-      if (requestId !== loadSequence) return;
-      console.error(error);
-      showError();
+
+  function setupEvents() {
+    if (searchInput) {
+      searchInput.addEventListener("input", function (e) { syncSearch(e.target.value); });
+    }
+    if (filterSearchInput) {
+      filterSearchInput.addEventListener("input", function (e) { syncSearch(e.target.value); });
+    }
+    var searchForm = document.getElementById("search-form");
+    if (searchForm) {
+      searchForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var lineup = document.getElementById("lineup") || document.getElementById("catalogo");
+        if (lineup) lineup.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    if (platformFilter) {
+      platformFilter.addEventListener("change", function () {
+        visibleCount = pageSize;
+        render();
+      });
+    }
+    if (sortFilter) {
+      sortFilter.addEventListener("change", function () {
+        visibleCount = pageSize;
+        render();
+      });
+    }
+
+    if (statusTabs) {
+      statusTabs.addEventListener("click", function (e) {
+        var btn = e.target.closest(".status-tab");
+        if (!btn) return;
+        selectedStatus = btn.getAttribute("data-status") || "all";
+        visibleCount = pageSize;
+        renderStatusTabs();
+        render();
+      });
+    }
+
+    if (categoryChips) {
+      categoryChips.addEventListener("click", function (e) {
+        var btn = e.target.closest(".category-chip");
+        if (!btn) return;
+        setCategory(btn.getAttribute("data-category") || "");
+      });
+    }
+
+    var clearBtn = document.getElementById("clear-filters");
+    if (clearBtn) clearBtn.addEventListener("click", clearFilters);
+
+    if (viewGridButton) viewGridButton.addEventListener("click", function () { setView("grid"); });
+    if (viewTableButton) viewTableButton.addEventListener("click", function () { setView("table"); });
+
+    if (reloadButton) {
+      reloadButton.addEventListener("click", function () {
+        loadCatalog();
+      });
+    }
+
+    var loadMoreBtn = document.getElementById("load-more");
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", function () {
+        visibleCount += pageSize;
+        render();
+      });
+    }
+
+    var modalClose = document.getElementById("modal-close");
+    if (modalClose) modalClose.addEventListener("click", closeModal);
+    var modalBackdrop = document.getElementById("app-modal");
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener("click", function (e) {
+        if (e.target === modalBackdrop) closeModal();
+      });
+    }
+
+    var copyBtn = document.getElementById("copy-cmd");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        var cmd = document.getElementById("modal-cmd").textContent;
+        navigator.clipboard.writeText(cmd).then(function () {
+          copyBtn.textContent = "COPIADO!";
+          setTimeout(function () { copyBtn.textContent = "COPIAR"; }, 1800);
+        });
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeModal();
     });
   }
-  document.getElementById("search-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    syncSearch(searchInput.value);
-    document.getElementById("catalogo").scrollIntoView({behavior:"smooth",block:"start"});
+
+  function loadCatalog() {
+    if (errorState) errorState.hidden = true;
+    fetch("data/software.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        allSoftware = Array.isArray(data) ? data : [];
+        renderCategories();
+        renderStatusTabs();
+        renderPlatformOptions();
+        render();
+      })
+      .catch(function (err) {
+        console.error("Falha ao carregar catálogo:", err);
+        if (errorState) errorState.hidden = false;
+        if (softwareGrid) softwareGrid.innerHTML = "";
+      });
+  }
+
+  // Expose global functions for testing / automation if needed
+  window.setView = setView;
+  window.renderStatusTabs = renderStatusTabs;
+
+  // Initialize
+  document.addEventListener("DOMContentLoaded", function () {
+    setupTheme();
+    setupEvents();
+    loadCatalog();
   });
-  searchInput.addEventListener("input", function () { syncSearch(searchInput.value); });
-  filterSearchInput.addEventListener("input", function () { syncSearch(filterSearchInput.value); });
-  platformFilter.addEventListener("change", function () { visibleCount = pageSize; render(); });
-  sortFilter.addEventListener("change", function () { visibleCount = pageSize; render(); });
-  categoryChips.addEventListener("click", function (event) {
-    var button = event.target.closest("button[data-category]");
-    if (button) setCategory(button.getAttribute("data-category"));
-  });
-  statusTabs.addEventListener("click", function (event) {
-    var button = event.target.closest("button[data-status]");
-    if (!button) return;
-    selectedStatus = button.getAttribute("data-status");
-    visibleCount = pageSize;
-    renderStatusTabs();
-    render();
-  });
-  viewGridButton.addEventListener("click", function () { setView("grid"); });
-  viewTableButton.addEventListener("click", function () { setView("table"); });
-  reloadButton.addEventListener("click", loadCatalog);
-  document.getElementById("clear-filters").addEventListener("click", clearFilters);
-  document.getElementById("load-more").addEventListener("click", function () { visibleCount += pageSize; render(); });
-  document.getElementById("retry-load").addEventListener("click", loadCatalog);
-  document.getElementById("current-year").textContent = String(new Date().getFullYear());
-  loadCatalog();
-}());
+})();

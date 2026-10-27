@@ -1,69 +1,707 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111213">
-<meta name="description" content="Decode Launcher: catálogo independente de aplicativos open source, com filtros por estágio e plataforma e links para downloads, sites e código-fonte oficiais.">
-<meta property="og:title" content="Decode Launcher — Open Source App Suite">
-<meta property="og:description" content="Descubra, compare e acesse aplicativos open source em uma interface compacta inspirada em launchers de desktop.">
-<meta property="og:type" content="website">
-<title>Decode Launcher — Open Source App Suite</title>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f1ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Edição de imagens, vetor, vídeo, fotos, PDFs, VFX, diagramação, interfaces UI/UX, textos, áudio, slides, CAD e planilhas: treze aplicativos nativos e open source da Decode Analytics, escritos em Rust e gratuitos.">
+  <meta property="og:title" content="Decode Launcher — Open Source App Suite">
+  <meta property="og:description" content="Treze aplicativos nativos em Rust para criadores e engenheiros. Código aberto, acelerado por GPU, sem Electron.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://decode-open-source-hub-catalog.vercel.app">
+  <title>Decode Apps: ferramentas criativas open source — Decode Analytics</title>
+  
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-<a class="skip-link" href="#catalogo">Pular para o catálogo</a>
-<header class="site-header"><div class="container header-inner">
-<a class="brand" href="#" aria-label="Decode Launcher - início"><span class="brand-mark" aria-hidden="true"><span>D</span></span><span class="brand-copy"><strong>DECODE</strong><small>OPEN SOURCE LAUNCHER</small></span></a>
-<nav class="main-nav" aria-label="Navegação principal"><a class="nav-tab active" href="#catalogo">CATÁLOGO</a><a class="nav-tab" href="#downloads">DOWNLOADS</a><a class="nav-tab" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps">SUÍTE DE APPS</a><a class="nav-tab" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher">LAUNCHER</a></nav>
-<div class="header-tools"><div class="view-toggle" role="group" aria-label="Modo de visualização"><button id="view-grid" class="view-button active" type="button" aria-pressed="true">GRID</button><button id="view-table" class="view-button" type="button" aria-pressed="false">TABLE</button></div><a class="top-utility" href="#escopo">ABOUT</a><button id="reload-catalog" class="icon-button" type="button" title="Recarregar catálogo" aria-label="Recarregar catálogo">↻</button><a class="header-github" href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></div>
-</div></header>
-<main>
-<section class="hero"><div class="hero-glow hero-glow-one" aria-hidden="true"></div><div class="hero-glow hero-glow-two" aria-hidden="true"></div><div class="container hero-content">
-<div class="eyebrow"><span class="eyebrow-dot"></span> DECODE / OPEN SOURCE CATALOG</div>
-<h1>As ferramentas Decode,<br><span>em um só lugar.</span></h1>
-<p class="hero-lede">Descubra as ferramentas Decode, compare plataformas e estágios, e acesse os sites, releases e repositórios oficiais dos projetos de origem.</p>
-<form class="hero-search" id="search-form" role="search"><span class="search-symbol" aria-hidden="true">⌕</span><label class="visually-hidden" for="search-input">Pesquisar aplicativos</label><input id="search-input" type="search" autocomplete="off" placeholder="Buscar DecodePhoto, DecodeCAD, PDF, áudio…" aria-describedby="search-hint"><button type="submit">Buscar <span aria-hidden="true">→</span></button></form>
-<p class="search-hint" id="search-hint">Ex.: desenho técnico, edição de imagem, PDF, planilhas, vídeo, áudio</p>
-<div class="hero-stats" aria-label="Resumo do catálogo"><div><strong id="stat-total">—</strong><span>APPS &amp; UTILITIES</span></div><div><strong id="stat-categories">—</strong><span>CATEGORIAS</span></div><div><strong>Oficiais</strong><span>FONTES RASTREÁVEIS</span></div></div>
-</div><div class="hero-side-art" aria-hidden="true"><div class="orbit orbit-large"></div><div class="orbit orbit-small"></div><div class="orbit-core"><span>D</span><i>✦</i></div><div class="floating-tile tile-one">⌘</div><div class="floating-tile tile-two">◇</div><div class="floating-tile tile-three">✳</div><div class="floating-tile tile-four">⌬</div></div></section>
-<section class="category-band" aria-label="Filtros do catálogo"><div class="container"><div id="status-tabs" class="status-tabs" role="group" aria-label="Filtrar por estágio e tipo"><span class="loading-text">Carregando filtros…</span></div><div class="band-heading"><span>CATEGORIAS</span><span class="band-note">FILTRAR POR ÁREA</span></div><div class="category-chips" id="category-chips"><span class="loading-text">Carregando categorias…</span></div></div></section>
-<section class="catalog-section" id="catalogo"><div class="container">
-<div class="section-heading"><div><span class="section-kicker">DECODE APP SUITE</span><h2>Biblioteca de aplicativos</h2><p>Escolha uma ferramenta para consultar downloads, site, código-fonte e licença.</p></div><div class="result-counter" id="result-count" aria-live="polite">Carregando catálogo…</div></div>
-<div class="filter-bar"><div class="filter-search"><span aria-hidden="true">⌕</span><label class="visually-hidden" for="filter-search-input">Filtrar catálogo</label><input id="filter-search-input" type="search" autocomplete="off" placeholder="Filtrar por nome, recurso, tipo ou estágio…"></div>
-<div class="filter-field"><label for="platform-filter">Plataforma</label><select id="platform-filter"><option value="">Todas</option></select></div>
-<div class="filter-field"><label for="sort-filter">Ordenar por</label><select id="sort-filter"><option value="featured">Destaques</option><option value="name">Nome: A–Z</option><option value="category">Categoria</option></select></div><button type="button" id="clear-filters" class="clear-button">Limpar filtros</button></div>
-<div class="active-filters" id="active-filters" aria-live="polite"></div><div class="software-grid" id="software-grid" aria-live="polite"><div class="loading-state"><span class="loader"></span><p>Preparando a biblioteca…</p></div></div>
-<div class="load-more-wrap" id="load-more-wrap" hidden><button class="load-more-button" id="load-more" type="button">Mostrar mais programas <span aria-hidden="true">↓</span></button></div>
-<div class="error-state" id="error-state" hidden><div class="error-icon">!</div><h3>Não foi possível carregar o catálogo</h3><p>Verifique se data/software.json está disponível. Para testar localmente, inicie um servidor HTTP conforme as instruções do README.</p><button type="button" id="retry-load">Tentar novamente</button></div>
-</div></section>
-<section class="how-section" id="escopo"><div class="container how-inner"><div class="how-intro"><span class="section-kicker">O QUE ESTÁ INCLUÍDO</span><h2>Uma identidade Decode, fontes transparentes.</h2><p>Os nomes exibidos são personalizados para o Decode. Identificadores técnicos, links, licenças e atribuições continuam apontando para os projetos de origem.</p></div>
-<div class="how-steps"><article class="step"><div class="step-number">01</div><div><h3>Lista conferida</h3><p>O catálogo apresenta os 13 aplicativos da lista pública e o launcher como utilitário separado.</p></div></article>
-<article class="step"><div class="step-number">02</div><div><h3>Origem rastreável</h3><p>Os cartões levam às páginas de download, sites e repositórios originais. Nenhum instalador é hospedado por este catálogo.</p></div></article>
-<article class="step"><div class="step-number">03</div><div><h3>Status explícito</h3><p>Os estágios alpha e desenvolvimento permanecem visíveis para que versões iniciais não sejam confundidas com versões estáveis.</p></div></article></div></div></section>
-<section class="about-section" id="sobre"><div class="container about-card"><div class="about-emblem" aria-hidden="true"><span>✦</span></div><div class="about-copy"><span class="section-kicker">DECODE ANALYTICS — PRESIDENTE PRUDENTE, SP</span><h2>Apps e launcher, com origem transparente e código aberto.</h2><p>Este repositório reúne o catálogo web, os 13 aplicativos da Decode App Suite em apps/ e o código-fonte do Decode Launcher em launcher/.</p><p class="about-note">Desenvolvido e mantido pela Decode Analytics. Redes sociais: <a href="https://www.instagram.com/decode.analytics/" target="_blank" rel="noopener noreferrer">@decode.analytics</a>. Confira requisitos e notas de lançamento antes de utilizar em ambientes de produção.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;"><a class="about-link" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps" target="_blank" rel="noopener noreferrer">Suíte de Apps (13) <span aria-hidden="true">↗</span></a><a class="about-link" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher" target="_blank" rel="noopener noreferrer">Código do launcher <span aria-hidden="true">↗</span></a><a class="about-link" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases" target="_blank" rel="noopener noreferrer">Releases ↗</a></div></div></section>
-<section class="download-section" id="downloads" style="padding: 48px 0; border-top: 1px solid var(--border-subtle, #1e2638);"><div class="container">
-<div class="section-heading"><div><span class="section-kicker">CENTRAL DE DOWNLOADS</span><h2>Baixar aplicativos Decode</h2><p>Acesse as releases oficiais do launcher ou baixe o código-fonte completo dos 13 aplicativos integrados no monorepo.</p></div></div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px;">
-<div style="background: rgba(32, 85, 255, 0.08); border: 1px solid rgba(32, 85, 255, 0.35); border-radius: 12px; padding: 24px;">
-<span style="font-size: 2rem;">🚀</span>
-<h3 style="margin: 12px 0 8px;">Decode Launcher</h3>
-<p style="font-size: 0.9rem; color: #a0aec0; margin-bottom: 16px;">Instalador e atualizador desktop nativo em Rust para gerenciar todos os 13 aplicativos da suíte.</p>
-<a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 18px; border-radius: 6px; background: #2055FF; color: #fff; font-weight: 600; text-decoration: none;">Ver Releases no GitHub ↗</a>
-</div>
-<div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 24px;">
-<span style="font-size: 2rem;">📦</span>
-<h3 style="margin: 12px 0 8px;">Suíte Monorepo (13 Apps)</h3>
-<p style="font-size: 0.9rem; color: #a0aec0; margin-bottom: 16px;">Navegue pelos 13 aplicativos na pasta apps/ com documentação e instruções para rodar com cargo run.</p>
-<a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 18px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 600; text-decoration: none;">Explorar Apps no Repo ↗</a>
-</div>
-<div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 24px;">
-<span style="font-size: 2rem;">⚡</span>
-<h3 style="margin: 12px 0 8px;">Download do Código (.ZIP)</h3>
-<p style="font-size: 0.9rem; color: #a0aec0; margin-bottom: 16px;">Baixe o repositório completo com todos os códigos-fonte, assets e o launcher em um arquivo compactado.</p>
-<a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 18px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 600; text-decoration: none;">Baixar Monorepo (.ZIP) ↓</a>
-</div>
-</div>
-</div></section>
-</main>
-<footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="#"><span class="brand-mark" aria-hidden="true"><span>D</span></span><span class="brand-copy"><strong>Decode</strong><small>DECODE ANALYTICS</small></span></a><p>Decode Analytics — Presidente Prudente, SP, Brasil. Catálogo e suíte Decode de código aberto.</p><div class="footer-links"><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.instagram.com/decode.analytics/" target="_blank" rel="noopener noreferrer">Instagram (@decode.analytics)</a><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps" target="_blank" rel="noopener noreferrer">Apps (Monorepo)</a><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher" target="_blank" rel="noopener noreferrer">Decode Launcher</a><a href="LICENSE-DATA.md">Licença dos dados</a></div></div><div class="container footer-bottom"><span>© <span id="current-year">2026</span> Decode Analytics — Presidente Prudente, SP</span><span>Os projetos listados mantêm suas próprias marcas, licenças e créditos.</span></div></footer>
-</body></html>
+  <a class="skip-link" href="#lineup">Pular para os aplicativos</a>
+
+  <!-- Header / Navigation Bar -->
+  <header class="site-header" id="site-nav">
+    <div class="header-inner">
+      <div class="header-left">
+        <a class="brand" href="#" aria-label="Decode Analytics - Início">
+          <img class="brand-logo-img" src="assets/brand/decode-logo.svg" alt="Decode Analytics">
+          <span class="brand-copy">
+            <strong>DECODE</strong>
+            <small>APP SUITE</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Navegação Principal">
+          <a class="nav-tab" href="#apps"><span>Início</span></a>
+          <a class="nav-tab active" href="#lineup"><span>Suíte de Apps</span></a>
+          <a class="nav-tab" href="#principles"><span>Princípios</span></a>
+          <a class="nav-tab" href="#downloads"><span>Downloads</span></a>
+          <a class="nav-tab" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps" target="_blank" rel="noopener noreferrer"><span>Monorepo</span></a>
+          <a class="nav-tab" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher" target="_blank" rel="noopener noreferrer"><span>Launcher</span></a>
+        </nav>
+      </div>
+
+      <div class="header-tools">
+        <div class="view-toggle" role="group" aria-label="Modo de visualização">
+          <button id="view-grid" class="view-button active" type="button" aria-pressed="true">GRID</button>
+          <button id="view-table" class="view-button" type="button" aria-pressed="false">TABLE</button>
+        </div>
+        <button id="reload-catalog" class="icon-button" type="button" title="Recarregar catálogo" aria-label="Recarregar catálogo">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"></path></svg>
+        </button>
+        <button id="theme-toggle" class="icon-button" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+        </button>
+        <a class="header-github" href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">
+          GITHUB ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Section 01: Hero (#apps) -->
+    <section class="draft-section" id="apps">
+      <span aria-hidden="true" class="section-top-rule"></span>
+      <div class="draft-frame">
+        <span aria-hidden="true" class="tick tick-half tick-top-left"></span>
+        <span aria-hidden="true" class="tick tick-half tick-top-right"></span>
+
+        <!-- Sticky Eyebrow 01 -->
+        <div class="sticky-eyebrow">
+          <div class="eyebrow-inner">
+            <p class="hud-label text-muted">
+              <span class="text-faint">01</span>
+              <span aria-hidden="true" style="margin: 0 6px;">/</span>
+              DECODE APP SUITE
+            </p>
+            <p class="hud-label text-faint" style="display:none; @media(min-width:640px){display:block;}">
+              Treze aplicativos · Código Aberto · Rust Puro
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-body">
+          <div class="hero-copy">
+            <h1>
+              Treze aplicativos.<br>
+              Um só <span class="italic-accent">ecossistema</span>.
+            </h1>
+            <p class="hero-lede">
+              Edição de imagens, desenho vetorial, edição de vídeo não-linear, revelação RAW fotográfica, manipulação avançada de PDFs, motion graphics &amp; VFX, editoração e diagramação, design de interface UI/UX, processamento de texto, workstation de áudio digital (DAW), apresentações de slides dinâmicas, desenho técnico assistido por computador (CAD 2D/3D) e planilhas eletrônicas. Aplicativos nativos e de código aberto desenvolvidos e mantidos no âmbito da Decode Analytics, escritos em Rust puro com aceleração por GPU, e 100% gratuitos.
+            </p>
+            <p class="hero-recommendation">
+              <strong>Recomendado:</strong> O <strong>Decode Launcher</strong> instala todos os aplicativos da suíte e os mantém sempre atualizados. Cada ferramenta também possui repositório independente no monorepo, binários standalone e suporte a agentes via CLI/MCP.
+            </p>
+
+            <!-- Search Form -->
+            <div class="hero-search-wrap">
+              <form class="hero-search-form" id="search-form" role="search">
+                <span class="search-symbol" aria-hidden="true">⌕</span>
+                <label class="visually-hidden" for="search-input">Pesquisar ferramentas</label>
+                <input class="hero-search-input" id="search-input" type="search" autocomplete="off" placeholder="Buscar DecodePhoto, DecodeCAD, PDF, áudio, vídeo…">
+                <button class="hero-search-btn" type="submit">Explorar Suíte →</button>
+              </form>
+              <p class="search-hint">Ex.: retocar fotos, desenho vetorial, renderização CAD, cortes de vídeo, DAW multipista</p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="hero-stats" aria-label="Estatísticas da Suíte">
+              <div>
+                <strong id="stat-total">14</strong>
+                <span>FERRAMENTAS &amp; LAUNCHER</span>
+              </div>
+              <div>
+                <strong id="stat-categories">6</strong>
+                <span>CATEGORIAS CRIATIVAS</span>
+              </div>
+              <div>
+                <strong>Rust 100%</strong>
+                <span>ACELERAÇÃO WGPU</span>
+              </div>
+              <div>
+                <strong>Permissivo</strong>
+                <span>MIT OU APACHE-2.0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Jump Navigation (Icons Grid) -->
+          <nav class="hero-jump-nav" aria-label="Navegação rápida pelos 13 aplicativos">
+            <a class="jump-app-item app-photocraft" href="#card-photocraft" title="DecodePhoto">
+              <img src="assets/apps/photocraft/icon.webp" alt="DecodePhoto" loading="eager" onerror="this.src='assets/app-icons/photocraft.png'">
+              <span>DecodePhoto</span>
+            </a>
+            <a class="jump-app-item app-vectorcraft" href="#card-vectorcraft" title="DecodeVector">
+              <img src="assets/apps/vectorcraft/icon.webp" alt="DecodeVector" loading="eager" onerror="this.src='assets/app-icons/vectorcraft.png'">
+              <span>DecodeVector</span>
+            </a>
+            <a class="jump-app-item app-filmcraft" href="#card-filmcraft" title="DecodeFilm">
+              <img src="assets/apps/filmcraft/icon.webp" alt="DecodeFilm" loading="eager" onerror="this.src='assets/app-icons/filmcraft.png'">
+              <span>DecodeFilm</span>
+            </a>
+            <a class="jump-app-item app-lightcraft" href="#card-lightcraft" title="DecodeLight">
+              <img src="assets/apps/lightcraft/icon.webp" alt="DecodeLight" loading="eager" onerror="this.src='assets/app-icons/lightcraft.png'">
+              <span>DecodeLight</span>
+            </a>
+            <a class="jump-app-item app-pdfcraft" href="#card-pdfcraft" title="DecodePdf">
+              <img src="assets/apps/pdfcraft/icon.webp" alt="DecodePdf" loading="eager" onerror="this.src='assets/app-icons/pdfcraft.png'">
+              <span>DecodePdf</span>
+            </a>
+            <a class="jump-app-item app-effectcraft" href="#card-effectcraft" title="DecodeEffect">
+              <img src="assets/apps/effectcraft/icon.webp" alt="DecodeEffect" loading="eager" onerror="this.src='assets/app-icons/effectcraft.png'">
+              <span>DecodeEffect</span>
+            </a>
+            <a class="jump-app-item app-designcraft" href="#card-designcraft" title="DecodeDesign">
+              <img src="assets/apps/designcraft/icon.webp" alt="DecodeDesign" loading="eager" onerror="this.src='assets/app-icons/designcraft.png'">
+              <span>DecodeDesign</span>
+            </a>
+            <a class="jump-app-item app-figcraft" href="#card-figcraft" title="DecodeFig">
+              <img src="assets/apps/figcraft/icon.webp" alt="DecodeFig" loading="eager" onerror="this.src='assets/app-icons/figcraft.png'">
+              <span>DecodeFig</span>
+            </a>
+            <a class="jump-app-item app-wordcraft" href="#card-wordcraft" title="DecodeWord">
+              <img src="assets/apps/wordcraft/icon.webp" alt="DecodeWord" loading="eager" onerror="this.src='assets/app-icons/wordcraft.png'">
+              <span>DecodeWord</span>
+            </a>
+            <a class="jump-app-item app-soundcraft" href="#card-soundcraft" title="DecodeSound">
+              <img src="assets/apps/soundcraft/icon.webp" alt="DecodeSound" loading="eager" onerror="this.src='assets/app-icons/soundcraft.png'">
+              <span>DecodeSound</span>
+            </a>
+            <a class="jump-app-item app-deckcraft" href="#card-deckcraft" title="DecodeDeck">
+              <img src="assets/apps/deckcraft/icon.webp" alt="DecodeDeck" loading="eager" onerror="this.src='assets/app-icons/deckcraft.png'">
+              <span>DecodeDeck</span>
+            </a>
+            <a class="jump-app-item app-cadcraft" href="#card-cadcraft" title="DecodeCAD">
+              <img src="assets/apps/cadcraft/icon.webp" alt="DecodeCAD" loading="eager" onerror="this.src='assets/app-icons/cadcraft.png'">
+              <span>DecodeCAD</span>
+            </a>
+            <a class="jump-app-item app-gridcraft" href="#card-gridcraft" title="DecodeGrid">
+              <img src="assets/apps/gridcraft/icon.webp" alt="DecodeGrid" loading="eager" onerror="this.src='assets/app-icons/gridcraft.png'">
+              <span>DecodeGrid</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Filter Sub-band -->
+        <div class="category-band">
+          <div id="status-tabs" class="status-tabs" role="group" aria-label="Filtrar por estágio e tipo">
+            <span class="hud-label text-muted">Carregando filtros…</span>
+          </div>
+          <div class="category-chips" id="category-chips" role="group" aria-label="Filtrar por área">
+            <span class="hud-label text-muted">Carregando categorias…</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: The Lineup (#lineup / #catalogo) -->
+    <section class="draft-section" id="lineup">
+      <span aria-hidden="true" class="section-top-rule"></span>
+      <div class="draft-frame" id="catalogo">
+        <span aria-hidden="true" class="tick tick-half tick-top-left"></span>
+        <span aria-hidden="true" class="tick tick-half tick-top-right"></span>
+
+        <!-- Sticky Eyebrow 02 -->
+        <div class="sticky-eyebrow">
+          <div class="eyebrow-inner">
+            <p class="hud-label text-muted">
+              <span class="text-faint">02</span>
+              <span aria-hidden="true" style="margin: 0 6px;">/</span>
+              A SUÍTE DE APLICATIVOS
+            </p>
+            <p class="hud-label text-faint" style="display:none; @media(min-width:640px){display:block;}">
+              Escolha uma ferramenta para explorar
+            </p>
+          </div>
+        </div>
+
+        <!-- Filter Controls Bar -->
+        <div class="filter-bar">
+          <div class="filter-search">
+            <label class="visually-hidden" for="filter-search-input">Filtrar suíte</label>
+            <input id="filter-search-input" type="search" autocomplete="off" placeholder="Filtrar por nome, recurso, estágio ou extensão…">
+          </div>
+          <div class="filter-field">
+            <label for="platform-filter">Plataforma:</label>
+            <select id="platform-filter">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="sort-filter">Ordenar:</label>
+            <select id="sort-filter">
+              <option value="featured">Destaques</option>
+              <option value="name">Nome: A–Z</option>
+              <option value="category">Categoria</option>
+            </select>
+          </div>
+          <button type="button" id="clear-filters" class="clear-button">Limpar Filtros</button>
+          <div class="result-counter" id="result-count" aria-live="polite">Carregando catálogo…</div>
+        </div>
+
+        <div class="active-filters" id="active-filters" aria-live="polite"></div>
+
+        <!-- 4-Column Hairline Grid -->
+        <div class="software-grid" id="software-grid" aria-live="polite">
+          <div class="loading-state">
+            <span class="loader"></span>
+            <p class="hud-label text-muted" style="margin-top: 16px;">Carregando a Suíte Decode…</p>
+          </div>
+        </div>
+
+        <div class="load-more-wrap" id="load-more-wrap" hidden style="padding: 24px; text-align: center;">
+          <button class="clear-button" id="load-more" type="button" style="padding: 10px 20px; font-weight: 700;">
+            Mostrar mais programas ↓
+          </button>
+        </div>
+
+        <div class="error-state" id="error-state" hidden style="padding: 40px; text-align: center;">
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--danger);">Não foi possível carregar a suíte</h3>
+          <p class="text-muted" style="margin-top: 8px;">Certifique-se de que data/software.json está disponível.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 03: Principles (#principles) -->
+    <section class="draft-section" id="principles">
+      <span aria-hidden="true" class="section-top-rule"></span>
+      <div class="draft-frame">
+        <span aria-hidden="true" class="tick tick-half tick-top-left"></span>
+        <span aria-hidden="true" class="tick tick-half tick-top-right"></span>
+
+        <!-- Sticky Eyebrow 03 -->
+        <div class="sticky-eyebrow">
+          <div class="eyebrow-inner">
+            <p class="hud-label text-muted">
+              <span class="text-faint">03</span>
+              <span aria-hidden="true" style="margin: 0 6px;">/</span>
+              PRINCÍPIOS DE ENGENHARIA
+            </p>
+            <p class="hud-label text-faint" style="display:none; @media(min-width:640px){display:block;}">
+              Compartilhado por todos os softwares
+            </p>
+          </div>
+        </div>
+
+        <div class="principles-header">
+          <h2>Construído do jeito difícil.</h2>
+          <p>
+            Cada aplicativo da suíte Decode é escrito do zero em Rust puro e obedece aos mesmos padrões rigorosos de performance nativa, transparência de código e privacidade.
+          </p>
+        </div>
+
+        <ul class="principles-grid">
+          <!-- Principle 01 -->
+          <li class="principle-item">
+            <div class="principle-top">
+              <span class="principle-icon-box">
+                <svg aria-hidden="true" class="lucide lucide-code-xml" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+              </span>
+              <p class="hud-label text-faint">01</p>
+            </div>
+            <h3>Código Aberto</h3>
+            <p>Cada linha de código está no GitHub sob licenças permissivas (MIT ou Apache-2.0). Leia, estude, faça fork e crie em cima de uma base sólida e auditável.</p>
+          </li>
+
+          <!-- Principle 02 -->
+          <li class="principle-item">
+            <div class="principle-top">
+              <span class="principle-icon-box">
+                <svg aria-hidden="true" class="lucide lucide-cpu" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect height="16" rx="2" width="16" x="4" y="4"></rect><rect height="8" rx="1" width="8" x="8" y="8"></rect></svg>
+              </span>
+              <p class="hud-label text-faint">02</p>
+            </div>
+            <h3>Nativo em Rust, Sem Electron</h3>
+            <p>Compilado diretamente para código de máquina para macOS, Windows e Linux. Aceleração por GPU direta via WGPU e egui. Sem Chromium, sem navegadores embutidos consumindo gigabytes de memória.</p>
+          </li>
+
+          <!-- Principle 03 -->
+          <li class="principle-item">
+            <div class="principle-top">
+              <span class="principle-icon-box">
+                <svg aria-hidden="true" class="lucide lucide-keyboard" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M10 8h.01"></path><path d="M12 12h.01"></path><path d="M14 8h.01"></path><path d="M16 12h.01"></path><path d="M18 8h.01"></path><path d="M6 8h.01"></path><path d="M7 16h10"></path><path d="M8 12h.01"></path><rect height="16" rx="2" width="20" x="2" y="4"></rect></svg>
+              </span>
+              <p class="hud-label text-faint">03</p>
+            </div>
+            <h3>Familiar desde o Primeiro Dia</h3>
+            <p>Layouts, caixas de ferramentas, painéis de camadas e atalhos de teclado que profissionais criativos já utilizam no seu fluxo diário, eliminando curvas artificiais de reaprendizado.</p>
+          </li>
+
+          <!-- Principle 04 -->
+          <li class="principle-item">
+            <div class="principle-top">
+              <span class="principle-icon-box">
+                <svg aria-hidden="true" class="lucide lucide-hard-drive" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M10 16h.01"></path><path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><path d="M21.946 12.013H2.054"></path><path d="M6 16h.01"></path></svg>
+              </span>
+              <p class="hud-label text-faint">04</p>
+            </div>
+            <h3>Seus Arquivos, Sua Máquina</h3>
+            <p>Arquitetura local-first. Trabalhe com arquivos nos formatos padrão do mercado sem depender de conexões com servidores na nuvem, logins forçados ou rastreamento invasivo de telemetria.</p>
+          </li>
+
+          <!-- Principle 05 -->
+          <li class="principle-item">
+            <div class="principle-top">
+              <span class="principle-icon-box">
+                <svg aria-hidden="true" class="lucide lucide-bot" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8V4H8"></path><rect height="12" rx="2" width="16" x="4" y="8"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+              </span>
+              <p class="hud-label text-faint">05</p>
+            </div>
+            <h3>Pronto para Agentes &amp; IA</h3>
+            <p>Controle qualquer ferramenta da suíte via interface de linha de comando (CLI), canais de eventos JSON estruturados ou servidores MCP (Model Context Protocol), prontos para automações com agentes de IA.</p>
+          </li>
+
+          <!-- Principle 06 -->
+          <li class="principle-item">
+            <div class="principle-top">
+              <span class="principle-icon-box">
+                <svg aria-hidden="true" class="lucide lucide-globe" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              </span>
+              <p class="hud-label text-faint">06</p>
+            </div>
+            <h3>Também no seu Navegador</h3>
+            <p>DecodePhoto, DecodeVector, DecodeLight, DecodePdf, DecodeFig, DecodeWord, DecodeCAD e outros compilam diretamente para WebAssembly (WASM), permitindo execução instantânea no navegador sem downloads.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 04: Downloads (#downloads) -->
+    <section class="draft-section" id="downloads">
+      <span aria-hidden="true" class="section-top-rule"></span>
+      <div class="draft-frame">
+        <span aria-hidden="true" class="tick tick-half tick-top-left"></span>
+        <span aria-hidden="true" class="tick tick-half tick-top-right"></span>
+
+        <!-- Sticky Eyebrow 04 -->
+        <div class="sticky-eyebrow">
+          <div class="eyebrow-inner">
+            <p class="hud-label text-muted">
+              <span class="text-faint">04</span>
+              <span aria-hidden="true" style="margin: 0 6px;">/</span>
+              DOWNLOADS &amp; RELEASES
+            </p>
+            <p class="hud-label text-faint" style="display:none; @media(min-width:640px){display:block;}">
+              Instaladores e pacotes compilados
+            </p>
+          </div>
+        </div>
+
+        <div class="downloads-body">
+          <div class="downloads-intro">
+            <h2>Baixar a Suíte Decode</h2>
+            <p>
+              Instale o <strong>Decode Launcher</strong> para gerenciar automaticamente todos os aplicativos ou baixe os pacotes compilados standalone da release v0.8.2 com somas de verificação SHA-256.
+            </p>
+          </div>
+
+          <div class="download-cards-grid">
+            <div class="dl-card">
+              <span class="dl-card-icon">🚀</span>
+              <h3>Decode Launcher</h3>
+              <p>Gerenciador desktop nativo em Rust que descobre, instala e atualiza todos os 13 aplicativos da suíte com um clique.</p>
+              <a class="dl-card-btn" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases" target="_blank" rel="noopener noreferrer">
+                Releases do Launcher ↗
+              </a>
+            </div>
+
+            <div class="dl-card">
+              <span class="dl-card-icon">📦</span>
+              <h3>Suíte Monorepo (13 Apps)</h3>
+              <p>Explore o código-fonte de cada ferramenta na pasta apps/ com documentação técnica e instruções para compilar com cargo.</p>
+              <a class="dl-card-btn" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps" target="_blank" rel="noopener noreferrer">
+                Explorar Monorepo ↗
+              </a>
+            </div>
+
+            <div class="dl-card">
+              <span class="dl-card-icon">⚡</span>
+              <h3>Código Completo (.ZIP)</h3>
+              <p>Faça download imediato do repositório completo com todos os 13 workspaces em Rust, assets e recipes de build.</p>
+              <a class="dl-card-btn" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer">
+                Baixar Código (.ZIP) ↓
+              </a>
+            </div>
+          </div>
+
+          <!-- Direct Release Packages v0.8.2 -->
+          <div style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0; font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--ink-strong);">
+                  Pacotes Oficiais v0.8.2 (Linux x86_64)
+                </h3>
+                <p class="text-muted" style="margin: 4px 0 0; font-size: 0.8125rem;">
+                  Binários independentes para download imediato com somas de verificação SHA-256 oficiais.
+                </p>
+              </div>
+              <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v0.8.2" target="_blank" rel="noopener noreferrer" class="clear-button" style="display:inline-flex; align-items:center; text-decoration:none;">
+                Ver Release v0.8.2 Completa ↗
+              </a>
+            </div>
+
+            <div class="packages-grid">
+              <!-- Launcher -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/artcraft-launcher/icon.webp" alt="Decode Launcher" onerror="this.src='assets/app-icons/artcraft-launcher.png'">
+                  <div class="pkg-meta">
+                    <strong>Decode Launcher</strong>
+                    <span>16.6 MB · Linux x86_64</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-launcher-linux-x86_64.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-launcher-linux-x86_64.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodePhoto -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/photocraft/icon.webp" alt="DecodePhoto" onerror="this.src='assets/app-icons/photocraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodePhoto</strong>
+                    <span>22.7 MB · Imagem</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-photo-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-photo-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodeVector -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/vectorcraft/icon.webp" alt="DecodeVector" onerror="this.src='assets/app-icons/vectorcraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodeVector</strong>
+                    <span>23.9 MB · Vetor</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-vector-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-vector-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodeFilm -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/filmcraft/icon.webp" alt="DecodeFilm" onerror="this.src='assets/app-icons/filmcraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodeFilm</strong>
+                    <span>21.5 MB · Vídeo</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-film-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-film-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodeLight -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/lightcraft/icon.webp" alt="DecodeLight" onerror="this.src='assets/app-icons/lightcraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodeLight</strong>
+                    <span>19.5 MB · RAW</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-light-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-light-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodePdf -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/pdfcraft/icon.webp" alt="DecodePdf" onerror="this.src='assets/app-icons/pdfcraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodePdf</strong>
+                    <span>18.7 MB · PDF</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-pdf-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-pdf-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodeCAD -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/cadcraft/icon.webp" alt="DecodeCAD" onerror="this.src='assets/app-icons/cadcraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodeCAD</strong>
+                    <span>5.8 MB · CAD 2D/3D</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-cad-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-cad-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+
+              <!-- DecodeGrid -->
+              <div class="pkg-item">
+                <div class="pkg-header">
+                  <img class="pkg-icon" src="assets/apps/gridcraft/icon.webp" alt="DecodeGrid" onerror="this.src='assets/app-icons/gridcraft.png'">
+                  <div class="pkg-meta">
+                    <strong>DecodeGrid</strong>
+                    <span>6.4 MB · Planilhas</span>
+                  </div>
+                </div>
+                <div class="pkg-actions">
+                  <a class="pkg-btn-main" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-grid-release-package.tar.gz">Baixar (.tar.gz) ↓</a>
+                  <a class="pkg-btn-sha" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/decode-grid-release-package.tar.gz.sha256" target="_blank" rel="noopener noreferrer">SHA</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 05: CTA (#start) -->
+    <section class="draft-section" id="start">
+      <span aria-hidden="true" class="section-top-rule"></span>
+      <div class="draft-frame">
+        <span aria-hidden="true" class="tick tick-half tick-top-left"></span>
+        <span aria-hidden="true" class="tick tick-half tick-top-right"></span>
+
+        <!-- Sticky Eyebrow 05 -->
+        <div class="sticky-eyebrow">
+          <div class="eyebrow-inner">
+            <p class="hud-label text-muted">
+              <span class="text-faint">05</span>
+              <span aria-hidden="true" style="margin: 0 6px;">/</span>
+              PARTICIPE
+            </p>
+            <p class="hud-label text-faint">
+              Código Aberto · Gratuito · Independente
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-body">
+          <p class="hud-label text-faint">DECODE OPEN SOURCE HUB</p>
+          <h2>Construa <span>conosco</span>.</h2>
+          <p>
+            Versões preliminares, roadmap transparente e o desenvolvimento de toda a suíte de aplicativos acontecem publicamente no GitHub da Decode Analytics.
+          </p>
+          <div class="cta-actions">
+            <a class="cta-btn-primary" href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">
+              Ver Repositório no GitHub ↗
+            </a>
+            <a class="cta-btn-secondary" href="https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer">
+              Baixar Monorepo (.ZIP) ↓
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container" style="max-width: 1280px; padding: 0;">
+      <div class="footer-columns">
+        <!-- Col 1 -->
+        <div class="footer-col">
+          <h4 style="color: var(--ink-strong); font-weight: 700;">DECODE ANALYTICS</h4>
+          <p class="footer-brand-p">
+            O hub de ferramentas criativas nativas em Rust, transparentes e aceleradas por hardware. Desenvolvido e mantido em Presidente Prudente - SP, Brasil.
+          </p>
+          <p class="footer-brand-p" style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.75rem;">
+            Instagram: <a href="https://www.instagram.com/decode.analytics/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-ink);">@decode.analytics</a>
+          </p>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="footer-col">
+          <h4>PRODUTOS</h4>
+          <ul>
+            <li><a href="#apps">Decode App Suite (13)</a></li>
+            <li><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher">Decode Launcher</a></li>
+            <li><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases">Releases &amp; Binários</a></li>
+            <li><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip">Download (.ZIP)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="footer-col">
+          <h4>SUÍTE DE APPS</h4>
+          <ul>
+            <li><a href="#card-photocraft">DecodePhoto · Imagem</a></li>
+            <li><a href="#card-vectorcraft">DecodeVector · Vetor</a></li>
+            <li><a href="#card-filmcraft">DecodeFilm · Vídeo</a></li>
+            <li><a href="#card-lightcraft">DecodeLight · RAW</a></li>
+            <li><a href="#card-pdfcraft">DecodePdf · PDF</a></li>
+            <li><a href="#card-cadcraft">DecodeCAD · CAD</a></li>
+            <li><a href="#card-gridcraft">DecodeGrid · Planilhas</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4 -->
+        <div class="footer-col">
+          <h4>RECURSOS &amp; ORIGEM</h4>
+          <ul>
+            <li><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub" target="_blank" rel="noopener noreferrer">GitHub Oficial</a></li>
+            <li><a href="https://github.com/storytold" target="_blank" rel="noopener noreferrer">Upstream Storytold (ArtCraft)</a></li>
+            <li><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Licença MIT &amp; Apache 2.0</a></li>
+            <li><a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/LICENSE-DATA.md" target="_blank" rel="noopener noreferrer">Licença de Dados</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>© 2026 Decode Analytics — Presidente Prudente, SP, Brasil.</span>
+        <span>Softwares baseados na arquitetura da suíte Craft da Storytold, mantidos e customizados sob a identidade Decode.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive App Detail Modal / Drawer -->
+  <div class="app-modal-backdrop" id="app-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="app-modal-dialog">
+      <button class="modal-close-btn" id="modal-close" type="button" aria-label="Fechar janela">✕</button>
+
+      <div class="modal-hero-cover">
+        <img id="modal-hero-img" src="assets/apps/photocraft/hero.webp" alt="Screenshot do aplicativo">
+      </div>
+
+      <div class="modal-body-content">
+        <div class="modal-head-row">
+          <img class="modal-app-icon" id="modal-icon-img" src="assets/apps/photocraft/icon.webp" alt="">
+          <div class="modal-head-text">
+            <h2 id="modal-title">DecodePhoto</h2>
+            <p class="hud-label text-muted" id="modal-role">01 · Image editor</p>
+          </div>
+        </div>
+
+        <p class="modal-description" id="modal-desc">
+          Descrição detalhada da ferramenta…
+        </p>
+
+        <div class="modal-command-box">
+          <code id="modal-cmd">cd apps/decode-photo &amp;&amp; cargo run --release</code>
+          <button class="copy-cmd-btn" id="copy-cmd" type="button">COPIAR</button>
+        </div>
+
+        <div class="modal-actions-row">
+          <a class="modal-btn-primary" id="modal-download-link" href="#" target="_blank" rel="noopener noreferrer">
+            Baixar Release Oficial ↗
+          </a>
+          <a class="modal-btn-secondary" id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer">
+            Ver Código no GitHub ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
