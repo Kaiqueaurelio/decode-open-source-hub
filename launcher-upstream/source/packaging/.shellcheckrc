@@ -1,0 +1,6 @@
+# shellcheck config for the packaging scripts (CI: .github/workflows/packaging-lint.yml).
+source-path=SCRIPTDIR
+external-sources=true
+
+
+Source: https://github.com/storytold/craft-launcher/blob/main/packaging/.shellcheckrc
