@@ -32,3 +32,15 @@ attributions must be retained for any source or binary redistributed from that p
 
 This note is not a claim that the upstream application has been fully vendored or that the Decode
 launcher is feature-complete. Use CI and platform builds to verify every integration step.
+
+
+## Files preserved in this reference subtree
+
+The folder `source/` contains upstream Rust workspace manifests and lockfile, core release/catalog
+logic, native install/update backend, egui UI and translations, desktop and WebAssembly entrypoints,
+unit/UI tests, CI workflows, release scripts and platform packaging files. It deliberately excludes
+the upstream ArtCraft branding files and upstream app icon assets.
+
+These files are preserved for porting and review. They are not part of the active Decode build.
+The active launcher remains under `launcher/`; its behavior must be ported and tested independently
+before claiming all upstream features are working in Decode.
