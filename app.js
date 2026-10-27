@@ -27,98 +27,168 @@
   var appMetadata = {
     photocraft: {
       number: "01",
-      role: "Image editor",
+      role: "Edição de imagens",
+      cleanName: "Photo",
+      version: "v0.16.0",
+      accent: "#3b82f6",
+      iconBg: "#0f2042",
+      icon: "photocraft.png",
       upstream: "DecodePhoto",
       appClass: "app-photocraft",
       cmd: "cd apps/decode-photo && cargo run --release"
     },
     vectorcraft: {
       number: "02",
-      role: "Vector illustration",
+      role: "Ilustração vetorial",
+      cleanName: "Vector",
+      version: "v0.17.0",
+      accent: "#ff6b4a",
+      iconBg: "#3d1e15",
+      icon: "vectorcraft.png",
       upstream: "DecodeVector",
       appClass: "app-vectorcraft",
       cmd: "cd apps/decode-vector && cargo run --release"
     },
     filmcraft: {
       number: "03",
-      role: "Video editor",
+      role: "Edição de vídeo, cor e som",
+      cleanName: "Film",
+      version: "v0.13.0",
+      accent: "#a855f7",
+      iconBg: "#2d1645",
+      icon: "filmcraft.png",
       upstream: "DecodeFilm",
       appClass: "app-filmcraft",
       cmd: "cd apps/decode-film && cargo run --release"
     },
     lightcraft: {
       number: "04",
-      role: "Photo library & raw developer",
+      role: "Biblioteca de fotos e revelação RAW",
+      cleanName: "Light",
+      version: "v0.14.0",
+      accent: "#f59e0b",
+      iconBg: "#382305",
+      icon: "lightcraft.png",
       upstream: "DecodeLight",
       appClass: "app-lightcraft",
       cmd: "cd apps/decode-light && cargo run --release"
     },
     pdfcraft: {
       number: "05",
-      role: "PDF workbench",
+      role: "Leitura, organização e proteção de PDFs",
+      cleanName: "Pdf",
+      version: "v0.14.0",
+      accent: "#00d2ff",
+      iconBg: "#062b36",
+      icon: "pdfcraft.png",
       upstream: "DecodePdf",
       appClass: "app-pdfcraft",
       cmd: "cd apps/decode-pdf && cargo run --release"
     },
     effectcraft: {
       number: "06",
-      role: "Motion graphics & VFX",
+      role: "Motion graphics e efeitos visuais",
+      cleanName: "Effect",
+      version: "v0.17.0",
+      accent: "#ff3b88",
+      iconBg: "#3b0c1e",
+      icon: "effectcraft.png",
       upstream: "DecodeEffect",
       appClass: "app-effectcraft",
       cmd: "cd apps/decode-effect && cargo run --release"
     },
     designcraft: {
       number: "07",
-      role: "Page layout & publishing",
+      role: "Diagramação e publicação",
+      cleanName: "Design",
+      version: "v0.15.0",
+      accent: "#8b5cf6",
+      iconBg: "#231545",
+      icon: "designcraft.png",
       upstream: "DecodeDesign",
       appClass: "app-designcraft",
       cmd: "cd apps/decode-design && cargo run --release"
     },
     figcraft: {
       number: "08",
-      role: "Interface design",
+      role: "Design de interfaces e prototipagem",
+      cleanName: "Fig",
+      version: "v0.11.2",
+      accent: "#00e599",
+      iconBg: "#053322",
+      icon: "figcraft.png",
       upstream: "DecodeFig",
       appClass: "app-figcraft",
       cmd: "cd apps/decode-fig && cargo run --release"
     },
     wordcraft: {
       number: "09",
-      role: "Word processing",
+      role: "Escrita e design de documentos",
+      cleanName: "Word",
+      version: "v0.11.0",
+      accent: "#60a5fa",
+      iconBg: "#112242",
+      icon: "wordcraft.png",
       upstream: "DecodeWord",
       appClass: "app-wordcraft",
       cmd: "cd apps/decode-word && cargo run --release"
     },
     soundcraft: {
       number: "10",
-      role: "Digital audio workstation",
+      role: "Gravação, edição e mixagem de áudio",
+      cleanName: "Sound",
+      version: "v0.13.1",
+      accent: "#38bdf8",
+      iconBg: "#082838",
+      icon: "soundcraft.png",
       upstream: "DecodeSound",
       appClass: "app-soundcraft",
       cmd: "cd apps/decode-sound && cargo run --release"
     },
     deckcraft: {
       number: "11",
-      role: "Presentations & slide shows",
+      role: "Apresentações e slides dinâmicos",
+      cleanName: "Deck",
+      version: "v0.12.0",
+      accent: "#f43f5e",
+      iconBg: "#380d17",
+      icon: "deckcraft.png",
       upstream: "DecodeDeck",
       appClass: "app-deckcraft",
       cmd: "cd apps/decode-deck && cargo run --release"
     },
     cadcraft: {
       number: "12",
-      role: "Computer-aided design & drafting",
+      role: "CAD e desenho técnico 2D/3D",
+      cleanName: "CAD",
+      version: "v0.10.0",
+      accent: "#14b8a6",
+      iconBg: "#092e29",
+      icon: "cadcraft.png",
       upstream: "DecodeCAD",
       appClass: "app-cadcraft",
       cmd: "cd apps/decode-cad && cargo run --release"
     },
     gridcraft: {
       number: "13",
-      role: "Spreadsheets & data analysis",
+      role: "Planilhas e dados",
+      cleanName: "Grid",
+      version: "v0.12.1",
+      accent: "#22c55e",
+      iconBg: "#093315",
+      icon: "gridcraft.png",
       upstream: "DecodeGrid",
       appClass: "app-gridcraft",
       cmd: "cd apps/decode-grid && cargo run --release"
     },
     "artcraft-launcher": {
       number: "14",
-      role: "Desktop App Launcher",
+      role: "Instalador e atualizador da suíte",
+      cleanName: "Launcher",
+      version: "v0.8.2",
+      accent: "#fbbf24",
+      iconBg: "#382905",
+      icon: "artcraft-launcher.png",
       upstream: "Decode Launcher",
       appClass: "app-artcraft-launcher",
       cmd: "cd launcher && cargo run --release -p decode-launcher"
@@ -330,60 +400,54 @@
     var meta = appMetadata[item.slug] || {
       number: String(index + 1).padStart(2, "0"),
       role: item.category,
+      cleanName: item.name.replace(/^Decode\s*/, ""),
+      version: "v0.8.2",
+      accent: "#2d81ff",
+      iconBg: "#112242",
+      icon: item.slug + ".png",
       upstream: item.name,
       appClass: "app-" + item.slug,
       cmd: "cargo run --release"
     };
 
+    var iconSrc = "assets/app-icons/" + (meta.icon || (item.slug + ".png"));
     var heroSrc = getHeroImg(item.slug);
-    var iconSrc = getIconImg(item.slug);
     var legacySrc = getLegacyIcon(item.slug);
-
-    var platforms = (item.platforms || []).map(function (p) {
-      return '<span class="pill-item pill-platform">' + escapeHtml(p) + '</span>';
-    }).join("");
-
-    var stagePill = '<span class="pill-item pill-highlight">' + escapeHtml(item.stage || "Ativo") + '</span>';
-    var nativePill = '<span class="pill-item pill-highlight">Puro Rust</span>';
-
-    var displayedNameHtml = item.name.startsWith("Decode")
-      ? '<span class="brand-prefix">Decode</span><span class="craft-suffix">' + escapeHtml(item.name.slice(6)) + '</span>'
-      : escapeHtml(item.name);
 
     var currentOs = getActiveOs();
     var asset = chooseAsset(item, currentOs);
 
-    var releaseRow = '<div class="card-release-row" title="Release oficial publicada v0.8.2">'
-      + '<span class="card-release-dot"></span>'
-      + '<span>' + escapeHtml(asset.version) + ' · Release Oficial</span>'
-      + '</div>';
+    var cleanName = meta.cleanName || item.name.replace(/^Decode\s*/, "");
+    var accentColor = meta.accent || "#2d81ff";
+    var versionText = meta.version || asset.version || "v0.8.2";
+    var taglineText = meta.role || item.tagline || "";
 
     return '<div class="software-card ' + meta.appClass + '" id="card-' + item.slug + '" data-slug="' + item.slug + '">'
-      + '<span aria-hidden="true" class="card-hover-accent"></span>'
+      + '<span aria-hidden="true" class="card-hover-accent" style="background:' + accentColor + ';"></span>'
       + '<div class="card-header-bar">'
-      + '  <span class="card-order-badge">' + meta.number + '</span>'
-      + '  <p class="card-role-label">' + escapeHtml(meta.role) + '</p>'
+      + '  <span class="card-version-badge" style="color:' + accentColor + ';">' + escapeHtml(versionText) + '</span>'
+      + '  <a class="card-github-link" href="' + escapeHtml(item.sourceUrl) + '" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>'
       + '</div>'
-      + '<div class="card-preview-wrap">'
-      + '  <img class="card-preview-img" src="' + heroSrc + '" alt="' + escapeHtml(item.name) + '" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
+      + '<div class="card-main-content">'
+      + '  <div class="card-icon-box" style="background:' + (meta.iconBg || "rgba(255,255,255,0.06)") + '; border-color:' + accentColor + '33;">'
+      + '    <img class="card-app-icon-img" src="' + iconSrc + '" alt="' + escapeHtml(item.name) + '" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
+      + '  </div>'
+      + '  <div class="card-title-group">'
+      + '    <h3 class="card-title">'
+      + '      <span class="brand-prefix">Decode</span><span class="craft-suffix" style="color:' + accentColor + ';">' + escapeHtml(cleanName) + '</span>'
+      + '    </h3>'
+      + '    <p class="card-tagline">' + escapeHtml(taglineText) + '</p>'
+      + '  </div>'
       + '</div>'
-      + '<div class="card-body-content">'
-      + '  <img class="card-app-icon-img" src="' + iconSrc + '" alt="" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
-      + '  <h3 class="card-title">' + displayedNameHtml + '</h3>'
-      + '  <p class="card-tagline">' + escapeHtml(item.tagline || item.description || "") + '</p>'
-      + '  <div class="card-pills-row">'
-      +      stagePill + nativePill + platforms
-      + '  </div>'
-      +   releaseRow
-      + '  <div class="card-action-bar">'
-      + '    <a class="card-btn-download" href="' + escapeHtml(asset.url) + '" target="_blank" rel="noopener noreferrer">'
-      + '      <span>' + escapeHtml(asset.label) + '</span>'
-      + '    </a>'
-      + '    <button type="button" class="card-explore-trigger" data-open-modal="' + item.slug + '">'
-      + '      <span>Detalhes</span>'
-      + '      <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>'
-      + '    </button>'
-      + '  </div>'
+      + '<p class="card-description">' + escapeHtml(item.description || item.tagline || "") + '</p>'
+      + '<p class="card-last-updated">Última atualização: 27 de out. de 2026</p>'
+      + '<div class="card-action-bar">'
+      + '  <a class="card-btn-download" href="' + escapeHtml(asset.url) + '" target="_blank" rel="noopener noreferrer">'
+      + '    <span>ABRIR / BAIXAR</span>'
+      + '  </a>'
+      + '  <button type="button" class="card-explore-trigger" data-open-modal="' + item.slug + '" title="Mais opções para ' + escapeHtml(item.name) + '">'
+      + '    <span>···</span>'
+      + '  </button>'
       + '</div>'
       + '</div>';
   }
