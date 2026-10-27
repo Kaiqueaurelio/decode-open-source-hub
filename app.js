@@ -207,8 +207,52 @@
     }).join("");
   }
 
+  var detectedOs = "linux";
+  function detectUserPlatform() {
+    var p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+    p = p.toLowerCase();
+    if (p.indexOf("win") !== -1) return "windows";
+    if (p.indexOf("mac") !== -1 || p.indexOf("iphone") !== -1 || p.indexOf("ipad") !== -1) return "macos";
+    return "linux";
+  }
+
+  function getActiveOs() {
+    var val = platformFilter ? platformFilter.value : "";
+    if (val === "Windows") return "windows";
+    if (val === "macOS") return "macos";
+    if (val === "Linux") return "linux";
+    return detectedOs;
+  }
+
+  function chooseAsset(item, os) {
+    var slug = item.slug;
+    var meta = appMetadata[slug] || {};
+    var pkgName = meta.releaseName || ("decode-" + slug.replace("craft", ""));
+
+    if (os === "windows") {
+      return {
+        label: "↓ Baixar Windows",
+        url: item.downloadUrl || "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
+        version: "v0.8.2"
+      };
+    } else if (os === "macos") {
+      return {
+        label: "↓ Baixar macOS",
+        url: item.downloadUrl || "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
+        version: "v0.8.2"
+      };
+    } else {
+      return {
+        label: "↓ Baixar Linux (.tar.gz)",
+        url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/" + pkgName + "-release-package.tar.gz",
+        version: "v0.8.2"
+      };
+    }
+  }
+
   function renderPlatformOptions() {
     if (!platformFilter) return;
+    detectedOs = detectUserPlatform();
     var platforms = [];
     allSoftware.forEach(function (item) {
       (item.platforms || []).forEach(function (platform) {
@@ -217,10 +261,14 @@
     });
     platforms.sort(function (a, b) { return a.localeCompare(b, "pt-BR"); });
     var old = platformFilter.value;
-    platformFilter.innerHTML = '<option value="">Todas</option>' + platforms.map(function (platform) {
-      return '<option value="' + escapeHtml(platform) + '">' + escapeHtml(platform) + '</option>';
+    var defaultSelection = detectedOs === "windows" ? "Windows" : (detectedOs === "macos" ? "macOS" : "Linux");
+    var html = '<option value="">Todas as plataformas</option>' + platforms.map(function (platform) {
+      var isDetected = (platform.toLowerCase() === detectedOs);
+      var label = platform + (isDetected ? " (Seu Sistema)" : "");
+      return '<option value="' + escapeHtml(platform) + '">' + escapeHtml(label) + '</option>';
     }).join("");
-    platformFilter.value = platforms.indexOf(old) >= 0 ? old : "";
+    platformFilter.innerHTML = html;
+    platformFilter.value = old || defaultSelection || "";
   }
 
   function currentSearch() {
@@ -302,6 +350,14 @@
       ? '<span class="brand-prefix">Decode</span><span class="craft-suffix">' + escapeHtml(item.name.slice(6)) + '</span>'
       : escapeHtml(item.name);
 
+    var currentOs = getActiveOs();
+    var asset = chooseAsset(item, currentOs);
+
+    var releaseRow = '<div class="card-release-row" title="Release oficial publicada v0.8.2">'
+      + '<span class="card-release-dot"></span>'
+      + '<span>' + escapeHtml(asset.version) + ' · Release Oficial</span>'
+      + '</div>';
+
     return '<div class="software-card ' + meta.appClass + '" id="card-' + item.slug + '" data-slug="' + item.slug + '">'
       + '<span aria-hidden="true" class="card-hover-accent"></span>'
       + '<div class="card-header-bar">'
@@ -318,10 +374,16 @@
       + '  <div class="card-pills-row">'
       +      stagePill + nativePill + platforms
       + '  </div>'
-      + '  <button type="button" class="card-explore-trigger" data-open-modal="' + item.slug + '">'
-      + '    <span>Explorar ' + escapeHtml(item.name) + '</span>'
-      + '    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>'
-      + '  </button>'
+      +   releaseRow
+      + '  <div class="card-action-bar">'
+      + '    <a class="card-btn-download" href="' + escapeHtml(asset.url) + '" target="_blank" rel="noopener noreferrer">'
+      + '      <span>' + escapeHtml(asset.label) + '</span>'
+      + '    </a>'
+      + '    <button type="button" class="card-explore-trigger" data-open-modal="' + item.slug + '">'
+      + '      <span>Detalhes</span>'
+      + '      <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>'
+      + '    </button>'
+      + '  </div>'
       + '</div>'
       + '</div>';
   }
@@ -336,6 +398,8 @@
 
     var iconSrc = getIconImg(item.slug);
     var legacySrc = getLegacyIcon(item.slug);
+    var currentOs = getActiveOs();
+    var asset = chooseAsset(item, currentOs);
 
     return '<div class="software-row ' + meta.appClass + '" data-slug="' + item.slug + '">'
       + '<div class="table-app-cell">'
@@ -349,6 +413,7 @@
       + '<div class="table-status"><span class="pill-item pill-highlight">' + escapeHtml(item.stage || "") + '</span></div>'
       + '<div class="table-platforms">' + escapeHtml((item.platforms || []).join(" · ")) + '</div>'
       + '<div class="table-links">'
+      + '  <a class="table-action-link table-action-download" href="' + escapeHtml(asset.url) + '" target="_blank" rel="noopener noreferrer">↓ Baixar</a>'
       + '  <button type="button" class="table-action-link" data-open-modal="' + item.slug + '">Detalhes ↗</button>'
       + '  <a class="table-action-link" href="' + escapeHtml(item.sourceUrl) + '" target="_blank" rel="noopener noreferrer">GitHub ↗</a>'
       + '</div>'
@@ -389,7 +454,13 @@
     document.getElementById("modal-hero-img").src = getHeroImg(slug);
     document.getElementById("modal-icon-img").src = getIconImg(slug);
     document.getElementById("modal-github-link").href = item.sourceUrl;
-    document.getElementById("modal-download-link").href = item.downloadUrl;
+    var currentOs = getActiveOs();
+    var asset = chooseAsset(item, currentOs);
+    var downloadBtn = document.getElementById("modal-download-link");
+    if (downloadBtn) {
+      downloadBtn.href = asset.url;
+      downloadBtn.textContent = asset.label;
+    }
 
     modal.classList.add("active");
     document.body.style.overflow = "hidden";

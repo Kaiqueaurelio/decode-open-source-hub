@@ -1233,10 +1233,39 @@ button, select {
   color: var(--muted);
 }
 
-/* Card Action Trigger Link */
-.card-explore-trigger {
+/* Card Action Trigger Link & Download Actions */
+.card-action-bar {
   margin-top: auto;
-  padding-top: 20px;
+  padding-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: var(--ink-strong);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.card-btn-download:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.card-explore-trigger {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1247,6 +1276,29 @@ button, select {
   color: var(--muted);
   font-weight: 600;
   transition: color 0.15s ease;
+}
+
+.table-action-download {
+  color: var(--app-ink, var(--accent-ink)) !important;
+  font-weight: 700;
+}
+
+.card-release-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--muted);
+}
+
+.card-release-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  display: inline-block;
 }
 
 .software-card:hover .card-explore-trigger {
