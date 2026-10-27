@@ -55,7 +55,8 @@ not a copy of the upstream source tree.
    not be reused as Decode branding.
 5. Do not represent a feature as implemented until corresponding code and tests exist and CI/builds pass.
 
-## Implementation status
+## Source snapshot status
 
-This document records features found in the upstream source. It does not claim all of them have been
-ported into `launcher/`. Compare this checklist against Decode source and test results before release.
+The upstream source snapshot is stored under `launcher-upstream/source/` as a **non-buildable reference subtree**. It contains the upstream Cargo workspace, source for the core/native/UI crates, desktop and web entry points, tests, localization tables, release/packaging scripts, CI workflows, and the upstream README/NOTICE/license files. Branding-specific ArtCraft assets and app icon PNGs are intentionally omitted. A source attribution is present in `launcher-upstream/source/ATTRIBUTION.md`.
+
+The source subtree is not wired into the live Decode launcher and its code has not been compiled here. It uses upstream package names and upstream release repositories. Treat it as an audit/porting baseline, not a claim of feature parity in `launcher/`. Integrate or cherry-pick behavior into the Decode names, release feeds, package IDs, branding and license obligations, then run the relevant CI and platform builds before claiming completion.
