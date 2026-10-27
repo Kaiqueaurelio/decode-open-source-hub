@@ -1,0 +1,9 @@
+# Ignore heavy Rust monorepo folders for Vercel static deployment
+apps/
+launcher/
+tests/
+scripts/
+docs/
+.github/
+*.dwg
+*.sh
