@@ -1,9 +1,9 @@
 GridCraft
-Copyright (c) 2026 ArtCraft Team and the GridCraft contributors.
+Copyright (c) 2026 Decode Analytics Team and the GridCraft contributors.
 Licensed under the MIT License or the Apache License, Version 2.0, at your option
 (LICENSE-MIT, LICENSE-APACHE).
 
-The ArtCraft name, wordmark and logos in docs/brand/ are trademarks of the ArtCraft Team. They are
+The Decode name, wordmark and logos in docs/brand/ are trademarks of the Decode Analytics Team. They are
 not open source and are not covered by the license above; their terms are in
 docs/brand/LICENSE-brand.txt.
 
@@ -20,7 +20,7 @@ Font License 1.1.
 The UI's egui-icons.ttf subset and emoji-icon-font.ttf fallback are provided by epaint_default_fonts
 and registered through egui's default font definitions. They derive from emoji-icon-font by
 John Slegers, under the MIT License. The subset and full face share the following upstream notice.
-Source: https://github.com/storytold/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
 Original: https://github.com/jslegers/emoji-icon-font
 The following text is reproduced verbatim from emoji-icon-font-mit-license.txt:
 
@@ -37,7 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Hack-Regular.ttf is provided by epaint_default_fonts and is egui's bundled monospace face. The
 work is Copyright 2018 Source Foundry Authors and is distributed under the MIT License and the
 Bitstream Vera License. The DejaVu work it derives from was committed to the public domain.
-Source: https://github.com/storytold/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
 Upstream: https://github.com/source-foundry/Hack
 The following text is reproduced verbatim from Hack-Regular.txt:
 
@@ -75,7 +75,7 @@ Except as contained in this notice, the names of Gnome, the Gnome Foundation, an
 
 NotoEmoji-Regular.ttf is provided by epaint_default_fonts and is enabled by egui's
 monochrome_emoji_fonts feature. It is distributed under the SIL Open Font License, Version 1.1.
-Source: https://github.com/storytold/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
 Upstream: https://fonts.google.com/noto/specimen/Noto+Emoji
 The following text is reproduced verbatim from OFL.txt:
 
@@ -174,7 +174,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 Ubuntu-Light.ttf is provided by epaint_default_fonts and is egui's default proportional face. It
 is distributed under the Ubuntu Font Licence, Version 1.0.
-Source: https://github.com/storytold/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
 Upstream: https://design.ubuntu.com/font
 The following text is reproduced verbatim from UFL.txt:
 

@@ -10,7 +10,7 @@ A implementação foi planejada após análise do código-fonte público de http
 - crates/core/src/release.rs e crates/core/src/platform.rs: leitura de releases, validação de URL, identificação de formatos e escolha do artefato pela plataforma/arquitetura.
 - crates/native/src/http.rs: cliente HTTPS, limites de tamanho, downloads e verificação SHA-256.
 - crates/native/src/install.rs, detect.rs, manifest.rs e paths.rs: instalação/atualização, detecção local, registros de propriedade e diretórios gerenciados.
-- crates/ui-egui e apps/artcraft-launcher: interface egui/eframe e aplicativo desktop.
+- crates/ui-egui e apps/Decode-launcher: interface egui/eframe e aplicativo desktop.
 
 Este repositório contém uma implementação independente para a Decode Analytics; não copia nem pretende ser o produto oficial da Decode Analytics. A suíte de referência é consultada por APIs e releases públicas. O Decode CAD aparece como projeto independente da Decode Analytics.
 

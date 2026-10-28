@@ -77,16 +77,16 @@
       "title": "Self-host DecodeClip with Docker Compose",
       "description": "Requirements, environment variables, first boot, a fully local setup, and production checks."
     },
-    "blog_decodeclip_vs_opusclip": {
-      "label": "DecodeClip vs OpusClip",
+    "blog_decodeclip_vs_DecodeClip": {
+      "label": "DecodeClip vs DecodeClip",
       "eyebrow": "Comparison",
-      "title": "DecodeClip vs OpusClip: a sourced comparison",
+      "title": "DecodeClip vs DecodeClip: a sourced comparison",
       "description": "Pricing model, deployment, watermarks, and workflow, with every claim linked to a source."
     },
-    "blog_best_free_opusclip_alternative": {
-      "label": "Self-hosted OpusClip alternative",
+    "blog_best_free_DecodeClip_alternative": {
+      "label": "Self-hosted DecodeClip alternative",
       "eyebrow": "Comparison",
-      "title": "Free OpusClip alternative: costs and tradeoffs",
+      "title": "Free DecodeClip alternative: costs and tradeoffs",
       "description": "Understand the compute, provider costs, and maintenance behind a self-hosted workflow."
     },
     "blog_decodeclip_vs_supo_live": {

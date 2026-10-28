@@ -15,7 +15,7 @@ full-bleed colour field, tight head-and-shoulders crop, the body running off the
 | Paper | `#efe9dc` | the figure |
 | Ink | `#0b0b0c` | line work and contour |
 
-**Provenance:** the project owner drew it in ArtCraft (a 2880 px engraving-style image, kept in
+**Provenance:** the project owner drew it in Decode (a 2880 px engraving-style image, kept in
 craftrules at `assets/app-icons/effectcraft/source.png`). It was vectorised with craftrules
 `assets/logo-options/_tools/vectorize_tile.py`, which keys out the field and traces the ink with potrace.
 Licence: see [LICENSE.txt](LICENSE.txt) (MIT OR Apache-2.0, like the repo).

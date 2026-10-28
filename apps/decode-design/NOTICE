@@ -1,9 +1,9 @@
 DesignCraft
-Copyright (c) 2026 ArtCraft Team and the DesignCraft contributors.
+Copyright (c) 2026 Decode Analytics Team and the DesignCraft contributors.
 Licensed under the MIT License or the Apache License, Version 2.0, at your option
 (LICENSE-MIT, LICENSE-APACHE).
 
-The ArtCraft name, wordmark and logos in docs/brand/ are trademarks of the ArtCraft Team. They are
+The Decode name, wordmark and logos in docs/brand/ are trademarks of the Decode Analytics Team. They are
 not open source and are not covered by the license above; their terms are in
 docs/brand/LICENSE-brand.txt.
 
@@ -76,7 +76,7 @@ list (author, source, license) is in ASSETS.md.
   License in CTAN distributions).
 - Japanese fonts (craft-fonts): builds made with craft-fonts (CRAFT_FONTS_DIR; all official
   releases) embed the fonts listed in
-  https://github.com/storytold/craft-fonts/blob/main/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
+  https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-fonts/blob/main/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
   Shippori Mincho), under the SIL Open Font License 1.1. Their licence texts ship with the
   packages as OFL-<family>.txt. Builds without CRAFT_FONTS_DIR do not include them.
 - All UI icons are drawn in code (crates/ui-egui/src/icons.rs) and are original work, MIT OR Apache-2.0.
@@ -93,14 +93,14 @@ No Adobe icons, images or artwork are included.
 PDF backend source
 
 The patched hayro 0.7.1, hayro-interpret 0.7.0, hayro-syntax 0.7.2, hayro-jbig2 0.3.0 and
-hayro-cmap 0.1.0 are fetched from https://github.com/storytold/craft-libs at revision
+hayro-cmap 0.1.0 are fetched from https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs at revision
 9f75d3dc19b4b514c4f3d4847ed1ec1b0e86b4ef. The first four source snapshots were transferred
-from https://github.com/storytold/pdfcraft at revision
+from https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/pdfcraft at revision
 7437bde378f43856eada40af25b983812e615e8a and hayro-cmap at revision
 a2ec27b4775f53c40cad3456936d9406611e3a8d, then patched in craft-libs. Their upstream project is
 https://github.com/LaurenzV/hayro, licensed MIT OR Apache-2.0. The snapshot retains each
 crate's upstream licence files. The patch ledger is at
-https://github.com/storytold/craft-libs/blob/9f75d3dc19b4b514c4f3d4847ed1ec1b0e86b4ef/vendor/README.craft-reader.md.
+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/blob/9f75d3dc19b4b514c4f3d4847ed1ec1b0e86b4ef/vendor/README.craft-reader.md.
 Per-crate vendor/SOURCE.json files record transferred and local source hashes; asset
 origins and unchanged per-file hashes are recorded separately in ASSETS.md.
 

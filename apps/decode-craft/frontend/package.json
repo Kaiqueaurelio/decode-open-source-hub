@@ -118,7 +118,7 @@
     "vitest": "^3.0.0"
   },
   "workspaces": [
-    "apps/artcraft",
+    "apps/Decode",
     "libs/*",
     "libs/analytics/*",
     "libs/components/*",

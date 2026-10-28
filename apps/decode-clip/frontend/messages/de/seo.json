@@ -109,7 +109,7 @@
         "heading": "Für wen das gedacht ist",
         "p1": "Der Ablauf passt zu Podcasts, Lehrenden, Gründerinnen und Gründern, Agenturen und Videoteams, die schon Langaufnahmen produzieren und einen wiederholbaren Weg zu mehr Kurzclips brauchen.",
         "p2": "Besonders nützlich ist es, wenn dir die Kontrolle wichtig ist: Wer selbst hostet, behält die Anwendung und kann den Quellcode ändern, statt ganz von einer geschlossenen Schnittplattform abzuhängen.",
-        "link1": "Wie DecodeClip im Vergleich zu OpusClip dasteht",
+        "link1": "Wie DecodeClip im Vergleich zu DecodeClip dasteht",
         "link2": "Warum Teams einen Open-Source-Clipper wählen"
       }
     },
@@ -187,7 +187,7 @@
         "p1": "Am schnellsten klonst du das Repository, kopierst die Umgebungsvorlage, trägst die nötigen Anbieter-Zugangsdaten ein und startest den Stack mit Docker Compose. Danach kannst du Bewertung, Untertitel-Vorlagen, Oberfläche oder Deployment anpassen, wenn sich der Ablauf ändert.",
         "p2": "Wer keine Infrastruktur betreiben will, kann die gehostete DecodeClip-Anwendung nutzen und das Open-Source-Repository als Migrationsweg behalten.",
         "link1": "DecodeClip mit Docker Compose selbst hosten",
-        "link2": "Selbst gehostetes DecodeClip gegenüber gehostetem OpusClip"
+        "link2": "Selbst gehostetes DecodeClip gegenüber gehostetem DecodeClip"
       }
     },
     "faqs": {
@@ -259,7 +259,7 @@
         "heading": "Einen wiederholbaren Weiterverwendungs-Ablauf bauen",
         "p1": "Behandel jedes Langvideo als Quellbibliothek, nicht als einmaligen Upload. Verarbeite die Aufnahme, gruppiere Clips nach Thema und verknüpfe jeden Short mit dem längeren Video oder einer passenden Produktseite.",
         "p2": "Schau, welche Themen Wiedergabezeit und Interaktion bringen, und nutz das für künftige Aufnahmen. Die Bewertungen von DecodeClip helfen, Kandidaten zu priorisieren; Veröffentlichungsdaten sollten zeigen, was das Publikum wirklich schätzt.",
-        "link1": "Zwischen DecodeClip und OpusClip wählen"
+        "link1": "Zwischen DecodeClip und DecodeClip wählen"
       }
     },
     "faqs": {

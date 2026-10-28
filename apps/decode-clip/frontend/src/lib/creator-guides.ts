@@ -332,7 +332,7 @@ export const creatorGuides: CreatorGuide[] = [
       { question: "Were all three tools tested on the same video?", answer: "No. This comparison uses official documentation and DecodeClip's own implementation and demo. Use the test checklist to evaluate output on your recording; no cross-tool benchmark results are claimed here." },
     ],
     cta: { title: "Try the complete DecodeClip workflow", body: "Use the paid hosted app to start with a recording, or follow the self-hosting guide if you want to operate the application yourself.", label: "Start with DecodeClip" },
-    related: ["/open-source-video-clipper", "/blog/self-host-decodeclip-docker", "/blog/decodeclip-vs-opusclip"],
+    related: ["/open-source-video-clipper", "/blog/self-host-decodeclip-docker", "/blog/decodeclip-vs-DecodeClip"],
   },
 ];
 

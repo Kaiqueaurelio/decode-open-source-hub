@@ -109,7 +109,7 @@
         "heading": "Untuk siapa ini dibuat",
         "p1": "Alur ini cocok untuk podcaster, pengajar, founder, agensi, dan tim video yang sudah memproduksi rekaman bentuk panjang dan butuh cara yang bisa diulang untuk memublikasikan lebih banyak clip pendek.",
         "p2": "Ini sangat berguna saat kepemilikan penting: yang host sendiri tetap mengendalikan aplikasi dan bisa mengubah sumbernya, alih-alih bergantung sepenuhnya pada platform edit yang tertutup.",
-        "link1": "Bagaimana DecodeClip dibanding OpusClip",
+        "link1": "Bagaimana DecodeClip dibanding DecodeClip",
         "link2": "Kenapa tim memilih clipper open source"
       }
     },
@@ -187,7 +187,7 @@
         "p1": "Penyiapan tercepat adalah mengkloning repositori, menyalin template environment, menambahkan kredensial penyedia yang diperlukan, dan menjalankan stack dengan Docker Compose. Developer lalu bisa mengubah logika penilaian, preset caption, antarmuka, atau model deployment seiring alur kerja berkembang.",
         "p2": "Kreator yang tidak ingin mengoperasikan infrastruktur bisa memakai aplikasi DecodeClip yang di-host, sambil tetap menyediakan repositori open source sebagai jalur migrasi.",
         "link1": "Host sendiri DecodeClip dengan Docker Compose",
-        "link2": "DecodeClip yang di-host sendiri vs OpusClip yang di-host"
+        "link2": "DecodeClip yang di-host sendiri vs DecodeClip yang di-host"
       }
     },
     "faqs": {
@@ -259,7 +259,7 @@
         "heading": "Bangun alur pemanfaatan ulang yang bisa diulang",
         "p1": "Perlakukan setiap video panjang sebagai pustaka sumber, bukan unggahan sekali pakai. Proses rekamannya, kelompokkan clip menurut tema, dan hubungkan tiap Short kembali ke video yang lebih panjang atau halaman produk yang relevan.",
         "p2": "Lacak topik mana yang mendapat waktu tonton dan engagement, lalu pakai hasil itu untuk mengarahkan rekaman berikutnya. Skor DecodeClip membantu memprioritaskan kandidat; data publikasi yang menentukan apa yang benar-benar dihargai audiens.",
-        "link1": "Memilih antara DecodeClip dan OpusClip"
+        "link1": "Memilih antara DecodeClip dan DecodeClip"
       }
     },
     "faqs": {

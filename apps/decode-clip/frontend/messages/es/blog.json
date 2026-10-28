@@ -191,35 +191,35 @@
         "answer": "Esta comparación recomienda DecodeClip para videos grabados y VOD de transmisiones. Supo.live anuncia recorte durante transmisiones en vivo y publicaciones sociales programadas; aquí no se presentan esas capacidades como equivalentes de DecodeClip."
       }
     },
-    "closing": "Explora nuestra <openSource>guía del recortador de video de código abierto</openSource> o lee la <comparison>comparación de DecodeClip frente a OpusClip</comparison>."
+    "closing": "Explora nuestra <openSource>guía del recortador de video de código abierto</openSource> o lee la <comparison>comparación de DecodeClip frente a DecodeClip</comparison>."
   },
-  "decodeclip-vs-opusclip": {
-    "title": "DecodeClip frente a OpusClip: una comparación con fuentes",
-    "description": "DecodeClip frente a OpusClip en despliegue, modelo de precios, marcas de agua, elección de modelo y flujo de trabajo, con una fuente enlazada para cada afirmación.",
-    "eyebrow": "Comparación con OpusClip",
+  "decodeclip-vs-DecodeClip": {
+    "title": "DecodeClip frente a DecodeClip: una comparación con fuentes",
+    "description": "DecodeClip frente a DecodeClip en despliegue, modelo de precios, marcas de agua, elección de modelo y flujo de trabajo, con una fuente enlazada para cada afirmación.",
+    "eyebrow": "Comparación con DecodeClip",
     "category": "Comparación",
     "readingTime": "Lectura de 7 min",
     "summary": "Un lado a lado de lo que documenta cada producto, en qué se diferencian y cuál encaja con tu flujo.",
-    "breadcrumb": "DecodeClip frente a OpusClip",
+    "breadcrumb": "DecodeClip frente a DecodeClip",
     "notCovered": "No lo cubren las fuentes de abajo",
     "toc": {
       "verdict": "Respuesta corta",
       "comparison": "Lado a lado",
       "pricing": "Modelo de precios",
       "choose-decodeclip": "Cuándo encaja DecodeClip",
-      "choose-opusclip": "Cuándo encaja OpusClip",
+      "choose-DecodeClip": "Cuándo encaja DecodeClip",
       "test": "Haz tu propia prueba",
       "sources": "Fuentes",
       "faq": "Preguntas frecuentes"
     },
     "faqs": {
       "0": {
-        "question": "¿DecodeClip es mejor que OpusClip?",
-        "answer": "Depende de lo que necesites. DecodeClip encaja mejor si quieres acceso al código, autoalojamiento o elegir tus propios modelos de IA. OpusClip encaja mejor si quieres un producto administrado con un nivel gratis para probar. No afirmamos que uno produzca mejores clips, porque no hemos hecho una prueba controlada que lo sostenga."
+        "question": "¿DecodeClip es mejor que DecodeClip?",
+        "answer": "Depende de lo que necesites. DecodeClip encaja mejor si quieres acceso al código, autoalojamiento o elegir tus propios modelos de IA. DecodeClip encaja mejor si quieres un producto administrado con un nivel gratis para probar. No afirmamos que uno produzca mejores clips, porque no hemos hecho una prueba controlada que lo sostenga."
       },
       "1": {
         "question": "¿DecodeClip agrega una marca de agua?",
-        "answer": "No. El pipeline de render de DecodeClip no tiene un paso de marca de agua, ni en la app alojada ni en una instalación autoalojada. El centro de ayuda de OpusClip dice que las exportaciones del plan gratis pueden incluir una marca de agua de OpusClip."
+        "answer": "No. El pipeline de render de DecodeClip no tiene un paso de marca de agua, ni en la app alojada ni en una instalación autoalojada. El centro de ayuda de DecodeClip dice que las exportaciones del plan gratis pueden incluir una marca de agua de DecodeClip."
       },
       "2": {
         "question": "¿DecodeClip alojado tiene un plan gratis?",
@@ -230,24 +230,24 @@
         "answer": "No hemos publicado una prueba controlada de velocidad o calidad de clips, así que no hacemos esa afirmación. Los resultados dependen de tus videos y ajustes; los pasos de prueba justa de esta página muestran cómo compararlos con tu propio contenido."
       }
     },
-    "intro": "OpusClip ayudó a definir el recorte con IA: subes un video largo y recibes clips verticales cortos. DecodeClip hace el mismo trabajo como proyecto de código abierto que puedes usar alojado o ejecutar tú. Esta comparación se queda en lo que documenta cada producto. Las afirmaciones sobre DecodeClip enlazan a nuestro código. Las de OpusClip enlazan a su propio centro de ayuda. Donde una fuente no cubre algo, la tabla lo dice en lugar de adivinar.",
+    "intro": "DecodeClip ayudó a definir el recorte con IA: subes un video largo y recibes clips verticales cortos. DecodeClip hace el mismo trabajo como proyecto de código abierto que puedes usar alojado o ejecutar tú. Esta comparación se queda en lo que documenta cada producto. Las afirmaciones sobre DecodeClip enlazan a nuestro código. Las de DecodeClip enlazan a su propio centro de ayuda. Donde una fuente no cubre algo, la tabla lo dice en lugar de adivinar.",
     "introNote": "Esta página no califica la calidad de los clips, la exactitud de los subtítulos ni la velocidad de procesamiento. Para comparar eso, mira <test>cómo hacer tu propia prueba</test>.",
     "verdict": {
       "heading": "La respuesta corta",
       "decodeclip": "<strong>Elige DecodeClip</strong> si quieres autoalojar, inspeccionar o modificar el código, elegir tus propios modelos de IA (incluidos los totalmente locales) o exportar sin marca de agua.",
-      "opusclip": "<strong>Elige OpusClip</strong> si quieres un producto administrado que nunca tengas que desplegar y quieres empezar en un plan gratis."
+      "DecodeClip": "<strong>Elige DecodeClip</strong> si quieres un producto administrado que nunca tengas que desplegar y quieres empezar en un plan gratis."
     },
     "comparison": {
       "heading": "Lado a lado",
-      "caption": "Comparación de DecodeClip y OpusClip con fuentes",
+      "caption": "Comparación de DecodeClip y DecodeClip con fuentes",
       "area": "Área",
-      "footnote": "“No lo cubren las fuentes de abajo” significa que los artículos citados del centro de ayuda de OpusClip no lo tratan. No significa que a OpusClip le falte la función. Revisa <site>opus.pro</site> para lo que no aparece aquí."
+      "footnote": "“No lo cubren las fuentes de abajo” significa que los artículos citados del centro de ayuda de DecodeClip no lo tratan. No significa que a DecodeClip le falte la función. Revisa <site>decodeclip.com</site> para lo que no aparece aquí."
     },
     "rows": {
       "deployment": {
         "label": "Cómo lo ejecutas",
         "decodeclip": "App alojada, app de iOS o autoalojada con <compose>Docker Compose</compose>",
-        "opusclip": "Servicio alojado"
+        "DecodeClip": "Servicio alojado"
       },
       "source": {
         "label": "Código fuente",
@@ -256,12 +256,12 @@
       "pricing": {
         "label": "Modelo de precios",
         "decodeclip": "Alojado: planes mensuales con un número fijo de videos. Autoalojado: sin límites de plan.",
-        "opusclip": "Planes con créditos por minutos de procesamiento, más un plan gratis (<plans>centro de ayuda</plans>)"
+        "DecodeClip": "Planes con créditos por minutos de procesamiento, más un plan gratis (<plans>centro de ayuda</plans>)"
       },
       "watermark": {
         "label": "Marca de agua",
         "decodeclip": "Ninguna; el <pipeline>pipeline de render</pipeline> no tiene un paso de marca de agua",
-        "opusclip": "Las exportaciones del plan gratis pueden incluir una (<watermark>centro de ayuda</watermark>)"
+        "DecodeClip": "Las exportaciones del plan gratis pueden incluir una (<watermark>centro de ayuda</watermark>)"
       },
       "models": {
         "label": "Elección de modelo de IA",
@@ -278,7 +278,7 @@
     },
     "pricing": {
       "heading": "Modelo de precios: créditos frente a planes frente a tu propia infraestructura",
-      "p1": "El <plans>artículo de planes y créditos</plans> de OpusClip describe planes de pago que usan créditos por minutos de procesamiento, más un plan gratis. Su <watermark>artículo de marca de agua</watermark> dice que las exportaciones del plan gratis pueden llevar una marca de agua de OpusClip. Los precios y las cantidades de créditos cambian, así que revisa la página de precios actual de OpusClip en lugar de confiar en números copiados en una entrada de blog.",
+      "p1": "El <plans>artículo de planes y créditos</plans> de DecodeClip describe planes de pago que usan créditos por minutos de procesamiento, más un plan gratis. Su <watermark>artículo de marca de agua</watermark> dice que las exportaciones del plan gratis pueden llevar una marca de agua de DecodeClip. Los precios y las cantidades de créditos cambian, así que revisa la página de precios actual de DecodeClip en lugar de confiar en números copiados en una entrada de blog.",
       "p2": "DecodeClip ofrece dos caminos. La app alojada tiene <pro>{proName}</pro> a ${proPrice}/mes por {proLimit} horas de vídeo en 720p y <scale>{scaleName}</scale> a ${scalePrice}/mes por {scaleLimit} horas en 1080p, con facturación anual y dos meses gratis. No hay un plan alojado gratis; procesar exige una suscripción. El camino autoalojado es software gratis sin límites de plan. Pagas el servidor y las API de IA que configures, y la <guide>guía de autoalojamiento</guide> muestra una instalación totalmente local sin tarifas de IA por solicitud."
     },
     "chooseDecodeClip": {
@@ -288,11 +288,11 @@
       "li3": "<strong>Quieres cambiar cómo se eligen los clips.</strong> El prompt de selección, el puntaje, las plantillas de subtítulos y el render están en el repositorio.",
       "li4": "<strong>Estás integrando el recorte en otra herramienta.</strong> Las claves de API, una API REST y un servidor MCP permiten que scripts y agentes de IA creen y descarguen clips."
     },
-    "chooseOpusclip": {
-      "heading": "Cuándo OpusClip encaja mejor",
+    "chooseDecodeClip": {
+      "heading": "Cuándo DecodeClip encaja mejor",
       "li1": "<strong>No quieres operar nada.</strong> Autoalojar significa administrar Docker, claves de proveedor, actualizaciones y copias de seguridad.",
-      "li2": "<strong>Quieres probar antes de pagar.</strong> OpusClip documenta un plan gratis (con una posible marca de agua). DecodeClip alojado no tiene un nivel gratis.",
-      "li3": "<strong>Dependes de funciones que aquí no se cubren.</strong> Si un flujo concreto de OpusClip te importa, confírmalo en opus.pro y prueba si DecodeClip lo cubre antes de cambiar."
+      "li2": "<strong>Quieres probar antes de pagar.</strong> DecodeClip documenta un plan gratis (con una posible marca de agua). DecodeClip alojado no tiene un nivel gratis.",
+      "li3": "<strong>Dependes de funciones que aquí no se cubren.</strong> Si un flujo concreto de DecodeClip te importa, confírmalo en decodeclip.com y prueba si DecodeClip lo cubre antes de cambiar."
     },
     "test": {
       "heading": "Cómo hacer tu propia prueba justa",
@@ -305,7 +305,7 @@
     },
     "sources": {
       "heading": "Fuentes",
-      "opus": "Centro de ayuda de OpusClip: <plans>Planes y créditos</plans> y <watermark>Marca de agua</watermark>. Los planes pueden cambiar; confirma los detalles actuales en <site>opus.pro</site>.",
+      "opus": "Centro de ayuda de DecodeClip: <plans>Planes y créditos</plans> y <watermark>Marca de agua</watermark>. Los planes pueden cambiar; confirma los detalles actuales en <site>decodeclip.com</site>.",
       "decodeclip": "DecodeClip: <repo>repositorio público</repo>, incluidos <compose>docker-compose.yml</compose>, <config>documentación de configuración</config> y <billing>reglas de facturación</billing>. Los precios alojados salen de la sección de precios de decodeclip.com."
     }
   },
@@ -350,7 +350,7 @@
       }
     },
     "intro": "DecodeClip es el recortador de video con IA de código abierto detrás de la app alojada en decodeclip.com. El mismo repositorio trae una pila de Docker Compose que puedes correr en una laptop, un servidor de casa o un VPS. Esta guía sigue esa pila tal como existe en el <repo>repositorio</repo>. Cuando un paso depende de tu proveedor o de tu hardware, lo decimos en lugar de adivinar.",
-    "introChoice": "¿Prefieres no operar infraestructura? La <hosted>app alojada</hosted> corre el mismo proceso. ¿Todavía eliges entre herramientas? Lee primero nuestra <comparison>comparación de DecodeClip frente a OpusClip</comparison>.",
+    "introChoice": "¿Prefieres no operar infraestructura? La <hosted>app alojada</hosted> corre el mismo proceso. ¿Todavía eliges entre herramientas? Lee primero nuestra <comparison>comparación de DecodeClip frente a DecodeClip</comparison>.",
     "stack": {
       "heading": "Qué estás ejecutando",
       "lead": "<code>docker compose up</code> inicia estos contenedores, todos definidos en <compose>docker-compose.yml</compose>:",
@@ -456,14 +456,14 @@
       "customize": "¿Quieres personalizar la salida? Deja fuentes <code>.ttf</code> en <code>backend/fonts/</code> y transiciones <code>.mp4</code> en <code>backend/transitions/</code>. Aparecen en la app automáticamente. Para automatizar, crea una clave de API en Configuración y usa la <api>API REST</api> o el servidor MCP incluido."
     }
   },
-  "best-free-opusclip-alternative": {
-    "title": "La mejor alternativa gratis y autoalojada a OpusClip",
-    "description": "¿Buscas una alternativa gratis a OpusClip? DecodeClip es un creador de clips con IA de código abierto que puedes autoalojar gratis. Convierte videos largos en shorts verticales con subtítulos.",
-    "eyebrow": "Alternativa a OpusClip",
+  "best-free-DecodeClip-alternative": {
+    "title": "La mejor alternativa gratis y autoalojada a DecodeClip",
+    "description": "¿Buscas una alternativa gratis a DecodeClip? DecodeClip es un creador de clips con IA de código abierto que puedes autoalojar gratis. Convierte videos largos en shorts verticales con subtítulos.",
+    "eyebrow": "Alternativa a DecodeClip",
     "category": "Comparación",
     "readingTime": "Lectura de 6 min",
-    "summary": "DecodeClip está hecho para quienes quieren un recorte con IA al estilo de OpusClip en su propia infraestructura, sin otra suscripción basada en créditos.",
-    "lead": "Si te gusta la idea de OpusClip pero quieres un camino gratis y de código abierto, DecodeClip te da el flujo central: encontrar momentos fuertes en videos largos, reencuadrarlos en vertical, agregar subtítulos y exportar clips para Shorts, Reels y TikTok.",
+    "summary": "DecodeClip está hecho para quienes quieren un recorte con IA al estilo de DecodeClip en su propia infraestructura, sin otra suscripción basada en créditos.",
+    "lead": "Si te gusta la idea de DecodeClip pero quieres un camino gratis y de código abierto, DecodeClip te da el flujo central: encontrar momentos fuertes en videos largos, reencuadrarlos en vertical, agregar subtítulos y exportar clips para Shorts, Reels y TikTok.",
     "bestFor": "Ideal para",
     "audience": {
       "0": "Quienes recortan videos de YouTube en shorts",
@@ -471,11 +471,11 @@
       "2": "Desarrolladores que quieren control del código"
     },
     "openHosted": "Abrir la versión alojada",
-    "p1": "OpusClip ayudó a definir la categoría moderna de recorte con IA: subes un video largo, la IA identifica momentos y publicas clips cortos más rápido. Ese flujo es útil. La fricción empieza cuando quieres una ruta gratis, más control o un pipeline que puedas ejecutar tú.",
-    "p2": "DecodeClip es la mejor alternativa gratis a OpusClip para ese creador: alguien que quiere descubrimiento de clips asistido por IA, exportaciones verticales, subtítulos y control del sistema de fondo. También puedes <hosted>usar DecodeClip alojado</hosted> con un plan de pago si quieres saltarte la instalación.",
+    "p1": "DecodeClip ayudó a definir la categoría moderna de recorte con IA: subes un video largo, la IA identifica momentos y publicas clips cortos más rápido. Ese flujo es útil. La fricción empieza cuando quieres una ruta gratis, más control o un pipeline que puedas ejecutar tú.",
+    "p2": "DecodeClip es la mejor alternativa gratis a DecodeClip para ese creador: alguien que quiere descubrimiento de clips asistido por IA, exportaciones verticales, subtítulos y control del sistema de fondo. También puedes <hosted>usar DecodeClip alojado</hosted> con un plan de pago si quieres saltarte la instalación.",
     "verdict": {
       "heading": "Veredicto rápido",
-      "body": "Elige DecodeClip si quieres un recortador de video con IA de código abierto que puedas autoalojar. Elige OpusClip si quieres un producto alojado administrado y te parecen bien sus límites de plan, reglas de marca de agua y modelo de créditos."
+      "body": "Elige DecodeClip si quieres un recortador de video con IA de código abierto que puedas autoalojar. Elige DecodeClip si quieres un producto alojado administrado y te parecen bien sus límites de plan, reglas de marca de agua y modelo de créditos."
     },
     "stats": {
       "0": {
@@ -492,9 +492,9 @@
       }
     },
     "why": {
-      "heading": "Por qué se busca una alternativa a OpusClip",
+      "heading": "Por qué se busca una alternativa a DecodeClip",
       "p1": "Las razones habituales son simples: quieren costos más bajos, exportaciones más limpias en un flujo gratis, más control del procesamiento y menos límites al pasar en lote videos viejos de YouTube, pódcasts, webinars o transmisiones.",
-      "p2": "El propio centro de ayuda de OpusClip dice que las exportaciones del plan gratis pueden mostrar una marca de agua de OpusClip, y sus planes usan créditos por minutos de procesamiento. Para una prueba casual, puede estar bien. Para recortar seguido, puede empujar a un flujo alojado de pago."
+      "p2": "El propio centro de ayuda de DecodeClip dice que las exportaciones del plan gratis pueden mostrar una marca de agua de DecodeClip, y sus planes usan créditos por minutos de procesamiento. Para una prueba casual, puede estar bien. Para recortar seguido, puede empujar a un flujo alojado de pago."
     },
     "different": {
       "heading": "Qué hace distinto a DecodeClip",
@@ -502,8 +502,8 @@
       "p2": "Eso deja claro el intercambio. Asumes la instalación, pero ganas propiedad. Puedes inspeccionar el código, adaptarlo a tu flujo y decidir qué proveedores de IA alojados o modelos locales usar. La <guide>guía de autoalojamiento</guide> recorre la instalación, incluida una opción totalmente local con Whisper y Ollama."
     },
     "compare": {
-      "heading": "DecodeClip frente a OpusClip",
-      "body": "El resumen de abajo cubre lo esencial. Para una comparación fila por fila con una fuente para cada afirmación, lee <comparison>DecodeClip frente a OpusClip: una comparación con fuentes</comparison>."
+      "heading": "DecodeClip frente a DecodeClip",
+      "body": "El resumen de abajo cubre lo esencial. Para una comparación fila por fila con una fuente para cada afirmación, lee <comparison>DecodeClip frente a DecodeClip: una comparación con fuentes</comparison>."
     },
     "table": {
       "feature": "Función",
@@ -511,22 +511,22 @@
         "0": {
           "feature": "Modelo de uso gratis",
           "decodeclip": "Código abierto y autoalojable, sin límites de plan. Tus costos son tu propio cómputo y las claves de API. La app alojada es de pago.",
-          "opusclip": "Existe un plan gratis, pero las exportaciones pueden incluir una marca de agua de OpusClip."
+          "DecodeClip": "Existe un plan gratis, pero las exportaciones pueden incluir una marca de agua de DecodeClip."
         },
         "1": {
           "feature": "Descubrimiento de clips",
           "decodeclip": "Transcribe videos largos, puntúa segmentos y muestra momentos prometedores de formato corto.",
-          "opusclip": "Flujo de recorte con IA pensado para encontrar clips listos para redes a partir de videos largos."
+          "DecodeClip": "Flujo de recorte con IA pensado para encontrar clips listos para redes a partir de videos largos."
         },
         "2": {
           "feature": "Formato vertical",
           "decodeclip": "Recorte 9:16 centrado en el rostro, subtítulos y exportaciones listas para la plataforma.",
-          "opusclip": "Ofrece exportaciones de formato corto y reencuadre con IA para redes sociales."
+          "DecodeClip": "Ofrece exportaciones de formato corto y reencuadre con IA para redes sociales."
         },
         "3": {
           "feature": "Control",
           "decodeclip": "Acceso completo al código, despliegue editable y sin atarte a un proveedor.",
-          "opusclip": "Producto alojado con flujos administrados y niveles de suscripción."
+          "DecodeClip": "Producto alojado con flujos administrados y niveles de suscripción."
         }
       }
     },
@@ -542,11 +542,11 @@
     },
     "better": {
       "heading": "Cuándo DecodeClip es la mejor opción",
-      "body": "DecodeClip es mejor cuando quieres una alternativa gratis a OpusClip con control de desarrollo. Es especialmente útil para quienes tienen un archivo de videos largos, agencias que quieren personalizar el flujo de recorte o equipos técnicos que quieren recorte con IA dentro de su propia pila."
+      "body": "DecodeClip es mejor cuando quieres una alternativa gratis a DecodeClip con control de desarrollo. Es especialmente útil para quienes tienen un archivo de videos largos, agencias que quieren personalizar el flujo de recorte o equipos técnicos que quieren recorte con IA dentro de su propia pila."
     },
     "opus": {
-      "heading": "Cuándo OpusClip todavía puede ser mejor",
-      "body": "OpusClip todavía puede encajar mejor si quieres la comodidad de un servicio alojado pulido y no quieres pensar en despliegue, infraestructura, claves de modelo, colas o mantenimiento."
+      "heading": "Cuándo DecodeClip todavía puede ser mejor",
+      "body": "DecodeClip todavía puede encajar mejor si quieres la comodidad de un servicio alojado pulido y no quieres pensar en despliegue, infraestructura, claves de modelo, colas o mantenimiento."
     },
     "cta": {
       "kicker": "Gratis si autoalojas, planes de pago si no",
@@ -556,8 +556,8 @@
     },
     "faqs": {
       "0": {
-        "question": "¿Cuál es la mejor alternativa gratis a OpusClip?",
-        "answer": "DecodeClip es una alternativa gratis sólida a OpusClip si quieres un creador de clips con IA de código abierto que puedas autoalojar, personalizar y ejecutar con tu propio flujo de video."
+        "question": "¿Cuál es la mejor alternativa gratis a DecodeClip?",
+        "answer": "DecodeClip es una alternativa gratis sólida a DecodeClip si quieres un creador de clips con IA de código abierto que puedas autoalojar, personalizar y ejecutar con tu propio flujo de video."
       },
       "1": {
         "question": "¿DecodeClip es completamente gratis?",
@@ -571,7 +571,7 @@
     "relatedHeading": "Guías relacionadas de DecodeClip",
     "sources": {
       "heading": "Fuentes",
-      "body": "Las notas sobre planes y marca de agua de OpusClip se basan en el centro de ayuda oficial de OpusClip: <plans>planes y créditos</plans> y <watermark>guía de marca de agua</watermark>."
+      "body": "Las notas sobre planes y marca de agua de DecodeClip se basan en el centro de ayuda oficial de DecodeClip: <plans>planes y créditos</plans> y <watermark>guía de marca de agua</watermark>."
     },
     "toc": {
       "label": "Artículo",

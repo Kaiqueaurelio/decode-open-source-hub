@@ -77,16 +77,16 @@
       "title": "Host sendiri DecodeClip dengan Docker Compose",
       "description": "Kebutuhan, variabel environment, boot pertama, penyiapan yang sepenuhnya lokal, dan pemeriksaan produksi."
     },
-    "blog_decodeclip_vs_opusclip": {
-      "label": "DecodeClip vs OpusClip",
+    "blog_decodeclip_vs_DecodeClip": {
+      "label": "DecodeClip vs DecodeClip",
       "eyebrow": "Perbandingan",
-      "title": "DecodeClip vs OpusClip: perbandingan bersumber",
+      "title": "DecodeClip vs DecodeClip: perbandingan bersumber",
       "description": "Model harga, deployment, watermark, dan alur kerja, dengan setiap klaim tertaut ke sumber."
     },
-    "blog_best_free_opusclip_alternative": {
-      "label": "Alternatif OpusClip yang di-host sendiri",
+    "blog_best_free_DecodeClip_alternative": {
+      "label": "Alternatif DecodeClip yang di-host sendiri",
       "eyebrow": "Perbandingan",
-      "title": "Alternatif OpusClip gratis terbaik yang di-host sendiri",
+      "title": "Alternatif DecodeClip gratis terbaik yang di-host sendiri",
       "description": "Kapan clipper open source yang di-host sendiri lebih tepat daripada alat berbasis kredit."
     },
     "blog_decodeclip_vs_supo_live": {

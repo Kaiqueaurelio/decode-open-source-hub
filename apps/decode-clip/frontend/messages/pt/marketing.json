@@ -77,16 +77,16 @@
       "title": "Auto-hospede o DecodeClip com Docker Compose",
       "description": "Requisitos, variáveis de ambiente, primeira inicialização, uma instalação totalmente local e checagens de produção."
     },
-    "blog_decodeclip_vs_opusclip": {
-      "label": "DecodeClip vs OpusClip",
+    "blog_decodeclip_vs_DecodeClip": {
+      "label": "DecodeClip vs DecodeClip",
       "eyebrow": "Comparação",
-      "title": "DecodeClip vs OpusClip: uma comparação com fontes",
+      "title": "DecodeClip vs DecodeClip: uma comparação com fontes",
       "description": "Modelo de preço, implantação, marcas d'água e fluxo de trabalho, com cada afirmação ligada a uma fonte."
     },
-    "blog_best_free_opusclip_alternative": {
-      "label": "Alternativa auto-hospedada ao OpusClip",
+    "blog_best_free_DecodeClip_alternative": {
+      "label": "Alternativa auto-hospedada ao DecodeClip",
       "eyebrow": "Comparação",
-      "title": "A melhor alternativa gratuita e auto-hospedada ao OpusClip",
+      "title": "A melhor alternativa gratuita e auto-hospedada ao DecodeClip",
       "description": "Quando um clipper de código aberto e auto-hospedado é melhor do que uma ferramenta baseada em créditos."
     },
     "blog_decodeclip_vs_supo_live": {

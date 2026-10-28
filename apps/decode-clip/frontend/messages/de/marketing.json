@@ -77,16 +77,16 @@
       "title": "DecodeClip mit Docker Compose selbst hosten",
       "description": "Voraussetzungen, Umgebungsvariablen, erster Start, ein komplett lokales Setup und Produktionschecks."
     },
-    "blog_decodeclip_vs_opusclip": {
-      "label": "DecodeClip vs OpusClip",
+    "blog_decodeclip_vs_DecodeClip": {
+      "label": "DecodeClip vs DecodeClip",
       "eyebrow": "Vergleich",
-      "title": "DecodeClip vs OpusClip: ein Vergleich mit Quellen",
+      "title": "DecodeClip vs DecodeClip: ein Vergleich mit Quellen",
       "description": "Preismodell, Betrieb, Wasserzeichen und Ablauf, jede Aussage mit einer Quelle verlinkt."
     },
-    "blog_best_free_opusclip_alternative": {
-      "label": "Selbst gehostete OpusClip-Alternative",
+    "blog_best_free_DecodeClip_alternative": {
+      "label": "Selbst gehostete DecodeClip-Alternative",
       "eyebrow": "Vergleich",
-      "title": "Die beste kostenlose, selbst gehostete OpusClip-Alternative",
+      "title": "Die beste kostenlose, selbst gehostete DecodeClip-Alternative",
       "description": "Wann ein selbst gehosteter Open-Source-Clipper die bessere Wahl ist als ein Credit-Tool."
     },
     "blog_decodeclip_vs_supo_live": {

@@ -1,36 +1,36 @@
-# Artcraft frontend
+# Decode frontend
 
-This Nx workspace contains the Tauri desktop frontend in `apps/artcraft` and its
-shared libraries in `libs`. Website and Netlify builds live in `artcraft-services`.
+This Nx workspace contains the Tauri desktop frontend in `apps/Decode` and its
+shared libraries in `libs`. Website and Netlify builds live in `Decode-services`.
 
 Use Node.js 20 or newer and npm. Run the following commands from `frontend/`:
 
 ```bash
 npm ci
-npx nx dev artcraft
-npx nx build artcraft
+npx nx dev Decode
+npx nx build Decode
 ```
 
 The frontend development server uses port 5173. Start the Rust app separately
 from the repository root:
 
 ```bash
-./script/artcraft/unix_rust_dev.sh
+./script/Decode/unix_rust_dev.sh
 ```
 
 The repository-root frontend launcher installs dependencies and starts the same
 server:
 
 ```bash
-./script/artcraft/unix_frontend_dev.sh
+./script/Decode/unix_frontend_dev.sh
 ```
 
-On Windows, use `script/artcraft/windows_frontend_dev.ps1` and
-`script/artcraft/windows_rust_dev.ps1` in separate terminals. See
+On Windows, use `script/Decode/windows_frontend_dev.ps1` and
+`script/Decode/windows_rust_dev.ps1` in separate terminals. See
 [development setup](../_docs/dev_setup.md) for Rust and Tauri prerequisites.
 
-The Vite build writes `apps/artcraft/dist`, which Tauri bundles. Public resources
-come from `apps/artcraft/app/public`. The app also needs its retained libraries,
+The Vite build writes `apps/Decode/dist`, which Tauri bundles. Public resources
+come from `apps/Decode/app/public`. The app also needs its retained libraries,
 root package lock, TypeScript project references, and Nx/Vite configuration.
 The aliases in `tsconfig.base.json` resolve shared libraries to their source for
 both development and production. The app's Vite configuration loads this file

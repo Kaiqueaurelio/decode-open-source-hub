@@ -1,10 +1,10 @@
-# ArtCraft Native
+# Decode Native
 
-ArtCraft's desktop app in pure Rust: an [egui](https://github.com/emilk/egui) UI over the same
-ArtCraft API client crates the Tauri app uses. There is no Tauri and no JavaScript; the only
+Decode's desktop app in pure Rust: an [egui](https://github.com/emilk/egui) UI over the same
+Decode API client crates the Tauri app uses. There is no Tauri and no JavaScript; the only
 webview is the Midjourney sign-in window, which exists to capture Midjourney's login cookies.
 
-The look follows the brutalist webapp (`artcraft-services/frontend/apps/artcraft-webapp`). That
+The look follows the brutalist webapp (`Decode-services/frontend/apps/Decode-webapp`). That
 means near-black surfaces with white/15 hairlines and 3 px corners on controls. Type is Archivo for
 display, Inter for body text and Geist Mono for labels. The brand blue marks the primary actions.
 
@@ -14,16 +14,16 @@ page that links to the same tool in the web app.
 ## Running
 
 ```bash
-cargo run -p artcraft_native --release
+cargo run -p Decode_native --release
 ```
 
-The workspace's default member is the Tauri app, so pass `-p artcraft_native`.
+The workspace's default member is the Tauri app, so pass `-p Decode_native`.
 
-- **Sign-in.** On first launch the app reuses an existing ArtCraft login. It reads the session
-  cookie from the Tauri app's jar (`<cache dir>/ai.artcraft.app/.cookies`) and keeps its own copy in
-  `~/Artcraft/credentials/native_session.json`. Otherwise use "Sign in with browser" (device code)
+- **Sign-in.** On first launch the app reuses an existing Decode login. It reads the session
+  cookie from the Tauri app's jar (`<cache dir>/ai.Decode.app/.cookies`) and keeps its own copy in
+  `~/Decode/credentials/native_session.json`. Otherwise use "Sign in with browser" (device code)
   or a username and password.
-- **API host.** `~/Artcraft/settings/env_configs.json` selects it, exactly as for the Tauri app.
+- **API host.** `~/Decode/settings/env_configs.json` selects it, exactly as for the Tauri app.
 
 ## Architecture
 
@@ -48,16 +48,16 @@ How the backend works:
 - **Generation.** It goes through OmniGen: `/v1/omni_gen/{models,cost,generate}/{image,video,audio}`.
   Model capabilities come from the server, so new models and options appear without an app update.
 - **Typed client functions.** Model lists, uploads, credits, login and deletes use
-  `artcraft_client`.
+  `Decode_client`.
 - **Lenient decoding.** Generate and cost requests are JSON maps, as in the Tauri app. Job polling
   (`/v1/jobs/session`), the audio model list, the library list, batches and prompts are decoded
   with lenient structs.
 - **Identity headers.** Every request sends the desktop identity headers: `Origin` and
   `User-Agent`.
 - **Other providers.** Images can also run on Midjourney (your own account) or fal (your own API
-  key), through `artcraft_router` like the Tauri app. The accounts live in the same files
-  (`~/Artcraft/credentials`), so connecting in either app works in both. Those jobs are tracked in
-  `~/Artcraft/state/native_provider_jobs.json` and their results uploaded into your library, resuming
+  key), through `Decode_router` like the Tauri app. The accounts live in the same files
+  (`~/Decode/credentials`), so connecting in either app works in both. Those jobs are tracked in
+  `~/Decode/state/native_provider_jobs.json` and their results uploaded into your library, resuming
   after a restart.
 
 ## Prompt box parity
@@ -79,7 +79,7 @@ How the backend works:
 | Validation: starting frame, text-only banner, limits, uploads   | Done                                    |
 | Clear all (confirms when references are attached)               | Done                                    |
 | `@Character` mentions and the Characters modal (create/edit/delete) | Done                                |
-| Provider choice (Midjourney direct, fal), "Select Provider"     | Done (images; video runs on ArtCraft)   |
+| Provider choice (Midjourney direct, fal), "Select Provider"     | Done (images; video runs on Decode)   |
 | In-app video playback                                           | Done with FFmpeg on the PATH; otherwise opens in the system player |
 | Audio reference playback (click to play/stop)                   | Done                                    |
 | Animated video previews in the feed (with a stills toggle)      | Done                                    |
@@ -99,15 +99,15 @@ Feed and lightbox:
 
 ## Diagnostics
 
-Set `ARTCRAFT_SCREENSHOT=<file.png>` to save a screenshot once the window has settled.
-`ARTCRAFT_PAGE` (`home`, `create-image`, `create-video`, `create-audio` or `library`) picks the page,
-`ARTCRAFT_OPEN` (`settings` or `midjourney-login`) opens a dialog, and `ARTCRAFT_SCREENSHOT_EXIT=1`
+Set `Decode_SCREENSHOT=<file.png>` to save a screenshot once the window has settled.
+`Decode_PAGE` (`home`, `create-image`, `create-video`, `create-audio` or `library`) picks the page,
+`Decode_OPEN` (`settings` or `midjourney-login`) opens a dialog, and `Decode_SCREENSHOT_EXIT=1`
 closes the app afterwards. The screenshot shows egui only, not the sign-in webview.
 
 ## Tests
 
 ```bash
-cargo test -p artcraft_native
+cargo test -p Decode_native
 ```
 
 There are unit tests for the catalog, feed store, wire decoding and backend helpers. Headless UI
@@ -118,5 +118,5 @@ mentions, clear-all), the Characters dialog and the audio toolbar (toggles, Beat
 
 `assets/fonts` holds Inter, Archivo and Geist Mono, all under the SIL Open Font License; the
 licences sit next to the files. The wordmark, app icon and creator logos are the Tauri app's own
-(`frontend/apps/artcraft/app/public/resources`, `crates/desktop/artcraft/icons`); see `NOTICE`
+(`frontend/apps/Decode/app/public/resources`, `crates/desktop/Decode/icons`); see `NOTICE`
 for their terms.

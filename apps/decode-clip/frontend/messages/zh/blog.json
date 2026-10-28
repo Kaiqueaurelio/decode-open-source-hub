@@ -191,35 +191,35 @@
         "answer": "这篇对比建议把 DecodeClip 用于录好的视频和直播回放。supo.live 宣传在直播进行中剪辑以及定时社交发布；这里不把这些能力说成 DecodeClip 的对等功能。"
       }
     },
-    "closing": "看看我们的<openSource>开源视频剪辑指南</openSource>，或阅读<comparison>DecodeClip 与 OpusClip 的对比</comparison>。"
+    "closing": "看看我们的<openSource>开源视频剪辑指南</openSource>，或阅读<comparison>DecodeClip 与 DecodeClip 的对比</comparison>。"
   },
-  "decodeclip-vs-opusclip": {
-    "title": "DecodeClip 与 OpusClip：附来源的对比",
-    "description": "从部署、定价模式、水印、模型选择和工作流对比 DecodeClip 与 OpusClip，每条说法都链到来源。",
-    "eyebrow": "OpusClip 对比",
+  "decodeclip-vs-DecodeClip": {
+    "title": "DecodeClip 与 DecodeClip：附来源的对比",
+    "description": "从部署、定价模式、水印、模型选择和工作流对比 DecodeClip 与 DecodeClip，每条说法都链到来源。",
+    "eyebrow": "DecodeClip 对比",
     "category": "对比",
     "readingTime": "7 分钟阅读",
     "summary": "并排看每个产品写了什么、两者差在哪里，以及哪一个适合你的流程。",
-    "breadcrumb": "DecodeClip 与 OpusClip",
+    "breadcrumb": "DecodeClip 与 DecodeClip",
     "notCovered": "下面的来源没有写到",
     "toc": {
       "verdict": "简短回答",
       "comparison": "并排对比",
       "pricing": "定价模式",
       "choose-decodeclip": "什么时候适合 DecodeClip",
-      "choose-opusclip": "什么时候适合 OpusClip",
+      "choose-DecodeClip": "什么时候适合 DecodeClip",
       "test": "自己做测试",
       "sources": "来源",
       "faq": "常见问题"
     },
     "faqs": {
       "0": {
-        "question": "DecodeClip 比 OpusClip 更好吗？",
-        "answer": "取决于你需要什么。如果你想要源码访问、自托管或自己选择 AI 模型，DecodeClip 更合适。如果你想要带免费档可以试用的托管产品，OpusClip 更合适。我们不声称哪一个做出的短片更好，因为我们没有做过能支持这种说法的对照测试。"
+        "question": "DecodeClip 比 DecodeClip 更好吗？",
+        "answer": "取决于你需要什么。如果你想要源码访问、自托管或自己选择 AI 模型，DecodeClip 更合适。如果你想要带免费档可以试用的托管产品，DecodeClip 更合适。我们不声称哪一个做出的短片更好，因为我们没有做过能支持这种说法的对照测试。"
       },
       "1": {
         "question": "DecodeClip 会加水印吗？",
-        "answer": "不会。无论托管应用还是自托管安装，DecodeClip 的渲染流程都没有水印步骤。OpusClip 的帮助中心写明，免费方案的导出可能带有 OpusClip 水印。"
+        "answer": "不会。无论托管应用还是自托管安装，DecodeClip 的渲染流程都没有水印步骤。DecodeClip 的帮助中心写明，免费方案的导出可能带有 DecodeClip 水印。"
       },
       "2": {
         "question": "托管的 DecodeClip 有免费方案吗？",
@@ -230,24 +230,24 @@
         "answer": "我们没有公布过关于速度或短片质量的对照测试，所以不做这种声称。结果取决于你的视频和设置；本页的公平测试步骤说明如何用你自己的内容来比较。"
       }
     },
-    "intro": "OpusClip 帮助定义了 AI 剪辑：上传长视频，拿回竖屏短片。DecodeClip 以开源项目做同样的事，你可以托管使用，也可以自己运行。这篇对比只谈每个产品写明的内容。关于 DecodeClip 的说法链到我们的源码。关于 OpusClip 的说法链到 OpusClip 自己的帮助中心。来源没写到的地方，表格会标明，而不是猜测。",
+    "intro": "DecodeClip 帮助定义了 AI 剪辑：上传长视频，拿回竖屏短片。DecodeClip 以开源项目做同样的事，你可以托管使用，也可以自己运行。这篇对比只谈每个产品写明的内容。关于 DecodeClip 的说法链到我们的源码。关于 DecodeClip 的说法链到 DecodeClip 自己的帮助中心。来源没写到的地方，表格会标明，而不是猜测。",
     "introNote": "本页不评价短片质量、字幕准确性或处理速度。要比较这些，请看<test>如何自己做测试</test>。",
     "verdict": {
       "heading": "简短回答",
       "decodeclip": "<strong>选 DecodeClip</strong>，如果你想自托管、查看或修改代码、自己选择 AI 模型（包括完全本地的），或导出时不要水印。",
-      "opusclip": "<strong>选 OpusClip</strong>，如果你想要一个不用自己部署的托管产品，并且想从免费方案开始。"
+      "DecodeClip": "<strong>选 DecodeClip</strong>，如果你想要一个不用自己部署的托管产品，并且想从免费方案开始。"
     },
     "comparison": {
       "heading": "并排对比",
-      "caption": "附来源的 DecodeClip 与 OpusClip 对比",
+      "caption": "附来源的 DecodeClip 与 DecodeClip 对比",
       "area": "方面",
-      "footnote": "“下面的来源没有写到”是指所引的 OpusClip 帮助中心文章没有谈到它。这并不表示 OpusClip 没有该功能。这里没列出的内容请查看 <site>opus.pro</site>。"
+      "footnote": "“下面的来源没有写到”是指所引的 DecodeClip 帮助中心文章没有谈到它。这并不表示 DecodeClip 没有该功能。这里没列出的内容请查看 <site>decodeclip.com</site>。"
     },
     "rows": {
       "deployment": {
         "label": "你怎么运行它",
         "decodeclip": "托管应用、iOS 应用，或用 <compose>Docker Compose</compose> 自托管",
-        "opusclip": "托管服务"
+        "DecodeClip": "托管服务"
       },
       "source": {
         "label": "源代码",
@@ -256,12 +256,12 @@
       "pricing": {
         "label": "定价模式",
         "decodeclip": "托管：按月方案，视频数量固定。自托管：没有方案上限。",
-        "opusclip": "用额度计算处理分钟的方案，另有免费方案（<plans>帮助中心</plans>）"
+        "DecodeClip": "用额度计算处理分钟的方案，另有免费方案（<plans>帮助中心</plans>）"
       },
       "watermark": {
         "label": "水印",
         "decodeclip": "没有；<pipeline>渲染流程</pipeline>没有水印步骤",
-        "opusclip": "免费方案的导出可能带有水印（<watermark>帮助中心</watermark>）"
+        "DecodeClip": "免费方案的导出可能带有水印（<watermark>帮助中心</watermark>）"
       },
       "models": {
         "label": "AI 模型选择",
@@ -278,7 +278,7 @@
     },
     "pricing": {
       "heading": "定价模式：额度、方案，还是你自己的基础设施",
-      "p1": "OpusClip 的<plans>方案与额度文章</plans>描述了用额度计算处理分钟的付费方案，以及一个免费方案。它的<watermark>水印文章</watermark>写明免费方案的导出可能带有 OpusClip 水印。方案价格和额度数量会变，所以请查看 OpusClip 当前的定价页，不要依赖抄进博客的数字。",
+      "p1": "DecodeClip 的<plans>方案与额度文章</plans>描述了用额度计算处理分钟的付费方案，以及一个免费方案。它的<watermark>水印文章</watermark>写明免费方案的导出可能带有 DecodeClip 水印。方案价格和额度数量会变，所以请查看 DecodeClip 当前的定价页，不要依赖抄进博客的数字。",
       "p2": "DecodeClip 有两条路。托管应用有 <pro>{proName}</pro>，每月 ${proPrice}，每月 {proLimit} 小时 720p 视频；以及 <scale>{scaleName}</scale>，每月 ${scalePrice}，每月 {scaleLimit} 小时 1080p 视频，按年付费可免费两个月。没有免费的托管方案；处理视频需要订阅。自托管这条路是没有方案上限的免费软件。你为服务器和所配置的 AI API 付费，<guide>自托管指南</guide>展示了一种完全本地、没有按次 AI 费用的安装。"
     },
     "chooseDecodeClip": {
@@ -288,11 +288,11 @@
       "li3": "<strong>你想改变短片的挑选方式。</strong>选择提示词、评分、字幕模板和渲染都在仓库里。",
       "li4": "<strong>你在把剪辑接到另一个工具里。</strong>API 密钥、REST API 和 MCP 服务器让脚本和 AI 智能体创建并下载短片。"
     },
-    "chooseOpusclip": {
-      "heading": "什么时候 OpusClip 更合适",
+    "chooseDecodeClip": {
+      "heading": "什么时候 DecodeClip 更合适",
       "li1": "<strong>你不想自己运维。</strong>自托管意味着管理 Docker、提供方密钥、更新和备份。",
-      "li2": "<strong>你想先试用再付费。</strong>OpusClip 写明有免费方案（可能带水印）。托管的 DecodeClip 没有免费档。",
-      "li3": "<strong>你依赖这里没写到的功能。</strong>如果某个具体的 OpusClip 流程对你很重要，先在 opus.pro 上确认，并在切换前测试 DecodeClip 是否覆盖它。"
+      "li2": "<strong>你想先试用再付费。</strong>DecodeClip 写明有免费方案（可能带水印）。托管的 DecodeClip 没有免费档。",
+      "li3": "<strong>你依赖这里没写到的功能。</strong>如果某个具体的 DecodeClip 流程对你很重要，先在 decodeclip.com 上确认，并在切换前测试 DecodeClip 是否覆盖它。"
     },
     "test": {
       "heading": "如何自己做一次公平测试",
@@ -305,7 +305,7 @@
     },
     "sources": {
       "heading": "来源",
-      "opus": "OpusClip 帮助中心：<plans>方案与额度</plans>和<watermark>水印</watermark>。方案可能变化；请在 <site>opus.pro</site> 确认当前细节。",
+      "opus": "DecodeClip 帮助中心：<plans>方案与额度</plans>和<watermark>水印</watermark>。方案可能变化；请在 <site>decodeclip.com</site> 确认当前细节。",
       "decodeclip": "DecodeClip：<repo>公开仓库</repo>，包括 <compose>docker-compose.yml</compose>、<config>配置文档</config>和<billing>计费规则</billing>。托管价格来自 decodeclip.com 的定价部分。"
     }
   },
@@ -350,7 +350,7 @@
       }
     },
     "intro": "DecodeClip 是 decodeclip.com 托管应用背后的开源 AI 视频剪辑工具。同一个仓库带有一套 Docker Compose 栈，可以跑在笔记本、家用服务器或 VPS 上。本指南严格按照它在<repo>仓库</repo>里的样子来写。某一步取决于你的提供方或硬件时，我们会说出来，而不是猜测。",
-    "introChoice": "不想自己跑基础设施？<hosted>托管应用</hosted>跑的是同一套流程。还在工具之间犹豫？先读我们的<comparison>DecodeClip 与 OpusClip 对比</comparison>。",
+    "introChoice": "不想自己跑基础设施？<hosted>托管应用</hosted>跑的是同一套流程。还在工具之间犹豫？先读我们的<comparison>DecodeClip 与 DecodeClip 对比</comparison>。",
     "stack": {
       "heading": "你正在运行什么",
       "lead": "<code>docker compose up</code> 会启动这些容器，它们都定义在 <compose>docker-compose.yml</compose> 里：",
@@ -456,14 +456,14 @@
       "customize": "想定制输出？把 <code>.ttf</code> 字体放进 <code>backend/fonts/</code>，把 <code>.mp4</code> 转场放进 <code>backend/transitions/</code>。它们会自动出现在应用里。要做自动化，在设置里创建 API 密钥，然后用 <api>REST API</api> 或附带的 MCP 服务器。"
     }
   },
-  "best-free-opusclip-alternative": {
-    "title": "最好的免费、可自托管的 OpusClip 替代",
-    "description": "在找免费的 OpusClip 替代？DecodeClip 是可以免费自托管的开源 AI 短片工具。它把长视频做成带字幕的竖屏短片。",
-    "eyebrow": "OpusClip 的替代",
+  "best-free-DecodeClip-alternative": {
+    "title": "最好的免费、可自托管的 DecodeClip 替代",
+    "description": "在找免费的 DecodeClip 替代？DecodeClip 是可以免费自托管的开源 AI 短片工具。它把长视频做成带字幕的竖屏短片。",
+    "eyebrow": "DecodeClip 的替代",
     "category": "对比",
     "readingTime": "6 分钟阅读",
-    "summary": "DecodeClip 面向想在自己的基础设施上做 OpusClip 式 AI 剪辑、而不想再买一套按额度计费订阅的创作者。",
-    "lead": "如果你喜欢 OpusClip 的思路，但想要一条免费、开源的路，DecodeClip 提供核心流程：在长视频里找出有力的时刻，做成竖屏，加上字幕，再导出到 Shorts、Reels 和 TikTok。",
+    "summary": "DecodeClip 面向想在自己的基础设施上做 DecodeClip 式 AI 剪辑、而不想再买一套按额度计费订阅的创作者。",
+    "lead": "如果你喜欢 DecodeClip 的思路，但想要一条免费、开源的路，DecodeClip 提供核心流程：在长视频里找出有力的时刻，做成竖屏，加上字幕，再导出到 Shorts、Reels 和 TikTok。",
     "bestFor": "适合",
     "audience": {
       "0": "把 YouTube 视频剪成短片的创作者",
@@ -471,11 +471,11 @@
       "2": "想要源码级控制的开发者"
     },
     "openHosted": "打开托管版本",
-    "p1": "OpusClip 帮助定义了现代 AI 剪辑这一类：上传长视频，让 AI 找出时刻，更快地发布短片。这个流程有用。当你想要免费路径、更多控制，或一条能自己跑的流水线时，摩擦才开始。",
-    "p2": "对这类创作者，DecodeClip 是最好的免费 OpusClip 替代：想要 AI 辅助找短片、竖屏导出、字幕，以及控制底层系统。如果想完全跳过安装，也可以在付费方案上<hosted>使用托管的 DecodeClip</hosted>。",
+    "p1": "DecodeClip 帮助定义了现代 AI 剪辑这一类：上传长视频，让 AI 找出时刻，更快地发布短片。这个流程有用。当你想要免费路径、更多控制，或一条能自己跑的流水线时，摩擦才开始。",
+    "p2": "对这类创作者，DecodeClip 是最好的免费 DecodeClip 替代：想要 AI 辅助找短片、竖屏导出、字幕，以及控制底层系统。如果想完全跳过安装，也可以在付费方案上<hosted>使用托管的 DecodeClip</hosted>。",
     "verdict": {
       "heading": "简短结论",
-      "body": "如果你想要可以自托管的开源 AI 视频剪辑工具，选 DecodeClip。如果你想要托管好的产品，并且接受它的方案上限、水印规则和额度模式，选 OpusClip。"
+      "body": "如果你想要可以自托管的开源 AI 视频剪辑工具，选 DecodeClip。如果你想要托管好的产品，并且接受它的方案上限、水印规则和额度模式，选 DecodeClip。"
     },
     "stats": {
       "0": {
@@ -492,9 +492,9 @@
       }
     },
     "why": {
-      "heading": "创作者为什么找 OpusClip 的替代",
+      "heading": "创作者为什么找 DecodeClip 的替代",
       "p1": "常见原因很简单：想要更低的成本、在免费流程里更干净的导出、对处理有更多控制，以及在批量处理旧 YouTube 视频、播客、网络研讨会或直播时更少的限制。",
-      "p2": "OpusClip 自己的帮助中心写明，免费方案的导出可能带有 OpusClip 水印，其方案用额度来计算处理分钟。随便试试也许没问题。如果反复剪辑，就可能把创作者推向付费的托管流程。"
+      "p2": "DecodeClip 自己的帮助中心写明，免费方案的导出可能带有 DecodeClip 水印，其方案用额度来计算处理分钟。随便试试也许没问题。如果反复剪辑，就可能把创作者推向付费的托管流程。"
     },
     "different": {
       "heading": "DecodeClip 的不同之处",
@@ -502,8 +502,8 @@
       "p2": "取舍因此很清楚。你承担安装，但获得所有权。你可以查看代码、按自己的流程改它，并决定用哪些托管 AI 提供方或本地模型。<guide>自托管指南</guide>会带你完成安装，包括完全本地的 Whisper + Ollama 方案。"
     },
     "compare": {
-      "heading": "DecodeClip 与 OpusClip",
-      "body": "下面的摘要覆盖要点。若要逐行对比、并且每条说法都有来源，请读<comparison>DecodeClip 与 OpusClip：附来源的对比</comparison>。"
+      "heading": "DecodeClip 与 DecodeClip",
+      "body": "下面的摘要覆盖要点。若要逐行对比、并且每条说法都有来源，请读<comparison>DecodeClip 与 DecodeClip：附来源的对比</comparison>。"
     },
     "table": {
       "feature": "功能",
@@ -511,22 +511,22 @@
         "0": {
           "feature": "免费使用模式",
           "decodeclip": "开源且可自托管，没有方案上限。费用是你自己的算力和 API 密钥。托管应用是付费的。",
-          "opusclip": "有免费方案，但导出可能带有 OpusClip 水印。"
+          "DecodeClip": "有免费方案，但导出可能带有 DecodeClip 水印。"
         },
         "1": {
           "feature": "发现短片",
           "decodeclip": "转写长视频，给片段打分，并浮出有潜力的短视频时刻。",
-          "opusclip": "面向从长视频中找出适合社交平台短片的 AI 剪辑流程。"
+          "DecodeClip": "面向从长视频中找出适合社交平台短片的 AI 剪辑流程。"
         },
         "2": {
           "feature": "竖屏格式",
           "decodeclip": "以人脸为中心的 9:16 裁切、字幕，以及可直接发布的导出。",
-          "opusclip": "提供短视频导出，以及面向社交平台的 AI 重构图。"
+          "DecodeClip": "提供短视频导出，以及面向社交平台的 AI 重构图。"
         },
         "3": {
           "feature": "控制",
           "decodeclip": "完整源码访问、可改的部署，并且不锁定在供应商上。",
-          "opusclip": "托管产品，带有代管流程和订阅档位。"
+          "DecodeClip": "托管产品，带有代管流程和订阅档位。"
         }
       }
     },
@@ -542,11 +542,11 @@
     },
     "better": {
       "heading": "什么时候 DecodeClip 更合适",
-      "body": "当你想要带开发者控制的免费 OpusClip 替代时，DecodeClip 最合适。它对有大量长视频积压的创作者、想定制剪辑流程的机构，或想把 AI 剪辑放进自己技术栈的技术团队尤其有用。"
+      "body": "当你想要带开发者控制的免费 DecodeClip 替代时，DecodeClip 最合适。它对有大量长视频积压的创作者、想定制剪辑流程的机构，或想把 AI 剪辑放进自己技术栈的技术团队尤其有用。"
     },
     "opus": {
-      "heading": "什么时候 OpusClip 可能仍然更好",
-      "body": "如果你想要一个打磨好的托管服务的便利，而不想考虑部署、基础设施、模型密钥、队列或维护，OpusClip 可能仍然更合适。"
+      "heading": "什么时候 DecodeClip 可能仍然更好",
+      "body": "如果你想要一个打磨好的托管服务的便利，而不想考虑部署、基础设施、模型密钥、队列或维护，DecodeClip 可能仍然更合适。"
     },
     "cta": {
       "kicker": "自托管免费，不自托管则用付费方案",
@@ -556,8 +556,8 @@
     },
     "faqs": {
       "0": {
-        "question": "最好的免费 OpusClip 替代是什么？",
-        "answer": "如果你想要可以自托管、定制，并用自己的视频流程运行的开源 AI 短片工具，DecodeClip 是很强的免费 OpusClip 替代。"
+        "question": "最好的免费 DecodeClip 替代是什么？",
+        "answer": "如果你想要可以自托管、定制，并用自己的视频流程运行的开源 AI 短片工具，DecodeClip 是很强的免费 DecodeClip 替代。"
       },
       "1": {
         "question": "DecodeClip 完全免费吗？",
@@ -571,7 +571,7 @@
     "relatedHeading": "相关的 DecodeClip 指南",
     "sources": {
       "heading": "来源",
-      "body": "关于 OpusClip 方案和水印的说明基于 OpusClip 官方帮助中心：<plans>方案与额度</plans>以及<watermark>水印说明</watermark>。"
+      "body": "关于 DecodeClip 方案和水印的说明基于 DecodeClip 官方帮助中心：<plans>方案与额度</plans>以及<watermark>水印说明</watermark>。"
     },
     "toc": {
       "label": "文章",

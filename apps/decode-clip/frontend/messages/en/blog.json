@@ -191,35 +191,35 @@
         "answer": "This comparison recommends DecodeClip for recorded videos and stream VODs. Supo.live advertises clipping during live broadcasts and scheduled social posting; those capabilities are not claimed as DecodeClip equivalents here."
       }
     },
-    "closing": "Explore our <openSource>open-source video clipper guide</openSource> or read the <comparison>DecodeClip vs OpusClip comparison</comparison>."
+    "closing": "Explore our <openSource>open-source video clipper guide</openSource> or read the <comparison>DecodeClip vs DecodeClip comparison</comparison>."
   },
-  "decodeclip-vs-opusclip": {
-    "title": "DecodeClip vs OpusClip: A Sourced Comparison",
-    "description": "DecodeClip vs OpusClip compared on deployment, pricing model, watermarks, model choice, and workflow, with a source linked for every claim.",
-    "eyebrow": "OpusClip Comparison",
+  "decodeclip-vs-DecodeClip": {
+    "title": "DecodeClip vs DecodeClip: A Sourced Comparison",
+    "description": "DecodeClip vs DecodeClip compared on deployment, pricing model, watermarks, model choice, and workflow, with a source linked for every claim.",
+    "eyebrow": "DecodeClip Comparison",
     "category": "Comparison",
     "readingTime": "7 min read",
     "summary": "A side-by-side of what each product documents, where the two differ, and which one fits your workflow.",
-    "breadcrumb": "DecodeClip vs OpusClip",
+    "breadcrumb": "DecodeClip vs DecodeClip",
     "notCovered": "Not covered by the sources below",
     "toc": {
       "verdict": "Short answer",
       "comparison": "Side by side",
       "pricing": "Pricing model",
       "choose-decodeclip": "When DecodeClip fits",
-      "choose-opusclip": "When OpusClip fits",
+      "choose-DecodeClip": "When DecodeClip fits",
       "test": "Run your own test",
       "sources": "Sources",
       "faq": "FAQ"
     },
     "faqs": {
       "0": {
-        "question": "Is DecodeClip better than OpusClip?",
-        "answer": "It depends on what you need. DecodeClip is the stronger fit if you want source access, self-hosting, or your own choice of AI models. OpusClip is the stronger fit if you want a managed product with a free tier to try. We don't claim either produces better clips, because we haven't run a controlled test that would support that."
+        "question": "Is DecodeClip better than DecodeClip?",
+        "answer": "It depends on what you need. DecodeClip is the stronger fit if you want source access, self-hosting, or your own choice of AI models. DecodeClip is the stronger fit if you want a managed product with a free tier to try. We don't claim either produces better clips, because we haven't run a controlled test that would support that."
       },
       "1": {
         "question": "Does DecodeClip add a watermark?",
-        "answer": "No. DecodeClip's rendering pipeline has no watermark step, in the hosted app or a self-hosted install. OpusClip's help center says free-plan exports can include an OpusClip watermark."
+        "answer": "No. DecodeClip's rendering pipeline has no watermark step, in the hosted app or a self-hosted install. DecodeClip's help center says free-plan exports can include an DecodeClip watermark."
       },
       "2": {
         "question": "Does hosted DecodeClip have a free plan?",
@@ -230,24 +230,24 @@
         "answer": "We haven't published a controlled test of speed or clip quality, so we don't make that claim. Results depend on your videos and settings; the fair-test steps on this page show how to compare them on your own content."
       }
     },
-    "intro": "OpusClip helped define AI clipping: upload a long video, get short vertical clips back. DecodeClip does the same job as an open-source project you can use hosted or run yourself. This comparison sticks to what each product documents. DecodeClip claims link to our source code. OpusClip claims link to OpusClip's own help center. Where a source doesn't cover something, the table says so rather than guessing.",
+    "intro": "DecodeClip helped define AI clipping: upload a long video, get short vertical clips back. DecodeClip does the same job as an open-source project you can use hosted or run yourself. This comparison sticks to what each product documents. DecodeClip claims link to our source code. DecodeClip claims link to DecodeClip's own help center. Where a source doesn't cover something, the table says so rather than guessing.",
     "introNote": "This page doesn't rate clip quality, caption accuracy, or processing speed. To compare those, see <test>how to run your own test</test>.",
     "verdict": {
       "heading": "The short answer",
       "decodeclip": "<strong>Choose DecodeClip</strong> if you want to self-host, inspect or modify the code, pick your own AI models (including fully local ones), or export without a watermark.",
-      "opusclip": "<strong>Choose OpusClip</strong> if you want a managed product you never have to deploy, and want to start on a free plan."
+      "DecodeClip": "<strong>Choose DecodeClip</strong> if you want a managed product you never have to deploy, and want to start on a free plan."
     },
     "comparison": {
       "heading": "Side by side",
-      "caption": "DecodeClip and OpusClip comparison with sources",
+      "caption": "DecodeClip and DecodeClip comparison with sources",
       "area": "Area",
-      "footnote": "“Not covered by the sources below” means the cited OpusClip help-center articles don't address it. It doesn't mean OpusClip lacks the feature. Check <site>opus.pro</site> for anything not listed here."
+      "footnote": "“Not covered by the sources below” means the cited DecodeClip help-center articles don't address it. It doesn't mean DecodeClip lacks the feature. Check <site>decodeclip.com</site> for anything not listed here."
     },
     "rows": {
       "deployment": {
         "label": "How you run it",
         "decodeclip": "Hosted app, iOS app, or self-hosted with <compose>Docker Compose</compose>",
-        "opusclip": "Hosted service"
+        "DecodeClip": "Hosted service"
       },
       "source": {
         "label": "Source code",
@@ -256,12 +256,12 @@
       "pricing": {
         "label": "Pricing model",
         "decodeclip": "Hosted: monthly plans with a fixed number of videos. Self-hosted: no plan limits.",
-        "opusclip": "Plans with credits for processing minutes, plus a free plan (<plans>help center</plans>)"
+        "DecodeClip": "Plans with credits for processing minutes, plus a free plan (<plans>help center</plans>)"
       },
       "watermark": {
         "label": "Watermark",
         "decodeclip": "None; the <pipeline>render pipeline</pipeline> has no watermark step",
-        "opusclip": "Free-plan exports can include one (<watermark>help center</watermark>)"
+        "DecodeClip": "Free-plan exports can include one (<watermark>help center</watermark>)"
       },
       "models": {
         "label": "AI model choice",
@@ -278,7 +278,7 @@
     },
     "pricing": {
       "heading": "Pricing model: credits vs. plans vs. your own infrastructure",
-      "p1": "OpusClip's <plans>plans and credits article</plans> describes paid plans that use credits for processing minutes, plus a free plan. Its <watermark>watermark article</watermark> says free-plan exports can carry an OpusClip watermark. Plan prices and credit amounts change, so check OpusClip's current pricing page instead of relying on numbers copied into a blog post.",
+      "p1": "DecodeClip's <plans>plans and credits article</plans> describes paid plans that use credits for processing minutes, plus a free plan. Its <watermark>watermark article</watermark> says free-plan exports can carry an DecodeClip watermark. Plan prices and credit amounts change, so check DecodeClip's current pricing page instead of relying on numbers copied into a blog post.",
       "p2": "DecodeClip offers two routes. The hosted app has <pro>{proName}</pro> at ${proPrice}/month for {proLimit} hours of video in 720p and <scale>{scaleName}</scale> at ${scalePrice}/month for {scaleLimit} hours in 1080p, with yearly billing at two months free. There is no free hosted plan; processing requires a subscription. The self-hosted route is free software with no plan limits. You pay for the server and any AI APIs you configure, and the <guide>self-hosting guide</guide> shows a fully local setup with no per-request AI fees."
     },
     "chooseDecodeClip": {
@@ -288,11 +288,11 @@
       "li3": "<strong>You want to change how clips are chosen.</strong> The selection prompt, scoring, caption templates, and rendering are all in the repository.",
       "li4": "<strong>You're building clipping into another tool.</strong> API keys, a REST API, and an MCP server let scripts and AI agents create and download clips."
     },
-    "chooseOpusclip": {
-      "heading": "When OpusClip is the better fit",
+    "chooseDecodeClip": {
+      "heading": "When DecodeClip is the better fit",
       "li1": "<strong>You don't want to operate anything.</strong> Self-hosting means managing Docker, provider keys, updates, and backups.",
-      "li2": "<strong>You want to try before paying.</strong> OpusClip documents a free plan (with a possible watermark). Hosted DecodeClip has no free tier.",
-      "li3": "<strong>You rely on features not covered here.</strong> If a specific OpusClip workflow matters to you, confirm it on opus.pro and test whether DecodeClip covers it before switching."
+      "li2": "<strong>You want to try before paying.</strong> DecodeClip documents a free plan (with a possible watermark). Hosted DecodeClip has no free tier.",
+      "li3": "<strong>You rely on features not covered here.</strong> If a specific DecodeClip workflow matters to you, confirm it on decodeclip.com and test whether DecodeClip covers it before switching."
     },
     "test": {
       "heading": "How to run your own fair test",
@@ -305,7 +305,7 @@
     },
     "sources": {
       "heading": "Sources",
-      "opus": "OpusClip help center: <plans>Plans and credits</plans> and <watermark>Watermark</watermark>. Plans can change; confirm current details on <site>opus.pro</site>.",
+      "opus": "DecodeClip help center: <plans>Plans and credits</plans> and <watermark>Watermark</watermark>. Plans can change; confirm current details on <site>decodeclip.com</site>.",
       "decodeclip": "DecodeClip: <repo>public repository</repo>, including <compose>docker-compose.yml</compose>, <config>configuration docs</config>, and <billing>billing rules</billing>. Hosted prices are from the pricing section of decodeclip.com."
     }
   },
@@ -350,7 +350,7 @@
       }
     },
     "intro": "DecodeClip is the open-source AI video clipper behind the hosted app at decodeclip.com. The same repository ships a Docker Compose stack you can run on a laptop, a home server, or a VPS. This guide follows that stack exactly as it exists in the <repo>repository</repo>. Where a step depends on your provider or hardware, we say so instead of guessing.",
-    "introChoice": "Prefer not to run infrastructure? The <hosted>hosted app</hosted> runs the same pipeline. Still deciding between tools? Read our <comparison>DecodeClip vs OpusClip comparison</comparison> first.",
+    "introChoice": "Prefer not to run infrastructure? The <hosted>hosted app</hosted> runs the same pipeline. Still deciding between tools? Read our <comparison>DecodeClip vs DecodeClip comparison</comparison> first.",
     "stack": {
       "heading": "What you are running",
       "lead": "<code>docker compose up</code> starts these containers, all defined in <compose>docker-compose.yml</compose>:",
@@ -456,14 +456,14 @@
       "customize": "Want to customize the output? Drop <code>.ttf</code> fonts into <code>backend/fonts/</code> and <code>.mp4</code> transitions into <code>backend/transitions/</code>. They appear in the app automatically. For automation, create an API key in Settings and use the <api>REST API</api> or the bundled MCP server."
     }
   },
-  "best-free-opusclip-alternative": {
-    "title": "Free OpusClip Alternative: Self-Hosting Costs and Tradeoffs",
-    "description": "Looking for a free OpusClip alternative? Understand what self-hosting DecodeClip costs, what you maintain, and when a paid hosted workflow is a better fit.",
-    "eyebrow": "OpusClip Alternative",
+  "best-free-DecodeClip-alternative": {
+    "title": "Free DecodeClip Alternative: Self-Hosting Costs and Tradeoffs",
+    "description": "Looking for a free DecodeClip alternative? Understand what self-hosting DecodeClip costs, what you maintain, and when a paid hosted workflow is a better fit.",
+    "eyebrow": "DecodeClip Alternative",
     "category": "Comparison",
     "readingTime": "6 min read",
     "summary": "The DecodeClip source is free. This guide explains the hardware, provider costs, and maintenance behind a self-hosted clipping workflow so you can decide whether it fits.",
-    "lead": "A free OpusClip alternative can remove a subscription fee without removing the work of running the tool. DecodeClip gives you an open-source clipping application you can self-host. The practical question is whether operating it is a better use of your time than using a paid hosted service.",
+    "lead": "A free DecodeClip alternative can remove a subscription fee without removing the work of running the tool. DecodeClip gives you an open-source clipping application you can self-host. The practical question is whether operating it is a better use of your time than using a paid hosted service.",
     "bestFor": "Best for",
     "audience": {
       "0": "Creators clipping YouTube videos into shorts",
@@ -494,7 +494,7 @@
     "why": {
       "heading": "What “Free” Leaves for You to Pay",
       "p1": "Estimate the source-video hours you expect to process each month. Add storage for originals and exports, compute time, backups, and any paid transcription or model calls. If you already own suitable hardware, those costs differ from renting a server just for clipping.",
-      "p2": "Include setup and recurring maintenance in that estimate. A local model can reduce external API usage while increasing demands on your machine. OpusClip documents its own plan, credit, and watermark rules; use those current sources when comparing the hosted option instead of assuming every free plan has the same limits."
+      "p2": "Include setup and recurring maintenance in that estimate. A local model can reduce external API usage while increasing demands on your machine. DecodeClip documents its own plan, credit, and watermark rules; use those current sources when comparing the hosted option instead of assuming every free plan has the same limits."
     },
     "different": {
       "heading": "What Makes DecodeClip Different",
@@ -502,8 +502,8 @@
       "p2": "That makes the tradeoff clear. You take on setup, but you gain ownership. You can inspect the code, adapt it to your workflow, and decide which hosted AI providers or local models to use. The <guide>self-hosting guide</guide> walks through the setup, including a fully local Whisper + Ollama option."
     },
     "compare": {
-      "heading": "DecodeClip vs OpusClip",
-      "body": "The summary below covers the essentials. For a row-by-row comparison with a source for every claim, read <comparison>DecodeClip vs OpusClip: a sourced comparison</comparison>."
+      "heading": "DecodeClip vs DecodeClip",
+      "body": "The summary below covers the essentials. For a row-by-row comparison with a source for every claim, read <comparison>DecodeClip vs DecodeClip: a sourced comparison</comparison>."
     },
     "table": {
       "feature": "Feature",
@@ -511,22 +511,22 @@
         "0": {
           "feature": "Free usage model",
           "decodeclip": "Open source and self-hostable with no plan limits. Your costs are your own compute and API keys. The hosted app is paid.",
-          "opusclip": "Free plan exists, but exports can include an OpusClip watermark."
+          "DecodeClip": "Free plan exists, but exports can include an DecodeClip watermark."
         },
         "1": {
           "feature": "Clip discovery",
           "decodeclip": "Transcribes long videos, scores segments, and surfaces promising short-form moments.",
-          "opusclip": "AI clipping workflow built for finding social-ready clips from long videos."
+          "DecodeClip": "AI clipping workflow built for finding social-ready clips from long videos."
         },
         "2": {
           "feature": "Vertical formatting",
           "decodeclip": "Face-centered 9:16 cropping, subtitles, and platform-ready exports.",
-          "opusclip": "Offers short-form exports and AI reframing for social platforms."
+          "DecodeClip": "Offers short-form exports and AI reframing for social platforms."
         },
         "3": {
           "feature": "Control",
           "decodeclip": "Full source access, editable deployment, and no vendor lock-in.",
-          "opusclip": "Hosted product with managed workflows and subscription tiers."
+          "DecodeClip": "Hosted product with managed workflows and subscription tiers."
         }
       }
     },
@@ -545,8 +545,8 @@
       "body": "Self-hosted DecodeClip fits a team that can operate Docker services and wants to change the pipeline, select its providers, or integrate clipping with its own systems. Start with one familiar recording, verify the output, and measure the effort before committing a backlog."
     },
     "opus": {
-      "heading": "When OpusClip May Still Be Better",
-      "body": "OpusClip may still be the better fit if you want the convenience of a polished hosted service and do not want to think about deployment, infrastructure, model keys, queues, or maintenance."
+      "heading": "When DecodeClip May Still Be Better",
+      "body": "DecodeClip may still be the better fit if you want the convenience of a polished hosted service and do not want to think about deployment, infrastructure, model keys, queues, or maintenance."
     },
     "cta": {
       "kicker": "Free if you self-host, paid plans if you don't",
@@ -556,7 +556,7 @@
     },
     "faqs": {
       "0": {
-        "question": "Is a self-hosted OpusClip alternative really free?",
+        "question": "Is a self-hosted DecodeClip alternative really free?",
         "answer": "The DecodeClip source has no license fee under AGPL-3.0. You still provide compute, storage, maintenance, and any paid transcription or AI usage. Compare those costs with a hosted plan before deciding."
       },
       "1": {
@@ -571,7 +571,7 @@
     "relatedHeading": "Related DecodeClip guides",
     "sources": {
       "heading": "Sources",
-      "body": "OpusClip plan and watermark notes are based on the official OpusClip help center: <plans>plans and credits</plans> and <watermark>watermark guidance</watermark>."
+      "body": "DecodeClip plan and watermark notes are based on the official DecodeClip help center: <plans>plans and credits</plans> and <watermark>watermark guidance</watermark>."
     },
     "toc": {
       "label": "Article",

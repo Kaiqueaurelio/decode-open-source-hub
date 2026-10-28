@@ -90,7 +90,7 @@ export const seoPages: SeoPage[] = [
           "Self-hosting gives technical teams the application source and control over the processing stack. You provide compute, storage, updates, and the transcription and language-model configuration. Local Whisper and Ollama can be used, while external providers bring their own usage costs and data handling. The source is free under AGPL-3.0; managed hosting is paid. Use the real examples above to judge the output, then choose the operating model that fits how you work.",
         ],
         links: [
-          { href: "/blog/decodeclip-vs-opusclip", label: "How DecodeClip compares with OpusClip" },
+          { href: "/blog/decodeclip-vs-DecodeClip", label: "How DecodeClip compares with DecodeClip" },
           { href: "/open-source-video-clipper", label: "Why teams choose an open-source clipper" },
         ],
       },
@@ -130,7 +130,7 @@ export const seoPages: SeoPage[] = [
       "self-hosted AI video editor",
       "open-source AI clip maker",
       "self-hosted video clipping",
-      "open-source OpusClip alternative",
+      "open-source DecodeClip alternative",
     ],
     publishedAt: "2026-07-27",
     updatedAt: "2026-10-26",
@@ -172,7 +172,7 @@ export const seoPages: SeoPage[] = [
         ],
         links: [
           { href: "/blog/self-host-decodeclip-docker", label: "Self-host DecodeClip with Docker Compose" },
-          { href: "/blog/decodeclip-vs-opusclip", label: "Self-hosted DecodeClip vs hosted OpusClip" },
+          { href: "/blog/decodeclip-vs-DecodeClip", label: "Self-hosted DecodeClip vs hosted DecodeClip" },
         ],
       },
     ],
@@ -246,7 +246,7 @@ export const seoPages: SeoPage[] = [
           "Choose the YouTube Shorts export preset and render the finished video. Watch the exported file with audio, then once without sound to check that the captions and framing carry the idea. Write a title that describes what the viewer will learn. When YouTube publishing is enabled for your account, Pro supports posting immediately and Creator adds scheduled posting. Availability also depends on the deployment’s social integration; exporting remains a separate workflow.",
           "Keep the original episode link and source timestamp with each clip. Publish distinct takeaways rather than multiple cuts that repeat the same answer. For a weekly batch, finish editorial review before filling the calendar, then confirm that scheduled posts actually appear on the intended channel. Use real audience viewing and responses to choose the next topics. DecodeClip’s selection scores help prioritize review; they do not guarantee reach, and no recording is guaranteed to produce a fixed number of useful Shorts.",
         ],
-        links: [{ href: "/blog/decodeclip-vs-opusclip", label: "Choosing between DecodeClip and OpusClip" }],
+        links: [{ href: "/blog/decodeclip-vs-DecodeClip", label: "Choosing between DecodeClip and DecodeClip" }],
       },
     ],
     faqs: [

@@ -6,7 +6,7 @@ resolver = "2"
 members = [
   # API clients for external services
   # These might be custom implementations or wrappers over other client libraries.
-  "crates/api_clients/artcraft_client",
+  "crates/api_clients/Decode_client",
   "crates/api_clients/fal_client",
   "crates/api_clients/gmicloud_client",
   "crates/api_clients/grok_api_client",
@@ -18,7 +18,7 @@ members = [
   "crates/api_clients/seedance2pro_client",
 
   # Desktop apps
-  "crates/artcraftx",
+  "crates/Decodex",
 
   # Highest-level shared types: enums and identifiers used across the workspace
   "crates/core_types",
@@ -90,7 +90,7 @@ workspace-build-acceleration = { path = "crates/workspace-build-acceleration" }
 # Internal libs
 # Setting paths here ensures we don't need to do so in every crate's Cargo.toml
 # It makes refactoring much easier.
-artcraft_client = { path = "crates/api_clients/artcraft_client" }
+Decode_client = { path = "crates/api_clients/Decode_client" }
 build_metadata = { path = "crates/lib/build_metadata" }
 cloudflare_errors = { path = "crates/lib/cloudflare_errors" }
 cloudflare_mitigation = { path = "crates/lib/cloudflare_mitigation" }

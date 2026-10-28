@@ -1,9 +1,9 @@
 LightCraft
-Copyright (c) 2026 ArtCraft Team and the LightCraft contributors.
+Copyright (c) 2026 Decode Analytics Team and the LightCraft contributors.
 Licensed under the MIT License or the Apache License, Version 2.0, at your option
 (LICENSE-MIT, LICENSE-APACHE).
 
-The ArtCraft name, wordmark and logos in docs/brand/ are trademarks of the ArtCraft Team. They are
+The Decode name, wordmark and logos in docs/brand/ are trademarks of the Decode Analytics Team. They are
 not open source and are not covered by the license above; their terms are in
 docs/brand/LICENSE-brand.txt.
 
@@ -25,7 +25,7 @@ functions it ships (CIE, CC-BY-4.0). The matrices were fitted by the LightCraft 
 (2026) with tools/spectral_camera_table.py. See assets/ATTRIBUTION.md.
 
 crates/inpaint (lightcraft-inpaint) ports the inpainting (PatchMatch completion) and Poisson membrane
-fill code of PhotoCraft (https://github.com/storytold/photocraft, crates/algo/src/inpaint.rs and
+fill code of PhotoCraft (https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft, crates/algo/src/inpaint.rs and
 poisson.rs), Copyright the PhotoCraft contributors, licensed under the MIT License or the Apache
 License 2.0, at your option. The port was modified by the LightCraft contributors (2026); each
 ported file says so.
@@ -53,7 +53,7 @@ no darktable, RawSpeed, LibRaw or other GPL decoder/runtime code is included.
 
 Builds made with craft-fonts (the optional CRAFT_FONTS_DIR build input; all official releases)
 also embed the default fonts listed in
-https://github.com/storytold/craft-fonts/blob/b076417b5880bd4154bd22f00695b1d28c6bea83/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-fonts/blob/b076417b5880bd4154bd22f00695b1d28c6bea83/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
 Shippori Mincho, Noto Sans CJK SC, Noto Sans Arabic, Noto Sans Thai, Noto Sans Georgian,
 NanumGothic, Noto Sans Symbols, Noto Sans Symbols 2, Noto Sans Hebrew and
 Noto Sans Devanagari), under the SIL Open Font License 1.1. The opt-in LXGW WenKai Lite face
@@ -75,7 +75,7 @@ and Ubuntu Light, and Noto Emoji Regular when egui's `monochrome_emoji_fonts` fe
 LightCraft workspace enables both `default_fonts` and `monochrome_emoji_fonts` on egui 0.37). The
 LightCraft binaries embed these faces unmodified, registered through egui's default font definitions.
 Source for all of them (the same pin as the icon fonts below):
-https://github.com/storytold/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
 
 Hack Regular (Hack-Regular.ttf) is Copyright (c) 2018 Source Foundry Authors and
 Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. It is licensed under the MIT License, and
@@ -322,7 +322,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 The UI's egui-icons.ttf subset and emoji-icon-font.ttf fallback are provided by epaint_default_fonts
 and registered through egui's default font definitions. They derive from emoji-icon-font by
 John Slegers, under the MIT License. The subset and full face share the following upstream notice.
-Source: https://github.com/storytold/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui/tree/6d518fc799681571963842f95b55a6b68431b15a/crates/epaint_default_fonts/fonts
 Original: https://github.com/jslegers/emoji-icon-font
 The following text is reproduced verbatim from emoji-icon-font-mit-license.txt:
 

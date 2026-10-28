@@ -1,11 +1,11 @@
 [package]
-name = "artcraft_router"
+name = "Decode_router"
 edition = "2024"
 version = "0.0.1"
 publish = false
 
 [lib]
-name = "artcraft_router"
+name = "Decode_router"
 path = "src/lib.rs"
 
 [dependencies]
@@ -13,9 +13,9 @@ midjourney_client.workspace = true
 browser_emulation.workspace = true
 
 # Internal
-artcraft_api_defs.workspace = true
+Decode_api_defs.workspace = true
 enums.workspace = true
-artcraft_client.workspace = true
+Decode_client.workspace = true
 fal_client.workspace = true
 gmicloud_client.workspace = true
 grok_api_client.workspace = true

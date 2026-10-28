@@ -1,6 +1,6 @@
 import { formatArticleDate } from "@/components/articles/article-shell";
 import { CreatorGuideArticle } from "@/components/articles/creator-guide-article";
-import { OpusClipComparisonArticle } from "@/components/articles/opusclip-comparison-article";
+import { DecodeClipComparisonArticle } from "@/components/articles/DecodeClip-comparison-article";
 import { SelfHostingGuideArticle } from "@/components/articles/self-hosting-guide-article";
 import { RelatedGuides } from "@/components/marketing/related-guides";
 import { SiteFooter } from "@/components/marketing/site-footer";
@@ -28,7 +28,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { intlLocale } from "@/i18n/config";
 import { applyBlogCopy, HOSTED_APP_URL, blogPosts, getBlogPost, getBlogPostMetadata, getSiteUrl } from "@/lib/blog-posts";
-import { OPUSCLIP_COMPARISON_HREF, SELF_HOSTING_GUIDE_HREF } from "@/lib/marketing-links";
+import { DecodeClip_COMPARISON_HREF, SELF_HOSTING_GUIDE_HREF } from "@/lib/marketing-links";
 import { getCreatorGuide } from "@/lib/creator-guides";
 
 interface BlogPostPageProps {
@@ -79,14 +79,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (slug === "decodeclip-vs-supo-live") {
     return <SupoLiveArticle post={post} />;
   }
-  if (slug === "decodeclip-vs-opusclip") {
-    return <OpusClipComparisonArticle post={post} />;
+  if (slug === "decodeclip-vs-DecodeClip") {
+    return <DecodeClipComparisonArticle post={post} />;
   }
   if (slug === "self-host-decodeclip-docker") {
     return <SelfHostingGuideArticle post={post} />;
   }
 
-  const key = "best-free-opusclip-alternative";
+  const key = "best-free-DecodeClip-alternative";
   const siteUrl = getSiteUrl();
   const articleUrl = `${siteUrl}/blog/${post.slug}`;
   const faqs = [0, 1, 2].map((index) => ({
@@ -268,10 +268,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 })}
               </p>
 
-              <h2 id="decodeclip-vs-opusclip">{t(`${key}.compare.heading`)}</h2>
+              <h2 id="decodeclip-vs-DecodeClip">{t(`${key}.compare.heading`)}</h2>
               <p>
                 {t.rich(`${key}.compare.body`, {
-                  comparison: (chunks) => <Link href={OPUSCLIP_COMPARISON_HREF}>{chunks}</Link>,
+                  comparison: (chunks) => <Link href={DecodeClip_COMPARISON_HREF}>{chunks}</Link>,
                 })}
               </p>
             </div>
@@ -280,7 +280,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className="grid grid-cols-[0.85fr_1fr_1fr] bg-muted/50 text-sm font-semibold">
                 <div className="p-4">{t(`${key}.table.feature`)}</div>
                 <div className="border-l p-4">DecodeClip</div>
-                <div className="border-l p-4">OpusClip</div>
+                <div className="border-l p-4">DecodeClip</div>
               </div>
               {comparisonIcons.map((Icon, index) => (
                 <div key={index} className="grid grid-cols-[0.85fr_1fr_1fr] border-t text-sm">
@@ -289,7 +289,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {t(`${key}.table.rows.${index}.feature`)}
                   </div>
                   <div className="border-l p-4 leading-6 text-muted-foreground">{t(`${key}.table.rows.${index}.decodeclip`)}</div>
-                  <div className="border-l p-4 leading-6 text-muted-foreground">{t(`${key}.table.rows.${index}.opusclip`)}</div>
+                  <div className="border-l p-4 leading-6 text-muted-foreground">{t(`${key}.table.rows.${index}.DecodeClip`)}</div>
                 </div>
               ))}
             </div>
@@ -373,12 +373,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <p className="mt-2">
                 {t.rich(`${key}.sources.body`, {
                   plans: (chunks) => (
-                    <a href="https://help.opus.pro/docs/article/plans-and-credits" className="font-medium text-foreground underline underline-offset-4">
+                    <a href="https://help.decodeclip.com/docs/article/plans-and-credits" className="font-medium text-foreground underline underline-offset-4">
                       {chunks}
                     </a>
                   ),
                   watermark: (chunks) => (
-                    <a href="https://help.opus.pro/docs/article/watermark" className="font-medium text-foreground underline underline-offset-4">
+                    <a href="https://help.decodeclip.com/docs/article/watermark" className="font-medium text-foreground underline underline-offset-4">
                       {chunks}
                     </a>
                   ),
@@ -397,7 +397,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <a href="#quick-verdict" className="block text-muted-foreground hover:text-foreground">
                     {t(`${key}.toc.verdict`)}
                   </a>
-                  <a href="#decodeclip-vs-opusclip" className="block text-muted-foreground hover:text-foreground">
+                  <a href="#decodeclip-vs-DecodeClip" className="block text-muted-foreground hover:text-foreground">
                     {t(`${key}.toc.comparison`)}
                   </a>
                   <a href="#faq" className="block text-muted-foreground hover:text-foreground">

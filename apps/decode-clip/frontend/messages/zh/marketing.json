@@ -77,16 +77,16 @@
       "title": "用 Docker Compose 自托管 DecodeClip",
       "description": "环境要求、环境变量、首次启动、完全本地的安装方式，以及上线前检查。"
     },
-    "blog_decodeclip_vs_opusclip": {
-      "label": "DecodeClip vs OpusClip",
+    "blog_decodeclip_vs_DecodeClip": {
+      "label": "DecodeClip vs DecodeClip",
       "eyebrow": "对比",
-      "title": "DecodeClip vs OpusClip：有出处的对比",
+      "title": "DecodeClip vs DecodeClip：有出处的对比",
       "description": "定价方式、部署、水印和工作流，每条说法都链到出处。"
     },
-    "blog_best_free_opusclip_alternative": {
-      "label": "自托管的 OpusClip 替代",
+    "blog_best_free_DecodeClip_alternative": {
+      "label": "自托管的 DecodeClip 替代",
       "eyebrow": "对比",
-      "title": "最好的免费自托管 OpusClip 替代方案",
+      "title": "最好的免费自托管 DecodeClip 替代方案",
       "description": "什么时候自托管的开源剪辑工具比按额度计费的工具更合适。"
     },
     "blog_decodeclip_vs_supo_live": {

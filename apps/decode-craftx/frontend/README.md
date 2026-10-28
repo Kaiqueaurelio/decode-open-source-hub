@@ -33,22 +33,22 @@ From the **repository root**, start the frontend and Tauri desktop app together:
 ```
 
 The launcher finds and binds a free port starting at 5183, then gives Tauri the
-same URL. Set `ARTCRAFTX_DEV_PORT` to change the starting port. Vite handles
+same URL. Set `DecodeX_DEV_PORT` to change the starting port. Vite handles
 frontend live reload; Tauri watches Rust workspace dependencies and rebuilds and
 restarts the app on edits. Ctrl-C stops both. See the repository README for details.
 
 For just the frontend, directly from this directory:
 
 ```bash
-npx nx dev artcraft
+npx nx dev Decode
 ```
 
 ## Building
 
 ```bash
-npx nx build artcraft-website
-npx nx build artcraft-webapp
-npx nx build artcraft
+npx nx build Decode-website
+npx nx build Decode-webapp
+npx nx build Decode
 npx nx build editor2d
 ```
 

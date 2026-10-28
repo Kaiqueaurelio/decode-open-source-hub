@@ -109,7 +109,7 @@
         "heading": "Para quem isto foi feito",
         "p1": "O fluxo serve a podcasts, educadores, fundadores, agências e equipes de vídeo que já produzem gravações longas e precisam de um jeito repetível de publicar mais clipes curtos.",
         "p2": "É especialmente útil quando a propriedade importa: quem auto-hospeda mantém o controle do aplicativo e pode modificar o código em vez de depender só de uma plataforma de edição fechada.",
-        "link1": "Como o DecodeClip se compara com o OpusClip",
+        "link1": "Como o DecodeClip se compara com o DecodeClip",
         "link2": "Por que equipes escolhem um cortador de código aberto"
       }
     },
@@ -187,7 +187,7 @@
         "p1": "O caminho mais rápido é clonar o repositório, copiar o modelo de ambiente, adicionar as credenciais de provedor necessárias e subir a pilha com Docker Compose. Depois, quem desenvolve pode mudar a lógica de pontuação, as predefinições de legenda, a interface ou o modelo de implantação conforme o fluxo evolui.",
         "p2": "Quem prefere não operar infraestrutura pode usar o aplicativo hospedado do DecodeClip e manter o repositório de código aberto como caminho de migração.",
         "link1": "Auto-hospede o DecodeClip com Docker Compose",
-        "link2": "DecodeClip auto-hospedado versus OpusClip hospedado"
+        "link2": "DecodeClip auto-hospedado versus DecodeClip hospedado"
       }
     },
     "faqs": {
@@ -259,7 +259,7 @@
         "heading": "Monte um fluxo repetível para reaproveitar conteúdo",
         "p1": "Trate cada vídeo longo como uma biblioteca de origem, não como um envio único. Processe a gravação, agrupe os clipes por tema e ligue cada Short de volta ao vídeo longo ou a uma página de produto relevante.",
         "p2": "Acompanhe quais temas geram tempo de exibição e engajamento e use esses resultados para orientar as próximas gravações. As notas do DecodeClip ajudam a priorizar candidatos; os dados de publicação devem decidir o que o público realmente valoriza.",
-        "link1": "Escolher entre DecodeClip e OpusClip"
+        "link1": "Escolher entre DecodeClip e DecodeClip"
       }
     },
     "faqs": {

@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 import { ArticleShell, CodeBlock, type ArticleFaq } from "@/components/articles/article-shell";
 import type { BlogPost } from "@/lib/blog-posts";
-import { OPUSCLIP_COMPARISON_HREF } from "@/lib/marketing-links";
+import { DecodeClip_COMPARISON_HREF } from "@/lib/marketing-links";
 import { GITHUB_URL } from "@/lib/site";
 
 const docs = (path: string) => `${GITHUB_URL}/blob/main/${path}`;
@@ -29,7 +29,7 @@ export async function SelfHostingGuideArticle({ post }: { post: BlogPost }) {
       <p>
         {t.rich(`${slug}.introChoice`, {
           hosted: (chunks) => <Link href="/sign-up">{chunks}</Link>,
-          comparison: (chunks) => <Link href={OPUSCLIP_COMPARISON_HREF}>{chunks}</Link>,
+          comparison: (chunks) => <Link href={DecodeClip_COMPARISON_HREF}>{chunks}</Link>,
         })}
       </p>
 

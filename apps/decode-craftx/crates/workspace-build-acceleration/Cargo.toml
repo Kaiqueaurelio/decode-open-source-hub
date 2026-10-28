@@ -13,7 +13,7 @@ publish = false
 # The parts of the file between the BEGIN HAKARI SECTION and END HAKARI SECTION comments
 # are managed by hakari.
 #
-# NB(artcraftx): Hakari is currently disabled in this pared-down workspace.
+# NB(Decodex): Hakari is currently disabled in this pared-down workspace.
 # Re-run `cargo hakari generate` if/when we want the build acceleration back.
 
 ### BEGIN HAKARI SECTION

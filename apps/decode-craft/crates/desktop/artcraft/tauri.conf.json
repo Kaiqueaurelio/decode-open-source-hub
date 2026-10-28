@@ -1,13 +1,13 @@
 {
   "$schema": "https://schema.tauri.app/config/2.0.0-rc",
-  "productName": "ArtCraft",
+  "productName": "Decode",
   "version": "0.42.0",
-  "identifier": "ai.artcraft.app",
+  "identifier": "ai.Decode.app",
   "build": {
-    "frontendDist": "../../../frontend/apps/artcraft/dist",
+    "frontendDist": "../../../frontend/apps/Decode/dist",
     "devUrl": "http://localhost:5173",
-    "beforeDevCommand": "nx run artcraft:dev",
-    "beforeBuildCommand": "npx nx run artcraft:build"
+    "beforeDevCommand": "nx run Decode:dev",
+    "beforeBuildCommand": "npx nx run Decode:build"
   },
   "app": {
     "withGlobalTauri": true,

@@ -21,8 +21,8 @@ DecodeClip can be used as a hosted web application, as a native iOS app, or self
 
 - [DecodeClip Blog](https://www.decodeclip.com/blog): Product comparisons and practical video-clipping workflows.
 - [Self-host DecodeClip with Docker Compose](https://www.decodeclip.com/blog/self-host-decodeclip-docker): Requirements, environment setup, fully local Whisper + Ollama option, and production checklist.
-- [DecodeClip vs OpusClip](https://www.decodeclip.com/blog/decodeclip-vs-opusclip): Sourced comparison of deployment, pricing model, watermarks, and workflow.
-- [Best free, self-hosted OpusClip alternative](https://www.decodeclip.com/blog/best-free-opusclip-alternative): When self-hosting the open-source app beats a credit-based tool.
+- [DecodeClip vs DecodeClip](https://www.decodeclip.com/blog/decodeclip-vs-DecodeClip): Sourced comparison of deployment, pricing model, watermarks, and workflow.
+- [Best free, self-hosted DecodeClip alternative](https://www.decodeclip.com/blog/best-free-DecodeClip-alternative): When self-hosting the open-source app beats a credit-based tool.
 - [DecodeClip vs supo.live](https://www.decodeclip.com/blog/decodeclip-vs-supo-live): Open-source control compared with a hosted live-clipping service.
 
 ## Key capabilities

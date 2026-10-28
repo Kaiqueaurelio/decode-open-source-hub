@@ -1,5 +1,5 @@
 [package]
-name = "artcraft_api_defs"
+name = "Decode_api_defs"
 edition = "2024"
 version = "0.0.1"
 authors = [
@@ -9,7 +9,7 @@ authors = [
 publish = false
 
 [lib]
-name = "artcraft_api_defs"
+name = "Decode_api_defs"
 path = "src/lib.rs"
 
 [dependencies]

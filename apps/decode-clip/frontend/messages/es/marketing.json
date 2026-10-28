@@ -77,16 +77,16 @@
       "title": "Autoaloja DecodeClip con Docker Compose",
       "description": "Requisitos, variables de entorno, primer arranque, una instalación local completa y revisiones de producción."
     },
-    "blog_decodeclip_vs_opusclip": {
-      "label": "DecodeClip vs OpusClip",
+    "blog_decodeclip_vs_DecodeClip": {
+      "label": "DecodeClip vs DecodeClip",
       "eyebrow": "Comparación",
-      "title": "DecodeClip vs OpusClip: una comparación con fuentes",
+      "title": "DecodeClip vs DecodeClip: una comparación con fuentes",
       "description": "Modelo de precios, despliegue, marcas de agua y flujo de trabajo, con cada afirmación enlazada a una fuente."
     },
-    "blog_best_free_opusclip_alternative": {
-      "label": "Alternativa autoalojada a OpusClip",
+    "blog_best_free_DecodeClip_alternative": {
+      "label": "Alternativa autoalojada a DecodeClip",
       "eyebrow": "Comparación",
-      "title": "La mejor alternativa gratis y autoalojada a OpusClip",
+      "title": "La mejor alternativa gratis y autoalojada a DecodeClip",
       "description": "Cuándo un recortador de código abierto y autoalojado conviene más que una herramienta basada en créditos."
     },
     "blog_decodeclip_vs_supo_live": {

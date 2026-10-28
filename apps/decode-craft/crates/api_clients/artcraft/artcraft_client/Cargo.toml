@@ -1,5 +1,5 @@
 [package]
-name = "artcraft_client"
+name = "Decode_client"
 edition = "2021"
 version = "0.0.1"
 authors = [
@@ -12,14 +12,14 @@ publish = false
 # unused_imports = "forbid"
 
 [lib]
-name = "artcraft_client"
+name = "Decode_client"
 path = "src/lib.rs"
 
 [dependencies]
 
 # Internal
-artcraft_api_defs.workspace = true
-artcraft_client_identity.workspace = true
+Decode_api_defs.workspace = true
+Decode_client_identity.workspace = true
 cloudflare_errors.workspace = true
 enums.workspace = true
 errors.workspace = true

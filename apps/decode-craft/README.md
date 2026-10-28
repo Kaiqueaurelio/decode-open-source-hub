@@ -2,7 +2,7 @@
 
 > **DecodeCraft — mantido e integrado pela [Decode Analytics](https://www.instagram.com/decode.analytics/).**  
 > Sede: Presidente Prudente - SP, Brasil | [Hub Oficial](https://kaiqueaurelio.github.io/decode-open-source-hub/)  
-> Esta edição faz parte do ecossistema Decode Open Source Hub, originada do projeto de código aberto ArtCraft.  
+> Esta edição faz parte do ecossistema Decode Open Source Hub, originada do projeto de código aberto Decode.  
 > Termos de licença e autoria preservados conforme [LICENSE-APACHE](LICENSE-APACHE), [LICENSE-MIT](LICENSE-MIT), [NOTICE](NOTICE) e [ATTRIBUTION.md](NOTICE).
 
 <p align="center">

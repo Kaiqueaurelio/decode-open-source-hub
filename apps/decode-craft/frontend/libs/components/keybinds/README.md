@@ -1,6 +1,6 @@
 # @storyteller/keybinds
 
-Unified, customizable keyboard shortcuts for Artcraft. A single registry of
+Unified, customizable keyboard shortcuts for Decode. A single registry of
 remappable actions, switchable **presets** (Gamer / Blender-like), per-user
 overrides with conflict detection, and persistence — plus the UI primitives
 (`<Kbd>`, key-capture input) used by the Settings pane and the cheatsheet.

@@ -3,10 +3,10 @@ resolver = "2"
 
 # Desktop application and its local build/test dependencies.
 members = [
-  "artcraft-native", # Pure Rust (egui) desktop app; no Tauri or webview
-  "crates/api_clients/artcraft/artcraft_api_defs",
-  "crates/api_clients/artcraft/artcraft_client",
-  "crates/api_clients/artcraft/artcraft_router",
+  "Decode-native", # Pure Rust (egui) desktop app; no Tauri or webview
+  "crates/api_clients/Decode/Decode_api_defs",
+  "crates/api_clients/Decode/Decode_client",
+  "crates/api_clients/Decode/Decode_router",
   "crates/api_clients/fal_client",
   "crates/api_clients/gmicloud_client",
   "crates/api_clients/grok_api_client",
@@ -16,8 +16,8 @@ members = [
   "crates/api_clients/openai_sora_client",
   "crates/api_clients/worldlabs_api_client",
   "crates/api_clients/worldlabs_consumer_client",
-  "crates/desktop/artcraft",
-  "crates/lib/artcraft_client_identity",
+  "crates/desktop/Decode",
+  "crates/lib/Decode_client_identity",
   "crates/lib/browser_emulation",
   "crates/lib/build_metadata",
   "crates/lib/caching/memory_store",
@@ -43,16 +43,16 @@ members = [
   "crates/testing/test_utils",
   "crates/vendor/tauri-plugin-http",
 ]
-default-members = ["crates/desktop/artcraft"]
+default-members = ["crates/desktop/Decode"]
 
 [workspace.package]
 publish = false
 
 [workspace.dependencies]
-artcraft_api_defs = { path = "crates/api_clients/artcraft/artcraft_api_defs" }
-artcraft_client = { path = "crates/api_clients/artcraft/artcraft_client" }
-artcraft_client_identity = { path = "crates/lib/artcraft_client_identity" }
-artcraft_router = { path = "crates/api_clients/artcraft/artcraft_router" }
+Decode_api_defs = { path = "crates/api_clients/Decode/Decode_api_defs" }
+Decode_client = { path = "crates/api_clients/Decode/Decode_client" }
+Decode_client_identity = { path = "crates/lib/Decode_client_identity" }
+Decode_router = { path = "crates/api_clients/Decode/Decode_router" }
 browser_emulation = { path = "crates/lib/browser_emulation" }
 cookie_store_wrapper = { path = "crates/lib/cookie_store_wrapper" }
 build_metadata = { path = "crates/lib/build_metadata" }

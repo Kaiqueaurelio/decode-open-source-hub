@@ -16,7 +16,7 @@ path = "src/lib.rs"
 workspace-build-acceleration.workspace = true
 
 # Internal
-artcraft_client.workspace = true
+Decode_client.workspace = true
 file_hashing.workspace = true
 browser_emulation.workspace = true
 fal_client.workspace = true

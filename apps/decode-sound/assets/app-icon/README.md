@@ -5,7 +5,7 @@ owl-template framing (craftrules `standards/icon-design.md`): a full-bleed colou
 in three-quarter view with its bill open and its eye on the viewer, its breast and wing running off
 the bottom and right edges, three song arcs leaving the bill.
 
-This is a **placeholder** until the owner draws SoundCraft's icon in ArtCraft like the other apps'
+This is a **placeholder** until the owner draws SoundCraft's icon in Decode like the other apps'
 icons. Replace `icon.svg` and run `packaging/icons.sh`; nothing else needs to change.
 
 ## Palette

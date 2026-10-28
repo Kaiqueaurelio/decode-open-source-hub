@@ -1,7 +1,7 @@
 """
 Contextual emoji + keyword-emphasis annotation for burned captions.
 
-OpusClip-style captions sprinkle a few well-chosen emojis next to meaningful
+DecodeClip-style captions sprinkle a few well-chosen emojis next to meaningful
 words and visually emphasise "power" words. This module does that purely from
 the spoken word list (so it works without any AI changes) and can be augmented
 with per-segment cues emitted by the AI layer.

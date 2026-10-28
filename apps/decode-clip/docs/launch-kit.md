@@ -18,7 +18,7 @@ activated users (people who export a clip), not just visits.
 | Home | `https://www.decodeclip.com/` | Product Hunt, general announcements |
 | Demo | `https://www.decodeclip.com/demo` | Social posts: real output, with timestamps back to the source |
 | Self-hosting guide | `https://www.decodeclip.com/blog/self-host-decodeclip-docker` | r/selfhosted, developer communities |
-| DecodeClip vs OpusClip | `https://www.decodeclip.com/blog/decodeclip-vs-opusclip` | "OpusClip alternative" threads and questions |
+| DecodeClip vs DecodeClip | `https://www.decodeclip.com/blog/decodeclip-vs-DecodeClip` | "DecodeClip alternative" threads and questions |
 | Open-source clipper | `https://www.decodeclip.com/open-source-video-clipper` | Open-source communities |
 | GitHub | `https://github.com/FujiwaraChoki/decodeclip` | Hacker News, developer audiences |
 
@@ -55,9 +55,9 @@ Use these claims freely. Each one is backed by the code or the site:
 **Don't say:**
 
 - "Free" without qualification. Hosted DecodeClip has **no free plan**. Say "free to self-host."
-- Any speed, accuracy, or quality number ("10x faster", "95% accurate", "better clips than OpusClip"). We haven't run a benchmark that supports one.
+- Any speed, accuracy, or quality number ("10x faster", "95% accurate", "better clips than DecodeClip"). We haven't run a benchmark that supports one.
 - That virality scores predict views. They rank candidates for review.
-- OpusClip prices or credit amounts. They change; link to the [comparison](https://www.decodeclip.com/blog/decodeclip-vs-opusclip) instead.
+- DecodeClip prices or credit amounts. They change; link to the [comparison](https://www.decodeclip.com/blog/decodeclip-vs-DecodeClip) instead.
 - "Fully offline." Downloading YouTube links needs internet access, and optional B-roll uses Pexels.
 
 ## Campaign links
@@ -88,7 +88,7 @@ X thread       https://www.decodeclip.com/demo?utm_source=x&utm_medium=social&ut
 LinkedIn       https://www.decodeclip.com/demo?utm_source=linkedin&utm_medium=social&utm_campaign=launch_2026_10
 Newsletter     https://www.decodeclip.com/?utm_source=newsletter&utm_medium=email&utm_campaign=launch_2026_10
 YouTube desc.  https://www.decodeclip.com/demo?utm_source=youtube&utm_medium=video&utm_campaign=launch_2026_10
-OpusClip Q&A   https://www.decodeclip.com/blog/decodeclip-vs-opusclip?utm_source=reddit&utm_medium=community&utm_campaign=launch_2026_10&utm_content=opusclip_thread
+DecodeClip Q&A   https://www.decodeclip.com/blog/decodeclip-vs-DecodeClip?utm_source=reddit&utm_medium=community&utm_campaign=launch_2026_10&utm_content=DecodeClip_thread
 ```
 
 Hacker News: link the GitHub repo or `https://www.decodeclip.com/` **without** tags.
@@ -130,7 +130,7 @@ posting, and reply to comments for the first few hours.
 
 > **DecodeClip: self-hosted AI video clipper (long videos → vertical clips), Docker Compose, works with Whisper + Ollama**
 >
-> I build DecodeClip, an AGPL-3.0 alternative to tools like OpusClip. It turns
+> I build DecodeClip, an AGPL-3.0 alternative to tools like DecodeClip. It turns
 > podcasts, streams, and talks into captioned 9:16 clips.
 >
 > - `docker compose up -d --build`: frontend, API, worker, Postgres, Redis
@@ -148,7 +148,7 @@ posting, and reply to comments for the first few hours.
 2. Here's real output from a long-form interview, with links back to each source timestamp: [demo link]
 3. Bring your own AI: OpenAI, Google, Anthropic, OpenRouter, or fully local Whisper + Ollama.
 4. No watermark. No plan limits when self-hosted. AGPL-3.0: [GitHub link]
-5. Comparing tools? Our DecodeClip vs OpusClip comparison links a source for every claim: [comparison link]
+5. Comparing tools? Our DecodeClip vs DecodeClip comparison links a source for every claim: [comparison link]
 
 Attach the demo video (own footage) to tweet 1, not the third-party demo clips.
 
@@ -196,7 +196,7 @@ which hardware or plan produced it.
 - [ ] Run the `user_acquisition` migration in production (see `DEPLOY_NOTES.md` pattern: `npx prisma migrate deploy` against the production DB), then deploy.
 - [ ] Open a tagged link in a private window, sign up, export a clip, and confirm `signup_completed`, `clip_exported`, and `first_clip_exported` appear in DataFast with UTM metadata.
 - [ ] Confirm the same test user has a `user_acquisition` row with `first_clip_exported_at` set (query below), then delete the test account.
-- [ ] Re-check the two OpusClip help-center pages cited in the comparison still say what we quote.
+- [ ] Re-check the two DecodeClip help-center pages cited in the comparison still say what we quote.
 - [ ] Submit the updated sitemap in Google Search Console and request indexing for `/demo`, the self-hosting guide, and the comparison.
 - [ ] Record and caption the demo video; export one landscape and one vertical cut.
 

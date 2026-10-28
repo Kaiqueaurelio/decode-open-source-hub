@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h3 align="center">Fuck OpusClip.</h3>
+<h3 align="center">Liberte seus Vídeos com IA.</h3>
 
 <p align="center">
   ... because good video clips shouldn't come with ugly watermarks or platform lock-in.
@@ -44,7 +44,7 @@ DecodeClip is an open-source, AI-powered video clipping tool. Give it a long vid
 
 ## Why DecodeClip Exists
 
-OpusClip is genuinely good at what it does — AI clip selection, accurate captions, virality scoring. But your usage is metered by plan, some exports carry platform branding, and your content and workflows live on their servers under their terms.
+DecodeClip is genuinely good at what it does — AI clip selection, accurate captions, virality scoring. But your usage is metered by plan, some exports carry platform branding, and your content and workflows live on their servers under their terms.
 
 DecodeClip gives you the same core pipeline without the leash:
 

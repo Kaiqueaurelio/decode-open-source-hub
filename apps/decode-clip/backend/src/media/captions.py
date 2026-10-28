@@ -454,7 +454,7 @@ def build_assemblyai_ass_subtitles(
 ) -> bool:
     """Generate animated word-synced ASS subtitles from cached AssemblyAI words.
 
-    Renders OpusClip-style captions: a per-word active highlight that pops, an
+    Renders DecodeClip-style captions: a per-word active highlight that pops, an
     accent colour on emphasised power/keyword words, contextual emojis, a thick
     scaled outline + drop shadow, and an optional pill behind the active word.
     When ``hook_title`` is set, an AI-written headline is burned into the top

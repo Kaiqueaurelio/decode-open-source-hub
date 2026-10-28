@@ -19,7 +19,7 @@ export interface MarketingLink {
 }
 
 export const SELF_HOSTING_GUIDE_HREF = "/blog/self-host-decodeclip-docker";
-export const OPUSCLIP_COMPARISON_HREF = "/blog/decodeclip-vs-opusclip";
+export const DecodeClip_COMPARISON_HREF = "/blog/decodeclip-vs-DecodeClip";
 
 export const marketingLinks: MarketingLink[] = [
   {
@@ -56,7 +56,7 @@ export const marketingLinks: MarketingLink[] = [
     title: "Open-source video clipper you can control",
     label: "Open-source clipper",
     description: "What self-hosting changes about control, model providers, and infrastructure.",
-    related: ["/blog/open-source-video-clippers", SELF_HOSTING_GUIDE_HREF, OPUSCLIP_COMPARISON_HREF],
+    related: ["/blog/open-source-video-clippers", SELF_HOSTING_GUIDE_HREF, DecodeClip_COMPARISON_HREF],
   },
   {
     href: SELF_HOSTING_GUIDE_HREF,
@@ -65,25 +65,25 @@ export const marketingLinks: MarketingLink[] = [
     title: "Self-host DecodeClip with Docker Compose",
     label: "Self-hosting guide",
     description: "Requirements, environment variables, first boot, a fully local setup, and production checks.",
-    related: ["/open-source-video-clipper", OPUSCLIP_COMPARISON_HREF, "/youtube-shorts-clipper"],
+    related: ["/open-source-video-clipper", DecodeClip_COMPARISON_HREF, "/youtube-shorts-clipper"],
   },
   {
-    href: OPUSCLIP_COMPARISON_HREF,
+    href: DecodeClip_COMPARISON_HREF,
     group: "comparison",
     eyebrow: "Comparison",
-    title: "DecodeClip vs OpusClip: a sourced comparison",
-    label: "DecodeClip vs OpusClip",
+    title: "DecodeClip vs DecodeClip: a sourced comparison",
+    label: "DecodeClip vs DecodeClip",
     description: "Pricing model, deployment, watermarks, and workflow, with every claim linked to a source.",
-    related: [SELF_HOSTING_GUIDE_HREF, "/blog/best-free-opusclip-alternative", "/ai-video-clipper"],
+    related: [SELF_HOSTING_GUIDE_HREF, "/blog/best-free-DecodeClip-alternative", "/ai-video-clipper"],
   },
   {
-    href: "/blog/best-free-opusclip-alternative",
+    href: "/blog/best-free-DecodeClip-alternative",
     group: "comparison",
     eyebrow: "Comparison",
-    title: "Free OpusClip alternative: costs and tradeoffs",
-    label: "Self-hosted OpusClip alternative",
+    title: "Free DecodeClip alternative: costs and tradeoffs",
+    label: "Self-hosted DecodeClip alternative",
     description: "Understand the compute, provider costs, and maintenance behind a self-hosted workflow.",
-    related: [OPUSCLIP_COMPARISON_HREF, SELF_HOSTING_GUIDE_HREF, "/blog/decodeclip-vs-supo-live"],
+    related: [DecodeClip_COMPARISON_HREF, SELF_HOSTING_GUIDE_HREF, "/blog/decodeclip-vs-supo-live"],
   },
   {
     href: "/blog/decodeclip-vs-supo-live",
@@ -92,7 +92,7 @@ export const marketingLinks: MarketingLink[] = [
     title: "DecodeClip vs supo.live: open-source control",
     label: "DecodeClip vs supo.live",
     description: "Compare self-hosting, AI clipping, and editing workflows before choosing a video tool.",
-    related: ["/open-source-video-clipper", SELF_HOSTING_GUIDE_HREF, OPUSCLIP_COMPARISON_HREF],
+    related: ["/open-source-video-clipper", SELF_HOSTING_GUIDE_HREF, DecodeClip_COMPARISON_HREF],
   },
   {
     href: "/blog/podcast-to-shorts", language: "en", group: "guide", eyebrow: "Podcast clips",
@@ -134,7 +134,7 @@ export const marketingLinks: MarketingLink[] = [
     href: "/blog/open-source-video-clippers", language: "en", group: "comparison", eyebrow: "Open-source comparison",
     title: "Compare DecodeClip, Clips AI, and Auto-Editor", label: "Open-source video clippers",
     description: "Choose an app, Python library, or command-line tool for the editing job you need.",
-    related: ["/open-source-video-clipper", SELF_HOSTING_GUIDE_HREF, OPUSCLIP_COMPARISON_HREF],
+    related: ["/open-source-video-clipper", SELF_HOSTING_GUIDE_HREF, DecodeClip_COMPARISON_HREF],
   },
 ];
 

@@ -109,7 +109,7 @@
         "heading": "Para quién está hecho",
         "p1": "El flujo encaja con pódcasts, docentes, fundadores, agencias y equipos de video que ya producen grabaciones largas y necesitan una forma repetible de publicar más clips cortos.",
         "p2": "Es especialmente útil cuando importa ser dueño: quien autoaloja conserva el control de la aplicación y puede modificar el código en lugar de depender por completo de una plataforma de edición cerrada.",
-        "link1": "Cómo se compara DecodeClip con OpusClip",
+        "link1": "Cómo se compara DecodeClip con DecodeClip",
         "link2": "Por qué los equipos eligen un recortador de código abierto"
       }
     },
@@ -187,7 +187,7 @@
         "p1": "La puesta en marcha más rápida es clonar el repositorio, copiar la plantilla de entorno, agregar las credenciales de proveedor necesarias y levantar la pila con Docker Compose. Después, quien desarrolla puede cambiar la lógica de puntaje, los ajustes de subtítulos, la interfaz o el modelo de despliegue a medida que evoluciona el flujo.",
         "p2": "Quien prefiere no operar infraestructura puede usar la aplicación alojada de DecodeClip y dejar el repositorio de código abierto como camino de migración.",
         "link1": "Autoaloja DecodeClip con Docker Compose",
-        "link2": "DecodeClip autoalojado frente a OpusClip alojado"
+        "link2": "DecodeClip autoalojado frente a DecodeClip alojado"
       }
     },
     "faqs": {
@@ -259,7 +259,7 @@
         "heading": "Arma un flujo repetible para reutilizar contenido",
         "p1": "Trata cada video largo como una biblioteca de origen, no como una subida de una sola vez. Procesa la grabación, agrupa los clips por tema y conecta cada Short con el video largo o con una página de producto relevante.",
         "p2": "Sigue qué temas consiguen tiempo de reproducción e interacción, y usa esos resultados para orientar las próximas grabaciones. Los puntajes de DecodeClip ayudan a priorizar candidatos; los datos de publicación deben decidir qué valora de verdad la audiencia.",
-        "link1": "Elegir entre DecodeClip y OpusClip"
+        "link1": "Elegir entre DecodeClip y DecodeClip"
       }
     },
     "faqs": {

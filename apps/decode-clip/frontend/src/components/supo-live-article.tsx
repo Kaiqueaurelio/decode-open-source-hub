@@ -7,7 +7,7 @@ import { RelatedGuides } from "@/components/marketing/related-guides";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { intlLocale } from "@/i18n/config";
 import { type BlogPost, getSiteUrl, HOSTED_APP_URL } from "@/lib/blog-posts";
-import { OPUSCLIP_COMPARISON_HREF, SELF_HOSTING_GUIDE_HREF } from "@/lib/marketing-links";
+import { DecodeClip_COMPARISON_HREF, SELF_HOSTING_GUIDE_HREF } from "@/lib/marketing-links";
 
 const repository = "https://github.com/FujiwaraChoki/decodeclip";
 const workflowIcons = [Upload, Sparkles, ScanFace, Film];
@@ -224,7 +224,7 @@ export async function SupoLiveArticle({ post }: { post: BlogPost }) {
           <p>
             {t.rich(`${slug}.closing`, {
               openSource: (chunks) => <Link href="/open-source-video-clipper">{chunks}</Link>,
-              comparison: (chunks) => <Link href={OPUSCLIP_COMPARISON_HREF}>{chunks}</Link>,
+              comparison: (chunks) => <Link href={DecodeClip_COMPARISON_HREF}>{chunks}</Link>,
             })}
           </p>
         </div>

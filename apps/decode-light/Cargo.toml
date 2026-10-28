@@ -7,13 +7,13 @@ version = "0.14.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 rust-version = "1.95"
-repository = "https://github.com/storytold/lightcraft"
+repository = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft"
 
 [workspace.dependencies]
-craft-ui = { git = "https://github.com/storytold/craft-libs", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f", features = ["serde"] }
-craft-docpath = { version = "0.1.0", git = "https://github.com/storytold/craft-libs", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f" }
-craft-update = { git = "https://github.com/storytold/craft-libs", version = "=0.1.0", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f", features = ["egui"] }
-craft-window = { git = "https://github.com/storytold/craft-libs", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f", features = ["egui"] }
+craft-ui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f", features = ["serde"] }
+craft-docpath = { version = "0.1.0", git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f" }
+craft-update = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", version = "=0.1.0", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f", features = ["egui"] }
+craft-window = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "1e6f127844ec61b3b8afdcc2bb76e7cfe470153f", features = ["egui"] }
 # internal
 lightcraft-denoise-core = { path = "crates/denoise-core" }
 lightcraft-denoise = { path = "crates/denoise", default-features = false }
@@ -177,18 +177,18 @@ miniz_oxide = { opt-level = 3 }
 
 # Keep the complete egui family and native event bridge on reviewed fork commits.
 [patch.crates-io]
-ecolor = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-emath = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-epaint = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-epaint_default_fonts = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui-winit = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui-wgpu = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui_glow = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui_extras = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui_kittest = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui_system_font_provider = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-eframe = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui_demo_lib = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-egui_inspection = { git = "https://github.com/storytold/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
-winit = { git = "https://github.com/storytold/winit.git", rev = "a517b3846ee8457d84ee4975110bfda6797c44dc" }
+ecolor = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+emath = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+epaint = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+epaint_default_fonts = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui-winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui-wgpu = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui_glow = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui_extras = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui_kittest = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui_system_font_provider = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+eframe = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui_demo_lib = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+egui_inspection = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui.git", rev = "6d518fc799681571963842f95b55a6b68431b15a" }
+winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit.git", rev = "a517b3846ee8457d84ee4975110bfda6797c44dc" }

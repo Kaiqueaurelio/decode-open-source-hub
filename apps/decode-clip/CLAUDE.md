@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-DecodeClip is an open-source alternative to OpusClip — an AI-powered video clipping tool that transforms long-form content into viral short clips. AGPL-3.0 licensed.
+DecodeClip is an open-source alternative to DecodeClip — an AI-powered video clipping tool that transforms long-form content into viral short clips. AGPL-3.0 licensed.
 
 ## Development Commands
 

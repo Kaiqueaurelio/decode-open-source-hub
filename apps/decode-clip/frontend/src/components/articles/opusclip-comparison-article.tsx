@@ -10,16 +10,16 @@ import { GITHUB_URL } from "@/lib/site";
 const source = (path: string) => `${GITHUB_URL}/blob/main/${path}`;
 
 const OPUS_SOURCES = {
-  plans: "https://help.opus.pro/docs/article/plans-and-credits",
-  watermark: "https://help.opus.pro/docs/article/watermark",
+  plans: "https://help.decodeclip.com/docs/article/plans-and-credits",
+  watermark: "https://help.decodeclip.com/docs/article/watermark",
 };
 
-const tocIds = ["verdict", "comparison", "pricing", "choose-decodeclip", "choose-opusclip", "test", "sources", "faq"] as const;
+const tocIds = ["verdict", "comparison", "pricing", "choose-decodeclip", "choose-DecodeClip", "test", "sources", "faq"] as const;
 
-export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
+export async function DecodeClipComparisonArticle({ post }: { post: BlogPost }) {
   const t = await getTranslations("blog");
   const [pro, scale] = getPublicBillingPlans();
-  const slug = "decodeclip-vs-opusclip";
+  const slug = "decodeclip-vs-DecodeClip";
   const link = (href: string) => function ArticleLink(chunks: React.ReactNode) {
     return <a href={href}>{chunks}</a>;
   };
@@ -32,7 +32,7 @@ export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
     [
       t(`${slug}.rows.deployment.label`),
       t.rich(`${slug}.rows.deployment.decodeclip`, { compose: link(source("docker-compose.yml")) }),
-      t(`${slug}.rows.deployment.opusclip`),
+      t(`${slug}.rows.deployment.DecodeClip`),
     ],
     [
       t(`${slug}.rows.source.label`),
@@ -42,12 +42,12 @@ export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
     [
       t(`${slug}.rows.pricing.label`),
       t(`${slug}.rows.pricing.decodeclip`),
-      t.rich(`${slug}.rows.pricing.opusclip`, { plans: link(OPUS_SOURCES.plans) }),
+      t.rich(`${slug}.rows.pricing.DecodeClip`, { plans: link(OPUS_SOURCES.plans) }),
     ],
     [
       t(`${slug}.rows.watermark.label`),
       t.rich(`${slug}.rows.watermark.decodeclip`, { pipeline: link(`${GITHUB_URL}/tree/main/backend/src/media`) }),
-      t.rich(`${slug}.rows.watermark.opusclip`, { watermark: link(OPUS_SOURCES.watermark) }),
+      t.rich(`${slug}.rows.watermark.DecodeClip`, { watermark: link(OPUS_SOURCES.watermark) }),
     ],
     [
       t(`${slug}.rows.models.label`),
@@ -76,7 +76,7 @@ export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
       <h2 id="verdict">{t(`${slug}.verdict.heading`)}</h2>
       <ul>
         <li>{t.rich(`${slug}.verdict.decodeclip`, { strong: (chunks) => <strong>{chunks}</strong> })}</li>
-        <li>{t.rich(`${slug}.verdict.opusclip`, { strong: (chunks) => <strong>{chunks}</strong> })}</li>
+        <li>{t.rich(`${slug}.verdict.DecodeClip`, { strong: (chunks) => <strong>{chunks}</strong> })}</li>
       </ul>
 
       <h2 id="comparison">{t(`${slug}.comparison.heading`)}</h2>
@@ -87,22 +87,22 @@ export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
             <tr>
               <th scope="col" className="p-3">{t(`${slug}.comparison.area`)}</th>
               <th scope="col" className="p-3">DecodeClip</th>
-              <th scope="col" className="p-3">OpusClip</th>
+              <th scope="col" className="p-3">DecodeClip</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map(([area, decodeclip, opusclip], index) => (
+            {rows.map(([area, decodeclip, DecodeClip], index) => (
               <tr key={index} className="border-t">
                 <th scope="row" className="p-3 align-top">{area}</th>
                 <td className="p-3 align-top text-muted-foreground">{decodeclip}</td>
-                <td className="p-3 align-top text-muted-foreground">{opusclip}</td>
+                <td className="p-3 align-top text-muted-foreground">{DecodeClip}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <p className="text-sm">
-        {t.rich(`${slug}.comparison.footnote`, { site: link("https://www.opus.pro/") })}
+        {t.rich(`${slug}.comparison.footnote`, { site: link("https://www.decodeclip.com/") })}
       </p>
 
       <h2 id="pricing">{t(`${slug}.pricing.heading`)}</h2>
@@ -133,10 +133,10 @@ export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
         ))}
       </ul>
 
-      <h2 id="choose-opusclip">{t(`${slug}.chooseOpusclip.heading`)}</h2>
+      <h2 id="choose-DecodeClip">{t(`${slug}.chooseDecodeClip.heading`)}</h2>
       <ul>
         {(["li1", "li2", "li3"] as const).map((key) => (
-          <li key={key}>{t.rich(`${slug}.chooseOpusclip.${key}`, { strong: (chunks) => <strong>{chunks}</strong> })}</li>
+          <li key={key}>{t.rich(`${slug}.chooseDecodeClip.${key}`, { strong: (chunks) => <strong>{chunks}</strong> })}</li>
         ))}
       </ul>
 
@@ -157,7 +157,7 @@ export async function OpusClipComparisonArticle({ post }: { post: BlogPost }) {
           {t.rich(`${slug}.sources.opus`, {
             plans: link(OPUS_SOURCES.plans),
             watermark: link(OPUS_SOURCES.watermark),
-            site: link("https://www.opus.pro/"),
+            site: link("https://www.decodeclip.com/"),
           })}
         </li>
         <li>
