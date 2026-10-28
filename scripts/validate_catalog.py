@@ -138,7 +138,7 @@ def main():
 
     expected_all = EXPECTED_ORDER + ["decode-launcher"]
     if slugs != expected_all:
-        errors.append("A lista deve conter, em ordem, os 15 apps oficiais seguidos do launcher separado.")
+        errors.append("A lista deve conter DecodeCraft, DecodeCraftX, DecodeClip e o launcher separado.")
     if len(set(slugs)) != len(slugs):
         errors.append("Há slugs duplicados no catálogo.")
 
@@ -148,7 +148,7 @@ def main():
             print(" - " + error)
         return 1
 
-    print("Validação do catálogo Decode: OK — 16 Apps Decode e 1 launcher no repositório.")
+    print("Validação do catálogo Decode: OK — 3 apps próprios e 1 launcher no repositório.")
     print("Estrutura, escopo, links HTTPS Decode e campos de catálogo conferidos.")
     return 0
 
