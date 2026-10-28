@@ -264,7 +264,9 @@ mod tests {
     #[test]
     fn macos_prefers_the_published_universal_build() {
         // DecodePhoto v0.9.0's GitHub metadata, trimmed to its desktop DMG.
-        let mut r = crate::release::parse_github_release(include_str!("../tests/fixtures/photocraft-release.json"), "Kaiqueaurelio/decode-open-source-hub").unwrap();
+        let mut r =
+            crate::release::parse_github_release(include_str!("../tests/fixtures/photocraft-release.json"), "Kaiqueaurelio/decode-open-source-hub")
+                .unwrap();
         // Split builds must not outrank the published universal DMG, even when listed first.
         r.assets.splice(0..0, release(&["photocraft-0.9.0-macos-arm64.dmg", "photocraft-0.9.0-macos-x86_64.dmg"]).assets);
         for arch in [Arch::X64, Arch::Arm64] {
@@ -277,7 +279,9 @@ mod tests {
     #[test]
     fn freebsd_picks_the_tarball_for_the_processor() {
         // DecodeSound v0.10.0's GitHub metadata, trimmed to its FreeBSD tarballs.
-        let r = crate::release::parse_github_release(include_str!("../tests/fixtures/soundcraft-release.json"), "Kaiqueaurelio/decode-open-source-hub").unwrap();
+        let r =
+            crate::release::parse_github_release(include_str!("../tests/fixtures/soundcraft-release.json"), "Kaiqueaurelio/decode-open-source-hub")
+                .unwrap();
         let pick = |arch| {
             let platform = Platform { os: Os::FreeBsd, arch };
             pick_asset(&r, &["soundcraft"], platform, platform.default_kinds()).map(|(a, k)| (a.name.as_str(), k))

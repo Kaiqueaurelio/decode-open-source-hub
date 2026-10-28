@@ -992,7 +992,9 @@ pub(crate) mod tests {
     #[ignore = "needs network access"]
     fn downloads_a_real_release_asset() {
         let http = Http::new().unwrap();
-        let Fetched::Body { text, .. } = http.get_api("https://api.github.com/repos/Kaiqueaurelio/decode-open-source-hub/releases/latest", None).unwrap() else {
+        let Fetched::Body { text, .. } =
+            http.get_api("https://api.github.com/repos/Kaiqueaurelio/decode-open-source-hub/releases/latest", None).unwrap()
+        else {
             panic!("no release")
         };
         let release = decode_launcher_core::release::parse_github_release(&text, "Kaiqueaurelio/decode-open-source-hub").unwrap();

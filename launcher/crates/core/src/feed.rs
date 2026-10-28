@@ -537,9 +537,12 @@ mod tests {
         let feed = Feed::parse(&moved).unwrap();
         assert_eq!(feed.repo_for(app("photocraft")), "Kaiqueaurelio/decode-open-source-hub-app");
         let FeedAnswer::Fresh(Some(r)) = feed.answer(app("photocraft"), NOW) else { panic!() };
-        assert!(r.assets[0].url.starts_with("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-app/releases/download/"));
+        assert!(
+            r.assets[0].url.starts_with("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-app/releases/download/")
+        );
         // The same entry without the rename: the repo doesn't match, so GitHub decides.
-        let unannounced = moved.replace(r#"{"old_name": "Kaiqueaurelio/photocraft", "new_name": "Kaiqueaurelio/decode-open-source-hub-app", "renamed_at": null}"#, "");
+        let unannounced = moved
+            .replace(r#"{"old_name": "Kaiqueaurelio/photocraft", "new_name": "Kaiqueaurelio/decode-open-source-hub-app", "renamed_at": null}"#, "");
         let feed = Feed::parse(&unannounced).unwrap();
         assert_eq!(feed.answer(app("photocraft"), NOW), FeedAnswer::AskGitHub);
     }
@@ -578,7 +581,10 @@ mod tests {
     #[test]
     fn a_local_mirror_is_trusted_only_when_asked_for_and_never_goes_stale() {
         const MIRROR: &str = "http://127.0.0.1:8787/";
-        let local = sample().replace("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.6.0/", "http://127.0.0.1:8787/photocraft/v0.6.0/");
+        let local = sample().replace(
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.6.0/",
+            "http://127.0.0.1:8787/photocraft/v0.6.0/",
+        );
         // Without the mirror, the local link is dropped like any other stranger's.
         let FeedAnswer::Fresh(Some(r)) = Feed::parse(&local).unwrap().answer(app("photocraft"), NOW) else { panic!() };
         assert!(r.assets.is_empty());

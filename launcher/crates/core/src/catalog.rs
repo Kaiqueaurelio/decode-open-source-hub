@@ -76,7 +76,13 @@ const fn app(
 pub const SUITE: [DecodeApp; 13] = [
     DecodeApp {
         former_names: &["PhotoCraft"],
-        ..app("photocraft", "DecodePhoto", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "Kaiqueaurelio/decode-open-source-hub")
+        ..app(
+            "photocraft",
+            "DecodePhoto",
+            "Image editing",
+            [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]],
+            "Kaiqueaurelio/decode-open-source-hub",
+        )
     },
     DecodeApp {
         former_names: &["VectorCraft"],
@@ -191,7 +197,13 @@ pub const SUITE: [DecodeApp; 13] = [
     },
     DecodeApp {
         former_names: &["GridCraft"],
-        ..app("gridcraft", "DecodeGrid", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "Kaiqueaurelio/decode-open-source-hub")
+        ..app(
+            "gridcraft",
+            "DecodeGrid",
+            "Spreadsheets and data",
+            [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]],
+            "Kaiqueaurelio/decode-open-source-hub",
+        )
     },
 ];
 

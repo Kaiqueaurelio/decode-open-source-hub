@@ -349,7 +349,11 @@ mod tests {
 
     #[test]
     fn drops_downloads_that_point_elsewhere() {
-        for url in ["https://evil.example/photocraft.dmg", "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/other/releases/download/v1/x.dmg", "javascript:alert(1)"] {
+        for url in [
+            "https://evil.example/photocraft.dmg",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/other/releases/download/v1/x.dmg",
+            "javascript:alert(1)",
+        ] {
             let r = parse_github_release(&api_json(url), REPO).unwrap();
             assert!(r.assets.is_empty(), "{url}");
         }
@@ -400,7 +404,10 @@ mod tests {
         }
         // A plain, confined download still passes.
         let prefix = download_prefix(REPO);
-        assert!(download_url_under("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg", &prefix));
+        assert!(download_url_under(
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg",
+            &prefix
+        ));
     }
 
     #[test]
@@ -420,11 +427,18 @@ mod tests {
     fn reads_checksums_and_redirects() {
         let sums = parse_sha256sums(&format!("{HASH}  photocraft-0.5.0-macos-universal.dmg\n{HASH} *b.zip\nnot a line\n{HASH}  ../escape\n"));
         assert_eq!(sums, [(HASH.to_string(), "photocraft-0.5.0-macos-universal.dmg".to_string()), (HASH.to_string(), "b.zip".to_string())]);
-        assert_eq!(tag_from_redirect("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/tag/v0.5.0", REPO).as_deref(), Some("v0.5.0"));
+        assert_eq!(
+            tag_from_redirect("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/tag/v0.5.0", REPO)
+                .as_deref(),
+            Some("v0.5.0")
+        );
         assert_eq!(tag_from_redirect("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases", REPO), None);
         assert_eq!(tag_from_redirect("https://evil/Kaiqueaurelio/decode-open-source-hub/releases/tag/v1", REPO), None);
         let r = release_from_sums(REPO, "v0.5.0", &sums);
-        assert_eq!(r.assets[0].url, "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg");
+        assert_eq!(
+            r.assets[0].url,
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg"
+        );
         assert_eq!(r.version, Some(Version::new(0, 5, 0)));
     }
 
