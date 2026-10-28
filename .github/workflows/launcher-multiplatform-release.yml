@@ -1,0 +1,107 @@
+name: Decode Launcher - Builds Windows and Linux
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: decode-launcher-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-x64
+            os: windows-latest
+            archive: zip
+          - platform: linux-x64
+            os: ubuntu-latest
+            archive: tar.gz
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: launcher
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install Linux system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev \
+            libxi-dev libgl1-mesa-dev pkg-config
+
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: launcher -> target
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Build launcher
+        run: cargo build --release --locked --workspace
+
+      - name: Package Windows executable
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path ../dist | Out-Null
+          $exe = Get-ChildItem -Path target/release -Filter *.exe -File |
+            Where-Object { $_.Name -match 'launcher' } |
+            Select-Object -First 1
+          if (-not $exe) {
+            Write-Error "Não foi encontrado um executável .exe com 'launcher' no nome em target/release."
+            Get-ChildItem target/release -File | Select-Object -ExpandProperty Name
+            exit 1
+          }
+          Copy-Item $exe.FullName ../dist/decode-launcher-windows-x86_64.exe
+          Compress-Archive -Path ../dist/decode-launcher-windows-x86_64.exe -DestinationPath ../dist/decode-launcher-windows-x86_64.zip -Force
+
+      - name: Package Linux executable
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ../dist
+          exe="$(find target/release -maxdepth 1 -type f -executable -name '*launcher*' ! -name '*.so' | head -n 1)"
+          if [ -z "$exe" ]; then
+            echo "Não foi encontrado um binário executável com 'launcher' no nome em target/release."
+            ls -la target/release
+            exit 1
+          fi
+          cp "$exe" ../dist/decode-launcher-linux-x86_64
+          tar -czf ../dist/decode-launcher-linux-x86_64.tar.gz -C ../dist decode-launcher-linux-x86_64
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: decode-launcher-${{ matrix.platform }}
+          path: dist/decode-launcher-${{ matrix.platform }}.*
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload binaries to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/decode-launcher-${{ matrix.platform }}.*
+          fail_on_unmatched_files: true
