@@ -11,7 +11,7 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 
 ## O que você encontra
 
-- **Aplicativos próprios listados:** DecodeCraft, DecodeCraftX e DecodeClip. O Decode Launcher é listado separadamente como utilitário. Os nomes de referência continuam disponíveis para pesquisa.
+- **Aplicativos próprios listados:** DecodeCraft, DecodeCraftX e DecodeClip. O Decode Launcher é listado separadamente como utilitário. O catálogo não inclui aplicativos upstream ou de terceiros.
 - **Decode Launcher:** utilitário nativo em Rust, com links para o código-fonte e suas releases.
 - Busca por nome, finalidade, recursos e palavras-chave.
 - Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.
@@ -30,24 +30,16 @@ O catálogo lista apenas os aplicativos próprios mantidos neste repositório (D
 - 📦 **[Baixar Código-Fonte Completo de Todos os Apps (.ZIP)](https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip)**
 - 🌐 **[Catálogo Web Interativo (Vercel)](https://decode-open-source-hub-catalog.vercel.app)**
 
-### Aplicativos Disponíveis no Repositório:
+### Aplicativos próprios listados
 
-| Aplicativo | Pasta no Repositório | Categoria | Pacote Release (v0.8.3) | Checksum | Como Compilar e Rodar (Rust) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Decode Launcher** | [`launcher/`](launcher/) | Gerenciador & Atualizador Desktop | [decode-launcher-linux-x86_64.tar.gz (16.6 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-launcher-linux-x86_64.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-launcher-linux-x86_64.tar.gz.sha256) | `cd launcher && cargo run --release -p decode-launcher` |
-| **Decode Photo** | [`apps/decode-photo/`](apps/decode-photo/) | Edição e Retoque de Imagens | [decode-photo-release-package.tar.gz (22.7 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-photo-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-photo-release-package.tar.gz.sha256) | `cd apps/decode-photo && cargo run --release` |
-| **Decode Vector** | [`apps/decode-vector/`](apps/decode-vector/) | Ilustração e Desenho Vetorial | [decode-vector-release-package.tar.gz (23.9 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-vector-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-vector-release-package.tar.gz.sha256) | `cd apps/decode-vector && cargo run --release` |
-| **Decode Film** | [`apps/decode-film/`](apps/decode-film/) | Edição de Vídeo e Linha do Tempo | [decode-film-release-package.tar.gz (21.5 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-film-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-film-release-package.tar.gz.sha256) | `cd apps/decode-film && cargo run --release` |
-| **Decode Light** | [`apps/decode-light/`](apps/decode-light/) | Catálogo Fotográfico e RAW | [decode-light-release-package.tar.gz (19.5 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-light-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-light-release-package.tar.gz.sha256) | `cd apps/decode-light && cargo run --release` |
-| **Decode PDF** | [`apps/decode-pdf/`](apps/decode-pdf/) | Leitura, Proteção e Edição PDF | [decode-pdf-release-package.tar.gz (18.7 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-pdf-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-pdf-release-package.tar.gz.sha256) | `cd apps/decode-pdf && cargo run --release` |
-| **Decode Effect** | [`apps/decode-effect/`](apps/decode-effect/) | Efeitos Visuais VFX e Motion | [decode-effect-release-package.tar.gz (13.7 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-effect-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-effect-release-package.tar.gz.sha256) | `cd apps/decode-effect && cargo run --release` |
-| **Decode Design** | [`apps/decode-design/`](apps/decode-design/) | Diagramação e Publicação Editorial | [decode-design-release-package.tar.gz (10.6 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-design-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-design-release-package.tar.gz.sha256) | `cd apps/decode-design && cargo run --release` |
-| **Decode Fig** | [`apps/decode-fig/`](apps/decode-fig/) | Design de Interfaces UI/UX | [decode-fig-release-package.tar.gz (11.2 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-fig-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-fig-release-package.tar.gz.sha256) | `cd apps/decode-fig && cargo run --release` |
-| **Decode Word** | [`apps/decode-word/`](apps/decode-word/) | Processador de Textos e Documentos | [decode-word-release-package.tar.gz (12.3 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-word-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-word-release-package.tar.gz.sha256) | `cd apps/decode-word && cargo run --release` |
-| **Decode Sound** | [`apps/decode-sound/`](apps/decode-sound/) | Estação de Áudio Digital (DAW) | [decode-sound-release-package.tar.gz (6.9 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-sound-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-sound-release-package.tar.gz.sha256) | `cd apps/decode-sound && cargo run --release` |
-| **Decode Deck** | [`apps/decode-deck/`](apps/decode-deck/) | Apresentações e Slides | [decode-deck-release-package.tar.gz (5.8 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-deck-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-deck-release-package.tar.gz.sha256) | `cd apps/decode-deck && cargo run --release` |
-| **Decode CAD** | [`apps/decode-cad/`](apps/decode-cad/) | Desenho Técnico 2D/3D (CAD) | [decode-cad-release-package.tar.gz (5.8 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-cad-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-cad-release-package.tar.gz.sha256) | `cd apps/decode-cad && cargo run --release` |
-| **Decode Grid** | [`apps/decode-grid/`](apps/decode-grid/) | Planilhas e Modelagem de Dados | [decode-grid-release-package.tar.gz (6.4 MB)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-grid-release-package.tar.gz) | [SHA-256](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.3/decode-grid-release-package.tar.gz.sha256) | `cd apps/decode-grid && cargo run --release` |
+| Aplicativo | Código-fonte |
+| :--- | :--- |
+| **DecodeCraft** | [apps/decode-craft](apps/decode-craft/) |
+| **DecodeCraftX** | [apps/decode-craftx](apps/decode-craftx/) |
+| **DecodeClip** | [apps/decode-clip](apps/decode-clip/) |
+| **Decode Launcher** | [launcher](launcher/) |
+
+O catálogo não deve listar aplicativos upstream/de terceiros como produtos próprios. Consulte as releases para confirmar quais binários estão publicados antes de divulgar um download.
 
 ## Fontes e referências
 
