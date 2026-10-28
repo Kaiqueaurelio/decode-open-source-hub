@@ -1,4 +1,4 @@
-"""Tests for the Decode App Suite and separate launcher entry in Decode Monorepo."""
+"""Tests for first-party Decode apps and launcher entry."""
 import json
 import subprocess
 import sys
@@ -8,39 +8,9 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "software.json"
-EXPECTED_ORDER = [
-    "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
-    "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
-    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx", "decode-clip",
-]
-EXPECTED_NAMES = {
-    "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
-    "lightcraft":"DecodeLight", "pdfcraft":"DecodePdf", "effectcraft":"DecodeEffect",
-    "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
-    "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
-    "gridcraft":"DecodeGrid",
-    "decode-craft":"DecodeCraft",
-    "decode-craftx":"DecodeCraftX",
-    "decode-clip":"DecodeClip",
-}
-SLUG_TO_APP_DIR = {
-    "photocraft": "decode-photo",
-    "vectorcraft": "decode-vector",
-    "filmcraft": "decode-film",
-    "lightcraft": "decode-light",
-    "pdfcraft": "decode-pdf",
-    "effectcraft": "decode-effect",
-    "designcraft": "decode-design",
-    "figcraft": "decode-fig",
-    "wordcraft": "decode-word",
-    "soundcraft": "decode-sound",
-    "deckcraft": "decode-deck",
-    "cadcraft": "decode-cad",
-    "gridcraft": "decode-grid",
-    "decode-craft": "decode-craft",
-    "decode-craftx": "decode-craftx",
-    "decode-clip": "decode-clip",
-}
+EXPECTED_ORDER = ["decode-craft", "decode-craftx", "decode-clip"]
+EXPECTED_NAMES = {"decode-craft": "DecodeCraft", "decode-craftx": "DecodeCraftX", "decode-clip": "DecodeClip"}
+SLUG_TO_APP_DIR = {"decode-craft": "decode-craft", "decode-craftx": "decode-craftx", "decode-clip": "decode-clip"}
 
 class CatalogTests(unittest.TestCase):
     @classmethod
@@ -48,24 +18,15 @@ class CatalogTests(unittest.TestCase):
         cls.items = json.loads(DATA.read_text(encoding="utf-8"))
         cls.by_slug = {item["slug"]: item for item in cls.items}
 
-    def test_contains_13_decode_apps_and_one_separate_launcher(self):
-        self.assertEqual(len(self.items), 17)
+    def test_contains_only_first_party_apps_and_one_launcher(self):
+        self.assertEqual(len(self.items), 4)
         self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["decode-launcher"])
         apps = [item for item in self.items if item["kind"] == "Aplicativo Decode"]
         self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
         self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
-        upstream_search_names = {
-            "photocraft":"PhotoCraft", "vectorcraft":"VectorCraft", "filmcraft":"FilmCraft",
-            "lightcraft":"LightCraft", "pdfcraft":"PdfCraft", "effectcraft":"EffectCraft",
-            "designcraft":"DesignCraft", "figcraft":"FigCraft", "wordcraft":"WordCraft",
-            "soundcraft":"SoundCraft", "deckcraft":"DeckCraft", "cadcraft":"CADCraft",
-            "gridcraft":"GridCraft",
-            "decode-craft":"DecodeCraft",
-            "decode-craftx":"DecodeCraftX",
-            "decode-clip":"DecodeClip",
-        }
+        first_party_names = {"decode-craft": "DecodeCraft", "decode-craftx": "DecodeCraftX", "decode-clip": "DecodeClip"}
         for item in apps:
-            self.assertIn(upstream_search_names[item["slug"]], item["tags"])
+            self.assertIn(first_party_names[item["slug"]], item["tags"])
         self.assertEqual(self.by_slug["decode-launcher"]["kind"], "Launcher")
         self.assertEqual(self.by_slug["decode-launcher"]["name"], "Decode Launcher")
         self.assertIn("Decode Launcher", self.by_slug["decode-launcher"]["tags"])
