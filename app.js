@@ -341,33 +341,113 @@
     platformFilter.value = old || defaultSelection || "";
   }
 
-  function currentSearch() {
+  function normalizeText(str) {
+    return String(str || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  function getSearchTerms() {
     var fVal = filterSearchInput ? filterSearchInput.value : "";
     var sVal = searchInput ? searchInput.value : "";
-    return (fVal || sVal || "").trim().toLocaleLowerCase("pt-BR");
+    var raw = (fVal || sVal || "").trim();
+    if (!raw) return [];
+    return normalizeText(raw).split(/\s+/).filter(function (t) { return t.length > 0; });
+  }
+
+  function currentSearch() {
+    var terms = getSearchTerms();
+    return terms.join(" ");
+  }
+
+  function calculateScore(item, terms) {
+    if (!terms.length) return 0;
+    var nameNorm = normalizeText(item.name);
+    var taglineNorm = normalizeText(item.tagline);
+    var descNorm = normalizeText(item.description);
+    var catNorm = normalizeText(item.category);
+    var slugNorm = normalizeText(item.slug);
+    var tagsNorm = normalizeText((item.tags || []).join(" "));
+
+    var totalScore = 0;
+    for (var i = 0; i < terms.length; i++) {
+      var t = terms[i];
+      var matched = false;
+
+      if (nameNorm.indexOf(t) !== -1) {
+        totalScore += 35;
+        if (nameNorm.indexOf(t) === 0 || nameNorm.indexOf(" " + t) !== -1) totalScore += 15;
+        matched = true;
+      }
+      if (slugNorm.indexOf(t) !== -1) {
+        totalScore += 25;
+        matched = true;
+      }
+      if (tagsNorm.indexOf(t) !== -1) {
+        totalScore += 20;
+        matched = true;
+      }
+      if (taglineNorm.indexOf(t) !== -1) {
+        totalScore += 12;
+        matched = true;
+      }
+      if (catNorm.indexOf(t) !== -1) {
+        totalScore += 10;
+        matched = true;
+      }
+      if (descNorm.indexOf(t) !== -1) {
+        totalScore += 6;
+        matched = true;
+      }
+
+      if (!matched) return -1; // AND logic: every term must match somewhere
+    }
+    return totalScore;
+  }
+
+  function highlightMatches(text, terms) {
+    if (!text) return "";
+    var escaped = escapeHtml(text);
+    if (!terms || !terms.length) return escaped;
+
+    terms.forEach(function (term) {
+      if (term.length < 2) return;
+      var cleanTerm = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      var re = new RegExp("(" + cleanTerm + ")", "gi");
+      escaped = escaped.replace(re, '<mark class="search-match">$1</mark>');
+    });
+    return escaped;
   }
 
   function getFiltered() {
-    var term = currentSearch();
+    var terms = getSearchTerms();
     var platform = platformFilter ? platformFilter.value : "";
-    var found = allSoftware.filter(function (item) {
-      var searchable = [item.name, item.tagline, item.description, item.category, item.license, item.stage, item.kind, item.slug]
-        .concat(item.tags || []).join(" ").toLocaleLowerCase("pt-BR");
-      return (!term || searchable.indexOf(term) !== -1)
-        && (!selectedCategory || item.category === selectedCategory)
-        && (!platform || (item.platforms || []).indexOf(platform) !== -1)
-        && (selectedStatus === "all" || statusMatches(item, selectedStatus));
+
+    var scored = [];
+    allSoftware.forEach(function (item) {
+      var score = calculateScore(item, terms);
+      if (terms.length > 0 && score < 0) return;
+      if (selectedCategory && item.category !== selectedCategory) return;
+      if (platform && (item.platforms || []).indexOf(platform) === -1) return;
+      if (selectedStatus !== "all" && !statusMatches(item, selectedStatus)) return;
+      scored.push({ item: item, score: score });
     });
+
     var sort = sortFilter ? sortFilter.value : "featured";
-    found.sort(function (a, b) {
-      if (sort === "name") return a.name.localeCompare(b.name, "pt-BR");
-      if (sort === "category") {
-        var cat = a.category.localeCompare(b.category, "pt-BR");
-        return cat || a.name.localeCompare(b.name, "pt-BR");
+    scored.sort(function (a, b) {
+      if (terms.length > 0 && sort === "featured") {
+        return b.score - a.score;
       }
-      return Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || a.name.localeCompare(b.name, "pt-BR");
+      if (sort === "name") return a.item.name.localeCompare(b.item.name, "pt-BR");
+      if (sort === "category") {
+        var cat = a.item.category.localeCompare(b.item.category, "pt-BR");
+        return cat || a.item.name.localeCompare(b.item.name, "pt-BR");
+      }
+      return Number(Boolean(b.item.featured)) - Number(Boolean(a.item.featured)) || a.item.name.localeCompare(b.item.name, "pt-BR");
     });
-    return found;
+
+    return scored.map(function (s) { return s.item; });
   }
 
   function renderFiltersSummary() {
@@ -422,6 +502,7 @@
     var versionText = meta.version || asset.version || "v0.8.2";
     var taglineText = meta.role || item.tagline || "";
 
+    var searchTerms = getSearchTerms();
     return '<div class="software-card ' + meta.appClass + '" id="card-' + item.slug + '" data-slug="' + item.slug + '">'
       + '<span aria-hidden="true" class="card-hover-accent" style="background:' + accentColor + ';"></span>'
       + '<div class="card-header-bar">'
@@ -434,12 +515,12 @@
       + '  </div>'
       + '  <div class="card-title-group">'
       + '    <h3 class="card-title">'
-      + '      <span class="brand-prefix">Decode</span><span class="craft-suffix" style="color:' + accentColor + ';">' + escapeHtml(cleanName) + '</span>'
+      + '      <span class="brand-prefix">Decode</span><span class="craft-suffix" style="color:' + accentColor + ';">' + highlightMatches(cleanName, searchTerms) + '</span>'
       + '    </h3>'
-      + '    <p class="card-tagline">' + escapeHtml(taglineText) + '</p>'
+      + '    <p class="card-tagline">' + highlightMatches(taglineText, searchTerms) + '</p>'
       + '  </div>'
       + '</div>'
-      + '<p class="card-description">' + escapeHtml(item.description || item.tagline || "") + '</p>'
+      + '<p class="card-description">' + highlightMatches(item.description || item.tagline || "", searchTerms) + '</p>'
       + '<p class="card-last-updated">Última atualização: 27 de out. de 2026</p>'
       + '<div class="card-action-bar">'
       + '  <a class="card-btn-download" href="' + escapeHtml(asset.url) + '" target="_blank" rel="noopener noreferrer">'
@@ -469,8 +550,8 @@
       + '<div class="table-app-cell">'
       + '  <img class="table-app-icon-img" src="' + iconSrc + '" alt="" loading="lazy" onerror="this.src=\'' + legacySrc + '\'">'
       + '  <div>'
-      + '    <h3 class="table-title">' + escapeHtml(item.name) + '</h3>'
-      + '    <p class="table-tagline">' + escapeHtml(item.tagline || "") + '</p>'
+      + '    <h3 class="table-title">' + highlightMatches(item.name, getSearchTerms()) + '</h3>'
+      + '    <p class="table-tagline">' + highlightMatches(item.tagline || "", getSearchTerms()) + '</p>'
       + '  </div>'
       + '</div>'
       + '<div class="table-category">' + escapeHtml(item.category || "") + '</div>'
@@ -657,6 +738,36 @@
   }
 
   function setupEvents() {
+    // Global Keyboard Shortcuts (Notes-app style search)
+    var isMac = /mac|iphone|ipad/i.test(navigator.userAgent || "");
+    var kbdBadge = document.getElementById("search-kbd");
+    if (kbdBadge) {
+      kbdBadge.textContent = isMac ? "⌘K" : "Ctrl K";
+    }
+
+    document.addEventListener("keydown", function (e) {
+      var isK = e.key && e.key.toLowerCase() === "k";
+      var isCmdOrCtrl = e.metaKey || e.ctrlKey;
+      var isSlash = e.key === "/";
+      var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      var isEditable = tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable);
+
+      if ((isCmdOrCtrl && isK) || (isSlash && !isEditable)) {
+        e.preventDefault();
+        var targetInput = searchInput || filterSearchInput;
+        if (targetInput) {
+          targetInput.focus();
+          targetInput.select();
+        }
+      } else if (e.key === "Escape") {
+        if (searchInput && document.activeElement === searchInput) {
+          searchInput.value = "";
+          syncSearch("");
+          searchInput.blur();
+        }
+      }
+    });
+
     if (searchInput) {
       searchInput.addEventListener("input", function (e) { syncSearch(e.target.value); });
     }

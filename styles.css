@@ -231,6 +231,36 @@ body.launcher-body {
   border-color: #3b82f6;
 }
 
+.search-kbd {
+  position: absolute;
+  right: 8px;
+  background-color: #1c1e27;
+  border: 1px solid #2d303e;
+  border-radius: 3px;
+  color: #8b90a0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  pointer-events: none;
+  line-height: 1.2;
+  transition: opacity 0.15s;
+}
+
+.search-box:focus-within .search-kbd {
+  opacity: 0.4;
+}
+
+.search-match {
+  background: rgba(45, 129, 255, 0.28);
+  color: #90c2ff;
+  border-bottom: 1.5px solid #2d81ff;
+  border-radius: 2px;
+  padding: 0 1px;
+  font-weight: 600;
+}
+
+
 /* Status tabs bar */
 .status-tabs-bar {
   background-color: #0a0b0e;
