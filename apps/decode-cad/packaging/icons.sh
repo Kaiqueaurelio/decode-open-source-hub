@@ -7,7 +7,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIR="$ROOT/assets/app-icon"
 SRC="$DIR/cadcraft-1024.png"
-ID="com.decode.cadcraft"
+ID="ai.storyteller.cadcraft"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 command -v sips >/dev/null || { echo "error: sips not found (macOS only)" >&2; exit 1; }
