@@ -13,6 +13,10 @@ REQUIRED = {
     "platforms", "license", "licenseUrl", "websiteUrl", "sourceUrl",
     "downloadUrl", "tags", "stage", "featured",
 }
+# Campos opcionais permitidos (URLs de download específicas por plataforma)
+OPTIONAL = {
+    "downloadWindows", "downloadWindowsExe", "downloadLinux", "downloadMacOS",
+}
 EXPECTED_ORDER = [
     "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
     "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
@@ -97,7 +101,7 @@ def main():
             errors.append(f"{prefix}: deve ser um objeto JSON.")
             continue
         missing = sorted(REQUIRED - set(item))
-        extra = sorted(set(item) - REQUIRED)
+        extra = sorted(set(item) - REQUIRED - OPTIONAL)
         if missing:
             errors.append(f"{prefix}: campos ausentes: {', '.join(missing)}.")
             continue

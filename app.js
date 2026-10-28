@@ -185,7 +185,7 @@
       number: "14",
       role: "Estúdio de IA generativa e 3D",
       cleanName: "Craft",
-      version: "v0.8.2",
+      version: "v0.8.3",
       accent: "#a855f7",
       iconBg: "#2e1065",
       icon: "decode-craft.png",
@@ -197,7 +197,7 @@
       number: "15",
       role: "Plataforma multimodal e IA criativa",
       cleanName: "CraftX",
-      version: "v0.8.2",
+      version: "v0.8.3",
       accent: "#ec4899",
       iconBg: "#500724",
       icon: "decode-craftx.png",
@@ -209,7 +209,7 @@
       number: "16",
       role: "Instalador e atualizador da suíte",
       cleanName: "Launcher",
-      version: "v0.8.2",
+      version: "v0.8.3",
       accent: "#fbbf24",
       iconBg: "#382905",
       icon: "decode-launcher.png",
@@ -324,25 +324,21 @@
     var slug = item.slug;
     var meta = appMetadata[slug] || {};
     var pkgName = meta.releaseName || ("decode-" + slug.replace("craft", ""));
+    var BASE = "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases";
+    var VER = "v0.8.3";
+    var BASE_DL = BASE + "/download/" + VER;
 
     if (os === "windows") {
-      return {
-        label: "↓ Baixar Windows",
-        url: item.downloadUrl || "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
-        version: "v0.8.2"
-      };
+      // Para o launcher, usar .exe direto; para apps usar a página de releases
+      var winUrl = item.downloadWindowsExe || item.downloadWindows || (BASE_DL + "/" + pkgName + "-release-package.zip") || BASE;
+      var winLabel = item.downloadWindowsExe ? "↓ Baixar .exe (Windows)" : "↓ Baixar Windows";
+      return { label: winLabel, url: winUrl, version: VER };
     } else if (os === "macos") {
-      return {
-        label: "↓ Baixar macOS",
-        url: item.downloadUrl || "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
-        version: "v0.8.2"
-      };
+      var macUrl = item.downloadMacOS || (BASE_DL + "/" + pkgName + "-release-package.tar.gz") || BASE;
+      return { label: "↓ Baixar macOS (.tar.gz)", url: macUrl, version: VER };
     } else {
-      return {
-        label: "↓ Baixar Linux (.tar.gz)",
-        url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.8.2/" + pkgName + "-release-package.tar.gz",
-        version: "v0.8.2"
-      };
+      var linuxUrl = item.downloadLinux || (BASE_DL + "/" + pkgName + "-release-package.tar.gz");
+      return { label: "↓ Baixar Linux (.tar.gz)", url: linuxUrl, version: VER };
     }
   }
 
@@ -507,7 +503,7 @@
       number: String(index + 1).padStart(2, "0"),
       role: item.category,
       cleanName: item.name.replace(/^Decode\s*/, ""),
-      version: "v0.8.2",
+      version: "v0.8.3",
       accent: "#2d81ff",
       iconBg: "#112242",
       icon: item.slug + ".png",
@@ -525,7 +521,7 @@
 
     var cleanName = meta.cleanName || item.name.replace(/^Decode\s*/, "");
     var accentColor = meta.accent || "#2d81ff";
-    var versionText = meta.version || asset.version || "v0.8.2";
+    var versionText = meta.version || asset.version || "v0.8.3";
     var taglineText = meta.role || item.tagline || "";
 
     var searchTerms = getSearchTerms();
