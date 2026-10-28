@@ -1,110 +1,28 @@
-name: Decode Launcher - Builds Windows and Linux
-
+name: Decode Launcher Release
 on:
   push:
     tags:
-      - "v*"
-  workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "Tag da release existente para anexar os binários (ex.: v0.8.2). Deixe vazio para apenas testar a compilação."
-        required: false
-        type: string
+      - 'v*'
 
 permissions:
   contents: write
 
-concurrency:
-  group: decode-launcher-release-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
-  build:
-    name: Build ${{ matrix.platform }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: windows-x86_64
-            os: windows-latest
-          - platform: linux-x86_64
-            os: ubuntu-latest
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
-    defaults:
-      run:
-        working-directory: launcher
+  build-linux:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Install Linux system dependencies
-        if: runner.os == 'Linux'
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y libx11-dev libasound2-dev libudev-dev libfontconfig1-dev libwayland-dev
+      - name: Build Launcher Release
+        run: cd launcher && cargo build --release --bin decode-launcher
+      - name: Package Linux Binary
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev \
-            libxi-dev libgl1-mesa-dev pkg-config
-
-      - name: Install stable Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          components: rustfmt
-
-      - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: launcher -> target
-
-      - name: Check formatting
-        run: cargo fmt --all -- --check
-
-      - name: Build only Decode Launcher
-        run: cargo build --release --locked -p decode-launcher
-
-      - name: Package Windows executable
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Force -Path ../dist | Out-Null
-          $exe = "target/release/decode-launcher.exe"
-          if (-not (Test-Path $exe)) {
-            Write-Error "O build não gerou target/release/decode-launcher.exe."
-            Get-ChildItem target/release -File | Select-Object -ExpandProperty Name
-            exit 1
-          }
-          Copy-Item $exe ../dist/decode-launcher-windows-x86_64.exe
-          Compress-Archive -Path ../dist/decode-launcher-windows-x86_64.exe -DestinationPath ../dist/decode-launcher-windows-x86_64.zip -Force
-
-      - name: Package Linux executable
-        if: runner.os == 'Linux'
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p ../dist
-          exe="target/release/decode-launcher"
-          if [ ! -x "$exe" ]; then
-            echo "O build não gerou target/release/decode-launcher."
-            ls -la target/release
-            exit 1
-          fi
-          cp "$exe" ../dist/decode-launcher-linux-x86_64
-          tar -czf ../dist/decode-launcher-linux-x86_64.tar.gz -C ../dist decode-launcher-linux-x86_64
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: decode-launcher-${{ matrix.platform }}
-          path: dist/decode-launcher-${{ matrix.platform }}.*
-          if-no-files-found: error
-          retention-days: 14
-
-      - name: Publish assets to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
+          mkdir -p dist
+          cp launcher/target/release/decode-launcher dist/
+          tar -czvf dist/decode-launcher-linux-x86_64.tar.gz -C dist decode-launcher
+      - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && inputs.release_tag || github.ref_name }}
-          files: |
-            dist/decode-launcher-${{ matrix.platform }}.*
-          fail_on_unmatched_files: true
+          files: dist/decode-launcher-linux-x86_64.tar.gz
