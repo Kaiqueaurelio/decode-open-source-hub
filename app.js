@@ -181,8 +181,32 @@
       appClass: "app-gridcraft",
       cmd: "cd apps/decode-grid && cargo run --release"
     },
-    "artcraft-launcher": {
+    "decode-craft": {
       number: "14",
+      role: "Estúdio de IA generativa e 3D",
+      cleanName: "Craft",
+      version: "v0.8.2",
+      accent: "#a855f7",
+      iconBg: "#2e1065",
+      icon: "decode-craft.png",
+      upstream: "DecodeCraft",
+      appClass: "app-decode-craft",
+      cmd: "cd apps/decode-craft && cargo run --release"
+    },
+    "decode-craftx": {
+      number: "15",
+      role: "Plataforma multimodal e IA criativa",
+      cleanName: "CraftX",
+      version: "v0.8.2",
+      accent: "#ec4899",
+      iconBg: "#500724",
+      icon: "decode-craftx.png",
+      upstream: "DecodeCraftX",
+      appClass: "app-decode-craftx",
+      cmd: "cd apps/decode-craftx && cargo run --release"
+    },
+    "decode-launcher": {
+      number: "16",
       role: "Instalador e atualizador da suíte",
       cleanName: "Launcher",
       version: "v0.8.2",
@@ -190,7 +214,7 @@
       iconBg: "#382905",
       icon: "decode-launcher.png",
       upstream: "Decode Launcher",
-      appClass: "app-artcraft-launcher",
+      appClass: "app-decode-launcher",
       cmd: "cd launcher && cargo run --release -p decode-launcher"
     }
   };
@@ -209,7 +233,9 @@
     deckcraft: "#f26b1d",
     cadcraft: "#14a3c7",
     gridcraft: "#1f9d55",
-    "artcraft-launcher": "#2d81ff"
+    "decode-craft": "#a855f7",
+    "decode-craftx": "#ec4899",
+    "decode-launcher": "#2d81ff"
   };
 
   function escapeHtml(value) {

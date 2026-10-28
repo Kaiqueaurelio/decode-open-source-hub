@@ -835,7 +835,9 @@ body.launcher-body {
 .app-deckcraft { --app: #f26b1d; --app-ink: #ad4306; }
 .app-cadcraft { --app: #14a3c7; --app-ink: #09596d; }
 .app-gridcraft { --app: #1f9d55; --app-ink: #136938; }
-.app-artcraft-launcher { --app: #2d81ff; --app-ink: #1659c4; }
+.app-decode-craft { --app: #a855f7; --app-ink: #7e22ce; }
+.app-decode-craftx { --app: #ec4899; --app-ink: #be185d; }
+.app-decode-launcher { --app: #2d81ff; --app-ink: #1659c4; }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .app-photocraft { --app-ink: #7fb0ff; }
@@ -851,7 +853,9 @@ body.launcher-body {
   :root:not([data-theme="light"]) .app-deckcraft { --app-ink: #ff9657; }
   :root:not([data-theme="light"]) .app-cadcraft { --app-ink: #4cc7e6; }
   :root:not([data-theme="light"]) .app-gridcraft { --app-ink: #5ee089; }
-  :root:not([data-theme="light"]) .app-artcraft-launcher { --app-ink: #74aaff; }
+  :root:not([data-theme="light"]) .app-decode-craft { --app-ink: #c084fc; }
+  :root:not([data-theme="light"]) .app-decode-craftx { --app-ink: #f472b6; }
+  :root:not([data-theme="light"]) .app-decode-launcher { --app-ink: #74aaff; }
 }
 
 :root[data-theme="dark"] .app-photocraft { --app-ink: #7fb0ff; }
@@ -867,7 +871,9 @@ body.launcher-body {
 :root[data-theme="dark"] .app-deckcraft { --app-ink: #ff9657; }
 :root[data-theme="dark"] .app-cadcraft { --app-ink: #4cc7e6; }
 :root[data-theme="dark"] .app-gridcraft { --app-ink: #5ee089; }
-:root[data-theme="dark"] .app-artcraft-launcher { --app-ink: #74aaff; }
+:root[data-theme="dark"] .app-decode-craft { --app-ink: #c084fc; }
+:root[data-theme="dark"] .app-decode-craftx { --app-ink: #f472b6; }
+:root[data-theme="dark"] .app-decode-launcher { --app-ink: #74aaff; }
 
 /* Global Reset & Base */
 *, *::before, *::after {

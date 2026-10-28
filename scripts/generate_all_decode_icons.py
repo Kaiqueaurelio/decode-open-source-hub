@@ -114,7 +114,23 @@ APPS = [
         "type": "grid",
     },
     {
-        "slug": "artcraft-launcher",
+        "slug": "decode-craft",
+        "name": "DecodeCraft",
+        "folder": "decode-craft",
+        "color": (168, 85, 247),       # #A855F7
+        "accent": (216, 180, 254),     # #D8B4FE
+        "type": "craft",
+    },
+    {
+        "slug": "decode-craftx",
+        "name": "DecodeCraftX",
+        "folder": "decode-craftx",
+        "color": (236, 72, 153),       # #EC4899
+        "accent": (244, 114, 182),     # #F472B6
+        "type": "craftx",
+    },
+    {
+        "slug": "decode-launcher",
         "name": "Decode Launcher",
         "folder": "launcher",
         "color": (32, 85, 255),        # #2055FF
@@ -331,6 +347,15 @@ def draw_glyph(draw, app_type, center, radius, color, accent):
         # Highlight cell
         draw.rectangle([cx - w*0.08, cy + h*0.12, cx + w*0.18, y0 + h - 6], fill=a_col)
 
+    elif app_type == "craft":
+        # Generative AI Sparkle & Neural 3D Splat
+        draw.ellipse([cx - radius*0.8, cy - radius*0.8, cx + radius*0.8, cy + radius*0.8], outline=a_col, width=4)
+        draw_decode_badge(draw, cx, cy, int(radius * 1.05), color, accent)
+
+    elif app_type == "craftx":
+        # Multimodal AI Prism & Kinetic Lightning
+        draw.rectangle([cx - radius*0.75, cy - radius*0.75, cx + radius*0.75, cy + radius*0.75], outline=a_col, width=4)
+        draw_decode_badge(draw, cx, cy, int(radius * 1.15), color, accent)
     elif app_type == "launcher":
         # Large signature Decode D Mark with orbital power ring
         draw.ellipse([cx - radius*1.05, cy - radius*1.05, cx + radius*1.05, cy + radius*1.05], outline=a_col, width=6)
@@ -409,7 +434,7 @@ def main():
                 hicolor_dir = icon_dir / "hicolor" / f"{s}x{s}" / "apps"
                 hicolor_dir.mkdir(parents=True, exist_ok=True)
                 resized = master_img.resize((s, s), Image.Resampling.LANCZOS)
-                resized.save(hicolor_dir / f"ai.storyteller.{slug}.png", optimize=True)
+                # removed legacy ai.storyteller save
                 resized.save(hicolor_dir / f"com.decode.{app['folder']}.png", optimize=True)
                 
             # Generate .ico file

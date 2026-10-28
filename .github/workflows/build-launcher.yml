@@ -57,7 +57,7 @@ jobs:
             dist/decode-launcher-linux-x86_64.tar.gz
             dist/decode-launcher-linux-x86_64.tar.gz.sha256
 
-      - name: Create GitHub Release
+      - name: Upload Release Assets
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
@@ -65,3 +65,110 @@ jobs:
             dist/decode-launcher-linux-x86_64.tar.gz
             dist/decode-launcher-linux-x86_64.tar.gz.sha256
           generate_release_notes: true
+
+  build-windows:
+    name: Build Windows x64 Binary (.exe)
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install stable Rust
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: launcher -> target
+
+      - name: Build Decode Launcher (Release)
+        working-directory: launcher
+        run: cargo build --release -p decode-launcher
+
+      - name: Package Release Zip & Standalone Exe
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist\decode-launcher-windows
+          Copy-Item launcher\target\release\decode-launcher.exe dist\decode-launcher-windows\
+          Copy-Item launcher\target\release\decode-launcher.exe dist\decode-launcher.exe
+          Copy-Item launcher\README.md dist\decode-launcher-windows\
+          Copy-Item launcher\LICENSE-MIT dist\decode-launcher-windows\
+          Copy-Item -Recurse launcher\assets dist\decode-launcher-windows\
+          Compress-Archive -Path dist\decode-launcher-windows\* -DestinationPath dist\decode-launcher-windows-x64.zip
+          $hashZip = (Get-FileHash dist\decode-launcher-windows-x64.zip -Algorithm SHA256).Hash.ToLower()
+          "$hashZip  decode-launcher-windows-x64.zip" | Out-File -Encoding utf8 dist\decode-launcher-windows-x64.zip.sha256
+          $hashExe = (Get-FileHash dist\decode-launcher.exe -Algorithm SHA256).Hash.ToLower()
+          "$hashExe  decode-launcher.exe" | Out-File -Encoding utf8 dist\decode-launcher.exe.sha256
+
+      - name: Upload Windows Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: decode-launcher-windows-x64
+          path: |
+            dist/decode-launcher-windows-x64.zip
+            dist/decode-launcher-windows-x64.zip.sha256
+            dist/decode-launcher.exe
+            dist/decode-launcher.exe.sha256
+
+      - name: Upload Windows Release Assets
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/decode-launcher-windows-x64.zip
+            dist/decode-launcher-windows-x64.zip.sha256
+            dist/decode-launcher.exe
+            dist/decode-launcher.exe.sha256
+
+  build-macos:
+    name: Build macOS Universal Binary
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install stable Rust
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: launcher -> target
+
+      - name: Build Decode Launcher (Release)
+        working-directory: launcher
+        run: cargo build --release -p decode-launcher
+
+      - name: Package macOS Tarball
+        run: |
+          mkdir -p dist/decode-launcher-macos
+          cp launcher/target/release/decode-launcher dist/decode-launcher-macos/
+          cp launcher/README.md dist/decode-launcher-macos/
+          cp launcher/LICENSE-MIT dist/decode-launcher-macos/
+          cp -r launcher/assets dist/decode-launcher-macos/
+          cd dist
+          tar -czvf decode-launcher-macos.tar.gz decode-launcher-macos/
+          shasum -a 256 decode-launcher-macos.tar.gz > decode-launcher-macos.tar.gz.sha256
+
+      - name: Upload macOS Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: decode-launcher-macos
+          path: |
+            dist/decode-launcher-macos.tar.gz
+            dist/decode-launcher-macos.tar.gz.sha256
+
+      - name: Upload macOS Release Assets
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/decode-launcher-macos.tar.gz
+            dist/decode-launcher-macos.tar.gz.sha256

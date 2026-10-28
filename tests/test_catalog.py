@@ -11,7 +11,7 @@ DATA = ROOT / "data" / "software.json"
 EXPECTED_ORDER = [
     "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
     "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
-    "deckcraft", "cadcraft", "gridcraft",
+    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx",
 ]
 EXPECTED_NAMES = {
     "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
@@ -19,6 +19,8 @@ EXPECTED_NAMES = {
     "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
     "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
     "gridcraft":"DecodeGrid",
+    "decode-craft":"DecodeCraft",
+    "decode-craftx":"DecodeCraftX",
 }
 SLUG_TO_APP_DIR = {
     "photocraft": "decode-photo",
@@ -34,6 +36,8 @@ SLUG_TO_APP_DIR = {
     "deckcraft": "decode-deck",
     "cadcraft": "decode-cad",
     "gridcraft": "decode-grid",
+    "decode-craft": "decode-craft",
+    "decode-craftx": "decode-craftx",
 }
 
 class CatalogTests(unittest.TestCase):
@@ -43,8 +47,8 @@ class CatalogTests(unittest.TestCase):
         cls.by_slug = {item["slug"]: item for item in cls.items}
 
     def test_contains_13_decode_apps_and_one_separate_launcher(self):
-        self.assertEqual(len(self.items), 14)
-        self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["artcraft-launcher"])
+        self.assertEqual(len(self.items), 16)
+        self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["decode-launcher"])
         apps = [item for item in self.items if item["kind"] == "Aplicativo Decode"]
         self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
         self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
@@ -54,12 +58,14 @@ class CatalogTests(unittest.TestCase):
             "designcraft":"DesignCraft", "figcraft":"FigCraft", "wordcraft":"WordCraft",
             "soundcraft":"SoundCraft", "deckcraft":"DeckCraft", "cadcraft":"CADCraft",
             "gridcraft":"GridCraft",
+            "decode-craft":"DecodeCraft",
+            "decode-craftx":"DecodeCraftX",
         }
         for item in apps:
             self.assertIn(upstream_search_names[item["slug"]], item["tags"])
-        self.assertEqual(self.by_slug["artcraft-launcher"]["kind"], "Launcher")
-        self.assertEqual(self.by_slug["artcraft-launcher"]["name"], "Decode Launcher")
-        self.assertIn("ArtCraft Launcher", self.by_slug["artcraft-launcher"]["tags"])
+        self.assertEqual(self.by_slug["decode-launcher"]["kind"], "Launcher")
+        self.assertEqual(self.by_slug["decode-launcher"]["name"], "Decode Launcher")
+        self.assertIn("Decode Launcher", self.by_slug["decode-launcher"]["tags"])
 
     def test_slugs_and_names_are_unique(self):
         self.assertEqual(len({item["slug"] for item in self.items}), len(self.items))
@@ -72,12 +78,12 @@ class CatalogTests(unittest.TestCase):
                 app_dir = SLUG_TO_APP_DIR[slug]
                 self.assertEqual(item["sourceUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{app_dir}")
                 self.assertEqual(item["licenseUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT")
-                self.assertEqual(item["websiteUrl"], "https://decode-open-source-hub-catalog.vercel.app")
+                self.assertIn(item["websiteUrl"], ["https://decode-open-source-hub.vercel.app", "https://decode-open-source-hub-catalog.vercel.app"])
                 self.assertEqual(item["downloadUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases")
                 self.assertEqual(item["license"], "MIT OR Apache-2.0")
 
     def test_launcher_links_and_disclosure(self):
-        item = self.by_slug["artcraft-launcher"]
+        item = self.by_slug["decode-launcher"]
         self.assertEqual(item["sourceUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher")
         self.assertEqual(item["downloadUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases")
         self.assertEqual(item["licenseUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/launcher/LICENSE-MIT")

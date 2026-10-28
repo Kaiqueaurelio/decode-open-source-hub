@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Decode catalog: 13 ArtCraft apps plus launcher utility",
+  "title": "Decode catalog: 15 suite apps plus launcher utility",
   "type": "array",
   "minItems": 14,
-  "maxItems": 14,
+  "maxItems": 16,
   "items": {
     "type": "object",
     "required": [
@@ -42,7 +42,9 @@
           "deckcraft",
           "cadcraft",
           "gridcraft",
-          "artcraft-launcher"
+          "decode-craft",
+          "decode-craftx",
+          "decode-launcher"
         ]
       },
       "name": {
@@ -102,7 +104,7 @@
       "websiteUrl": {
         "type": "string",
         "format": "uri",
-        "pattern": "^https://(decode-open-source-hub-catalog\\.vercel\\.app|kaiqueaurelio\\.github\\.io)"
+        "pattern": "^https://(decode-open-source-hub\\.vercel\\.app|decode-open-source-hub-catalog\\.vercel\\.app|kaiqueaurelio\\.github\\.io)"
       },
       "sourceUrl": {
         "type": "string",

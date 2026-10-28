@@ -16,7 +16,7 @@ REQUIRED = {
 EXPECTED_ORDER = [
     "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
     "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
-    "deckcraft", "cadcraft", "gridcraft",
+    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx",
 ]
 EXPECTED_NAMES = {
     "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
@@ -24,6 +24,8 @@ EXPECTED_NAMES = {
     "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
     "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
     "gridcraft":"DecodeGrid",
+    "decode-craft":"DecodeCraft",
+    "decode-craftx":"DecodeCraftX",
 }
 SLUG_TO_APP_DIR = {
     "photocraft": "decode-photo",
@@ -39,6 +41,8 @@ SLUG_TO_APP_DIR = {
     "deckcraft": "decode-deck",
     "cadcraft": "decode-cad",
     "gridcraft": "decode-grid",
+    "decode-craft": "decode-craft",
+    "decode-craftx": "decode-craftx",
 }
 CATEGORIES = {
     "Imagem e fotografia", "Design e publicação", "Vídeo e motion",
@@ -52,9 +56,10 @@ STAGES = {
     "wordcraft":"Em desenvolvimento", "soundcraft":"Em desenvolvimento",
     "deckcraft":"Em desenvolvimento", "cadcraft":"Em desenvolvimento",
     "gridcraft":"Em desenvolvimento",
+    "decode-craft":"Alpha inicial", "decode-craftx":"Em desenvolvimento",
 }
 PLATFORMS = {
-    slug: (["macOS", "Windows", "Linux"] if slug == "filmcraft"
+    slug: (["macOS", "Windows", "Linux"] if slug in ("filmcraft", "decode-craft")
            else ["macOS", "Windows", "Linux", "Web"])
     for slug in EXPECTED_ORDER
 }
@@ -81,8 +86,8 @@ def main():
     if not isinstance(items, list):
         print("ERRO: a raiz do catálogo deve ser uma lista.")
         return 1
-    if len(items) != 14:
-        errors.append(f"Esperados 13 apps Decode e 1 launcher; encontrados {len(items)} registros.")
+    if len(items) != 16:
+        errors.append(f"Esperados 15 apps Decode e 1 launcher; encontrados {len(items)} registros.")
 
     slugs = []
     names = set()
@@ -112,13 +117,13 @@ def main():
         else:
             names.add(name.strip().casefold())
 
-        if slug == "artcraft-launcher":
+        if slug == "decode-launcher":
             if name != "Decode Launcher" or item["kind"] != "Launcher":
                 errors.append(f"{prefix}: launcher deve ser identificado separadamente.")
             if item["category"] != "Launchers e utilitários":
                 errors.append(f"{prefix}: categoria incorreta do launcher.")
-            if "ArtCraft Launcher" not in item["tags"]:
-                errors.append(f"{prefix}: nome upstream do launcher deve permanecer como termo de busca.")
+            if "Decode Launcher" not in item["tags"]:
+                errors.append(f"{prefix}: nome do launcher deve permanecer como termo de busca.")
             if item["sourceUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher":
                 errors.append(f"{prefix}: repositório do launcher incorreto.")
             if item["downloadUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases":
@@ -153,8 +158,8 @@ def main():
             if item["sourceUrl"] != expected_source:
                 errors.append(f"{prefix}: repositório-fonte não corresponde ao app no monorepo Decode.")
             
-            expected_page = "https://decode-open-source-hub-catalog.vercel.app"
-            if item["websiteUrl"] != expected_page:
+            expected_page = "https://decode-open-source-hub.vercel.app"
+            if item["websiteUrl"] not in ("https://decode-open-source-hub.vercel.app", "https://decode-open-source-hub-catalog.vercel.app"):
                 errors.append(f"{prefix}: site deve apontar para o catálogo Decode.")
             if item["downloadUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases":
                 errors.append(f"{prefix}: página de download deve apontar para releases do repositório Decode.")
@@ -171,9 +176,9 @@ def main():
             if not is_https(item[key]):
                 errors.append(f"{prefix}: {key} precisa ser uma URL HTTPS.")
 
-    expected_all = EXPECTED_ORDER + ["artcraft-launcher"]
+    expected_all = EXPECTED_ORDER + ["decode-launcher"]
     if slugs != expected_all:
-        errors.append("A lista deve conter, em ordem, os 13 apps oficiais seguidos do launcher separado.")
+        errors.append("A lista deve conter, em ordem, os 15 apps oficiais seguidos do launcher separado.")
     if len(set(slugs)) != len(slugs):
         errors.append("Há slugs duplicados no catálogo.")
 
@@ -183,7 +188,7 @@ def main():
             print(" - " + error)
         return 1
 
-    print("Validação do catálogo Decode: OK — 13 Apps Decode e 1 launcher no repositório.")
+    print("Validação do catálogo Decode: OK — 15 Apps Decode e 1 launcher no repositório.")
     print("Estrutura, escopo, links HTTPS Decode e campos de catálogo conferidos.")
     return 0
 

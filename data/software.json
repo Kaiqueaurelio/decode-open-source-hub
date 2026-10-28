@@ -383,7 +383,69 @@
     "featured": false
   },
   {
-    "slug": "artcraft-launcher",
+    "slug": "decode-craft",
+    "name": "DecodeCraft",
+    "icon": "✨",
+    "category": "Design e publicação",
+    "kind": "Aplicativo Decode",
+    "tagline": "Estúdio de IA generativa para imagens, splats 3D e áudio em Rust",
+    "description": "O DecodeCraft é uma estação de trabalho para criação visual com inteligência artificial desenvolvida em Rust. Suporta geração de imagens neurais, síntese e visualização de gaussian splatting 3D, controle de prompts avançados e pipeline local acelerado por GPU com arquitetura limpa de código aberto.",
+    "platforms": [
+      "macOS",
+      "Windows",
+      "Linux"
+    ],
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-craft/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-craft",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
+    "tags": [
+      "DecodeCraft",
+      "decode",
+      "ai",
+      "generative",
+      "3d",
+      "splat",
+      "image-generation",
+      "rust"
+    ],
+    "stage": "Alpha inicial",
+    "featured": true
+  },
+  {
+    "slug": "decode-craftx",
+    "name": "DecodeCraftX",
+    "icon": "⚡",
+    "category": "Design e publicação",
+    "kind": "Aplicativo Decode",
+    "tagline": "Plataforma multimodal avançada de criação e IA generativa com Tauri e React",
+    "description": "O DecodeCraftX expande o ecossistema criativo da Decode com interface multimodal de alta reatividade baseada em Tauri e React. Integra modelos de visão, geração procedural, automação criativa e gerenciamento de projetos em nuvem e local.",
+    "platforms": [
+      "macOS",
+      "Windows",
+      "Linux",
+      "Web"
+    ],
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-craftx/LICENSE-MIT",
+    "websiteUrl": "https://decode-open-source-hub.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-craftx",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
+    "tags": [
+      "DecodeCraftX",
+      "decode",
+      "ai",
+      "tauri",
+      "react",
+      "multimodal",
+      "generative-ai"
+    ],
+    "stage": "Em desenvolvimento",
+    "featured": true
+  },
+  {
+    "slug": "decode-launcher",
     "name": "Decode Launcher",
     "icon": "🚀",
     "category": "Launchers e utilitários",
@@ -399,7 +461,7 @@
     ],
     "license": "MIT OR Apache-2.0",
     "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/launcher/LICENSE-MIT",
-    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "websiteUrl": "https://decode-open-source-hub.vercel.app",
     "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher",
     "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
     "tags": [
@@ -412,8 +474,8 @@
       "RPM",
       "Flatpak",
       "WebAssembly",
-      "Craft App Suite",
-      "ArtCraft Launcher"
+      "Decode App Suite",
+      "Decode Launcher"
     ],
     "stage": "Alpha inicial",
     "featured": true
