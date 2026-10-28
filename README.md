@@ -9,6 +9,27 @@
 
 Este repositório reúne o catálogo informativo e o código-fonte do **Decode Launcher**, com identidade própria e paridade funcional com a suíte de aplicativos. Consulte a [matriz de paridade funcional](docs/decode-launcher-parity.md) para detalhes técnicos de cada componente.
 
+## 📥 Baixar o Decode Launcher (Hub Oficial)
+
+O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter atualizada toda a suíte de softwares criativos Decode no seu computador (com atualizações automáticas via GitHub Releases).
+
+### Links Diretos para Download (Versão v0.9.0):
+
+| Sistema Operacional | Formato | Link de Download Direto | Instruções Rápidas |
+| :--- | :--- | :--- | :--- |
+| **🪟 Windows (Instalador)** | `.exe` | [**Baixar decode-launcher.exe**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe) | Execute o instalador e siga o assistente. |
+| **🪟 Windows (Portátil)** | `.zip` | [**Baixar decode-launcher-windows-x64.zip**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip) | Extraia o `.zip` e execute `decode-launcher.exe`. |
+| **🐧 Linux (x86_64)** | `.tar.gz` | [**Baixar decode-launcher-linux-x86_64.tar.gz**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz) | Extraia e rode o binário `decode-launcher`. |
+| **🍎 macOS (Intel / Apple Silicon)** | `.tar.gz` | [**Baixar decode-launcher-macos.tar.gz**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz) | Extraia o pacote e abra o aplicativo no macOS. |
+
+> 💡 **Instalação rápida no terminal Linux:**
+> ```bash
+> curl -sL https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz | tar -xz
+> ./decode-launcher
+> ```
+
+---
+
 ## O que você encontra
 
 - **Aplicativos próprios listados:** DecodeCraft, DecodeCraftX e DecodeClip. O Decode Launcher é listado separadamente como utilitário. O catálogo não inclui aplicativos upstream ou de terceiros.

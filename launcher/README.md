@@ -98,6 +98,19 @@ Atualizações respeitam o formato pelo qual o aplicativo foi originalmente inst
 
 Registros de log são gravados em `logs/decode-launcher.log` na pasta de dados do usuário (`~/.local/share/decode-launcher` no Linux, `~/Library/Application Support/Decode Launcher` no macOS e `%LOCALAPPDATA%\Decode Launcher` no Windows).
 
+## 📥 Downloads Oficiais do Decode Launcher (v0.9.0)
+
+| Sistema Operacional | Formato | Link de Download Direto | Descrição |
+| :--- | :--- | :--- | :--- |
+| **🪟 Windows (Instalador)** | `.exe` | [**Baixar decode-launcher.exe**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe) | Instalador direto para Windows 10 e 11 x64 |
+| **🪟 Windows (Portátil)** | `.zip` | [**Baixar decode-launcher-windows-x64.zip**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip) | Arquivo portátil ZIP (extrair e rodar sem instalar) |
+| **🐧 Linux (x86_64)** | `.tar.gz` | [**Baixar decode-launcher-linux-x86_64.tar.gz**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz) | Binário executável independente com ícones e atalhos |
+| **🍎 macOS** | `.tar.gz` | [**Baixar decode-launcher-macos.tar.gz**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz) | Pacote universal macOS |
+
+> 📌 **Ver todas as releases e códigos-fonte:** [GitHub Releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)
+
+---
+
 ## Downloads
 
 Baixe a versão correspondente ao seu sistema a partir da [última versão (latest release)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) ou navegue por [todas as releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases). Cada publicação fornece um arquivo `SHA256SUMS.txt` para conferência de integridade.
