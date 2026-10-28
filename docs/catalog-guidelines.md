@@ -2,31 +2,15 @@
 
 ## Escopo permitido
 
-O catálogo contém os 13 aplicativos da **Decode App Suite**:
-DecodePhoto, DecodeVector, DecodeFilm, DecodeLight, DecodePdf, DecodeEffect, DecodeDesign, DecodeFig, DecodeWord, DecodeSound, DecodeDeck, DecodeCAD e DecodeGrid.
-
-O **Decode Launcher** atua como utilitário nativo de instalação e gerenciamento da suíte. Não acrescente softwares genéricos não relacionados ao ecossistema Decode para manter a integridade e coesão da suíte.
+O catálogo exibe somente os aplicativos próprios mantidos neste repositório: **DecodeCraft**, **DecodeCraftX** e **DecodeClip**, além do **Decode Launcher** como utilitário de instalação e gerenciamento. Não incluir aplicativos de terceiros, upstream ou reempacotados sob nomes Decode. Só cadastrar um aplicativo quando seu código-fonte e manutenção estiverem comprovadamente presentes no monorepo.
 
 ## Registros e metadados
 
-Cada registro de software contém:
-- `slug`: identificador único técnico;
-- `name`: nome de apresentação com prefixo Decode (ex.: `DecodePhoto`, `DecodeCAD`);
-- `icon`: caractere visual ou emoji de identificação;
-- `category`: categoria de atuação (ex.: "Imagem e fotografia", "Design e publicação");
-- `kind`: identificação do tipo de produto;
-- `tagline`: frase curta de destaque em português;
-- `description`: descrição técnica e clara dos recursos;
-- `platforms`: plataformas suportadas (macOS, Windows, Linux, Web);
-- `license`: termo de licenciamento de código aberto (ex.: "MIT OR Apache-2.0");
-- `licenseUrl`, `websiteUrl`, `sourceUrl`, `downloadUrl`: URLs válidas em HTTPS;
-- `tags`: termos de pesquisa, incluindo os nomes de referência (ex.: `PhotoCraft`, `CADCraft`);
-- `stage`: estágio atual de desenvolvimento ("Alpha inicial", "Em desenvolvimento").
+Cada registro deve conter `slug`, `name`, `icon`, `category`, `kind`, `tagline`, `description`, `platforms`, `license`, `licenseUrl`, `websiteUrl`, `sourceUrl`, `downloadUrl`, `tags` e `stage`. Os links de fonte e licença devem apontar para o código real do respectivo aplicativo neste repositório.
 
-## DecodeCAD
+## Regras de origem
 
-O DecodeCAD é mantido no repositório [Kaiqueaurelio/decodecad](https://github.com/Kaiqueaurelio/decodecad), e todos os links de código-fonte e licença apontam diretamente para este projeto.
-
-## Nomes e apresentação
-
-Na interface e na documentação, utilize sempre os nomes oficiais Decode: DecodePhoto, DecodeVector, DecodeFilm, DecodeLight, DecodePdf, DecodeEffect, DecodeDesign, DecodeFig, DecodeWord, DecodeSound, DecodeDeck, DecodeCAD e DecodeGrid. Os nomes de referência continuam cadastrados no campo `tags` para permitir busca imediata por qualquer termo anterior.
+- Não adicionar projetos externos só porque existem diretórios, forks ou nomes de referência.
+- Não substituir nomes e ícones de projetos de terceiros para apresentá-los como aplicativos próprios.
+- Manter downloads vinculados às releases verificadas do projeto correspondente.
+- Atualizar `data/software.json`, o validador e os testes juntos.
