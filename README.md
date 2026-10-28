@@ -13,14 +13,46 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 
 O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter atualizada toda a suíte de softwares criativos Decode no seu computador (com atualizações automáticas via GitHub Releases).
 
-### Links Diretos para Download (Versão v0.9.0):
+<p align="center">
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe">
+    <img src="https://img.shields.io/badge/Windows%20Installer-.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows .exe">
+  </a>
+  &nbsp;
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip">
+    <img src="https://img.shields.io/badge/Windows%20Portable-.zip-238636?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Portable .zip">
+  </a>
+  &nbsp;
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz">
+    <img src="https://img.shields.io/badge/Linux%20x86__64-.tar.gz-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux .tar.gz">
+  </a>
+  &nbsp;
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz">
+    <img src="https://img.shields.io/badge/macOS%20Universal-.tar.gz-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS .tar.gz">
+  </a>
+</p>
 
-| Sistema Operacional | Formato | Link de Download Direto | Instruções Rápidas |
+<p align="center">
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v0.9.0">
+    <img src="https://img.shields.io/badge/GitHub%20Release-v0.9.0-8957e5?style=flat-square&logo=github&logoColor=white" alt="GitHub Release v0.9.0">
+  </a>
+  &nbsp;
+  <a href="https://decode-open-source-hub.vercel.app">
+    <img src="https://img.shields.io/badge/Cat%C3%A1logo%20Web-Online-00C7B7?style=flat-square&logo=vercel&logoColor=white" alt="Catálogo Web Online">
+  </a>
+  &nbsp;
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip">
+    <img src="https://img.shields.io/badge/C%C3%B3digo--Fonte-.ZIP-gray?style=flat-square&logo=github" alt="Código-Fonte Completo">
+  </a>
+</p>
+
+### Detalhes dos Pacotes Oficiais:
+
+| Sistema Operacional | Formato | Botão de Download Direto | Instruções Rápidas |
 | :--- | :--- | :--- | :--- |
-| **🪟 Windows (Instalador)** | `.exe` | [**Baixar decode-launcher.exe**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe) | Execute o instalador e siga o assistente. |
-| **🪟 Windows (Portátil)** | `.zip` | [**Baixar decode-launcher-windows-x64.zip**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip) | Extraia o `.zip` e execute `decode-launcher.exe`. |
-| **🐧 Linux (x86_64)** | `.tar.gz` | [**Baixar decode-launcher-linux-x86_64.tar.gz**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz) | Extraia e rode o binário `decode-launcher`. |
-| **🍎 macOS (Intel / Apple Silicon)** | `.tar.gz` | [**Baixar decode-launcher-macos.tar.gz**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz) | Extraia o pacote e abra o aplicativo no macOS. |
+| **🪟 Windows (Instalador)** | `.exe` | [**⬇️ Baixar (.exe)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe) | Execute o instalador no Windows 10/11. |
+| **🪟 Windows (Portátil)** | `.zip` | [**⬇️ Baixar (.zip)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip) | Extraia o arquivo e execute direto sem instalar. |
+| **🐧 Linux (x86_64)** | `.tar.gz` | [**⬇️ Baixar (.tar.gz)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz) | Extraia e rode o executável `decode-launcher`. |
+| **🍎 macOS (Intel / Apple Silicon)** | `.tar.gz` | [**⬇️ Baixar (.tar.gz)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz) | Extraia e execute no macOS. |
 
 > 💡 **Instalação rápida no terminal Linux:**
 > ```bash
