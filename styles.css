@@ -8,7 +8,7 @@
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* ArtCraft Exact Dark Theme Palette */
+  /* Decode Dark Theme Palette */
   --bg: #0c0d10;
   --bg-raised: #111216;
   --bg-sunken: #08090b;
@@ -42,7 +42,7 @@ body.launcher-body {
   font-family: var(--font-sans);
 }
 
-/* Launcher Window Header Bar (ArtCraft exact) */
+/* Launcher Window Header Bar */
 .launcher-window-header {
   height: 48px;
   background-color: #08090b;
@@ -129,7 +129,7 @@ body.launcher-body {
   color: #ffffff;
 }
 
-/* Control Bar (ArtCraft exact) */
+/* Control Bar */
 .launcher-control-bar {
   background-color: #0d0e12;
   border-bottom: 1px solid #1a1b20;
@@ -408,7 +408,7 @@ body.launcher-body {
   border-color: #3b3f4e;
 }
 
-/* 3-Column App Grid (ArtCraft exact) */
+/* 3-Column App Grid */
 .launcher-main-container {
   padding: 0 24px 40px;
 }
@@ -433,7 +433,7 @@ body.launcher-body {
   }
 }
 
-/* Card Styling (ArtCraft exact) */
+/* Card Styling */
 .software-card {
   position: relative;
   display: flex;
@@ -664,7 +664,7 @@ body.launcher-body {
   cursor: pointer;
 }
 
-/* Footer Status Bar (ArtCraft exact) */
+/* Footer Status Bar */
 .launcher-footer-bar {
   margin-top: auto;
   height: 44px;
@@ -715,7 +715,7 @@ body.launcher-body {
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Geist+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ==========================================================================
-   ArtCraft Design System Cloned & Customized for Decode Analytics
+   Decode Analytics Design System
    ========================================================================== */
 
 :root {
@@ -724,7 +724,7 @@ body.launcher-body {
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Color Tokens - Light mode (ArtCraft exact) */
+  /* Color Tokens - Light mode */
   --bg: #f2f1ee;
   --bg-raised: #faf9f7;
   --bg-sunken: #e9e8e4;
