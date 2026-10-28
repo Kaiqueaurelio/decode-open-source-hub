@@ -20,7 +20,7 @@ OPTIONAL = {
 EXPECTED_ORDER = [
     "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
     "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
-    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx",
+    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx", "decode-clip",
 ]
 EXPECTED_NAMES = {
     "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
@@ -29,7 +29,7 @@ EXPECTED_NAMES = {
     "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
     "gridcraft":"DecodeGrid",
     "decode-craft":"DecodeCraft",
-    "decode-craftx":"DecodeCraftX",
+    "decode-craftx":"DecodeCraftX", "decode-clip":"DecodeClip",
 }
 SLUG_TO_APP_DIR = {
     "photocraft": "decode-photo",
@@ -47,10 +47,11 @@ SLUG_TO_APP_DIR = {
     "gridcraft": "decode-grid",
     "decode-craft": "decode-craft",
     "decode-craftx": "decode-craftx",
+    "decode-clip": "decode-clip",
 }
 CATEGORIES = {
     "Imagem e fotografia", "Design e publicação", "Vídeo e motion",
-    "Documentos e produtividade", "Áudio", "CAD e engenharia",
+    "Documentos e produtividade", "Áudio", "CAD e engenharia", "Vídeo e IA",
 }
 STAGES = {
     "photocraft":"Alpha inicial", "vectorcraft":"Em desenvolvimento",
@@ -61,10 +62,10 @@ STAGES = {
     "deckcraft":"Em desenvolvimento", "cadcraft":"Em desenvolvimento",
     "gridcraft":"Em desenvolvimento",
     "decode-craft":"Alpha inicial", "decode-craftx":"Em desenvolvimento",
+    "decode-clip":"Disponível",
 }
 PLATFORMS = {
-    slug: (["macOS", "Windows", "Linux"] if slug in ("filmcraft", "decode-craft")
-           else ["macOS", "Windows", "Linux", "Web"])
+    slug: (["Linux", "Windows", "macOS", "Docker"] if slug == "decode-clip" else ["macOS", "Windows", "Linux"] if slug in ("filmcraft", "decode-craft") else ["macOS", "Windows", "Linux", "Web"])
     for slug in EXPECTED_ORDER
 }
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -90,8 +91,8 @@ def main():
     if not isinstance(items, list):
         print("ERRO: a raiz do catálogo deve ser uma lista.")
         return 1
-    if len(items) != 16:
-        errors.append(f"Esperados 15 apps Decode e 1 launcher; encontrados {len(items)} registros.")
+    if len(items) != 17:
+        errors.append(f"Esperados 16 apps Decode e 1 launcher; encontrados {len(items)} registros.")
 
     slugs = []
     names = set()
@@ -132,7 +133,7 @@ def main():
                 errors.append(f"{prefix}: repositório do launcher incorreto.")
             if item["downloadUrl"] != "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases":
                 errors.append(f"{prefix}: download deve apontar para releases do repositório.")
-            if item["license"] != "MIT OR Apache-2.0":
+            if item["license"] not in ("MIT OR Apache-2.0", "GPL-3.0"):
                 errors.append(f"{prefix}: rótulo de licença inconsistente no launcher.")
             if not isinstance(item["platforms"], list) or not item["platforms"]:
                 errors.append(f"{prefix}: platforms deve ser uma lista não vazia.")
@@ -146,7 +147,7 @@ def main():
                 errors.append(f"{prefix}: tipo deve ser Aplicativo Decode.")
             if item["category"] not in CATEGORIES:
                 errors.append(f"{prefix}: categoria inesperada {item['category']!r}.")
-            if item["license"] != "MIT OR Apache-2.0":
+            if item["license"] not in ("MIT OR Apache-2.0", "GPL-3.0"):
                 errors.append(f"{prefix}: rótulo de licença inconsistente.")
             if item["stage"] != STAGES.get(slug):
                 errors.append(f"{prefix}: estágio não corresponde à lista oficial para {slug}.")
@@ -154,7 +155,7 @@ def main():
                 errors.append(f"{prefix}: plataformas não correspondem à lista oficial para {slug}.")
             
             app_dir = SLUG_TO_APP_DIR.get(slug)
-            expected_license = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT"
+            expected_license = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE" if slug == "decode-clip" else f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT"
             if item["licenseUrl"] != expected_license:
                 errors.append(f"{prefix}: URL de licença deve apontar para {expected_license}.")
             
@@ -192,7 +193,7 @@ def main():
             print(" - " + error)
         return 1
 
-    print("Validação do catálogo Decode: OK — 15 Apps Decode e 1 launcher no repositório.")
+    print("Validação do catálogo Decode: OK — 16 Apps Decode e 1 launcher no repositório.")
     print("Estrutura, escopo, links HTTPS Decode e campos de catálogo conferidos.")
     return 0
 

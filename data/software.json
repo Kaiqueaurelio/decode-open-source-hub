@@ -445,6 +445,39 @@
     "featured": true
   },
   {
+    "slug": "decode-clip",
+    "name": "DecodeClip",
+    "icon": "🎬",
+    "category": "Vídeo e IA",
+    "kind": "Aplicativo Decode",
+    "tagline": "Geração e edição inteligente de clipes e cortes virais com IA",
+    "description": "Plataforma open-source completa para transformar vídeos longos em clipes virais verticais com reenquadramento inteligente, legendas dinâmicas, detecção de rostos e automação com MCP.",
+    "platforms": [
+      "Linux",
+      "Windows",
+      "macOS",
+      "Docker"
+    ],
+    "license": "GPL-3.0",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/decode-clip/LICENSE",
+    "websiteUrl": "https://decode-open-source-hub-catalog.vercel.app",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/decode-clip",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases",
+    "tags": [
+      "vídeo",
+      "clipes",
+      "IA",
+      "cortes",
+      "redes sociais",
+      "DecodeClip",
+      "shorts",
+      "reels",
+      "tiktok"
+    ],
+    "stage": "Disponível",
+    "featured": true
+  },
+  {
     "slug": "decode-launcher",
     "name": "Decode Launcher",
     "icon": "🚀",

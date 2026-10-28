@@ -11,7 +11,7 @@ DATA = ROOT / "data" / "software.json"
 EXPECTED_ORDER = [
     "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
     "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
-    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx",
+    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx", "decode-clip",
 ]
 EXPECTED_NAMES = {
     "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
@@ -21,6 +21,7 @@ EXPECTED_NAMES = {
     "gridcraft":"DecodeGrid",
     "decode-craft":"DecodeCraft",
     "decode-craftx":"DecodeCraftX",
+    "decode-clip":"DecodeClip",
 }
 SLUG_TO_APP_DIR = {
     "photocraft": "decode-photo",
@@ -38,6 +39,7 @@ SLUG_TO_APP_DIR = {
     "gridcraft": "decode-grid",
     "decode-craft": "decode-craft",
     "decode-craftx": "decode-craftx",
+    "decode-clip": "decode-clip",
 }
 
 class CatalogTests(unittest.TestCase):
@@ -47,7 +49,7 @@ class CatalogTests(unittest.TestCase):
         cls.by_slug = {item["slug"]: item for item in cls.items}
 
     def test_contains_13_decode_apps_and_one_separate_launcher(self):
-        self.assertEqual(len(self.items), 16)
+        self.assertEqual(len(self.items), 17)
         self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["decode-launcher"])
         apps = [item for item in self.items if item["kind"] == "Aplicativo Decode"]
         self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
@@ -60,6 +62,7 @@ class CatalogTests(unittest.TestCase):
             "gridcraft":"GridCraft",
             "decode-craft":"DecodeCraft",
             "decode-craftx":"DecodeCraftX",
+            "decode-clip":"DecodeClip",
         }
         for item in apps:
             self.assertIn(upstream_search_names[item["slug"]], item["tags"])
@@ -77,10 +80,11 @@ class CatalogTests(unittest.TestCase):
             with self.subTest(app=item["name"]):
                 app_dir = SLUG_TO_APP_DIR[slug]
                 self.assertEqual(item["sourceUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{app_dir}")
-                self.assertEqual(item["licenseUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT")
+                expected_lic = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE" if slug == "decode-clip" else f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT"
+                self.assertEqual(item["licenseUrl"], expected_lic)
                 self.assertIn(item["websiteUrl"], ["https://decode-open-source-hub.vercel.app", "https://decode-open-source-hub-catalog.vercel.app"])
                 self.assertEqual(item["downloadUrl"], "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases")
-                self.assertEqual(item["license"], "MIT OR Apache-2.0")
+                self.assertIn(item["license"], ("MIT OR Apache-2.0", "GPL-3.0"))
 
     def test_launcher_links_and_disclosure(self):
         item = self.by_slug["decode-launcher"]

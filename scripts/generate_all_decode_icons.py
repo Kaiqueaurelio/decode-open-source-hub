@@ -1,368 +1,415 @@
 #!/usr/bin/env python3
-"""Generate complete, high-definition Decode Analytics icons for all 13 suite apps and launcher."""
+"""Generate ultra-polished, modern, unified Decode Analytics suite icons.
+
+Every icon follows the Decode Design System:
+- Dark sleek squircle base (#0d111a) with subtle inner gradient & neon rim
+- The official Decode Analytics clover node mark embedded as brand hallmark
+- Distinct high-contrast functional glyph for each tool:
+  * photocraft: Camera aperture with focus ring
+  * vectorcraft: Pen tool nib with bezier control nodes
+  * filmcraft: Cinematic clapperboard / film frame with playback triangle
+  * lightcraft: Sunburst aperture / color grading wheel
+  * pdfcraft: Clean document sheet with folded corner & PDF vector lines
+  * effectcraft: Visual FX magic wand with particle burst
+  * designcraft: Layout artboards with vector guides & ruler
+  * figcraft: Prototyping component diamond with smart layout flow
+  * wordcraft: Typography ligature 'W' with dynamic text lines
+  * soundcraft: Stereo equalizer spectrum waveform with audio jack
+  * deckcraft: Presentation slide projection with rising analytics trend
+  * cadcraft: Precision engineering drafting compass with crosshair snaps
+  * gridcraft: Spreadsheet database table matrix with active formula cell
+  * decode-craft: Neural network node matrix with generative AI spark
+  * decode-craftx: Quantum AI prism with hyper-speed laser vector
+  * decode-clip: Video scissors cutting filmstrip / social viral short badge
+  * decode-launcher: Official Decode Analytics clover mark with orbital energy ring
+"""
+
 import math
 import os
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageOps
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+OFFICIAL_MARK_PATH = REPO_ROOT / "launcher" / "docs" / "brand" / "decode-mark.png"
 
-# App definitions: slug, name, folder, primary_rgb, accent_rgb
+# App configurations: slug, name, folder, primary_rgb, accent_rgb, type
 APPS = [
     {
         "slug": "photocraft",
         "name": "Decode Photo",
         "folder": "decode-photo",
-        "color": (47, 123, 245),       # #2F7BF5
-        "accent": (0, 210, 255),       # #00D2FF
+        "color": (59, 130, 246),       # #3B82F6 Vibrant Blue
+        "accent": (56, 189, 248),      # #38BDF8 Sky Cyan
         "type": "photo",
     },
     {
         "slug": "vectorcraft",
         "name": "Decode Vector",
         "folder": "decode-vector",
-        "color": (232, 87, 63),        # #E8573F
-        "accent": (255, 138, 112),     # #FF8A70
+        "color": (239, 68, 68),        # #EF4444 Crimson Red
+        "accent": (249, 115, 22),      # #F97316 Bright Orange
         "type": "vector",
     },
     {
         "slug": "filmcraft",
         "name": "Decode Film",
         "folder": "decode-film",
-        "color": (139, 92, 246),       # #8B5CF6
-        "accent": (182, 156, 255),     # #B69CFF
+        "color": (147, 51, 234),       # #9333EA Electric Violet
+        "accent": (192, 132, 252),     # #C084FC Lavender Neon
         "type": "film",
     },
     {
         "slug": "lightcraft",
         "name": "Decode Light",
         "folder": "decode-light",
-        "color": (242, 165, 22),       # #F2A516
-        "accent": (255, 193, 77),      # #FFC14D
+        "color": (245, 158, 11),       # #F59E0B Amber
+        "accent": (253, 224, 71),      # #FDE047 Vivid Yellow
         "type": "light",
     },
     {
         "slug": "pdfcraft",
         "name": "Decode PDF",
         "folder": "decode-pdf",
-        "color": (18, 165, 138),       # #12A58A
-        "accent": (63, 214, 184),      # #3FD6B8
+        "color": (16, 185, 129),       # #10B981 Emerald
+        "accent": (52, 211, 153),      # #34D399 Mint
         "type": "pdf",
     },
     {
         "slug": "effectcraft",
         "name": "Decode Effect",
         "folder": "decode-effect",
-        "color": (224, 54, 143),       # #E0368F
-        "accent": (255, 122, 184),     # #FF7AB8
+        "color": (236, 72, 153),       # #EC4899 Magenta
+        "accent": (244, 114, 182),     # #F472B6 Pink
         "type": "effect",
     },
     {
         "slug": "designcraft",
         "name": "Decode Design",
         "folder": "decode-design",
-        "color": (236, 72, 153),       # #EC4899
-        "accent": (244, 114, 182),     # #F472B6
+        "color": (217, 70, 239),       # #D946EF Fuchsia
+        "accent": (240, 171, 252),     # #F0ABFC Orchid
         "type": "design",
     },
     {
         "slug": "figcraft",
         "name": "Decode Fig",
         "folder": "decode-fig",
-        "color": (16, 185, 129),       # #10B981
-        "accent": (52, 211, 153),      # #34D399
+        "color": (20, 184, 166),       # #14B8A6 Teal
+        "accent": (94, 234, 212),      # #5EEAD4 Aquamarine
         "type": "fig",
     },
     {
         "slug": "wordcraft",
         "name": "Decode Word",
         "folder": "decode-word",
-        "color": (59, 130, 246),       # #3B82F6
-        "accent": (96, 165, 250),      # #60A5FA
+        "color": (37, 99, 235),        # #2563EB Deep Blue
+        "accent": (96, 165, 250),      # #60A5FA Light Blue
         "type": "word",
     },
     {
         "slug": "soundcraft",
         "name": "Decode Sound",
         "folder": "decode-sound",
-        "color": (99, 102, 241),       # #6366F1
-        "accent": (129, 140, 248),     # #818CF8
+        "color": (79, 70, 229),        # #4F46E5 Indigo
+        "accent": (165, 180, 252),     # #A5B4FC Soft Indigo
         "type": "sound",
     },
     {
         "slug": "deckcraft",
         "name": "Decode Deck",
         "folder": "decode-deck",
-        "color": (249, 115, 22),       # #F97316
-        "accent": (251, 146, 60),      # #FB923C
+        "color": (234, 88, 12),        # #EA580C Warm Tangerine
+        "accent": (251, 146, 60),      # #FB923C Peach Accent
         "type": "deck",
     },
     {
         "slug": "cadcraft",
         "name": "Decode CAD",
         "folder": "decode-cad",
-        "color": (62, 166, 232),       # #3EA6E8
-        "accent": (124, 200, 255),     # #7CC8FF
+        "color": (14, 165, 233),       # #0EA5E9 Sky Blue
+        "accent": (125, 211, 252),     # #7DD3FC Soft Cyan
         "type": "cad",
     },
     {
         "slug": "gridcraft",
         "name": "Decode Grid",
         "folder": "decode-grid",
-        "color": (31, 157, 85),        # #1F9D55
-        "accent": (79, 214, 138),      # #4FD68A
+        "color": (22, 163, 74),        # #16A34A Forest Green
+        "accent": (74, 222, 128),      # #4ADE80 Lime Green
         "type": "grid",
     },
     {
         "slug": "decode-craft",
         "name": "DecodeCraft",
         "folder": "decode-craft",
-        "color": (168, 85, 247),       # #A855F7
-        "accent": (216, 180, 254),     # #D8B4FE
+        "color": (139, 92, 246),       # #8B5CF6 Purple
+        "accent": (216, 180, 254),     # #D8B4FE Pastel Violet
         "type": "craft",
     },
     {
         "slug": "decode-craftx",
         "name": "DecodeCraftX",
         "folder": "decode-craftx",
-        "color": (236, 72, 153),       # #EC4899
-        "accent": (244, 114, 182),     # #F472B6
+        "color": (244, 63, 94),        # #F43F5E Rose Red
+        "accent": (251, 113, 133),     # #FB7185 Coral
         "type": "craftx",
+    },
+    {
+        "slug": "decode-clip",
+        "name": "DecodeClip",
+        "folder": "decode-clip",
+        "color": (225, 29, 72),        # #E11D48 Carmine
+        "accent": (253, 164, 175),     # #FDA4AF Light Rose
+        "type": "clip",
     },
     {
         "slug": "decode-launcher",
         "name": "Decode Launcher",
         "folder": "launcher",
-        "color": (32, 85, 255),        # #2055FF
-        "accent": (0, 210, 255),       # #00D2FF
+        "color": (37, 99, 235),        # #2563EB Blue
+        "accent": (56, 189, 248),      # #38BDF8 Cyan
         "type": "launcher",
     },
 ]
 
-def draw_decode_badge(draw, cx, cy, size, color, accent):
-    """Draw the signature Decode 'D' mark at position (cx, cy)."""
-    r = size // 2
-    # Outer D contour
-    left = cx - r
-    top = cy - r
-    right = cx + r
-    bottom = cy + r
-    
-    # Stem
-    stem_w = max(4, size // 4)
-    draw.rounded_rectangle([left, top, left + stem_w, bottom], radius=stem_w//2, fill=accent)
-    
-    # Curve
-    curve_box = [left, top, right, bottom]
-    draw.arc(curve_box, -90, 90, fill=color, width=stem_w)
-    draw.line([(left + stem_w//2, top), (cx, top)], fill=color, width=stem_w)
-    draw.line([(left + stem_w//2, bottom), (cx, bottom)], fill=color, width=stem_w)
+def load_official_mark():
+    if OFFICIAL_MARK_PATH.exists():
+        return Image.open(OFFICIAL_MARK_PATH).convert("RGBA")
+    return None
 
 def draw_glyph(draw, app_type, center, radius, color, accent):
-    """Draw a distinct, modern vector glyph representing the tool."""
     cx, cy = center
     c_col = color + (255,)
     a_col = accent + (255,)
-    white = (255, 255, 255, 230)
+    white = (255, 255, 255, 255)
     
     if app_type == "photo":
-        # Aperture / Lens: concentric rings + shutter petals
-        draw.ellipse([cx - radius, cy - radius, cx + radius, cy + radius], outline=a_col, width=12)
-        inner_r = radius * 0.6
-        draw.ellipse([cx - inner_r, cy - inner_r, cx + inner_r, cy + inner_r], fill=c_col, outline=white, width=4)
-        center_r = radius * 0.25
-        draw.ellipse([cx - center_r, cy - center_r, cx + center_r, cy + center_r], fill=(11, 15, 25, 255))
-        # Glare
-        draw.ellipse([cx - radius*0.35, cy - radius*0.35, cx - radius*0.15, cy - radius*0.15], fill=(255, 255, 255, 180))
+        # Professional Camera with lens aperture rings & focus reflection
+        w = radius * 1.3
+        h = radius * 0.95
+        # Camera body
+        draw.rounded_rectangle([cx - w, cy - h*0.7, cx + w, cy + h*0.9], radius=16, outline=c_col, width=6)
+        # Top prism
+        draw.polygon([(cx - w*0.35, cy - h*0.7), (cx + w*0.35, cy - h*0.7), (cx + w*0.2, cy - h), (cx - w*0.2, cy - h)], fill=c_col)
+        # Big central lens
+        lens_r = radius * 0.58
+        draw.ellipse([cx - lens_r, cy - lens_r*0.8, cx + lens_r, cy + lens_r*1.2], outline=a_col, width=8)
+        inner_r = lens_r * 0.55
+        draw.ellipse([cx - inner_r, cy - inner_r*0.6 + 6, cx + inner_r, cy + inner_r*1.4 + 6], fill=c_col)
+        # Glint
+        draw.ellipse([cx - inner_r*0.4, cy - inner_r*0.2, cx + inner_r*0.2, cy + inner_r*0.4], fill=white)
+        # Shutter button
+        draw.rounded_rectangle([cx + w*0.5, cy - h*0.85, cx + w*0.8, cy - h*0.7], radius=4, fill=a_col)
 
     elif app_type == "vector":
-        # Vector Pen Tip & Bezier Node
-        points = [
-            (cx, cy - radius),
-            (cx + radius*0.7, cy + radius*0.4),
-            (cx + radius*0.3, cy + radius*0.7),
-            (cx, cy + radius*0.2),
-            (cx - radius*0.3, cy + radius*0.7),
-            (cx - radius*0.7, cy + radius*0.4),
+        # Precision Pen Tool Nib & Bezier vector control handles
+        # Pen Nib
+        nib = [
+            (cx, cy - radius * 1.15),
+            (cx + radius * 0.7, cy + radius * 0.5),
+            (cx + radius * 0.35, cy + radius * 0.5),
+            (cx, cy + radius * 0.8),
+            (cx - radius * 0.35, cy + radius * 0.5),
+            (cx - radius * 0.7, cy + radius * 0.5),
         ]
-        draw.polygon(points, fill=c_col, outline=a_col)
-        # Pen nib slit
-        draw.line([(cx, cy - radius*0.5), (cx, cy + radius*0.1)], fill=white, width=6)
-        # Anchor handles
-        draw.ellipse([cx - radius*0.8, cy - radius*0.8, cx - radius*0.5, cy - radius*0.5], fill=a_col)
-        draw.ellipse([cx + radius*0.5, cy - radius*0.8, cx + radius*0.8, cy - radius*0.5], fill=a_col)
-        draw.line([(cx - radius*0.65, cy - radius*0.65), (cx + radius*0.65, cy - radius*0.65)], fill=white, width=4)
+        draw.polygon(nib, fill=c_col, outline=a_col)
+        # Center split
+        draw.line([(cx, cy - radius * 0.4), (cx, cy + radius * 0.8)], fill=white, width=5)
+        draw.ellipse([cx - 8, cy - radius * 0.45 - 8, cx + 8, cy - radius * 0.45 + 8], fill=white)
+        # Control handle dots
+        draw.line([(cx - radius*1.1, cy + radius*0.85), (cx + radius*1.1, cy + radius*0.85)], fill=a_col, width=4)
+        draw.rectangle([cx - radius*1.1 - 7, cy + radius*0.85 - 7, cx - radius*1.1 + 7, cy + radius*0.85 + 7], fill=white)
+        draw.rectangle([cx + radius*1.1 - 7, cy + radius*0.85 - 7, cx + radius*1.1 + 7, cy + radius*0.85 + 7], fill=white)
 
     elif app_type == "film":
-        # Cinema Clapperboard / Film Frame
-        w, h = radius * 1.3, radius * 1.0
-        x0, y0 = cx - w//2, cy - h//2
-        draw.rounded_rectangle([x0, y0, x0 + w, y0 + h], radius=16, fill=(20, 24, 38, 255), outline=a_col, width=8)
-        # Clapper top bar
-        draw.rectangle([x0, y0, x0 + w, y0 + h*0.35], fill=c_col)
-        # Stripes
-        for sx in range(int(x0) + 15, int(x0 + w) - 10, 32):
-            draw.line([(sx, y0 + 4), (sx + 14, y0 + h*0.32)], fill=white, width=6)
-        # Play triangle
-        tri = [(cx - 10, cy + 5), (cx - 10, cy + h*0.35), (cx + 20, cy + h*0.2)]
-        draw.polygon(tri, fill=a_col)
+        # Hollywood Film Clapperboard with cinema play indicator
+        w = radius * 1.15
+        h = radius * 0.85
+        # Lower board
+        draw.rounded_rectangle([cx - w, cy - h*0.1, cx + w, cy + h*1.1], radius=14, outline=c_col, width=6)
+        # Clapper stripes on upper tilted bar
+        top_bar = [(cx - w*1.05, cy - h*0.8), (cx + w*1.05, cy - h*0.35), (cx + w*1.02, cy - h*0.1), (cx - w*1.08, cy - h*0.55)]
+        draw.polygon(top_bar, fill=c_col, outline=a_col)
+        # Play button in center
+        play = [(cx - radius*0.25, cy + radius*0.2), (cx - radius*0.25, cy + radius*0.8), (cx + radius*0.4, cy + radius*0.5)]
+        draw.polygon(play, fill=a_col)
 
     elif app_type == "light":
-        # Sunburst / Shutter Blades / RAW Crystal
-        draw.ellipse([cx - radius*0.8, cy - radius*0.8, cx + radius*0.8, cy + radius*0.8], outline=a_col, width=8)
-        # Radial rays
+        # Dynamic Sunburst / Aperture Ring & Shutter Ray
+        draw.ellipse([cx - radius*0.45, cy - radius*0.45, cx + radius*0.45, cy + radius*0.45], fill=a_col)
+        draw.ellipse([cx - radius*0.7, cy - radius*0.7, cx + radius*0.7, cy + radius*0.7], outline=c_col, width=6)
         for angle in range(0, 360, 45):
             rad = math.radians(angle)
-            x1 = cx + math.cos(rad) * radius * 0.45
-            y1 = cy + math.sin(rad) * radius * 0.45
-            x2 = cx + math.cos(rad) * radius * 0.95
-            y2 = cy + math.sin(rad) * radius * 0.95
-            draw.line([(x1, y1), (x2, y2)], fill=c_col, width=7)
-        draw.ellipse([cx - radius*0.3, cy - radius*0.3, cx + radius*0.3, cy + radius*0.3], fill=a_col)
+            x1 = cx + math.cos(rad) * radius * 0.85
+            y1 = cy + math.sin(rad) * radius * 0.85
+            x2 = cx + math.cos(rad) * radius * 1.15
+            y2 = cy + math.sin(rad) * radius * 1.15
+            draw.line([(x1, y1), (x2, y2)], fill=a_col, width=6)
 
     elif app_type == "pdf":
-        # Document Fold & Shield Lock
-        w, h = radius * 1.0, radius * 1.3
-        x0, y0 = cx - w//2, cy - h//2
-        # Page body
-        draw.rounded_rectangle([x0, y0, x0 + w, y0 + h], radius=14, fill=c_col, outline=white, width=6)
-        # Lines
-        line_w = w * 0.6
-        draw.line([(cx - line_w//2, cy - radius*0.3), (cx + line_w//2, cy - radius*0.3)], fill=white, width=8)
-        draw.line([(cx - line_w//2, cy), (cx + line_w//2, cy)], fill=white, width=8)
-        draw.line([(cx - line_w//2, cy + radius*0.3), (cx + line_w*0.2, cy + radius*0.3)], fill=white, width=8)
-        # Secure badge
-        draw.ellipse([cx + w*0.1, cy + h*0.2, cx + w*0.55, cy + h*0.65], fill=a_col, outline=white, width=3)
+        # Clean Document Sheet with 3D folded corner & Vector Page Lines
+        w = radius * 0.85
+        h = radius * 1.15
+        fold = radius * 0.4
+        doc_pts = [
+            (cx - w, cy - h),
+            (cx + w - fold, cy - h),
+            (cx + w, cy - h + fold),
+            (cx + w, cy + h),
+            (cx - w, cy + h),
+        ]
+        draw.polygon(doc_pts, outline=c_col, width=6)
+        # Fold corner
+        draw.polygon([(cx + w - fold, cy - h), (cx + w - fold, cy - h + fold), (cx + w, cy - h + fold)], fill=a_col)
+        # Document lines
+        draw.line([(cx - w*0.65, cy - h*0.1), (cx + w*0.65, cy - h*0.1)], fill=a_col, width=6)
+        draw.line([(cx - w*0.65, cy + h*0.25), (cx + w*0.65, cy + h*0.25)], fill=white, width=6)
+        draw.line([(cx - w*0.65, cy + h*0.6), (cx + w*0.25, cy + h*0.6)], fill=white, width=6)
 
     elif app_type == "effect":
-        # Dynamic Starburst VFX Spark
-        for i in range(8):
-            ang = i * (math.pi / 4)
-            r_out = radius * (1.1 if i % 2 == 0 else 0.55)
-            x = cx + math.cos(ang) * r_out
-            y = cy + math.sin(ang) * r_out
-            if i == 0:
-                poly = [(x, y)]
-            else:
-                poly.append((x, y))
-        draw.polygon(poly, fill=c_col, outline=a_col)
-        draw.ellipse([cx - radius*0.3, cy - radius*0.3, cx + radius*0.3, cy + radius*0.3], fill=white)
+        # Magic Wand with luminous particle stars
+        draw.line([(cx - radius*0.8, cy + radius*0.8), (cx + radius*0.4, cy - radius*0.4)], fill=c_col, width=12)
+        draw.line([(cx + radius*0.1, cy - radius*0.1), (cx + radius*0.4, cy - radius*0.4)], fill=a_col, width=14)
+        # Star sparks
+        for sx, sy in [(cx + radius*0.7, cy - radius*0.7), (cx + radius*0.2, cy - radius*0.9), (cx + radius*0.9, cy - radius*0.3)]:
+            draw.line([(sx - 12, sy), (sx + 12, sy)], fill=a_col, width=4)
+            draw.line([(sx, sy - 12), (sx, sy + 12)], fill=a_col, width=4)
 
     elif app_type == "design":
-        # Layout Columns & Grid Frames
-        w, h = radius * 1.3, radius * 1.1
-        x0, y0 = cx - w//2, cy - h//2
-        # Left column
-        draw.rounded_rectangle([x0, y0, cx - 10, y0 + h], radius=10, fill=c_col, outline=a_col, width=4)
-        # Right top block
-        draw.rounded_rectangle([cx + 10, y0, x0 + w, cy - 8], radius=8, fill=a_col, outline=white, width=3)
-        # Right bottom block
-        draw.rounded_rectangle([cx + 10, cy + 8, x0 + w, y0 + h], radius=8, fill=(20, 24, 38, 255), outline=a_col, width=4)
+        # Precision Canvas Artboards with Layout Ruler & Guides
+        w = radius * 0.95
+        draw.rectangle([cx - w, cy - w*0.7, cx + w, cy + w*0.7], outline=c_col, width=6)
+        draw.rectangle([cx - w*0.7, cy - w*0.45, cx + w*0.7, cy + w*0.45], outline=a_col, width=4)
+        # Grid snap cross
+        draw.line([(cx, cy - w*0.7), (cx, cy + w*0.7)], fill=white, width=2)
+        draw.line([(cx - w, cy), (cx + w, cy)], fill=white, width=2)
 
     elif app_type == "fig":
-        # UI Nodes / Interface Components
-        draw.ellipse([cx - radius*0.7, cy - radius*0.7, cx - radius*0.1, cy - radius*0.1], fill=a_col)
-        draw.ellipse([cx + radius*0.1, cy - radius*0.7, cx + radius*0.7, cy - radius*0.1], fill=c_col)
-        draw.ellipse([cx - radius*0.7, cy + radius*0.1, cx - radius*0.1, cy + radius*0.7], fill=c_col)
-        draw.ellipse([cx + radius*0.1, cy + radius*0.1, cx + radius*0.7, cy + radius*0.7], fill=white)
-        # Frame connector lines
-        draw.line([(cx - radius*0.4, cy - radius*0.4), (cx + radius*0.4, cy + radius*0.4)], fill=white, width=4)
+        # Modern UI Component Diamond with Dynamic Vector Corner Nodes
+        d = radius * 0.95
+        diamond = [(cx, cy - d), (cx + d, cy), (cx, cy + d), (cx - d, cy)]
+        draw.polygon(diamond, outline=c_col, width=7)
+        inner = [(cx, cy - d*0.5), (cx + d*0.5, cy), (cx, cy + d*0.5), (cx - d*0.5, cy)]
+        draw.polygon(inner, fill=a_col)
+        # Corner nodes
+        for pt in diamond:
+            draw.rectangle([pt[0]-6, pt[1]-6, pt[0]+6, pt[1]+6], fill=white)
 
     elif app_type == "word":
-        # Serif Typographic W / Pen Calligraphy
-        p1 = (cx - radius*0.8, cy - radius*0.6)
-        p2 = (cx - radius*0.4, cy + radius*0.6)
-        p3 = (cx, cy - radius*0.2)
-        p4 = (cx + radius*0.4, cy + radius*0.6)
-        p5 = (cx + radius*0.8, cy - radius*0.6)
-        draw.line([p1, p2, p3, p4, p5], fill=c_col, width=16, joint="curve")
-        draw.line([p1, p2, p3, p4, p5], fill=a_col, width=8, joint="curve")
-        # Underline
-        draw.line([(cx - radius*0.7, cy + radius*0.8), (cx + radius*0.7, cy + radius*0.8)], fill=white, width=8)
+        # Typography Monogram Ligature 'W' with Editorial Serifs
+        w = radius * 0.95
+        h = radius * 0.9
+        pts = [
+            (cx - w, cy - h),
+            (cx - w*0.55, cy + h),
+            (cx, cy - h*0.2),
+            (cx + w*0.55, cy + h),
+            (cx + w, cy - h),
+        ]
+        draw.line(pts, fill=c_col, width=12, joint="curve")
+        draw.line([(cx - w*0.55, cy + h), (cx, cy - h*0.2)], fill=a_col, width=12)
+        # Base baseline rule
+        draw.line([(cx - w*1.05, cy + h + 16), (cx + w*1.05, cy + h + 16)], fill=white, width=4)
 
     elif app_type == "sound":
-        # Equalizer Waveform Bars & Fader Knob
-        bars = [-0.7, -0.4, -0.1, 0.2, 0.5, 0.8]
-        heights = [0.35, 0.75, 1.0, 0.6, 0.85, 0.4]
-        for b, h in zip(bars, heights):
-            bx = cx + b * radius
-            bar_h = h * radius
-            draw.line([(bx, cy - bar_h*0.8), (bx, cy + bar_h*0.8)], fill=a_col, width=12)
-            draw.ellipse([bx - 8, cy - 8, bx + 8, cy + 8], fill=white)
+        # High-Fidelity Audio Equalizer Waveform & Beats
+        bars = [0.35, 0.65, 1.1, 0.75, 1.3, 0.9, 0.45]
+        bar_w = 12
+        spacing = 26
+        start_x = cx - (len(bars) * spacing) // 2 + 6
+        for i, h_factor in enumerate(bars):
+            bh = int(radius * h_factor)
+            bx = start_x + i * spacing
+            col = a_col if i in (2, 4) else c_col
+            draw.rounded_rectangle([bx - bar_w//2, cy - bh//2, bx + bar_w//2, cy + bh//2], radius=6, fill=col)
 
     elif app_type == "deck":
-        # Layered Keynote Slides in Isometric 3D
-        w, h = radius * 1.1, radius * 0.75
-        # Bottom back slide
-        draw.rounded_rectangle([cx - w*0.45, cy - h*0.8, cx + w*0.55, cy - h*0.1], radius=8, fill=(40, 50, 75, 255), outline=c_col, width=3)
-        # Middle slide
-        draw.rounded_rectangle([cx - w*0.5, cy - h*0.45, cx + w*0.5, cy + h*0.25], radius=10, fill=c_col, outline=a_col, width=4)
-        # Front slide
-        draw.rounded_rectangle([cx - w*0.55, cy - h*0.1, cx + w*0.45, cy + h*0.6], radius=12, fill=(15, 20, 32, 255), outline=a_col, width=6)
-        # Trend graph on front slide
-        draw.line([(cx - w*0.4, cy + h*0.4), (cx - w*0.1, cy + h*0.2), (cx + w*0.1, cy + h*0.3), (cx + w*0.35, cy)], fill=a_col, width=6)
+        # Presentation Canvas with Projection Screen & Upward Trend Bar
+        w = radius * 1.1
+        h = radius * 0.75
+        draw.rounded_rectangle([cx - w, cy - h, cx + w, cy + h*0.7], radius=12, outline=c_col, width=6)
+        # Stand
+        draw.line([(cx, cy + h*0.7), (cx, cy + h*1.15)], fill=c_col, width=6)
+        draw.line([(cx - w*0.4, cy + h*1.15), (cx + w*0.4, cy + h*1.15)], fill=c_col, width=6)
+        # Upward arrow trend
+        draw.line([(cx - w*0.6, cy + h*0.3), (cx, cy - h*0.1), (cx + w*0.6, cy - h*0.45)], fill=a_col, width=7)
+        draw.polygon([(cx + w*0.6, cy - h*0.45), (cx + w*0.35, cy - h*0.45), (cx + w*0.6, cy - h*0.2)], fill=a_col)
 
-    elif app_type == "cadcraft" or app_type == "cad":
-        # Isometric Blueprint Cube & Precision Crosshair
-        r = radius * 0.75
-        # Top face
-        top_pts = [
-            (cx, cy - r),
-            (cx + r * 0.866, cy - r * 0.5),
-            (cx, cy),
-            (cx - r * 0.866, cy - r * 0.5),
-        ]
-        draw.polygon(top_pts, fill=a_col, outline=white)
-        # Left face
-        left_pts = [
-            (cx - r * 0.866, cy - r * 0.5),
-            (cx, cy),
-            (cx, cy + r),
-            (cx - r * 0.866, cy + r * 0.5),
-        ]
-        draw.polygon(left_pts, fill=c_col, outline=white)
-        # Right face
-        right_pts = [
-            (cx, cy),
-            (cx + r * 0.866, cy - r * 0.5),
-            (cx + r * 0.866, cy + r * 0.5),
-            (cx, cy + r),
-        ]
-        draw.polygon(right_pts, fill=(15, 30, 55, 255), outline=white)
+    elif app_type == "cad":
+        # Precision Drafting Compass & Coordinate Crosshairs
+        draw.ellipse([cx - radius*0.9, cy - radius*0.9, cx + radius*0.9, cy + radius*0.9], outline=c_col, width=4)
+        draw.ellipse([cx - radius*0.45, cy - radius*0.45, cx + radius*0.45, cy + radius*0.45], outline=a_col, width=6)
         # Crosshair axes
-        draw.line([(cx - radius, cy), (cx + radius, cy)], fill=a_col, width=2)
-        draw.line([(cx, cy - radius), (cx, cy + radius)], fill=a_col, width=2)
+        draw.line([(cx - radius*1.15, cy), (cx + radius*1.15, cy)], fill=white, width=3)
+        draw.line([(cx, cy - radius*1.15), (cx, cy + radius*1.15)], fill=white, width=3)
+        # Precision snap tick boxes
+        draw.rectangle([cx - 8, cy - radius*0.45 - 8, cx + 8, cy - radius*0.45 + 8], fill=a_col)
+        draw.rectangle([cx - 8, cy + radius*0.45 - 8, cx + 8, cy + radius*0.45 + 8], fill=a_col)
+        draw.rectangle([cx - radius*0.45 - 8, cy - 8, cx - radius*0.45 + 8, cy + 8], fill=a_col)
+        draw.rectangle([cx + radius*0.45 - 8, cy - 8, cx + radius*0.45 + 8, cy + 8], fill=a_col)
 
     elif app_type == "grid":
-        # Data Matrix Spreadsheet & Analytics Bars
-        w, h = radius * 1.2, radius * 1.1
-        x0, y0 = cx - w//2, cy - h//2
-        draw.rounded_rectangle([x0, y0, x0 + w, y0 + h], radius=12, fill=(18, 25, 35, 255), outline=a_col, width=6)
+        # Professional Matrix Grid & Dynamic Formula Cell
+        w = radius * 1.05
+        h = radius * 0.95
+        draw.rounded_rectangle([cx - w, cy - h, cx + w, cy + h], radius=10, outline=c_col, width=6)
         # Header bar
-        draw.rectangle([x0 + 4, y0 + 4, x0 + w - 4, y0 + h*0.32], fill=c_col)
-        # Grid lines
-        draw.line([(cx - w*0.1, y0), (cx - w*0.1, y0 + h)], fill=a_col, width=4)
-        draw.line([(cx + w*0.2, y0), (cx + w*0.2, y0 + h)], fill=a_col, width=4)
-        draw.line([(x0, cy + h*0.1), (x0 + w, cy + h*0.1)], fill=a_col, width=4)
-        # Highlight cell
-        draw.rectangle([cx - w*0.08, cy + h*0.12, cx + w*0.18, y0 + h - 6], fill=a_col)
+        draw.rectangle([cx - w, cy - h, cx + w, cy - h*0.45], fill=c_col)
+        # Matrix lines
+        draw.line([(cx - w*0.3, cy - h), (cx - w*0.3, cy + h)], fill=c_col, width=4)
+        draw.line([(cx + w*0.35, cy - h), (cx + w*0.35, cy + h)], fill=c_col, width=4)
+        draw.line([(cx - w, cy + h*0.25), (cx + w, cy + h*0.25)], fill=c_col, width=4)
+        # Selected cell highlight
+        draw.rectangle([cx - w*0.28, cy - h*0.4, cx + w*0.33, cy + h*0.22], fill=a_col)
 
     elif app_type == "craft":
-        # Generative AI Sparkle & Neural 3D Splat
-        draw.ellipse([cx - radius*0.8, cy - radius*0.8, cx + radius*0.8, cy + radius*0.8], outline=a_col, width=4)
-        draw_decode_badge(draw, cx, cy, int(radius * 1.05), color, accent)
+        # Generative AI Sparkle Core & Neural Orbit
+        draw.ellipse([cx - radius*0.9, cy - radius*0.9, cx + radius*0.9, cy + radius*0.9], outline=c_col, width=4)
+        # 4-point star in center
+        for factor, col in [(1.0, a_col), (0.5, white)]:
+            s = radius * factor
+            star = [
+                (cx, cy - s), (cx + s*0.25, cy - s*0.25),
+                (cx + s, cy), (cx + s*0.25, cy + s*0.25),
+                (cx, cy + s), (cx - s*0.25, cy + s*0.25),
+                (cx - s, cy), (cx - s*0.25, cy - s*0.25)
+            ]
+            draw.polygon(star, fill=col)
 
     elif app_type == "craftx":
-        # Multimodal AI Prism & Kinetic Lightning
-        draw.rectangle([cx - radius*0.75, cy - radius*0.75, cx + radius*0.75, cy + radius*0.75], outline=a_col, width=4)
-        draw_decode_badge(draw, cx, cy, int(radius * 1.15), color, accent)
+        # Futuristic Multimodal Quantum Core
+        d = radius * 0.95
+        draw.polygon([(cx, cy - d), (cx + d*0.9, cy - d*0.45), (cx + d*0.9, cy + d*0.45), (cx, cy + d), (cx - d*0.9, cy + d*0.45), (cx - d*0.9, cy - d*0.45)], outline=c_col, width=6)
+        # Inner energy beam
+        draw.polygon([(cx, cy - d*0.5), (cx + d*0.45, cy - d*0.25), (cx + d*0.45, cy + d*0.25), (cx, cy + d*0.5), (cx - d*0.45, cy + d*0.25), (cx - d*0.45, cy - d*0.25)], fill=a_col)
+        # Energy laser cross
+        draw.line([(cx - radius*1.1, cy), (cx + radius*1.1, cy)], fill=white, width=3)
+
+    elif app_type == "clip":
+        # Video Viral Clip Scissors Cutting Filmstrip & Audio Spikes
+        w = radius * 1.05
+        h = radius * 0.8
+        # Filmstrip outline
+        draw.rounded_rectangle([cx - w, cy - h, cx + w, cy + h], radius=12, outline=c_col, width=6)
+        # Perforation notches
+        for px in [-w*0.7, -w*0.3, 0, w*0.3, w*0.7]:
+            draw.rectangle([cx + px - 8, cy - h + 4, cx + px + 8, cy - h + 18], fill=c_col)
+            draw.rectangle([cx + px - 8, cy + h - 18, cx + px + 8, cy + h - 4], fill=c_col)
+        # Scissors cutting the strip
+        draw.line([(cx - radius*0.5, cy - radius*0.35), (cx + radius*0.5, cy + radius*0.35)], fill=a_col, width=8)
+        draw.line([(cx - radius*0.5, cy + radius*0.35), (cx + radius*0.5, cy - radius*0.35)], fill=a_col, width=8)
+        draw.ellipse([cx - radius*0.65, cy - radius*0.5, cx - radius*0.35, cy - radius*0.2], outline=a_col, width=6)
+        draw.ellipse([cx - radius*0.65, cy + radius*0.2, cx - radius*0.35, cy + radius*0.5], outline=a_col, width=6)
+        # Central viral spark
+        draw.ellipse([cx - 10, cy - 10, cx + 10, cy + 10], fill=white)
+
     elif app_type == "launcher":
-        # Large signature Decode D Mark with orbital power ring
+        # Master Launcher: Central orbital power ring around official clover mark
         draw.ellipse([cx - radius*1.05, cy - radius*1.05, cx + radius*1.05, cy + radius*1.05], outline=a_col, width=6)
-        draw_decode_badge(draw, cx, cy, int(radius * 1.3), color, accent)
+        draw.ellipse([cx - radius*0.75, cy - radius*0.75, cx + radius*0.75, cy + radius*0.75], outline=c_col, width=4)
 
 
-def create_app_icon(app, size=1024):
+def create_app_icon(app, official_mark, size=1024):
     """Generate high-resolution PNG image for an app."""
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
@@ -375,46 +422,78 @@ def create_app_icon(app, size=1024):
     border_color = app["color"] + (255,)
     accent_color = app["accent"] + (255,)
     
-    # Deep obsidian background
-    bg_color = (11, 15, 25, 255)
-    draw.rounded_rectangle([pad, pad, size - pad, size - pad], radius=r, fill=bg_color, outline=border_color, width=max(4, size // 100))
+    # Deep obsidian background (#090D16)
+    bg_color = (9, 13, 22, 255)
+    draw.rounded_rectangle([pad, pad, size - pad, size - pad], radius=r, fill=bg_color, outline=border_color, width=max(6, size // 90))
     
     # Subtle inner gradient frame
-    draw.rounded_rectangle([inner_pad, inner_pad, size - inner_pad, size - inner_pad], radius=r - 10, outline=accent_color, width=max(2, size // 250))
+    draw.rounded_rectangle([inner_pad, inner_pad, size - inner_pad, size - inner_pad], radius=r - 12, outline=accent_color, width=max(2, size // 250))
     
-    # Tool Glyph
     center = (size // 2, size // 2)
     glyph_radius = int(size * 0.30)
-    draw_glyph(draw, app["type"], center, glyph_radius, app["color"], app["accent"])
     
-    # Decode mini-monogram badge in top right (except launcher which has full mark)
-    if app["type"] != "launcher":
-        badge_cx = size - pad - int(size * 0.16)
-        badge_cy = pad + int(size * 0.16)
-        badge_size = int(size * 0.18)
-        draw_decode_badge(draw, badge_cx, badge_cy, badge_size, app["color"], app["accent"])
+    if app["type"] == "launcher":
+        # Launcher showcases the official Decode clover mark full center
+        if official_mark:
+            mark_size = int(size * 0.68)
+            mark_resized = official_mark.resize((mark_size, mark_size), Image.Resampling.LANCZOS)
+            draw_glyph(draw, "launcher", center, glyph_radius, app["color"], app["accent"])
+            img.alpha_composite(mark_resized, ((size - mark_size)//2, (size - mark_size)//2))
+    else:
+        # Draw specialized tool glyph
+        draw_glyph(draw, app["type"], center, glyph_radius, app["color"], app["accent"])
         
+        # Stamp the official Decode clover mark in the top-right badge
+        if official_mark:
+            badge_size = int(size * 0.22)
+            badge_x = size - pad - badge_size - int(size * 0.03)
+            badge_y = pad + int(size * 0.03)
+            
+            # Circular dark pill behind badge for supreme clarity
+            b_cx = badge_x + badge_size // 2
+            b_cy = badge_y + badge_size // 2
+            b_r = badge_size // 2 + 6
+            draw.ellipse([b_cx - b_r, b_cy - b_r, b_cx + b_r, b_cy + b_r], fill=(13, 17, 28, 240), outline=accent_color, width=3)
+            
+            mark_badge = official_mark.resize((badge_size, badge_size), Image.Resampling.LANCZOS)
+            img.alpha_composite(mark_badge, (badge_x, badge_y))
+            
     return img
 
 
 def main():
-    print("Generating official Decode Analytics icons across repository...")
+    print("Generating official unified Decode Analytics suite icons...")
+    official_mark = load_official_mark()
+    if official_mark:
+        print(f" -> Loaded official Decode mark from {OFFICIAL_MARK_PATH}")
+    else:
+        print(" -> Warning: official mark not found, proceeding with fallback geometry.")
+
     launcher_icons_dir = REPO_ROOT / "launcher" / "assets" / "app-icons"
     root_icons_dir = REPO_ROOT / "assets" / "app-icons"
+    root_apps_dir = REPO_ROOT / "assets" / "apps"
     launcher_icons_dir.mkdir(parents=True, exist_ok=True)
     root_icons_dir.mkdir(parents=True, exist_ok=True)
+    root_apps_dir.mkdir(parents=True, exist_ok=True)
     
     for app in APPS:
         slug = app["slug"]
         print(f" -> Rendering icon for {app['name']} ({slug})...")
         
         # Master 1024x1024 image
-        master_img = create_app_icon(app, size=1024)
+        master_img = create_app_icon(app, official_mark, size=1024)
         
         # 128x128 for launcher/assets/app-icons and root/assets/app-icons
         img_128 = master_img.resize((128, 128), Image.Resampling.LANCZOS)
         img_128.save(launcher_icons_dir / f"{slug}.png", optimize=True)
         img_128.save(root_icons_dir / f"{slug}.png", optimize=True)
+        
+        # Also save to root/assets/apps/ (e.g. decode-cad.png, decode-clip.png)
+        img_256 = master_img.resize((256, 256), Image.Resampling.LANCZOS)
+        img_256.save(root_apps_dir / f"{slug}.png", optimize=True)
+        if slug.endswith("craft"):
+            equiv_slug = f"decode-{slug[:-5]}"
+            img_256.save(root_apps_dir / f"{equiv_slug}.png", optimize=True)
         
         # Also handle specific folder under apps/
         if app["type"] != "launcher":
@@ -426,22 +505,26 @@ def main():
             master_img.save(icon_dir / f"{slug}-1024.png", optimize=True)
             
             # Save 256
-            img_256 = master_img.resize((256, 256), Image.Resampling.LANCZOS)
             img_256.save(icon_dir / f"{slug}.png", optimize=True)
+            img_256.save(icon_dir / f"{slug}-256.png", optimize=True)
             
             # Save standard sizes under hicolor
-            for s in [16, 24, 48, 64, 128, 256, 512]:
+            for s in [16, 24, 32, 48, 64, 128, 256, 512]:
                 hicolor_dir = icon_dir / "hicolor" / f"{s}x{s}" / "apps"
                 hicolor_dir.mkdir(parents=True, exist_ok=True)
                 resized = master_img.resize((s, s), Image.Resampling.LANCZOS)
-                # removed legacy ai.storyteller save
                 resized.save(hicolor_dir / f"com.decode.{app['folder']}.png", optimize=True)
                 
             # Generate .ico file
             ico_sizes = [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
             master_img.save(icon_dir / f"{slug}.ico", format="ICO", sizes=ico_sizes)
+        else:
+            # Launcher specific icons
+            master_img.save(REPO_ROOT / "launcher" / "assets" / "app-icon" / "decode-launcher-1024.png", optimize=True)
+            img_256.save(REPO_ROOT / "assets" / "launcher-icon" / "decode-launcher-256.png", optimize=True)
+            master_img.save(REPO_ROOT / "launcher" / "assets" / "app-icon" / "decode-launcher.ico", format="ICO", sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
             
-    print("Done! All 14 Decode app icons successfully generated and installed!")
+    print("Done! All Decode suite app icons successfully stylized and rendered!")
 
 if __name__ == "__main__":
     main()
