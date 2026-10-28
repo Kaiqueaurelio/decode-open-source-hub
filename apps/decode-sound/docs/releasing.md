@@ -7,7 +7,7 @@ publishes it.
 
 This is SoundCraft's implementation of the shared [release playbook](release-playbook.md).
 User-facing names say **SoundCraft**. Files, binaries and ids stay lowercase
-(`soundcraft-<version>-<platform>-<arch>.<ext>`, `ai.storyteller.soundcraft`).
+(`soundcraft-<version>-<platform>-<arch>.<ext>`, `com.decode.soundcraft`).
 
 ## Cutting a release
 
@@ -56,9 +56,9 @@ web build and are checked, the signing jobs are refused, and no release is draft
 | FreeBSD 14 x86_64 | `soundcraft-<v>-freebsd-x86_64.tar.gz` (a `/usr/local` tree) | FreeBSD 14.3 VM on `ubuntu-latest` |
 | Web | `soundcraft-web-<v>.zip` (static site; see [`packaging/web/README.md`](../packaging/web/README.md)) | `ubuntu-latest` |
 
-The from-source Flatpak manifest (`packaging/linux/flatpak/ai.storyteller.soundcraft.yml`) is
+The from-source Flatpak manifest (`packaging/linux/flatpak/com.decode.soundcraft.yml`) is
 kept ready for a Flathub submission; the release's `.flatpak` bundles come from
-`ai.storyteller.soundcraft.bundle.yml` (see Linux below).
+`com.decode.soundcraft.bundle.yml` (see Linux below).
 
 ### Audio libraries
 
@@ -83,8 +83,8 @@ plugins), and WebAudio in the browser.
 `packaging/macos/package.sh` builds `aarch64-apple-darwin` and `x86_64-apple-darwin` with
 `MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo`, and assembles `SoundCraft.app`:
 
-- `Info.plist` is generated from `Info.plist.in`. The bundle id is `ai.storyteller.soundcraft`.
-  It declares the `.scraft` session type (`ai.storyteller.soundcraft.session`, MIME
+- `Info.plist` is generated from `Info.plist.in`. The bundle id is `com.decode.soundcraft`.
+  It declares the `.scraft` session type (`com.decode.soundcraft.session`, MIME
   `application/x-soundcraft-session`, role Editor, rank Owner) and lists WAV, AIFF/AIFC, FLAC,
   MP3 and MIDI as Viewer/Alternate, so SoundCraft appears under *Open With* without taking over
   the default player. `NSMicrophoneUsageDescription` explains the recording prompt.
@@ -136,27 +136,27 @@ Locally on Windows: `dotnet tool install -g wix --version 5.0.2`, then
 ### Linux
 
 `packaging/linux/package.sh` stages one FHS tree and makes every format from it: both binaries,
-`ai.storyteller.soundcraft.desktop` (with `MimeType=` for sessions, WAV, AIFF, FLAC, MP3 and
+`com.decode.soundcraft.desktop` (with `MimeType=` for sessions, WAV, AIFF, FLAC, MP3 and
 MIDI), hicolor icons from 16 px to 512 px plus a scalable SVG, AppStream metainfo, and a
 shared-mime-info file declaring `application/x-soundcraft-session` (`*.scraft`).
 
 - **AppImage** (maintained `AppImage/appimagetool`, static runtime: no libfuse2 needed). Each
   embeds the update information
-  `gh-releases-zsync|storytold|soundcraft|latest|soundcraft-*-linux-<arch>.AppImage.zsync`, and
+  `gh-releases-zsync|Kaiqueaurelio|soundcraft|latest|soundcraft-*-linux-<arch>.AppImage.zsync`, and
   the `.zsync` next to it (written when `zsyncmake` from the `zsync` package is installed, as in
   CI) lets AppImageUpdate fetch only the changed blocks of the newest non-pre-release.
 - **.deb** and **.rpm** by [nfpm](https://nfpm.goreleaser.com/) from one `nfpm.yaml`; the
   `postinst.sh` hook refreshes the desktop, MIME and icon caches.
 - **.tar.gz** for people who manage their own `/opt` or `~/.local`.
 - **Flatpak**: the `flatpak` job runs `packaging/linux/flatpak-bundle.sh` on the Linux job's
-  tarball (no Rust build) with `flatpak/ai.storyteller.soundcraft.bundle.yml`, then installs the
+  tarball (no Rust build) with `flatpak/com.decode.soundcraft.bundle.yml`, then installs the
   bundle and runs `soundcraft-cli --version` in the sandbox. Install with
   `flatpak install --user soundcraft-<v>-linux-<arch>.flatpak`. Both manifests use the freedesktop
   25.08 runtime with Wayland/X11, `dri`, PulseAudio and `xdg-music`; other files go through the
   portals. For the VST3 and CLAP hosts they grant `~/.vst3` and `~/.clap` read-only and mount
   Flathub's `org.freedesktop.LinuxAudio.Plugins` extensions (pointed to by `VST3_PATH` and
   `CLAP_PATH`); system plugin folders aren't visible in the sandbox.
-  `ai.storyteller.soundcraft.yml` builds from source for Flathub and needs vendored crates
+  `com.decode.soundcraft.yml` builds from source for Flathub and needs vendored crates
   (`cargo-sources.json` from `flatpak-cargo-generator.py`); the commands are in its header.
 
 Binaries are built on Ubuntu 22.04 and need **glibc ≥ 2.35**. X11, Wayland, xkbcommon, Vulkan

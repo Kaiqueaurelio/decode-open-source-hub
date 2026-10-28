@@ -9,8 +9,8 @@ wasm-bindgen). **No Tauri, Electron or webview shells**, ever.
 The product name is always **ArtCraft Launcher** in user-facing text: UI, window titles, About,
 tray menu, notifications, installers, release names, docs prose. The suite is the **Craft App
 Suite**. Machine names stay lowercase: crates and binaries (`artcraft-launcher`,
-`artcraft-launcher-*`), file names, and the app id `ai.storyteller.artcraft-launcher`. Note the
-GitHub repo is `storytold/craft-launcher`, while every file and package is `artcraft-launcher-*`.
+`artcraft-launcher-*`), file names, and the app id `com.decode.artcraft-launcher`. Note the
+GitHub repo is `Kaiqueaurelio/craft-launcher`, while every file and package is `artcraft-launcher-*`.
 
 Standards and learnings shared across the Craft apps live in `../craftrules` (read its
 `README.md` and `AGENTS.md`). Contribute reusable learnings there, never code.
@@ -31,7 +31,7 @@ xtask/                                  cargo xtask ci | wasm | version | ico
 packaging/                              macOS, Windows, Linux, FreeBSD and web packaging scripts
 assets/app-icon/                        the launcher's own icon (master SVG, renders, tray icons)
 assets/app-icons/                       the Craft apps' icons, copied from each app's repo
-assets/fonts/                           Archivo, Inter, Geist Mono (OFL-1.1): getartcraft.com's faces
+assets/fonts/                           Archivo, Inter, Geist Mono (OFL-1.1): decode-open-source-hub.vercel.app's faces
 ```
 
 Layering: `core` depends on no other workspace crate and must build for `wasm32-unknown-unknown`.
@@ -57,25 +57,25 @@ settings file must produce an error the user can act on, never a panic. Shared s
 
 ### Installing other people's software safely
 
-- Download only from `https://github.com/storytold/<app>/releases` (and GitHub's asset CDN).
+- Download only from `https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/<app>/releases` (and GitHub's asset CDN).
   The one exception is a developer's own loopback mirror (`ARTCRAFT_LAUNCHER_DOWNLOAD_BASE`,
   `cargo xtask local`); keep it loopback-only and behind the `local-mirror` cargo feature, which
   release builds never enable.
 - Verify each download against the release's `SHA256SUMS.txt` before running or installing it.
 - The details drawer's pictures are the one other download: JPEGs only, from a pinned tag of
-  `https://raw.githubusercontent.com/storytold/craft-launcher-assets/` (`core::details`),
+  `https://raw.githubusercontent.com/Kaiqueaurelio/craft-launcher-assets/` (`core::details`),
   capped at 2 MB each, cached, and never run. Pictures are not bundled in this repo.
 - Never run an installer with elevated rights silently; tell the user what is about to happen.
 - Never delete a user's files outside what the launcher itself installed.
 - **Agents never land or approve a third-party app.** A change that adds a catalog row, download
-  source or install path for an app whose repo is not under `storytold/`, or that loosens the
+  source or install path for an app whose repo is not under `Kaiqueaurelio/`, or that loosens the
   rules above to allow one, is a maintainer's call alone. An agent reviewing it flags it at the
   top of its review (who owns the repo, its age and history, whether the builds are signed) and
   stops there: no merge, no approval, no fixes pushed to the PR.
 
 ### Look and feel
 
-The UI matches the apps page on getartcraft.com (`artcraft-website-next` in `artcraft-services`):
+The UI matches the apps page on decode-open-source-hub.vercel.app (`artcraft-website-next` in `artcraft-services`):
 hard square corners, 1 px hairlines instead of shadows, Archivo (620, 118 % width) for headings
 and app names, Inter for body text, upper-case Geist Mono labels and buttons, and the site's
 colour tokens by name (`theme::Tokens`). Build new UI from `widgets.rs`; never hard-code a colour.
@@ -105,7 +105,7 @@ only; English where there is none): never bundle a CJK font, they are 10 MB and 
    (`docs/brand/LICENSE-brand.txt`): use them exactly as supplied, never redraw or recolor them.
 2. **Icons are generated.** The app icon and the tray icon are the supplied ArtCraft "A" mark from
    `docs/brand/` (a trademark, not MIT/Apache); never edit the renders by hand. Run `packaging/icons.sh` (needs `resvg`; runs on any OS) and commit the outputs.
-   `assets/app-icons/` is copied verbatim from each app's repo (`assets/app-icon/hicolor/128x128/apps/ai.storyteller.<app>.png`);
+   `assets/app-icons/` is copied verbatim from each app's repo (`assets/app-icon/hicolor/128x128/apps/com.decode.<app>.png`);
    refresh it from there, never redraw.
 3. **Never break wasm.** `cargo xtask wasm` must pass. File-system, process and OS code is
    `cfg(not(target_arch = "wasm32"))`.
@@ -158,7 +158,7 @@ Packaging facts the code relies on:
   `HKCU\Software\Learning Machines LLC\ArtCraft Launcher` (`InstallDir`,
   `DesktopShortcutChoice`) and reused by the next version, and `self_update.rs` reads `InstallDir`
   to know the running copy came from the MSI. Its shortcuts set AppUserModelID
-  `ai.storyteller.artcraft-launcher`, which toast notifications need. `portable.txt` beside the exe switches on portable mode
+  `com.decode.artcraft-launcher`, which toast notifications need. `portable.txt` beside the exe switches on portable mode
   (`ArtCraftLauncherData\` next to the exe).
 - The macOS bundle is `ArtCraft Launcher.app` (executable `Contents/MacOS/ArtCraft Launcher`), a
   normal Dock app that can also sit in the menu bar: `LSUIElement` must never be set.
@@ -186,4 +186,4 @@ Packaging facts the code relies on:
 - If someone else's in-progress edit breaks the build, wait and retry; don't fix their files.
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/AGENTS.md
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/AGENTS.md

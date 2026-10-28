@@ -85,7 +85,7 @@ No push, pull request, release, tag, comment or other publication is authorized.
 or new pull request needs explicit human approval of the exact content and the validation results
 first.
 
-This plan covers only `storytold/lightcraft` at
+This plan covers only `Kaiqueaurelio/decode-open-source-hub` at
 `23e181283cb448205d865e8cd288b56afe987986` (branch `codex/egui-037-plan-20261022` in the assigned
 checkout). It does not migrate the egui fork, winit, craft-libs or a sibling app; those are separate
 plans, separate review units and separate publication gates.
@@ -115,19 +115,19 @@ IDs, capture correlation, dropped-file replay) that a compiler diagnostic cannot
 | craft-libs historical inspection | `49190884278f16c9a9f5823d7698a8ffb5deb062`; PR 199 `8614e4a` + README `1764bca` | Earlier base and hunks; retained as history only. The port shape is already contained in the `3832c47…` base |
 | Target upstream release | egui `0.37.0`, peeled commit `841a328ba2dd8f6996beb7189ebb7fc00e668a2a`; the annotated tag object SHA is not the commit SHA |
 | Comparison-only egui tree | `aiongg/egui` `craft/0.37` at `a4f9a17f64a6bae61350fb85804c9df0d9865916` (E1–E21) |
-| Comparison-only winit tree | `aiongg/winit` `craft/0.30.13-lang` at `8b35388bd719e8cc86a95971ba0bc026c9a8f058`; storytold base `ffae5198770d7730e718043f035a772b7dbc3b1b` |
+| Comparison-only winit tree | `aiongg/winit` `craft/0.30.13-lang` at `8b35388bd719e8cc86a95971ba0bc026c9a8f058`; Kaiqueaurelio base `ffae5198770d7730e718043f035a772b7dbc3b1b` |
 | craft-libs stale trees | PR 199 head `b68de8c5f4f1c060904d211a7b1320aa0f7bce78` and audit merge `ec8840af8c5fda695cf195cdd05e5ae078415c07` | Evidence only, not mergeable trees: they omit current `craft-platform` and revert security/settings/docking/printer fixes |
 | Language work | craft-libs issue/PR 198 is a separate proposal, not a merged dependency and not included here |
 
 **Pin policy for this consumer.** `a4f9a17f` (egui) and `8b35388b` (winit) are *comparison and
-inspection* references only. LightCraft must pin the final reviewed **storytold** egui and winit
+inspection* references only. LightCraft must pin the final reviewed **Kaiqueaurelio** egui and winit
 revisions by immutable full SHA **once the fork and winit series are published**. Those revisions do
 not exist yet, so this plan states no SHA for them and does not guess one. Every stage that needs
 them is explicitly blocked (§9, §10). LightCraft's production dependency is the complete reviewed
-and published storytold egui **P8** revision: E1–E21 plus **P2b** (E4 regular/PRIMARY with bounded
+and published Kaiqueaurelio egui **P8** revision: E1–E21 plus **P2b** (E4 regular/PRIMARY with bounded
 asynchronous W15P transfer completion), **P7** held-key release pairing, **P7b/E21b** outgoing IME
 surrounding text, and **P7c** (the selected #8763/#8748 fixes and justified performance fixes). Its
-companion is the complete published storytold winit revision with **W15P** and the **W27** IME
+companion is the complete published Kaiqueaurelio winit revision with **W15P** and the **W27** IME
 lifecycle. No stock 0.37 or intermediate fork stage is a production dependency; stock 0.37 is only
 the measurement control. A published revision missing any of these is not acceptable for the stages
 named below.
@@ -842,11 +842,11 @@ Anchors: `apps/lightcraft/src/window_gpu.rs:104-200` (`choose`, `base_options`, 
 
 ```text
 lightcraft / lightcraft-web / lightcraft-cli / lightcraft-ui-egui
-  -> egui 0.37.0 (published storytold revision, immutable SHA)
+  -> egui 0.37.0 (published Kaiqueaurelio revision, immutable SHA)
      + epaint, epaint_default_fonts, ecolor, emath
   -> eframe 0.37.0, egui-winit, egui-wgpu, egui_glow
   -> egui_kittest 0.37.0 (dev) -> kittest 0.5.0 (registry), accesskit 0.25.x
-  -> winit 0.30.13 (published storytold revision, immutable SHA)
+  -> winit 0.30.13 (published Kaiqueaurelio revision, immutable SHA)
   -> craft-ui from the reviewed craft-libs revision (stock-egui-0.37 source compatible, CL-2F)
 ```
 
@@ -1111,10 +1111,10 @@ does not satisfy native acceptance.
 
 ```text
 P0 (external; BLOCKED until published)
-  storytold egui immutable revision P8: E1-E21 + P2b (E4 regular/PRIMARY with bounded
+  Kaiqueaurelio egui immutable revision P8: E1-E21 + P2b (E4 regular/PRIMARY with bounded
     async W15P transfer) + P7 held-key pairing + P7b/E21b + P7c (#8763/#8748 and
     justified perf fixes), reviewed and published
-  storytold winit immutable revision: complete W15P + W27 lifecycle (+ W15/W25/W26 series)
+  Kaiqueaurelio winit immutable revision: complete W15P + W27 lifecycle (+ W15/W25/W26 series)
   craft-libs CL-1 revision, then CL-2 provisional capture slot
   CL-2 -> DesignCraft/GridCraft adapters -> CL-2F API freeze
         |
@@ -1136,7 +1136,7 @@ L2c fonts/accessibility/language/IME/clipboard hardening (set_language, #8763, E
 L2d measured visual/perf acceptance, docs updates, platform evidence and final review
 ```
 
-P0 is **explicitly blocked**: the final approved storytold immutable SHAs are unknown until the fork
+P0 is **explicitly blocked**: the final approved Kaiqueaurelio immutable SHAs are unknown until the fork
 and winit series are published, and this plan does not invent them. `a4f9a17f`/`8b35388b` are used
 only to inspect behavior. L2a–L2d cannot be prepared as merge-ready changes until P0 exists.
 L1 can start now in 0.36.2 expected-graph mode; L2a switches the dependency check to the 0.37 P8
@@ -1168,7 +1168,7 @@ deletion or cache cleanup until the migration is abandoned or complete and evide
 
 ## 10. Blocking unknowns and acceptance criteria
 
-1. **Published pins (blocking).** The final approved storytold egui **P8** (including P2b, P7,
+1. **Published pins (blocking).** The final approved Kaiqueaurelio egui **P8** (including P2b, P7,
    P7b/E21b and P7c) and the completed winit (W15P + W27) immutable revisions do not exist until the
    fork/winit series is published and reviewed; no SHA is assumed here. Stages L2a–L2d are blocked
    on them. `a4f9a17f`/`8b35388b` are comparison references only; no stock or intermediate stage is
@@ -1296,7 +1296,7 @@ and deliverables are saved.
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/lightcraft` `main` now resolves to `d5e639b3d1ad079c39a924c1b65d0a96ee2134ac`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` now resolves to `d5e639b3d1ad079c39a924c1b65d0a96ee2134ac`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 No migration API redesign required by this delta; preserve the merged packaging, test and chrono changes where present.
 
@@ -1319,7 +1319,7 @@ open; it is not acceptance evidence.
   `egui_kittest`'s own dev-dependencies do not propagate. `tests_lifecycle_037` asserts the
   `Hack`, `Ubuntu-Light`, `egui-icons`, `NotoEmoji-Regular` and `emoji-icon-font` faces and that
   U+1F642/U+1F44D are paintable.
-- No final storytold SHA, `[patch]` entry or lockfile was invented. The parent supplies the local
+- No final Kaiqueaurelio SHA, `[patch]` entry or lockfile was invented. The parent supplies the local
   path patch from `../PLANNING-CONTRACT.md` / `local-integration-config.toml` and generates the
   lockfile. `crates/raw/src/vendor/` is untouched.
 
@@ -1400,7 +1400,7 @@ exactly (the pinned fork's winit byte-range event).
 
 ### Unresolved prerequisites and validation
 
-- Final published storytold egui P8 (E1–E21 + P2b + P7 + P7b/E21b + P7c) and winit W15P/W27
+- Final published Kaiqueaurelio egui P8 (E1–E21 + P2b + P7 + P7b/E21b + P7c) and winit W15P/W27
   revisions, and the reviewed craft-libs CL-1/CL-2F revisions, do not exist as pins here.
 - This source stage calls `craft_ui::capture::CaptureSlot` (the provisional CL-2 module in the
   local craft-libs tree). The parent must provide a craft-ui revision that actually contains that

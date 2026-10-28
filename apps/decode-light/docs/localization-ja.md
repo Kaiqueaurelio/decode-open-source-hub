@@ -6,7 +6,7 @@ LightCraft は日本語・簡体字中国語・英語（English）の表示に�
 - 「編集 → 言語」または「設定 → 一般 → 言語」で切り替えます。選択は次回起動にも引き継ぎます。
 - メニュー、写真編集、マスク、切り抜き、設定、読み込み、書き出し、主な処理状況を翻訳しています。
 - 通常表示と太字の双方に、SIL OFLのBIZ UDPGothicを使います。日本語フォントはこのリポジトリではなく
-  [storytold/craft-fonts](https://github.com/storytold/craft-fonts) にあり、任意のビルド入力
+  [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub) にあり、任意のビルド入力
   `CRAFT_FONTS_DIR=../craft-fonts` を指定したビルド（公式リリースはすべて）に組み込まれます。
   指定しない場合も動作しますが、日本語の文字は表示されません。
 - 翻訳は表示層で行います。操作コマンドのID、写真のファイル名、入力したメタデータを変更しません。

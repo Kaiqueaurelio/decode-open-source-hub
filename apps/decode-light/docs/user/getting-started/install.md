@@ -5,11 +5,11 @@ order: 10
 verified: 0.7.1
 ---
 
-Download the file for your system from the [latest release](https://github.com/storytold/lightcraft/releases/latest) and install it. In the file names, `<version>` stands for the version number, for example `0.7.1`. The [LightCraft page on getartcraft.com](https://getartcraft.com/apps/lightcraft) also links the download.
+Download the file for your system from the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/releases/latest) and install it. In the file names, `<version>` stands for the version number, for example `0.7.1`. The [LightCraft page on decode-open-source-hub.vercel.app](https://decode-open-source-hub.vercel.app/#lightcraft) also links the download.
 
 ## Windows 11
 
-1. Open the [latest release](https://github.com/storytold/lightcraft/releases/latest).
+1. Open the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/releases/latest).
 2. Download `lightcraft-<version>-windows-x64.msi`. It fits most PCs (Intel and AMD, 64-bit).
 3. Run the file. The installer asks where to install. The default is `C:\Program Files\LightCraft`, and upgrades stay in the folder you chose.
 4. At the end, choose the option to start LightCraft.
@@ -41,7 +41,7 @@ RISC-V and FreeBSD builds are on the release page too. On a Wayland desktop, Lig
 
 ## Install with ArtCraft Launcher
 
-[ArtCraft Launcher](https://getartcraft.com/docs/craft-launcher) lists LightCraft and can install and update it for you. On Windows it installs the release `.msi`.
+[ArtCraft Launcher](https://decode-open-source-hub.vercel.app/docs/craft-launcher) lists LightCraft and can install and update it for you. On Windows it installs the release `.msi`.
 
 ## In a web browser
 
@@ -54,4 +54,4 @@ The release also has `lightcraft-web-<version>.zip`, a static site that runs Lig
 
 ## Still stuck?
 
-Ask in [Discord](https://discord.gg/artcraft) or open an issue in the [issue tracker](https://github.com/storytold/lightcraft/issues).
+Ask in [Discord](https://discord.gg/artcraft) or open an issue in the [issue tracker](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/issues).

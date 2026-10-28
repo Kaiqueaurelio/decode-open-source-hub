@@ -73,7 +73,7 @@ impl LoginChallengeClient {
     let origin_allowed = match self.api_host {
       ApiHost::Localhost { .. } => ["http://localhost:4200", "http://127.0.0.1:4200", "http://localhost:4201", "http://127.0.0.1:4201"]
         .contains(&url.origin().ascii_serialization().as_str()),
-      ApiHost::Storyteller => ["https://app.getartcraft.com", "https://getartcraft.com", "https://www.getartcraft.com"]
+      ApiHost::Storyteller => ["https://decode-open-source-hub.vercel.app", "https://decode-open-source-hub.vercel.app", "https://www.decode-open-source-hub.vercel.app"]
         .contains(&url.origin().ascii_serialization().as_str()),
       ApiHost::FakeYou => false,
     };

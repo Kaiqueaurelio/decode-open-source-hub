@@ -1,17 +1,17 @@
 ---
 title: Install PhotoCraft
-description: Download PhotoCraft for Windows 10 or 11, macOS or Linux from getartcraft.com or GitHub, or install it with ArtCraft Launcher.
+description: Download PhotoCraft for Windows 10 or 11, macOS or Linux from decode-open-source-hub.vercel.app or GitHub, or install it with ArtCraft Launcher.
 order: 10
 verified: 0.8.2
 ---
 
-The easiest way is the [PhotoCraft page on getartcraft.com](https://getartcraft.com/apps/photocraft). You can also install it with [ArtCraft Launcher](https://getartcraft.com/docs/craft-launcher/guides/install-and-update-apps), which lists PhotoCraft. For a specific build or file format, take it from the [latest release](https://github.com/storytold/photocraft/releases/latest) on GitHub. In the file names below, `<version>` stands for the version number, for example `0.8.2`.
+The easiest way is the [PhotoCraft page on decode-open-source-hub.vercel.app](https://decode-open-source-hub.vercel.app/#photocraft). You can also install it with [ArtCraft Launcher](https://decode-open-source-hub.vercel.app/docs/craft-launcher/guides/install-and-update-apps), which lists PhotoCraft. For a specific build or file format, take it from the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/latest) on GitHub. In the file names below, `<version>` stands for the version number, for example `0.8.2`.
 
 ## Windows
 
 PhotoCraft needs Windows 10 or later. On Windows 7 and 8 the installer stops with "PhotoCraft needs Windows 10 or later."
 
-1. Open the [latest release](https://github.com/storytold/photocraft/releases/latest).
+1. Open the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/latest).
 2. Download `photocraft-<version>-windows-x64.msi`. It fits most PCs (64-bit Intel and AMD).
 3. Run the file and follow the installer.
 
@@ -39,7 +39,7 @@ Pick one file from the release. Use `x86_64` for Intel and AMD, or `aarch64` for
 | AppImage            | `photocraft-<version>-linux-x86_64.AppImage` | Runs anywhere and needs no install.                                                |
 | Debian and Ubuntu   | `photocraft-<version>-linux-x86_64.deb`      |                                                                                    |
 | Fedora and openSUSE | `photocraft-<version>-linux-x86_64.rpm`      |                                                                                    |
-| Flatpak             | `photocraft-<version>-linux-x86_64.flatpak`  | Run `flatpak install --user <file>`, then `flatpak run ai.storyteller.photocraft`. |
+| Flatpak             | `photocraft-<version>-linux-x86_64.flatpak`  | Run `flatpak install --user <file>`, then `flatpak run com.decode.photocraft`. |
 | Tarball             | `photocraft-<version>-linux-x86_64.tar.gz`   | Unpack it anywhere.                                                                |
 
 The first time you run the AppImage, it adds its icon and menu entry under `~/.local/share`. Set `PHOTOCRAFT_NO_DESKTOP_INTEGRATION=1` to skip that. For RISC-V, take the `riscv64` file: `photocraft-<version>-linux-riscv64.tar.gz`, `.deb` or `.rpm`. The RISC-V tarball needs glibc 2.39 or newer.

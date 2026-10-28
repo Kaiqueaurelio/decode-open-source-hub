@@ -101,7 +101,7 @@ Every alpha difference is followed by a run code, including a final singleton
 (RDD 36:2022 §5.3.3, Tables 12–14). Omitting the final run produces a truncated
 alpha payload: FFmpeg may accept it, while macOS native HD decoding fails with AVFoundation `-11821` / underlying `-12137`. This affected
 both 4444 and 4444 XQ exports, including EffectCraft's alpha output
-([effectcraft#293](https://github.com/storytold/effectcraft/issues/293)).
+([effectcraft#293](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/293)).
 
 The encoder tests check exact singleton codewords at 8 and 16 bits, run-length
 boundaries through 2048 and split runs, final-value bit alignments, and complete

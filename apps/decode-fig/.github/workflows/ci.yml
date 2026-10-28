@@ -19,7 +19,7 @@ concurrency:
 jobs:
   gate:
     # Tracks @main so suite-wide CI fixes reach every app without a PR in each repository.
-    uses: storytold/craft-common-actions/.github/workflows/gate.yml@main
+    uses: Kaiqueaurelio/craft-common-actions/.github/workflows/gate.yml@main
     with:
       # Combined Latin presentation and core UI catalog. Required web builds enforce
       # Inter Regular/SemiBold and Noto Sans Georgian Regular after asset-policy filtering.

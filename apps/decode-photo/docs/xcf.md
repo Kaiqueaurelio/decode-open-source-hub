@@ -83,7 +83,7 @@ Unit tests (`crates/io/src/xcf/tests.rs`) build XCF files from the specification
 writer and check every compression, precisions, pointer widths, groups by item path, masks,
 channels, the colour map, parasites, limits and malformed input.
 
-Real files come from GIMP 3.2.6 itself: `gimp/` of [photocraft-corpus](https://github.com/storytold/photocraft-corpus)
+Real files come from GIMP 3.2.6 itself: `gimp/` of [photocraft-corpus](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-corpus)
 (generator `tools/gimp-xcf/xcf_fixtures.py`, run inside GIMP), fetched into `corpus/gimp/` by
 `cargo xtask corpus --gimp` (28 files, 251 KB): procedural layers the tests regenerate sample for
 sample, and for each file GIMP's own merged rendering as a PNG. `crates/io/tests/it/xcf.rs` (feature

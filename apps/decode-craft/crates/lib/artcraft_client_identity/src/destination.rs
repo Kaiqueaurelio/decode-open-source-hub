@@ -5,15 +5,15 @@ use crate::third_party_provider::{ThirdPartyProvider, THIRD_PARTY_PROVIDERS};
 
 /// Hostnames of our deployed APIs (HTTPS only).
 const ARTCRAFT_API_HOSTNAMES: [&str; 3] = [
-  "api.storyteller.ai",
-  "api.getartcraft.com",
+  "api.decodeanalytics.com",
+  "api.decodeanalytics.com",
   "api.fakeyou.com",
 ];
 
 /// Domains we own. Subdomains match too (CDNs, uploads, websites).
 const ARTCRAFT_DOMAINS: [&str; 4] = [
-  "storyteller.ai",
-  "getartcraft.com",
+  "decodeanalytics.com",
+  "decode-open-source-hub.vercel.app",
   "fakeyou.com",
   "artcraft.ai",
 ];
@@ -81,11 +81,11 @@ mod tests {
     #[test]
     fn deployed_apis_get_desktop_origin() {
       for destination in [
-        "https://api.storyteller.ai/v1/session",
-        "https://api.getartcraft.com/v1/session",
+        "https://api.decodeanalytics.com/v1/session",
+        "https://api.decodeanalytics.com/v1/session",
         "https://api.fakeyou.com/v1/session",
       ] {
-        assert_eq!(classify(destination), Destination::ArtcraftApi { origin: "https://desktop.getartcraft.com" });
+        assert_eq!(classify(destination), Destination::ArtcraftApi { origin: "https://decode-open-source-hub.vercel.app" });
       }
     }
 
@@ -105,11 +105,11 @@ mod tests {
     fn other_owned_hosts_are_not_apis() {
       for destination in [
         "https://cdn-2.fakeyou.com/media/a/b.png",
-        "https://cdn.storyteller.ai/media/a/b.png",
-        "https://style.storyteller.ai/",
-        "https://app.getartcraft.com/",
-        "https://getartcraft.com/",
-        "http://api.storyteller.ai/v1/session",
+        "https://cdn.decodeanalytics.com/media/a/b.png",
+        "https://style.decodeanalytics.com/",
+        "https://decode-open-source-hub.vercel.app/",
+        "https://decode-open-source-hub.vercel.app/",
+        "http://api.decodeanalytics.com/v1/session",
       ] {
         assert_eq!(classify(destination), Destination::ArtcraftHost, "{destination}");
       }
@@ -146,8 +146,8 @@ mod tests {
     #[test]
     fn lookalikes_and_others_are_unknown() {
       for destination in [
-        "https://api.storyteller.ai.example.com/v1/session",
-        "https://notstoryteller.ai/",
+        "https://api.decodeanalytics.com.example.com/v1/session",
+        "https://notdecodeanalytics.com/",
         "https://evilgrok.com/",
         "https://grok.com.example.com/",
         "https://www.gravatar.com/avatar/a",

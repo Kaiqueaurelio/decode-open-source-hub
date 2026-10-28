@@ -5,7 +5,7 @@ order: 20
 verified: 0.7.1
 ---
 
-Post in the [issue tracker](https://github.com/storytold/designcraft/issues) or in [Discord](https://discord.gg/artcraft), and attach the log file. The log is the most useful thing you can send after a crash.
+Post in the [issue tracker](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/issues) or in [Discord](https://discord.gg/artcraft), and attach the log file. The log is the most useful thing you can send after a crash.
 
 ## What to include
 

@@ -57,4 +57,4 @@ else
 fi
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/macos/import-cert.sh
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/macos/import-cert.sh

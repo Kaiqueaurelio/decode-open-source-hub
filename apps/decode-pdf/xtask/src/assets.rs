@@ -515,7 +515,7 @@ mod tests {
             option: "CRAFT_FONTS_DIR".into(),
             title: "t".into(),
             author: "a".into(),
-            source: "https://github.com/storytold/craft-fonts".into(),
+            source: "https://github.com/Kaiqueaurelio/decode-open-source-hub".into(),
             licence: licence.into(),
             attribution: attribution.into(),
             kind: "font".into(),

@@ -28,7 +28,7 @@ use artcraft_launcher_ui_egui::theme::Tokens;
 use artcraft_launcher_ui_egui::{Host, LauncherUi, Settings, TitleBar};
 use eframe::wgpu::rwh::{HasDisplayHandle, RawDisplayHandle};
 
-const APP_ID: &str = "ai.storyteller.artcraft-launcher";
+const APP_ID: &str = "com.decode.artcraft-launcher";
 const SETTINGS_KEY: &str = "settings";
 
 type Wake = Arc<OnceLock<Box<dyn Fn() + Send + Sync>>>;
@@ -163,7 +163,7 @@ fn main() -> ExitCode {
 /// short adapter cannot fail device creation.
 fn native_options(hidden: bool) -> eframe::NativeOptions {
     let icon =
-        eframe::icon_data::from_png_bytes(include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/ai.storyteller.artcraft-launcher.png")).ok();
+        eframe::icon_data::from_png_bytes(include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/com.decode.artcraft-launcher.png")).ok();
     let mut viewport = egui::ViewportBuilder::default()
         .with_title("ArtCraft Launcher")
         .with_app_id(APP_ID)
@@ -342,7 +342,7 @@ fn wgpu_options() -> eframe::WgpuConfiguration {
 /// internal error, the device is lost and the launcher exits at startup (#344). Intel Macs skip
 /// them, and other platforms keep wgpu's default. The launcher issues no indirect draws or
 /// dispatches. `WGPU_VALIDATION_INDIRECT_CALL=1` still turns them back on. PhotoCraft does the same
-/// (storytold/photocraft#3171).
+/// (Kaiqueaurelio/decode-open-source-hub#3171).
 #[cfg(any(target_os = "macos", test))]
 fn skips_indirect_validation(os: &str, intel: bool) -> bool {
     os == "macos" && intel
@@ -1213,4 +1213,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher/src/main.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher/src/main.rs

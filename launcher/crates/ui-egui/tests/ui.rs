@@ -146,13 +146,13 @@ fn release(id: &str, v: &str, at: i64) -> Release {
         version: version::parse(v),
         name: format!("v{v}"),
         published_at: Some(at),
-        html_url: format!("https://github.com/storytold/{id}/releases/tag/v{v}"),
-        notes: "## What's Changed\n* Faster things by @a in https://github.com/storytold/x/pull/1".into(),
+        html_url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/tag/v{v}"),
+        notes: "## What's Changed\n* Faster things by @a in https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/x/pull/1".into(),
         prerelease: false,
         assets: vec![Asset {
             name: name.clone(),
             size: 150 << 20,
-            url: format!("https://github.com/storytold/{id}/releases/download/v{v}/{name}"),
+            url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/download/v{v}/{name}"),
             sha256: None,
         }],
     }
@@ -1226,7 +1226,7 @@ fn links_to_the_website_github_and_each_apps_pages() {
     for label in ["Website", "GitHub", "Discord"] {
         assert!(h.query_all_by_label(label).count() >= 1, "{label}");
     }
-    // Cards: every app links to its repo and to its own page on getartcraft.com (plus the footer's).
+    // Cards: every app links to its repo and to its own page on decode-open-source-hub.vercel.app (plus the footer's).
     let shown_cards = h.query_all_by_label("GitHub").count() - 1;
     let shown_sites = h.query_all_by_label("Website").count() - 1;
     assert!(shown_cards >= 13, "{shown_cards}");
@@ -1277,7 +1277,7 @@ fn links_open_the_right_pages() {
     // The footer's Decode links and each card's own pages.
     let github = all_opened(&mut h, "GitHub");
     assert!(github.contains(&"https://github.com/Kaiqueaurelio/decode-open-source-hub".to_string()), "{github:?}");
-    assert!(github.contains(&"https://github.com/storytold/photocraft".to_string()), "{github:?}");
+    assert!(github.contains(&"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft".to_string()), "{github:?}");
     let sites = all_opened(&mut h, "Website");
     assert!(sites.contains(&"https://kaiqueaurelio.github.io/decode-open-source-hub/".to_string()), "{sites:?}");
     // Social icons in the footer.
@@ -1288,14 +1288,14 @@ fn links_open_the_right_pages() {
     h.run_steps(3);
     // The first card is the first installed app by name.
     let url = click_opens(&mut h, "All releases").unwrap_or_default();
-    assert!(url.starts_with("https://github.com/storytold/") && url.ends_with("/releases"), "{url}");
+    assert!(url.starts_with("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/") && url.ends_with("/releases"), "{url}");
 }
 
 /// An asset URL can come straight from GitHub's release JSON; it must not reach the opener when
 /// it carries an opener metacharacter, whether it is shown on a card or in the launcher dialog.
 #[test]
 fn hostile_release_asset_urls_never_reach_the_opener() {
-    const HOSTILE: &str = "https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg|calc.exe";
+    const HOSTILE: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg|calc.exe";
 
     let mut ev = events();
     for event in &mut ev {
@@ -1495,8 +1495,8 @@ fn feed_announcements_and_alerts_show_until_dismissed() {
     let sent = Rc::new(RefCell::new(Vec::new()));
     let mut evs = events();
     evs.push(Event::Notices {
-        announcements: vec![notice("a1", "DecodeCAD 1.0 is out", Some("https://getartcraft.com/news"))],
-        alerts: vec![notice("x1", "Security update", Some("https://getartcraft.com/security"))],
+        announcements: vec![notice("a1", "DecodeCAD 1.0 is out", Some("https://decode-open-source-hub.vercel.app/news"))],
+        alerts: vec![notice("x1", "Security update", Some("https://decode-open-source-hub.vercel.app/security"))],
     });
     let mut backend = Some(Fake { events: evs, sent, manage: true, pictures: Rc::default(), asked: Vec::new(), clock: Rc::new(Cell::new(NOW)) });
     let mut h = test_harness_builder(egui::Theme::Dark).with_size(egui::vec2(1180.0, 1200.0)).build_ui_state(

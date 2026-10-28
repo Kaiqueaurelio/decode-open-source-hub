@@ -16,11 +16,11 @@ import { useModelsStore } from "@storyteller/tauri-api";
 
 // TODO(bt,2025-04-19): Make these configurable
 const ENV = {
-  GOOGLE_API: "https://studio.storyteller.ai",
-  FUNNEL_API: "https://studio.storyteller.ai",
+  GOOGLE_API: "https://studio.decodeanalytics.com",
+  FUNNEL_API: "https://studio.decodeanalytics.com",
   CDN_API: "https://cdn-2.fakeyou.com",
-  GRAVATAR_API: "https://studio.storyteller.ai",
-  DEPLOY_PRIME_URL: "https://studio.storyteller.ai",
+  GRAVATAR_API: "https://studio.decodeanalytics.com",
+  DEPLOY_PRIME_URL: "https://studio.decodeanalytics.com",
 };
 
 const GlobalSettingsManager = ({ env }: { env: Record<string, string> }) => {

@@ -351,7 +351,7 @@ filter	Installed	Telepítve
 # Tray (menu bar) menu and tooltip
 	Show Decode Launcher	Decode Launcher megjelenítése
 	Check for Updates	Frissítések keresése
-	Visit getartcraft.com	getartcraft.com megnyitása
+	Visit decode-open-source-hub.vercel.app	decode-open-source-hub.vercel.app megnyitása
 	Decode on GitHub	Decode a GitHubon
 	Join the Decode Discord	Csatlakozás az Decode Discord-közösségéhez
 @plural	Decode Launcher · {n} update available|Decode Launcher · {n} updates available	Decode Launcher · {n} frissítés elérhető|Decode Launcher · {n} frissítés elérhető

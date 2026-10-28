@@ -353,7 +353,7 @@ filter	Installed	インストール済み
 # Tray (menu bar) menu and tooltip
 	Show Decode Launcher	Decode Launcher を表示
 	Check for Updates	更新を確認
-	Visit getartcraft.com	getartcraft.com を開く
+	Visit decode-open-source-hub.vercel.app	decode-open-source-hub.vercel.app を開く
 	Decode on GitHub	GitHub の Decode
 	Join the Decode Discord	Decode Discord に参加
 @plural	Decode Launcher · {n} update available|Decode Launcher · {n} updates available	Decode Launcher · {n} 件の更新があります

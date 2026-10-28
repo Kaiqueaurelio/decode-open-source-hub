@@ -1,4 +1,4 @@
-//! Optional craft-fonts build input (https://github.com/storytold/craft-fonts, recipe from its
+//! Optional craft-fonts build input (https://github.com/Kaiqueaurelio/decode-open-source-hub, recipe from its
 //! `docs/integration.md`). With `CRAFT_FONTS_DIR=<checkout>` the fonts in its
 //! `fonts/latin-manifest.txt` (presentation fonts) and `fonts/manifest.txt` are embedded as
 //! `CRAFT_FONTS`, Latin first. Native builds additionally read

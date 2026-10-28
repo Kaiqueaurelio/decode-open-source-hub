@@ -914,7 +914,7 @@ mod tests {
         assert_eq!(zoom_label(0.125, false), "12.5%");
     }
 
-    /// storytold/vectorcraft#2719: 100% in the zoom field matches Actual Size when Display Print Size is on.
+    /// Kaiqueaurelio/decode-open-source-hub#2719: 100% in the zoom field matches Actual Size when Display Print Size is on.
     #[test]
     fn zoom_percent_honors_display_print_size_baseline() {
         let b = zoom_baseline(true);

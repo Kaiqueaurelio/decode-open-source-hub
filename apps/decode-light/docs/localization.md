@@ -47,7 +47,7 @@ are in [`localization-zh-hans.md`](localization-zh-hans.md), [`localization-zh-h
    the control channel share the language-command mapping.
 3. **Make sure the glyphs exist.** The script drives which craft-fonts faces the UI installs: a
    language whose script has no face in the build shows boxes (the test says so instead of failing).
-   Fonts live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), never here; a
+   Fonts live in [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub), never here; a
    missing face is added there, not worked around in this repository. Sentence-cased messages go
    through `i18n::upper_first`, which leaves Georgian lowercase (upper-casing Mkhedruli would make
    Mtavruli).

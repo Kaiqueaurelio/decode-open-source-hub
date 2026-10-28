@@ -1,4 +1,4 @@
-//! Small building blocks in getartcraft.com's style: mono labels, square buttons, badges and
+//! Small building blocks in decode-open-source-hub.vercel.app's style: mono labels, square buttons, badges and
 //! hairline cell groups.
 //!
 //! Upper-case text is drawn upper case but announced to screen readers as written.
@@ -718,16 +718,16 @@ mod tests {
     #[test]
     fn external_openers_refuse_hostile_urls() {
         let ctx = egui::Context::default();
-        let release_asset = "https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg";
+        let release_asset = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg";
         open_external_link(&ctx, release_asset);
         assert_eq!(opened_urls(&ctx), vec![release_asset.to_string()]);
 
         ctx.output_mut(|out| out.commands.clear());
         for hostile in [
-            "https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft.dmg|calc.exe",
-            "https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft.dmg&whoami",
-            "https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft.dmg`id`",
-            "https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft.dmg\nnext",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft.dmg|calc.exe",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft.dmg&whoami",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft.dmg`id`",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft.dmg\nnext",
             "https://user@evil.example/photocraft.dmg",
             "https:///path",
             "javascript:alert(1)",
@@ -767,4 +767,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/widgets.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/widgets.rs

@@ -1,4 +1,4 @@
-//! Fonts from the optional craft-fonts build input (storytold/craft-fonts).
+//! Fonts from the optional craft-fonts build input (Kaiqueaurelio/craft-fonts).
 //!
 //! Built with `CRAFT_FONTS_DIR=<craft-fonts checkout>`, [`CRAFT_FONTS`] holds every font in its
 //! manifest (today: the Japanese and Simplified-Chinese UI and document fonts); otherwise it is

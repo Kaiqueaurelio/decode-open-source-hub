@@ -42,7 +42,7 @@ pub fn generate(root: &Path) -> bool {
         if size <= 512 {
             let hd = dir.join(format!("hicolor/{size}x{size}/apps"));
             let _ = std::fs::create_dir_all(&hd);
-            ok &= render(&tile, size, &hd.join("ai.storyteller.figcraft.png"));
+            ok &= render(&tile, size, &hd.join("com.decode.figcraft.png"));
         }
     }
     // Windows .ico (PNG-compressed entries).
@@ -73,7 +73,7 @@ pub fn generate(root: &Path) -> bool {
     // The lighter trace keeps the scalable theme icon cheap to render.
     let sd = dir.join("hicolor/scalable/apps");
     let _ = std::fs::create_dir_all(&sd);
-    let target = sd.join("ai.storyteller.figcraft.svg");
+    let target = sd.join("com.decode.figcraft.svg");
     let _ = std::fs::remove_file(&target);
     ok &= std::fs::copy(dir.join("figcraft-small.svg"), &target).is_ok();
     eprintln!("icon: wrote {}", dir.display());

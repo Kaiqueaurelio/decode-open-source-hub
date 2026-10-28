@@ -10,4 +10,4 @@ fi
 exit 0
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/linux/postinst.sh
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/linux/postinst.sh

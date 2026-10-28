@@ -41,7 +41,7 @@ to be added when this text or its derived PR text is published.
 
 Scope: the assigned checkout
 `/home/codex/work/CraftApps/egui037-migration-20261022/soundcraft` only. The shared
-`storytold/egui`, `storytold/winit`, `storytold/craft-libs`, `craft-ai-integrations` and sibling
+`Kaiqueaurelio/egui`, `Kaiqueaurelio/winit`, `Kaiqueaurelio/craft-libs`, `craft-ai-integrations` and sibling
 applications are dependency/hand-off points, not repositories changed by this plan.
 
 The plan is written against source, not against a generic migration template. Every claim names
@@ -64,8 +64,8 @@ one coherent lifecycle, not another version bump.
 
 Target release state:
 
-1. One immutable egui family from the complete reviewed/published **storytold egui P8**
-   hand-off and one immutable **completed storytold winit**, each at a storytold-owned full
+1. One immutable egui family from the complete reviewed/published **Kaiqueaurelio egui P8**
+   hand-off and one immutable **completed Kaiqueaurelio winit**, each at a Kaiqueaurelio-owned full
    SHA. P8 is the E1–E21 base plus **P2b** (`E4` regular-clipboard/PRIMARY routing over the
    async W15 transfer path), **P7** held-key release pairing and `E21`, **P7b/E21b** outgoing
    surrounding text, and **P7c**'s selected `#8763` selection-action and `#8748`
@@ -78,7 +78,7 @@ Target release state:
    reachable when implementation starts, wait for approved publication; never fill the gap
    with a movable branch, an invented SHA or an incomplete stage. Stock 0.37 is only a
    measurement control, not an intermediate production stage.
-2. `craft-ui` and `craft-docpath` from one reviewed `storytold/craft-libs` revision on the
+2. `craft-ui` and `craft-docpath` from one reviewed `Kaiqueaurelio/craft-libs` revision on the
    reconciled merge base `3832c47ef68a0e6214f2c1e85f3526b6adcb686e`, which carries the intended
    egui-API port. The historical PR #199 hunks (`8614e4a`, README `1764bca`) and the earlier
    `4919088` main inspection describe how that base was assembled; they are no longer the base
@@ -111,13 +111,13 @@ screenshots). That work is specified in §6.
 | Upstream egui 0.37.0 | `841a328ba2dd8f6996beb7189ebb7fc00e668a2a` | Peeled release commit; annotated tag object differs |
 | Suite fork research input | `a4f9a17f64a6bae61350fb85804c9df0d9865916` | `aiongg/craft/0.37`, movable branch; E1–E21; not a production pin |
 | Suite winit research input | `8b35388bd719e8cc86a95971ba0bc026c9a8f058` | `aiongg/winit craft/0.30.13-lang`; W17–W27; movable branch; no W15P |
-| storytold winit base | `ffae5198770d7730e718043f035a772b7dbc3b1b` | `craft/0.30.13`, W1–W15 |
-| Published storytold egui 0.36.2 | `767b1cad294120689a514bb4bd68c077e46679b9` | Existing `craft/0.36.2`; not the 0.37 target |
+| Kaiqueaurelio winit base | `ffae5198770d7730e718043f035a772b7dbc3b1b` | `craft/0.30.13`, W1–W15 |
+| Published Kaiqueaurelio egui 0.36.2 | `767b1cad294120689a514bb4bd68c077e46679b9` | Existing `craft/0.36.2`; not the 0.37 target |
 | craft-libs reconciliation base | `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` | Current merged `craft-ui`/`craft-docpath` base for this migration; the exact publish pin is still a central-publication gate |
 | craft-libs historical inspection | `49190884278f16c9a9f5823d7698a8ffb5deb062` / PR #199 `8614e4a` + README `1764bca` | Earlier base and hunks; retained as history only. Branch head `b68de8c…`/audit `ec8840a…` are stale trees and must not be merged |
 | craft-libs audit merge | `ec8840af8c5fda695cf195cdd05e5ae078415c07` | Evidence only; not a target |
 
-The exact `storytold/egui`, `storytold/winit` and reviewed `craft-libs` revision after merge are
+The exact `Kaiqueaurelio/egui`, `Kaiqueaurelio/winit` and reviewed `craft-libs` revision after merge are
 **blocking unknowns** (§16). They must be supplied as full immutable SHAs before P1 manifests
 are changed.
 
@@ -255,7 +255,7 @@ to every step; a lockfile/graph check must be a separate accepted command.
 Repository workflows at inspection: `freebsd.yml` (nightly/release, common action),
 `windows-arm64.yml` (nightly/release, common action), `packaging-lint.yml`, `nix.yml` (common
 action; there is no root flake in this checkout), `sonarcloud.yml`, `release.yml` (release branch
-only). The primary PR test matrix is supplied by `storytold/craft-common-actions`, not by a
+only). The primary PR test matrix is supplied by `Kaiqueaurelio/craft-common-actions`, not by a
 `ci.yml` in this repository.
 
 Existing UI tests already exercise real frames and shapes rather than only state:
@@ -316,7 +316,7 @@ those are handled in §5 and §12.
 
 ### 5.1 Coherent production target
 
-P1 adopts the reviewed storytold egui family, companion winit and compatible
+P1 adopts the reviewed Kaiqueaurelio egui family, companion winit and compatible
 craft-libs revision atomically with all required source changes. The aiongg SHAs
 are research inputs and patch provenance, not final production pins. Stock 0.37 may
 be built as an isolated measurement control; it is not an intermediate shipping
@@ -326,14 +326,14 @@ SHA before implementation or publication.
 The final production pin is the whole prerequisite set, not the E1–E21 base or an
 intermediate stage:
 
-- The complete **storytold egui P8** hand-off: E1–E21, **E4/P2b** regular-clipboard
+- The complete **Kaiqueaurelio egui P8** hand-off: E1–E21, **E4/P2b** regular-clipboard
   and PRIMARY routing (`get_primary_text`/`set_primary_text`, per-seat
   owner/offer/serial handling, no second regular `wl_data_device`, password
   exclusion, no unchanged-selection reclaim) over the bounded async transfer path,
   **P7** held-key release pairing plus `E21`, **P7b/E21b** outgoing surrounding
   text, and **P7c**'s selected `#8763`/`#8748` fixes, plus justified performance
   fixes. Incoming E21 deletion/commit alone is not surrounding-text support.
-- The **completed storytold winit**: **W15P** PRIMARY on the existing wayland
+- The **completed Kaiqueaurelio winit**: **W15P** PRIMARY on the existing wayland
   connection/per-seat lifecycle, the **bounded W15 async transfer API** (total
   deadline from admission, cumulative byte cap, bounded read/writer workers and
   queue depth, handle-owned result/cancel slot that cancels on drop, owner-specific
@@ -362,16 +362,16 @@ manifest to land with placeholders):
 
 ```toml
 [patch.crates-io]
-egui                 = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-ecolor               = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-emath                = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-epaint               = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-epaint_default_fonts = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-eframe               = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-egui-winit           = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-egui-wgpu            = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-egui_kittest         = { git = "https://github.com/storytold/egui",  rev = "<REVIEWED_EGUI_SHA>" }
-winit                = { git = "https://github.com/storytold/winit", rev = "<REVIEWED_WINIT_SHA>" }
+egui                 = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+ecolor               = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+emath                = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+epaint               = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+epaint_default_fonts = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+eframe               = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+egui-winit           = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+egui-wgpu            = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+egui_kittest         = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui",  rev = "<REVIEWED_EGUI_SHA>" }
+winit                = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit", rev = "<REVIEWED_WINIT_SHA>" }
 ```
 
 The table is illustrative, not an exhaustive resolved-family list. Include `egui_glow`,
@@ -384,8 +384,8 @@ reviewed change is needed; winit stays 0.30.13-compatible.
 Workflow pins:
 
 ```toml
-craft-ui     = { version = "0.1.0", git = "https://github.com/storytold/craft-libs", rev = "<REVIEWED_CRAFT_LIBS_SHA>", features = ["serde"] }
-craft-docpath = { version = "0.1.0", git = "https://github.com/storytold/craft-libs", rev = "<REVIEWED_CRAFT_LIBS_SHA>" }
+craft-ui     = { version = "0.1.0", git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "<REVIEWED_CRAFT_LIBS_SHA>", features = ["serde"] }
+craft-docpath = { version = "0.1.0", git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "<REVIEWED_CRAFT_LIBS_SHA>" }
 ```
 
 Use one craft-libs revision for both if the reviewed diff only changes the UI crate plus unrelated
@@ -1182,8 +1182,8 @@ Dependency DAG:
 P0 reviewed plans + SoundCraft baselines (e85a480..., current-engine/0.36-UI if it builds,
    stock-0.37 control, fork) and preserved baseline executable/fixture
    |
-   +-- approved published storytold egui P8 (E1-E21 + P2b + P7 + P7b/E21b + P7c)
-   +-- completed approved published storytold winit (W15P + bounded W15 transfer
+   +-- approved published Kaiqueaurelio egui P8 (E1-E21 + P2b + P7 + P7b/E21b + P7c)
+   +-- completed approved published Kaiqueaurelio winit (W15P + bounded W15 transfer
        + W27 lifecycle revision)
    +-- reviewed craft-libs CL-1 (reconciled 3832c47 base)
    |        -> CL-2 capture prototype -> Design/Grid pilot adapters -> CL-2F API freeze
@@ -1203,7 +1203,7 @@ P0 reviewed plans + SoundCraft baselines (e85a480..., current-engine/0.36-UI if 
    production changes. Preserve the baseline executable and a saved fixture for
    rollback rehearsal.
 2. **P1 — atomic compatibility.** Prerequisites are the complete approved,
-   reachable **storytold egui P8** and **completed storytold winit** revisions
+   reachable **Kaiqueaurelio egui P8** and **completed Kaiqueaurelio winit** revisions
    (P2b over the bounded W15 transfer, P7, P7b/E21b, P7c; W15P, W15 transfer and
    W27 lifecycle/serial state), the reviewed craft-libs **CL-1** revision built by
    on the reconciled `3832c47` base (`8614e4a`/`1764bca` are the historical port hunks),
@@ -1262,7 +1262,7 @@ Blocking unknowns:
    exists, P1 cannot pin it.
 2. **Organization-owned egui/winit SHAs, including the required new work.** `aiongg/craft/0.37`
    and `aiongg/winit craft/0.30.13-lang` are movable research inputs. P1 requires approved,
-   reachable `storytold` full SHAs for the complete **egui P8** set (E1–E21, **P2b**, **P7**,
+   reachable `Kaiqueaurelio` full SHAs for the complete **egui P8** set (E1–E21, **P2b**, **P7**,
    **P7b/E21b**, **P7c**) and the **completed winit** (**W15P**, bounded W15 transfer, W27
    lifecycle). A missing SHA blocks all P1 manifest changes; these SHAs cannot be invented
    before implementation and publication.
@@ -1333,7 +1333,7 @@ Acceptance for the whole migration:
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/soundcraft` `main` resolved to `d47abe484d4f9ef0cc9f8e872e0b3880a61a4588` when the owned checkout was fast-forwarded on 2026-10-23. Earlier baseline SHAs and line anchors above are retained as historical review evidence.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` resolved to `d47abe484d4f9ef0cc9f8e872e0b3880a61a4588` when the owned checkout was fast-forwarded on 2026-10-23. Earlier baseline SHAs and line anchors above are retained as historical review evidence.
 
 Current local implementation update (2026-10-24): the owned worktree `HEAD` is
 `6b84a4f0461f2467402eafe41dcc708c369fb045` on `codex/egui-037-soundcraft-20261023`, with the

@@ -53,7 +53,7 @@ pub enum ArtcraftLoginErrorType {
 /// store the resulting session as a new credential file.
 ///
 /// `service` selects the environment: `Artcraft` hits production
-/// (`api.storyteller.ai`); `ArtcraftLocal` hits a local dev server. Every
+/// (`api.decodeanalytics.com`); `ArtcraftLocal` hits a local dev server. Every
 /// successful login creates a NEW credential file, so users can keep an
 /// unlimited number of accounts for either environment.
 #[tauri::command]

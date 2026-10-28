@@ -158,4 +158,4 @@ if __name__ == "__main__":
     main()
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/macos/dmg/generate.py
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/macos/dmg/generate.py

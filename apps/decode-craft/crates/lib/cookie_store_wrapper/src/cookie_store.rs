@@ -27,7 +27,7 @@ pub struct CapturedCookie {
   pub value: String,
 
   /// Domain as reported by the browser. May carry a leading dot
-  /// (e.g. `.storyteller.ai`), which marks a parent-domain cookie.
+  /// (e.g. `.decodeanalytics.com`), which marks a parent-domain cookie.
   pub maybe_domain: Option<String>,
 
   pub maybe_path: Option<String>,

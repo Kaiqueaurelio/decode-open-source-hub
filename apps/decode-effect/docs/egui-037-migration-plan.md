@@ -54,7 +54,7 @@ independent review; no new test, native-IME or final dependency-graph acceptance
 Every future push or new pull request still needs a fresh, explicit human approval of the exact
 commit range and its validation; this document is not publication evidence.
 
-Scope: `storytold/effectcraft` only (this checkout). Shared work in `storytold/craft-libs`
+Scope: `Kaiqueaurelio/decode-open-source-hub` only (this checkout). Shared work in `Kaiqueaurelio/craft-libs`
 (PR 199 and the CL-2 capture helper), the suite egui fork and the suite winit fork are dependencies
 with their own plans; this document records what EffectCraft needs from them, not what they should
 do. Sibling apps, their plans and their dependency bumps are out of scope.
@@ -82,16 +82,16 @@ This plan deliberately separates:
 | Target upstream release | egui tag `0.37.0`, peeled commit `841a328ba2dd8f6996beb7189ebb7fc00e668a2a` (tagged 2026-10-15) |
 | Candidate suite egui (comparison input only) | `aiongg/craft/0.37` = `a4f9a17f64a6bae61350fb85804c9df0d9865916` (2026-10-21, E1–E21). Read-only source for this plan; **not a publication pin**. |
 | Candidate suite winit (comparison input only) | `aiongg/craft/0.30.13-lang` = `8b35388bd719e8cc86a95971ba0bc026c9a8f058` (winit 0.30.13 + W1–W15, W17–W27). Read-only source; **not a publication pin**. |
-| Production egui pin | **pending approved fork implementation**: the final reviewed and published `storytold/egui` P8 SHA containing E1–E21, P2b async W15P routing, P7 held-key pairing, P7b/E21b, P7c's selected `#8763`/`#8748` fixes and the justified `#8731`/`#8736` performance fixes if measurements require them. All egui-family crates must come from that one revision. |
-| Production winit pin | **pending approved fork implementation**: the completed, final reviewed `storytold/winit` SHA containing W1–W27, W15P and the W27 lifecycle fixes. |
-| Final dependency unit | one immutable set recorded together: the complete storytold egui P8 SHA + storytold winit SHA + craft-ui SHA with CL-1 and CL-2F, proved by a clean `--locked` fetch. This is the consumer's first and only compatibility landing: no stock-0.37 or intermediate fork production stage. |
-| Suite shared UI dependency | `craft-ui` from `storytold/craft-libs`, reconciled merged-PR base `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` (current shared-library implementation base). Historical planning rev `5c874d51eeb3de70e735c8ce87a59a7dedd47675` is superseded; the final publication pin is the reviewed immutable SHA containing CL-1 and CL-2F. |
-| Shared PR history | `storytold/craft-libs#199` is merged at `3832c47ef68a0e6214f2c1e85f3526b6adcb686e`. Historical port hunks `8614e4a04fae516fba16c22b31ff1008cb6be10b` and README `1764bca`, applied to old `main` `49190884278f16c9a9f5823d7698a8ffb5deb062`, are superseded. Never merge `b68de8c`/`ec8840a` as trees. |
-| Separate language PR | `storytold/craft-libs#198` (fork E5/E9/E12–E21, winit W17–W27) |
+| Production egui pin | **pending approved fork implementation**: the final reviewed and published `Kaiqueaurelio/egui` P8 SHA containing E1–E21, P2b async W15P routing, P7 held-key pairing, P7b/E21b, P7c's selected `#8763`/`#8748` fixes and the justified `#8731`/`#8736` performance fixes if measurements require them. All egui-family crates must come from that one revision. |
+| Production winit pin | **pending approved fork implementation**: the completed, final reviewed `Kaiqueaurelio/winit` SHA containing W1–W27, W15P and the W27 lifecycle fixes. |
+| Final dependency unit | one immutable set recorded together: the complete Kaiqueaurelio egui P8 SHA + Kaiqueaurelio winit SHA + craft-ui SHA with CL-1 and CL-2F, proved by a clean `--locked` fetch. This is the consumer's first and only compatibility landing: no stock-0.37 or intermediate fork production stage. |
+| Suite shared UI dependency | `craft-ui` from `Kaiqueaurelio/craft-libs`, reconciled merged-PR base `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` (current shared-library implementation base). Historical planning rev `5c874d51eeb3de70e735c8ce87a59a7dedd47675` is superseded; the final publication pin is the reviewed immutable SHA containing CL-1 and CL-2F. |
+| Shared PR history | `Kaiqueaurelio/craft-libs#199` is merged at `3832c47ef68a0e6214f2c1e85f3526b6adcb686e`. Historical port hunks `8614e4a04fae516fba16c22b31ff1008cb6be10b` and README `1764bca`, applied to old `main` `49190884278f16c9a9f5823d7698a8ffb5deb062`, are superseded. Never merge `b68de8c`/`ec8840a` as trees. |
+| Separate language PR | `Kaiqueaurelio/craft-libs#198` (fork E5/E9/E12–E21, winit W17–W27) |
 
 All pins must be full commit SHAs. Branch names are not publication pins. The `aiongg` SHAs above
 are source-inspection inputs for this review; the lock file in a publication branch must name only
-the final storytold revisions (plus the existing unrelated craft-libs PDF pin).
+the final Kaiqueaurelio revisions (plus the existing unrelated craft-libs PDF pin).
 
 ### 1.2 Baseline dependency set (historical `9581b53c`; from `Cargo.lock` and manifests)
 
@@ -110,10 +110,10 @@ configuration is review evidence, not an immutable publication pin.
 | `accesskit` / `accesskit_winit` | `0.24.1` / `0.32.2` | transitive |
 | `winit` | `0.30.13` crates.io, checksum `a6755fa5…` | `apps/effectcraft/Cargo.toml:23` (`"0.30"`, default features off) and transitive |
 | `wgpu` | `30.0.1` | `Cargo.toml:101` |
-| `craft-ui` | baseline `0.1.0` git `storytold/craft-libs` rev `5c874d51…`; implementation resolves local `craft-libs-implementation` at `3832c47…` | `Cargo.toml:107` plus `local-integration-config.toml` |
-| `craft-pdf` | git `storytold/craft-libs` rev `ca50d63b…` | `Cargo.toml:15` |
-| `craft-docpath` | git `storytold/craft-libs` rev `82a24b00…` | `Cargo.toml:16` |
-| `hayro-syntax` patch | git `storytold/craft-libs` rev `ca50d63b…`, `=0.7.2` | `Cargo.toml:213-214` |
+| `craft-ui` | baseline `0.1.0` git `Kaiqueaurelio/craft-libs` rev `5c874d51…`; implementation resolves local `craft-libs-implementation` at `3832c47…` | `Cargo.toml:107` plus `local-integration-config.toml` |
+| `craft-pdf` | git `Kaiqueaurelio/craft-libs` rev `ca50d63b…` | `Cargo.toml:15` |
+| `craft-docpath` | git `Kaiqueaurelio/craft-libs` rev `82a24b00…` | `Cargo.toml:16` |
+| `hayro-syntax` patch | git `Kaiqueaurelio/craft-libs` rev `ca50d63b…`, `=0.7.2` | `Cargo.toml:213-214` |
 | `wasm-bindgen` | `0.2.129` (exact crate and CLI), `apps/effectcraft-web/Cargo.toml:34` and `xtask/src/main.rs:254` | web only |
 | filmcraft crates | git rev `2c5ba7a7…` | `Cargo.toml:76-95` |
 
@@ -350,7 +350,7 @@ EffectCraft has no `vendor/` directory and no local egui patch. Its only `[patch
 `hayro-syntax`, inherited from the craft-libs PDF stack (`Cargo.toml:213-214`); it is unrelated to
 egui and must stay.
 
-The production dependency is the complete reviewed and published storytold egui **P8** revision,
+The production dependency is the complete reviewed and published Kaiqueaurelio egui **P8** revision,
 not the personal `aiongg` branches used as comparison input here. P8 carries E1–E21, P2b async
 W15P routing, P7 held-key pairing, P7b/E21b outgoing IME surrounding text (§5.5), P7c's selected
 `#8763`/`#8748` fixes and the justified `#8731`/`#8736` performance fixes. The completed final
@@ -638,25 +638,25 @@ pass). Rules:
 ### 5.1 Manifests, features, pins and lock checks
 
 Root `Cargo.toml` (final publication form; placeholders are filled only after the reviewed forks
-exist). P1 waits for the complete reviewed/published storytold egui P8 (E1–E21, P2b, P7, P7b/E21b,
+exist). P1 waits for the complete reviewed/published Kaiqueaurelio egui P8 (E1–E21, P2b, P7, P7b/E21b,
 P7c and any justified perf fix), the completed winit (W1–W27, W15P, W27 lifecycle) and craft-ui
 CL-1 + CL-2F. It includes the custom-editor IME payload adapter atomically. Stock 0.37.0 and
 aiongg candidates remain comparison controls, never intermediate production stages.
 
 ```toml
-craft-ui = { version = "0.1.0", git = "https://github.com/storytold/craft-libs", rev = "<reviewed main SHA including CL-1 and CL-2F>", features = ["serde"] }
+craft-ui = { version = "0.1.0", git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "<reviewed main SHA including CL-1 and CL-2F>", features = ["serde"] }
 egui = { version = "0.37", default-features = false, features = ["default_fonts", "monochrome_emoji_fonts"] }
 eframe = { version = "0.37", default-features = false }
 egui_kittest = { version = "0.37" }
 
 [patch.crates-io]
-winit = { git = "https://github.com/storytold/winit", rev = "<final reviewed winit SHA incl W15P>" }
-egui = { git = "https://github.com/storytold/egui", rev = "<final reviewed egui P8 SHA incl E21b + P7c>" }
-eframe = { git = "https://github.com/storytold/egui", rev = "<same egui SHA>" }
-egui-winit = { git = "https://github.com/storytold/egui", rev = "<same egui SHA>" }
-egui-wgpu = { git = "https://github.com/storytold/egui", rev = "<same egui SHA>" }
-egui_kittest = { git = "https://github.com/storytold/egui", rev = "<same egui SHA>" }
-hayro-syntax = { git = "https://github.com/storytold/craft-libs", rev = "ca50d63b773c99f96e75c77ce5a1d21e7c9cda0d", version = "=0.7.2" } # keep
+winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit", rev = "<final reviewed winit SHA incl W15P>" }
+egui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<final reviewed egui P8 SHA incl E21b + P7c>" }
+eframe = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same egui SHA>" }
+egui-winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same egui SHA>" }
+egui-wgpu = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same egui SHA>" }
+egui_kittest = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same egui SHA>" }
+hayro-syntax = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "ca50d63b773c99f96e75c77ce5a1d21e7c9cda0d", version = "=0.7.2" } # keep
 ```
 
 `epaint`, `epaint_default_fonts`, `ecolor` and `emath` are path dependencies of the git egui crates
@@ -666,7 +666,7 @@ not appear in a publication lock.
 Notes:
 
 - `craft-ui` is a git dependency from `craft-libs`; redirecting it with
-  `[patch."https://github.com/storytold/craft-libs"]` is only acceptable for development, never in a
+  `[patch."https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs"]` is only acceptable for development, never in a
   publication branch. The publication form is the real `rev`.
 - Do not patch `egui_plot`, `egui_dock`, `egui_extras` (unused) or `egui_system_font_provider`
   (unused while `system_fonts` is off).
@@ -705,9 +705,9 @@ Notes:
   cargo test --locked
   cargo metadata --locked --format-version 1 --no-deps
   ```
-  Acceptance: exactly one egui-family source (the final storytold revision) covering `egui`,
+  Acceptance: exactly one egui-family source (the final Kaiqueaurelio revision) covering `egui`,
   `eframe`, `egui-winit`, `egui-wgpu`, `egui_kittest`, `epaint`, `epaint_default_fonts`, `ecolor`
-  and `emath`; exactly one winit (the final storytold revision); no registry `egui`/`epaint`
+  and `emath`; exactly one winit (the final Kaiqueaurelio revision); no registry `egui`/`epaint`
   beside it; no `path = "…"` patch and no branch dependency; a clean checkout fetches every
   approved revision and passes the checks with `--locked`.
 - `wgpu` stays `30.0.1`; egui 0.37 accepts `30.0` and already resolves 30.0.1 here. The pinned
@@ -1082,16 +1082,16 @@ When `craft-libs#198`'s fork APIs are accepted:
 
 ## 6. Dependency topology, publication reachability and rollback
 
-Intended graph (final reviewed storytold revisions; names shown for structure):
+Intended graph (final reviewed Kaiqueaurelio revisions; names shown for structure):
 
 ```text
 effectcraft / effectcraft-web / effectcraft-cli
   -> effectcraft-ui-egui -> craft-ui (craft-libs rev with CL-1 + CL-2F)
-                          -> egui 0.37.0 (git <final storytold egui P8 SHA, incl E21b/P7c>)
+                          -> egui 0.37.0 (git <final Kaiqueaurelio egui P8 SHA, incl E21b/P7c>)
                              -> epaint, epaint_default_fonts, ecolor, emath (same git rev)
                              -> eframe, egui-wgpu, egui-winit (same git rev)
                              -> accesskit 0.25.1, kittest 0.5.0
-                             -> winit 0.30.13 (git <final storytold winit SHA, incl W15P>)
+                             -> winit 0.30.13 (git <final Kaiqueaurelio winit SHA, incl W15P>)
   -> winit (direct, same git rev)
 ```
 
@@ -1397,7 +1397,7 @@ thresholds are proposals to be validated by paired runs on recorded hardware.
 ## 10. Staged implementation PRs
 
 Dependency DAG: `B0 → P1 → P2 → P3 → P4 → P5`. P1 waits for the complete reviewed/published
-storytold egui **P8** (E1–E21, P2b async W15P routing, P7 held-key pairing, P7b/E21b, P7c's
+Kaiqueaurelio egui **P8** (E1–E21, P2b async W15P routing, P7 held-key pairing, P7b/E21b, P7c's
 selected `#8763`/`#8748` fixes and any justified `#8731`/`#8736` perf fix), the completed winit
 (W1–W27, W15P, W27 lifecycle), and craft-libs CL-1 and CL-2F after its DesignCraft/GridCraft
 pilots. P1 includes the compatible `IMEOutput` producer and all required fork API adaptations.
@@ -1410,7 +1410,7 @@ acceptance.
 | Stage | Scope | Validation | Rollback |
 | --- | --- | --- | --- |
 | **B0** | Bench instrumentation only: samples/percentiles, final/discarded pass counters, logic-only tick, repaint observer, texture-byte counter, font-startup and WASM sizes, optional allocator; baseline run on B0-instrumented `9581b53c` (record patch SHA and lock) | `bench --ops --json` raw evidence; no behaviour change; gates | revert commit; baseline evidence retained |
-| **P1** | Final reviewed storytold dependency pins (complete egui P8: E1–E21 + P2b + P7 + P7b/E21b + P7c `#8763`/`#8748` + justified perf fixes; completed winit W1–W27 + W15P and W27 lifecycle fixes; craft-ui with CL-1 + CL-2F), including the viewer_text surrounding-text adapter and compatible `IMEOutput` literal, feature `clipboard`, `default_fonts` + `monochrome_emoji_fonts`; mechanical API migration (IDs, roles, `Ui::scope_id`, `Atom`/`IdSalt`, font bytes, `TextEdit::align`, `MouseWheelSource`, screenshot callback via the CL-2F slot, test `Event`s); **actual strict kittest accessibility names and glyph fixes** until all tests pass with `check_accessibility: true` and missing-glyph `Panic`, with `allow_missing_glyphs` only on the two named script tests. No `with_accessibility_check(false)` anywhere. | `cargo xtask ci`; `cargo check/test --locked`; `cargo tree -d`; one-family/one-winit and wasm-target checks; all tests compile and pass | revert P1: restores the 0.36.2 lock; no data changes |
+| **P1** | Final reviewed Kaiqueaurelio dependency pins (complete egui P8: E1–E21 + P2b + P7 + P7b/E21b + P7c `#8763`/`#8748` + justified perf fixes; completed winit W1–W27 + W15P and W27 lifecycle fixes; craft-ui with CL-1 + CL-2F), including the viewer_text surrounding-text adapter and compatible `IMEOutput` literal, feature `clipboard`, `default_fonts` + `monochrome_emoji_fonts`; mechanical API migration (IDs, roles, `Ui::scope_id`, `Atom`/`IdSalt`, font bytes, `TextEdit::align`, `MouseWheelSource`, screenshot callback via the CL-2F slot, test `Event`s); **actual strict kittest accessibility names and glyph fixes** until all tests pass with `check_accessibility: true` and missing-glyph `Panic`, with `allow_missing_glyphs` only on the two named script tests. No `with_accessibility_check(false)` anywhere. | `cargo xtask ci`; `cargo check/test --locked`; `cargo tree -d`; one-family/one-winit and wasm-target checks; all tests compile and pass | revert P1: restores the 0.36.2 lock; no data changes |
 | **P2** | Lifecycle: `tick`/`draw` split, injected app clock, focus, polls/playback/audio/project and workspace-layout autosave/events in tick, hidden `RequestPaintWhileHidden` (including queued screenshots, settling and playback/child viewports), synthetic-input generation guard, input-waiter ordering after draw, close guard, screenshot scheduling ownership | §8.3 tests; native hidden/minimized manual check; benchmark logic-only/idle | revert P2: returns work to `ui`; behaviour-only, no data |
 | **P3** | Accessibility completion (custom roles/names), glyph coverage, extended light/dark × 1.0/2.0 visual harness, geometry/pixel tests, style/visual adjustments if the tests show unintended movement | §8.4 tests, `cargo xtask assets` (only if PNG goldens), a required-adapter `ui_gpu.rs` run | revert P3: tests and names only (except any visual fix, which is isolated) |
 | **P4** | Extended language/platform qualification: `set_language`/`set_ui_language` policy where applicable, RTL UI-label tests, PRIMARY native capability matrix, clipboard/non-Latin shortcut and native IME rows. E21b/`IMEOutput` compatibility is already part of P1. | fork-required tests and native matrix using the same coherent dependency unit | revert P4 policy/test additions; retain P1 final pins and required adapters |
@@ -1437,10 +1437,10 @@ git grep -n 'with_accessibility_check(false)' -- crates apps # must be empty
 
 ## 11. Blocking unknowns and decisions
 
-1. **Final storytold egui/winit SHAs.** The candidate `aiongg` revisions are comparison inputs only.
-   Production waits for the approved, published implementation: a storytold egui **P8** SHA with
+1. **Final Kaiqueaurelio egui/winit SHAs.** The candidate `aiongg` revisions are comparison inputs only.
+   Production waits for the approved, published implementation: a Kaiqueaurelio egui **P8** SHA with
    E1–E21 + P2b + P7 + P7b/E21b + P7c's selected `#8763`/`#8748` fixes + any justified
-   `#8731`/`#8736` fix, and a completed storytold winit SHA with W1–W27 + W15P and the W27
+   `#8731`/`#8736` fix, and a completed Kaiqueaurelio winit SHA with W1–W27 + W15P and the W27
    lifecycle fixes. Both must be reachable, immutable and fetchable with `--locked`.
 2. **craft-libs PR 199 base.** The implementation starts from merged PR 199 at
    `3832c47ef68a0e6214f2c1e85f3526b6adcb686e`; historical `8614e4a`/`1764bca` on old `main`
@@ -1525,7 +1525,7 @@ git grep -n 'with_accessibility_check(false)' -- crates apps # must be empty
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/effectcraft` `main` now resolves to `f6ef1a790625657259f449f3f4f0773d7df449bb`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` now resolves to `f6ef1a790625657259f449f3f4f0773d7df449bb`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 Preserve queue4096/click1–512/drag<=2048 validation and refusal-without-mutation test; these limits differ from FilmCraft. Preserve chrono feature split.
 

@@ -5,7 +5,7 @@
 //! desktop compositor still reserves that frame for the window surface: the content is drawn
 //! offset by the caption and border while the pointer keeps the un-offset client coordinates, so
 //! it no longer points at what is drawn under it (rust-windowing/winit#2419; PhotoCraft fixed the
-//! same in storytold/photocraft#2401). [`service`] strips the two styles and has Windows
+//! same in Kaiqueaurelio/decode-open-source-hub#2401). [`service`] strips the two styles and has Windows
 //! recalculate the frame; winit puts them back whenever it changes the window flags (maximize,
 //! restore, …), so the returned guard runs every frame.
 //!
@@ -13,7 +13,7 @@
 //! caption is gone is sized without one: its rect covers the whole monitor, taskbar included, and
 //! the shell reads a caption-less window covering its monitor as a full-screen app (#1977). The
 //! guard therefore also trims a parked maximize's rect back to the work area plus its own frame,
-//! clear of the taskbar, as PhotoCraft does (storytold/photocraft#3308). winit pins the client
+//! clear of the taskbar, as PhotoCraft does (Kaiqueaurelio/decode-open-source-hub#3308). winit pins the client
 //! area to the work area either way (`WM_NCCALCSIZE`), so the app's pixels do not move.
 
 /// Run once per frame; a no-op once the window is borderless.

@@ -41,7 +41,7 @@ In order. Each closes a beta blocker from [gaps.md](gaps.md).
    macOS, Windows and Linux. 30–50 h.
 2. **CI on pull requests** (gap 7): `cargo xtask ci` on every PR, at least macOS and Linux;
    Windows smoke start. 4–8 h. Needs the owner to make it a required check.
-3. **INDD real-file corpus** (gap 2): `.indd` and `.indt` open through storytold/indd-utils
+3. **INDD real-file corpus** (gap 2): `.indd` and `.indt` open through Kaiqueaurelio/indd-utils
    (INDD → IDML in memory → existing importer, warnings in the open result); a pinned corpus and
    a metric show what survives. 10–30 h.
 4. **IDML real-file corpus** (gap 3): a pinned corpus, a survival metric, and fixes for #193,
@@ -111,7 +111,7 @@ output intent · EPS place") is done except Books depth and EPS (preview only).
 
 | Date | Change | Summary |
 |---|---|---|
-| 2026-10-13 | minor | INDD and INDT open through storytold/indd-utils; focus item 3 shrinks to a real-file corpus (10–30 h) |
+| 2026-10-13 | minor | INDD and INDT open through Kaiqueaurelio/indd-utils; focus item 3 shrinks to a real-file corpus (10–30 h) |
 | 2026-10-12 | minor | Threading row: threading by hand works; the gate waits on the Primary Text Frame page fixes (#165), 5–7 h |
 | 2026-10-10 | trivial | Ready figure 42% → 47% (method aligned with the standard); beta distance 28 points |
 | 2026-10-10 | minor | Alpha gate table added (6 core workflows); gate fails on manual threading, stage pre-alpha; A1 milestone and focus item 0 |

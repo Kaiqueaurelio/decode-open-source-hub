@@ -39,4 +39,4 @@ pub(crate) fn blurb(ui: &mut Ui, text: &str, color: Color32, rows: usize) {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/card_parts.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/card_parts.rs

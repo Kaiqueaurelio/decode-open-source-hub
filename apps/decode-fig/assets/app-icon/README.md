@@ -32,7 +32,7 @@ image is not kept in this repo. License: see `LICENSE.txt`.
 - `figcraft-<size>.png` (16–1024): renders on the macOS grid; `packaging/macos/package.sh` builds
   the `.icns` from them.
 - `figcraft.ico`: Windows icon, 16–256 px, embedded in the `.exe` by `apps/figcraft/build.rs`.
-- `hicolor/<size>/apps/ai.storyteller.figcraft.png` (16–512) and `hicolor/scalable/...svg`:
+- `hicolor/<size>/apps/com.decode.figcraft.png` (16–512) and `hicolor/scalable/...svg`:
   Linux icon theme; the 256 px one is also the runtime window icon off macOS.
 
 ## Regenerate

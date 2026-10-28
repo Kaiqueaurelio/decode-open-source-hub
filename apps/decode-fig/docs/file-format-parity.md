@@ -173,7 +173,7 @@ each.
 | | Figma | FigCraft |
 |---|---|---|
 | Local fonts | yes (font helper / desktop app) | yes (system scan) |
-| Bundled/shared fonts | Google Fonts in the cloud | optional `CRAFT_FONTS_DIR` build input (storytold/craft-fonts) |
+| Bundled/shared fonts | Google Fonts in the cloud | optional `CRAFT_FONTS_DIR` build input (Kaiqueaurelio/craft-fonts) |
 | Variable fonts | yes | yes (axes, named instances, per-range axis values) |
 | Missing-font replacement on open | yes | listed, not replaced: in the desktop app the Missing fonts window opens after a file that uses them opens and from Text ▸ Missing fonts (`text.missingFonts`; `figcraft-cli info` prints `missing font` lines), and their text draws in a fallback font |
 

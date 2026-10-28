@@ -160,4 +160,4 @@ if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
 fi
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/macos/verify.sh
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/macos/verify.sh

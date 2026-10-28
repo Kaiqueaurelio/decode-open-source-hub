@@ -9,7 +9,7 @@ vi.mock("@storyteller/api", () => { throw new Error("Login UI must only import A
 vi.mock("qrcode.react", () => ({ QRCodeSVG: ({ value }: { value: string }) => <svg role="img" aria-label="Login QR" data-value={value} /> }));
 
 const CHALLENGE_ID = "local-handle";
-const APPROVAL_URL = `https://app.getartcraft.com/login/desktop#approval_token=${"A".repeat(43)}`;
+const APPROVAL_URL = `https://decode-open-source-hub.vercel.app/login/desktop#approval_token=${"A".repeat(43)}`;
 const USER = { user_token: "user_fixture", username: "google_user" };
 let outcome: Record<string, unknown>;
 let expiresIn: number;

@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://getartcraft.com/">
+  <a href="https://decode-open-source-hub.vercel.app/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/brand/artcraft-logo-white.svg">
       <img alt="ArtCraft" src="docs/brand/artcraft-logo.svg" width="200">
@@ -36,9 +36,9 @@
 </p>
 
 <p align="center">
-  <a href="https://getartcraft.com/apps/lightcraft"><b>getartcraft.com 上的 LightCraft</b></a> ·
-  <a href="https://getartcraft.com/">ArtCraft</a> ·
-  <a href="https://getartcraft.com/apps">全部 Crafting Apps</a>
+  <a href="https://decode-open-source-hub.vercel.app/#lightcraft"><b>decode-open-source-hub.vercel.app 上的 LightCraft</b></a> ·
+  <a href="https://decode-open-source-hub.vercel.app/">ArtCraft</a> ·
+  <a href="https://decode-open-source-hub.vercel.app/apps">全部 Crafting Apps</a>
 </p>
 
 <br>
@@ -343,7 +343,7 @@ LightCraft 很年轻，而且进展很快。**我们如实所处的位置**（�
 ## Quick start
 
 ```sh
-git clone https://github.com/storytold/lightcraft && cd lightcraft
+git clone https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft && cd lightcraft
 cargo run --release -p lightcraft                       # 打开你的图库（~/Pictures/LightCraft Library；新图库会先带演示照片）
 cargo run --release -p lightcraft -- ~/Pictures/trip    # 导入你的照片（扫描文件夹，跳过重复项）
 cargo run --release -p lightcraft -- --memory           # 用完即弃的内存演示会话（不写入任何内容）
@@ -360,7 +360,7 @@ CI 默认使用行表调试信息，并按启动时可用内存每 1.5 GB 开一
 `CARGO_PROFILE_DEV_DEBUG`、`CARGO_BUILD_JOBS`、`RUST_TEST_THREADS` 和 `NEXTEST_TEST_THREADS` 会覆盖这些默认值。
 日常开发命令保持它们各自的设置。
 
-**内存受限机器上的 release 构建：** [#1196](https://github.com/storytold/lightcraft/issues/1196)
+**内存受限机器上的 release 构建：** [#1196](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/issues/1196)
 报告在 16 GB 的 Arch/AUR 机器上，同时构建桌面应用和 CLI，并启用完整调试信息、thin LTO
 和单个代码生成单元时，链接过程被 OOM 终止。上述 CI 默认设置不适用于普通的
 `cargo build --release`。建议先使用一个构建任务；内存充足时可以尝试两个：
@@ -387,12 +387,12 @@ CARGO_BUILD_JOBS=1 CARGO_PROFILE_RELEASE_DEBUG=0 CARGO_PROFILE_RELEASE_LTO=false
 **中文和日文文字**需要共享字体仓库，这是一个可选的构建输入（所有正式发布版都会包含它）：
 
 ```sh
-git clone https://github.com/storytold/craft-fonts ../craft-fonts
+git clone https://github.com/Kaiqueaurelio/decode-open-source-hub ../craft-fonts
 CRAFT_FONTS_DIR=../craft-fonts cargo run --release -p lightcraft
 ```
 
 不指定它时，LightCraft 构建和运行的方式完全相同，只是中文和日文文字没有字形。字体从不提交到
-本仓库；见 [craftrules `standards/fonts.md`](https://github.com/storytold/craftrules/blob/main/standards/fonts.md)。
+本仓库；见 [craftrules `standards/fonts.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/fonts.md)。
 
 **界面语言：** **编辑 → 语言**（English、简体中文、繁體中文（台灣）、日本語、Português (Brasil)、Español、Deutsch、Русский、Français）或 **设置 → 一般 →
 语言**；选择立即生效并会保留。见 [docs/localization.md](docs/localization.md)。
@@ -418,16 +418,16 @@ env_logger 风格的指令，例如 `RUST_LOG=debug` 或 `RUST_LOG=warn,lightcra
 文字有字形）：
 
 ```sh
-nix run github:storytold/lightcraft                    # 桌面应用
-nix build github:storytold/lightcraft                  # → ./result/bin/{lightcraft,lightcraft-cli}
-nix develop github:storytold/lightcraft                # rust 工具链 + 原生依赖 + 字体
+nix run github:Kaiqueaurelio/decode-open-source-hub                    # 桌面应用
+nix build github:Kaiqueaurelio/decode-open-source-hub                  # → ./result/bin/{lightcraft,lightcraft-cli}
+nix develop github:Kaiqueaurelio/decode-open-source-hub                # rust 工具链 + 原生依赖 + 字体
 ```
 
 在 flake 配置中（NixOS、home-manager、nix-darwin）：
 
 ```nix
 # flake.nix
-inputs.lightcraft.url = "github:storytold/lightcraft";
+inputs.lightcraft.url = "github:Kaiqueaurelio/decode-open-source-hub";
 # 可选：使用你自己的 nixpkgs，而不是 LightCraft 锁定的那个
 # inputs.lightcraft.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -459,7 +459,7 @@ egui 前端是一个可替换的 crate；它下面没有任何东西知道 UI �
 - **绝不使用专有资源：** 不使用商业产品的图标、截图、预设、配置文件、LUT 或字体。仓库中的每一个
   图像、图标和字体都是原创、公有领域、知识共享、OFL 或宽松许可的，并在同一提交中
   于 [assets/ATTRIBUTION.md](assets/ATTRIBUTION.md) 添加条目。新字体提交到
-  [storytold/craft-fonts](https://github.com/storytold/craft-fonts)，而不是这里。
+  [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub)，而不是这里。
 - **纯 Rust**、强制 crate 分层、一切皆命令，并且每次提交前 `cargo xtask ci` 必须通过
   （一个提交一个任务 ID）。
 - **绝不崩溃。** 非测试代码返回错误而不是 panic：不用 `unwrap()`、`expect()`、`panic!` 或
@@ -472,9 +472,9 @@ egui 前端是一个可替换的 crate；它下面没有任何东西知道 UI �
 
 ## Downloads
 
-**第一次用 LightCraft？** 从 [getartcraft.com 的 LightCraft 页面](https://getartcraft.com/apps/lightcraft)下载。那是最简单的安装方式。
+**第一次用 LightCraft？** 从 [decode-open-source-hub.vercel.app 的 LightCraft 页面](https://decode-open-source-hub.vercel.app/#lightcraft)下载。那是最简单的安装方式。
 
-**想要特定的构建或格式？** 在 GitHub 上，[最新发布](https://github.com/storytold/lightcraft/releases/latest)包含下面列出的所有构建，[全部发布](https://github.com/storytold/lightcraft/releases)则有更早的版本及其说明。文件名中的 `<ver>` 是版本号，`SHA256SUMS.txt` 列出了每个文件的校验和。
+**想要特定的构建或格式？** 在 GitHub 上，[最新发布](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/releases/latest)包含下面列出的所有构建，[全部发布](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/releases)则有更早的版本及其说明。文件名中的 `<ver>` 是版本号，`SHA256SUMS.txt` 列出了每个文件的校验和。
 
 ### Windows
 
@@ -521,20 +521,20 @@ egui 前端是一个可替换的 crate；它下面没有任何东西知道 UI �
 
 ## The Crafting Apps
 
-LightCraft 是 **Crafting Apps** 之一：来自 [ArtCraft](https://getartcraft.com/) 团队的免费开源创作工具，
+LightCraft 是 **Crafting Apps** 之一：来自 [ArtCraft](https://decode-open-source-hub.vercel.app/) 团队的免费开源创作工具，
 每一个都用 Rust 从零编写，每一个都能独立使用。
 
 | | 应用 | 用途 | 代码 | 了解更多 |
 |:-:|---|---|---|---|
-| <img src="https://raw.githubusercontent.com/storytold/photocraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.photocraft.png" alt="" width="32" height="32"> | **PhotoCraft** | 图像编辑：图层、蒙版、文字和真正的 PSD 文件 | [GitHub](https://github.com/storytold/photocraft) | [网站](https://getartcraft.com/apps/photocraft) |
-| <img src="https://raw.githubusercontent.com/storytold/vectorcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.vectorcraft.png" alt="" width="32" height="32"> | **VectorCraft** | 矢量插画 | [GitHub](https://github.com/storytold/vectorcraft) | [网站](https://getartcraft.com/apps/vectorcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/filmcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.filmcraft.png" alt="" width="32" height="32"> | **FilmCraft** | 视频剪辑、调色与声音 | [GitHub](https://github.com/storytold/filmcraft) | [网站](https://getartcraft.com/apps/filmcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/lightcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.lightcraft.png" alt="" width="32" height="32"> | **LightCraft** | **照片图库与 raw 显影 · 你在这里** | [GitHub](https://github.com/storytold/lightcraft) | [网站](https://getartcraft.com/apps/lightcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/pdfcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.pdfcraft.png" alt="" width="32" height="32"> | **PdfCraft** | 阅读、整理和保护 PDF | [GitHub](https://github.com/storytold/pdfcraft) | [网站](https://getartcraft.com/apps/pdfcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/effectcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.effectcraft.png" alt="" width="32" height="32"> | **EffectCraft** | 动态图形与视觉特效 | [GitHub](https://github.com/storytold/effectcraft) | [网站](https://getartcraft.com/apps/effectcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/designcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.designcraft.png" alt="" width="32" height="32"> | **DesignCraft** | 页面排版与出版 | [GitHub](https://github.com/storytold/designcraft) | [网站](https://getartcraft.com/apps/designcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.photocraft.png" alt="" width="32" height="32"> | **PhotoCraft** | 图像编辑：图层、蒙版、文字和真正的 PSD 文件 | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft) | [网站](https://decode-open-source-hub.vercel.app/#photocraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.vectorcraft.png" alt="" width="32" height="32"> | **VectorCraft** | 矢量插画 | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/vectorcraft) | [网站](https://decode-open-source-hub.vercel.app/#vectorcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.filmcraft.png" alt="" width="32" height="32"> | **FilmCraft** | 视频剪辑、调色与声音 | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/filmcraft) | [网站](https://decode-open-source-hub.vercel.app/#filmcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.lightcraft.png" alt="" width="32" height="32"> | **LightCraft** | **照片图库与 raw 显影 · 你在这里** | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft) | [网站](https://decode-open-source-hub.vercel.app/#lightcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.pdfcraft.png" alt="" width="32" height="32"> | **PdfCraft** | 阅读、整理和保护 PDF | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/pdfcraft) | [网站](https://decode-open-source-hub.vercel.app/#pdfcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.effectcraft.png" alt="" width="32" height="32"> | **EffectCraft** | 动态图形与视觉特效 | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft) | [网站](https://decode-open-source-hub.vercel.app/#effectcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.designcraft.png" alt="" width="32" height="32"> | **DesignCraft** | 页面排版与出版 | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft) | [网站](https://decode-open-source-hub.vercel.app/#designcraft) |
 
-以及 [**ArtCraft**](https://getartcraft.com/) 本身，我们为想要真正掌控力的创作者打造的 AI 图像与视频工作室。
+以及 [**ArtCraft**](https://decode-open-source-hub.vercel.app/) 本身，我们为想要真正掌控力的创作者打造的 AI 图像与视频工作室。
 
 <br>
 
@@ -553,9 +553,9 @@ LightCraft 是 **Crafting Apps** 之一：来自 [ArtCraft](https://getartcraft.
 
 <p align="center">
   <a href="https://discord.gg/artcraft"><b>discord.gg/artcraft</b></a> ·
-  <a href="https://getartcraft.com/">getartcraft.com</a> ·
-  <a href="https://getartcraft.com/apps">The Crafting Apps</a> ·
-  <a href="https://getartcraft.com/apps/lightcraft">LightCraft</a>
+  <a href="https://decode-open-source-hub.vercel.app/">decode-open-source-hub.vercel.app</a> ·
+  <a href="https://decode-open-source-hub.vercel.app/apps">The Crafting Apps</a> ·
+  <a href="https://decode-open-source-hub.vercel.app/#lightcraft">LightCraft</a>
 </p>
 
 <br>
@@ -571,9 +571,9 @@ Copyright (c) 2026 ArtCraft Team and the LightCraft contributors. 必需的声�
 展示照片是经 Wikimedia Commons 使用的公有领域作品：安塞尔·亚当斯，*《特顿山脉与蛇河》*
 （1942，美国国家档案馆）；多萝西娅·兰格，*《移民母亲》*（1936，美国国会图书馆）；比尔·安德斯／NASA，
 *《地出》*（1968）；NASA，*《蓝色弹珠》*（1972）。演示图库由 LightCraft 程序生成。界面字体：
-Inter（SIL OFL 1.1）。用 [craft-fonts](https://github.com/storytold/craft-fonts) 构建的版本（所有正式发布版）
+Inter（SIL OFL 1.1）。用 [craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub) 构建的版本（所有正式发布版）
 还会内嵌它的中文和日文字体（Noto Sans CJK SC、BIZ UDPGothic、BIZ UDMincho、Shippori Mincho；SIL OFL 1.1），列在其
-[ATTRIBUTION.md](https://github.com/storytold/craft-fonts/blob/main/ATTRIBUTION.md) 中。所有图标均为原创。
+[ATTRIBUTION.md](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/ATTRIBUTION.md) 中。所有图标均为原创。
 
 [`docs/brand/`](docs/brand/) 中的 ArtCraft 名称、字标和标志是
 ArtCraft 团队的商标，不在本许可范围内。它们只能在未修改的情况下，作为
@@ -581,10 +581,10 @@ ArtCraft 团队的商标，不在本许可范围内。它们只能在未修改�
 分支和修改版本必须移除它们。
 
 <p align="center">
-  <a href="https://getartcraft.com/"><img alt="ArtCraft" src="docs/brand/artcraft-mark.svg" width="28"></a><br>
-  <sub>由 <a href="https://getartcraft.com/">ArtCraft</a> 团队和社区制作。</sub>
+  <a href="https://decode-open-source-hub.vercel.app/"><img alt="ArtCraft" src="docs/brand/artcraft-mark.svg" width="28"></a><br>
+  <sub>由 <a href="https://decode-open-source-hub.vercel.app/">ArtCraft</a> 团队和社区制作。</sub>
 </p>
 
 ## Star history
 
-[![Star History Chart](https://api.star-history.com/svg?repos=storytold/lightcraft&type=Date&legend=top-left)](https://www.star-history.com/?repos=storytold%2Flightcraft&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=Kaiqueaurelio/decode-open-source-hub&type=Date&legend=top-left)](https://www.star-history.com/?repos=Kaiqueaurelio%2Flightcraft&type=date&legend=top-left)

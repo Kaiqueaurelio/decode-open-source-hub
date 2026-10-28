@@ -37,7 +37,7 @@ is a disposition index only; it does not override any section.
 
 | Item | Value |
 |---|---|
-| Repository | `storytold/filmcraft` |
+| Repository | `Kaiqueaurelio/decode-open-source-hub` |
 | Assigned checkout | `/home/codex/work/CraftApps/egui037-migration-20261022/filmcraft-implementation` |
 | Latest qualified tree | HEAD `4ce159e1cda036bbc972d6d27d125626ff714b98` (2026-10-25; merge of migration `df5f86ae` and main `bfc23840`), with main `a504f3c5adc4cd60d9c1120916cddb50c9b24b86` merged locally but uncommitted; `Cargo.toml` SHA-256 `d544c4368d222e79e34be0c681b3b34f435109903b4f85f1ccc4ff27e35b8efb`; `Cargo.lock` SHA-256 `8ddb2d92ec359928491b47c084501bbecaa9ff708d678156dab99d1cbd24642e` |
 | Planning-snapshot branch HEAD (historical) | `fa550ce2d07bdfee6b1d7b6835e8abc8c6913d00` (2026-10-24; migration work is uncommitted on this base) |
@@ -49,7 +49,7 @@ is a disposition index only; it does not override any section.
 | Shared UI dependency | Planning manifest (historical): `craft-ui` at `5c874d51eeb3de70e735c8ce87a59a7dedd47675`, `craft-media` at `f0ad6c1e1d297908915f4be315b0fcfc9be7b5d4`, `craft-docpath` at `82a24b006eefa036b43c09a67fb9a3fbd17ffe63`. Reconciled PR #199 base: `3832c47ef68a0e6214f2c1e85f3526b6adcb686e`; final immutable pins and lock remain G-PINS/G-CL2F/G-CRAFT-LIBS gates. |
 | Target release | `egui 0.37.0` = upstream commit `841a328ba2dd8f6996beb7189ebb7fc00e668a2a` |
 | Research candidate | `aiongg/egui` `craft/0.37` = `a4f9a17f64a6bae61350fb85804c9df0d9865916`; `aiongg/winit` `craft/0.30.13-lang` = `8b35388bd719e8cc86a95971ba0bc026c9a8f058` |
-| Production fork pins | **Unknown and deliberately not invented.** They become valid only after reviewed, published immutable `storytold/egui` and `storytold/winit` commits exist. See §3.2 and §15 gate G-PINS. |
+| Production fork pins | **Unknown and deliberately not invented.** They become valid only after reviewed, published immutable `Kaiqueaurelio/egui` and `Kaiqueaurelio/winit` commits exist. See §3.2 and §15 gate G-PINS. |
 | Evidence directory | `/home/codex/work/ssd2/task-evidence/egui037-migration-20261022` |
 | Historical diagnostics | `/home/codex/work/ssd2/task-evidence/egui037-audit-20261022/{fork,stock}/filmcraft.errors` — older checkout (FilmCraft manifest 0.10.0), clues only, never acceptance |
 
@@ -199,10 +199,10 @@ rows above.
 ### 3.1 Shared `craft-libs` baseline — corrected facts
 
 - The reconciled shared-library base is the merged PR #199 squash
-  `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` on `storytold/craft-libs`. The implementation
+  `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` on `Kaiqueaurelio/craft-libs`. The implementation
   checkouts use that base; `49190884278f16c9a9f5823d7698a8ffb5deb062` and its verification
   below are historical planning evidence.
-- GitHub `repos/storytold/craft-libs/branches/main` returned
+- GitHub `repos/Kaiqueaurelio/craft-libs/branches/main` returned
   `49190884278f16c9a9f5823d7698a8ffb5deb062` at approximately 06:25 UTC on 2026-10-23. This was
   the shared-library baseline at planning time.
 - The local `origin/main` ref (`b1401e3`) is stale. A stale remote-tracking ref **does not
@@ -241,7 +241,7 @@ rows above.
 
 Stock 0.37 is a **local comparison** and CI control only. It is not a landable production
 stage. The production landing uses one coherent graph: the final reviewed immutable
-`storytold/egui` family, the final reviewed immutable `storytold/winit`, and the matching
+`Kaiqueaurelio/egui` family, the final reviewed immutable `Kaiqueaurelio/winit`, and the matching
 published `craft-libs` revision. The previous coherent 0.36.2 graph remains the rollback
 target.
 
@@ -249,12 +249,12 @@ The exact production pins are **not known yet** and must not be invented. `a4f9a
 `8b35388b` are aiongg research candidates and comparison sources, not approved production
 pins. Gate G-PINS (§15) blocks the entire landing stage until:
 
-1. the complete reviewed/published `storytold/egui` P8 commit is immutable: E1-E21,
+1. the complete reviewed/published `Kaiqueaurelio/egui` P8 commit is immutable: E1-E21,
    P2b bounded async W15P routing, P7 held-key pairing, P7b/E21b, P7c selected #8763/#8748
    fixes and justified performance fixes;
-2. the completed reviewed/published `storytold/winit` commit contains the bounded W15P
+2. the completed reviewed/published `Kaiqueaurelio/winit` commit contains the bounded W15P
    transfer path, the W27 owner/support lifecycle and the required W1-W27 behavior;
-3. the matching published `storytold/craft-libs` commit contains CL-1 (the PR-199 API hunks
+3. the matching published `Kaiqueaurelio/craft-libs` commit contains CL-1 (the PR-199 API hunks
    and one coherent fork graph) and the frozen CL-2F helper;
 4. the exact SHAs, feature sets, provenance and test mappings are recorded in the suite pin
    manifest and the ledger.
@@ -270,17 +270,17 @@ resolved only after G-PINS:
 
 ```toml
 [patch.crates-io]
-egui = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-eframe = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-egui-winit = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-egui-wgpu = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-egui_glow = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-egui_kittest = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-epaint = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-emath = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-ecolor = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-epaint_default_fonts = { git = "https://github.com/storytold/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
-winit = { git = "https://github.com/storytold/winit", rev = "REPLACE_WITH_APPROVED_WINIT_SHA" }
+egui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+eframe = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+egui-winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+egui-wgpu = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+egui_glow = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+egui_kittest = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+epaint = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+emath = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+ecolor = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+epaint_default_fonts = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "REPLACE_WITH_APPROVED_EGUI_SHA" }
+winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit", rev = "REPLACE_WITH_APPROVED_WINIT_SHA" }
 ```
 
 If a stock-0.37 comparison is needed, it lives in a separate local/CI branch or harness with
@@ -1379,7 +1379,7 @@ No production stock-0.37 stage exists. The first production stage is the coheren
 | Stage | Contents | Depends on | Rollback |
 |---|---|---|---|
 | P0 | This plan only; no code | — | delete document |
-| **P1** | **Atomic compatibility landing on the final fork graph.** Manifests/lockfile: final approved `storytold/egui` P8 + `storytold/winit` pins, final `storytold/craft-libs` revision (CL-1 + CL-2F), explicit `default_fonts`, `monochrome_emoji_fonts`, native `clipboard`, no `system_fonts`/`links`. API migration: `FontData`, `Role`/names, `ScrollArea`, `MouseWheelSource`, `run_ui` signature, `Id::unique`, screenshot callback + CL-2 helper, `PasteImage`, E21b custom IME adapter, bounded E4/W15P clipboard/PRIMARY routing, lifecycle split/multi-pass queue, strict kittest names/glyphs, and **removal of the manual `rtl::Lines` reversal and its unit tests**. Tests from §11. | P0; **G-PINS**, **G-CL2F**, published/reachable pins; capacity for gates | revert to the coherent 0.36.2 graph (`Cargo.toml`/`Cargo.lock` and source); keep old craft-libs `5c874d51` and `craft-docpath 82a24b0` |
+| **P1** | **Atomic compatibility landing on the final fork graph.** Manifests/lockfile: final approved `Kaiqueaurelio/egui` P8 + `Kaiqueaurelio/winit` pins, final `Kaiqueaurelio/craft-libs` revision (CL-1 + CL-2F), explicit `default_fonts`, `monochrome_emoji_fonts`, native `clipboard`, no `system_fonts`/`links`. API migration: `FontData`, `Role`/names, `ScrollArea`, `MouseWheelSource`, `run_ui` signature, `Id::unique`, screenshot callback + CL-2 helper, `PasteImage`, E21b custom IME adapter, bounded E4/W15P clipboard/PRIMARY routing, lifecycle split/multi-pass queue, strict kittest names/glyphs, and **removal of the manual `rtl::Lines` reversal and its unit tests**. Tests from §11. | P0; **G-PINS**, **G-CL2F**, published/reachable pins; capacity for gates | revert to the coherent 0.36.2 graph (`Cargo.toml`/`Cargo.lock` and source); keep old craft-libs `5c874d51` and `craft-docpath 82a24b0` |
 | P2 | Language and the full native input matrix: Latin-layout shortcuts, `ctx.set_language`/`set_ui_language`, and the full W15P/E4 PRIMARY and E21b native rows against the P1 integration. Fork bidi is already active in P1; P2 does not introduce a second bidi state. | P1 (fork already pinned) | revert P2; restore prior language/input behavior without changing the P1 dependency graph or re-introducing manual reversal |
 | P3 | Accessibility semantics beyond first-green naming: radio-group/tool semantics, richer role/value/label assertions, AccessKit language screenshots. | P1 | revert P3 |
 | P4 | Evidence hardening: visual/geometry/screenshot regression harness, mutation probes, performance baseline/candidate and stock control, wasm sizes, environment provisioning. | P1–P3 | revert P4; keep earlier behavior |
@@ -1435,8 +1435,8 @@ uses the preserved baseline executable/source and a separate managed allocation.
 These are gates, not future nice-to-haves. A failed or unavailable gate is an explicit blocker,
 not a passing result.
 
-1. **G-PINS — production fork pins.** The reviewed, published, immutable `storytold/egui`
-   commit (E1-E21 + E21b/P7b + selected #8763/#8748 fixes) and `storytold/winit` commit
+1. **G-PINS — production fork pins.** The reviewed, published, immutable `Kaiqueaurelio/egui`
+   commit (E1-E21 + E21b/P7b + selected #8763/#8748 fixes) and `Kaiqueaurelio/winit` commit
    (W15P + W27 + required W1-W27 behavior) are not known at planning time. Do not invent a SHA,
    do not use an aiongg branch as a production pin, and do not land a stock-0.37 intermediate.
    The exact SHAs, feature sets and provenance must be recorded before P1.
@@ -1563,9 +1563,9 @@ This table is an index; the body sections above are authoritative.
 - Fork provenance: `aiongg/egui` `craft/0.37` `PATCHES.md` (E1-E21) and `aiongg/winit`
   `craft/0.30.13-lang` `PATCHES.md` (W1-W27), inspected read-only in
   `/home/codex/work/CraftApps/egui037-migration-20261022/{egui,winit}`.
-- Shared migration: `storytold/craft-libs#199` (port hunks `8614e4a`, README `1764bca`;
+- Shared migration: `Kaiqueaurelio/craft-libs#199` (port hunks `8614e4a`, README `1764bca`;
   stale heads `b68de8c`/`ec8840a` are not mergeable trees), current main `4919088`, old
-  FilmCraft pin `5c874d51`, language work `storytold/craft-libs#198`.
+  FilmCraft pin `5c874d51`, language work `Kaiqueaurelio/craft-libs#198`.
 - Local evidence: `/home/codex/work/ssd2/task-evidence/craft-fork-plan-20261020/PLAN.md`,
   `/home/codex/work/ssd2/task-evidence/craft-fork-ai-lines-20261022/SURVEY.md`,
   `/home/codex/work/ssd2/task-evidence/craft-fork-egui037-20261021/RESULTS.md`,

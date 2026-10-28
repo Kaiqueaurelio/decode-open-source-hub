@@ -39,7 +39,7 @@ app performance remain open. No publication or merge is authorized by these resu
 > implementation snapshot `9aef21e627cb447dd2180cd804db85343e73e5cf` and the historical planning
 > baseline `b47195feec0f0fe4220d8943ad1c8add5dad8072` are retained only as review history.
 > **Target:** egui-family `0.37.0`. The stock crates.io release is a local comparison experiment,
-> not a staged consumer release; production uses reviewed, published, immutable storytold full SHAs
+> not a staged consumer release; production uses reviewed, published, immutable Kaiqueaurelio full SHAs
 > for the complete egui family and winit. Publication of any pin requires a separate, explicit
 > human approval of the exact contents and validation.
 > **Review:** a fresh adversarial review of this plan, then a separate adversarial review of each
@@ -107,13 +107,13 @@ DeckCraft remain `craft-pdf` and the `krilla` patch at their current immutable r
 | MSRV | workspace `rust-version = "1.95"`, same as egui 0.37.0 |
 | Stock experiment target | upstream tag `0.37.0`, peeled commit `841a328ba2dd8f6996beb7189ebb7fc00e668a2a`. This is a local comparison experiment, never a staged consumer release |
 | Candidate fork sources (comparison only) | `aiongg/egui` `craft/0.37` at `a4f9a17f64a6bae61350fb85804c9df0d9865916`; `aiongg/winit` `craft/0.30.13-lang` at `8b35388bd719e8cc86a95971ba0bc026c9a8f058`. These personal-fork SHAs are not production pins |
-| Production pin requirement | reviewed, published, immutable **storytold** full SHAs for the complete egui family **and** winit, including W15P PRIMARY; one coherent atomically landed graph. No `aiongg`/personal fork in a production manifest and no stock-only intermediate release |
-| Prior published 0.36.2 | storytold/egui `craft/0.36.2` at `767b1cad294120689a514bb4bd68c077e46679b9` |
+| Production pin requirement | reviewed, published, immutable **Kaiqueaurelio** full SHAs for the complete egui family **and** winit, including W15P PRIMARY; one coherent atomically landed graph. No `aiongg`/personal fork in a production manifest and no stock-only intermediate release |
+| Prior published 0.36.2 | Kaiqueaurelio/egui `craft/0.36.2` at `767b1cad294120689a514bb4bd68c077e46679b9` |
 | craft-libs reference | merged PR 199 base `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` (current shared-library implementation base). Historical plan-only source `8614e4a04fae516fba16c22b31ff1008cb6be10b`/README `1764bca` and main `49190884278f16c9a9f5823d7698a8ffb5deb062` are superseded. Do not use PR head `b68de8c5f4f1c060904d211a7b1320aa0f7bce78` or audit merge `ec8840af8c5fda695cf195cdd05e5ae078415c07` as trees |
 
 The contract's `0.37.0` annotated tag object SHA is not the peeled commit SHA; all pins in this
 plan use the peeled commit. A branch name is not a publication pin. The `aiongg` revisions above
-are source-review inputs; production manifests must name reviewed storytold commits, and the
+are source-review inputs; production manifests must name reviewed Kaiqueaurelio commits, and the
 stock 0.37.0 stage exists only to isolate the API diff.
 
 ### 2.2 Manifests and packages
@@ -483,7 +483,7 @@ Actions:
   `cargo test -p deckcraft-ui-egui` standalone with and without `CRAFT_FONTS_DIR`; do not rely on
   app feature unification.
 - Update `crates/fonts/Cargo.toml` `epaint_default_fonts` to `0.37.0` (or the same reviewed
-  storytold source). Its constants (`HACK_REGULAR`, `UBUNTU_LIGHT`) remain the last-resort face.
+  Kaiqueaurelio source). Its constants (`HACK_REGULAR`, `UBUNTU_LIGHT`) remain the last-resort face.
 - Keep `FontData::from_static`/`from_owned`, `FontDefinitions`, `FontFamily::Name("bold")`,
   `data.tweak.hinting` usage; verify against 0.37 source. `ctx.set_fonts` applies immediately
   when no text is laid out; `UiFonts::apply` must still request a repaint and must not install
@@ -548,7 +548,7 @@ Actions:
   (`egui-winit/src/clipboard.rs`, `arboard::LinuxClipboardKind::Primary`) even though its ledger
   says "through arboard meanwhile". The shared contract requires a winit-owned W15P path on the
   existing Wayland connection/event queue using SCTK 0.19.2's per-seat PRIMARY objects, landed and
-  reviewed with a published storytold winit revision. Treat arboard PRIMARY as an unresolved fork
+  reviewed with a published Kaiqueaurelio winit revision. Treat arboard PRIMARY as an unresolved fork
   gap, not a solved dependency feature. Test keyboard-only focus, serial freshness, owner/seat
   changes, empty/absent offers, self-paste, password exclusion, no unchanged-selection reclaim and
   canceled/slow transfers on wlroots/KWin/Mutter; ordinary paste is not PRIMARY acceptance.
@@ -677,29 +677,29 @@ one registry egui family. This stage exists to isolate the API/behavior diff aga
 and to run the stock-only comparison benchmarks. No fork patches. It is a local experiment and
 must not be published as an intermediate consumer release; the production graph is the fork below.
 
-**Stage B — reviewed storytold production pins.** Add a root `[patch.crates-io]` block pinning
-every used egui-family crate and winit to reviewed, published, immutable **storytold** full SHAs,
+**Stage B — reviewed Kaiqueaurelio production pins.** Add a root `[patch.crates-io]` block pinning
+every used egui-family crate and winit to reviewed, published, immutable **Kaiqueaurelio** full SHAs,
 landed as one coherent set. Cargo does not propagate the fork workspace's winit patch into
 DeckCraft. The shape is:
 
 ```toml
 [patch.crates-io]
-winit = { git = "https://github.com/storytold/winit", rev = "<reviewed published storytold winit full SHA with W15P>" }
-eframe = { git = "https://github.com/storytold/egui", rev = "<reviewed published storytold egui full SHA with E1-E21 + E21b>" }
-egui = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-egui-winit = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-egui-wgpu = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-egui_kittest = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-epaint = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-epaint_default_fonts = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-ecolor = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-emath = { git = "https://github.com/storytold/egui", rev = "<same reviewed storytold egui full SHA>" }
-krilla = { git = "https://github.com/storytold/craft-libs", rev = "c3487320b2d1de657b860b3c8abb44e1f2b32bd8", version = "=0.8.2" }
+winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit", rev = "<reviewed published Kaiqueaurelio winit full SHA with W15P>" }
+eframe = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<reviewed published Kaiqueaurelio egui full SHA with E1-E21 + E21b>" }
+egui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+egui-winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+egui-wgpu = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+egui_kittest = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+epaint = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+epaint_default_fonts = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+ecolor = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+emath = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<same reviewed Kaiqueaurelio egui full SHA>" }
+krilla = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs", rev = "c3487320b2d1de657b860b3c8abb44e1f2b32bd8", version = "=0.8.2" }
 ```
 
 The `aiongg/egui` `a4f9a17f` and `aiongg/winit` `8b35388b` revisions are source-review inputs, not
 publishable pins. Production waits until the reviewed series (including W15P PRIMARY and E21b) is
-published under storytold with immutable full SHAs. `egui_extras` is unused today; do not add it
+published under Kaiqueaurelio with immutable full SHAs. `egui_extras` is unused today; do not add it
 to the patch list unless a real consumer appears. Do not patch `egui_system_font_provider` because
 `system_fonts` stays off; if enabled later, patch it to the same revision. Do not patch
 `egui_plot`, `egui_dock` or `egui_glow`; they are not in DeckCraft's graph. Keep the `krilla`
@@ -709,7 +709,7 @@ patch and its `cargo xtask pdf-deps` check.
 immutable full SHAs are publishable. A branch name is not acceptable, and an `aiongg` personal-fork
 SHAs must not appear in a production manifest or release. The `deckcraft` app is `publish = false`,
 so its root patch and lock are not crates.io publication artifacts, but releases and CI must
-still resolve the public storytold revisions. No stage is pushed or published without fresh human
+still resolve the public Kaiqueaurelio revisions. No stage is pushed or published without fresh human
 approval of the exact contents and validation.
 
 **Font pin gate (before publication, not local work; stale pending a combined pin).** The three
@@ -744,7 +744,7 @@ The required-input gate is explicit, but CI and FreeBSD qualification remain par
   `craft-common-actions` adds one (or the caller can otherwise set that environment); do not cite
   FreeBSD as required-font evidence before then.
 
-The font assets stay in the central `storytold/craft-fonts` repository; no font file is added to
+The font assets stay in the central `Kaiqueaurelio/craft-fonts` repository; no font file is added to
 this checkout.
 
 ### 5.2 Fork patch ledger and DeckCraft decisions
@@ -788,7 +788,7 @@ records the exact winit SHA.
   that merge. Never merge or cherry-pick PR head `b68de8c`/audit merge `ec8840a` as trees. The
   older `8614e4a`/`1764bca`/`4919088` references were plan-only and are superseded. Preserve
   unrelated vendors and current-main fixes; regenerate the lock with the final reviewed
-  storytold set.
+  Kaiqueaurelio set.
 - PR 199 does not add a fork pin or winit pin and does not test hidden `App::logic`. DeckCraft's
   root patch and lifecycle tests must stand on their own.
 - Language work (#198) and the fork's E5/E12/E13/E17/E18/E19/E20 are the relevant source for
@@ -806,7 +806,7 @@ Before merging any dependency stage:
   `egui`, `egui-winit`, `egui-wgpu`, `epaint`, `ecolor`, `emath`, `epaint_default_fonts` or
   `winit` source. Use `cargo tree -d` and `cargo tree -i egui@0.37.0`,
   `cargo tree -i winit@0.30.13`, `cargo tree -e features -i eframe`.
-- Inspect `Cargo.lock` git entries: every egui-family git entry must have the exact full **storytold**
+- Inspect `Cargo.lock` git entries: every egui-family git entry must have the exact full **Kaiqueaurelio**
   rev and no `branch =` or path; there must be no `aiongg` source. The `krilla` entry and
   `craft-pdf` source stay unchanged.
 - Check the feature graph: native `default_fonts`, `clipboard`, `wgpu`, `accesskit`, `links`, `wayland`,
@@ -848,7 +848,7 @@ stage is published without fresh human approval of contents and validation.
 
 ### D1 — atomic final-fork 0.37 compatibility PR
 
-Dependencies: D0 and final reviewed/published storytold egui/winit including P2b, P7, P7b/E21b, W15P/W27 and P7c. Files: root `Cargo.toml`, `Cargo.lock`, `crates/fonts/Cargo.toml`,
+Dependencies: D0 and final reviewed/published Kaiqueaurelio egui/winit including P2b, P7, P7b/E21b, W15P/W27 and P7c. Files: root `Cargo.toml`, `Cargo.lock`, `crates/fonts/Cargo.toml`,
 `crates/ui-egui/Cargo.toml` and `src/*`, `apps/deckcraft*` if the App trait/feature graph requires
 it, tests. Stock 0.37 remains an isolated comparison workspace, never a production stage.
 
@@ -1172,7 +1172,7 @@ clamp-only shortcut.
 
 ## 10. Blocking unknowns and explicit non-claims
 
-1. **Production pins.** Production requires reviewed, published, immutable **storytold** full
+1. **Production pins.** Production requires reviewed, published, immutable **Kaiqueaurelio** full
    SHAs for the complete egui family and winit, including W15P PRIMARY and E21b. The `aiongg`
    `a4f9a17f`/`8b35388b` revisions are review inputs only; a branch, personal-fork SHA or
    stock-only intermediate release is not a production pin.
@@ -1227,7 +1227,7 @@ clamp-only shortcut.
 
 - [ ] Stock 0.37.0 experiment resolves and all workspace tests pass; wasm checks pass; it is not
       published as an intermediate release.
-- [ ] Production uses exactly one reviewed storytold egui-family source and one reviewed storytold
+- [ ] Production uses exactly one reviewed Kaiqueaurelio egui-family source and one reviewed Kaiqueaurelio
       winit source, including W15P PRIMARY and E21b; no branch/path/personal-fork; `krilla`
       preserved; `cargo xtask pdf-deps` green.
 - [ ] `App::logic`/`App::ui` root-`Ui` semantics documented and tested on the real call order;
@@ -1311,8 +1311,8 @@ workspace's read-only copy.
   with the W1–W27/W15P ledger recorded in the craft-libs migration planning note and the local
   `PATCHES.md` provenance.
 - craft-libs PR 199 and language work #198 are external work under
-  `https://github.com/storytold/craft-libs/pull/199` and
-  `https://github.com/storytold/craft-libs/pull/198`; their merge state must be rechecked before
+  `https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/pull/199` and
+  `https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/pull/198`; their merge state must be rechecked before
   any consumer relies on them. This implementation uses merged PR 199 at
   `3832c47ef68a0e6214f2c1e85f3526b6adcb686e`; the older `8614e4a`/`1764bca`/`4919088`
   references are superseded.
@@ -1322,7 +1322,7 @@ workspace's read-only copy.
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/deckcraft` `main` now resolves to `0f4fffcf6c71ffa16029d07ac23752fedd783547`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` now resolves to `0f4fffcf6c71ffa16029d07ac23752fedd783547`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 No migration API redesign required by this delta; preserve the merged packaging, test and chrono changes where present.
 
@@ -1454,10 +1454,10 @@ publication packet; old dirty-union hashes below are historical evidence only.
 
 | Dependency | Final local pin | Note |
 |---|---|---|
-| egui family (`egui`, `eframe`, `egui-winit`, `egui-wgpu`, `epaint`, `ecolor`, `emath`, `epaint_default_fonts`, `egui_kittest`, …) | `storytold/egui` `6d518fc799681571963842f95b55a6b68431b15a` | `Cargo.toml` patch entries and `Cargo.lock` agree |
-| winit | `storytold/winit` `a517b3846ee8457d84ee4975110bfda6797c44dc` | `Cargo.toml` patch entry |
-| craft-media | `storytold/craft-libs` `f0ad6c1e1d297908915f4be315b0fcfc9be7b5d4` | intentionally separate craft-libs pin |
-| craft-pdf / krilla patch | `storytold/craft-libs` `9f75d3dc19b4b514c4f3d4847ed1ec1b0e86b4ef` | intentionally separate craft-libs pin |
+| egui family (`egui`, `eframe`, `egui-winit`, `egui-wgpu`, `epaint`, `ecolor`, `emath`, `epaint_default_fonts`, `egui_kittest`, …) | `Kaiqueaurelio/egui` `6d518fc799681571963842f95b55a6b68431b15a` | `Cargo.toml` patch entries and `Cargo.lock` agree |
+| winit | `Kaiqueaurelio/winit` `a517b3846ee8457d84ee4975110bfda6797c44dc` | `Cargo.toml` patch entry |
+| craft-media | `Kaiqueaurelio/craft-libs` `f0ad6c1e1d297908915f4be315b0fcfc9be7b5d4` | intentionally separate craft-libs pin |
+| craft-pdf / krilla patch | `Kaiqueaurelio/craft-libs` `9f75d3dc19b4b514c4f3d4847ed1ec1b0e86b4ef` | intentionally separate craft-libs pin |
 
 The craft-media `f0ad6c1e…` and craft-pdf `9f75d3dc…` pins are intentionally separate from the
 egui/winit pins; they are **not** required to move to `25da1314…`. The font inputs bundled by

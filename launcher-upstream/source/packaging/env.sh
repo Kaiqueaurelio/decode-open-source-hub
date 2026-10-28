@@ -64,4 +64,4 @@ sha256() {
 }
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/env.sh
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/env.sh

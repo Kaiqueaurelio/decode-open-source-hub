@@ -11,7 +11,7 @@ pub fn cookie_origin_for_service(service: GenerationSource) -> Option<Url> {
   let origin = match service {
     GenerationSource::Artcraft
     | GenerationSource::ArtcraftLocal
-    | GenerationSource::ArtcraftCookies => "https://storyteller.ai/",
+    | GenerationSource::ArtcraftCookies => "https://decodeanalytics.com/",
     GenerationSource::Grok
     | GenerationSource::GrokCookies => "https://grok.com/",
     GenerationSource::Midjourney

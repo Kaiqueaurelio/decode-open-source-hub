@@ -220,7 +220,7 @@ Image-to-image, 3D, and World Models make an entirely new form of Machinima poss
 
 # ArtCraft: Free and Open 3D Filmmaking
 
-ArtCraft is a crafting engine and is available in its entirety on [Github (please star us!)](https://github.com/storytold/artcraft), or try it today on [Mac or Windows](/download).
+ArtCraft is a crafting engine and is available in its entirety on [Github (please star us!)](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/artcraft), or try it today on [Mac or Windows](/download).
 
 You generate images and videos in app using a wide selection of models and providers
 such as Midjourney, Google, Sora, Grok, WorldLabs, and more - or you can bring your own keys!

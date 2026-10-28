@@ -333,4 +333,4 @@ impl Backend for WebBackend {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher-web/src/web.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher-web/src/web.rs

@@ -55,7 +55,7 @@ mod tests {
       request: RemoveBackgroundRembgWebhookRequest {
         image_url: ERNEST_SCARED_STUPID_IMAGE_URL.to_string(),
       },
-      webhook_url: "https://api.storyteller.ai/webhook",
+      webhook_url: "https://api.decodeanalytics.com/webhook",
       api_key: &api_key,
     };
 

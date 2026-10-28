@@ -71,8 +71,8 @@ async fn check_billing_window(
       .to_string();
 
   match hostname.as_str() {
-    "getartcraft.com" |
-    "storyteller.ai" => {
+    "decode-open-source-hub.vercel.app" |
+    "decodeanalytics.com" => {
       // Checkout done. Fall-through.
     },
     "stripe.com" | "checkout.stripe.com" => {

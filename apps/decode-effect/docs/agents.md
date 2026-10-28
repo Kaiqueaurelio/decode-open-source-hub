@@ -200,7 +200,7 @@ Things that tripped up a long agent-driven session (a multi-scene 3D piece built
   default to layer time; pass `timeBase: "comp"` to supply comp seconds on offset or
   stretched layers. `run_script`'s `setValueAtTime` and `keyTime` also use comp time. Without an
   explicit engine time base, subtract the layer's start time before keying an unstretched layer
-  ([#257](https://github.com/storytold/effectcraft/issues/257)).
+  ([#257](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/257)).
 - **Moving a layer in time.** `execute_command layer.timing {"layers":["Scene 2"],"start":5.1}` sets
   the start time in comp seconds and moves the in and out points with it.
 - **Loops in scripts.** `run_script` can call any engine command with `app.run(id, params)`, for
@@ -213,7 +213,7 @@ Things that tripped up a long agent-driven session (a multi-scene 3D piece built
 - **Environment light.** `layer.newLight` also accepts `"kind":"Environment"`: an equirectangular
   image that metallic surfaces reflect. Set its `lightOptions/source` to a footage, comp or solid
   layer by layer id; with no source it uses the comp's Environment Layer (`layer.environment`)
-  ([#261](https://github.com/storytold/effectcraft/issues/261)).
+  ([#261](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/261)).
 
 ### Cookbook (from end-to-end QA)
 
@@ -557,7 +557,7 @@ On Linux and the BSDs the system font folders are `/usr/share/fonts`, `/usr/loca
 every `<dir>` the fontconfig configuration names (`/etc/fonts/fonts.conf` with its includes,
 `~/.config/fontconfig/fonts.conf`) and, in the Flatpak, the host's fonts under `/run/host`. The
 Flatpak can't see other folders; grant one with
-`flatpak override --user --filesystem=<dir>:ro --env=EFFECTCRAFT_FONT_DIRS=<dir> ai.storyteller.effectcraft`.
+`flatpak override --user --filesystem=<dir>:ro --env=EFFECTCRAFT_FONT_DIRS=<dir> com.decode.effectcraft`.
 
 In expressions, `text.sourceText.style` / `getStyleAt(i, t)` read styles and the setters
 (`setFontSize(v, start?, count?)`, `setFillColor`, `setText`, `setJustification`…) return a

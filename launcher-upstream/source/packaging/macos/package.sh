@@ -191,4 +191,4 @@ echo "==> done (check the artifact as shipped with packaging/macos/verify.sh --a
 ls -lh "$DMG"
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/macos/package.sh
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/macos/package.sh

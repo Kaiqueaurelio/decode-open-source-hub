@@ -33,7 +33,7 @@ const PLAN_STYLE: Record<
 };
 const PLAN_BUTTON_CLASSES =
   "h-11 w-full font-mono text-[11px] font-semibold uppercase tracking-[0.12em] rounded-none bg-[var(--plan)] hover:bg-[var(--plan)] text-white hover:opacity-90";
-const CONTACT_EMAIL = "hello@storyteller.ai";
+const CONTACT_EMAIL = "hello@decodeanalytics.com";
 const ENTERPRISE_FEATURES = [
   "Bespoke credit allocation",
   "Secure models",

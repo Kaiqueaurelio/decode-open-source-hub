@@ -12,7 +12,7 @@ don't, don't use the default server: share on your local network, or run your ow
 
 ## Who runs it
 
-The FigCraft project operates the server. Contact: **hello@storyteller.ai** (questions, removal
+The FigCraft project operates the server. Contact: **hello@decodeanalytics.com** (questions, removal
 requests, abuse reports).
 
 ## It is a preview, offered as is

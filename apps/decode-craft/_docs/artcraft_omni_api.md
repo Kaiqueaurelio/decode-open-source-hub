@@ -23,14 +23,14 @@ runs generation against it. You never have to upload files yourself.
 | Environment   | Base URL                       |
 | ------------- | ------------------------------ |
 | Development   | `http://localhost:12345`       |
-| Production    | `https://api.storyteller.ai`   |
+| Production    | `https://api.decodeanalytics.com`   |
 
 All paths below are relative to the base URL (e.g. `POST /v1/omni_api/generate/video`).
 
 The examples in this guide use the **development** base URL. To run against production, swap
-`http://localhost:12345` for `https://api.storyteller.ai`.
+`http://localhost:12345` for `https://api.decodeanalytics.com`.
 
-Note: Our APIs are hosted on "`api.storyteller.ai`", not "`api.getartcraft.com`". This is not a 
+Note: Our APIs are hosted on "`api.decodeanalytics.com`", not "`api.decodeanalytics.com`". This is not a 
 typo. Our Cloudflare CDN URLs are `cdn-2.fakeyou.com`.
 
 ---
@@ -39,7 +39,7 @@ typo. Our Cloudflare CDN URLs are `cdn-2.fakeyou.com`.
 
 Create and manage API keys from the ArtCraft web app:
 
-1. Go to **<https://app.getartcraft.com/>**
+1. Go to **<https://decode-open-source-hub.vercel.app/>**
 2. Click **Account → Settings → API Keys** (your account must have API keys enabled from our staff)
 3. Create a key and copy it. The secret is shown **once** — store it somewhere safe.
 
@@ -161,7 +161,7 @@ curl -s -X POST http://localhost:12345/v1/omni_api/generate/video \
 import uuid
 import requests
 
-BASE_URL = "http://localhost:12345"  # production: https://api.storyteller.ai
+BASE_URL = "http://localhost:12345"  # production: https://api.decodeanalytics.com
 API_KEY = "YOUR_API_KEY"
 
 resp = requests.post(
@@ -186,7 +186,7 @@ print(resp.json())
 ```javascript
 import { randomUUID } from "node:crypto";
 
-const BASE_URL = "http://localhost:12345"; // production: https://api.storyteller.ai
+const BASE_URL = "http://localhost:12345"; // production: https://api.decodeanalytics.com
 const API_KEY = "YOUR_API_KEY";
 
 const resp = await fetch(`${BASE_URL}/v1/omni_api/generate/video`, {
@@ -242,7 +242,7 @@ curl -s -X POST http://localhost:12345/v1/omni_api/generate/video \
 import uuid
 import requests
 
-BASE_URL = "http://localhost:12345"  # production: https://api.storyteller.ai
+BASE_URL = "http://localhost:12345"  # production: https://api.decodeanalytics.com
 API_KEY = "YOUR_API_KEY"
 
 resp = requests.post(
@@ -271,7 +271,7 @@ print(resp.json())
 ```javascript
 import { randomUUID } from "node:crypto";
 
-const BASE_URL = "http://localhost:12345"; // production: https://api.storyteller.ai
+const BASE_URL = "http://localhost:12345"; // production: https://api.decodeanalytics.com
 const API_KEY = "YOUR_API_KEY";
 
 const resp = await fetch(`${BASE_URL}/v1/omni_api/generate/video`, {
@@ -333,7 +333,7 @@ curl -s -X POST http://localhost:12345/v1/omni_api/generate/video \
 import uuid
 import requests
 
-BASE_URL = "http://localhost:12345"  # production: https://api.storyteller.ai
+BASE_URL = "http://localhost:12345"  # production: https://api.decodeanalytics.com
 API_KEY = "YOUR_API_KEY"
 
 resp = requests.post(
@@ -364,7 +364,7 @@ print(resp.json())
 ```javascript
 import { randomUUID } from "node:crypto";
 
-const BASE_URL = "http://localhost:12345"; // production: https://api.storyteller.ai
+const BASE_URL = "http://localhost:12345"; // production: https://api.decodeanalytics.com
 const API_KEY = "YOUR_API_KEY";
 
 const resp = await fetch(`${BASE_URL}/v1/omni_api/generate/video`, {
@@ -552,7 +552,7 @@ done
 import time
 import requests
 
-BASE_URL = "http://localhost:12345"  # production: https://api.storyteller.ai
+BASE_URL = "http://localhost:12345"  # production: https://api.decodeanalytics.com
 API_KEY = "YOUR_API_KEY"
 JOB_TOKEN = "jinf_xxxxxxxxxxxxxxxxxxxxxxxxx"
 
@@ -581,7 +581,7 @@ while True:
 #### javascript
 
 ```javascript
-const BASE_URL = "http://localhost:12345"; // production: https://api.storyteller.ai
+const BASE_URL = "http://localhost:12345"; // production: https://api.decodeanalytics.com
 const API_KEY = "YOUR_API_KEY";
 const JOB_TOKEN = "jinf_xxxxxxxxxxxxxxxxxxxxxxxxx";
 

@@ -678,12 +678,12 @@ fn open_file(path: &str) -> Result<(), String> {
 
 /// The window, Dock, taskbar and app-switcher icon (`assets/app-icon/`, see its README). macOS gets
 /// the version with Apple's transparent margin; elsewhere the full-bleed tile. The app ID matches
-/// `packaging/linux/ai.storyteller.vectorcraft.desktop` so Wayland docks find the launcher icon.
+/// `packaging/linux/com.decode.vectorcraft.desktop` so Wayland docks find the launcher icon.
 fn app_icon() -> egui::IconData {
     #[cfg(target_os = "macos")]
     let png: &[u8] = include_bytes!("../../../assets/app-icon/vectorcraft-macos-512.png");
     #[cfg(not(target_os = "macos"))]
-    let png: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/ai.storyteller.vectorcraft.png");
+    let png: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/com.decode.vectorcraft.png");
     eframe::icon_data::from_png_bytes(png).unwrap_or_default()
 }
 
@@ -788,7 +788,7 @@ fn native_options(custom_titlebar: bool) -> eframe::NativeOptions {
             .with_titlebar_shown(false)
             .with_title_shown(false)
             .with_icon(app_icon())
-            .with_app_id("ai.storyteller.vectorcraft"),
+            .with_app_id("com.decode.vectorcraft"),
         #[cfg(feature = "windows7")]
         renderer: eframe::Renderer::Glow,
         ..Default::default()
@@ -1382,7 +1382,7 @@ mod tests {
     }
 
     /// The MIME types a Linux desktop gives each extension in `OPEN_EXTS` but `UNASSOCIATED_EXTS`
-    /// (one row per type): shared-mime-info's, or one that `ai.storyteller.vectorcraft.mime.xml`
+    /// (one row per type): shared-mime-info's, or one that `com.decode.vectorcraft.mime.xml`
     /// declares.
     const LINUX_TYPES: &[(&str, &str)] = &[
         ("vectorcraft", "application/x-vectorcraft"),
@@ -1442,8 +1442,8 @@ mod tests {
     /// have.
     #[test]
     fn the_linux_desktop_entry_opens_every_readable_format() {
-        let desktop = include_str!("../../../packaging/linux/ai.storyteller.vectorcraft.desktop");
-        let mime = include_str!("../../../packaging/linux/ai.storyteller.vectorcraft.mime.xml");
+        let desktop = include_str!("../../../packaging/linux/com.decode.vectorcraft.desktop");
+        let mime = include_str!("../../../packaging/linux/com.decode.vectorcraft.mime.xml");
         let listed: Vec<&str> =
             desktop.lines().find_map(|l| l.strip_prefix("MimeType=")).unwrap_or_default().split(';').filter(|t| !t.is_empty()).collect();
         // Each type the MIME package declares, with the extensions of its globs and its `<magic>`

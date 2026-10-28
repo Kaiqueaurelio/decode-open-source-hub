@@ -43,7 +43,7 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export DECKCRAFT_MAINTAINER="${DECKCRAFT_MAINTAINER:-DeckCraft maintainers <deckcraft@storyteller.ai>}"
+export DECKCRAFT_MAINTAINER="${DECKCRAFT_MAINTAINER:-DeckCraft maintainers <deckcraft@decodeanalytics.com>}"
 BASENAME="deckcraft-$VERSION-linux-$ARCH"
 
 echo "==> DeckCraft $VERSION for Linux $ARCH ($FORMATS)"

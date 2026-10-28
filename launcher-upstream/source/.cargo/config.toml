@@ -2,4 +2,4 @@
 xtask = "run -p xtask --"
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/.cargo/config.toml
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/.cargo/config.toml

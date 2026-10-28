@@ -1250,7 +1250,7 @@ mod tests {
     fn feed() -> Feed {
         Feed::parse(
             r#"{"release_info": {"apps": {
-            "photocraft": {"repo": "storytold/photocraft", "latest_release": {"tag": "v0.6.0"}, "app_last_fetched": "2026-10-09T13:00:00Z"}
+            "photocraft": {"repo": "Kaiqueaurelio/decode-open-source-hub", "latest_release": {"tag": "v0.6.0"}, "app_last_fetched": "2026-10-09T13:00:00Z"}
         }}}"#,
         )
         .unwrap()
@@ -1766,4 +1766,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/native/src/backend.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/native/src/backend.rs

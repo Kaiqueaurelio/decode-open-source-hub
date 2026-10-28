@@ -97,7 +97,7 @@ fn import_tauri_cookies() -> Option<Credentials> {
   let now = chrono::Utc::now();
   let mut creds = Credentials::default();
   for entry in &cookies {
-    let for_api = entry.get("domain").map(|d| d.to_string()).is_some_and(|d| d.contains("storyteller.ai"));
+    let for_api = entry.get("domain").map(|d| d.to_string()).is_some_and(|d| d.contains("decodeanalytics.com"));
     let expired = entry.pointer("/expires/AtUtc").and_then(|v| v.as_str()).and_then(|s| chrono::DateTime::parse_from_rfc3339(s).ok()).is_some_and(|t| t < now);
     let Some(raw) = entry.get("raw_cookie").and_then(|v| v.as_str()) else {
       continue;

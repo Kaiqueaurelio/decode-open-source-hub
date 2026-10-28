@@ -1,6 +1,6 @@
 # Revolve
 
-This initial implementation follows the scope agreed in [issue #605](https://github.com/storytold/vectorcraft/issues/605#issuecomment-6070543567).
+This initial implementation follows the scope agreed in [issue #605](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/vectorcraft/issues/605#issuecomment-6070543567).
 
 Draw an open profile with the Pen tool, select it, then choose **Effect > 3D and Materials > Revolve**.
 The profile's horizontal distance from a vertical axis is its radius. **Axis side** chooses the left or right

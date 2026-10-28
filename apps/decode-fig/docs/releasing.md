@@ -7,7 +7,7 @@ Nobody sees a draft until a maintainer publishes it.
 
 This is FigCraft's copy of the shared [release playbook](release-playbook.md) (PhotoCraft is the
 reference implementation). User-facing names say **FigCraft**. Files, binaries and ids stay
-lowercase (`figcraft-<version>-<platform>-<arch>.<ext>`, `ai.storyteller.figcraft`). The
+lowercase (`figcraft-<version>-<platform>-<arch>.<ext>`, `com.decode.figcraft`). The
 operational runbook (secrets, the `release` ruleset, runner group, promoting the draft) is
 craftrules `release/cut-a-release.md`.
 
@@ -17,8 +17,8 @@ craftrules `release/cut-a-release.md`.
 |---|---|
 | Display name | FigCraft |
 | Packages / binaries | `figcraft` (app), `figcraft-cli` (headless CLI), `figcraft-web` (browser) |
-| Bundle / app id | `ai.storyteller.figcraft` (CLI signing identifier `ai.storyteller.figcraft-cli`) |
-| Native document | `.figcraft`, MIME `application/x-figcraft`, UTI `ai.storyteller.figcraft.document` |
+| Bundle / app id | `com.decode.figcraft` (CLI signing identifier `com.decode.figcraft-cli`) |
+| Native document | `.figcraft`, MIME `application/x-figcraft`, UTI `com.decode.figcraft.document` |
 | Also opens | `.svg`, `.png`, `.jpg`/`.jpeg` ("Open with", never the default app) |
 | WiX UpgradeCode | `7F8B9827-D065-41B7-A514-2A454B21F484` (fixed forever; never reuse it in another app) |
 | Linux categories | `Graphics;2DGraphics;VectorGraphics;X-Design;` (`Design` isn't a registered freedesktop category, so `desktop-file-validate` rejects it) |
@@ -112,7 +112,7 @@ the sources). Linux only for now; elsewhere operators build it with
 `cargo build --release -p figcraft-server`.
 
 **Fonts.** Every build job, the web one included (`web-craft-fonts`), checks out
-[craft-fonts](https://github.com/storytold/craft-fonts) at `craft-fonts-ref` (in `release.yml`) and
+[craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub) at `craft-fonts-ref` (in `release.yml`) and
 builds with `CRAFT_FONTS_DIR` and `CRAFT_FONTS_REQUIRED=1`, so releases embed its fonts and fail
 rather than ship without them. The browser has no system fonts, so a web build without craft-fonts
 can't draw text.
@@ -166,7 +166,7 @@ Locally on Windows: `dotnet tool install -g wix --version 5.0.2`,
 ### Linux
 
 `packaging/linux/package.sh [--formats "appimage deb rpm tar"]` stages one FHS tree (binaries,
-`ai.storyteller.figcraft.desktop`, hicolor icons 16–512 px, AppStream metainfo, a
+`com.decode.figcraft.desktop`, hicolor icons 16–512 px, AppStream metainfo, a
 shared-mime-info file for `.figcraft`) and builds every format from it: `.tar.gz`; `.deb` and
 `.rpm` with [nfpm](https://nfpm.goreleaser.com/) (`nfpm.yaml` lists the dlopen'd runtime
 libraries as dependencies); and an `.AppImage` with update information and a `.zsync`, whose
@@ -174,7 +174,7 @@ libraries as dependencies); and an `.AppImage` with update information and a `.z
 (`FIGCRAFT_NO_DESKTOP_INTEGRATION=1` opts out; covered by `apprun-test.sh`) and runs the bundled
 `figcraft-cli` for `FigCraft.AppImage cli <args>`.
 `flatpak-bundle.sh` repackages the tarball into a `.flatpak` with
-`flatpak/ai.storyteller.figcraft.bundle.yml` (freedesktop 26.08). `flatpak/ai.storyteller.figcraft.yml`
+`flatpak/com.decode.figcraft.bundle.yml` (freedesktop 26.08). `flatpak/com.decode.figcraft.yml`
 is the from-source manifest for a Flathub submission (not built in CI; vendor crates with
 `flatpak-cargo-generator.py` first). Both manifests keep the same runtime and `finish-args`
 (packaging-lint checks). Binaries are built on Ubuntu 22.04 and need glibc ≥ 2.35.

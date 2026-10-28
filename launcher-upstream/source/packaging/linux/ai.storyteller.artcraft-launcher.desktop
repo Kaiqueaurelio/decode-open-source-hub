@@ -5,7 +5,7 @@ GenericName=App Launcher
 Comment=Install, update and launch the Craft App Suite
 Exec=artcraft-launcher
 TryExec=artcraft-launcher
-Icon=ai.storyteller.artcraft-launcher
+Icon=com.decode.artcraft-launcher
 Terminal=false
 StartupNotify=true
 StartupWMClass=artcraft-launcher
@@ -13,4 +13,4 @@ Categories=Utility;PackageManager;
 Keywords=artcraft;craft;launcher;installer;updater;photocraft;filmcraft;apps;
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/linux/ai.storyteller.artcraft-launcher.desktop
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/linux/com.decode.artcraft-launcher.desktop

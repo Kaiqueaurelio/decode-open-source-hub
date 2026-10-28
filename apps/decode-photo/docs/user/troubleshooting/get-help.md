@@ -5,7 +5,7 @@ order: 30
 verified: 0.8.2
 ---
 
-Open **Help › Report an Issue…**. It takes you to the [PhotoCraft issue tracker](https://github.com/storytold/photocraft/issues) on GitHub. You can also ask in [Discord](https://discord.gg/artcraft).
+Open **Help › Report an Issue…**. It takes you to the [PhotoCraft issue tracker](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/issues) on GitHub. You can also ask in [Discord](https://discord.gg/artcraft).
 
 ## What to include
 

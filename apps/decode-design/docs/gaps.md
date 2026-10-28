@@ -41,7 +41,7 @@ Kind: **F** feature · **U** UI/UX · **T** typography · **FF** file format · 
 
 ### 2. INDD opening isn't measured on real files (FF)
 - **Missing:** a real-file corpus test of opening `.indd` and `.indt`. They open through
-  [storytold/indd-utils](https://github.com/storytold/indd-utils), which converts them to IDML in
+  [Kaiqueaurelio/indd-utils](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/indd-utils), which converts them to IDML in
   memory for the IDML importer, but DesignCraft's own tests use synthetic bytes only. INDB and
   INDL are still not read.
 - **Evidence:** #21, #114 (PR #98 proposed another converter). indd-utils reports 96.9% of
@@ -49,12 +49,12 @@ Kind: **F** feature · **U** UI/UX · **T** typography · **FF** file format · 
   DesignCraft draws from those files is unmeasured, and it inherits the IDML importer's open bugs
   (gap 3).
 - **Impact:** a client's `.indd` opens, but nobody knows how close it comes to the original.
-- **Estimate:** 10–30 h (corpus pinned in a sibling of `storytold/photocraft-corpus`, metric,
+- **Estimate:** 10–30 h (corpus pinned in a sibling of `Kaiqueaurelio/decode-open-source-hub-corpus`, metric,
   fixes in indd-utils or the IDML importer).
 - **Doc:** [file-format-parity.md](file-format-parity.md)
 
 ### 3. IDML round-trip isn't proven on real files (FF)
-- **Missing:** a corpus test of real InDesign-authored IDML (via `storytold/photocraft-corpus` or
+- **Missing:** a corpus test of real InDesign-authored IDML (via `Kaiqueaurelio/decode-open-source-hub-corpus` or
   a sibling) measuring what survives import → export → reopen in InDesign. Open bugs: frames not
   rendered without a warning (#193), `$ID/` font names reported missing (#338), no
   `PDFAttribute` on export (#339), drag-drop open of IDML on the app icon (#211).

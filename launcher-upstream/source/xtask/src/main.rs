@@ -124,4 +124,4 @@ fn cmd_ci() -> Result<(), String> {
 }
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/xtask/src/main.rs
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/xtask/src/main.rs

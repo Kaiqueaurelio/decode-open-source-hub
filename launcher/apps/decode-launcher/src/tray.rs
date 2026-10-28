@@ -56,7 +56,7 @@ impl Tray {
         let show = MenuItem::new(i18n::t("Show Decode Launcher"), true, None);
         let check = MenuItem::new(i18n::t("Check for Updates"), true, None);
         use decode_launcher_core::catalog::{GITHUB_URL, WEBSITE_URL};
-        let website = MenuItem::new(i18n::t("Visit getartcraft.com"), true, None);
+        let website = MenuItem::new(i18n::t("Visit decode-open-source-hub.vercel.app"), true, None);
         let github = MenuItem::new(i18n::t("Decode on GitHub"), true, None);
         let discord = MenuItem::new(i18n::t("Join the Decode Discord"), true, None);
         let quit = MenuItem::new(i18n::t("Quit Decode Launcher"), true, None);
@@ -109,7 +109,7 @@ impl Tray {
         let labels = vec![
             (show, "Show Decode Launcher"),
             (check, "Check for Updates"),
-            (website, "Visit getartcraft.com"),
+            (website, "Visit decode-open-source-hub.vercel.app"),
             (github, "Decode on GitHub"),
             (discord, "Join the Decode Discord"),
             (quit, "Quit Decode Launcher"),

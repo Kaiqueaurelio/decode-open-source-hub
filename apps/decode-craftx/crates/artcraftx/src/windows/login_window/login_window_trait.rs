@@ -42,7 +42,7 @@ pub trait LoginWindowSite: Send + Sync {
   fn journey(&self) -> LoginJourney;
 
   /// Hosts that indicate the user has reached the logged-in destination.
-  /// e.g. `["app.getartcraft.com"]`. Note the login page is often on one of
+  /// e.g. `["app.decode-open-source-hub.vercel.app"]`. Note the login page is often on one of
   /// these too, so this is combined with cookie heuristics — see
   /// [`crate::windows::login_window::login_window_thread`].
   fn destination_hostnames(&self) -> &[&str];

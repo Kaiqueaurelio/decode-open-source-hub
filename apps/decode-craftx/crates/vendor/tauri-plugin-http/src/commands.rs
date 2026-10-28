@@ -321,9 +321,9 @@ pub async fn fetch<R: Runtime>(
                     || maybe_origin_header == Some(&HeaderValue::from_static("tauri://localhost")); // Mac plausibly causes this
 
                 if replace_origin_header {
-                    // TODO(bt): Make this a sentinel origin, eg. sentinel.storyteller.ai.
+                    // TODO(bt): Make this a sentinel origin, eg. sentinel.decodeanalytics.com.
                     // NB: HeadersMap is a multimap, but this should ensure we just have one value.
-                    headers.insert(header::ORIGIN, HeaderValue::from_static("https://studio.storyteller.ai"));
+                    headers.insert(header::ORIGIN, HeaderValue::from_static("https://studio.decodeanalytics.com"));
                 }
 
                 if let Some(data) = data {

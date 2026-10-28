@@ -23,4 +23,4 @@ pub use release::{Asset, Release};
 pub use status::{AppStatus, InstallSource, Installed, Latest};
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/lib.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/core/src/lib.rs

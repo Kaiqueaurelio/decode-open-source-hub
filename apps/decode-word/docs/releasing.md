@@ -1,6 +1,6 @@
 # Releasing WordCraft
 
-The canonical recipe is [craftrules `release/playbook.md`](https://github.com/storytold/craftrules/blob/main/release/playbook.md);
+The canonical recipe is [craftrules `release/playbook.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/release/playbook.md);
 this file has the WordCraft specifics.
 
 1. Bump the version on `main`: `cargo xtask version set 0.2.0` (the one source of truth is

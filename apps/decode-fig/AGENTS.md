@@ -7,7 +7,7 @@ Siblings: `../vectorcraft` (Illustrator-class), `../photocraft` (Photoshop-class
 (InDesign-class) and the other Crafting Apps; same conventions.
 
 Standards and learnings shared across the crafting apps live in `../../craftrules` (checked out
-next to `craft-apps/`, or `storytold/craftrules`). Read its `AGENTS.md` at the start of a session,
+next to `craft-apps/`, or `Kaiqueaurelio/craftrules`). Read its `AGENTS.md` at the start of a session,
 follow its standards, and contribute reusable learnings back there. Never code: repos don't share
 code.
 
@@ -48,7 +48,7 @@ code.
   are original. Keep it that way: new icons are new code, designed from scratch.
 - The app icon is the owner's chameleon drawing, vectorised (`assets/app-icon/README.md`); `cargo xtask icon`
   renders the PNGs and `.ico` from `assets/app-icon/figcraft.svg`.
-- **Fonts live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), never in this
+- **Fonts live in [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub), never in this
   repo.** The app uses it only through the optional `CRAFT_FONTS_DIR` build input
   (`.cargo/config.toml` points it at `../craft-fonts` for local builds; `crates/text/build.rs`
   embeds it). Everything must build, test and run without it (system fonts are scanned at runtime).

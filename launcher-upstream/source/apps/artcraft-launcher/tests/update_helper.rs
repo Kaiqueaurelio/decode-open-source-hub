@@ -30,4 +30,4 @@ fn the_update_helper_exits_without_opening_the_launcher() {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher/tests/update_helper.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher/tests/update_helper.rs

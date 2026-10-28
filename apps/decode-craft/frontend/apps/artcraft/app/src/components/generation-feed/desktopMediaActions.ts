@@ -44,7 +44,7 @@ import { useTabStore } from "~/pages/Stores/TabState";
 // the create pages' generation feed (rows + cards). All of them operate on
 // global stores via getState(), so they're safe to call from anywhere.
 
-export const SHARE_URL_BASE = "https://getartcraft.com/media/";
+export const SHARE_URL_BASE = "https://decode-open-source-hub.vercel.app/media/";
 
 /** Download a media file, prompting for a location when configured to. */
 export async function downloadMediaFileToDisk(url: string, mediaClass?: string, model?: string) {

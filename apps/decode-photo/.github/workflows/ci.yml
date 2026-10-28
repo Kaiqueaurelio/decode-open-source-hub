@@ -57,7 +57,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Git dependencies come from storytold
+      - name: Git dependencies come from Kaiqueaurelio
         run: |
           set -euo pipefail
           test -f Cargo.lock || { echo "Cargo.lock is missing"; exit 1; }
@@ -83,9 +83,9 @@ jobs:
           lock = tomllib.load(open("Cargo.lock", "rb"))
           bad = sorted({p["source"] for p in lock.get("package", [])
                         if p.get("source", "").startswith("git+")
-                        and not p["source"].startswith("git+https://github.com/storytold/")})
+                        and not p["source"].startswith("git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/")})
           if bad:
-              print("Git dependencies outside github.com/storytold:", *bad, sep="\n")
+              print("Git dependencies outside github.com/Kaiqueaurelio:", *bad, sep="\n")
               sys.exit(1)
           PY
       - id: pick
@@ -117,7 +117,7 @@ jobs:
   gate:
     if: github.event.action != 'labeled' || github.event.label.name == 'full-ci'
     # Tracks @main so suite-wide CI fixes reach every app without a PR in each repository.
-    uses: storytold/craft-common-actions/.github/workflows/gate.yml@main
+    uses: Kaiqueaurelio/craft-common-actions/.github/workflows/gate.yml@main
     with:
       # egui/winit/rfd.
       packages: >-
@@ -173,7 +173,7 @@ jobs:
       - name: Check out craft-fonts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: storytold/craft-fonts
+          repository: Kaiqueaurelio/craft-fonts
           ref: b076417b5880bd4154bd22f00695b1d28c6bea83
           path: craft-fonts
           persist-credentials: false
@@ -259,7 +259,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Linux build dependencies
-        uses: storytold/craft-common-actions/actions/install-apt-packages@main
+        uses: Kaiqueaurelio/craft-common-actions/actions/install-apt-packages@main
         with:
           packages: >-
             libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev

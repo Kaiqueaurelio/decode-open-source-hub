@@ -16,7 +16,7 @@ export default function ProfileDropdown() {
   }
   const username = userInfo.value.core_info.username;
   const emailHash = userInfo.value.core_info.gravatar_hash;
-  const profileUrl = `https://storyteller.ai/profile/${userInfo.value.core_info.display_name}`;
+  const profileUrl = `https://decodeanalytics.com/profile/${userInfo.value.core_info.display_name}`;
   const avatarIndex = userInfo.value.core_info.default_avatar.image_index;
   const backgroundColorIndex =
     userInfo.value.core_info.default_avatar.color_index;

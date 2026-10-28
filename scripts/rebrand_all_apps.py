@@ -276,7 +276,7 @@ def rebrand_packaging_files(app_dir: Path, meta: dict):
                 txt = txt.replace("<developer id=\"ai.storyteller\">", "<developer id=\"com.decode\">")
                 txt = txt.replace("<name>Learning Machines LLC</name>", "<name>Decode Analytics</name>")
                 txt = txt.replace("<name>ArtCraft</name>", f"<name>{short_name}</name>")
-                txt = txt.replace("https://getartcraft.com/apps", "https://kaiqueaurelio.github.io/decode-open-source-hub/")
+                txt = txt.replace("https://decode-open-source-hub.vercel.app/apps", "https://kaiqueaurelio.github.io/decode-open-source-hub/")
                 xml_file.write_text(txt, encoding="utf-8")
             except Exception as e:
                 print(f"Warn updating {xml_file}: {e}")
@@ -287,7 +287,7 @@ def rebrand_packaging_files(app_dir: Path, meta: dict):
         try:
             txt = macos_plist.read_text(encoding="utf-8", errors="replace")
             txt = txt.replace("<string>ArtCraft", f"<string>{short_name}")
-            txt = txt.replace("ai.storyteller.", "com.decode.")
+            txt = txt.replace("com.decode.", "com.decode.")
             txt = txt.replace("Learning Machines LLC", "Decode Analytics (Presidente Prudente, SP)")
             macos_plist.write_text(txt, encoding="utf-8")
         except Exception as e:

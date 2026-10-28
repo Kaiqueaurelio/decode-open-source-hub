@@ -155,8 +155,8 @@ All egui-family crates must resolve from one immutable fork revision, not merely
 
 | Crate | Target | Source |
 |---|---|---|
-| `egui`, `eframe`, `egui-winit`, `egui-wgpu`, `egui_glow`, `egui_kittest`, `egui_extras`, `epaint`, `emath`, `ecolor`, `epaint_default_fonts`, `egui_system_font_provider` | 0.37.0 | the approved, published, reachable `storytold/egui` P8 release containing the complete series: P2b async W15P routing, P7 with held-key release pairing, P7b/E21b, P7c's selected #8763/#8748 fixes and justified performance fixes; the exact SHA is assigned only after review/publication. Research input: aiongg `a4f9a17f64a6bae61350fb85804c9df0d9865916` (`ai-0.37` in an `emilk/egui` clone). |
-| `winit` | 0.30.13 | the completed, approved, published, reachable `storytold/winit` revision containing W1-W15 minus W5, plus W17-W27 including W20 as W5’s replacement including the W27 lifecycle revision, and W15P PRIMARY; exact SHA assigned after review/publication. Research input: aiongg `8b35388bd719e8cc86a95971ba0bc026c9a8f058` (`ai-lang`). |
+| `egui`, `eframe`, `egui-winit`, `egui-wgpu`, `egui_glow`, `egui_kittest`, `egui_extras`, `epaint`, `emath`, `ecolor`, `epaint_default_fonts`, `egui_system_font_provider` | 0.37.0 | the approved, published, reachable `Kaiqueaurelio/egui` P8 release containing the complete series: P2b async W15P routing, P7 with held-key release pairing, P7b/E21b, P7c's selected #8763/#8748 fixes and justified performance fixes; the exact SHA is assigned only after review/publication. Research input: aiongg `a4f9a17f64a6bae61350fb85804c9df0d9865916` (`ai-0.37` in an `emilk/egui` clone). |
+| `winit` | 0.30.13 | the completed, approved, published, reachable `Kaiqueaurelio/winit` revision containing W1-W15 minus W5, plus W17-W27 including W20 as W5’s replacement including the W27 lifecycle revision, and W15P PRIMARY; exact SHA assigned after review/publication. Research input: aiongg `8b35388bd719e8cc86a95971ba0bc026c9a8f058` (`ai-lang`). |
 | `accesskit` / `accesskit_winit` | 0.25.x / 0.34.x | registry, resolved by the lockfile |
 | `kittest` | 0.5.0 | registry, via `egui_kittest` 0.37 |
 | `craft-ui`, `craft-print` | the published craft-libs revision containing CL-1 and the CL-2F frozen helper containing the reviewed PR 199 port on current main | exact git `rev`, not a branch; it must move in the same atomic dependency stage as the egui/winit pins |
@@ -259,7 +259,7 @@ intermediate stage. The WordCraft-relevant patches are:
 | E21 `ImeEvent::DeleteSurroundingBytes` | Desktop macOS/Wayland IME replacement | Required. Add a byte-range path alongside the existing char-count web path. |
 | E21b/P7b outgoing IME surrounding text | Canvas/Wayland surrounding-text support; the candidate has incoming deletion only | Required fork prerequisite under the complete E21b/W27 contract (owner generation, empty-Available, serial/epoch rules). TextEdit producer and W27 adapter; both WordCraft canvas producers need real model/preedit/UTF-8 adapters. |
 
-Winit provenance: the final pin must be the completed, approved, published `storytold/winit`
+Winit provenance: the final pin must be the completed, approved, published `Kaiqueaurelio/winit`
 revision containing W1-W15 minus W5, plus W17-W27 including W20 as W5’s replacement including the W27 lifecycle revision, and the
 W15P PRIMARY path. The inspected `8b35388` `ai-lang` commit is an aiongg research input, not a production
 pin. WordCraft's existing issue references (#787, #721 and related IME/DPI fixes) depend on
@@ -289,7 +289,7 @@ Proposed checks, to run through the managed `task.py` workflow after the plans l
    expected `egui/default_fonts`, `egui-winit/clipboard` (required on native, with arboard resolved),
    `accesskit`, `wgpu` and no `system_fonts` resolution for the app root. Record the exact
    feature sets in the lock/evidence manifest.
-6. Publication reachability: a clean clone must fetch the approved `storytold` revisions and
+6. Publication reachability: a clean clone must fetch the approved `Kaiqueaurelio` revisions and
    pass `--locked` without local overrides. S1 cannot start while the only available trees are
    the aiongg research inputs; do not substitute a candidate SHA for a published pin.
 7. Release/packaging check after the source migration: signed native builds and the web package
@@ -1143,8 +1143,8 @@ S3 alone may be reverted only because it contains later policy/tests, not requir
    changes onto current `4919088`, preserving intervening fixes. The reviewed and published
    CL-1 `craft-ui`/`craft-print` revision is a prerequisite for the WordCraft pin and must land
    in the same atomic dependency stage (section 9).
-2. **Fork publication/reachability.** Final pins must be the completed P8 `storytold/egui`
-   and completed `storytold/winit` revisions: approved, reachable and immutable. Their SHAs do
+2. **Fork publication/reachability.** Final pins must be the completed P8 `Kaiqueaurelio/egui`
+   and completed `Kaiqueaurelio/winit` revisions: approved, reachable and immutable. Their SHAs do
    not exist at planning time and must not be invented; the aiongg candidate commits and stock
    0.37 are research/measurement inputs only. No branch pins and no intermediate production
    stage in the release manifest.
@@ -1210,13 +1210,13 @@ Immutable or primary sources used for the API and behavior statements above:
   <https://github.com/emilk/egui/blob/841a328ba2dd8f6996beb7189ebb7fc00e668a2a/crates/egui_kittest/CHANGELOG.md>
 - Candidate aiongg egui research input (not a production pin):
   `a4f9a17f64a6bae61350fb85804c9df0d9865916`, `ai-0.37`; the inspected checkout's origin is
-  `emilk/egui`, and no `storytold/egui` `craft/0.37` ref contained it at inspection.
+  `emilk/egui`, and no `Kaiqueaurelio/egui` `craft/0.37` ref contained it at inspection.
 - Candidate aiongg winit research input (not a production pin):
-  `8b35388bd719e8cc86a95971ba0bc026c9a8f058`, `ai-lang` in `storytold/winit`.
-- Final patch inventories will be linked from the approved published `storytold` revisions
+  `8b35388bd719e8cc86a95971ba0bc026c9a8f058`, `ai-lang` in `Kaiqueaurelio/winit`.
+- Final patch inventories will be linked from the approved published `Kaiqueaurelio` revisions
   after publication; do not use the candidate SHAs as immutable production links.
-- craft-libs PR 199: <https://github.com/storytold/craft-libs/pull/199>
-- craft-libs language-support issue 198: <https://github.com/storytold/craft-libs/issues/198>
+- craft-libs PR 199: <https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/pull/199>
+- craft-libs language-support issue 198: <https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/issues/198>
 - craft-libs current main used for the port:
   `49190884278f16c9a9f5823d7698a8ffb5deb062`.
 - Shared suite rollout/performance contract:
@@ -1225,7 +1225,7 @@ Immutable or primary sources used for the API and behavior statements above:
   §6 (E4/P2b, E21b) and `winit/docs/egui-037-migration-plan.md` §5.2-5.3 in the planning
   workspace.
 - Pinned font fixtures (craft-fonts `2481a8a...`, Noto Color Emoji v2.047):
-  <https://github.com/storytold/craft-fonts/blob/2481a8a324b986a45954e90045ed1f8f2efaaf3c/fonts/manifest.txt>
+  <https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/2481a8a324b986a45954e90045ed1f8f2efaaf3c/fonts/manifest.txt>
   and <https://github.com/googlefonts/noto-emoji/blob/22e564626297b4df0a40570ad81d6c05cc7c38bd/fonts/NotoColorEmoji.ttf>.
 - Upstream reports used as risk hypotheses, not reproduced WordCraft results:
   <https://github.com/emilk/egui/issues/8731>,
@@ -1271,7 +1271,7 @@ Immutable or primary sources used for the API and behavior statements above:
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/wordcraft` `main` now resolves to `00ccee52354d9dfc48cb21a943b55f258fc76df0`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` now resolves to `00ccee52354d9dfc48cb21a943b55f258fc76df0`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 Preserve the separate 64-entry engine UI-intent queue, newest Paste Special deduplication, save/export/print view preservation, linear-time unknown settings, finite font preview sizes and Format Painter cursor. Screenshot admission budgets are a separate queue.
 

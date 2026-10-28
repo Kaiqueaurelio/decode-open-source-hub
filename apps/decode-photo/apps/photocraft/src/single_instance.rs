@@ -957,8 +957,8 @@ mod tests {
     #[test]
     fn the_socket_transport_needs_a_flatpak_id_and_a_runtime_directory() {
         use std::ffi::OsStr;
-        let (id, run) = (OsStr::new("ai.storyteller.photocraft"), OsStr::new("/run/user/1000"));
-        assert_eq!(sandbox_socket(Some(id), Some(run)), Some(PathBuf::from("/run/user/1000/app/ai.storyteller.photocraft/instance.sock")));
+        let (id, run) = (OsStr::new("com.decode.photocraft"), OsStr::new("/run/user/1000"));
+        assert_eq!(sandbox_socket(Some(id), Some(run)), Some(PathBuf::from("/run/user/1000/app/com.decode.photocraft/instance.sock")));
         assert_eq!(sandbox_socket(None, Some(run)), None);
         assert_eq!(sandbox_socket(Some(id), None), None);
         assert_eq!(sandbox_socket(Some(OsStr::new("")), Some(run)), None);

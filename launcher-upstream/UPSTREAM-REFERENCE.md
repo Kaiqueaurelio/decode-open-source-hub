@@ -1,6 +1,6 @@
 # Upstream launcher capability reference
 
-Source repository: https://github.com/storytold/craft-launcher
+Source repository: https://github.com/Kaiqueaurelio/decode-open-source-hub
 Source branch: main
 Source revision inspected: 7aafad661a11594a70ae949471d481f30d8fe64a
 

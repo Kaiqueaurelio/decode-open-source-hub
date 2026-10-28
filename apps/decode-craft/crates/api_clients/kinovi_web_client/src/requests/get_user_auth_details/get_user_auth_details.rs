@@ -134,7 +134,7 @@ mod tests {
   #[test]
   fn float_credits_are_coerced() {
     let body = r#"[{"result":{"data":{"json":{
-      "email":"hello@storyteller.ai",
+      "email":"hello@decodeanalytics.com",
       "credits":372215.18,
       "availableCredits":372215
     }}}}]"#;

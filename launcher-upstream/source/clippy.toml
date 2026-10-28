@@ -4,4 +4,4 @@ allow-panic-in-tests = true
 allow-indexing-slicing-in-tests = true
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/clippy.toml
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/clippy.toml

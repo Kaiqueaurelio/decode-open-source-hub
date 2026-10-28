@@ -30,10 +30,10 @@ Licence: see [LICENSE.txt](LICENSE.txt) (MIT OR Apache-2.0, like the repo).
 | `effectcraft-macos-512.png` | runtime Dock icon on macOS, on Apple's 824/1024 grid |
 | `effectcraft.icns` | macOS icon (Apple grid) |
 | `effectcraft.ico` | Windows icon, 16–256 px; embedded in `effectcraft.exe` by `apps/effectcraft/build.rs` |
-| `hicolor/<n>x<n>/apps/ai.storyteller.effectcraft.png` | Linux icon theme, 16–512 px; the 256 px one is the runtime icon on Windows and Linux |
-| `hicolor/scalable/apps/ai.storyteller.effectcraft.svg` | Linux scalable icon |
+| `hicolor/<n>x<n>/apps/com.decode.effectcraft.png` | Linux icon theme, 16–512 px; the 256 px one is the runtime icon on Windows and Linux |
+| `hicolor/scalable/apps/com.decode.effectcraft.svg` | Linux scalable icon |
 
-App ID: `ai.storyteller.effectcraft` (Wayland app ID, `packaging/linux/ai.storyteller.effectcraft.desktop`).
+App ID: `com.decode.effectcraft` (Wayland app ID, `packaging/linux/com.decode.effectcraft.desktop`).
 
 ## Regenerate
 

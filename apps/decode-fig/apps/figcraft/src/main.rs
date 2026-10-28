@@ -241,7 +241,7 @@ fn main() -> eframe::Result {
     // and StartupWMClass (FreeBSD's package matches the binary's name instead).
     let mut viewport = egui::ViewportBuilder::default()
         .with_title("FigCraft")
-        .with_app_id("ai.storyteller.figcraft")
+        .with_app_id("com.decode.figcraft")
         .with_inner_size([1440.0, 900.0])
         .with_min_inner_size([800.0, 500.0])
         .with_drag_and_drop(true);

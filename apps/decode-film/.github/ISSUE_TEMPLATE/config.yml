@@ -1,7 +1,7 @@
 blank_issues_enabled: true
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/storytold/filmcraft/blob/main/SECURITY.md
+    url: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/filmcraft/blob/main/SECURITY.md
     about: Read the reporting guidance before sharing sensitive details or malicious files.
   - name: Community help
     url: https://discord.gg/artcraft

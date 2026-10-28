@@ -36,7 +36,7 @@ Implemented only from public specifications, papers and observation of files:
   (prose: the `0x0096` table layout, a lossy curve followed by a fixed-table Huffman stage),
   ExifTool's Nikon tag-name documentation and ITU-T T.81 Annex F / H. The Huffman tables are not
   stored in the files; they were recovered by black-box analysis of CC0 raw.pixls.us samples (the
-  same scenes shot compressed and uncompressed) for LightCraft (storytold/lightcraft#86) and
+  same scenes shot compressed and uncompressed) for LightCraft (Kaiqueaurelio/decode-open-source-hub#86) and
   verified there on ~45 files from ~35 bodies.
 * Sony cRAW (ARW 2): H. Dietz, "Sony ARW2 Compression: Artifacts And Credible Repair"
   (Electronic Imaging 2016) and the RawDigger / diglloyd write-ups of the 11 + 7-bit scheme;
@@ -55,7 +55,7 @@ Implemented only from public specifications, papers and observation of files:
   and performance measures", IEEE TIP 2003) with edge-aware colour differences.
 * McCamy's CCT approximation (1992); the Bradford chromatic adaptation transform.
 * Per-file colour from the camera's embedded JPEG (`fit_look`, `src/look.rs`): the method follows
-  the prose description in LightCraft's `docs/camera-preview-colour.md` (storytold/lightcraft#165,
+  the prose description in LightCraft's `docs/camera-preview-colour.md` (Kaiqueaurelio/decode-open-source-hub#165,
   Apache-2.0, same organisation); no LightCraft code was used. Pool-adjacent-violators isotonic
   regression (Ayer et al., 1955), Tukey's biweight (Beaton & Tukey, 1974), ridge regression
   (Hoerl & Kennard, 1970) and the CIE 1976 L\*a\*b\* colour difference.

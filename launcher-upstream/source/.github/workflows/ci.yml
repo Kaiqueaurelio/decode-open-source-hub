@@ -82,4 +82,4 @@ jobs:
         run: packaging/web/package.sh
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/.github/workflows/ci.yml
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/.github/workflows/ci.yml

@@ -331,7 +331,7 @@ filter	Installed	Instaladas
 @id	appearance.theme	Apariencia
 	Show Decode Launcher	Mostrar Decode Launcher
 	Check for Updates	Buscar actualizaciones
-	Visit getartcraft.com	Visitar getartcraft.com
+	Visit decode-open-source-hub.vercel.app	Visitar decode-open-source-hub.vercel.app
 	Decode on GitHub	Decode en GitHub
 	Join the Decode Discord	Únete al Discord de Decode
 @plural	Decode Launcher · {n} update available|Decode Launcher · {n} updates available	Decode Launcher · {n} actualización disponible|Decode Launcher · {n} actualizaciones disponibles

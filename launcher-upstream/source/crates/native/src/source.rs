@@ -198,4 +198,4 @@ impl ReleaseSource for GitHubSource {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/native/src/source.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/native/src/source.rs

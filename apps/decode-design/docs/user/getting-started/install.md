@@ -5,11 +5,11 @@ order: 20
 verified: 0.7.1
 ---
 
-Download the file for your system from the [latest release](https://github.com/storytold/designcraft/releases/latest) and install it. In the file names, `<version>` stands for the version number, for example `0.7.1`. The release also has `SHA256SUMS.txt`, which lists a checksum for every file. The [DesignCraft page on getartcraft.com](https://getartcraft.com/apps/designcraft) links to the download as well.
+Download the file for your system from the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/releases/latest) and install it. In the file names, `<version>` stands for the version number, for example `0.7.1`. The release also has `SHA256SUMS.txt`, which lists a checksum for every file. The [DesignCraft page on decode-open-source-hub.vercel.app](https://decode-open-source-hub.vercel.app/#designcraft) links to the download as well.
 
 ## Windows 11
 
-1. Open the [latest release](https://github.com/storytold/designcraft/releases/latest).
+1. Open the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/releases/latest).
 2. Download `designcraft-<version>-windows-x64.msi`. It fits most PCs (64-bit Intel and AMD).
 3. Run the file and follow the installer.
 4. Start **DesignCraft** from the Start menu.
@@ -39,7 +39,7 @@ For RISC-V there is a `.deb`, an `.rpm` and a tarball, named with `riscv64` in p
 
 ## Install with ArtCraft Launcher
 
-ArtCraft Launcher lists DesignCraft and can install and update it for you. See [ArtCraft Launcher](https://getartcraft.com/docs/craft-launcher) for how it works.
+ArtCraft Launcher lists DesignCraft and can install and update it for you. See [ArtCraft Launcher](https://decode-open-source-hub.vercel.app/docs/craft-launcher) for how it works.
 
 ## First run
 

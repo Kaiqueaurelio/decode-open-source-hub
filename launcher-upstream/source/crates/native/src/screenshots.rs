@@ -183,4 +183,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/native/src/screenshots.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/native/src/screenshots.rs

@@ -17,7 +17,7 @@ use crate::theme::{Tokens, regular, semibold};
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// Where a report goes.
-const ISSUES: &str = "https://github.com/storytold/figcraft/issues";
+const ISSUES: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/figcraft/issues";
 
 /// What the desktop app says when its window couldn't open with `error` (no frame was drawn: the
 /// language is the one [`i18n::set`] picked from the preferences). `backend_set`: `WGPU_BACKEND`
@@ -133,7 +133,7 @@ fn about_body(ui: &mut egui::Ui, t: &Tokens) {
         "Interface design and prototyping. A free, open-source, clean-room design tool written from scratch in Rust, part of the ArtCraft Crafting Apps.",
     ));
     ui.add_space(8.0);
-    ui.hyperlink_to("getartcraft.com/apps/figcraft", "https://getartcraft.com/apps/figcraft");
+    ui.hyperlink_to("decode-open-source-hub.vercel.app/apps/figcraft", "https://decode-open-source-hub.vercel.app/#figcraft");
     ui.hyperlink_to(tr("Join us on Discord"), "https://discord.gg/artcraft");
     ui.add_space(8.0);
     ui.label(

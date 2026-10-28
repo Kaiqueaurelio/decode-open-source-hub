@@ -15,9 +15,9 @@
 //! ## Origin
 //!
 //! [`bitstream`] and [`isobmff`] are re-exports of `craft_media::bitstream` and
-//! `craft_media::isobmff` from craft-libs (`storytold/craft-libs`, the shared crate FilmCraft uses
+//! `craft_media::isobmff` from craft-libs (`Kaiqueaurelio/craft-libs`, the shared crate FilmCraft uses
 //! too). The H.264 and ProRes code is a copy of the clean-room crates of our sibling app FilmCraft
-//! (`storytold/filmcraft`, same organisation, MIT OR Apache-2.0): `filmcraft-h264` → [`h264`]
+//! (`Kaiqueaurelio/decode-open-source-hub`, same organisation, MIT OR Apache-2.0): `filmcraft-h264` → [`h264`]
 //! (without its test-only synthetic stream module), `filmcraft-prores` → [`prores`]. Only the
 //! module paths were changed; fixes found here should be offered back upstream. [`Movie`], the
 //! pixel conversion and the frame caches are SoundCraft's own.

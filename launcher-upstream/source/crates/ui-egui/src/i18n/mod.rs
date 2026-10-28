@@ -41,4 +41,4 @@ pub(crate) use translate::{StrictCjkDrawing, drew_cjk};
 pub use translate::{current, fmt, has, message, msg, set_current, t, t_id, tn, tr, tr_ctx, tr_id, trn};
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/i18n/mod.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/i18n/mod.rs

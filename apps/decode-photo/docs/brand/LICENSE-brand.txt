@@ -12,7 +12,7 @@ permission to use the ArtCraft Marks only:
 
   1. as part of copies of this repository; and
   2. within PhotoCraft itself, its documentation and its official builds, to identify PhotoCraft as made
-     by the ArtCraft team and community and to link to getartcraft.com and its community.
+     by the ArtCraft team and community and to link to decode-open-source-hub.vercel.app and its community.
 
 Conditions
 
@@ -38,5 +38,5 @@ unchanged.
 Everything else
 
 Any use not expressly permitted here needs prior written permission from the ArtCraft Team
-(https://getartcraft.com/). The permission ends automatically for anyone who breaks these terms.
+(https://decode-open-source-hub.vercel.app/). The permission ends automatically for anyone who breaks these terms.
 All other rights are reserved.

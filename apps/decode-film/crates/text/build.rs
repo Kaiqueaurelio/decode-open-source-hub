@@ -1,4 +1,4 @@
-//! Optional craft-fonts build input (see storytold/craft-fonts `docs/integration.md` and
+//! Optional craft-fonts build input (see Kaiqueaurelio/craft-fonts `docs/integration.md` and
 //! craftrules `standards/fonts.md`).
 //!
 //! With `CRAFT_FONTS_DIR=<absolute path of a craft-fonts checkout>` (a relative path resolves from

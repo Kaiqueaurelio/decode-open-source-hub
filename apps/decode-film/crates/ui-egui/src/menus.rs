@@ -141,7 +141,7 @@ pub const UI_COMMANDS: &[UiCommand] = &[
     uic!("mode.export", "Export", ["File", "Export"], Some("Cmd+M")),
     uic!("help.discord", "Join the ArtCraft Discord…", ["Help"], None),
     uic!("help.website", "ArtCraft Website", ["Help"], None),
-    uic!("help.appPage", "FilmCraft on getartcraft.com", ["Help"], None),
+    uic!("help.appPage", "FilmCraft on decode-open-source-hub.vercel.app", ["Help"], None),
     uic!("help.github", "FilmCraft on GitHub", ["Help"], None),
     uic!("help.reportIssue", "Report an Issue…", ["Help"], None),
     uic!("help.revealLogFiles", "Reveal Log Files…", ["Help"], None),

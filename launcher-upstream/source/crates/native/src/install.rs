@@ -348,7 +348,7 @@ fn can_pacman() -> bool {
 }
 
 /// Whether a pacman install is the release's own Arch package rather than an AUR build. The
-/// release names it by the bundle id (`ai.storyteller.<app>`), which no AUR package uses
+/// release names it by the bundle id (`com.decode.<app>`), which no AUR package uses
 /// (they are `<app>`, `<app>-bin` and `<app>-git`), so an AUR helper never mistakes it
 /// for one of its own and rebuilds it from source.
 pub fn is_release_arch_package(app: &CraftApp, installed: &Installed) -> bool {
@@ -2128,7 +2128,7 @@ mod tests {
         let tree_style = dir.path().join("tree.tar.gz");
         tarball(
             &tree_style,
-            &["wordcraft-0.3.0-freebsd-x86_64/bin/wordcraft", "wordcraft-0.3.0-freebsd-x86_64/share/applications/ai.storyteller.wordcraft.desktop"],
+            &["wordcraft-0.3.0-freebsd-x86_64/bin/wordcraft", "wordcraft-0.3.0-freebsd-x86_64/share/applications/com.decode.wordcraft.desktop"],
         );
         let flat_style = dir.path().join("flat.tar.gz");
         tarball(
@@ -2137,15 +2137,15 @@ mod tests {
                 "wordcraft-0.3.0-freebsd-x86_64/wordcraft",
                 "wordcraft-0.3.0-freebsd-x86_64/wordcraft-cli",
                 "wordcraft-0.3.0-freebsd-x86_64/README.md",
-                "wordcraft-0.3.0-freebsd-x86_64/ai.storyteller.wordcraft.desktop",
-                "wordcraft-0.3.0-freebsd-x86_64/ai.storyteller.wordcraft.png",
+                "wordcraft-0.3.0-freebsd-x86_64/com.decode.wordcraft.desktop",
+                "wordcraft-0.3.0-freebsd-x86_64/com.decode.wordcraft.png",
             ],
         );
         for file in [tree_style, flat_style] {
             let root = tree::unpack(app, &file, &dir.path().join("staging")).unwrap();
             let files = tree::files(&root).unwrap();
             assert!(files.contains(&PathBuf::from("bin/wordcraft")), "{files:?}");
-            assert!(files.contains(&PathBuf::from("share/applications/ai.storyteller.wordcraft.desktop")), "{files:?}");
+            assert!(files.contains(&PathBuf::from("share/applications/com.decode.wordcraft.desktop")), "{files:?}");
             assert!(!files.iter().any(|f| f.ends_with("README.md")), "{files:?}");
         }
         let bad = dir.path().join("bad.tar.gz");
@@ -2206,7 +2206,7 @@ mod tests {
             &[
                 "wordcraft-0.3.0-linux-x86_64/bin/wordcraft",
                 "wordcraft-0.3.0-linux-x86_64/bin/wordcraft-cli",
-                "wordcraft-0.3.0-linux-x86_64/share/applications/ai.storyteller.wordcraft.desktop",
+                "wordcraft-0.3.0-linux-x86_64/share/applications/com.decode.wordcraft.desktop",
             ],
         );
 
@@ -2214,7 +2214,7 @@ mod tests {
         let root = paths.apps().join("wordcraft");
         assert_eq!(bin, root.join("bin").join("wordcraft"));
         assert!(bin.is_file(), "the app's binary wasn't unpacked");
-        assert!(root.join("share/applications/ai.storyteller.wordcraft.desktop").is_file(), "share/ wasn't unpacked");
+        assert!(root.join("share/applications/com.decode.wordcraft.desktop").is_file(), "share/ wasn't unpacked");
         assert!(!paths.cache.join("wordcraft.new").exists(), "the staging folder was left behind");
 
         // The app's own home sits beside the tree, and an update keeps it.
@@ -2266,7 +2266,7 @@ mod tests {
         reg.set_size(2);
         reg.set_mode(0o644);
         reg.set_cksum();
-        b.append_data(&mut reg, "wordcraft-0.3.0-linux-x86_64/share/applications/ai.storyteller.wordcraft.desktop", &b"hi"[..]).unwrap();
+        b.append_data(&mut reg, "wordcraft-0.3.0-linux-x86_64/share/applications/com.decode.wordcraft.desktop", &b"hi"[..]).unwrap();
         b.into_inner().unwrap().finish().unwrap();
         drop(std::io::stdout().flush());
 
@@ -2432,8 +2432,8 @@ mod tests {
         let app = CraftApp::by_id("wordcraft").unwrap();
         let root = tempfile::tempdir().unwrap();
         let data = root.path().join("share");
-        let desktop = data.join("applications/ai.storyteller.wordcraft.desktop");
-        let icon = data.join("icons/hicolor/128x128/apps/ai.storyteller.wordcraft.png");
+        let desktop = data.join("applications/com.decode.wordcraft.desktop");
+        let icon = data.join("icons/hicolor/128x128/apps/com.decode.wordcraft.png");
         let old = root.path().join("My Apps/wordcraft-0.2.0-linux-x86_64.AppImage");
         let new = root.path().join("My Apps/wordcraft-0.3.0-linux-x86_64.AppImage");
         std::fs::create_dir_all(new.parent().unwrap()).unwrap();
@@ -2444,7 +2444,7 @@ mod tests {
         assert_eq!(files, [icon.clone(), desktop.clone()]);
         let text = std::fs::read_to_string(&desktop).unwrap();
         assert!(text.contains("Exec=\"") && text.contains("My Apps/wordcraft-0.3.0-linux-x86_64.AppImage\" %F\n"), "{text}");
-        assert!(text.contains("Icon=ai.storyteller.wordcraft\n"));
+        assert!(text.contains("Icon=com.decode.wordcraft\n"));
         assert!(std::fs::read(&icon).unwrap().starts_with(b"\x89PNG"));
         let rec = record("0.3.0", PackageKind::AppImage, new.clone(), files, false);
 
@@ -2518,11 +2518,11 @@ mod tests {
     fn only_the_release_arch_package_is_updated_by_the_launcher() {
         let pacman = |name: &str| Installed { version: None, source: InstallSource::Pacman, location: String::new(), package: Some(name.into()) };
         let app = artcraft_launcher_core::CraftApp::by_id("wordcraft").unwrap();
-        assert!(is_release_arch_package(app, &pacman("ai.storyteller.wordcraft")));
+        assert!(is_release_arch_package(app, &pacman("com.decode.wordcraft")));
         for aur in ["wordcraft", "wordcraft-bin", "wordcraft-git"] {
             assert!(!is_release_arch_package(app, &pacman(aur)), "{aur}");
         }
-        assert_eq!(managed_elsewhere_with(app, &pacman("ai.storyteller.wordcraft"), false, |_| None), None);
+        assert_eq!(managed_elsewhere_with(app, &pacman("com.decode.wordcraft"), false, |_| None), None);
         assert_eq!(managed_elsewhere_with(app, &pacman("wordcraft-bin"), true, |_| None), None);
     }
 
@@ -2556,7 +2556,7 @@ mod tests {
     fn release_arch_packages_are_updated_as_arch_pkg() {
         let pacman = |name: &str| Installed { version: None, source: InstallSource::Pacman, location: String::new(), package: Some(name.into()) };
         let app = artcraft_launcher_core::CraftApp::by_id("filmcraft").unwrap();
-        let installed = pacman("ai.storyteller.filmcraft");
+        let installed = pacman("com.decode.filmcraft");
         assert_eq!(managed_elsewhere_with(app, &installed, false, |_| None), None);
         assert_eq!(choose_kinds_with(app, Some(&installed), None, &[], &[], true), vec![PackageKind::ArchPkg]);
         assert_eq!(choose_kinds_with(app, Some(&installed), None, &[], &[PackageKind::ArchPkg], false), vec![PackageKind::ArchPkg]);
@@ -2606,7 +2606,7 @@ mod tests {
         let release = Release { version: version::parse("99.0.0"), tag: "v99.0.0".into(), ..Release::default() };
         let asset = Asset {
             name: "photocraft-0.4.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/storytold/photocraft/releases/download/v0.4.0/photocraft-0.4.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.4.0/photocraft-0.4.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         let stop = Stop::default();
@@ -2618,7 +2618,7 @@ mod tests {
         // A matching artifact passes the guard (it fails later for unrelated reasons, not the bind).
         let good = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/storytold/photocraft/releases/download/v99.0.0/photocraft-99.0.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v99.0.0/photocraft-99.0.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &good).is_ok());
@@ -2626,7 +2626,7 @@ mod tests {
         // URL filename mismatch is rejected (CWE-494).
         let bad_url_name = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/storytold/photocraft/releases/download/v99.0.0/other.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v99.0.0/other.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &bad_url_name).is_err());
@@ -2634,7 +2634,7 @@ mod tests {
         // URL tag mismatch is rejected.
         let bad_tag = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/storytold/photocraft/releases/download/unparsed_tag/photocraft-99.0.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/unparsed_tag/photocraft-99.0.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &bad_tag).is_err());
@@ -2705,7 +2705,7 @@ mod tests {
                 contents.join("Info.plist"),
                 format!(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict>\
-                     <key>CFBundleIdentifier</key><string>ai.storyteller.photocraft</string>\
+                     <key>CFBundleIdentifier</key><string>com.decode.photocraft</string>\
                      <key>CFBundleExecutable</key><string>PhotoCraft</string>\
                      <key>CFBundleShortVersionString</key><string>{version}</string></dict></plist>"
                 ),
@@ -2780,7 +2780,7 @@ mod tests {
             let dir = tempfile::tempdir().unwrap();
             let placed = bundle(dir.path(), "0.5.0");
             let plist = placed.join("Contents/Info.plist");
-            let unrelated = std::fs::read_to_string(&plist).unwrap().replace("ai.storyteller.photocraft", "com.example.other");
+            let unrelated = std::fs::read_to_string(&plist).unwrap().replace("com.decode.photocraft", "com.example.other");
             std::fs::write(&plist, &unrelated).unwrap();
             let image = dmg(dir.path(), "0.6.0");
             let result =
@@ -2869,4 +2869,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/native/src/install.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/native/src/install.rs

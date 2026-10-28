@@ -47,13 +47,13 @@ fn release(id: &str, v: &str, at: i64) -> Release {
         version: version::parse(v),
         name: format!("v{v}"),
         published_at: Some(at),
-        html_url: format!("https://github.com/storytold/{id}/releases/tag/v{v}"),
+        html_url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/tag/v{v}"),
         notes: String::new(),
         prerelease: false,
         assets: vec![Asset {
             name: name.clone(),
             size: 150 << 20,
-            url: format!("https://github.com/storytold/{id}/releases/download/v{v}/{name}"),
+            url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/download/v{v}/{name}"),
             sha256: None,
         }],
     }
@@ -129,4 +129,4 @@ fn russian_ui_translates_labels_dates_and_messages() {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/tests/russian.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/tests/russian.rs

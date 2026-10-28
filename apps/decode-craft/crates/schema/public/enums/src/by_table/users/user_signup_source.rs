@@ -34,11 +34,11 @@ pub enum UserSignupSource {
   #[serde(rename = "artcraft_ai_s")]
   ArtCraftAiStripe,
 
-  /// getartcraft.com normal onboard flow
+  /// decode-open-source-hub.vercel.app normal onboard flow
   #[serde(rename = "artcraft_get_web")]
   ArtCraftGetWeb,
 
-  /// getartcraft.com stripe checkout flow
+  /// decode-open-source-hub.vercel.app stripe checkout flow
   #[serde(rename = "artcraft_get_s")]
   ArtCraftGetStripe,
 

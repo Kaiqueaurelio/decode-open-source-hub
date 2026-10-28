@@ -9,7 +9,7 @@ People trust EffectCraft with hours of work. A malformed project, PSD, SVG, Lott
 expression or script, a broken plug-in, a bad control-channel or MCP argument, a corrupt preferences file
 or a full disk must produce an error the user (or agent) can act on, never a crash and never lost work.
 **This rule outranks feature work:** don't ship a feature by adding a panic path, and fix a crash before
-building on top of it. Full standard: [craftrules `standards/never-crash.md`](https://github.com/storytold/craftrules/blob/main/standards/never-crash.md).
+building on top of it. Full standard: [craftrules `standards/never-crash.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/never-crash.md).
 
 - **Fail with `Result<T, E>`** through the crate's error type and propagate with `?`; add context
   (`map_err`, an error variant) rather than discarding it. Lenient readers fall back and record the repair.
@@ -108,8 +108,8 @@ a command, everything is agent-drivable, and the quality gates (`cargo xtask ci`
 - **Time goes through `chrono`** (workspace dependency). Never hand-roll UTC/calendar conversion (days-to-date algorithms, leap-year math); a crate owns only its output format string. The one exception is range extension: past the years chrono can represent, shift the date by whole 400-year Gregorian cycles (146,097 days, after which the calendar repeats), let chrono compute the month and day, and add the cycles back to the year (splitting seconds into hours, minutes and seconds is plain arithmetic).
 
 Shared real-file test corpora (Photoshop-authored PSDs, etc.) live in
-[`storytold/photocraft-corpus`](https://github.com/storytold/photocraft-corpus), explained in
-[craftrules `standards/test-corpora.md`](https://github.com/storytold/craftrules/blob/main/standards/test-corpora.md).
+[`Kaiqueaurelio/decode-open-source-hub-corpus`](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-corpus), explained in
+[craftrules `standards/test-corpora.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/test-corpora.md).
 Never commit large binary fixtures to this repo; fetch them pinned by commit and sha256-verified,
 as PhotoCraft does with `cargo xtask corpus`.
 
@@ -118,7 +118,7 @@ as PhotoCraft does with `cargo xtask corpus`.
 
 - [ROADMAP.md](ROADMAP.md): stage, headline numbers and what's next
 - [docs/gaps.md](docs/gaps.md): every known shortfall against After Effects, ranked, and the prioritised workstreams (G1–G9); read it before choosing work
-- [docs/target-app-parity.md](docs/target-app-parity.md): the parity numbers and how they were measured, with the per-area docs it links (UI, file formats, hardware, localization, effects, scripting); progress docs follow [craftrules `standards/progress-docs.md`](https://github.com/storytold/craftrules/blob/main/standards/progress-docs.md)
+- [docs/target-app-parity.md](docs/target-app-parity.md): the parity numbers and how they were measured, with the per-area docs it links (UI, file formats, hardware, localization, effects, scripting); progress docs follow [craftrules `standards/progress-docs.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/progress-docs.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md): setup, gates, commits, how to add things
 - [docs/architecture.md](docs/architecture.md): layers, data model, commands, pipeline
 - [docs/testing.md](docs/testing.md): oracle tests, criteria, benchmarks

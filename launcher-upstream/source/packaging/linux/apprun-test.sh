@@ -8,7 +8,7 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"
-APP_ID=ai.storyteller.artcraft-launcher
+APP_ID=com.decode.artcraft-launcher
 
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
@@ -184,4 +184,4 @@ ln -s "$TMP/manager-entry" "$DESKTOP"
 echo "AppRun desktop integration ok"
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/linux/apprun-test.sh
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/linux/apprun-test.sh

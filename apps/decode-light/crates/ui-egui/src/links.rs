@@ -5,15 +5,15 @@ pub const APP: &str = "lightcraft";
 /// The ArtCraft community Discord.
 pub const DISCORD: &str = "https://discord.gg/artcraft";
 /// The ArtCraft website.
-pub const WEBSITE: &str = "https://getartcraft.com";
+pub const WEBSITE: &str = "https://decode-open-source-hub.vercel.app";
 /// This app's page on the ArtCraft website.
-pub const APP_PAGE: &str = "https://getartcraft.com/apps/lightcraft";
+pub const APP_PAGE: &str = "https://decode-open-source-hub.vercel.app/#lightcraft";
 /// This app's source repository.
-pub const GITHUB: &str = "https://github.com/storytold/lightcraft";
+pub const GITHUB: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft";
 
 /// (UI command id, menu label, URL) for each link, in Help-menu order.
 /// The user documentation (docs/ in the repository).
-pub const HELP: &str = "https://github.com/storytold/lightcraft/tree/main/docs";
+pub const HELP: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/tree/main/docs";
 
 pub const LINKS: &[(&str, &str, &str)] = &[
     ("app.help", "LightCraft Help", HELP),
@@ -25,7 +25,7 @@ pub const LINKS: &[(&str, &str, &str)] = &[
 ];
 
 /// Where feedback and bug reports go.
-pub const FEEDBACK: &str = "https://github.com/storytold/lightcraft/issues/new";
+pub const FEEDBACK: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft/issues/new";
 
 /// The URL behind a link command id.
 pub fn url_of(cmd: &str) -> Option<&'static str> {
@@ -51,6 +51,6 @@ mod tests {
             assert_eq!(url_of(id), Some(*url));
         }
         assert!(APP_PAGE.ends_with(&format!("/apps/{APP}")));
-        assert!(GITHUB.ends_with(&format!("/storytold/{APP}")));
+        assert!(GITHUB.ends_with(&format!("/Kaiqueaurelio/{APP}")));
     }
 }

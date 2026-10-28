@@ -234,7 +234,7 @@ filter	Installed	已安装
 	Show in Explorer	在资源管理器中显示
 	Show ArtCraft Launcher	显示 ArtCraft Launcher
 	Check for Updates	检查更新
-	Visit getartcraft.com	访问 getartcraft.com
+	Visit decode-open-source-hub.vercel.app	访问 decode-open-source-hub.vercel.app
 	ArtCraft on GitHub	ArtCraft 的 GitHub 主页
 	Join the ArtCraft Discord	加入 ArtCraft Discord 社区
 @plural	ArtCraft Launcher · {n} update available|ArtCraft Launcher · {n} updates available	ArtCraft Launcher · 有 {n} 个可用更新
@@ -351,4 +351,4 @@ figcraft	Interface design and prototyping	界面设计与原型制作
 column	Version	版本
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/i18n/zh-CN.tsv
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/i18n/zh-CN.tsv

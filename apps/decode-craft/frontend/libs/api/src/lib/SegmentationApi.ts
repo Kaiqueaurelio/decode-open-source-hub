@@ -48,7 +48,7 @@ export class SegmentationApi extends ApiManager {
   public async createSession(
     blobVideo: File | Blob,
   ): Promise<{ session_id: string }> {
-    const endpoint = `https://hax.storyteller.ai/segmentation/new_session`;
+    const endpoint = `https://hax.decodeanalytics.com/segmentation/new_session`;
     const id = uuidv4().toString();
     return this.postFormVideo<{ session_id: "fix-mimetype" }>({
       endpoint: endpoint,
@@ -67,7 +67,7 @@ export class SegmentationApi extends ApiManager {
     frames: RequestFrame[],
     propagate: boolean,
   ): Promise<SegmentationResponse> {
-    const endpoint = `https://hax.storyteller.ai/segmentation/generate_masks`;
+    const endpoint = `https://hax.decodeanalytics.com/segmentation/generate_masks`;
 
     const segmentationRequest: SegmentationRequest = {
       session_id: session_id,

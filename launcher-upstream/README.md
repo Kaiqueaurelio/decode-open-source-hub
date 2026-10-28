@@ -1,7 +1,7 @@
 # Upstream launcher reference
 
 This directory is reserved for a tracked integration of the upstream launcher from
-[`storytold/craft-launcher`](https://github.com/storytold/craft-launcher).
+[`Kaiqueaurelio/craft-launcher`](https://github.com/Kaiqueaurelio/decode-open-source-hub).
 
 ## Integration status
 
@@ -25,8 +25,8 @@ attributions must be retained for any source or binary redistributed from that p
 
 ## Source
 
-- Repository: https://github.com/storytold/craft-launcher
-- Upstream main tree: https://github.com/storytold/craft-launcher/tree/main
+- Repository: https://github.com/Kaiqueaurelio/decode-open-source-hub
+- Upstream main tree: https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main
 - Imported/ported code must keep applicable source headers, licenses, notices and attribution files.
 - ArtCraft trademarks and brand assets are not covered by MIT/Apache-2.0; use Decode brand assets instead.
 

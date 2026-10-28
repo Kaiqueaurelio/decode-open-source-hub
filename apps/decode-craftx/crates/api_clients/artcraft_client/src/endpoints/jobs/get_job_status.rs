@@ -26,7 +26,7 @@ mod tests {
   use super::*;
 
   #[tokio::test]
-  #[ignore] // Live: hits api.storyteller.ai (read-only, no credits)
+  #[ignore] // Live: hits api.decodeanalytics.com (read-only, no credits)
   async fn live_get_job_status() {
     let host = ApiHost::Storyteller;
     // A known completed job (nano banana smoke test).

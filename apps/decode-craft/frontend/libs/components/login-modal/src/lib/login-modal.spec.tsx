@@ -24,7 +24,7 @@ beforeEach(() => {
   native.mockReset().mockImplementation(async (command: string) => {
     if (command === "storyteller_get_login_session_command") return null;
     if (command === "storyteller_create_login_challenge_command") return {
-      challenge_id: "native_handle", verification_url: `https://app.getartcraft.com/login/desktop#approval_token=${"A".repeat(43)}`,
+      challenge_id: "native_handle", verification_url: `https://decode-open-source-hub.vercel.app/login/desktop#approval_token=${"A".repeat(43)}`,
       confirmation_code: "WDJBMJHT", expires_at: new Date(Date.now() + 1_200_000).toISOString(), poll_interval_seconds: 5,
     };
     if (command === "storyteller_poll_login_challenge_command") return { status: "redeemed", maybe_user: USER };

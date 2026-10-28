@@ -27,7 +27,7 @@ mod tests {
   use super::*;
 
   #[tokio::test]
-  #[ignore] // Live: hits api.storyteller.ai (read-only, no credits)
+  #[ignore] // Live: hits api.decodeanalytics.com (read-only, no credits)
   async fn live_batch_get_job_status() {
     let host = ApiHost::Storyteller;
     let tokens = vec![

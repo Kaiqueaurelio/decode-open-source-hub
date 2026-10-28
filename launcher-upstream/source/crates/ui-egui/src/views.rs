@@ -1,5 +1,5 @@
 //! The header, toolbar, footer, the grid of cards and the table, laid out like the apps page on
-//! getartcraft.com: hairline cells, mono labels and square controls.
+//! decode-open-source-hub.vercel.app: hairline cells, mono labels and square controls.
 
 use artcraft_launcher_core::details::AppDetails;
 use artcraft_launcher_core::platform::pick_asset;
@@ -1160,7 +1160,7 @@ mod tests {
             version: None,
             name: "ArtCraft Launcher v0.4.1".into(),
             published_at: None,
-            html_url: "https://github.com/storytold/craft-launcher/releases/tag/v0.4.1".into(),
+            html_url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v0.4.1".into(),
             notes: String::new(),
             prerelease: false,
             assets: vec![
@@ -1189,4 +1189,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/views.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/views.rs

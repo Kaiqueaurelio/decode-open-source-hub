@@ -34,9 +34,9 @@ mod tests {
 
     #[test]
     fn lang_comes_from_the_query_not_the_fragment() {
-        assert_eq!(lang_params("https://getartcraft.com/launcher/?lang=de"), ["de"]);
-        assert_eq!(lang_params("https://getartcraft.com/launcher/?x=1&lang=pt-BR#apps"), ["pt-BR"]);
-        assert!(lang_params("https://getartcraft.com/launcher/#apps?lang=de").is_empty());
-        assert!(lang_params("https://getartcraft.com/launcher/?lang=").is_empty());
+        assert_eq!(lang_params("https://decode-open-source-hub.vercel.app/launcher/?lang=de"), ["de"]);
+        assert_eq!(lang_params("https://decode-open-source-hub.vercel.app/launcher/?x=1&lang=pt-BR#apps"), ["pt-BR"]);
+        assert!(lang_params("https://decode-open-source-hub.vercel.app/launcher/#apps?lang=de").is_empty());
+        assert!(lang_params("https://decode-open-source-hub.vercel.app/launcher/?lang=").is_empty());
     }
 }

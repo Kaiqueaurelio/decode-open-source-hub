@@ -20,7 +20,7 @@ concurrency:
 jobs:
   release:
     # Intentionally tracked at @main (not SHA-pinned) so org-wide CI improvements, security fixes, and build optimizations propagate without PR churn across all craftapp repos.
-    uses: storytold/craft-common-actions/.github/workflows/release.yml@main
+    uses: Kaiqueaurelio/craft-common-actions/.github/workflows/release.yml@main
     with:
       app-name: craft-launcher
       app-title: ArtCraft Launcher
@@ -42,4 +42,4 @@ jobs:
       AZURE_CERT_PROFILE: ${{ secrets.AZURE_CERT_PROFILE }}
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/.github/workflows/release.yml
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/.github/workflows/release.yml

@@ -1,16 +1,16 @@
 //! Community and project links: the Help menu, the About dialog, the start screen and the title
-//! bar all open these. URLs follow the crafting-app pattern (`getartcraft.com/apps/<app>`,
-//! `github.com/storytold/<app>`).
+//! bar all open these. URLs follow the crafting-app pattern (`decode-open-source-hub.vercel.app/apps/<app>`,
+//! `github.com/Kaiqueaurelio/<app>`).
 
 use serde_json::{Value, json};
 
 use crate::PhotocraftApp;
 
 pub const DISCORD: &str = "https://discord.gg/artcraft";
-pub const ARTCRAFT_WEBSITE: &str = "https://getartcraft.com";
-pub const APP_PAGE: &str = "https://getartcraft.com/apps/photocraft";
-pub const GITHUB: &str = "https://github.com/storytold/photocraft";
-pub const ISSUES: &str = "https://github.com/storytold/photocraft/issues";
+pub const ARTCRAFT_WEBSITE: &str = "https://decode-open-source-hub.vercel.app";
+pub const APP_PAGE: &str = "https://decode-open-source-hub.vercel.app/#photocraft";
+pub const GITHUB: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft";
+pub const ISSUES: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/issues";
 
 /// Help-menu link commands: (id, url). Labels live in `menus::UI_COMMANDS`.
 pub const COMMANDS: &[(&str, &str)] =
@@ -127,8 +127,8 @@ mod tests {
         let ctx = egui::Context::default();
         for (id, url) in [
             ("help.discord", "https://discord.gg/artcraft"),
-            ("help.website", "https://getartcraft.com/apps/photocraft"),
-            ("help.github", "https://github.com/storytold/photocraft"),
+            ("help.website", "https://decode-open-source-hub.vercel.app/#photocraft"),
+            ("help.github", "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft"),
         ] {
             let r = crate::menus::invoke(&mut app, &ctx, id, serde_json::json!({})).unwrap();
             assert_eq!(r["url"], url);

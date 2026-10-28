@@ -352,7 +352,7 @@ filter	Installed	Zainstalowane
 # Tray (menu bar) menu and tooltip
 	Show Decode Launcher	Pokaż Decode Launcher
 	Check for Updates	Sprawdź dostępność aktualizacji
-	Visit getartcraft.com	Odwiedź getartcraft.com
+	Visit decode-open-source-hub.vercel.app	Odwiedź decode-open-source-hub.vercel.app
 	Decode on GitHub	Decode na GitHubie
 	Join the Decode Discord	Dołącz do Discorda Decode
 @plural	Decode Launcher · {n} update available|Decode Launcher · {n} updates available	Decode Launcher · {n} dostępna aktualizacja|Decode Launcher · {n} dostępne aktualizacje|Decode Launcher · {n} dostępnych aktualizacji

@@ -70,7 +70,7 @@ fn validate(metadata: &Value) -> Result<(), String> {
         }
         matches.first().copied().ok_or_else(|| format!("missing {name}"))
     };
-    let source = format!("git+https://github.com/storytold/craft-libs?rev={SHARED_REV}#{SHARED_REV}");
+    let source = format!("git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs?rev={SHARED_REV}#{SHARED_REV}");
     for (name, version, expected_source, expected_features) in [
         ("craft-pdf", "0.1.0", source.as_str(), vec!["write", "write-simple-text"]),
         ("krilla", "0.8.2", source.as_str(), vec!["raster-images", "rayon", "simple-text"]),
@@ -143,7 +143,7 @@ mod tests {
     use serde_json::json;
 
     fn metadata() -> Value {
-        let source = format!("git+https://github.com/storytold/craft-libs?rev={SHARED_REV}#{SHARED_REV}");
+        let source = format!("git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs?rev={SHARED_REV}#{SHARED_REV}");
         json!({
             "packages": [
                 {"id":"app", "name":"deckcraft-pdf"},
@@ -174,7 +174,7 @@ mod tests {
     #[test]
     fn rejects_unpinned_or_duplicate_writer_sources() {
         assert!(validate(&metadata()).is_ok());
-        for source in [Value::Null, json!(REGISTRY), json!("git+https://github.com/storytold/craft-libs#other")] {
+        for source in [Value::Null, json!(REGISTRY), json!("git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs#other")] {
             let mut m = metadata();
             m["packages"][1]["source"] = source;
             assert!(validate(&m).is_err());

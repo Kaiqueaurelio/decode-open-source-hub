@@ -1,4 +1,4 @@
-//! Fonts from the optional craft-fonts build input (https://github.com/storytold/craft-fonts).
+//! Fonts from the optional craft-fonts build input (https://github.com/Kaiqueaurelio/decode-open-source-hub).
 //!
 //! `CRAFT_FONTS` is empty unless the app was built with `CRAFT_FONTS_DIR=<craft-fonts checkout>`
 //! (see `build.rs`); every user of it must work when it is empty. It carries every font in the

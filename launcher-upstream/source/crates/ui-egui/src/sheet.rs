@@ -115,4 +115,4 @@ pub(crate) fn panel_with_heading(ui: &mut Ui, title: &str, body: impl FnOnce(&mu
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/sheet.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/sheet.rs

@@ -57,7 +57,7 @@ fn is_loopback_origin(origin: &str) -> bool {
 mod tests {
   use super::*;
 
-  const API: &str = "https://api.storyteller.ai/v1/session";
+  const API: &str = "https://api.decodeanalytics.com/v1/session";
   const LOCAL_API: &str = "http://localhost:12345/v1/session";
   const CDN: &str = "https://cdn-2.fakeyou.com/media/a/b.png";
   const GCS: &str = "https://storage.googleapis.com/bucket/a.png";
@@ -81,13 +81,13 @@ mod tests {
         "http://localhost:5173",
         "http://[::1]:5193",
       ] {
-        assert_eq!(normalized(API, Some(origin)), "https://desktop.getartcraft.com");
+        assert_eq!(normalized(API, Some(origin)), "https://decode-open-source-hub.vercel.app");
         assert_eq!(normalized(LOCAL_API, Some(origin)), "http://localhost");
         assert_eq!(normalized(GROK, Some(origin)), "https://grok.com");
       }
       assert_eq!(
         normalized("https://api.fakeyou.com/v1/session", Some(DEV_WEBVIEW_ORIGIN)),
-        "https://desktop.getartcraft.com"
+        "https://decode-open-source-hub.vercel.app"
       );
     }
 
@@ -97,8 +97,8 @@ mod tests {
         CDN,
         GCS,
         UNKNOWN,
-        "https://api.storyteller.ai.example.com/v1/session",
-        "http://api.storyteller.ai/v1/session",
+        "https://api.decodeanalytics.com.example.com/v1/session",
+        "http://api.decodeanalytics.com/v1/session",
       ] {
         assert_eq!(normalized(destination, Some(DEV_WEBVIEW_ORIGIN)), DEV_WEBVIEW_ORIGIN, "{destination}");
       }
@@ -107,7 +107,7 @@ mod tests {
     #[test]
     fn leaves_non_webview_origins_unchanged() {
       for origin in [
-        "https://app.getartcraft.com",
+        "https://decode-open-source-hub.vercel.app",
         "https://example.com",
         "http://localhost.example.com:5193",
         "http://192.168.1.2:5193",
@@ -126,7 +126,7 @@ mod tests {
     #[test]
     fn our_apis_get_desktop_identity() {
       for origin in PACKAGED_ORIGINS {
-        assert_eq!(normalized(API, origin), "https://desktop.getartcraft.com");
+        assert_eq!(normalized(API, origin), "https://decode-open-source-hub.vercel.app");
         assert_eq!(normalized(LOCAL_API, origin), "http://localhost");
       }
     }
@@ -142,7 +142,7 @@ mod tests {
     #[test]
     fn cdns_keep_legacy_origin() {
       for origin in PACKAGED_ORIGINS {
-        assert_eq!(normalized(CDN, origin), "https://studio.storyteller.ai");
+        assert_eq!(normalized(CDN, origin), "https://studio.decodeanalytics.com");
       }
     }
 
@@ -163,7 +163,7 @@ mod tests {
       headers.insert(header::COOKIE, HeaderValue::from_static("session=fixture"));
       normalize_artcraft_origin(&Url::parse(API).unwrap(), &mut headers);
       assert_eq!(headers.get_all(header::ORIGIN).iter().count(), 1);
-      assert_eq!(headers[header::ORIGIN], "https://desktop.getartcraft.com");
+      assert_eq!(headers[header::ORIGIN], "https://decode-open-source-hub.vercel.app");
       assert_eq!(headers[header::COOKIE], "session=fixture");
     }
   }

@@ -340,7 +340,7 @@ fn wgpu_options() -> eframe::WgpuConfiguration {
 /// internal error, the device is lost and the launcher exits at startup (#344). Intel Macs skip
 /// them, and other platforms keep wgpu's default. The launcher issues no indirect draws or
 /// dispatches. `WGPU_VALIDATION_INDIRECT_CALL=1` still turns them back on. DecodePhoto does the same
-/// (storytold/photocraft#3171).
+/// (Kaiqueaurelio/decode-open-source-hub#3171).
 #[cfg(any(target_os = "macos", test))]
 fn skips_indirect_validation(os: &str, intel: bool) -> bool {
     os == "macos" && intel

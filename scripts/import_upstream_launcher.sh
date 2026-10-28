@@ -23,7 +23,7 @@ if ! command -v git >/dev/null 2>&1; then
   exit 2
 fi
 
-git clone --depth 1 https://github.com/storytold/craft-launcher.git "$TMP/upstream"
+git clone --depth 1 https://github.com/Kaiqueaurelio/decode-open-source-hub.git "$TMP/upstream"
 
 # Preserve the complete upstream tree (including binary assets, fonts and icons),
 # but never copy its .git directory into this repository.
@@ -76,7 +76,7 @@ replacements = [
     ("CadCraft", "DecodeCad"),
     ("GridCraft", "DecodeGrid"),
     ("PrintCraft", "DecodePrint"),
-    ("storytold/cadcraft", "Kaiqueaurelio/decodecad"),
+    ("Kaiqueaurelio/decodecad", "Kaiqueaurelio/decodecad"),
     ("ArtCraft API", "Decode API"),
     ("CraftApp", "DecodeApp"),
     ("craft_app", "decode_app"),
@@ -95,8 +95,8 @@ replacements = [
     ("artcraft-logo-white", "decode-logo-white"),
     ("artcraft-logo", "decode-logo"),
     ("artcraft-mark", "decode-mark"),
-    ("ai.storyteller.decode-launcher", "com.decode.launcher"),
-    ("https://github.com/storytold/craft-launcher", "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher"),
+    ("com.decode.decode-launcher", "com.decode.launcher"),
+    ("https://github.com/Kaiqueaurelio/decode-open-source-hub", "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher"),
 ]
 
 skip_names = {"LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "ATTRIBUTION.md", "LICENSE.txt"}
@@ -114,7 +114,7 @@ for path in root.rglob("*"):
         updated = updated.replace(old, new)
 
     # Protect external upstream git dependencies and release URLs
-    updated = updated.replace("storytold/decode-libs", "storytold/craft-libs")
+    updated = updated.replace("Kaiqueaurelio/decode-libs", "Kaiqueaurelio/craft-libs")
     updated = updated.replace("decode-update", "craft-update")
     updated = updated.replace("decode-quit", "craft-quit")
     updated = updated.replace("decode/0.37", "craft/0.37")
@@ -163,7 +163,7 @@ if catalog_source.exists():
     source = catalog_source.read_text(encoding="utf-8")
     source = source.replace(
         "assert_eq!(a.name.to_lowercase(), a.id);",
-        'if a.id == "cadcraft" { assert_eq!(a.repo, "Kaiqueaurelio/decodecad"); } else { assert_eq!(a.repo, format!("storytold/{}", a.id)); }\n            assert_eq!(a.name.to_lowercase().replace("decode", "") + "craft", a.id);'
+        'if a.id == "cadcraft" { assert_eq!(a.repo, "Kaiqueaurelio/decodecad"); } else { assert_eq!(a.repo, format!("Kaiqueaurelio/{}", a.id)); }\n            assert_eq!(a.name.to_lowercase().replace("decode", "") + "craft", a.id);'
     )
     source = source.replace(
         'assert_eq!(pdf.names().collect::<Vec<_>>(), ["DecodePdf", "DecodePrint"]);',
@@ -185,7 +185,7 @@ if catalog_source.exists():
         ("gridcraft", "GridCraft"),
     ]
     for app_id, former_name in apps_pairs:
-        pat = re.compile(r"app\(\s*\"" + app_id + r"\"(.*?\"storytold/" + app_id + r"\".*?\))", re.S)
+        pat = re.compile(r"app\(\s*\"" + app_id + r"\"(.*?\"Kaiqueaurelio/" + app_id + r"\".*?\))", re.S)
         m = pat.search(source)
         if m:
             repl = f"DecodeApp {{ former_names: &[\"{former_name}\"], ..app(\"{app_id}\"{m.group(1)} }}"
@@ -195,7 +195,7 @@ if catalog_source.exists():
         'former_names: &["DecodePrint"],',
         'former_names: &["PdfCraft", "PrintCraft"],'
     )
-    source = source.replace('"storytold/cadcraft"', '"Kaiqueaurelio/decodecad"')
+    source = source.replace('"Kaiqueaurelio/decodecad"', '"Kaiqueaurelio/decodecad"')
 
     launcher_match = re.search(r"pub const LAUNCHER: DecodeApp = app\(\n.*?\n\);", source, re.S)
     if launcher_match:
@@ -227,7 +227,7 @@ if detect_source.exists():
 for path in sorted(root.rglob("*"), key=lambda item: len(item.parts), reverse=True):
     if not path.exists():
         continue
-    new_name = path.name.replace("ai.storyteller.artcraft-launcher", "com.decode.launcher")
+    new_name = path.name.replace("com.decode.artcraft-launcher", "com.decode.launcher")
     new_name = new_name.replace("artcraft", "decode").replace("ArtCraft", "Decode")
     if new_name != path.name:
         target = path.with_name(new_name)

@@ -1,4 +1,4 @@
-//! Optional build input: with `CRAFT_FONTS_DIR=<storytold/craft-fonts checkout>`, embed every font
+//! Optional build input: with `CRAFT_FONTS_DIR=<Kaiqueaurelio/craft-fonts checkout>`, embed every font
 //! in its `fonts/manifest.txt` as `CRAFT_FONTS` (see src/fonts.rs). Unset, `CRAFT_FONTS` is empty.
 //! Recipe from craft-fonts' docs/integration.md; craft-fonts is never a Cargo dependency, and this
 //! script only reads a local directory (no network).
@@ -36,7 +36,7 @@ fn main() {
     if embedded == 0 {
         println!(
             "cargo::warning=no craft-fonts embedded: Chinese and Japanese text will render as empty boxes. \
-             Clone https://github.com/storytold/craft-fonts next to this repo and rebuild with \
+             Clone https://github.com/Kaiqueaurelio/decode-open-source-hub next to this repo and rebuild with \
              CRAFT_FONTS_DIR=../craft-fonts"
         );
     }

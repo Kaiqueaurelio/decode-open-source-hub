@@ -104,16 +104,16 @@ ports.ubuntu.com. It ships the tarball only, needs glibc 2.39 (Ubuntu 24.04+, De
 ### Linux: AppImage updates and Flatpak
 
 Each AppImage embeds update information
-(`gh-releases-zsync|storytold|effectcraft|latest|effectcraft-*-linux-<arch>.AppImage.zsync`), and
+(`gh-releases-zsync|Kaiqueaurelio|effectcraft|latest|effectcraft-*-linux-<arch>.AppImage.zsync`), and
 the `.zsync` file published beside it lets [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate)
 and AppImageLauncher fetch only the changed blocks from the newest published (non-pre-release)
 version. `package.sh` writes the `.zsync` when `zsyncmake` (the `zsync` package) is installed; the
 workflow checks both.
 
 The `.flatpak` bundles repackage the Linux job's tarball with
-`packaging/linux/flatpak-bundle.sh` and `packaging/linux/flatpak/ai.storyteller.effectcraft.bundle.yml`
+`packaging/linux/flatpak-bundle.sh` and `packaging/linux/flatpak/com.decode.effectcraft.bundle.yml`
 (no Rust build inside flatpak-builder), then install the bundle and run `effectcraft-cli --version`
-in the sandbox. `ai.storyteller.effectcraft.yml` is the from-source manifest for Flathub; packaging
+in the sandbox. `com.decode.effectcraft.yml` is the from-source manifest for Flathub; packaging
 lint keeps the runtime and sandbox permissions of the two identical.
 
 ### FreeBSD

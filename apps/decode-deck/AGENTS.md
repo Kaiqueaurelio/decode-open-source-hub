@@ -7,7 +7,7 @@ PhotoCraft, VectorCraft, FilmCraft, LightCraft, PdfCraft, EffectCraft, DesignCra
 (`../<app>`).
 
 Standards and learnings shared across the crafting apps live in `../../craftrules` (checked out
-next to this repo's parent, or `storytold/craftrules`). Read its `AGENTS.md` at the start of a
+next to this repo's parent, or `Kaiqueaurelio/craftrules`). Read its `AGENTS.md` at the start of a
 session, follow its standards, and contribute reusable learnings back there. Never code: repos
 don't share code.
 
@@ -68,7 +68,7 @@ allowed: our UI, our/Lucide icons, OFL fonts, and decks built only from allowed 
   commit), licence and use. `cargo xtask assets` fails if a file under `assets/`, `docs/images/`
   or `docs/brand/` has no row.
 - **`NOTICE`** keeps the notices the licences require.
-- Fonts live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), never in this
+- Fonts live in [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub), never in this
   repo (craftrules `standards/fonts.md`). DeckCraft embeds its `fonts/latin-manifest.txt` and
   `fonts/manifest.txt` when built with `CRAFT_FONTS_DIR` (local dev: `.cargo/config.toml` points at
   `../craft-fonts`).

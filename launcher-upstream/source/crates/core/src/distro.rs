@@ -108,4 +108,4 @@ ID_LIKE=debian
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/distro.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/core/src/distro.rs

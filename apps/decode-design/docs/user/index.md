@@ -18,4 +18,4 @@ It has spreads and parent pages, text frames that thread from one to the next, p
 
 ## Get help
 
-Ask in [Discord](https://discord.gg/artcraft) or open an issue in the [issue tracker](https://github.com/storytold/designcraft/issues). Say which version and which system you use.
+Ask in [Discord](https://discord.gg/artcraft) or open an issue in the [issue tracker](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/issues). Say which version and which system you use.

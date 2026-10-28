@@ -21,7 +21,7 @@
 //! * [`fit_look`] fits a per-file colour matrix and tone curve ([`CameraLook`])
 //!   to the camera's own (decoded) JPEG, for files without colour calibration
 //!   (method after LightCraft's `docs/camera-preview-colour.md`,
-//!   storytold/lightcraft#165); pass it in [`DevelopOptions::camera_look`].
+//!   Kaiqueaurelio/decode-open-source-hub#165); pass it in [`DevelopOptions::camera_look`].
 //! * Raws that carry no colour description (NEF) take a camera profile we
 //!   measured from the camera's own output when there is one (`cameras.rs`:
 //!   image area, levels, ForwardMatrix, tone curve; the Nikon D4 so far).

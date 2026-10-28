@@ -94,7 +94,7 @@ Detail in [file-format-parity.md](file-format-parity.md).
   outside this repo.
 - **Impact:** the main reason to switch is "open my PowerPoint decks". Fidelity on real decks
   (corporate templates, SmartArt, `chartex` charts, embedded fonts, EMF) is still mostly unknown.
-- **Estimate:** 20–35 h: grow the owned corpus in `storytold/photocraft-corpus` style (craftrules
+- **Estimate:** 20–35 h: grow the owned corpus in `Kaiqueaurelio/decode-open-source-hub-corpus` style (craftrules
   `standards/test-corpora.md`), add render checks, have the owner open outputs in PowerPoint, fix
   what breaks. **Beta blocker.**
 

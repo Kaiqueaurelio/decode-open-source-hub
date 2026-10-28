@@ -9,7 +9,7 @@
 use std::path::PathBuf;
 
 #[cfg_attr(windows, allow(dead_code))]
-const ID: &str = "ai.storyteller.artcraft-launcher";
+const ID: &str = "com.decode.artcraft-launcher";
 /// The command-line flag a login start passes.
 pub const HIDDEN_FLAG: &str = "--hidden";
 
@@ -116,4 +116,4 @@ fn remove(path: &std::path::Path) -> Result<(), String> {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/native/src/login.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/native/src/login.rs

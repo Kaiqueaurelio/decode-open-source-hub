@@ -29,8 +29,8 @@ permissions:
 jobs:
   freebsd:
     # Intentionally tracked at @main (not SHA-pinned) so org-wide CI improvements, security fixes, and build optimizations propagate without PR churn across all craftapp repos.
-    uses: storytold/craft-common-actions/.github/workflows/freebsd.yml@main
+    uses: Kaiqueaurelio/craft-common-actions/.github/workflows/freebsd.yml@main
     with:
       run-package-check: true
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/.github/workflows/freebsd.yml
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/.github/workflows/freebsd.yml

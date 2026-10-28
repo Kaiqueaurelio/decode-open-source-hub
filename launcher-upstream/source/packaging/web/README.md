@@ -76,4 +76,4 @@ Local test: `python3 -m http.server 8765` inside the folder, then open http://lo
 - Don't send `X-Frame-Options: DENY` or a `frame-ancestors` CSP that excludes the embedding page.
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/web/README.md
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/web/README.md

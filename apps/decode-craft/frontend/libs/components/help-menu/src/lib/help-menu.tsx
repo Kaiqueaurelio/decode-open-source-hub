@@ -29,7 +29,7 @@ const NewsView = ({ onBack }: { onBack: () => void }) => {
       try {
         const baseUrl = import.meta.env.DEV
           ? "http://localhost:4200"
-          : "https://getartcraft.com";
+          : "https://decode-open-source-hub.vercel.app";
         const res = await fetch(`${baseUrl}/news.json`);
         if (res.ok) {
           const data = await res.json();
@@ -220,7 +220,7 @@ export function HelpMenuButton({
         OpenUrl("https://discord.com/invite/75svZP2Vje");
         break;
       case "github":
-        OpenUrl("https://github.com/storytold/artcraft");
+        OpenUrl("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/artcraft");
         break;
       case "artcraft":
         OpenUrl("https://www.youtube.com/@OfficialArtCraftStudios");

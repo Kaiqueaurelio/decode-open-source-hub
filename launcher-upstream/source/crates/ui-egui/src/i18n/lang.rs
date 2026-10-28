@@ -389,4 +389,4 @@ pub(super) fn name_sort_key(name: &str) -> String {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/i18n/lang.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/i18n/lang.rs

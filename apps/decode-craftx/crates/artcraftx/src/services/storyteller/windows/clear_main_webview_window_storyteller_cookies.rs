@@ -35,14 +35,14 @@ fn get_cookies_to_delete(cookies: Vec<Cookie>) -> Vec<Cookie> {
         // Define your filtering logic here
         // For example, delete cookies with a specific name or domain
         match cookie.domain() {
-          // storyteller.ai
-          Some("api.storyteller.ai") => true,
-          Some("storyteller.ai") => true,
-          Some(domain) if domain.ends_with(".storyteller.ai") => true,
-          // getartcraft.com
-          Some("api.getartcraft.com") => true,
-          Some("getartcraft.com") => true,
-          Some(domain) if domain.ends_with(".getartcraft.com") => true,
+          // decodeanalytics.com
+          Some("api.decodeanalytics.com") => true,
+          Some("decodeanalytics.com") => true,
+          Some(domain) if domain.ends_with(".decodeanalytics.com") => true,
+          // decode-open-source-hub.vercel.app
+          Some("api.decodeanalytics.com") => true,
+          Some("decode-open-source-hub.vercel.app") => true,
+          Some(domain) if domain.ends_with(".decode-open-source-hub.vercel.app") => true,
           // artcraft.ai
           Some("api.artcraft.ai") => true,
           Some("artcraft.ai") => true,

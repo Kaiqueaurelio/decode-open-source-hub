@@ -9,6 +9,6 @@ Yes for IDML, the InDesign Markup format. DesignCraft can open `.idml` files and
 
 The **Open…** dialog lists `.designcraft` and `.idml` files only, so it does not offer InDesign's own `.indd` files. See [Open a DesignCraft or InDesign (IDML) file](../guides/open-a-file.md).
 
-IDML import is not complete. Open issues in the tracker report that custom text-wrap boundaries ([#451](https://github.com/storytold/designcraft/issues/451)) and saved image clipping paths ([#450](https://github.com/storytold/designcraft/issues/450)) are lost when importing IDML, and that bullets and numbers in lists show as missing-font magenta in some templates ([#110](https://github.com/storytold/designcraft/issues/110)). Check your layout after importing.
+IDML import is not complete. Open issues in the tracker report that custom text-wrap boundaries ([#451](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/issues/451)) and saved image clipping paths ([#450](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/issues/450)) are lost when importing IDML, and that bullets and numbers in lists show as missing-font magenta in some templates ([#110](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/issues/110)). Check your layout after importing.
 
 DesignCraft can also export PDF (including PDF/X-4 and PDF/A-2b), PNG and EPUB. See [Export a PDF](../guides/export-a-pdf.md).

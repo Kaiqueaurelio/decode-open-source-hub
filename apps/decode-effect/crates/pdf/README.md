@@ -148,7 +148,7 @@ page parser and rasterizer on native and WASM targets. It also bounds xref, obje
 graphics-state work, reads the full `/W[0]` xref type width, and caps JBIG2 segment references
 and bitmap allocation.
 
-The root Cargo patch pins Hayro-syntax and Hayro-jbig2 to the same `storytold/craft-libs` revision. `cargo xtask pdf-deps` checks this graph and refuses
+The root Cargo patch pins Hayro-syntax and Hayro-jbig2 to the same `Kaiqueaurelio/craft-libs` revision. `cargo xtask pdf-deps` checks this graph and refuses
 an enabled Hayro interpreter, rasterizer or CMap dependency. The shared revision must be
 published before a fresh app checkout can resolve it; no sibling checkout is required.
 

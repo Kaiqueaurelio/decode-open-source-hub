@@ -49,7 +49,7 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export FIGCRAFT_MAINTAINER="${FIGCRAFT_MAINTAINER:-FigCraft maintainers <figcraft@storyteller.ai>}"
+export FIGCRAFT_MAINTAINER="${FIGCRAFT_MAINTAINER:-FigCraft maintainers <figcraft@decodeanalytics.com>}"
 BASENAME="figcraft-$VERSION-linux-$ARCH"
 
 echo "==> FigCraft $VERSION for Linux $ARCH ($FORMATS; ${BINS[*]})"

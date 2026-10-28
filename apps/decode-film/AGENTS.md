@@ -9,7 +9,7 @@ People trust FilmCraft with hours of work. A malformed file, a bad command or MC
 preset or project, an odd keystroke or a full disk must give an error the user (or agent) can act on,
 never a crash and never lost work. **This rule outranks feature work:** don't ship a feature by adding a
 panic path, and fix a crash before building on top of it. The cross-app standard is
-[`craftrules/standards/never-crash.md`](https://github.com/storytold/craftrules/blob/main/standards/never-crash.md).
+[`craftrules/standards/never-crash.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/never-crash.md).
 
 1. **Fail with `Result<T, E>`.** Return the crate's error type and propagate with `?`; add context
    (`map_err`, an error variant) instead of discarding it. In the UI, report the error (status bar, error
@@ -92,13 +92,13 @@ reproduce an image (for example, point lists traced from someone else's icon).
    need a sidecar and an `ATTRIBUTION.md` row (licence `LicenseRef-ArtCraft-Trademark`). No other
    non-open asset is allowed, and this exception never covers third-party marks (Adobe, Discord, GitHub
    and other logos stay out; draw a generic icon instead).
-9. **Fonts live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), never in this
+9. **Fonts live in [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub), never in this
    repo.** Don't commit new font files (the small Latin UI fonts already in `assets/fonts/` stay). A
    font FilmCraft needs is added to craft-fonts, which the app reads through the optional build input
    `CRAFT_FONTS_DIR=<absolute path of a craft-fonts checkout>` (`crates/text/build.rs` embeds the fonts in its
    `fonts/manifest.txt` as `filmcraft_text::fonts::CRAFT_FONTS`; unset, it is empty and the app uses its
    bundled and system fonts). Never add craft-fonts to a `Cargo.toml`. Code using `CRAFT_FONTS` must work
-   when it is empty. Standard: [`craftrules/standards/fonts.md`](https://github.com/storytold/craftrules/blob/main/standards/fonts.md).
+   when it is empty. Standard: [`craftrules/standards/fonts.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/fonts.md).
 
 ## 2. Clean-room code
 
@@ -139,8 +139,8 @@ a command, everything is agent-drivable, and the quality gates (`cargo xtask ci`
 
 
 Shared real-file test corpora (Photoshop-authored PSDs, etc.) live in
-[`storytold/photocraft-corpus`](https://github.com/storytold/photocraft-corpus), explained in
-[craftrules `standards/test-corpora.md`](https://github.com/storytold/craftrules/blob/main/standards/test-corpora.md).
+[`Kaiqueaurelio/decode-open-source-hub-corpus`](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-corpus), explained in
+[craftrules `standards/test-corpora.md`](https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/standards/test-corpora.md).
 Never commit large binary fixtures to this repo; fetch them pinned by commit and sha256-verified,
 as PhotoCraft does with `cargo xtask corpus`.
 

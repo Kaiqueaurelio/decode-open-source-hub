@@ -16,7 +16,7 @@ set -euo pipefail
 # shellcheck source=../env.sh
 . "$(dirname "${BASH_SOURCE[0]}")/../env.sh"
 LINUX="$ROOT/packaging/linux"
-APP_ID=ai.storyteller.artcraft-launcher
+APP_ID=com.decode.artcraft-launcher
 PKG=artcraft-launcher
 
 SKIP_BUILD=0
@@ -107,4 +107,4 @@ fi
 echo "==> done"
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/freebsd/package.sh
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/freebsd/package.sh

@@ -52,13 +52,13 @@ fn release(id: &str, v: &str, at: i64) -> Release {
         version: version::parse(v),
         name: format!("v{v}"),
         published_at: Some(at),
-        html_url: format!("https://github.com/storytold/{id}/releases/tag/v{v}"),
-        notes: "## What's Changed\n* Faster things by @a in https://github.com/storytold/x/pull/1".into(),
+        html_url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/tag/v{v}"),
+        notes: "## What's Changed\n* Faster things by @a in https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/x/pull/1".into(),
         prerelease: false,
         assets: vec![Asset {
             name: name.clone(),
             size: 150 << 20,
-            url: format!("https://github.com/storytold/{id}/releases/download/v{v}/{name}"),
+            url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/download/v{v}/{name}"),
             sha256: None,
         }],
     }
@@ -230,4 +230,4 @@ fn simplified_chinese_switches_persists_and_keeps_install_actions() {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/tests/chinese.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/tests/chinese.rs

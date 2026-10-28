@@ -1,6 +1,6 @@
 // Tracks landing context (referral username, referral code, landing URL,
-// referrer) so signup attribution survives the getartcraft.com →
-// app.getartcraft.com hop. Values are persisted to cookies scoped to the apex
+// referrer) so signup attribution survives the decode-open-source-hub.vercel.app →
+// app.decode-open-source-hub.vercel.app hop. Values are persisted to cookies scoped to the apex
 // domain (shared across subdomains) plus localStorage as a fallback for
 // environments where the apex cookie isn't available (eg. localhost).
 //
@@ -15,7 +15,7 @@ const REFERRER_KEY = "referral_referrer";
 const URL_MAX_LENGTH = 1024;
 const REFERRAL_CODE_MAX_LENGTH = 30;
 const COOKIE_MAX_AGE_DAYS = 90;
-const APEX_DOMAINS = ["getartcraft.com"];
+const APEX_DOMAINS = ["decode-open-source-hub.vercel.app"];
 
 /**
  * Capture referral username (`?u=`), referral code (`?r=`), landing URL
@@ -25,8 +25,8 @@ const APEX_DOMAINS = ["getartcraft.com"];
  *   referrer gets credit, but a page load without the param leaves the
  *   existing value alone.
  * - Landing URL and referrer: first visit wins, so the original entry point
- *   survives navigation within and between getartcraft.com and
- *   app.getartcraft.com.
+ *   survives navigation within and between decode-open-source-hub.vercel.app and
+ *   app.decode-open-source-hub.vercel.app.
  */
 export function captureLandingContext(): void {
   try {

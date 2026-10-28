@@ -44,4 +44,4 @@ pub use i18n::{
 pub use settings::Settings;
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/lib.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/lib.rs

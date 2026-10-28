@@ -12,12 +12,12 @@ human approval after the exact contents and validation are shown. The contributo
 preference remains username-only (`@skylartaylor`); do not add display or real names or any
 agent/model/tool attribution.
 
-This plan covers only `storytold/designcraft`. It records the work needed to move the
+This plan covers only `Kaiqueaurelio/decode-open-source-hub`. It records the work needed to move the
 DesignCraft desktop, web and UI crates from the current coherent 0.36.2 dependency set to
 egui 0.37.0, the final reviewed suite fork and the matching final reviewed winit revision.
-Shared-library work remains in `storytold/craft-libs`; this plan consumes it but does not
+Shared-library work remains in `Kaiqueaurelio/craft-libs`; this plan consumes it but does not
 redefine it. Candidate `aiongg` revisions below are comparison inputs only. A production
-manifest must name the final reviewed `storytold` revisions, which do not exist until the
+manifest must name the final reviewed `Kaiqueaurelio` revisions, which do not exist until the
 fork/winit/craft-libs publication is reviewed and approved.
 
 Capture acceptance follows the suite contract: a queued-not-issued hidden request and
@@ -41,17 +41,17 @@ in-flight and completed images together.
 | Workspace version / edition / MSRV | `0.12.0` / edition 2024 / Rust 1.95 |
 | Lockfile | `Cargo.lock`, format version 4 |
 | Current egui family | `egui`, `epaint`, `ecolor`, `emath`, `eframe`, `egui-wgpu`, `egui-winit`, `egui_kittest`, `epaint_default_fonts` all `0.36.2` from crates.io |
-| Current winit | `git+https://github.com/storytold/winit.git?rev=3d51077fd1a966f84df9ef287839dc84fd5b4ca7` (0.30.13, W1–W14) |
-| Current `craft-ui` | `git+https://github.com/storytold/craft-libs?rev=5c874d51eeb3de70e735c8ce87a59a7dedd47675#5c874d51...` |
+| Current winit | `git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit.git?rev=3d51077fd1a966f84df9ef287839dc84fd5b4ca7` (0.30.13, W1–W14) |
+| Current `craft-ui` | `git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs?rev=5c874d51eeb3de70e735c8ce87a59a7dedd47675#5c874d51...` |
 | Upstream egui 0.37.0 | `841a328ba2dd8f6996beb7189ebb7fc00e668a2a` (release commit, not the annotated-tag object) |
 | Candidate egui fork (comparison only) | `aiongg/egui` `craft/0.37` = `a4f9a17f64a6bae61350fb85804c9df0d9865916` (E1–E21; E21b/P7b still to be added) |
 | Candidate winit (comparison only) | `aiongg/winit` `craft/0.30.13-lang` = `8b35388bd719e8cc86a95971ba0bc026c9a8f058` (W1–W27; W15P still to be added) |
-| Final storytold egui pin | **Unknown until approved publication**: a reviewed immutable `storytold/egui` revision containing the complete P8 handoff: E1–E21, E21b/P7b, E4/P2b, P7 key pairing and P7c fixes. Never ship the candidate hash. |
-| Final storytold winit pin | **Unknown until approved publication**: a reviewed immutable `storytold/winit` revision containing W1–W27 plus native W15P PRIMARY. Never ship the candidate hash. |
+| Final Kaiqueaurelio egui pin | **Unknown until approved publication**: a reviewed immutable `Kaiqueaurelio/egui` revision containing the complete P8 handoff: E1–E21, E21b/P7b, E4/P2b, P7 key pairing and P7c fixes. Never ship the candidate hash. |
+| Final Kaiqueaurelio winit pin | **Unknown until approved publication**: a reviewed immutable `Kaiqueaurelio/winit` revision containing W1–W27 plus native W15P PRIMARY. Never ship the candidate hash. |
 | Final `craft-ui` pin | **Unknown until approved publication**: `<FINAL_CRAFT_UI_REV>`, the reviewed CL-2F revision (including CL-1, and CL-3 if it has landed) derived from current craft-libs, not a PR head. D1 uses the reviewed CL-1 + CL-2 provisional revision as a pilot; CL-2F follows the DesignCraft/GridCraft adapter reviews. |
-| Published predecessor | `storytold/egui` `craft/0.36.2` = `767b1cad294120689a514bb4bd68c077e46679b9`; published `storytold/winit` = `ffae5198770d7730e718043f035a772b7dbc3b1b` |
+| Published predecessor | `Kaiqueaurelio/egui` `craft/0.36.2` = `767b1cad294120689a514bb4bd68c077e46679b9`; published `Kaiqueaurelio/winit` = `ffae5198770d7730e718043f035a772b7dbc3b1b` |
 | craft-libs PR 199 | head `b68de8c5f4f1c060904d211a7b1320aa0f7bce78`; audit tree `ec8840af8c5fda695cf195cdd05e5ae078415c07`. Both are **stale trees, not bases**: they omit `crates/platform` and revert current security/settings/docking/printer fixes. Apply only the API-port hunks from `8614e4a04fae516fba16c22b31ff1008cb6be10b` (and relevant README changes from `1764bca`) onto current craft-libs `49190884278f16c9a9f5823d7698a8ffb5deb062`. |
-| Related language work | `storytold/craft-libs#198`, delivered through fork E5/E9/E12–E17/E19–E21, E21b and winit W17–W27 plus W15P |
+| Related language work | `Kaiqueaurelio/craft-libs#198`, delivered through fork E5/E9/E12–E17/E19–E21, E21b and winit W17–W27 plus W15P |
 
 Authoritative lifecycle evidence for this plan is
 `/home/codex/work/ssd2/task-evidence/egui037-migration-20261022/lifecycle-source-audit.md`.
@@ -117,7 +117,7 @@ with `finish` after reviews.
   explicit `egui/default_fonts` dev feature and with `theme::install_fonts` before layout.
 - Clean-checkout dependency gate: after publication, a fresh clone runs
   `cargo fetch --locked` and `cargo metadata --locked --format-version 1` against the final
-  storytold revisions. A missing/unreachable revision or a machine-local path fails the gate.
+  Kaiqueaurelio revisions. A missing/unreachable revision or a machine-local path fails the gate.
 - CI workflow `.github/workflows/ci.yml` runs `cargo xtask ci` on Ubuntu 24.04 with pinned
   craft-fonts `abb83316d96aa59c1cf64784289e378fe9fa5695`, nextest, and the apt/winit build
   dependencies.
@@ -681,18 +681,18 @@ only after review and is recorded in evidence.
 ### 4.1 Intended suite graph
 
 For suite validation, DesignCraft resolves exactly one copy of each egui-family crate and
-one winit. The revisions below are placeholders until the reviewed `storytold` publications
+one winit. The revisions below are placeholders until the reviewed `Kaiqueaurelio` publications
 exist; candidate `aiongg` hashes are comparison inputs only.
 
 ```
 designcraft / designcraft-web / designcraft-ui-egui
-  -> egui 0.37.0          git <FINAL_STORYTOLD_EGUI_REV>   (contains E1-E21, E21b, E4/P2b)
-  -> eframe 0.37.0        git <FINAL_STORYTOLD_EGUI_REV>
-  -> egui-winit 0.37.0    git <FINAL_STORYTOLD_EGUI_REV>
-  -> egui-wgpu 0.37.0     git <FINAL_STORYTOLD_EGUI_REV>
-  -> egui_kittest 0.37.0  git <FINAL_STORYTOLD_EGUI_REV>   (dev)
-  -> epaint/ecolor/emath/epaint_default_fonts  git <FINAL_STORYTOLD_EGUI_REV>
-  -> winit 0.30.13        git <FINAL_STORYTOLD_WINIT_REV>  (W1-W27 plus W15P PRIMARY)
+  -> egui 0.37.0          git <FINAL_KAIQUEAURELIO_EGUI_REV>   (contains E1-E21, E21b, E4/P2b)
+  -> eframe 0.37.0        git <FINAL_KAIQUEAURELIO_EGUI_REV>
+  -> egui-winit 0.37.0    git <FINAL_KAIQUEAURELIO_EGUI_REV>
+  -> egui-wgpu 0.37.0     git <FINAL_KAIQUEAURELIO_EGUI_REV>
+  -> egui_kittest 0.37.0  git <FINAL_KAIQUEAURELIO_EGUI_REV>   (dev)
+  -> epaint/ecolor/emath/epaint_default_fonts  git <FINAL_KAIQUEAURELIO_EGUI_REV>
+  -> winit 0.30.13        git <FINAL_KAIQUEAURELIO_WINIT_REV>  (W1-W27 plus W15P PRIMARY)
   -> craft-ui             git <FINAL_CRAFT_UI_REV>         (CL-2F after adapter review; includes CL-1/CL-3)
   -> wgpu 30.0.1          registry
   -> accesskit 0.25.1     registry
@@ -710,22 +710,22 @@ moving branch or machine-local path:
 
 ```toml
 [patch.crates-io]
-egui = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-eframe = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-egui-winit = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-egui-wgpu = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-egui_kittest = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-epaint = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-epaint_default_fonts = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-ecolor = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-emath = { git = "https://github.com/storytold/egui", rev = "<FINAL_STORYTOLD_EGUI_REV>" }
-winit = { git = "https://github.com/storytold/winit", rev = "<FINAL_STORYTOLD_WINIT_REV>" }
+egui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+eframe = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+egui-winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+egui-wgpu = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+egui_kittest = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+epaint = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+epaint_default_fonts = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+ecolor = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+emath = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_KAIQUEAURELIO_EGUI_REV>" }
+winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit", rev = "<FINAL_KAIQUEAURELIO_WINIT_REV>" }
 ```
 
-The egui remote must be the published, reachable `storytold/egui` mirror containing the
+The egui remote must be the published, reachable `Kaiqueaurelio/egui` mirror containing the
 reviewed fork history. Pinning `aiongg/egui` directly is not the production plan; it would be
 an explicit policy decision, not a default. The winit remote must likewise be the final
-reviewed `storytold/winit`, not the candidate URL/revision. A branch name, a machine-local
+reviewed `Kaiqueaurelio/winit`, not the candidate URL/revision. A branch name, a machine-local
 path, or a `path` override must never appear in a shipped manifest.
 
 Workspace dependency versions change from `0.36` to `0.37` for `egui`, `eframe` and
@@ -740,10 +740,10 @@ After generating a lockfile through the managed build workflow, verify:
 
 - `Cargo.lock` has exactly one `egui`, `epaint`, `ecolor`, `emath`, `eframe`,
   `egui-winit`, `egui-wgpu`, `egui_kittest` and `winit` entry.
-- Every egui-family source is `git+https://github.com/storytold/egui?rev=<FINAL...>#<FINAL...>`;
+- Every egui-family source is `git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui?rev=<FINAL...>#<FINAL...>`;
   no `registry+.../egui-0.36.2` or `-0.37.0` remains and no candidate `aiongg` source is
   shipped.
-- `winit` source is the exact final storytold revision; no registry 0.30.13 and no old
+- `winit` source is the exact final Kaiqueaurelio revision; no registry 0.30.13 and no old
   `3d51077f...` copy remains.
 - `wgpu` stays `30.0.1`; `accesskit` moves to the version egui 0.37 requires
   (`0.25.1` in the reference graph).
@@ -761,7 +761,7 @@ After generating a lockfile through the managed build workflow, verify:
 
 The root `[patch.crates-io]` also contains the unrelated PDF entries. Keep
 `krilla`, `hayro`, `hayro-interpret`, `hayro-syntax` and `hayro-jbig2` at
-`storytold/craft-libs` `89dcbb3060377a26c99a6d80caa16084366704c4` unchanged. They are not
+`Kaiqueaurelio/craft-libs` `89dcbb3060377a26c99a6d80caa16084366704c4` unchanged. They are not
 egui vendors and have their own provenance, tests and removal conditions.
 
 ### 4.4 craft-libs CL-1/CL-2 and language work
@@ -792,8 +792,8 @@ DesignCraft has no `vendor/` directory. Its relevant non-registry inputs are:
 
 | Patch / input | Current revision | Provenance | Decision for this migration | Removal condition |
 | --- | --- | --- | --- | --- |
-| `winit` | `storytold/winit` `3d51077f...` (W1–W14) | storytold/winit `craft/0.30.13`; X11 `with_x11`, macOS `with_close_requested_on_terminate`, `mac_window::sync_movable` | Replace with `<FINAL_STORYTOLD_WINIT_REV>` (W1–W27 plus W15P). W12/W14 remain; W15/W15P/W25/W26/W27 are needed by E4/E19/E21. | Upstream winit 0.30/0.31 contains the equivalent patches and the suite no longer needs the fork. |
-| `egui`/`eframe`/`egui-winit`/`egui-wgpu`/`egui_kittest`/`epaint`/`ecolor`/`emath` | registry 0.36.2 | crates.io | Replace by `<FINAL_STORYTOLD_EGUI_REV>` containing E1–E21, E21b and E4/P2b in D1 after the isolated stock-0.37 comparison, including P7c/P8. Candidate `a4f9a17f` is comparison input, not the pin. | Upstream egui release contains the equivalent behavior (or the suite drops each patch when its `PATCHES.md` condition is met). |
+| `winit` | `Kaiqueaurelio/winit` `3d51077f...` (W1–W14) | Kaiqueaurelio/winit `craft/0.30.13`; X11 `with_x11`, macOS `with_close_requested_on_terminate`, `mac_window::sync_movable` | Replace with `<FINAL_KAIQUEAURELIO_WINIT_REV>` (W1–W27 plus W15P). W12/W14 remain; W15/W15P/W25/W26/W27 are needed by E4/E19/E21. | Upstream winit 0.30/0.31 contains the equivalent patches and the suite no longer needs the fork. |
+| `egui`/`eframe`/`egui-winit`/`egui-wgpu`/`egui_kittest`/`epaint`/`ecolor`/`emath` | registry 0.36.2 | crates.io | Replace by `<FINAL_KAIQUEAURELIO_EGUI_REV>` containing E1–E21, E21b and E4/P2b in D1 after the isolated stock-0.37 comparison, including P7c/P8. Candidate `a4f9a17f` is comparison input, not the pin. | Upstream egui release contains the equivalent behavior (or the suite drops each patch when its `PATCHES.md` condition is met). |
 | `egui_extras` | registry 0.36.2, only in `craft-ui` dev-dependencies | crates.io; not used by DesignCraft | Leave alone. Do not add a patch entry unless a DesignCraft crate directly uses it. | No removal needed. |
 | `krilla` | craft-libs `89dcbb30...`, version `=0.8.2` | PDF backend vendor patch in craft-libs; unrelated to egui | Keep exactly. | Its own PDF backend gate. |
 | `hayro`, `hayro-interpret`, `hayro-syntax`, `hayro-jbig2` | craft-libs `89dcbb30...`, pinned versions | PDF parser vendor patches in craft-libs | Keep exactly. | Their own PDF parser gates. |
@@ -1058,7 +1058,7 @@ craft-libs CL-3 + D1 -> D4 docking/accessibility
 D2/D3/D4 -> D5 visual/workflow acceptance -> D6 final platform/performance evidence
 ```
 
-- **D1 — atomic final-fork compatibility pilot.** Pin the complete final storytold
+- **D1 — atomic final-fork compatibility pilot.** Pin the complete final Kaiqueaurelio
   egui/winit graph and reviewed craft-ui CL-1/CL-2 prototype; regenerate the lock.
   Apply roles/IDs/FontData/wheel changes, explicit native clipboard and test fonts,
   strict minimum names/glyphs, the shared capture-slot adapter and its cancellation/
@@ -1103,8 +1103,8 @@ results at the reviewed revision. No PR is published without fresh direct human 
 
 ### Blocking unknowns
 
-1. **Final dependency publications.** The final reviewed `storytold/egui` and
-   `storytold/winit` revisions do not exist yet. Candidate `aiongg` hashes are comparison
+1. **Final dependency publications.** The final reviewed `Kaiqueaurelio/egui` and
+   `Kaiqueaurelio/winit` revisions do not exist yet. Candidate `aiongg` hashes are comparison
    inputs only. D1 cannot ship until the complete P8 handoff and winit revisions are published with E1–E21,
    E21b, E4/P2b, W1–W27 and W15P, and a clean checkout fetches them `--locked`.
 2. **craft-libs CL-1/CL-2F revisions.** The 0.37-compatible craft-ui revision must be the
@@ -1182,7 +1182,7 @@ results at the reviewed revision. No PR is published without fresh direct human 
       rollback.
 - [ ] All 22 manifests, root lockfile, root patch section, build scripts, `ui_shot`,
       platform cfgs and CI workflows audited.
-- [ ] Exactly one egui family and one winit resolve from the final reviewed storytold
+- [ ] Exactly one egui family and one winit resolve from the final reviewed Kaiqueaurelio
       revisions; no registry 0.36.2, candidate `aiongg` source or machine-local path remains.
 - [ ] Clean checkout passes `cargo fetch --locked` and `cargo metadata --locked`.
 - [ ] `cargo xtask ci`, `cargo xtask wasm`, `cargo test -p designcraft-ui-egui --lib`,
@@ -1233,13 +1233,13 @@ Primary source inspected locally (read-only; no checkout switch):
 - Candidate winit for comparison: `aiongg/winit` `craft/0.30.13-lang` =
   `8b35388bd719e8cc86a95971ba0bc026c9a8f058`, including `PATCHES.md` (W1–W27; W15P still
   to be added). This is not the production pin.
-- `storytold/craft-libs` PR 199 head =
+- `Kaiqueaurelio/craft-libs` PR 199 head =
   `b68de8c5f4f1c060904d211a7b1320aa0f7bce78`; audit merge
   `ec8840af8c5fda695cf195cdd05e5ae078415c07`; API-port source
   `8614e4a04fae516fba16c22b31ff1008cb6be10b`; current craft-libs baseline
   `49190884278f16c9a9f5823d7698a8ffb5deb062`.
-- `storytold/egui` published 0.36.2 =
-  `767b1cad294120689a514bb4bd68c077e46679b9`; `storytold/winit` published 0.30.13 =
+- `Kaiqueaurelio/egui` published 0.36.2 =
+  `767b1cad294120689a514bb4bd68c077e46679b9`; `Kaiqueaurelio/winit` published 0.30.13 =
   `ffae5198770d7730e718043f035a772b7dbc3b1b`.
 - DesignCraft baseline =
   `e74208dd7e0c801d15dfdf926d64cfe5e3b346d3`.
@@ -1285,7 +1285,7 @@ validation, and an upstream status may have changed since the snapshot.
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/designcraft` `main` now resolves to `2e36dcf909627c8f0e5662fe6b4825b1c1c24420`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` now resolves to `2e36dcf909627c8f0e5662fe6b4825b1c1c24420`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 Preserve browser page zoom and canvas touch-action:none alongside packaging fixes.
 
@@ -1293,7 +1293,7 @@ The complete static delta review and exact old/new object identities are retaine
 
 ### Local pinned font inputs (2026-10-23)
 
-Parent fetched and verified all eight manifest fonts at `storytold/craft-fonts`
+Parent fetched and verified all eight manifest fonts at `Kaiqueaurelio/craft-fonts`
 `2481a8a324b986a45954e90045ed1f8f2efaaf3c` into
 `/home/codex/work/CraftApps/egui037-migration-20261022/fixtures/craft-fonts`.
 Use this exact directory as the optional `CRAFT_FONTS_DIR` build input. All
@@ -1317,12 +1317,12 @@ the parent through the managed `task.py` workflow and are cited as evidence, not
 
 | Item | Revision |
 | --- | --- |
-| egui family (`egui`, `epaint`, `ecolor`, `emath`, `eframe`, `egui-wgpu`, `egui-winit`, `egui_kittest`, `egui_extras`, `epaint_default_fonts`) | `storytold/egui` `6d518fc799681571963842f95b55a6b68431b15a` |
-| winit | `storytold/winit` `a517b3846ee8457d84ee4975110bfda6797c44dc` |
-| craft-libs (`craft-ui`, `craft-print`) | `storytold/craft-libs` `25da1314d443171b4adeaad2cd9454b273f35c6f` |
-| CI craft-fonts | `storytold/craft-fonts` `b076417b5880bd4154bd22f00695b1d28c6bea83` |
+| egui family (`egui`, `epaint`, `ecolor`, `emath`, `eframe`, `egui-wgpu`, `egui-winit`, `egui_kittest`, `egui_extras`, `epaint_default_fonts`) | `Kaiqueaurelio/egui` `6d518fc799681571963842f95b55a6b68431b15a` |
+| winit | `Kaiqueaurelio/winit` `a517b3846ee8457d84ee4975110bfda6797c44dc` |
+| craft-libs (`craft-ui`, `craft-print`) | `Kaiqueaurelio/craft-libs` `25da1314d443171b4adeaad2cd9454b273f35c6f` |
+| CI craft-fonts | `Kaiqueaurelio/craft-fonts` `b076417b5880bd4154bd22f00695b1d28c6bea83` |
 
-`Cargo.toml` and `Cargo.lock` resolve one egui family and one winit from these storytold revisions;
+`Cargo.toml` and `Cargo.lock` resolve one egui family and one winit from these Kaiqueaurelio revisions;
 the lock has no registry 0.36.2 egui family and no candidate `aiongg` source. `crates/fonts/build.rs`
 continues to treat craft-fonts as an optional `CRAFT_FONTS_DIR` input, not a manifest dependency.
 

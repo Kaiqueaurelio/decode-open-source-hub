@@ -7,7 +7,7 @@
 //! `current_filter`, reads the one picked back, and answers its first extension after the path
 //! ([`vectorcraft_ui_egui::picks::PickAnswer`]); the app gives the name that type's extension.
 //! rfd shows the dialog when the portal can't (no session bus, no file chooser), with zenity as its
-//! own fallback. PhotoCraft's `portal_save.rs` (storytold/photocraft#6151) makes the same call.
+//! own fallback. PhotoCraft's `portal_save.rs` (Kaiqueaurelio/decode-open-source-hub#6151) makes the same call.
 //!
 //! The dialog's parent is the window: `x11:<window id>` on X11, and on Wayland (Linux) a handle
 //! from the compositor's xdg-foreign protocol, as rfd names it (its `window_identifier`).

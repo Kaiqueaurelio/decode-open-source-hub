@@ -5,27 +5,27 @@ use once_cell::sync::Lazy;
 use reqwest::Url;
 
 // NB(2026-07-31): Artcraft login is temporarily pointed at Storyteller's login
-// instead of app.getartcraft.com. Artcraft is a Storyteller frontend backed by
-// the same api.storyteller.ai, and its session cookies are scoped to
-// `.storyteller.ai`, so a Storyteller login yields cookies valid for Artcraft
-// too. The getartcraft.com page can't complete login inside the webview because
+// instead of app.decode-open-source-hub.vercel.app. Artcraft is a Storyteller frontend backed by
+// the same api.decodeanalytics.com, and its session cookies are scoped to
+// `.decodeanalytics.com`, so a Storyteller login yields cookies valid for Artcraft
+// too. The decode-open-source-hub.vercel.app page can't complete login inside the webview because
 // it detects Tauri and routes auth through the Rust HTTP proxy (unavailable in
 // this window); the Storyteller login form works directly. Revisit when the
 // Artcraft web login is reachable natively.
 //
-// We use the classic storyteller.ai/login page rather than the studio SPA: the
+// We use the classic decodeanalytics.com/login page rather than the studio SPA: the
 // studio app runs a GPU-detection step (detect-gpu) on load that can stall
 // inside the webview and never redirect off /login, starving the completion
 // heuristic. The classic login does a plain post-login redirect.
 const DESTINATION_HOSTNAMES: &[&str] =
-    &["storyteller.ai", "www.storyteller.ai", "studio.storyteller.ai"];
+    &["decodeanalytics.com", "www.decodeanalytics.com", "studio.decodeanalytics.com"];
 
 static WEBSITE_ENTRY_URL: Lazy<Url> = Lazy::new(|| {
-  Url::parse("https://storyteller.ai/").expect("URL should parse")
+  Url::parse("https://decodeanalytics.com/").expect("URL should parse")
 });
 
 static LOGIN_PAGE_URL: Lazy<Url> = Lazy::new(|| {
-  Url::parse("https://storyteller.ai/login").expect("URL should parse")
+  Url::parse("https://decodeanalytics.com/login").expect("URL should parse")
 });
 
 pub struct ArtCraftLoginWindow;

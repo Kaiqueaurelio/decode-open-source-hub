@@ -29,4 +29,4 @@ fn main() {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher/build.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher/build.rs

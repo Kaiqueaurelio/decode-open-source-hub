@@ -15,4 +15,4 @@ fn the_launchers_own_product_version_is_read_from_its_exe() {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher/tests/version_info.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher/tests/version_info.rs

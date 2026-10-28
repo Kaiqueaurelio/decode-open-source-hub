@@ -2,4 +2,4 @@ max_width = 150
 use_small_heuristics = "Max"
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/rustfmt.toml
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/rustfmt.toml

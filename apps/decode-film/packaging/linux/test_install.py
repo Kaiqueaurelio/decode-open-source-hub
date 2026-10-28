@@ -12,7 +12,7 @@ import unittest
 
 
 HERE = Path(__file__).resolve().parent
-APP_ID = "ai.storyteller.filmcraft"
+APP_ID = "com.decode.filmcraft"
 
 
 class InstallTests(unittest.TestCase):

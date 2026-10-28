@@ -14,7 +14,7 @@ macOS 的設定也可由「LightCraft → 設定…」或 `⌘,` 開啟。
 
 ## 建置與字型
 
-使用既有 [craft-fonts](https://github.com/storytold/craft-fonts) 字型作為建置輸入：
+使用既有 [craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub) 字型作為建置輸入：
 
 ```sh
 CRAFT_FONTS_DIR=../craft-fonts cargo run --release -p lightcraft

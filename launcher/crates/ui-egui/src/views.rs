@@ -1,5 +1,5 @@
 //! The header, toolbar, footer, the grid of cards and the table, laid out like the apps page on
-//! getartcraft.com: hairline cells, mono labels and square controls.
+//! decode-open-source-hub.vercel.app: hairline cells, mono labels and square controls.
 
 use decode_launcher_core::details::AppDetails;
 use decode_launcher_core::platform::pick_asset;

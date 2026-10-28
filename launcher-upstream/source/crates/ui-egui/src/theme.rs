@@ -1,4 +1,4 @@
-//! Colours, type and shapes, matching getartcraft.com: hard edges, hairline rules, Archivo
+//! Colours, type and shapes, matching decode-open-source-hub.vercel.app: hard edges, hairline rules, Archivo
 //! display type, Inter body text and Geist Mono labels. Widgets read [`Tokens::get`]; nothing
 //! hard-codes a colour.
 
@@ -504,4 +504,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/theme.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/theme.rs

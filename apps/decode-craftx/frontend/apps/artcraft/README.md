@@ -36,11 +36,11 @@ If you can use chat gpt to create the interface.
 - `studio-staging` - The staging auto-deploy branch.
 
   You do not ever need to interact with this branch. Changes to `main` will automatically be pushed to `studio-staging` and auto-deployed to
-  https://studio-staging.studio.storyteller.ai . You can test changes that have landed in `main` here before promoting them to production.
+  https://studio-staging.studio.decodeanalytics.com . You can test changes that have landed in `main` here before promoting them to production.
 
 - `studio-testing` - The testing branch.
 
-Anyone can push their changes to this branch for testing in a production-like environment. Since it is built and hosted on https://studio-testing.studio.storyteller.ai ,
+Anyone can push their changes to this branch for testing in a production-like environment. Since it is built and hosted on https://studio-testing.studio.decodeanalytics.com ,
 you won't face CORS issues, same-site cookie issues, or have to use a local development proxy. (This doesn't obviate the need for a development
 proxy for fast development iteration, but is a fantastic way to test your changes in a "production-like" environment.)
 

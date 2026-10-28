@@ -49,4 +49,4 @@ fn an_argument_that_is_not_utf8_is_ignored_like_any_other() {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher/tests/arguments.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher/tests/arguments.rs

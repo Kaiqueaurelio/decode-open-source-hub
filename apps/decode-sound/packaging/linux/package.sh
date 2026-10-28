@@ -41,7 +41,7 @@ case "$ARCH" in
   riscv64) DEB_ARCH=riscv64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export SOUNDCRAFT_MAINTAINER="${SOUNDCRAFT_MAINTAINER:-SoundCraft maintainers <soundcraft@storyteller.ai>}"
+export SOUNDCRAFT_MAINTAINER="${SOUNDCRAFT_MAINTAINER:-SoundCraft maintainers <soundcraft@decodeanalytics.com>}"
 BASENAME="soundcraft-$VERSION-linux-$ARCH"
 
 echo "==> SoundCraft $VERSION for Linux $ARCH ($FORMATS)"

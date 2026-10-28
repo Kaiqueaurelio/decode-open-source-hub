@@ -1,7 +1,7 @@
 # User docs: rules for agents and contributors
 
 Everything in this folder (except this file, CLAUDE.md and README.md) is published at
-https://getartcraft.com/docs/designcraft. The file path is the URL:
+https://decode-open-source-hub.vercel.app/docs/designcraft. The file path is the URL:
 `troubleshooting/app-closes-at-start.md` → `/docs/designcraft/troubleshooting/app-closes-at-start`.
 Renaming a file breaks links, so add the old path to `redirect_from` when you rename.
 
@@ -18,7 +18,7 @@ either. Write for an artist, not a developer.
 - Link to other pages instead of repeating them. Use relative links to the `.md` file:
   `[Install DesignCraft](../getting-started/install.md)`.
 - No marketing copy, no "simply", no claims you have not checked in the code or a release.
-- Call the product "DesignCraft", as the app, its downloads and getartcraft.com do.
+- Call the product "DesignCraft", as the app, its downloads and decode-open-source-hub.vercel.app do.
 - Name UI labels exactly as the app shows them, in **bold**.
 - Document Windows 11 only. Do not name older Windows versions.
 - Troubleshooting pages: `## Symptoms`, `## Fix`, `## Why this happens` (optional),
@@ -53,10 +53,10 @@ drafts and are not published.
 
     node <path to your artcraft-services checkout>/frontend/apps/artcraft-website-next/scripts/docs/core.mjs docs/user
 
-The checker lives in storytold/artcraft-services. A CI check will be added once it is on that repo's main branch.
+The checker lives in Kaiqueaurelio/artcraft-services. A CI check will be added once it is on that repo's main branch.
 
 ## Support PRs
 
 Pages written to answer a user question come in as PRs titled `docs(support): <page title>`.
 Review them like code: check every claim against the source. Questions and bugs go to
-https://github.com/storytold/designcraft/issues.
+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/issues.

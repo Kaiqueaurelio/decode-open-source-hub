@@ -13,7 +13,7 @@ the error as logged out; its Log In button rechecked the valid native session
 and immediately closed the login modal again.
 
 The fix extends the existing packaged-desktop Origin normalization to loopback
-development origins, at any port, for HTTPS requests to `api.storyteller.ai` and
+development origins, at any port, for HTTPS requests to `api.decodeanalytics.com` and
 `api.fakeyou.com`. Other development request destinations and non-loopback
 website origins retain their headers. Cookie handling and API authorization are
 unchanged. A frontend reload alone cannot update this fix: Rust must rebuild.
@@ -26,9 +26,9 @@ values from one place, `crates/lib/artcraft_client_identity`
 
 | Destination                                            | Origin sent                         | User-Agent               |
 |--------------------------------------------------------|-------------------------------------|--------------------------|
-| Our APIs (`api.storyteller.ai`, `api.fakeyou.com`, …)  | `https://desktop.getartcraft.com`   | `storyteller-client/1.0` |
+| Our APIs (`api.decodeanalytics.com`, `api.fakeyou.com`, …)  | `https://decode-open-source-hub.vercel.app`   | `storyteller-client/1.0` |
 | Local API (`localhost`, `127.0.0.1`, `[::1]`)          | `http://localhost`                  | `storyteller-client/1.0` |
-| Our CDNs / sites (`*.storyteller.ai`, `*.fakeyou.com`) | unchanged (`studio.storyteller.ai`) | `storyteller-client/1.0` |
+| Our CDNs / sites (`*.decodeanalytics.com`, `*.fakeyou.com`) | unchanged (`studio.decodeanalytics.com`) | `storyteller-client/1.0` |
 | Named third parties (`THIRD_PARTY_PROVIDERS`)          | the provider's own site             | OS webview               |
 | Any other host (incl. `storage.googleapis.com`)        | webview origin, untouched           | OS webview               |
 

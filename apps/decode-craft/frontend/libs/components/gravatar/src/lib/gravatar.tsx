@@ -21,8 +21,8 @@ function Gravatar(props: Props) {
   // submitted fallback need to be a url served from our server for gravatar to grab it
   const defaultImageUrl =
     props.avatarIndex === undefined
-      ? "https://storyteller.ai/images/avatars/2000x2000/0.webp"
-      : `https://storyteller.ai/images/avatars/2000x2000/${props.avatarIndex}.webp`;
+      ? "https://decodeanalytics.com/images/avatars/2000x2000/0.webp"
+      : `https://decodeanalytics.com/images/avatars/2000x2000/${props.avatarIndex}.webp`;
 
   // NB: Gravatar suggests URI encoding these:
   // https://en.gravatar.com/site/implement/images/

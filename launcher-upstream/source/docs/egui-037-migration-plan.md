@@ -26,7 +26,7 @@ at that baseline. The status above and the dated implementation amendments at th
 their stale status and decision statements. F1's dependency-publication gate is now closed by the canonical pins and generated lock;
 the original plan's emoji-font decision was revised on 2026-10-24.
 
-This plan covers only `storytold/craft-launcher` (the ArtCraft Launcher repository). It records the
+This plan covers only `Kaiqueaurelio/craft-launcher` (the ArtCraft Launcher repository). It records the
 app-specific migration, not a generic egui compatibility layer. `craft-libs`, the individual Craft
 apps, the egui fork and the winit fork each keep their own plans.
 
@@ -101,10 +101,10 @@ egui_kittest = "0.36"
 | Upstream egui 0.37.0 | annotated tag `0.37.0`; peeled commit `841a328ba2dd8f6996beb7189ebb7fc00e668a2a` | API and release-note source |
 | Candidate egui comparison input | `aiongg/egui` `craft/0.37` = `a4f9a17f64a6bae61350fb85804c9df0d9865916` | candidate used for source comparison only; not a production pin |
 | Candidate winit comparison input | `aiongg/winit` `craft/0.30.13-lang` = `8b35388bd719e8cc86a95971ba0bc026c9a8f058` | candidate used for source comparison only; not a production pin |
-| storytold winit base | `craft/0.30.13` = `ffae5198770d7730e718043f035a772b7dbc3b1b`; winit tag `v0.30.13` = `e9809ef5` | provenance |
+| Kaiqueaurelio winit base | `craft/0.30.13` = `ffae5198770d7730e718043f035a772b7dbc3b1b`; winit tag `v0.30.13` = `e9809ef5` | provenance |
 | Craft-libs reconciled base | `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` | merged PR 199; preserve later shared-library fixes |
 | Craft-libs PR 199 | head `b68de8c5f4f1c060904d211a7b1320aa0f7bce78`, audit merge `ec8840af8c5fda695cf195cdd05e5ae078415c07`, API-port ancestor `8614e4a04fae516fba16c22b31ff1008cb6be10b` | historical stale/unsafe trees; superseded by the reconciled merged base `3832c47`; not a dependency of this repo |
-| Final production egui/winit/craft-libs pins | unknown until the reviewed storytold revisions are approved and published | production manifests use only those immutable full revisions |
+| Final production egui/winit/craft-libs pins | unknown until the reviewed Kaiqueaurelio revisions are approved and published | production manifests use only those immutable full revisions |
 | Language work | craft-libs `#198`, represented in the fork by E5/E12-E21, plus new E21b/P7b | suite alignment decision |
 
 Sources inspected read-only (no checkout was switched):
@@ -382,12 +382,12 @@ These are reported upstream measurements, not this task's results:
 - **#8731**: plain-text tessellation is reported ~61% slower in 0.37.0 because of the color-glyph
   check inside `tessellate_text`'s per-vertex closure. The launcher is text-heavy (grid cards,
   table rows, labels). The inspected candidate `a4f9a17f` contains the 0.37 code, not the proposed
-  per-row branch fix; the final storytold revision must state whether it carries a reviewed fix.
+  per-row branch fix; the final Kaiqueaurelio revision must state whether it carries a reviewed fix.
   This is a likely performance-gate failure, not something a 0.37 API rename can hide.
 - **#8736**: the new `wrap_texel_coord` in `egui.wgsl` makes the DX12/FXC pipeline ~4× slower to
   compile, reported as ~+40 ms first-frame startup on Windows. The launcher deliberately pins FXC
   (`main.rs:225`), so it is directly affected. The inspected candidate contains the 0.37 shader,
-  not the proposed float/select fix; the final storytold revision must state its resolution.
+  not the proposed float/select fix; the final Kaiqueaurelio revision must state its resolution.
 - **#8763 / PR #8764**: clicking outside a `TextEdit` can collapse its selection before the clicked
   button runs. #8764 is an open, unmerged proposed fix; the separate 2026-10-23 snapshot verifies its head. The launcher's
   search and install-folder fields do not have selection-based toolbar actions, but selection
@@ -599,7 +599,7 @@ The font stack is deliberate:
   not claim "not adopting E14" while pinning a revision that contains it. Keep the existing
   `y_offset_factor` nudge in `cjk_font.rs:75-80` and add a CJK/Indic fallback row-height and
   baseline comparison against 0.36.2; if E14 causes a product-visible change, either exclude it
-  from the final storytold revision or accept it explicitly with before/after evidence.
+  from the final Kaiqueaurelio revision or accept it explicitly with before/after evidence.
 - The CJK loader (`cjk_font.rs:62-95`, `theme.rs:338-377`) reads a known system font by path,
   caches it per language, and appends it after every named family. CJK languages with no font stay
   in English. Preserve that policy. Do not enable eframe `system_fonts` in this migration; its
@@ -799,7 +799,7 @@ locally.
 
 ### 5.2 Craft-libs PR 199 and language work #198
 
-- `storytold/craft-libs#199` is the craft-libs egui 0.37 update. The launcher does **not** depend
+- `Kaiqueaurelio/craft-libs#199` is the craft-libs egui 0.37 update. The launcher does **not** depend
   on `craft-libs` or `craft-ui`, so its source is not a dependency and must not be copied into
   this repository. Adopt only its dependency hygiene: full immutable revisions, every egui-family
   package patched, stock-package proof, no branch or machine-local path in the lock.
@@ -811,21 +811,21 @@ locally.
   the suite pin and review evidence must follow the corrected base.
 - #198's language work is represented in the selected candidate fork revision (E5/E12-E21), but
   the candidate is a comparison input, not the production pin. The final production revision is
-  the reviewed, published storytold egui revision (including E21b) and must be selected after
+  the reviewed, published Kaiqueaurelio egui revision (including E21b) and must be selected after
   approval; no launcher source calls a fork-only API. The shared craft-libs pin is likewise its
-  final reviewed storytold revision; `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` is the merged base for the shared-library follow-up.
+  final reviewed Kaiqueaurelio revision; `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` is the merged base for the shared-library follow-up.
 - If a future launcher version uses `craft-ui`, it enters the dependency DAG then; the current
   plan does not add a `craft-ui` dependency merely to share code.
 
 ### 5.3 Stock vs fork
 
 Production uses the suite fork with every family member patched at final reviewed,
-published storytold egui/winit revisions, including W15P, E21b and required regression fixes.
+published Kaiqueaurelio egui/winit revisions, including W15P, E21b and required regression fixes.
 Those full SHAs are recorded once the predecessor fork work is complete. The inspected aiongg
 candidates and registry 0.37 are comparison inputs only. Registry 0.37 is never an intermediate
 production stage or rollback target; rollback uses the prior coherent source/lock/executable.
 
-L1 lands the final storytold pins atomically. Preserve stock-compatible API usage where it is
+L1 lands the final Kaiqueaurelio pins atomically. Preserve stock-compatible API usage where it is
 appropriate, then compare both graphs in isolation: one fork contract build and one registry-0.37 contract build of the launcher
 (or at least `cargo check`/tests against a registry-only isolated fixture), plus an equivalent
 stock-0.37 performance control where workloads are comparable. Because the launcher is
@@ -861,25 +861,25 @@ feature set). Keep the native `clipboard` feature, and set `system_font_fallback
 ### 6.2 Suite fork patch section
 
 For L1, the root `Cargo.toml` gets a `[patch.crates-io]` block naming every used package at the
-same **final reviewed storytold** full revision, plus winit at its final full revision. The exact
+same **final reviewed Kaiqueaurelio** full revision, plus winit at its final full revision. The exact
 SHAs are unknown until the revised fork is reviewed, approved and published; the inspected
 `aiongg` SHAs above are comparison inputs only and must not be committed as production pins:
 
 ```toml
-# Fill with the approved final storytold revisions before L1; candidate SHAs are comparison-only.
+# Fill with the approved final Kaiqueaurelio revisions before L1; candidate SHAs are comparison-only.
 [patch.crates-io]
-egui = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-eframe = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-egui-winit = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-egui-wgpu = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-egui_glow = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-egui_extras = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-egui_kittest = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-epaint = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-epaint_default_fonts = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-ecolor = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-emath = { git = "https://github.com/storytold/egui", rev = "<FINAL_EGUI_REV>" }
-winit = { git = "https://github.com/storytold/winit", rev = "<FINAL_WINIT_REV>" }
+egui = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+eframe = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+egui-winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+egui-wgpu = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+egui_glow = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+egui_extras = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+egui_kittest = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+epaint = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+epaint_default_fonts = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+ecolor = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+emath = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/egui", rev = "<FINAL_EGUI_REV>" }
+winit = { git = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/winit", rev = "<FINAL_WINIT_REV>" }
 ```
 
 `egui_glow` is in the lock today as an optional `eframe` dependency (`Cargo.lock:1304` at the
@@ -1254,7 +1254,7 @@ Noise policy:
 ```text
 L0 baseline + version-gated test-only benchmark/golden harness (no production behavior)
   |
-Reviewed published storytold egui/winit (W15P, E21b, required regression fixes)
+Reviewed published Kaiqueaurelio egui/winit (W15P, E21b, required regression fixes)
   |
 L1 atomic final-fork API/features/MSRV/lock/Nix + minimum test-green changes:
    drawn gear/refresh, strict accessible names, fixed panel geometry tests
@@ -1273,7 +1273,7 @@ and the unnamed ComboBoxes, so the drawn-glyph and minimum accessible-name fixes
 though they are behavior/visual changes. L2 adds the action boundary, lifecycle/toast work and the
 remaining accessibility/focus design. L2 and L3 touch different files and could be prepared in
 parallel, but land serially to avoid lock/ID churn. L1 cannot land before the reviewed final
-storytold revisions exist. L4 qualifies L1-L3 on all required platforms; L5 is documentation-only.
+Kaiqueaurelio revisions exist. L4 qualifies L1-L3 on all required platforms; L5 is documentation-only.
 Registry 0.37 is an isolated comparison workspace, never an intermediate production PR.
 
 ### L0: baseline harness and fixtures (test-only)
@@ -1301,7 +1301,7 @@ Files:
   `theme.rs` (bundled emoji coverage and dynamic-text glyph fixture), and
   `settings_dialog.rs`/`views.rs` (minimum strict accessible names and the
   `.show_ui(...).response.labelled_by(...)` fix).
-- Root whole-family/winit patches at the final approved reachable storytold revisions,
+- Root whole-family/winit patches at the final approved reachable Kaiqueaurelio revisions,
   `Cargo.lock` regenerated from that coherent graph and matching `flake.nix` output hashes.
 - Test-only kittest 0.5/AccessKit 0.25 adaptation (version-gated; no 0.37-only API in the 0.36
   harness).
@@ -1371,14 +1371,14 @@ plan authorizes a push or PR.
 ## 10. Risks, unresolved decisions and blocking acceptance
 
 1. **Fork and winit provenance.** The candidates (`a4f9a17f`, winit `8b35388b`) are personal
-   comparison inputs. Production manifests must pin the **final reviewed storytold egui/winit**
+   comparison inputs. Production manifests must pin the **final reviewed Kaiqueaurelio egui/winit**
    including the fork P8 release (P2b, P7, P7b/E21b, P7c) and completed W15P/W27 lifecycle;
    the fork P8 name is distinct from this plan’s P8 performance workload. Use
    immutable full revisions after separate approval and publication; those SHAs are unknown now.
    A branch, tag or candidate SHA is never a production pin. This blocks L1.
 2. **#8731 text tessellation.** The inspected candidate has the 0.37 color-glyph code, not the
    proposed per-row fix. The launcher is text-heavy and is likely to exceed the +5% text/median
-   gate. The final storytold revision must either carry a reviewed fork patch (with identical mesh
+   gate. The final Kaiqueaurelio revision must either carry a reviewed fork patch (with identical mesh
    tests and provenance) or the user must grant an explicit waiver with the measured profile. Do
    not auto-waive.
 3. **#8736 DX12/FXC pipeline.** The inspected candidate has `wrap_texel_coord`; the launcher forces
@@ -1490,7 +1490,7 @@ exact contents and validation are shown.
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-At the time of the 2026-10-23 refresh, canonical `storytold/craft-launcher` `main` resolved to `ce3b29f4f23bf958b457a55effae87127f5b5dd4`. The owned checkout was later fast-forwarded to `674b893f0e5dcaceb742ae22728b8bde8bd73911`, which is the current tested HEAD for this implementation; the `ce3b29f4` value is retained as historical provenance. Earlier baseline SHAs and line anchors above remain historical review evidence. The original refs remain reachable.
+At the time of the 2026-10-23 refresh, canonical `Kaiqueaurelio/craft-launcher` `main` resolved to `ce3b29f4f23bf958b457a55effae87127f5b5dd4`. The owned checkout was later fast-forwarded to `674b893f0e5dcaceb742ae22728b8bde8bd73911`, which is the current tested HEAD for this implementation; the `ce3b29f4` value is retained as historical provenance. Earlier baseline SHAs and line anchors above remain historical review evidence. The original refs remain reachable.
 
 No migration API redesign required by this delta; preserve the merged packaging, test and chrono changes where present.
 
@@ -1544,4 +1544,4 @@ No production action-boundary semantics changed. These test repairs were subsequ
 managed jobs 20–22 and the mutation control recorded in the status above.
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/docs/egui-037-migration-plan.md
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/docs/egui-037-migration-plan.md

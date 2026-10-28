@@ -6,7 +6,7 @@ the web build, and creates or updates a **draft**
 GitHub Release named `FilmCraft v<version>`. Nobody sees a draft until a maintainer publishes it.
 
 User-facing names say **FilmCraft**. Files, binaries and ids stay lowercase
-(`filmcraft-<version>-<platform>-<arch>.<ext>`, `ai.storyteller.filmcraft`).
+(`filmcraft-<version>-<platform>-<arch>.<ext>`, `com.decode.filmcraft`).
 
 ## Cutting a release
 
@@ -58,7 +58,7 @@ signing jobs are refused, and the draft-release job, which needs them, is skippe
 
 `filmcraft --version` and `filmcraft-cli --version` print the version from `Cargo.toml`.
 
-**Fonts.** Every build job checks out [craft-fonts](https://github.com/storytold/craft-fonts) at a
+**Fonts.** Every build job checks out [craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub) at a
 pinned commit (`craft-fonts-ref` in `.github/workflows/release.yml` and `freebsd.yml`) and builds
 with `CRAFT_FONTS_DIR` and `CRAFT_FONTS_REQUIRED=1`, so releases embed its fonts and fail
 rather than ship without them (the web build embeds only the UI font, to stay small). The packages
@@ -70,7 +70,7 @@ deliberately, in every job at once.
 `packaging/macos/package.sh` builds `aarch64-apple-darwin` and `x86_64-apple-darwin` with
 `MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo` and assembles `FilmCraft.app`:
 
-- `Info.plist` is generated from `Info.plist.in` (bundle id `ai.storyteller.filmcraft`, the
+- `Info.plist` is generated from `Info.plist.in` (bundle id `com.decode.filmcraft`, the
   version and the build commit).
 - **Signing** uses the hardened runtime and a secure timestamp, with the entitlements in
   `entitlements.plist`. The Developer ID certificate is imported into a temporary keychain by
@@ -125,7 +125,7 @@ After packaging, the job prints the `.deb`'s metadata and contents, runs `ldd` o
 runs each AppImage with `--version`.
 
 **AppImage updates.** Each AppImage embeds update information,
-`gh-releases-zsync|storytold|filmcraft|latest|filmcraft-*-linux-<arch>.AppImage.zsync`, and
+`gh-releases-zsync|Kaiqueaurelio|filmcraft|latest|filmcraft-*-linux-<arch>.AppImage.zsync`, and
 `appimagetool` writes the matching `.zsync` beside it (the job installs `zsync` for
 `zsyncmake`). [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) and
 AppImageLauncher then fetch only the changed blocks from the newest published (non-pre-release)
@@ -133,15 +133,15 @@ release. The job checks both with `--appimage-updateinformation` and `test -s`.
 
 **Flatpak.** The `flatpak` jobs (x86_64 on `ubuntu-24.04`, aarch64 on `ubuntu-24.04-arm`) run
 `packaging/linux/flatpak-bundle.sh` on the Linux job's tarball: it installs the binaries with
-`packaging/linux/flatpak/ai.storyteller.filmcraft.bundle.yml` into a single-file bundle,
+`packaging/linux/flatpak/com.decode.filmcraft.bundle.yml` into a single-file bundle,
 `filmcraft-<v>-linux-<arch>.flatpak` (no Rust build, so it takes a minute), then installs it and
 runs `filmcraft-cli --version` in the sandbox. Users install it with
 `flatpak install --user <file>`; the freedesktop runtime comes from Flathub.
-`packaging/linux/flatpak/ai.storyteller.filmcraft.yml` is the from-source manifest for a Flathub
+`packaging/linux/flatpak/com.decode.filmcraft.yml` is the from-source manifest for a Flathub
 submission (its header says how to build it). Both manifests must keep the same runtime and
 `finish-args`, and install the same programs: the app and `filmcraft-cli`, which runs the
 headless commands and the MCP server in the sandbox
-(`flatpak run --command=filmcraft-cli ai.storyteller.filmcraft mcp`). packaging-lint checks this.
+(`flatpak run --command=filmcraft-cli com.decode.filmcraft mcp`). packaging-lint checks this.
 
 ### FreeBSD
 

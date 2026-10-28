@@ -44,7 +44,7 @@ mod tests {
   }
 
   #[tokio::test]
-  #[ignore] // Live: hits api.storyteller.ai with the stored credential (read-only, no credits)
+  #[ignore] // Live: hits api.decodeanalytics.com with the stored credential (read-only, no credits)
   async fn live_list_media_files_by_job() {
     let host = ApiHost::Storyteller;
     let creds = load_artcraft_cookie_creds();

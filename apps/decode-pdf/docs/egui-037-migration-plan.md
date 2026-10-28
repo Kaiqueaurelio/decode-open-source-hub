@@ -38,9 +38,9 @@ tree does not use an external Cargo config.
 
 | Item | Current value |
 |---|---|
-| egui family | `6d518fc799681571963842f95b55a6b68431b15a` (storytold/egui) |
-| winit | `a517b3846ee8457d84ee4975110bfda6797c44dc` (storytold/winit) |
-| craft-ui / craft-quit / craft-print | `25da1314d443171b4adeaad2cd9454b273f35c6f` (storytold/craft-libs) |
+| egui family | `6d518fc799681571963842f95b55a6b68431b15a` (Kaiqueaurelio/egui) |
+| winit | `a517b3846ee8457d84ee4975110bfda6797c44dc` (Kaiqueaurelio/winit) |
+| craft-ui / craft-quit / craft-print | `25da1314d443171b4adeaad2cd9454b273f35c6f` (Kaiqueaurelio/craft-libs) |
 | `Cargo.lock` SHA-256 | `f5cee0acb795240d2071116230316fd4e4b6bfe4e4314c82b0a4ca5459739f80` |
 | Target-main observation | `a7801dc84e74dd12757aecbb6be324dce7a33939` |
 
@@ -211,7 +211,7 @@ At planning time the lockfile contained one egui family at 0.36.2; the current q
 
 W14 remains opt-in in the shared winit revision and is **not enabled** by PdfCraft; its existing termination path stays `craft-quit`. Validate that `dpi` resolves once with the git source. W15 regular clipboard is required by E4. In the planning-era candidate `8b35388b`, the **W15P** PRIMARY implementation was a prerequisite added by the shared winit work, using SCTK 0.19.2's `PrimarySelectionManagerState`/device/source/offer on the existing connection and event queue, and had to land before egui P2b. The current pin `a517b384` contains W15P (`PATCHES.md` W15P row; `src/platform_impl/linux/wayland/clipboard.rs`) and W27; native evidence remains open. No second regular `wl_data_device` is acceptable.
 
-The egui fork requires companion winit APIs on their target platforms. Integrate and review the series in the approved public storytold fork, compare every current PdfCraft vendor delta, transfer behavioral tests, then replace the path patch with the final immutable git revision. Record provenance and old/new source hashes in migration evidence. Keep the original vendor until equivalence is established; do not publish an interim personal-fork branch dependency.
+The egui fork requires companion winit APIs on their target platforms. Integrate and review the series in the approved public Kaiqueaurelio fork, compare every current PdfCraft vendor delta, transfer behavioral tests, then replace the path patch with the final immutable git revision. Record provenance and old/new source hashes in migration evidence. Keep the original vendor until equivalence is established; do not publish an interim personal-fork branch dependency.
 
 ### 3.4 Source-guard migration and exact inventory
 
@@ -219,7 +219,7 @@ The egui fork requires companion winit APIs on their target platforms. Integrate
 
 `winit_macos_emoji_picker`, `winit_macos_ime_commit`, `winit_macos_ime_discard`, `winit_macos_korean_first_key`, `winit_macos_korean_space`, `winit_macos_title_bar_drag` (W12), `winit_wayland_scroll` (W13), `winit_wayland_text_input` (W2), `winit_windows_hidden_maximized` (W4), `winit_windows_ime_cursor` (W3), `winit_x11_dpi` (W11), `winit_x11_ime_focus` (W5).
 
-PdfCraft keeps the retained `vendor/winit` and `vendor/egui-wgpu` copies as provenance and may read them only for provenance assertions (W1 patch text, base hashes, the W1–W13/E2+E3 rows), never as proof of the code the app runs. The resolved graph is checked from `Cargo.lock`: `vendor_graph.rs` requires the exact canonical storytold git URL, 40-character revision and fragment for the two crates it inspects, `winit` and `egui-wgpu`, and rejects path sources. W17 covers W2, W3, W5–W10, W12 and W13; add W1, W4, W11 and the egui-wgpu behavioral coverage to the same central evidence map. The W15/W15P guard belongs on the winit fork or a behavior test, never on `vendor/winit`.
+PdfCraft keeps the retained `vendor/winit` and `vendor/egui-wgpu` copies as provenance and may read them only for provenance assertions (W1 patch text, base hashes, the W1–W13/E2+E3 rows), never as proof of the code the app runs. The resolved graph is checked from `Cargo.lock`: `vendor_graph.rs` requires the exact canonical Kaiqueaurelio git URL, 40-character revision and fragment for the two crates it inspects, `winit` and `egui-wgpu`, and rejects path sources. W17 covers W2, W3, W5–W10, W12 and W13; add W1, W4, W11 and the egui-wgpu behavioral coverage to the same central evidence map. The W15/W15P guard belongs on the winit fork or a behavior test, never on `vendor/winit`.
 
 ### 3.5 Vendored egui-wgpu provenance
 
@@ -240,7 +240,7 @@ PR 199's egui port changes `craft-ui` roles, `Id::unique`/`Ui::scope_id`, `egui_
 
 Bumping all four craft-libs crates from their four current pins listed in section 1 to a revision based on `3832c47` carries more than a new field:
 
-- `craft-print` adds the unconditional `craft-winprint-gdi` dependency (`storytold/winprint.rs`, revision `417ac3c4…`), a public `rgb` re-export of the GDI transport, `lpstat -l` description parsing and `Printer.description`.
+- `craft-print` adds the unconditional `craft-winprint-gdi` dependency (`Kaiqueaurelio/winprint.rs`, revision `417ac3c4…`), a public `rgb` re-export of the GDI transport, `lpstat -l` description parsing and `Printer.description`.
 - Audit `craft-winprint-gdi` licensing/target cfg/`cargo deny`/Windows build, and the non-Windows `rgb::PrintError::Unsupported` behavior.
 - `Printer` now has `description`; update every literal in the repository. At baseline there are 19 `Printer { … }` literals across `crates/print` and UI tests, not 13. This is a mechanical compile fix, with the craft-print tests and Windows native checks re-run.
 - Keep PdfCraft's own `print_ui.rs` sheet preview and options. `description` is not automatically displayed; a product change to show it is separate.
@@ -250,7 +250,7 @@ Bumping all four craft-libs crates from their four current pins listed in sectio
 
 - Pin immutable revisions. A branch name is not a pin.
 - `[patch.crates-io]` in the egui or winit repository does not propagate into PdfCraft. PdfCraft's root must patch every resolved egui-workspace package, including `egui_glow` for GL, `epaint_default_fonts`, the used core/render/test crates, and winit.
-- Use approved public immutable storytold fork revisions after vendor equivalence review. Never add a machine-local absolute path patch or publish another vendor fork to bypass dependency publication.
+- Use approved public immutable Kaiqueaurelio fork revisions after vendor equivalence review. Never add a machine-local absolute path patch or publish another vendor fork to bypass dependency publication.
 - Add a CI assertion that `cargo metadata` resolves exactly one package ID for each family crate and one winit, and that no `path` dependency points outside the repository.
 
 ### 3.8 Vendors outside the UI port
@@ -500,7 +500,7 @@ Scope (one reviewable change set; commits may split by file only if every commit
 - Pin the egui 0.37 family and winit 0.30.13 fork revision; update `Cargo.lock`.
 - Enable native eframe `clipboard` in `apps/pdfcraft` and `crates/ui-egui`; add the feature-identity assertion. State that web has no egui-winit clipboard.
 - Enable `monochrome_emoji_fonts`; update `ATTRIBUTION.toml` bundled versions and add `egui-icons.ttf`; run assets write/check.
-- Add storytold egui/winit git URLs to `deny.toml` `allow-git`; keep `unknown-git = "deny"`.
+- Add Kaiqueaurelio egui/winit git URLs to `deny.toml` `allow-git`; keep `unknown-git = "deny"`.
 - Rename `WidgetType`/`Id::new`/`Ui::id`/`UiBuilder::id`; map roles; fix all kittest accessible-name and missing-glyph failures (204 harnesses).
 - Update painted submenu labels: `"File ⏵"` → `"File"`, etc.; update AccessKit/name expectations across `commands.rs`, `theme.rs`, `editing.rs`, `control.rs`, `text_select.rs`, `view.rs`; assert the arrow is painted.
 - Add `MouseWheel.source` with the real variants; migrate the screenshot path to the bounded callback; add panel-key migration.
@@ -759,7 +759,7 @@ Decisions made by this plan:
 
 External gates that cannot be decided from this host:
 
-- final approved immutable storytold egui/winit/craft-libs revisions, including W15P and E21b/P7b;
+- final approved immutable Kaiqueaurelio egui/winit/craft-libs revisions, including W15P and E21b/P7b;
 - native Wayland PRIMARY/IME evidence on wlroots/KWin/Mutter;
 - Windows real-GPU/WARP and native GUI evidence; macOS and FreeBSD hardware evidence;
 - browser runtime and non-Latin keyboard evidence;

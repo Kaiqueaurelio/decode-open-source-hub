@@ -17,7 +17,7 @@ pub enum InstallSource {
     Deb,
     /// An RPM package.
     Rpm,
-    /// An Arch Linux package: the release's own (`ai.storyteller.<app>`), or `<app>`, `<app>-bin`
+    /// An Arch Linux package: the release's own (`com.decode.<app>`), or `<app>`, `<app>-bin`
     /// or `<app>-git` from the AUR or a repository.
     Pacman,
     /// A Flatpak.
@@ -146,4 +146,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/core/src/status.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/core/src/status.rs

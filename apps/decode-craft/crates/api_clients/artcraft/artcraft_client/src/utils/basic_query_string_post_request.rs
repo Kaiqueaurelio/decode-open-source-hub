@@ -122,7 +122,7 @@ mod tests {
 
     let url = get_route(&api_host, route_path, &query_params);
 
-    assert!(url.starts_with("https://api.storyteller.ai/v1/test?"));
+    assert!(url.starts_with("https://api.decodeanalytics.com/v1/test?"));
     assert!(url.contains("param1=value1"));
     assert!(url.contains("param2=value2"));
   }

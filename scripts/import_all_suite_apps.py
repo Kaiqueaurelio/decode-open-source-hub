@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Imports all 13 Crafting Apps from upstream (storytold) into apps/ in decode-open-source-hub,
+Imports all 13 Crafting Apps from upstream (Kaiqueaurelio) into apps/ in decode-open-source-hub,
 rebranding names and titles to the Decode identity while preserving open source licenses.
 """
 
@@ -45,7 +45,7 @@ def import_app(upstream_slug, dest_name, decode_name, description, original_name
     if upstream_slug == "cadcraft":
         upstream_url = "https://github.com/Kaiqueaurelio/decodecad.git"
     else:
-        upstream_url = f"https://github.com/storytold/{upstream_slug}.git"
+        upstream_url = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{upstream_slug}.git"
     print(f"    Cloning shallow from {upstream_url}...")
     clone_res = subprocess.run(
         ["git", "clone", "--depth", "1", upstream_url, str(tmp_dir)],

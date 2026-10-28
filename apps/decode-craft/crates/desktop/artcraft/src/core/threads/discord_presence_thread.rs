@@ -7,10 +7,10 @@ use rand::random_range;
 /// Our Discord App ID. Not sure if this is a secret.
 const DISCORD_APP_ID : &str = "1366596912593113138";
 
-const DISCORD_ARTCRAFT_LOGO_SPIN : &str = "https://getartcraft.com/discord-status-icons/artcraft-a-spin-512x512.webp";
-const DISCORD_ARTCRAFT_LOGO_STATIC : &str = "https://getartcraft.com/discord-status-icons/artcraft-a-512x512.png";
-const DISCORD_KITSUNE_MASK_LOGO : &str = "https://getartcraft.com/discord-status-icons/kitsune-mask-512x512.png";
-const DISCORD_LINK_SPIN: &str = "https://getartcraft.com/discord-status-icons/link-spin-200x216.webp";
+const DISCORD_ARTCRAFT_LOGO_SPIN : &str = "https://decode-open-source-hub.vercel.app/discord-status-icons/artcraft-a-spin-512x512.webp";
+const DISCORD_ARTCRAFT_LOGO_STATIC : &str = "https://decode-open-source-hub.vercel.app/discord-status-icons/artcraft-a-512x512.png";
+const DISCORD_KITSUNE_MASK_LOGO : &str = "https://decode-open-source-hub.vercel.app/discord-status-icons/kitsune-mask-512x512.png";
+const DISCORD_LINK_SPIN: &str = "https://decode-open-source-hub.vercel.app/discord-status-icons/link-spin-200x216.webp";
 
 pub async fn discord_presence_thread() -> ! {
   loop {
@@ -34,7 +34,7 @@ async fn discord_main_loop(mut client: DiscordIpcClient) -> AnyhowResult<()> {
     let assets = discord_rich_presence::activity::Assets::new()
         .large_image(discord_logo_image)
         .large_text("https://GetArtCraft.com");
-        //.small_image("https://storyteller.ai/android-chrome-192x192.png")
+        //.small_image("https://decodeanalytics.com/android-chrome-192x192.png")
         //.small_text("small text");
 
     client.set_activity(discord_rich_presence::activity::Activity::new()

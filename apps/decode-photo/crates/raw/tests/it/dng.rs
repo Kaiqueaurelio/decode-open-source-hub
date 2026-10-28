@@ -425,7 +425,7 @@ fn highlights_clip_to_white_and_exposure_applies() {
     assert!((lin(up) / lin(base) - 2.0).abs() < 0.02, "{} vs {}", lin(up), lin(base));
 }
 
-/// storytold/photocraft#4348 (as storytold/lightcraft#548): a 12-bit DNG that states WhiteLevel 4095
+/// Kaiqueaurelio/decode-open-source-hub#4348 (as Kaiqueaurelio/decode-open-source-hub#548): a 12-bit DNG that states WhiteLevel 4095
 /// but whose sensor saturates at 3567 in every colour. Under the camera's white balance (red x2.46,
 /// blue x1.59) the stuck red and blue samples clip at 1 while green stays at 0.85, so a blown wall
 /// rendered magenta. The wall must come out neutral, and the unclipped ramp beside it unchanged.

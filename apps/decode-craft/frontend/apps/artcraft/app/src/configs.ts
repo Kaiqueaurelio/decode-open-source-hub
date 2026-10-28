@@ -15,10 +15,10 @@ export enum Environment {
 // TODO: Rename `EnvConfig` and allow a final override pass from env vars on a per-variable basis.
 export class Configs {
     // API backend (protocol + hostname)
-    readonly baseApi: string = "https://api.storyteller.ai";
+    readonly baseApi: string = "https://api.decodeanalytics.com";
 
     // CDN (protocol + hostname)
-    readonly cdnApi: string = "https://cdn.storyteller.ai";
+    readonly cdnApi: string = "https://cdn.decodeanalytics.com";
 
     // Where we're deployed
     readonly deployContext: string;
@@ -28,7 +28,7 @@ export class Configs {
 
     // I assume this is the preview server. 
     // TODO: Rename when confirmed.
-    readonly funnelApi: string = "https://style.storyteller.ai";
+    readonly funnelApi: string = "https://style.decodeanalytics.com";
 
     // Why the hell was this even introduced as a variable?
     readonly googleApi: string = "https://storage.googleapis.com";
@@ -42,10 +42,10 @@ export class Configs {
     // ??? Something seems to be locked behind this flag in production
     readonly premiumLock: boolean = true;
 
-    readonly uploadApiVideo : string = "https://upload.storyteller.ai";
+    readonly uploadApiVideo : string = "https://upload.decodeanalytics.com";
 
     // Why does this have almost the same name? Gross!
-    readonly uploadVideoApi : string = "https://api.storyteller.ai/v1/media_files/upload/new_video";
+    readonly uploadVideoApi : string = "https://api.decodeanalytics.com/v1/media_files/upload/new_video";
 
     constructor(environment: BuildEnvironmentType) {
         switch (environment) {

@@ -4,7 +4,7 @@
 
 This checkout, at documentation-only follow-up `12fee85c9cbf9f7f1609a53bc67327b12e4f4dd1` (`M14: distinguish qualification from publication`), is locally reconciling upstream `main` `714434527e1a3e03c4b49096e30dd92b258aab50` (PR #4135: panels on craft-ui's shared docking, floating panels in OS windows). The four conflicted files were resolved by taking upstream's `dock.rs`, `panel_docking.rs` and `panel_docking_tests.rs` and deleting `floating.rs`; `git diff` against `714434527…` is empty for those three files, and no `crate::floating` or `mod floating` path remains. Managed CI job 1422 passed all 12 mandatory stages on the pre-merge tree (`12fee85c9…`); managed job `egui037-vector-combined-ci1443` subsequently passed all 12 mandatory CI stages on the combined working tree, including WASM. Independent integration reviews accepted the conflict resolutions and shared-library pins. This qualification covers the executable source and lockfile; the qualification prose was updated afterward to record that result. Native/platform GUI and IME workflows, final packages and paired app performance remain open.
 
-**Historical status (superseded, not current acceptance):** the earlier reconciliation against `main` `8bf090b25389b48aa6f9d7415de57c9ce7ccf8cb` and managed job `egui037-vectorcraft-artboard-green-ci-20261025-0589` recorded 10,197 passing test executions, zero failures and 14 ignored, including the artboard-name geometry regression, input/IME fixtures, no-bundled-font checks and the web app build. The 0.36.2 lock table and the plan-time local craft-libs/CL-2F statements below are historical planning state. Current dependency pins (read from this checkout's `Cargo.toml` and `Cargo.lock` on 2026-10-25): `egui`, `eframe`, `egui-winit`, `egui-wgpu`, `egui_glow`, `egui_extras`, `egui_kittest`, `epaint`, `emath`, `ecolor`, `epaint_default_fonts` are `0.37.0` from `storytold/egui` rev `6d518fc799681571963842f95b55a6b68431b15a`; `egui_system_font_provider` has an unused patch at that same revision and is not in the resolved dependency graph; `winit` is `0.30.13` from `storytold/winit` rev `a517b3846ee8457d84ee4975110bfda6797c44dc`; `wgpu` is `30.0.1`; `kittest` is `0.5.0`; `accesskit`/`accesskit_winit` are `0.25.1`/`0.34.1`; `craft-ui`, `craft-window`, `craft-keymap`, `craft-print`, `craft-pdf` and `craft-docpath` use published `storytold/craft-libs` rev `a0916808f7d78bed8c7b90cdf937176015454a7f`, as do the `hayro-*` and `krilla` patches.
+**Historical status (superseded, not current acceptance):** the earlier reconciliation against `main` `8bf090b25389b48aa6f9d7415de57c9ce7ccf8cb` and managed job `egui037-vectorcraft-artboard-green-ci-20261025-0589` recorded 10,197 passing test executions, zero failures and 14 ignored, including the artboard-name geometry regression, input/IME fixtures, no-bundled-font checks and the web app build. The 0.36.2 lock table and the plan-time local craft-libs/CL-2F statements below are historical planning state. Current dependency pins (read from this checkout's `Cargo.toml` and `Cargo.lock` on 2026-10-25): `egui`, `eframe`, `egui-winit`, `egui-wgpu`, `egui_glow`, `egui_extras`, `egui_kittest`, `epaint`, `emath`, `ecolor`, `epaint_default_fonts` are `0.37.0` from `Kaiqueaurelio/egui` rev `6d518fc799681571963842f95b55a6b68431b15a`; `egui_system_font_provider` has an unused patch at that same revision and is not in the resolved dependency graph; `winit` is `0.30.13` from `Kaiqueaurelio/winit` rev `a517b3846ee8457d84ee4975110bfda6797c44dc`; `wgpu` is `30.0.1`; `kittest` is `0.5.0`; `accesskit`/`accesskit_winit` are `0.25.1`/`0.34.1`; `craft-ui`, `craft-window`, `craft-keymap`, `craft-print`, `craft-pdf` and `craft-docpath` use published `Kaiqueaurelio/craft-libs` rev `a0916808f7d78bed8c7b90cdf937176015454a7f`, as do the `hayro-*` and `krilla` patches.
 
 **Earlier status (historical):** implementation revision 4, 2026-10-24. The VectorCraft migration is implemented in the
 `vectorcraft-implementation` worktree; this revision incorporates the final upstream-review repairs. At revision 4
@@ -22,7 +22,7 @@ implementation worktree. The earlier pinned review checkout was `vectorcraft` at
 `70938f132709da9073910631e90364738e8df3dfc0d7b354920ba7910fc01fbe`, reviewed in
 `plan-reviews/vectorcraft-v1.md`. Both reviews are under
 `/home/codex/work/ssd2/task-evidence/egui037-migration-20261022/`.
-**Remote drift snapshot:** `storytold/vectorcraft` main advanced from `8906073…` to
+**Remote drift snapshot:** `Kaiqueaurelio/decode-open-source-hub` main advanced from `8906073…` to
 `4a7cba0dd32e4ac249e4dc50af486b89531481aa` in two commits touching only
 `crates/cad/src/import/curve.rs` (DXF spline); see
 `/home/codex/work/ssd2/task-evidence/egui037-migration-20261022/remote-plan-bases-20261023-0632.json`.
@@ -82,8 +82,8 @@ The migration is not a version-string bump:
    lays out as synthetic tofu in production and the `install_fonts` non-empty-family assertion fails. Enable
    `egui/default_fonts` explicitly: kittest's own `[dev-dependencies]` fonts do not reach VectorCraft's tests.
 
-**Selected dependency set (primary):** approved, reachable `storytold/winit` revision containing W1–W15 (minus
-W5, plus replacement W20) and W17–W27 plus W15P and the bounded transfer API (D1a), and the complete `storytold/egui` P8 revision
+**Selected dependency set (primary):** approved, reachable `Kaiqueaurelio/winit` revision containing W1–W15 (minus
+W5, plus replacement W20) and W17–W27 plus W15P and the bounded transfer API (D1a), and the complete `Kaiqueaurelio/egui` P8 revision
 containing P2b, P7, P7b/E21b and P7c (D1b). Final SHAs are execution prerequisites created by that fork work; none
 is invented or asserted in this plan, and no intermediate fork stage becomes a production pin. The aiongg
 `craft/0.37` (`a4f9a17…`) and `winit craft/0.30.13-lang` (`8b35388b…`) trees remain research inputs, not production
@@ -104,9 +104,9 @@ publishing a mixed or reduced graph.
 | Upstream egui 0.37.0 | `841a328ba2dd8f6996beb7189ebb7fc00e668a2a` (tag `0.37.0`) | Behaviour/API reference; release notes and migration decisions |
 | Upstream egui 0.36.2 | `49682f8baa058bf49e011035cfbd6e825f88a5ef` | Stock comparison and old coherent set |
 | aiongg egui candidate | `a4f9a17f64a6bae61350fb85804c9df0d9865916` (`aiongg/craft/0.37`) | **Research input only**, not a production pin; source comparison anchor |
-| storytold egui 0.36.2 | `767b1cad294120689a514bb4bd68c077e46679b9` (`craft/0.36.2`) | Existing published fork for comparison |
+| Kaiqueaurelio egui 0.36.2 | `767b1cad294120689a514bb4bd68c077e46679b9` (`craft/0.36.2`) | Existing published fork for comparison |
 | aiongg winit candidate | `8b35388bd719e8cc86a95971ba0bc026c9a8f058` (`aiongg/winit craft/0.30.13-lang`) | **Research input only**, not a production pin; missing W15P and W27 lifecycle revisions |
-| Published storytold winit | `ffae5198770d7730e718043f035a772b7dbc3b1b` (`craft/0.30.13`) | Old coherent comparator |
+| Published Kaiqueaurelio winit | `ffae5198770d7730e718043f035a772b7dbc3b1b` (`craft/0.30.13`) | Old coherent comparator |
 | craft-libs planning base (historical) | `3832c47ef68a0e6214f2c1e85f3526b6adcb686e` | Local shared-library tree used to prepare the port; it carries PR 199's egui 0.37 update. It is not the current pin. The current workspace uses published craft-libs `a0916808f7d78bed8c7b90cdf937176015454a7f`, which includes the CL-2F capture helper |
 | craft-libs PR 199 head | `b68de8c5f4f1c060904d211a7b1320aa0f7bce78` | **Stale tree; do not merge.** Reuse selected port hunks only (§3.7) |
 | craft-libs PR 199 API commit | `8614e4a04fae516fba16c22b31ff1008cb6be10b` | Historical source of the egui API-port hunks already contained in the `3832c47…` base |
@@ -136,16 +136,16 @@ Historical pre-migration VectorCraft lock identities (from `Cargo.lock` at the p
 | `accesskit_winit` | `0.32.2` | crates.io (external accessibility crate) |
 | `winit` | `0.30.13` | crates.io |
 | `wgpu` | `30.0.1` | crates.io |
-| `craft-ui` | `0.1.0` | `storytold/craft-libs` rev `5c874d51eeb3de70e735c8ce87a59a7dedd47675` |
-| `craft-window` | `0.1.0` | `storytold/craft-libs` rev `1f805378d454dac48b5c214029d254055fdf961b` |
-| `craft-pdf` | `0.1.0` | `storytold/craft-libs` rev `ca50d63b773c99f96e75c77ce5a1d21e7c9cda0d` |
-| `craft-print` | `0.1.0` | `storytold/craft-libs` rev `d991bf6792f8ade99c51358bf3c1d902c8cd96b5` |
-| `craft-docpath` | `0.1.0` | `storytold/craft-libs` rev `82a24b006eefa036b43c09a67fb9a3fbd17ffe63` |
+| `craft-ui` | `0.1.0` | `Kaiqueaurelio/craft-libs` rev `5c874d51eeb3de70e735c8ce87a59a7dedd47675` |
+| `craft-window` | `0.1.0` | `Kaiqueaurelio/craft-libs` rev `1f805378d454dac48b5c214029d254055fdf961b` |
+| `craft-pdf` | `0.1.0` | `Kaiqueaurelio/craft-libs` rev `ca50d63b773c99f96e75c77ce5a1d21e7c9cda0d` |
+| `craft-print` | `0.1.0` | `Kaiqueaurelio/craft-libs` rev `d991bf6792f8ade99c51358bf3c1d902c8cd96b5` |
+| `craft-docpath` | `0.1.0` | `Kaiqueaurelio/craft-libs` rev `82a24b006eefa036b43c09a67fb9a3fbd17ffe63` |
 
 `rust-version = "1.95"` and `edition = "2024"` are already the egui 0.37 MSRV/edition, so no toolchain change is
 implied. Do not treat a compile time as UI performance evidence.
 
-No final `storytold/egui`, `storytold/winit` or final craft-libs SHA is asserted here. Those revisions are created
+No final `Kaiqueaurelio/egui`, `Kaiqueaurelio/winit` or final craft-libs SHA is asserted here. Those revisions are created
 by the fork and library stages after their own reviews, with exact full SHAs, tree hashes and clean-fetch evidence
 recorded at execution time. The candidate aiongg SHAs above are comparison inputs; they lack W15P and E21b/W27
 lifecycle work and must not become interim production pins. The two-commit main drift from `8906073…` to `4a7cba0…`
@@ -163,8 +163,8 @@ Root workspace (`Cargo.toml`):
 - Current `craft-ui`, `craft-window` and `craft-keymap` pins are published craft-libs rev `a0916808…`
   (`craft-ui` with `serde` and target-gated `native-windows`; `craft-window` with `egui`); `craft-print`,
   `craft-pdf` and `craft-docpath` use the same revision.
-- Root `[patch.crates-io]` maps the egui family (including `eframe` and `egui_kittest`) to `storytold/egui` rev
-  `6d518fc7…`, `winit` to `storytold/winit` rev `a517b384…`, and `hayro-*`/`krilla` to craft-libs rev
+- Root `[patch.crates-io]` maps the egui family (including `eframe` and `egui_kittest`) to `Kaiqueaurelio/egui` rev
+  `6d518fc7…`, `winit` to `Kaiqueaurelio/winit` rev `a517b384…`, and `hayro-*`/`krilla` to craft-libs rev
   `a0916808…`. The hayro/krilla patches are unrelated to egui and must remain unless a separate comparison proves
   replacement.
 - `vendor/windows-link` is the only vendored package. `vendor/windows-link/VECTORCRAFT-PATCH.md` records the
@@ -476,7 +476,7 @@ historical audit tree `ec8840a` is likewise unsafe. Never merge either tree:
   (later published in `25da131…`), preserving the permission checks, `craft-platform`, settings, docking, printing
   and tests. Record the new commit, its parent and the diff. Publish a new immutable final craft-libs revision only
   after the shared tests and an adversarial review pass.
-  That final revision comes **after** the final reviewed storytold egui/winit revisions (which include E21b and
+  That final revision comes **after** the final reviewed Kaiqueaurelio egui/winit revisions (which include E21b and
   W15P), so no provisional craft-libs commit pretends to be final.
 - The final craft-libs revision also carries the CL-2F frozen capture-slot helper; VectorCraft's final app lock
   depends on that revision, not on a provisional prototype.
@@ -658,8 +658,8 @@ Source-grounded from the 0.37 changelog and code, with tests rather than assumpt
 The dependency direction is fixed:
 
 ```
-D1a  approved storytold/winit: W1–W15 minus W5, plus W17–W27 including replacement W20, W15P, bounded transfer
-D1b  approved storytold/egui P8: P2b + P7 + P7b/E21b + P7c, complete
+D1a  approved Kaiqueaurelio/winit: W1–W15 minus W5, plus W17–W27 including replacement W20, W15P, bounded transfer
+D1b  approved Kaiqueaurelio/egui P8: P2b + P7 + P7b/E21b + P7c, complete
         -> L1  craft-libs CL-1 API port on 3832c47 (PR199 already applied) + CL-2F helper
         -> L2  craft-libs CL-2F capture-helper freeze
         -> V2  VectorCraft atomic app lock
@@ -673,7 +673,7 @@ One coherent 0.37 family:
 
 ```
 eframe 0.37 ─┬─ egui 0.37 ── epaint/emath/ecolor/epaint_default_fonts 0.37
-             ├─ egui-winit 0.37 ── winit 0.30.13 (approved storytold fork)
+             ├─ egui-winit 0.37 ── winit 0.30.13 (approved Kaiqueaurelio fork)
              ├─ egui-wgpu 0.37 ── wgpu 30.0.x
              └─ egui_glow 0.37 (windows7)
 egui_extras 0.37
@@ -1241,8 +1241,8 @@ Public text carries no agent/model/tool attribution.
 |---|---|---|---|---|
 | V0 | VectorCraft | This plan only | — | Adversarial review; no code |
 | V1 | VectorCraft | Version-neutral UI perf harness, lifecycle/screenshot/accessibility test scaffolding on **0.36.2**; baseline, `4a7cba0…` control and stock-0.37.0 captures | V0 | `cargo xtask ci` on baseline; baseline/control/stock perf report; no production behavior change |
-| D1a | storytold/winit | Complete reviewed immutable winit: W1–W15 minus W5, plus W17–W27 including replacement W20, W15P, bounded transfer; provenance/PATCHES and clean-fetch proof | Independent winit adversarial review; upstream prerequisites | winit test suites, W15P/transfer contract tests, clean `cargo fetch --locked` |
-| D1b | storytold/egui | Complete reviewed immutable egui **P8** (`craft/0.37.0-release`): P2/P3/P4/P5/P6, P2b (E4 regular + PRIMARY), P7 (E7/E19/E21), P7b (E21b), P7c (#8763/#8748); provenance/PATCHES and clean-fetch proof | D1a; independent egui adversarial review; P8 prerequisites | egui test suites, E21b/W27 and P7c regression tests, clean `cargo fetch --locked` |
+| D1a | Kaiqueaurelio/winit | Complete reviewed immutable winit: W1–W15 minus W5, plus W17–W27 including replacement W20, W15P, bounded transfer; provenance/PATCHES and clean-fetch proof | Independent winit adversarial review; upstream prerequisites | winit test suites, W15P/transfer contract tests, clean `cargo fetch --locked` |
+| D1b | Kaiqueaurelio/egui | Complete reviewed immutable egui **P8** (`craft/0.37.0-release`): P2/P3/P4/P5/P6, P2b (E4 regular + PRIMARY), P7 (E7/E19/E21), P7b (E21b), P7c (#8763/#8748); provenance/PATCHES and clean-fetch proof | D1a; independent egui adversarial review; P8 prerequisites | egui test suites, E21b/W27 and P7c regression tests, clean `cargo fetch --locked` |
 | L1 | craft-libs | CL-1 coherent 0.37 API port on `3832c47…` (which already carries `8614e4a`/`1764bca`): `craft-platform` and security/settings/docking/printing fixes preserved, egui 0.37 pins to D1b; includes the CL-2 capture-slot prototype for the DesignCraft/GridCraft pilots (VectorCraft does not consume it) | D1b | craft-libs fmt/clippy/tests, `cargo test -p craft-ui --test visual_regression` (414 exact positives, 36 negative controls, no autoupdate), no security regression; packaged-manifest check; no stale PR199 tree |
 | L2 | craft-libs | CL-2F final capture-helper API freeze after the DesignCraft/GridCraft adapters are reviewed; final immutable craft-libs revision on the L1 base | L1; adapter review | Shared capture contract tests; visual regression; final package/lock check; adversarial review |
 | V2 | VectorCraft | Atomic compatibility PR: manifests, lock, root patches, `Id`/`Role`/`MouseWheel`/shared screenshot-helper adoption/fonts/scroll/panel-width changes, required E21 byte deletion and E21b canvas producer/owner lifecycle, **and the accessible names/glyph-fixture fixes required to keep kittest 0.37's strict tests green**; no blanket `with_accessibility_check(false)` | V1, D1a, D1b, L2 | `cargo xtask ci`, `ui-deps`, wasm, native build; exact test counts; rebase/DXF gate |
@@ -1258,7 +1258,7 @@ a blanket `with_accessibility_check(false)` as a staging shortcut. V3–V5 may l
 includes V2 and they do not touch the same lifecycle files; prefer sequential for review. V2 waits for the complete
 D1a winit and D1b egui P8 revisions and for L2; no intermediate fork or craft-libs stage is a production pin.
 
-**Rebase gate before V2:** fetch current `storytold/vectorcraft` main, record its full SHA and diff against the
+**Rebase gate before V2:** fetch current `Kaiqueaurelio/decode-open-source-hub` main, record its full SHA and diff against the
 pinned review baseline. The recorded drift is exactly two commits from `8906073…` to `4a7cba0…`, both changing only
 `crates/cad/src/import/curve.rs` (DXF spline). Rebase the migration branch onto that (or a later) main, preserve the
 DXF fix, run the DXF import tests, and use the same `4a7cba0…` source as the performance control in §6.2. If more
@@ -1305,8 +1305,8 @@ fix.
 
 These are not “future work”; they block calling the migration done:
 
-1. **Complete final forks and reachability.** Approve and publish reachable immutable **D1a** `storytold/winit`
-   (W1–W15 minus W5, plus W17–W27 including replacement W20, W15P, bounded transfer) and **D1b** `storytold/egui` P8 (P2b, P7, P7b/E21b,
+1. **Complete final forks and reachability.** Approve and publish reachable immutable **D1a** `Kaiqueaurelio/winit`
+   (W1–W15 minus W5, plus W17–W27 including replacement W20, W15P, bounded transfer) and **D1b** `Kaiqueaurelio/egui` P8 (P2b, P7, P7b/E21b,
    P7c, complete). Record exact full SHAs and tree hashes, preserve fork authorship/PATCHES, and prove a clean
    `cargo fetch --locked`. No intermediate fork stage is a production pin; candidate aiongg revisions remain
    research inputs; no final SHA is invented in this plan.
@@ -1349,7 +1349,7 @@ These are not “future work”; they block calling the migration done:
     arm in the first report and every investigated regression, using the shared sample floors and the 5%
     median / 10% p95 / 5% RSS gates. Upstream #8731, #8736 and #8512 are reports, not results; do not claim a
     regression or a fix without ours.
-12. **Dependency identities.** Enumerate every fork-family package at one storytold source; audit external
+12. **Dependency identities.** Enumerate every fork-family package at one Kaiqueaurelio source; audit external
     `kittest`/`accesskit*` as compatible registry identities, not egui-git crates. Skrifa/harfrust/glifo duplicates
     are expected; measure binary size and confirm no public type crossing. A new `egui`/winit duplicate is a hard
     failure.
@@ -1375,7 +1375,7 @@ no reviewer finding is treated as an executed test result or an implementation c
 | # | Finding | Disposition |
 |---|---|---|
 | 1 | E21b/P7b outgoing IME surrounding text missing | **Accepted and fixed.** Added E21b/W27 requirements, the canvas model/preedit/UTF-8 payload adapter, final-output/password/focus rules and tests in §3.9, §4.6, §5.2/§5.6, §8; D1b (P7b in P8) is a prerequisite. |
-| 2 | Final storytold pins and craft-libs publication order not implementable | **Accepted and fixed.** D1a winit and D1b egui P8 precede the craft-libs CL-1 L1 and CL-2F L2; V2 depends on L2; no self-dependency; no invented SHAs; clean-fetch gate retained. §4.1, §7.1. |
+| 2 | Final Kaiqueaurelio pins and craft-libs publication order not implementable | **Accepted and fixed.** D1a winit and D1b egui P8 precede the craft-libs CL-1 L1 and CL-2F L2; V2 depends on L2; no self-dependency; no invented SHAs; clean-fetch gate retained. §4.1, §7.1. |
 | 3 | Required W15P/E4 PRIMARY integration absent | **Accepted and fixed.** W15P is a prerequisite, E4/P2b routes PRIMARY through it, second data device forbidden, bounded-transfer and compositor tests added. §3.6, §4.5, §8. |
 | 4 | Screenshot callback violates weak-slot/cancel contract | **Accepted and fixed.** Replaced receiver/strong-`Context` design with a per-request weak completion slot, pre-issue pixel admission, aggregate limits and shared craft-ui helper after CL-2F. §3.5, §4.4, §5.2. |
 | 5 | `raw_input_hook`/logic-only lifecycle premise is source-wrong | **Accepted and fixed.** Corrected to both hosts calling the hook before the logic-only decision; it is a host-iteration boundary, not a UI-phase marker. Separate host-iteration and accepted-UI-frame counters; stale input only in a known UI phase; test driver preserves host order; baseline uses `logic`/`ui`, not `tick`. §2.4, §4.2, §5.2, §6.1. |
@@ -1445,8 +1445,8 @@ Public upstream references (immutable where possible):
 - upstream discussions collected in `/home/codex/work/ssd2/task-evidence/egui037-migration-20261022/upstream-discussions.json`
   (#8731, #8736, #8763/#8764, #8748, #8512, #8657, #8577)
 - suite rollout: local `craft-libs/docs/egui-037-suite-rollout.md` planning draft (link only after it lands)
-- craft-libs PR 199: `https://github.com/storytold/craft-libs/pull/199`; issue 198:
-  `https://github.com/storytold/craft-libs/issues/198`
+- craft-libs PR 199: `https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/pull/199`; issue 198:
+  `https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs/issues/198`
 
 Fork provenance:
 
@@ -1503,7 +1503,7 @@ These are decisions this plan recommends but does not silently make:
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/vectorcraft` `main` now resolves to `125df6d8ecfae01d01ce369ac02e4aa03e0deed5`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `Kaiqueaurelio/decode-open-source-hub` `main` now resolves to `125df6d8ecfae01d01ce369ac02e4aa03e0deed5`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 Preserve supplied PDF passwords on confirmation at125df6d8, in addition to the previously recorded DXF fixes. Add dialog regression coverage without recording password contents.
 

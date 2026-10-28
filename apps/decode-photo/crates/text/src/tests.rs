@@ -2510,7 +2510,7 @@ fn engine_data_antialias_numbers_match_photoshop() {
     }
 }
 
-/// Anti-alias modes must change edge coverage (storytold/photocraft#5902).
+/// Anti-alias modes must change edge coverage (Kaiqueaurelio/decode-open-source-hub#5902).
 #[test]
 fn antialias_modes_change_edge_fringe() {
     use photocraft_doc::text::AntiAlias;

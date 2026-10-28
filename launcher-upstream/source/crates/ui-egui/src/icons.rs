@@ -72,7 +72,7 @@ pub fn social(service: &str) -> Option<ImageSource<'static>> {
     })
 }
 
-/// The ArtCraft "A" mark in blue, as supplied: the launcher's app icon and getartcraft.com's favicon.
+/// The ArtCraft "A" mark in blue, as supplied: the launcher's app icon and decode-open-source-hub.vercel.app's favicon.
 pub fn artcraft_mark() -> ImageSource<'static> {
     egui::include_image!("../../../docs/brand/artcraft-mark.svg")
 }
@@ -95,4 +95,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/icons.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/icons.rs

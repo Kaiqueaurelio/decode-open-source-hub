@@ -606,7 +606,7 @@ pub(crate) mod tests {
 
     #[test]
     fn host_is_what_follows_the_scheme() {
-        assert_eq!(host("https://api.github.com/repos/storytold/wordcraft"), "api.github.com");
+        assert_eq!(host("https://api.github.com/repos/Kaiqueaurelio/decode-open-source-hub"), "api.github.com");
         assert_eq!(host("http://127.0.0.1:8080"), "127.0.0.1:8080");
         assert_eq!(host("not a url"), "not a url");
     }
@@ -992,10 +992,10 @@ pub(crate) mod tests {
     #[ignore = "needs network access"]
     fn downloads_a_real_release_asset() {
         let http = Http::new().unwrap();
-        let Fetched::Body { text, .. } = http.get_api("https://api.github.com/repos/storytold/wordcraft/releases/latest", None).unwrap() else {
+        let Fetched::Body { text, .. } = http.get_api("https://api.github.com/repos/Kaiqueaurelio/decode-open-source-hub/releases/latest", None).unwrap() else {
             panic!("no release")
         };
-        let release = artcraft_launcher_core::release::parse_github_release(&text, "storytold/wordcraft").unwrap();
+        let release = artcraft_launcher_core::release::parse_github_release(&text, "Kaiqueaurelio/decode-open-source-hub").unwrap();
         let sums_url = &release.sums_asset().unwrap().url;
         let sums = artcraft_launcher_core::release::parse_sha256sums(&http.get_text(sums_url).unwrap().unwrap());
         let asset = release.assets.iter().find(|a| a.name.ends_with("freebsd-x86_64.tar.gz")).unwrap();
@@ -1009,7 +1009,7 @@ pub(crate) mod tests {
     /// Answers one request with `head` (status line and headers) and an empty body.
     fn answer_once(head: String) -> String {
         let listener = TcpListener::bind("127.0.0.1:0").unwrap();
-        let url = format!("http://{}/repos/storytold/photocraft/releases/latest", listener.local_addr().unwrap());
+        let url = format!("http://{}/repos/Kaiqueaurelio/decode-open-source-hub/releases/latest", listener.local_addr().unwrap());
         std::thread::spawn(move || {
             let Ok((mut stream, _)) = listener.accept() else { return };
             let mut reader = BufReader::new(stream.try_clone().unwrap());
@@ -1089,4 +1089,4 @@ pub(crate) mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/native/src/http.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/native/src/http.rs

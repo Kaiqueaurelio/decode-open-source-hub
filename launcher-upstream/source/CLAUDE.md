@@ -1,4 +1,4 @@
 Read [AGENTS.md](AGENTS.md) first: it is the guide for every agent and contributor working in this repository.
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/CLAUDE.md
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/CLAUDE.md

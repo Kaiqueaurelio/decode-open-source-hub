@@ -1631,7 +1631,7 @@ mod tests {
         assert!(app.run("view.goToArtboard", json!({"index": "sideways"})).is_err());
     }
 
-    /// storytold/vectorcraft#2719: status-bar 100% matches Actual Size when Display Print Size is on.
+    /// Kaiqueaurelio/decode-open-source-hub#2719: status-bar 100% matches Actual Size when Display Print Size is on.
     #[test]
     fn set_zoom_100_matches_actual_size_with_display_print_size() {
         let mut app = crate::VectorcraftApp::new(Session::new(), Default::default());

@@ -318,7 +318,7 @@ filter	Installed	Nainstalováno
 @id	appearance.theme	Vzhled
 	Show Decode Launcher	Zobrazit Decode Launcher
 	Check for Updates	Zkontrolovat aktualizace
-	Visit getartcraft.com	Navštívit getartcraft.com
+	Visit decode-open-source-hub.vercel.app	Navštívit decode-open-source-hub.vercel.app
 	Decode on GitHub	Decode na GitHubu
 	Join the Decode Discord	Připojit se na Decode Discord
 @plural	Decode Launcher · {n} update available|Decode Launcher · {n} updates available	Decode Launcher · {n} dostupná aktualizace|Decode Launcher · {n} dostupné aktualizace|Decode Launcher · {n} dostupných aktualizací

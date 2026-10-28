@@ -67,7 +67,7 @@ const NAME_ENV: &str = "WGPU_ADAPTER_NAME";
 
 /// Where to read how to choose another adapter, for the error that ends the app.
 const HELP: &str =
-    "to choose a graphics adapter or backend, see https://github.com/storytold/designcraft/blob/main/README.md#graphics-backend-and-processor";
+    "to choose a graphics adapter or backend, see https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft/blob/main/README.md#graphics-backend-and-processor";
 
 /// Frames the UI ran before the failure, below which it was still starting up. A failing adapter
 /// fails on the first or second frame; later, the adapter has proved itself, and a lost window is

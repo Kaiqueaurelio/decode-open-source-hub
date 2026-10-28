@@ -22,4 +22,4 @@ pub fn follow_current_desktop(on: bool) {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/apps/artcraft-launcher/src/spaces.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/artcraft-launcher/src/spaces.rs

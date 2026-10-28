@@ -56,7 +56,7 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export DECODE_LAUNCHER_MAINTAINER="${DECODE_LAUNCHER_MAINTAINER:-Decode Launcher maintainers <craft-launcher@storyteller.ai>}"
+export DECODE_LAUNCHER_MAINTAINER="${DECODE_LAUNCHER_MAINTAINER:-Decode Launcher maintainers <craft-launcher@decodeanalytics.com>}"
 BASENAME="$PKG-$VERSION-linux-$ARCH"
 
 echo "==> Decode Launcher $VERSION for Linux $ARCH ($FORMATS)"
@@ -183,7 +183,7 @@ if has appimage; then
   # next to each AppImage on GitHub Releases. `latest` is the newest published release that is
   # not a pre-release. A fork's builds point at its own releases through GITHUB_REPOSITORY.
   # The repo is craft-launcher while the files are decode-launcher-*.
-  REPO="${GITHUB_REPOSITORY:-storytold/craft-launcher}"
+  REPO="${GITHUB_REPOSITORY:-Kaiqueaurelio/craft-launcher}"
   UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|$PKG-*-linux-$ARCH.AppImage.zsync"
   # Extract-and-run: works without FUSE (containers, CI). The output embeds the static runtime,
   # so users don't need libfuse2 either. With zsyncmake on the host (CI installs the zsync

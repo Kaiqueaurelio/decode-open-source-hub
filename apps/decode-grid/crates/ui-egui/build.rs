@@ -34,7 +34,7 @@ fn main() {
     emit_craft_fonts();
 }
 
-/// The optional craft-fonts build input (<https://github.com/storytold/craft-fonts>, recipe from
+/// The optional craft-fonts build input (<https://github.com/Kaiqueaurelio/decode-open-source-hub>, recipe from
 /// its `docs/integration.md`). With `CRAFT_FONTS_DIR=<absolute checkout>` the permitted fonts in
 /// its `fonts/manifest.txt` are embedded as `CRAFT_FONTS` for `theme`'s fallback chains; unset,
 /// the table is empty. Release and acceptance builds also set `CRAFT_FONTS_REQUIRED=1` (exactly

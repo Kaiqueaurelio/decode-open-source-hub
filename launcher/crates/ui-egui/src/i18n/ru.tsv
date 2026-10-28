@@ -332,7 +332,7 @@ filter	Installed	Установлены
 # Tray (menu bar) menu and tooltip
 	Show Decode Launcher	Показать Decode Launcher
 	Check for Updates	Проверить обновления
-	Visit getartcraft.com	Открыть getartcraft.com
+	Visit decode-open-source-hub.vercel.app	Открыть decode-open-source-hub.vercel.app
 	Decode on GitHub	Decode на GitHub
 	Join the Decode Discord	Присоединиться к Discord Decode
 	App details	О приложении

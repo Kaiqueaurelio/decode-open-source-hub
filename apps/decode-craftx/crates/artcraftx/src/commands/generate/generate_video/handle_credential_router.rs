@@ -98,7 +98,7 @@ mod live_generation_tests {
   use super::*;
 
   #[tokio::test]
-  #[ignore] // live: spends credits on api.storyteller.ai
+  #[ignore] // live: spends credits on api.decodeanalytics.com
   async fn live_generation_video_seedance_lite_480p() {
     let app_data_root = AppDataRoot::create_default().expect("app data root");
     let credential_id = app_data_root

@@ -108,7 +108,7 @@ mod login_bridge_tests {
     let root = AppDataRoot::create_existing(directory.path()).unwrap();
     let manager = StorytellerCredentialManager::initialize_empty(&root);
     let mut jar = CookieStore::default();
-    let url = Url::parse("https://api.storyteller.ai/v1/login_challenges/poll").unwrap();
+    let url = Url::parse("https://api.decodeanalytics.com/v1/login_challenges/poll").unwrap();
     jar.store_response_cookies([RawCookie::parse("session=signed_backend_cookie; Secure; HttpOnly; Path=/; Max-Age=3600").unwrap().into_owned(), RawCookie::parse("visitor=existing_visitor; Secure; Path=/; Max-Age=3600").unwrap().into_owned()].into_iter(), &url);
     sync_tauri_credentials(&jar, &manager, &url).unwrap();
     let credentials = manager.get_credentials_required().unwrap();
@@ -121,7 +121,7 @@ mod login_bridge_tests {
 
   #[test]
   fn unrelated_and_expired_cookies_cannot_become_artcraft_sessions() {
-    let url = Url::parse("https://api.storyteller.ai/").unwrap();
+    let url = Url::parse("https://api.decodeanalytics.com/").unwrap();
     let mut jar = CookieStore::default();
     jar.store_response_cookies([RawCookie::parse("session=unrelated; Path=/; Max-Age=3600").unwrap().into_owned()].into_iter(), &Url::parse("https://unrelated.example/").unwrap());
     assert!(get_credentials_from_cookie_store(&jar, &url).unwrap().session.is_none());
@@ -131,7 +131,7 @@ mod login_bridge_tests {
 
   #[test]
   fn configured_local_api_does_not_import_production_cookies() {
-    let production = Url::parse("https://api.storyteller.ai/").unwrap();
+    let production = Url::parse("https://api.decodeanalytics.com/").unwrap();
     let local = Url::parse("http://localhost:12345/").unwrap();
     let mut jar = CookieStore::default();
     jar.store_response_cookies([RawCookie::parse("session=production; Secure; Path=/").unwrap().into_owned()].into_iter(), &production);

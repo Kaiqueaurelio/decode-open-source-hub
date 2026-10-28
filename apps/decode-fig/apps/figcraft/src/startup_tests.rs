@@ -16,7 +16,7 @@ const DRIVER_HINT: &str = if cfg!(windows) {
 fn the_message_carries_the_error_and_where_to_report_it() {
     let text = message(ERROR, false);
     assert!(text.contains(ERROR), "the error itself: {text}");
-    assert!(text.contains("https://github.com/storytold/figcraft/issues"), "where to report it: {text}");
+    assert!(text.contains("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/figcraft/issues"), "where to report it: {text}");
 }
 
 #[test]

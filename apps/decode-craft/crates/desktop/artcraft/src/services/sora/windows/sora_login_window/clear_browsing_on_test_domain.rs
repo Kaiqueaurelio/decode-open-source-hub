@@ -10,7 +10,7 @@ pub fn clear_browsing_data_on_test_domain(webview: &Webview) -> AnyhowResult<()>
       .ok_or(anyhow!("no host in url"))?
       .to_string();
   match hostname.as_str() {
-    "storyteller.ai" => {
+    "decodeanalytics.com" => {
       info!("Clearing all browsing data...");
       webview.clear_all_browsing_data()?;
     }

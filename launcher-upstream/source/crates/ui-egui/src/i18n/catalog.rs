@@ -201,4 +201,4 @@ pub(super) fn unescape(s: &str) -> String {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/i18n/catalog.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/i18n/catalog.rs

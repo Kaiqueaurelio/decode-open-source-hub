@@ -1,5 +1,5 @@
 // Artcraft / Storyteller API backend
-const DEFAULT_API_HOST_PRODUCTION = "https://api.storyteller.ai";
+const DEFAULT_API_HOST_PRODUCTION = "https://api.decodeanalytics.com";
 const DEFAULT_API_HOST_DEVELOPMENT = "http://localhost:12345";
 
 
@@ -15,7 +15,7 @@ export class StorytellerApiHostStore {
   /**
    * The scheme and host of the API.
    * This can optionally include a port, but no path components (including `/`).
-   * eg. http://localhost:12345 or https://api.storyteller.ai
+   * eg. http://localhost:12345 or https://api.decodeanalytics.com
    */
   private apiSchemeAndHost: string;
 

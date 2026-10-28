@@ -67,7 +67,7 @@ reopens, edits and saves in place through the agent surface, and checks that a d
 adjustment layer never overwrites its `.ora`; the CLI test converts both ways.
 
 Real-file checks use Krita-authored oracles from
-[photocraft-corpus](https://github.com/storytold/photocraft-corpus) (`krita/`, made by
+[photocraft-corpus](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-corpus) (`krita/`, made by
 `tools/krita-oracles/generate.py`). Each Krita file carries Krita's rendering of itself in
 `mergedimage.png`:
 

@@ -272,7 +272,7 @@ mod live_tests {
     use crate::utils::api_host::ApiHost;
 
     #[tokio::test]
-    #[ignore] // live: hits https://api.storyteller.ai
+    #[ignore] // live: hits https://api.decodeanalytics.com
     async fn list_video_models() {
       let api_host = ApiHost::Storyteller;
       let response = omni_gen_list_video_models(OmniGenListVideoModelsArgs {

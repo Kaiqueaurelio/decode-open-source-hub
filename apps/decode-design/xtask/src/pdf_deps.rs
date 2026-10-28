@@ -4,7 +4,7 @@ use std::process::Command;
 
 use serde_json::Value;
 
-const REPO: &str = "https://github.com/storytold/craft-libs";
+const REPO: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs";
 const REV: &str = "b926b5c03e256c86ca10934f58d03f628810b5b7";
 const PACKAGES: &[(&str, &str)] = &[
     ("craft-pdf", "0.1.0"),
@@ -111,7 +111,7 @@ mod tests {
     #[test]
     fn rejects_facade_revision_drift_and_malformed_metadata() {
         let mut m = metadata();
-        m["packages"][0]["source"] = json!("git+https://github.com/storytold/craft-libs?branch=main#other");
+        m["packages"][0]["source"] = json!("git+https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-libs?branch=main#other");
         assert!(validate(&m).is_err());
         assert!(validate(&json!({})).is_err());
     }

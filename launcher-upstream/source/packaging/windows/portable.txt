@@ -9,4 +9,4 @@ If ArtCraftLauncherData can't be written (for example on a read-only drive), Art
 so and uses %APPDATA%\ArtCraft Launcher instead.
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/windows/portable.txt
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/windows/portable.txt

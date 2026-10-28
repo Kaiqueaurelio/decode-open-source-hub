@@ -53,7 +53,7 @@ pub const LIBRARY_PAGE_SIZE: u32 = 40;
 const MODEL_LIST_ATTEMPTS: u32 = 3;
 const MODEL_LIST_BACKOFF: Duration = Duration::from_millis(250);
 /// The share link base (`SHARE_URL_BASE`).
-pub const SHARE_URL_BASE: &str = "https://getartcraft.com/media/";
+pub const SHARE_URL_BASE: &str = "https://decode-open-source-hub.vercel.app/media/";
 /// fal's cost estimate (the provider-aware legacy endpoint; OmniGen only prices ArtCraft).
 const PROVIDER_COST_PATH: &str = "/v1/generate/cost_estimate/image";
 /// Characters are made for this model (the Tauri app's `CharactersModal`).

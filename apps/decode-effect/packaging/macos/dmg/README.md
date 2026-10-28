@@ -41,4 +41,4 @@ The DMG file name (`effectcraft-<version>-macos-<arch>.dmg`) still carries the v
   alias holds only the volume name and `/.background/background.tiff`, nothing from the machine that
   ran it. The window is 660 × 432 with Finder's 32 pt title bar; the content area is 660 × 400.
 
-This follows VectorCraft's `packaging/macos/dmg/` (storytold/vectorcraft#493).
+This follows VectorCraft's `packaging/macos/dmg/` (Kaiqueaurelio/decode-open-source-hub#493).

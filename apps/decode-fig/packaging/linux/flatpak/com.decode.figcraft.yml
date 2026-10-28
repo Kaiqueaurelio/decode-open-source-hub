@@ -11,7 +11,7 @@
 # The single-file .flatpak attached to each release comes from com.decode.figcraft.bundle.yml,
 # which repackages the prebuilt release binaries. Keep runtime-version and finish-args identical.
 #
-# Official release binaries embed craft-fonts (storytold/craft-fonts, OFL fonts); this from-source
+# Official release binaries embed craft-fonts (Kaiqueaurelio/craft-fonts, OFL fonts); this from-source
 # build doesn't (add it as a git source and set CRAFT_FONTS_DIR to include it), so it uses the
 # runtime's system fonts.
 id: com.decode.figcraft

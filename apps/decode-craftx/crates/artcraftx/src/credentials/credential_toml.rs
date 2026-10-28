@@ -150,7 +150,7 @@ mod tests {
     [[cookie.cookies]]
     name = "session"
     value = "abc123"
-    domain = "storyteller.ai"
+    domain = "decodeanalytics.com"
   "#;
 
   const HAND_WRITTEN_API_KEY_FILE: &str = r#"

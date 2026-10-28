@@ -121,4 +121,4 @@ pub fn status_rank(status: &AppStatus) -> u8 {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/crates/ui-egui/src/model.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/crates/ui-egui/src/model.rs

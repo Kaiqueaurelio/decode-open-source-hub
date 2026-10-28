@@ -3,7 +3,7 @@
 # supplied. The mark is an ArtCraft trademark, NOT MIT/Apache: docs/brand/LICENSE-brand.txt.
 #
 # - App icon (Dock, taskbar, Start menu, Linux menus, installers): the blue mark, which is also
-#   getartcraft.com's favicon.
+#   decode-open-source-hub.vercel.app's favicon.
 # - Tray: the black mark as the macOS menu-bar template; the blue mark on Windows, Linux and BSD.
 #
 # Needs: resvg (brew install resvg / cargo install resvg). The .ico and .icns are packed by
@@ -16,7 +16,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIR="$ROOT/assets/app-icon"
 BRAND="$ROOT/docs/brand"
 SVG="$BRAND/artcraft-mark.svg"
-ID="ai.storyteller.artcraft-launcher"
+ID="com.decode.artcraft-launcher"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
@@ -69,4 +69,4 @@ render "$BRAND/artcraft-mark.svg" 64 "$BRAND/artcraft-mark-64.png"
 echo "icons written to $DIR"
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/icons.sh
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/icons.sh

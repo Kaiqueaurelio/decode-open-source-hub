@@ -1,4 +1,4 @@
-//! Optional craft-fonts build input (https://github.com/storytold/craft-fonts, recipe from its
+//! Optional craft-fonts build input (https://github.com/Kaiqueaurelio/decode-open-source-hub, recipe from its
 //! `docs/integration.md`; rules in `craftrules/standards/fonts.md`).
 //!
 //! With `CRAFT_FONTS_DIR=<craft-fonts checkout>`, every font in its `fonts/manifest.txt` is

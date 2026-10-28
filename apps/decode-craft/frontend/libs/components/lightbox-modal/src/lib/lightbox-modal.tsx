@@ -1208,7 +1208,7 @@ export function LightboxModal({
                     onClick={async (e) => {
                       e.stopPropagation();
                       gtagEvent("share_link_copied");
-                      const shareUrl = `https://getartcraft.com/media/${selectedMediaToken}`;
+                      const shareUrl = `https://decode-open-source-hub.vercel.app/media/${selectedMediaToken}`;
                       try {
                         await navigator.clipboard.writeText(shareUrl);
                         toast.success("Share link copied");

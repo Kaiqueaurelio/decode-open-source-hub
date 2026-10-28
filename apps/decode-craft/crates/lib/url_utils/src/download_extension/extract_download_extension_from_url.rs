@@ -25,7 +25,7 @@ mod tests {
 
   #[test]
   fn success_case() {
-    let url = "https://storyteller.ai/example.jpg";
+    let url = "https://decodeanalytics.com/example.jpg";
     let maybe_extension= extract_download_extension_from_url_str(url);
     assert_eq!(maybe_extension, Some(DownloadExtension::Jpg));
   }

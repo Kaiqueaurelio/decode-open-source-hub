@@ -194,7 +194,7 @@ mod tests {
     write_file(
       dir.path(),
       "artcraft_user1.toml",
-      "service = \"artcraft_cookies\"\n[[cookie.cookies]]\nname = \"a\"\nvalue = \"b\"\ndomain = \"storyteller.ai\"\n",
+      "service = \"artcraft_cookies\"\n[[cookie.cookies]]\nname = \"a\"\nvalue = \"b\"\ndomain = \"decodeanalytics.com\"\n",
     );
     write_file(
       dir.path(),

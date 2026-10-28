@@ -58,7 +58,7 @@ copy_docs() {
 }
 
 # Inter is embedded in every build (crates/ui-egui/src/theme.rs), so its OFL always ships with the
-# package as OFL-Inter.txt. Builds made with CRAFT_FONTS_DIR (storytold/craft-fonts, an optional
+# package as OFL-Inter.txt. Builds made with CRAFT_FONTS_DIR (Kaiqueaurelio/craft-fonts, an optional
 # build input) also embed its fonts; their OFL licences go with the package as OFL-<family-dir>.txt.
 copy_font_licences() {
   local dest="$1" lic family

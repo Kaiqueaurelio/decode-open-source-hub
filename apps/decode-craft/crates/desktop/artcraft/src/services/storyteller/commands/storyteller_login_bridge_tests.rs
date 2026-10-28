@@ -217,10 +217,10 @@ fn website_origin_must_match_native_api_environment() {
   let fragment = format!("#approval_token={}", "A".repeat(43));
   assert!(local.allows_verification_url(&format!("http://localhost:4201/login/desktop{fragment}")));
   assert!(!local.allows_verification_url(&format!(
-    "https://app.getartcraft.com/login/desktop{fragment}"
+    "https://decode-open-source-hub.vercel.app/login/desktop{fragment}"
   )));
   assert!(prod.allows_verification_url(&format!(
-    "https://app.getartcraft.com/login/desktop{fragment}"
+    "https://decode-open-source-hub.vercel.app/login/desktop{fragment}"
   )));
   assert!(!prod.allows_verification_url(&format!("http://localhost:4201/login/desktop{fragment}")));
 }

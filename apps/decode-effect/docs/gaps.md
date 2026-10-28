@@ -117,23 +117,23 @@ The most important missing piece: it turns every other estimate here into a meas
 - Path editing (#1220): selected shape and mask paths suppress the layer transform box while
   their points are edited. `ui_viewer` regressions cover Pen-family tools, Selection vertex
   dragging and undo, restoration of layer controls, and layers without visible paths.
-- Regression evidence for [#66](https://github.com/storytold/effectcraft/issues/66): scripted
+- Regression evidence for [#66](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/66): scripted
   pointer tests in `ui_viewer` and `ui_text_edit`, checked headlessly on Linux, cover viewer clicks,
   marquee selection and text picking when layers are hidden or excluded by solo. They also check
   hidden/locked solo layers, and that solo still excludes the other layers while the soloed
   layer is outside its active time range (as in After Effects, so nothing is picked there).
-- Regression evidence for [#67](https://github.com/storytold/effectcraft/issues/67): scripted
+- Regression evidence for [#67](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/67): scripted
   input tests in `ui_project_delete`, checked headlessly on Linux, cover Delete/Backspace on
   Project items, multiple selection and undo. They check that an unrelated Timeline layer stays,
   an empty Project selection does nothing, viewer focus still deletes layers, and typing or
   dialogs do not delete items.
-- Regression evidence for [#484](https://github.com/storytold/effectcraft/issues/484): the
+- Regression evidence for [#484](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/484): the
   `shift_delete_*` input tests in `ui_project_delete`, checked headlessly on Windows, press
   Shift+Delete both as a key and as the Cut event Windows sends for it. Items in use go without
   the prompt, with their layers, in one undo step, for single items, multiple selections and
   folder contents. Nothing happens with an empty selection, in other panels, while typing or with
   a dialog open, and the next Delete still asks.
-- Regression evidence for [#612](https://github.com/storytold/effectcraft/issues/612): the
+- Regression evidence for [#612](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/612): the
   `ui_gradient_value` and `ui_gradient_editor` input tests, checked headlessly on Windows, open
   the Gradient Editor from the Timeline's "Edit Gradient…" on a shape layer's Gradient Fill. They
   check that OK sets the edited stops (added, dragged, recoloured in the picker, down to a single
@@ -149,7 +149,7 @@ The most important missing piece: it turns every other estimate here into a meas
   tests, checked headlessly on Windows, drag a selected Gradient Fill's start and end points in
   the Composition viewer: one undo step, the layer stays, a point inside a moved and scaled group
   converts to the group's space, and the handles show only for a selected gradient.
-- Regression evidence for [#1011](https://github.com/storytold/effectcraft/issues/1011): the
+- Regression evidence for [#1011](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/1011): the
   `ui_text_range_handles` input tests, checked headlessly on macOS, drag a text Range Selector's
   End bar in the Composition viewer: one undo step, Start and the layer stay, and on an animated
   End a keyframe at the current time. The bars show only for a selected selector or a selected
@@ -200,14 +200,14 @@ The most important missing piece: it turns every other estimate here into a meas
   `effect_points_move_into_effect_space_unless_left_at_their_default` /
   `puppet_paint_liquify_and_roto_data_move_into_effect_space` (effects); see
   [architecture.md](architecture.md) §3 for what the conversion keeps.
-- Regression evidence for the interface items of [#227](https://github.com/storytold/effectcraft/issues/227),
+- Regression evidence for the interface items of [#227](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/227),
   checked headlessly on Windows: `spacebar_taps_preview_and_held_spacebar_pans_the_viewer` and
   `spacebar_drag_scrolls_the_time_graph` (Spacebar previews on its release, held it is the Hand
   tool), `right_click_in_effect_controls_shows_the_effect_menu`,
   `project_items_dropped_on_new_comp_make_a_composition` and
   `dragging_over_layer_switches_sets_them_all`.
 - Regression evidence for the shape layer items of
-  [#227](https://github.com/storytold/effectcraft/issues/227), checked headlessly on Windows:
+  [#227](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft/issues/227), checked headlessly on Windows:
   `shape_tools_draw_into_the_selected_shape_layer` and `ui_viewer`
   `shape_tool_draws_into_the_selected_shape_layer` (a shape tool adds a group to the selected
   shape layer), `shape_contents_copy_cut_and_paste_between_shape_layers` and

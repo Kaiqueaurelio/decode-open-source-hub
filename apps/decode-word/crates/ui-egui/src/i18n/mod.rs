@@ -4,7 +4,7 @@
 //! agents are unaffected. A string without a translation shows in English, so coverage can grow
 //! one entry at a time, and a missing translation never fails a build, a test or a release.
 //!
-//! The catalogs live in [storytold/craft-i18n](https://github.com/storytold/craft-i18n)
+//! The catalogs live in [Kaiqueaurelio/craft-i18n](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/craft-i18n)
 //! (`locales/<locale>/common.tsv` and `wordcraft.tsv`), not in this repository. `build.rs` embeds
 //! them from `CRAFT_I18N_DIR` (CI and releases check out the SHA in `craft-i18n.rev`); without it
 //! the build is English only. Lookup, fallback (`pt-br` → `pt` → English, app rows over shared

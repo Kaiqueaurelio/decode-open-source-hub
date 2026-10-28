@@ -21,7 +21,7 @@ set -euo pipefail
 # shellcheck source=../env.sh
 . "$(dirname "${BASH_SOURCE[0]}")/../env.sh"
 HERE="$ROOT/packaging/linux"
-APP_ID=ai.storyteller.artcraft-launcher
+APP_ID=com.decode.artcraft-launcher
 PKG=artcraft-launcher
 # Verify a downloaded file's sha256 against its expected hex digest.
 check_sha256() {
@@ -56,7 +56,7 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export ARTCRAFT_LAUNCHER_MAINTAINER="${ARTCRAFT_LAUNCHER_MAINTAINER:-ArtCraft Launcher maintainers <craft-launcher@storyteller.ai>}"
+export ARTCRAFT_LAUNCHER_MAINTAINER="${ARTCRAFT_LAUNCHER_MAINTAINER:-ArtCraft Launcher maintainers <craft-launcher@decodeanalytics.com>}"
 BASENAME="$PKG-$VERSION-linux-$ARCH"
 
 echo "==> ArtCraft Launcher $VERSION for Linux $ARCH ($FORMATS)"
@@ -183,7 +183,7 @@ if has appimage; then
   # next to each AppImage on GitHub Releases. `latest` is the newest published release that is
   # not a pre-release. A fork's builds point at its own releases through GITHUB_REPOSITORY.
   # The repo is craft-launcher while the files are artcraft-launcher-*.
-  REPO="${GITHUB_REPOSITORY:-storytold/craft-launcher}"
+  REPO="${GITHUB_REPOSITORY:-Kaiqueaurelio/craft-launcher}"
   UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|$PKG-*-linux-$ARCH.AppImage.zsync"
   # Extract-and-run: works without FUSE (containers, CI). The output embeds the static runtime,
   # so users don't need libfuse2 either. With zsyncmake on the host (CI installs the zsync
@@ -206,4 +206,4 @@ echo "==> done"
 ls -lh "$DIST"
 
 
-# Source: https://github.com/storytold/craft-launcher/blob/main/packaging/linux/package.sh
+# Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/linux/package.sh

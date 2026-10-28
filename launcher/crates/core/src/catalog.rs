@@ -14,7 +14,7 @@ pub struct DecodeApp {
     pub name: &'static str,
     /// What it's for, in a few words (English; the UI translates it by app id).
     pub tagline: &'static str,
-    /// Brand colour (sRGB), for surfaces: getartcraft.com's `--app`.
+    /// Brand colour (sRGB), for surfaces: decode-open-source-hub.vercel.app's `--app`.
     pub color: [u8; 3],
     /// The brand colour for text on a light background (the site's light `--app-ink`).
     pub ink_light: [u8; 3],
@@ -29,9 +29,9 @@ pub struct DecodeApp {
 }
 
 impl DecodeApp {
-    /// `ai.storyteller.<id>`: macOS bundle id, Flatpak id and Linux desktop-file id.
+    /// `com.decode.<id>`: macOS bundle id, Flatpak id and Linux desktop-file id.
     pub fn bundle_id(&self) -> String {
-        format!("ai.storyteller.{}", self.id)
+        format!("com.decode.{}", self.id)
     }
 
     pub fn releases_url(&self) -> String {
@@ -42,9 +42,9 @@ impl DecodeApp {
         format!("https://github.com/{}", self.repo)
     }
 
-    /// The app's page on getartcraft.com.
+    /// The app's page on decode-open-source-hub.vercel.app.
     pub fn website(&self) -> String {
-        format!("https://getartcraft.com/apps/{}", self.id)
+        format!("https://decode-open-source-hub.vercel.app/#{}", self.id)
     }
 
     /// Asset stems this app's releases may use, current first.
@@ -72,11 +72,11 @@ const fn app(
     DecodeApp { id, name, tagline, color, ink_light, ink_dark, repo, former_ids: &[], former_names: &[] }
 }
 
-/// The Decode App Suite, in display order matching getartcraft.com:
+/// The Decode App Suite, in display order matching decode-open-source-hub.vercel.app:
 pub const SUITE: [DecodeApp; 13] = [
     DecodeApp {
         former_names: &["PhotoCraft"],
-        ..app("photocraft", "DecodePhoto", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "storytold/photocraft")
+        ..app("photocraft", "DecodePhoto", "Image editing", [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]], "Kaiqueaurelio/decode-open-source-hub")
     },
     DecodeApp {
         former_names: &["VectorCraft"],
@@ -85,7 +85,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeVector",
             "Vector illustration",
             [[0xe8, 0x57, 0x3f], [0xb8, 0x3a, 0x24], [0xff, 0x8a, 0x70]],
-            "storytold/vectorcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -95,7 +95,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeFilm",
             "Video editing, color and sound",
             [[0x8b, 0x5c, 0xf6], [0x6a, 0x3f, 0xd6], [0xb6, 0x9c, 0xff]],
-            "storytold/filmcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -105,7 +105,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeLight",
             "Photo library and raw development",
             [[0xf2, 0xa5, 0x16], [0x8a, 0x58, 0x00], [0xff, 0xc1, 0x4d]],
-            "storytold/lightcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -116,7 +116,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodePdf",
             "Reading, organizing and protecting PDFs",
             [[0x12, 0xa5, 0x8a], [0x0a, 0x75, 0x63], [0x3f, 0xd6, 0xb8]],
-            "storytold/pdfcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -126,7 +126,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeEffect",
             "Motion graphics and visual effects",
             [[0xe0, 0x36, 0x8f], [0xb0, 0x20, 0x6c], [0xff, 0x7a, 0xb8]],
-            "storytold/effectcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -136,7 +136,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeDesign",
             "Page layout and publishing",
             [[0x7b, 0xb5, 0x1c], [0x45, 0x70, 0x08], [0xa6, 0xe0, 0x4a]],
-            "storytold/designcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -146,7 +146,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeFig",
             "Interface design and prototyping",
             [[0x02, 0xda, 0x96], [0x04, 0x7a, 0x56], [0x4f, 0xe8, 0xb6]],
-            "storytold/figcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -156,7 +156,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeWord",
             "Writing and document design",
             [[0x3f, 0x5f, 0xe0], [0x2a, 0x44, 0xb8], [0x8e, 0xa2, 0xff]],
-            "storytold/wordcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -166,7 +166,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeSound",
             "Recording, editing and mixing audio",
             [[0x1f, 0xa5, 0xc9], [0x0e, 0x72, 0x90], [0x5f, 0xd0, 0xee]],
-            "storytold/soundcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -176,7 +176,7 @@ pub const SUITE: [DecodeApp; 13] = [
             "DecodeDeck",
             "Presentations and slide shows",
             [[0xf0, 0x7a, 0x1e], [0xa8, 0x4f, 0x0a], [0xff, 0xa0, 0x60]],
-            "storytold/deckcraft",
+            "Kaiqueaurelio/decode-open-source-hub",
         )
     },
     DecodeApp {
@@ -191,7 +191,7 @@ pub const SUITE: [DecodeApp; 13] = [
     },
     DecodeApp {
         former_names: &["GridCraft"],
-        ..app("gridcraft", "DecodeGrid", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "storytold/gridcraft")
+        ..app("gridcraft", "DecodeGrid", "Spreadsheets and data", [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]], "Kaiqueaurelio/decode-open-source-hub")
     },
 ];
 
@@ -199,7 +199,7 @@ pub const SUITE: [DecodeApp; 13] = [
 pub const WEBSITE_URL: &str = "https://kaiqueaurelio.github.io/decode-open-source-hub/";
 /// The GitHub account every Decode App's repository lives under: the only one the launcher
 /// installs from, whatever the release feed says.
-pub const GITHUB_OWNER: &str = "storytold";
+pub const GITHUB_OWNER: &str = "Kaiqueaurelio";
 /// Decode on GitHub: every Decode App's source.
 pub const GITHUB_URL: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub";
 /// Decode's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
@@ -227,12 +227,12 @@ pub const LAUNCHER: DecodeApp = DecodeApp {
         "Decode Launcher",
         "Installs and updates the Decode App Suite",
         [[0x0b, 0x0b, 0x0c], [0x0b, 0x0b, 0x0c], [0xf2, 0xf1, 0xee]],
-        "storytold/craft-launcher",
+        "Kaiqueaurelio/craft-launcher",
     )
 };
 
 /// The launcher's own repo, checked so it can say when a newer launcher is out.
-pub const LAUNCHER_REPO: &str = "storytold/craft-launcher";
+pub const LAUNCHER_REPO: &str = "Kaiqueaurelio/craft-launcher";
 /// The launcher's own asset stem.
 pub const LAUNCHER_ID: &str = "decode-launcher";
 
@@ -281,7 +281,7 @@ mod tests {
             if a.id == "cadcraft" {
                 assert_eq!(a.repo, "Kaiqueaurelio/decodecad");
             } else {
-                assert_eq!(a.repo, format!("storytold/{}", a.id));
+                assert_eq!(a.repo, format!("Kaiqueaurelio/{}", a.id));
             }
             assert_eq!(a.name.to_lowercase().replace("decode", "") + "craft", a.id);
         }
@@ -292,7 +292,7 @@ mod tests {
         let pdf = DecodeApp::by_id("pdfcraft").unwrap();
         assert_eq!(pdf.stems().collect::<Vec<_>>(), ["pdfcraft", "printcraft"]);
         assert_eq!(pdf.names().collect::<Vec<_>>(), ["DecodePdf", "PdfCraft", "PrintCraft"]);
-        assert_eq!(pdf.website(), "https://getartcraft.com/apps/pdfcraft");
-        assert_eq!(DecodeApp::by_id("wordcraft").unwrap().website(), "https://getartcraft.com/apps/wordcraft");
+        assert_eq!(pdf.website(), "https://decode-open-source-hub.vercel.app/#pdfcraft");
+        assert_eq!(DecodeApp::by_id("wordcraft").unwrap().website(), "https://decode-open-source-hub.vercel.app/#wordcraft");
     }
 }

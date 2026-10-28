@@ -4,7 +4,7 @@
 //! primaries, no tone curve) renders flat, grey and slightly green.
 //!
 //! Method (after LightCraft's prose description in `docs/camera-preview-colour.md`,
-//! storytold/lightcraft#165; this is an independent implementation against this
+//! Kaiqueaurelio/decode-open-source-hub#165; this is an independent implementation against this
 //! crate's pipeline): both the sensor data and the camera JPEG are reduced to a
 //! common grid of at most [`PROXY_EDGE`] cells on the long edge, over the whole
 //! (upright) frame. Each cell pairs the white-balanced camera RGB `c` (the same

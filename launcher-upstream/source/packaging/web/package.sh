@@ -56,4 +56,4 @@ echo "wrote $DIST/$NAME.zip"
 ls -lh "$DIST/$NAME.zip"
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/packaging/web/package.sh
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/packaging/web/package.sh

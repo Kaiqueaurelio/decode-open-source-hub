@@ -9,7 +9,7 @@ use crate::error::higgsfield_client_error::HiggsfieldClientError;
 /// sources. These are first-party ArtCraft / FakeYou properties.
 pub const BLOCKED_UPLOAD_SOURCE_DOMAINS: &[&str] = &[
   "fakeyou.com",
-  "getartcraft.com",
+  "decode-open-source-hub.vercel.app",
   "artcraft.ai",
   "cdn-2.fakeyou.com", // Subsumed by fakeyou.com; listed for clarity.
 ];
@@ -63,7 +63,7 @@ mod tests {
     for url in [
       "https://fakeyou.com/media/a.png",
       "https://cdn-2.fakeyou.com/media/a/5/a/image_x.png",
-      "https://storage.getartcraft.com/media/a.png?query=1",
+      "https://storage.decode-open-source-hub.vercel.app/media/a.png?query=1",
       "https://artcraft.ai/a.png",
       "https://ARTCRAFT.AI/a.png",
       "http://user:pass@cdn.fakeyou.com:8080/a.png",

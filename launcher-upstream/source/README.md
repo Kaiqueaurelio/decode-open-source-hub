@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://getartcraft.com/">
+  <a href="https://decode-open-source-hub.vercel.app/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/brand/artcraft-logo-white.svg">
       <img alt="ArtCraft" src="docs/brand/artcraft-logo.svg" width="200">
@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/app-icon/hicolor/256x256/apps/ai.storyteller.artcraft-launcher.png" width="128" height="128" alt="ArtCraft Launcher icon: a blue stylised letter A">
+  <img src="assets/app-icon/hicolor/256x256/apps/com.decode.artcraft-launcher.png" width="128" height="128" alt="ArtCraft Launcher icon: a blue stylised letter A">
 </p>
 
 <h1 align="center">ArtCraft Launcher</h1>
@@ -25,8 +25,8 @@
   <img alt="License: MIT OR Apache-2.0" src="https://img.shields.io/badge/license-MIT%20%2F%20Apache--2.0-3a3a3a?style=flat-square">
   <img alt="Status: early alpha" src="https://img.shields.io/badge/status-early%20alpha-d69e2e?style=flat-square">
   <br>
-  <a href="https://sonarcloud.io/project/overview?id=storytold_craft-launcher"><img alt="Scanned by SonarCloud" src="https://img.shields.io/badge/Scanned_by-SonarCloud-4b9fd5?style=flat-square&logo=sonarqubecloud&logoColor=white"></a>
-  <a href="https://coderabbit.ai"><img alt="Reviewed by CodeRabbit" src="https://img.shields.io/coderabbit/prs/github/storytold/craft-launcher?style=flat-square&label=Reviewed%20by%20CodeRabbit&logo=coderabbit"></a>
+  <a href="https://sonarcloud.io/project/overview?id=Kaiqueaurelio_craft-launcher"><img alt="Scanned by SonarCloud" src="https://img.shields.io/badge/Scanned_by-SonarCloud-4b9fd5?style=flat-square&logo=sonarqubecloud&logoColor=white"></a>
+  <a href="https://coderabbit.ai"><img alt="Reviewed by CodeRabbit" src="https://img.shields.io/coderabbit/prs/github/Kaiqueaurelio/craft-launcher?style=flat-square&label=Reviewed%20by%20CodeRabbit&logo=coderabbit"></a>
 </p>
 
 <p align="center">
@@ -34,9 +34,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/storytold/craft-launcher/releases/latest"><b>Download ArtCraft Launcher</b></a> ·
-  <a href="https://getartcraft.com/">ArtCraft</a> ·
-  <a href="https://getartcraft.com/apps">The Craft App Suite</a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest"><b>Download ArtCraft Launcher</b></a> ·
+  <a href="https://decode-open-source-hub.vercel.app/">ArtCraft</a> ·
+  <a href="https://decode-open-source-hub.vercel.app/apps">The Craft App Suite</a>
 </p>
 
 > [!NOTE]
@@ -121,7 +121,7 @@ installed by hand (and the launcher finds apps you installed yourself):
 | macOS | `/Applications/<App>.app` | Copied from the signed, notarized release DMG |
 | Windows | `C:\Program Files\<App>` | The release MSI, through Windows Installer (with Start menu entry and Apps & features entry) |
 | Linux | `/usr/bin`, `/usr/share/applications` | The release `.deb` (apt) or `.rpm` (dnf, zypper), with your system's password prompt. Without those, a Flatpak, or an AppImage in `~/Applications` |
-| Linux, inside the launcher's Flatpak, with no Flatpak on the host | `~/.var/app/ai.storyteller.artcraft-launcher/data/artcraft-launcher/apps/<app>` | The release tarball, unpacked into the launcher's own folder and run inside the same sandbox, with its settings in a `home/` folder beside it. Nothing is installed on the host, and each app's configuration stays in the sandbox |
+| Linux, inside the launcher's Flatpak, with no Flatpak on the host | `~/.var/app/com.decode.artcraft-launcher/data/artcraft-launcher/apps/<app>` | The release tarball, unpacked into the launcher's own folder and run inside the same sandbox, with its settings in a `home/` folder beside it. Nothing is installed on the host, and each app's configuration stays in the sandbox |
 | FreeBSD | `/usr/local` | The release tree, with a password prompt (polkit); `~/.local` when polkit isn't installed |
 
 ArtCraft Launcher keeps itself current too: when a new version is out, **Update and restart**
@@ -139,7 +139,7 @@ portable zip's executable) and keeps the previous two runs as `artcraft-launcher
 
 ## Downloads
 
-Download the build for your computer from the [latest release](https://github.com/storytold/craft-launcher/releases/latest), or browse [all releases](https://github.com/storytold/craft-launcher/releases). Every release has a `SHA256SUMS.txt` to check the files against. `<ver>` is the version number, for example `0.1.0`.
+Download the build for your computer from the [latest release](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest), or browse [all releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases). Every release has a `SHA256SUMS.txt` to check the files against. `<ver>` is the version number, for example `0.1.0`.
 
 **Windows** (10 and 11)
 
@@ -194,7 +194,7 @@ You need a recent stable Rust (1.90 or newer). On Linux, install the windowing h
 (Debian/Ubuntu: `sudo apt install libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev`).
 
 ```sh
-git clone https://github.com/storytold/craft-launcher
+git clone https://github.com/Kaiqueaurelio/decode-open-source-hub
 cd craft-launcher
 cargo run --release -p artcraft-launcher   # the desktop app
 cargo xtask ci                             # fmt, clippy, tests and the wasm check
@@ -212,7 +212,7 @@ cd apps/artcraft-launcher-web && trunk serve
 `flake.nix` gives a dev shell (`nix develop`, then the cargo commands above) and a package:
 
 ```sh
-nix run github:storytold/craft-launcher
+nix run github:Kaiqueaurelio/craft-launcher
 ```
 
 On NixOS this uses the system's graphics drivers. On other distros, a Nix-built program can't load
@@ -221,7 +221,7 @@ the host's GPU drivers, so the window may fail to open. Run it through
 variant), or use the AppImage, `.deb` or `.rpm` release:
 
 ```sh
-nix run --impure github:nix-community/nixGL -- nix run github:storytold/craft-launcher
+nix run --impure github:nix-community/nixGL -- nix run github:Kaiqueaurelio/craft-launcher
 ```
 
 ### Installing your own builds
@@ -254,26 +254,26 @@ New contributors and AI agents: start with [`AGENTS.md`](AGENTS.md). Release pac
 ## The Craft App Suite
 
 ArtCraft Launcher installs the **Craft App Suite**: free, open-source creative tools from the
-[ArtCraft](https://getartcraft.com/) team, each written from scratch in Rust and each able to
+[ArtCraft](https://decode-open-source-hub.vercel.app/) team, each written from scratch in Rust and each able to
 stand on its own.
 
 | | App | What it's for | Code | Learn more |
 |:-:|---|---|---|---|
-| <img src="https://raw.githubusercontent.com/storytold/photocraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.photocraft.png" alt="" width="32" height="32"> | **PhotoCraft** | Image editing: layers, masks, type and real PSD files | [GitHub](https://github.com/storytold/photocraft) | [Website](https://getartcraft.com/apps/photocraft) |
-| <img src="https://raw.githubusercontent.com/storytold/vectorcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.vectorcraft.png" alt="" width="32" height="32"> | **VectorCraft** | Vector illustration | [GitHub](https://github.com/storytold/vectorcraft) | [Website](https://getartcraft.com/apps/vectorcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/filmcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.filmcraft.png" alt="" width="32" height="32"> | **FilmCraft** | Video editing, color and sound | [GitHub](https://github.com/storytold/filmcraft) | [Website](https://getartcraft.com/apps/filmcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/lightcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.lightcraft.png" alt="" width="32" height="32"> | **LightCraft** | Photo library and raw development | [GitHub](https://github.com/storytold/lightcraft) | [Website](https://getartcraft.com/apps/lightcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/pdfcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.pdfcraft.png" alt="" width="32" height="32"> | **PdfCraft** | Reading, organizing and protecting PDFs | [GitHub](https://github.com/storytold/pdfcraft) | [Website](https://getartcraft.com/apps/pdfcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/effectcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.effectcraft.png" alt="" width="32" height="32"> | **EffectCraft** | Motion graphics and visual effects | [GitHub](https://github.com/storytold/effectcraft) | [Website](https://getartcraft.com/apps/effectcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/designcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.designcraft.png" alt="" width="32" height="32"> | **DesignCraft** | Page layout and publishing | [GitHub](https://github.com/storytold/designcraft) | [Website](https://getartcraft.com/apps/designcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/figcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.figcraft.png" alt="" width="32" height="32"> | **FigCraft** | Interface design and prototyping | [GitHub](https://github.com/storytold/figcraft) | [Website](https://getartcraft.com/apps/figcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/wordcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.wordcraft.png" alt="" width="32" height="32"> | **WordCraft** | Word processing and documents | [GitHub](https://github.com/storytold/wordcraft) | [Website](https://getartcraft.com/apps/wordcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/soundcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.soundcraft.png" alt="" width="32" height="32"> | **SoundCraft** | Audio recording and editing | [GitHub](https://github.com/storytold/soundcraft) | [Website](https://getartcraft.com/apps/soundcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/deckcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.deckcraft.png" alt="" width="32" height="32"> | **DeckCraft** | Presentations and slide decks | [GitHub](https://github.com/storytold/deckcraft) | [Website](https://getartcraft.com/apps/deckcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/cadcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.cadcraft.png" alt="" width="32" height="32"> | **CADCraft** | Computer-aided design | [GitHub](https://github.com/storytold/cadcraft) | [Website](https://getartcraft.com/apps/cadcraft) |
-| <img src="https://raw.githubusercontent.com/storytold/gridcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.gridcraft.png" alt="" width="32" height="32"> | **GridCraft** | Spreadsheets and data | [GitHub](https://github.com/storytold/gridcraft) | [Website](https://getartcraft.com/apps/gridcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.photocraft.png" alt="" width="32" height="32"> | **PhotoCraft** | Image editing: layers, masks, type and real PSD files | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft) | [Website](https://decode-open-source-hub.vercel.app/#photocraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.vectorcraft.png" alt="" width="32" height="32"> | **VectorCraft** | Vector illustration | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/vectorcraft) | [Website](https://decode-open-source-hub.vercel.app/#vectorcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.filmcraft.png" alt="" width="32" height="32"> | **FilmCraft** | Video editing, color and sound | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/filmcraft) | [Website](https://decode-open-source-hub.vercel.app/#filmcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.lightcraft.png" alt="" width="32" height="32"> | **LightCraft** | Photo library and raw development | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/lightcraft) | [Website](https://decode-open-source-hub.vercel.app/#lightcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.pdfcraft.png" alt="" width="32" height="32"> | **PdfCraft** | Reading, organizing and protecting PDFs | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/pdfcraft) | [Website](https://decode-open-source-hub.vercel.app/#pdfcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.effectcraft.png" alt="" width="32" height="32"> | **EffectCraft** | Motion graphics and visual effects | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/effectcraft) | [Website](https://decode-open-source-hub.vercel.app/#effectcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.designcraft.png" alt="" width="32" height="32"> | **DesignCraft** | Page layout and publishing | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/designcraft) | [Website](https://decode-open-source-hub.vercel.app/#designcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.figcraft.png" alt="" width="32" height="32"> | **FigCraft** | Interface design and prototyping | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/figcraft) | [Website](https://decode-open-source-hub.vercel.app/#figcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.wordcraft.png" alt="" width="32" height="32"> | **WordCraft** | Word processing and documents | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/wordcraft) | [Website](https://decode-open-source-hub.vercel.app/#wordcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.soundcraft.png" alt="" width="32" height="32"> | **SoundCraft** | Audio recording and editing | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/soundcraft) | [Website](https://decode-open-source-hub.vercel.app/#soundcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.deckcraft.png" alt="" width="32" height="32"> | **DeckCraft** | Presentations and slide decks | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/deckcraft) | [Website](https://decode-open-source-hub.vercel.app/#deckcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decodecad/main/assets/app-icon/hicolor/64x64/apps/com.decode.cadcraft.png" alt="" width="32" height="32"> | **CADCraft** | Computer-aided design | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/cadcraft) | [Website](https://decode-open-source-hub.vercel.app/#cadcraft) |
+| <img src="https://raw.githubusercontent.com/Kaiqueaurelio/decode-open-source-hub/main/assets/app-icon/hicolor/64x64/apps/com.decode.gridcraft.png" alt="" width="32" height="32"> | **GridCraft** | Spreadsheets and data | [GitHub](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/gridcraft) | [Website](https://decode-open-source-hub.vercel.app/#gridcraft) |
 
-And [**ArtCraft**](https://getartcraft.com/) itself, our AI image and video studio for artists who want real control.
+And [**ArtCraft**](https://decode-open-source-hub.vercel.app/) itself, our AI image and video studio for artists who want real control.
 
 <br>
 
@@ -292,9 +292,9 @@ And [**ArtCraft**](https://getartcraft.com/) itself, our AI image and video stud
 
 <p align="center">
   <a href="https://discord.gg/artcraft"><b>discord.gg/artcraft</b></a> ·
-  <a href="https://getartcraft.com/">getartcraft.com</a> ·
-  <a href="https://getartcraft.com/apps">The Craft App Suite</a> ·
-  <a href="https://github.com/storytold/craft-launcher">ArtCraft Launcher</a>
+  <a href="https://decode-open-source-hub.vercel.app/">decode-open-source-hub.vercel.app</a> ·
+  <a href="https://decode-open-source-hub.vercel.app/apps">The Craft App Suite</a> ·
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub">ArtCraft Launcher</a>
 </p>
 
 ---
@@ -338,9 +338,9 @@ part of this repository and ArtCraft Launcher, under [`docs/brand/LICENSE-brand.
 Forks and modified versions must remove them.
 
 <p align="center">
-  <a href="https://getartcraft.com/"><img alt="ArtCraft" src="docs/brand/artcraft-mark.svg" width="28"></a><br>
-  <sub>Made by the <a href="https://getartcraft.com/">ArtCraft</a> team and community.</sub>
+  <a href="https://decode-open-source-hub.vercel.app/"><img alt="ArtCraft" src="docs/brand/artcraft-mark.svg" width="28"></a><br>
+  <sub>Made by the <a href="https://decode-open-source-hub.vercel.app/">ArtCraft</a> team and community.</sub>
 </p>
 
 
-Source: https://github.com/storytold/craft-launcher/blob/main/README.md
+Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/README.md

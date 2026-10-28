@@ -5,7 +5,7 @@ LightCraft 的界面支持英语、简体中文、繁体中文（台湾）和日
 - 通过「编辑 → 语言」或「设置 → 一般 → 语言」切换，选择会保留到下次启动。
 - 已翻译的范围与 `zh-hant.json` 键集完全一致（1246 条），两份目录的键与键序一一对应。
 - 正文字重与半粗体都使用 SIL OFL 的 **Noto Sans CJK SC**（简体中文）与 BIZ UDPGothic（日语）。
-  这些字体不在本仓库，而在 [storytold/craft-fonts](https://github.com/storytold/craft-fonts)；
+  这些字体不在本仓库，而在 [Kaiqueaurelio/craft-fonts](https://github.com/Kaiqueaurelio/decode-open-source-hub)；
   使用可选的构建输入 `CRAFT_FONTS_DIR=../craft-fonts` 时（所有正式发布版）会内嵌进来。
   不指定该输入时程序照常构建运行，但中文与日文文字没有字形，会显示为方框 ——
   语言菜单里四种语言仍然都在，选中「简体中文」也只会得到一屏方框。未内嵌字体时构建会打印一条

@@ -117,4 +117,4 @@ mod tests {
 }
 
 
-// Source: https://github.com/storytold/craft-launcher/blob/main/xtask/src/icns.rs
+// Source: https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/xtask/src/icns.rs
