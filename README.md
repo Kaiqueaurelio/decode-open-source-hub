@@ -11,7 +11,7 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 
 ## O que você encontra
 
-- **13 apps Decode:** DecodePhoto, DecodeVector, DecodeFilm, DecodeLight, DecodePdf, DecodeEffect, DecodeDesign, DecodeFig, DecodeWord, DecodeSound, DecodeDeck, DecodeCAD e DecodeGrid. Os nomes de referência continuam disponíveis para pesquisa.
+- **Aplicativos próprios listados:** DecodeCraft, DecodeCraftX e DecodeClip. O Decode Launcher é listado separadamente como utilitário. Os nomes de referência continuam disponíveis para pesquisa.
 - **Decode Launcher:** utilitário nativo em Rust, com links para o código-fonte e suas releases.
 - Busca por nome, finalidade, recursos e palavras-chave.
 - Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.
@@ -23,7 +23,7 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 
 ## 📥 Downloads e Acesso aos Aplicativos da Suíte
 
-Todos os 13 aplicativos da suíte Decode e o Decode Launcher estão integrados diretamente neste repositório.
+O catálogo lista apenas os aplicativos próprios mantidos neste repositório (DecodeCraft, DecodeCraftX e DecodeClip) e o Decode Launcher. Projetos de terceiros ou upstream não devem aparecer como aplicativos próprios.
 
 ### Links Diretos de Download:
 - 🚀 **[Releases e Binários Compilados (GitHub Releases)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)**
