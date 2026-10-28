@@ -36,15 +36,14 @@
 > [!NOTE]
 > **A Decode é uma comunidade de criadores, artistas e desenvolvedores.** Pintores, fotógrafos,
 > cineastas, ilustradores, designers, animadores, entusiastas e qualquer pessoa apaixonada por criação.
-> Se você cria, você faz parte. **[Venha conversar no Discord](https://discord.gg/artcraft).**
+> Se você cria, você faz parte.
 
 <p align="center">
   <a href="#o-que-ele-faz">O que ele faz</a> ·
   <a href="#recursos">Recursos</a> ·
   <a href="#downloads">Downloads</a> ·
   <a href="#compilar-a-partir-do-código-fonte">Compilar do código-fonte</a> ·
-  <a href="#a-suíte-de-aplicativos-decode">Decode App Suite</a> ·
-  <a href="https://discord.gg/artcraft">Discord</a>
+  <a href="#a-suíte-de-aplicativos-decode">Decode App Suite</a>
 </p>
 
 ## O que ele faz
@@ -221,7 +220,7 @@ DECODE_LAUNCHER_DOWNLOAD_BASE=http://127.0.0.1:8787/ cargo run --release -p deco
 Instruções para novos contribuidores e agentes de IA estão descritas em [`AGENTS.md`](AGENTS.md). Scripts de empacotamento ficam em [`packaging/`](packaging/).
 
 > [!IMPORTANT]
-> **Status:** O Decode Launcher está em fase alpha inicial. Caso encontre comportamentos inesperados, por favor abra uma issue no repositório (informando seu sistema operacional, o aplicativo que tentava instalar e o arquivo de log do launcher) ou entre em contato pelo [Discord](https://discord.gg/artcraft).
+> **Status:** O Decode Launcher está em fase alpha inicial. Caso encontre comportamentos inesperados, por favor abra uma issue no repositório oficial (informando seu sistema operacional, o aplicativo que tentava instalar e o arquivo de log do launcher).
 
 ## A Suíte de Aplicativos Decode
 
@@ -245,22 +244,16 @@ O Decode Launcher gerencia a **Decode App Suite**: ferramentas criativas livres 
 
 <br>
 
-<p align="center">
-  <a href="https://discord.gg/artcraft"><img alt="Participe da comunidade Decode no Discord" src="https://img.shields.io/badge/Entre%20no%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" height="40"></a>
-</p>
-
-<h3 align="center">Venha criar conosco</h3>
+<h3 align="center">Comunidade Decode</h3>
 
 <p align="center">
-  Nosso Discord é o ponto de encontro de criadores de todas as áreas: artistas digitais, fotógrafos,
-  animadores, designers, desenvolvedores e iniciantes. Compartilhe o que está produzindo, peça ajuda,
-  sugira melhorias ou reporte problemas. Você é muito bem-vindo!
+  Acompanhe o desenvolvimento e colabore com a comunidade de criadores, artistas e desenvolvedores da Decode.
+  Compartilhe o que está produzindo, solicite recursos ou reporte melhorias em nosso repositório oficial.
 </p>
 
 <p align="center">
-  <a href="https://discord.gg/artcraft"><b>discord.gg/artcraft</b></a> ·
-  <a href="https://kaiqueaurelio.github.io/decode-open-source-hub/">Decode Hub</a> ·
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher">Código do Decode Launcher</a>
+  <a href="https://decode-open-source-hub.vercel.app/"><b>Decode Hub Web</b></a> ·
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher"><b>Código do Decode Launcher</b></a>
 </p>
 
 ---
