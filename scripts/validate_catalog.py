@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the 13 Decode suite apps plus the separate launcher utility in Decode Monorepo."""
+"""Validate only first-party Decode apps plus the launcher utility."""
 import json
 import re
 import sys
@@ -17,57 +17,12 @@ REQUIRED = {
 OPTIONAL = {
     "downloadWindows", "downloadWindowsExe", "downloadLinux", "downloadMacOS",
 }
-EXPECTED_ORDER = [
-    "photocraft", "vectorcraft", "filmcraft", "lightcraft", "pdfcraft",
-    "effectcraft", "designcraft", "figcraft", "wordcraft", "soundcraft",
-    "deckcraft", "cadcraft", "gridcraft", "decode-craft", "decode-craftx", "decode-clip",
-]
-EXPECTED_NAMES = {
-    "photocraft":"DecodePhoto", "vectorcraft":"DecodeVector", "filmcraft":"DecodeFilm",
-    "lightcraft":"DecodeLight", "pdfcraft":"DecodePdf", "effectcraft":"DecodeEffect",
-    "designcraft":"DecodeDesign", "figcraft":"DecodeFig", "wordcraft":"DecodeWord",
-    "soundcraft":"DecodeSound", "deckcraft":"DecodeDeck", "cadcraft":"DecodeCAD",
-    "gridcraft":"DecodeGrid",
-    "decode-craft":"DecodeCraft",
-    "decode-craftx":"DecodeCraftX", "decode-clip":"DecodeClip",
-}
-SLUG_TO_APP_DIR = {
-    "photocraft": "decode-photo",
-    "vectorcraft": "decode-vector",
-    "filmcraft": "decode-film",
-    "lightcraft": "decode-light",
-    "pdfcraft": "decode-pdf",
-    "effectcraft": "decode-effect",
-    "designcraft": "decode-design",
-    "figcraft": "decode-fig",
-    "wordcraft": "decode-word",
-    "soundcraft": "decode-sound",
-    "deckcraft": "decode-deck",
-    "cadcraft": "decode-cad",
-    "gridcraft": "decode-grid",
-    "decode-craft": "decode-craft",
-    "decode-craftx": "decode-craftx",
-    "decode-clip": "decode-clip",
-}
-CATEGORIES = {
-    "Imagem e fotografia", "Design e publicação", "Vídeo e motion",
-    "Documentos e produtividade", "Áudio", "CAD e engenharia", "Vídeo e IA",
-}
-STAGES = {
-    "photocraft":"Alpha inicial", "vectorcraft":"Em desenvolvimento",
-    "filmcraft":"Em desenvolvimento", "lightcraft":"Em desenvolvimento",
-    "pdfcraft":"Alpha inicial", "effectcraft":"Em desenvolvimento",
-    "designcraft":"Em desenvolvimento", "figcraft":"Alpha inicial",
-    "wordcraft":"Em desenvolvimento", "soundcraft":"Em desenvolvimento",
-    "deckcraft":"Em desenvolvimento", "cadcraft":"Em desenvolvimento",
-    "gridcraft":"Em desenvolvimento",
-    "decode-craft":"Alpha inicial", "decode-craftx":"Em desenvolvimento",
-    "decode-clip":"Disponível",
-}
-PLATFORMS = {
-    slug: (["Linux", "Windows", "macOS", "Docker"] if slug == "decode-clip" else ["macOS", "Windows", "Linux"] if slug in ("filmcraft", "decode-craft") else ["macOS", "Windows", "Linux", "Web"])
-    for slug in EXPECTED_ORDER
-}
+EXPECTED_ORDER = ["decode-craft", "decode-craftx", "decode-clip"]
+EXPECTED_NAMES = {"decode-craft": "DecodeCraft", "decode-craftx": "DecodeCraftX", "decode-clip": "DecodeClip"}
+SLUG_TO_APP_DIR = {"decode-craft": "decode-craft", "decode-craftx": "decode-craftx", "decode-clip": "decode-clip"}
+CATEGORIES = {"Design e publicação", "Vídeo e IA"}
+STAGES = {"decode-craft": "Alpha inicial", "decode-craftx": "Em desenvolvimento", "decode-clip": "Disponível"}
+PLATFORMS = {"decode-craft": ["macOS", "Windows", "Linux"], "decode-craftx": ["macOS", "Windows", "Linux", "Web"], "decode-clip": ["Linux", "Windows", "macOS", "Docker"]}
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
@@ -91,8 +46,8 @@ def main():
     if not isinstance(items, list):
         print("ERRO: a raiz do catálogo deve ser uma lista.")
         return 1
-    if len(items) != 17:
-        errors.append(f"Esperados 16 apps Decode e 1 launcher; encontrados {len(items)} registros.")
+    if len(items) != 4:
+        errors.append(f"Esperados 3 aplicativos próprios e 1 launcher; encontrados {len(items)} registros.")
 
     slugs = []
     names = set()
