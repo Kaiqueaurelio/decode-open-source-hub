@@ -5,6 +5,11 @@ on:
     tags:
       - "v*"
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Tag da release existente para anexar os binários (ex.: v0.8.2). Deixe vazio para apenas testar a compilação."
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -22,10 +27,8 @@ jobs:
         include:
           - platform: windows-x86_64
             os: windows-latest
-            archive: zip
           - platform: linux-x86_64
             os: ubuntu-latest
-            archive: tar.gz
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     defaults:
@@ -56,23 +59,22 @@ jobs:
       - name: Check formatting
         run: cargo fmt --all -- --check
 
-      - name: Build launcher
-        run: cargo build --release --locked --workspace
+      - name: Build only Decode Launcher
+        run: cargo build --release --locked -p decode-launcher
 
       - name: Package Windows executable
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force -Path ../dist | Out-Null
-          $exe = Get-ChildItem -Path target/release -Filter *.exe -File |
-            Where-Object { $_.Name -match 'launcher' } |
-            Select-Object -First 1
-          if (-not $exe) {
-            Write-Error "Não foi encontrado um executável .exe com 'launcher' no nome em target/release."
+          $exe = "target/release/decode-launcher.exe"
+          if (-not (Test-Path $exe)) {
+            Write-Error "O build não gerou target/release/decode-launcher.exe."
             Get-ChildItem target/release -File | Select-Object -ExpandProperty Name
             exit 1
           }
-          Copy-Item $exe.FullName ../dist/decode-launcher-windows-x86_64.exe
+          Copy-Item $exe ../dist/decode-launcher-windows-x86_64.exe
           Compress-Archive -Path ../dist/decode-launcher-windows-x86_64.exe -DestinationPath ../dist/decode-launcher-windows-x86_64.zip -Force
 
       - name: Package Linux executable
@@ -81,9 +83,9 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p ../dist
-          exe="$(find target/release -maxdepth 1 -type f -executable -name '*launcher*' ! -name '*.so' | head -n 1)"
-          if [ -z "$exe" ]; then
-            echo "Não foi encontrado um binário executável com 'launcher' no nome em target/release."
+          exe="target/release/decode-launcher"
+          if [ ! -x "$exe" ]; then
+            echo "O build não gerou target/release/decode-launcher."
             ls -la target/release
             exit 1
           fi
@@ -98,10 +100,11 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Upload binaries to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Publish assets to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && inputs.release_tag || github.ref_name }}
           files: |
             dist/decode-launcher-${{ matrix.platform }}.*
           fail_on_unmatched_files: true
