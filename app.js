@@ -130,6 +130,7 @@
       iconBg: "#112242",
       icon: "wordcraft.png",
       upstream: "DecodeWord",
+      releaseName: "decode-word",
       appClass: "app-wordcraft",
       cmd: "cd apps/decode-word && cargo run --release"
     },
@@ -350,10 +351,10 @@
   function chooseAsset(item, os) {
     var slug = item.slug;
     var meta = appMetadata[slug] || {};
-    var pkgName = meta.releaseName || ("decode-" + slug.replace("craft", ""));
+    var pkgName = meta.releaseName || (slug.indexOf("decode-") === 0 ? slug : "decode-" + slug.replace("craft", ""));
     var BASE = "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases";
-    var VER = "v0.8.3";
-    var BASE_DL = BASE + "/download/" + VER;
+    var VER = "latest";
+    var BASE_DL = BASE + "/latest/download";
 
     if (os === "windows") {
       // Para o launcher, usar .exe direto; para apps usar a página de releases
