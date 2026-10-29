@@ -1,4 +1,4 @@
-name: Build CADCraft
+name: Build DecodeCAD (canonical repository)
 
 on:
   push:
@@ -51,8 +51,12 @@ jobs:
             binary: target/release/cadcraft
 
     steps:
-      - name: Check out source
+      - name: Check out canonical DecodeCAD source
         uses: actions/checkout@v4
+        with:
+          repository: Kaiqueaurelio/decodecad
+          ref: main
+          path: decodecad
 
       - name: Install Linux build dependencies
         if: runner.os == 'Linux'
@@ -64,15 +68,16 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Build desktop executable
+        working-directory: decodecad
         run: cargo build --locked --release -p cadcraft
 
       - name: Stage binary
         shell: bash
         run: |
           mkdir -p dist
-          cp "${{ matrix.binary }}" dist/
-          cp README.md dist/README-upstream.md
-          cp README-FORK.md dist/README-fork.md
+          cp "decodecad/${{ matrix.binary }}" dist/
+          cp decodecad/README.md dist/README-decodecad.md
+          cp decodecad/README-FORK.md dist/README-fork.md
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
