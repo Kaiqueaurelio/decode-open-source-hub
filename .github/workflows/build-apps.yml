@@ -127,6 +127,7 @@ jobs:
           test -f "$binary" || { echo "Binary not generated: $binary"; exit 1; }
           mkdir -p "$RUNNER_TEMP/decode-package/$folder/bin" "$GITHUB_WORKSPACE/dist"
           install -m 0755 "$binary" "$RUNNER_TEMP/decode-package/$folder/bin/$APP_ID"
+          strip --strip-unneeded "$RUNNER_TEMP/decode-package/$folder/bin/$APP_ID"
           tar -czf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" -C "$RUNNER_TEMP/decode-package" "$folder"
           tar -tzf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" | grep -F "$folder/bin/$APP_ID"
           sha256sum "$GITHUB_WORKSPACE/dist/$folder.tar.gz" > "$GITHUB_WORKSPACE/dist/$folder.tar.gz.sha256"
