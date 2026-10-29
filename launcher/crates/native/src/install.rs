@@ -7,9 +7,9 @@
 //! - Linux: the distro's own package (`.deb` through apt on the Debian family, `.rpm` through
 //!   dnf/zypper/rpm on the Fedora, Red Hat and SUSE families, read from `os-release`) with the
 //!   system's polkit password prompt; otherwise a Flatpak, otherwise an AppImage in
-//!   `~/Applications` (the AppImage convention), with a menu entry and icon in
-//!   `~/.local/share` so it shows up like any other app. A Flatpak or AppImage launcher prefers
-//!   its own format.
+//!   `~/Applications`, then the release tarball unpacked into the launcher's per-user data folder.
+//!   AppImages and tarball installs get a menu entry and icon in `~/.local/share`. A Flatpak or
+//!   AppImage launcher prefers its own format.
 //! - FreeBSD: the release's `/usr/local` tree, with a polkit prompt (or `~/.local` without one).
 //! - Linux, inside the Flatpak launcher with no usable host Flatpak (none installed, or
 //!   `flatpak-spawn` not allowed): the release tarball, unpacked into the launcher's own folder
@@ -131,7 +131,10 @@ pub fn install_at(
         #[cfg(target_os = "freebsd")]
         PackageKind::TarGz => freebsd::install_tree(app, &file, job.paths).map(|(bin, files, root)| Some(record(&version, kind, bin, files, root))),
         #[cfg(target_os = "linux")]
-        PackageKind::TarGz => linux::install_tree(app, &file, job.paths).map(|path| Some(record(&version, kind, path, Vec::new(), false))),
+        PackageKind::TarGz => linux::install_tree(app, &file, job.paths).map(|path| {
+            let files = linux::integrate(app, &path, &[], previous);
+            Some(record(&version, kind, path, files, false))
+        }),
         other => Err(format!("{} isn't supported on this system", other.label())),
     };
     match &result {
@@ -511,7 +514,10 @@ pub fn uninstall(
         // A tarball the launcher unpacked into its own folder: take the tree out and leave the
         // app's settings (`home/`) alone, so a reinstall finds its projects where they were.
         #[cfg(target_os = "linux")]
-        InstallSource::Launcher if record.is_some_and(|r| r.kind == PackageKind::TarGz) => linux::remove_tree(app, paths),
+        InstallSource::Launcher if record.is_some_and(|r| r.kind == PackageKind::TarGz) => {
+            linux::unintegrate(app, &path, record);
+            linux::remove_tree(app, paths)
+        },
         #[cfg(target_os = "linux")]
         InstallSource::Launcher => remove_appimage(app, &path, record),
         other => Err(format!("{} can't be removed from here", other.label())),
@@ -899,11 +905,11 @@ pub(crate) mod linux {
             kinds.push(PackageKind::Flatpak);
         }
         // The tarball runs inside the sandbox, so it is only ever offered there.
-        if is_flatpak && !kinds.contains(&PackageKind::TarGz) {
-            kinds.push(PackageKind::TarGz);
-        }
         if !kinds.contains(&PackageKind::AppImage) {
             kinds.push(PackageKind::AppImage);
+        }
+        if !kinds.contains(&PackageKind::TarGz) {
+            kinds.push(PackageKind::TarGz);
         }
         kinds
     }
@@ -1024,10 +1030,10 @@ pub(crate) mod linux {
     }
 
     /// Unpacks a release tarball (`bin/<app>`, `share/…`) into `<data>/apps/<app>`, a folder
-    /// only the launcher owns, and returns the app's binary. This is the fallback for the
-    /// Flatpak launcher when the host has no usable Flatpak: the app then runs inside the
-    /// sandbox instead of on the host. `bin` and `share` are swapped in one at a time, so an
-    /// update leaves the app's own `home/` beside them untouched.
+    /// only the launcher owns, and returns the app's binary. This is the last-resort Linux
+    /// installer when no native package, Flatpak or AppImage exists, and the sandbox fallback
+    /// when the host has no usable Flatpak. `bin` and `share` are swapped in one at a time, so
+    /// an update leaves the app's own `home/` beside them untouched.
     pub fn install_tree(app: &DecodeApp, file: &Path, paths: &Paths) -> Result<PathBuf, String> {
         let staged = paths.cache.join(format!("{}.new", app.id));
         let result = unpack_tree(app, file, &staged, paths);
@@ -1135,8 +1141,8 @@ pub(crate) mod linux {
         data.join("icons/hicolor/128x128/apps").join(format!("{}.png", app.bundle_id()))
     }
 
-    /// Adds `appimage` to the desktop's menu. Best effort: a failure here never fails the
-    /// install. Returns the files written, for the record.
+    /// Adds an AppImage or unpacked tarball executable to the desktop's menu. Best effort: a
+    /// failure here never fails the install. Returns the files written, for the record.
     pub fn integrate(app: &DecodeApp, appimage: &Path, replaced: &[PathBuf], previous: Option<&Record>) -> Vec<PathBuf> {
         match host_data_dir() {
             Some(data) => integrate_into(&data, app, appimage, replaced, previous),
@@ -2667,21 +2673,22 @@ mod tests {
         let kinds = order_available_kinds(false, false, true, false, false, true);
         assert_eq!(kinds.first(), Some(&PackageKind::ArchPkg));
 
-        // Base Linux launcher without root/distro packaging falls back to Flatpak then AppImage
+        // Base Linux launcher without root/distro packaging falls back to Flatpak, AppImage, then tarball
         let kinds = order_available_kinds(false, false, true, false, false, false);
         assert_eq!(kinds.first(), Some(&PackageKind::Flatpak));
         assert_eq!(kinds.get(1), Some(&PackageKind::AppImage));
+        assert_eq!(kinds.get(2), Some(&PackageKind::TarGz));
 
-        // The tarball runs inside the sandbox, so it is only offered there: with a usable host
-        // Flatpak it stays an alternative, without one it is the default (an AppImage cannot
-        // mount in a sandbox, and a distro package needs root).
+        // Tarballs are a fallback for Linux systems that have no compatible AppImage or native
+        // package. Inside a Flatpak they are also the fallback when no usable host Flatpak exists.
         let kinds = order_available_kinds(true, false, true, false, false, false);
         assert_eq!(kinds.first(), Some(&PackageKind::Flatpak));
         assert_eq!(kinds.get(1), Some(&PackageKind::TarGz));
         let kinds = order_available_kinds(true, false, false, false, false, false);
         assert_eq!(kinds, [PackageKind::TarGz, PackageKind::AppImage]);
+        // A normal Linux install always keeps the tarball as a last-resort fallback.
         for (appimage, flatpak) in [(true, true), (false, false), (false, true)] {
-            assert!(!order_available_kinds(false, appimage, flatpak, true, true, false).contains(&PackageKind::TarGz));
+            assert!(order_available_kinds(false, appimage, flatpak, true, true, false).contains(&PackageKind::TarGz));
         }
     }
 
