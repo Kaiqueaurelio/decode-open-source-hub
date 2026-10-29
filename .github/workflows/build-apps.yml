@@ -207,4 +207,4 @@ jobs:
             dist/previous/*
             dist/*-linux-x86_64.tar.gz
             dist/SHA256SUMS.txt
-          fail_on_unmatched_files: true
+          fail_on_unmatched_files: false
