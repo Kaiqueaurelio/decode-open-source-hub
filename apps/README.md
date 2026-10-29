@@ -38,3 +38,7 @@ Cada aplicativo é um workspace modular em Rust com interface nativa acelerada p
 * **Workspaces independentes:** Cada aplicação em `apps/<app>` conta com seu próprio `Cargo.toml`, crates internos (`crates/*`), shell de desktop (`apps/*`) e receitas de empacotamento.
 * **Gerenciamento centralizado:** O [Decode Launcher](../launcher/) descobre, abre, instala e atualiza todos os aplicativos desta suíte.
 * **Licenciamento:** Todas as ferramentas são de código aberto sob licenças **MIT OR Apache-2.0**.
+
+### DecodeCAD — repositório canônico
+
+O **DecodeCAD** é mantido em um repositório próprio: [Kaiqueaurelio/decodecad](https://github.com/Kaiqueaurelio/decodecad). O pipeline de compilação do hub baixa o código desse repositório na branch `main`; a pasta histórica `apps/decode-cad` não é a fonte de compilação. Os pacotes publicados e as instruções mais atuais estão em [DecodeCAD Releases](https://github.com/Kaiqueaurelio/decodecad/releases).
