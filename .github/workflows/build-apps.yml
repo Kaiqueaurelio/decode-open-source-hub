@@ -1,41 +1,155 @@
-name: Build & Package Decode Suite Apps
+name: Build and publish native Decode apps
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Tag da release existente para anexar os binários (ex.: v0.9.0). Vazio = somente compilar/testar."
+        required: false
+        type: string
 
 permissions:
   contents: write
 
+concurrency:
+  group: decode-app-build-${{ github.event.inputs.release_tag || github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  package-apps:
-    name: Package All 13 Decode Suite Apps
+  build-linux:
+    name: Build ${{ matrix.id }} (Linux x86_64)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - directory: decode-deck
+            package: deckcraft
+            id: deckcraft
+          - directory: decode-design
+            package: designcraft
+            id: designcraft
+          - directory: decode-effect
+            package: effectcraft
+            id: effectcraft
+          - directory: decode-fig
+            package: figcraft
+            id: figcraft
+          - directory: decode-film
+            package: filmcraft
+            id: filmcraft
+          - directory: decode-grid
+            package: gridcraft
+            id: gridcraft
+          - directory: decode-light
+            package: lightcraft
+            id: lightcraft
+          - directory: decode-pdf
+            package: pdfcraft
+            id: pdfcraft
+          - directory: decode-photo
+            package: photocraft
+            id: photocraft
+          - directory: decode-sound
+            package: soundcraft
+            id: soundcraft
+          - directory: decode-vector
+            package: vectorcraft
+            id: vectorcraft
+          - directory: decode-word
+            package: wordcraft
+            id: wordcraft
     steps:
-      - name: Checkout Repository
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Package App Bundles
+      - name: Install Linux build dependencies
         run: |
-          mkdir -p dist
-          for app_dir in apps/decode-*; do
-            if [ -d "$app_dir" ]; then
-              app_name=$(basename "$app_dir")
-              echo "Packaging $app_name..."
-              tar -czvf "dist/${app_name}-release-package.tar.gz" -C apps "$app_name"
-              sha256sum "dist/${app_name}-release-package.tar.gz" > "dist/${app_name}-release-package.tar.gz.sha256"
-            fi
-          done
-          ls -lh dist/
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential pkg-config cmake libssl-dev libdbus-1-dev \
+            libx11-dev libxkbcommon-dev libwayland-dev libxrandr-dev \
+            libxi-dev libxcursor-dev libxinerama-dev libxfixes-dev \
+            libgl1-mesa-dev libasound2-dev libudev-dev \
+            libfontconfig1-dev libfreetype6-dev
 
-      - name: Upload App Packages to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            apps/${{ matrix.directory }} -> target
+
+      - name: Build the actual application binary
+        working-directory: apps/${{ matrix.directory }}
+        run: cargo build --release --locked -p ${{ matrix.package }}
+
+      - name: Package executable in the layout expected by Decode Launcher
+        shell: bash
+        env:
+          APP_ID: ${{ matrix.id }}
+          APP_PACKAGE: ${{ matrix.package }}
+          EVENT_NAME: ${{ github.event_name }}
+          TAG_NAME: ${{ github.ref_name }}
+          INPUT_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            tag="${INPUT_TAG:-v0.0.0}"
+          else
+            tag="$TAG_NAME"
+          fi
+          version="${tag#v}"
+          folder="${APP_ID}-${version}-linux-x86_64"
+          binary="apps/${{ matrix.directory }}/target/release/${APP_PACKAGE}"
+          test -f "$binary" || { echo "Binary not generated: $binary"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/decode-package/$folder/bin" "$GITHUB_WORKSPACE/dist"
+          install -m 0755 "$binary" "$RUNNER_TEMP/decode-package/$folder/bin/$APP_ID"
+          tar -czf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" -C "$RUNNER_TEMP/decode-package" "$folder"
+          tar -tzf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" | grep -F "$folder/bin/$APP_ID"
+          sha256sum "$GITHUB_WORKSPACE/dist/$folder.tar.gz" > "$GITHUB_WORKSPACE/dist/$folder.tar.gz.sha256"
+
+      - name: Upload compiled package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: decode-${{ matrix.id }}-linux-x86_64
+          path: |
+            dist/*.tar.gz
+            dist/*.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    name: Attach real binaries to GitHub Release
+    needs: build-linux
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all compiled packages
+        uses: actions/download-artifact@v4
+        with:
+          pattern: decode-*-linux-x86_64
+          path: dist
+          merge-multiple: true
+
+      - name: Create release checksum manifest
+        working-directory: dist
+        run: |
+          set -euo pipefail
+          sha256sum *.tar.gz > SHA256SUMS.txt
+          test "$(find . -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 12
+
+      - name: Publish packages to the selected release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && inputs.release_tag || github.ref_name }}
           files: |
-            dist/decode-*-release-package.tar.gz
-            dist/decode-*-release-package.tar.gz.sha256
+            dist/*-linux-x86_64.tar.gz
+            dist/SHA256SUMS.txt
+          fail_on_unmatched_files: true
