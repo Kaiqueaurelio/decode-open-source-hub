@@ -8,8 +8,8 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "software.json"
-EXPECTED_ORDER = ["decode-craft", "decode-craftx", "decode-clip"]
-EXPECTED_NAMES = {"decode-craft": "DecodeCraft", "decode-craftx": "DecodeCraftX", "decode-clip": "DecodeClip"}
+EXPECTED_ORDER = ["decode-craft", "decode-craftx", "decode-clip", "decode-cad"]
+EXPECTED_NAMES = {"decode-craft": "DecodeCraft", "decode-craftx": "DecodeCraftX", "decode-clip": "DecodeClip", "decode-cad": "Decode CAD"}
 SLUG_TO_APP_DIR = {"decode-craft": "decode-craft", "decode-craftx": "decode-craftx", "decode-clip": "decode-clip"}
 
 class CatalogTests(unittest.TestCase):
@@ -19,12 +19,12 @@ class CatalogTests(unittest.TestCase):
         cls.by_slug = {item["slug"]: item for item in cls.items}
 
     def test_contains_only_first_party_apps_and_one_launcher(self):
-        self.assertEqual(len(self.items), 4)
-        self.assertEqual([item["slug"] for item in self.items], EXPECTED_ORDER + ["decode-launcher"])
+        self.assertEqual(len(self.items), 5)
+        self.assertEqual([item["slug"] for item in self.items], ["decode-craft", "decode-craftx", "decode-clip", "decode-launcher", "decode-cad"])
         apps = [item for item in self.items if item["kind"] == "Aplicativo Decode"]
-        self.assertEqual([item["slug"] for item in apps], EXPECTED_ORDER)
+        self.assertEqual({item["slug"] for item in apps}, set(EXPECTED_ORDER))
         self.assertEqual({item["slug"]: item["name"] for item in apps}, EXPECTED_NAMES)
-        first_party_names = {"decode-craft": "DecodeCraft", "decode-craftx": "DecodeCraftX", "decode-clip": "DecodeClip"}
+        first_party_names = EXPECTED_NAMES
         for item in apps:
             self.assertIn(first_party_names[item["slug"]], item["tags"])
         self.assertEqual(self.by_slug["decode-launcher"]["kind"], "Launcher")
@@ -39,6 +39,11 @@ class CatalogTests(unittest.TestCase):
         for slug in EXPECTED_ORDER:
             item = self.by_slug[slug]
             with self.subTest(app=item["name"]):
+                if slug == "decode-cad":
+                    self.assertEqual(item["sourceUrl"], "https://github.com/Kaiqueaurelio/decodecad")
+                    self.assertEqual(item["licenseUrl"], "https://github.com/Kaiqueaurelio/decodecad")
+                    self.assertEqual(item["downloadUrl"], "https://github.com/Kaiqueaurelio/decodecad/releases")
+                    continue
                 app_dir = SLUG_TO_APP_DIR[slug]
                 self.assertEqual(item["sourceUrl"], f"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{app_dir}")
                 expected_lic = f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE" if slug == "decode-clip" else f"https://github.com/Kaiqueaurelio/decode-open-source-hub/blob/main/apps/{app_dir}/LICENSE-MIT"
