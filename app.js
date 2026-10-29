@@ -167,7 +167,7 @@
       icon: "cadcraft.png",
       upstream: "DecodeCAD",
       appClass: "app-cadcraft",
-      cmd: "cd apps/decode-cad && cargo run --release"
+      cmd: "git clone https://github.com/Kaiqueaurelio/decodecad.git && cd decodecad && cargo run --release -p cadcraft"
     },
     gridcraft: {
       number: "13",
