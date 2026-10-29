@@ -36,6 +36,7 @@ jobs:
           - directory: decode-deck
             package: deckcraft
             id: deckcraft
+          # DecodeCAD is built from Kaiqueaurelio/decodecad, not the legacy in-hub copy.
           - directory: decode-cad-canonical
             package: cadcraft
             id: cadcraft
@@ -207,7 +208,7 @@ jobs:
             (cd dist/previous && sha256sum *) >> dist/SHA256SUMS.txt
           fi
           (cd dist && sha256sum *-linux-x86_64.tar.gz) >> dist/SHA256SUMS.txt
-          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 12
+          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 13
 
       - name: Publish packages to the selected release
         uses: softprops/action-gh-release@v2
