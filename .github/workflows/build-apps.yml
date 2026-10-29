@@ -1,4 +1,5 @@
 name: Build and publish native Decode apps
+# A main-branch commit containing [publish-decode-apps] publishes the compiled apps to the latest release.
 
 on:
   push:
