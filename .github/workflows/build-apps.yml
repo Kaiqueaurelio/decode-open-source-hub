@@ -130,7 +130,7 @@ jobs:
           strip --strip-unneeded "$RUNNER_TEMP/decode-package/$folder/bin/$APP_ID"
           tar -czf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" -C "$RUNNER_TEMP/decode-package" "$folder"
           tar -tzf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" | grep -F "$folder/bin/$APP_ID"
-          sha256sum "$GITHUB_WORKSPACE/dist/$folder.tar.gz" > "$GITHUB_WORKSPACE/dist/$folder.tar.gz.sha256"
+          (cd "$GITHUB_WORKSPACE/dist" && sha256sum "$folder.tar.gz" > "$folder.tar.gz.sha256" && sha256sum --check "$folder.tar.gz.sha256")
 
       - name: Upload compiled package artifact
         uses: actions/upload-artifact@v4
