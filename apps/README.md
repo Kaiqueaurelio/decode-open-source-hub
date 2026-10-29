@@ -41,4 +41,4 @@ Cada aplicativo é um workspace modular em Rust com interface nativa acelerada p
 
 ### DecodeCAD — repositório canônico
 
-O **DecodeCAD** é mantido em um repositório próprio: [Kaiqueaurelio/decodecad](https://github.com/Kaiqueaurelio/decodecad). O pipeline de compilação do hub baixa o código desse repositório na branch `main`; a pasta histórica `apps/decode-cad` não é a fonte de compilação. Os pacotes publicados e as instruções mais atuais estão em [DecodeCAD Releases](https://github.com/Kaiqueaurelio/decodecad/releases).
+O **DecodeCAD** é mantido em um repositório próprio: [Kaiqueaurelio/decodecad](https://github.com/Kaiqueaurelio/decodecad). O pipeline de compilação do hub baixa o código desse repositório na branch `main`; a pasta histórica `apps/decode-cad` não é a fonte de compilação. A publicação Linux da suíte valida a presença dos 13 pacotes antes de criar a release. Os pacotes publicados e as instruções mais atuais estão em [DecodeCAD Releases](https://github.com/Kaiqueaurelio/decodecad/releases).
