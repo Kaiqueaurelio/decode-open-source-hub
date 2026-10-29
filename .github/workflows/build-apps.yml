@@ -111,7 +111,13 @@ jobs:
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
             tag="${INPUT_TAG:-v0.0.0}"
           elif [[ "$EVENT_NAME" == "push" && "$GITHUB_REF" == "refs/heads/main" && "$PUBLISH_LATEST" == "true" ]]; then
-            tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+            latest="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+            if [[ "$latest" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              tag="v${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.$((10#${BASH_REMATCH[3]} + 1))"
+            else
+              echo "Latest release tag is not semantic version: $latest" >&2
+              exit 1
+            fi
           else
             tag="$TAG_NAME"
           fi
@@ -141,12 +147,22 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]'))
     runs-on: ubuntu-latest
     steps:
-      - name: Resolve latest release for one-time main-branch publish
+      - name: Resolve next release tag for one-time main-branch publish
         id: target
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: echo "tag=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)" >> "$GITHUB_OUTPUT"
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+          if [[ "$latest" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            tag="v${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.$((10#${BASH_REMATCH[3]} + 1))"
+          else
+            echo "Latest release tag is not semantic version: $latest" >&2
+            exit 1
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
 
       - name: Download all compiled packages
         uses: actions/download-artifact@v4
@@ -155,18 +171,40 @@ jobs:
           path: dist
           merge-multiple: true
 
-      - name: Create release checksum manifest
-        working-directory: dist
+      - name: Preserve existing release assets when creating a new release
+        if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]'))
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_TAG: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]') && steps.target.outputs.tag || github.ref_name }}
+        shell: bash
         run: |
           set -euo pipefail
-          sha256sum *.tar.gz > SHA256SUMS.txt
-          test "$(find . -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 12
+          mkdir -p dist/previous
+          previous_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=20" --jq "[.[] | select(.tag_name != \"$TARGET_TAG\")][0].tag_name")"
+          test -n "$previous_tag" || { echo "No previous release found to preserve"; exit 1; }
+          gh release download "$previous_tag" --repo "$GITHUB_REPOSITORY" --dir dist/previous
+          rm -f dist/previous/SHA256SUMS.txt
+
+      - name: Create release checksum manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          : > dist/SHA256SUMS.txt
+          if [[ -d dist/previous ]]; then
+            (cd dist/previous && sha256sum *) >> dist/SHA256SUMS.txt
+          fi
+          (cd dist && sha256sum *-linux-x86_64.tar.gz) >> dist/SHA256SUMS.txt
+          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 12
 
       - name: Publish packages to the selected release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && inputs.release_tag || (startsWith(github.ref, 'refs/tags/v') && github.ref_name) || steps.target.outputs.tag }}
+          target_commitish: main
+          generate_release_notes: true
           files: |
+            dist/previous/*
             dist/*-linux-x86_64.tar.gz
             dist/SHA256SUMS.txt
           fail_on_unmatched_files: true
