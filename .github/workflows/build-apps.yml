@@ -2,6 +2,11 @@ name: Build and publish native Decode apps
 
 on:
   push:
+    branches:
+      - main
+    paths:
+      - "apps/**"
+      - ".github/workflows/build-apps.yml"
     tags:
       - "v*"
   workflow_dispatch:
