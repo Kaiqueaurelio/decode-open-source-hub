@@ -133,5 +133,39 @@
     "downloadWindowsExe": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher.exe",
     "downloadLinux": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.tar.gz",
     "downloadMacOS": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-macos.tar.gz"
+  },
+  {
+    "slug": "decode-cad",
+    "name": "Decode CAD",
+    "icon": "📐",
+    "category": "Engenharia e desenho técnico",
+    "kind": "Aplicativo Decode",
+    "tagline": "CAD 2D/3D para desenho técnico, documentação e projetos",
+    "description": "Aplicativo CAD nativo desenvolvido em Rust, com ferramentas de desenho, camadas, cotas, hachuras, importação/exportação DXF/DWG e automação por CLI/MCP. Consulte o repositório e as releases oficiais para requisitos e pacotes disponíveis.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "license": "MIT OR Apache-2.0",
+    "licenseUrl": "https://github.com/Kaiqueaurelio/decodecad",
+    "websiteUrl": "https://github.com/Kaiqueaurelio/decodecad",
+    "sourceUrl": "https://github.com/Kaiqueaurelio/decodecad",
+    "downloadUrl": "https://github.com/Kaiqueaurelio/decodecad/releases",
+    "tags": [
+      "Decode CAD",
+      "DecodeCAD",
+      "CAD",
+      "desenho técnico",
+      "DXF",
+      "DWG",
+      "Rust",
+      "MCP"
+    ],
+    "stage": "Disponível",
+    "featured": true,
+    "downloadWindows": "https://github.com/Kaiqueaurelio/decodecad/releases/latest",
+    "downloadLinux": "https://github.com/Kaiqueaurelio/decodecad/releases/latest",
+    "downloadMacOS": "https://github.com/Kaiqueaurelio/decodecad/releases/latest"
   }
 ]
