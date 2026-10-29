@@ -36,6 +36,9 @@ jobs:
           - directory: decode-deck
             package: deckcraft
             id: deckcraft
+          - directory: decode-cad-canonical
+            package: cadcraft
+            id: cadcraft
           - directory: decode-design
             package: designcraft
             id: designcraft
@@ -73,6 +76,14 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Check out canonical DecodeCAD source
+        if: matrix.id == 'cadcraft'
+        uses: actions/checkout@v4
+        with:
+          repository: Kaiqueaurelio/decodecad
+          ref: main
+          path: apps/decode-cad-canonical
+
       - name: Install Linux build dependencies
         run: |
           sudo apt-get update
@@ -81,7 +92,7 @@ jobs:
             libx11-dev libxkbcommon-dev libwayland-dev libxrandr-dev \
             libxi-dev libxcursor-dev libxinerama-dev libxfixes-dev \
             libgl1-mesa-dev libasound2-dev libudev-dev \
-            libfontconfig1-dev libfreetype6-dev
+            libfontconfig1-dev libfreetype6-dev libxcb1-dev mesa-vulkan-drivers
 
       - name: Install stable Rust
         uses: dtolnay/rust-toolchain@stable
