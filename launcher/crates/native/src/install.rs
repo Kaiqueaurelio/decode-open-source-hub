@@ -905,11 +905,21 @@ pub(crate) mod linux {
             kinds.push(PackageKind::Flatpak);
         }
         // The tarball runs inside the sandbox, so it is only ever offered there.
-        if !kinds.contains(&PackageKind::AppImage) {
-            kinds.push(PackageKind::AppImage);
-        }
-        if !kinds.contains(&PackageKind::TarGz) {
-            kinds.push(PackageKind::TarGz);
+        if is_flatpak {
+            // AppImages cannot mount in the sandbox; try the tarball before that fallback.
+            if !kinds.contains(&PackageKind::TarGz) {
+                kinds.push(PackageKind::TarGz);
+            }
+            if !kinds.contains(&PackageKind::AppImage) {
+                kinds.push(PackageKind::AppImage);
+            }
+        } else {
+            if !kinds.contains(&PackageKind::AppImage) {
+                kinds.push(PackageKind::AppImage);
+            }
+            if !kinds.contains(&PackageKind::TarGz) {
+                kinds.push(PackageKind::TarGz);
+            }
         }
         kinds
     }
