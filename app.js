@@ -349,25 +349,32 @@
   }
 
   function chooseAsset(item, os) {
-    var slug = item.slug;
-    var meta = appMetadata[slug] || {};
-    var pkgName = meta.releaseName || (slug.indexOf("decode-") === 0 ? slug : "decode-" + slug.replace("craft", ""));
-    var BASE = "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases";
-    var VER = "latest";
-    var BASE_DL = BASE + "/latest/download";
+    var BASE = "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest";
+    var platformLinks = {
+      windows: item.downloadWindowsExe || item.downloadWindows,
+      macos: item.downloadMacOS,
+      linux: item.downloadLinux
+    };
+    var url = platformLinks[os];
 
-    if (os === "windows") {
-      // Para o launcher, usar .exe direto; para apps usar a página de releases
-      var winUrl = item.downloadWindowsExe || item.downloadWindows || (BASE_DL + "/" + pkgName + "-release-package.zip") || BASE;
-      var winLabel = item.downloadWindowsExe ? "↓ Baixar .exe (Windows)" : "↓ Baixar Windows";
-      return { label: winLabel, url: winUrl, version: VER };
-    } else if (os === "macos") {
-      var macUrl = item.downloadMacOS || (BASE_DL + "/" + pkgName + "-release-package.tar.gz") || BASE;
-      return { label: "↓ Baixar macOS (.tar.gz)", url: macUrl, version: VER };
-    } else {
-      var linuxUrl = item.downloadLinux || (BASE_DL + "/" + pkgName + "-release-package.tar.gz");
-      return { label: "↓ Baixar Linux (.tar.gz)", url: linuxUrl, version: VER };
+    // Never synthesize an asset filename: releases may not contain that package.
+    // Use an explicitly configured download, otherwise send the user to the
+    // release page where they can choose a real asset.
+    if (url) {
+      return {
+        label: os === "windows" && item.downloadWindowsExe
+          ? "↓ Baixar .exe (Windows)"
+          : "↓ Baixar " + (os === "macos" ? "macOS" : os === "windows" ? "Windows" : "Linux"),
+        url: url,
+        version: "latest"
+      };
     }
+
+    return {
+      label: "Ver downloads disponíveis",
+      url: item.downloadUrl || BASE,
+      version: "latest"
+    };
   }
 
   function renderPlatformOptions() {
