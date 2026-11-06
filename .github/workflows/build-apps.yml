@@ -78,7 +78,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check out the pinned Craft Fonts input
-        if: matrix.id == 'lightcraft' || matrix.id == 'deckcraft' || matrix.id == 'wordcraft'
+        if: matrix.id == 'lightcraft' || matrix.id == 'deckcraft' || matrix.id == 'designcraft' || matrix.id == 'pdfcraft' || matrix.id == 'wordcraft'
         uses: actions/checkout@v4
         with:
           repository: storytold/craft-fonts
@@ -157,7 +157,7 @@ jobs:
           version_var="$(printf '%s_VERSION' "$APP_ID" | tr '[:lower:]' '[:upper:]')"
           export "$version_var=$version"
           package_script="apps/${{ matrix.directory }}/packaging/linux/package.sh"
-          if [[ "$APP_ID" == "deckcraft" || "$APP_ID" == "lightcraft" || "$APP_ID" == "wordcraft" ]]; then
+          if [[ "$APP_ID" == "deckcraft" || "$APP_ID" == "designcraft" || "$APP_ID" == "lightcraft" || "$APP_ID" == "pdfcraft" || "$APP_ID" == "wordcraft" ]]; then
             export CRAFT_FONTS_DIR="$GITHUB_WORKSPACE/apps/craft-fonts"
           fi
           if [[ "$APP_ID" == "cadcraft" ]]; then
