@@ -1,0 +1,82 @@
+name: Build and publish Decode Launcher AppImage
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "launcher/**"
+      - ".github/workflows/build-launcher-appimage.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: decode-launcher-appimage-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    name: Build AppImage for custom Linux install folders
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential pkg-config libssl-dev libdbus-1-dev \
+            libx11-dev libxkbcommon-dev libwayland-dev libxrandr-dev \
+            libxi-dev libxcursor-dev libxinerama-dev libxfixes-dev \
+            libgl1-mesa-dev libasound2-dev libudev-dev \
+            libfontconfig1-dev libfreetype6-dev libxcb1-dev zsync
+
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            launcher -> target
+
+      - name: Build Decode Launcher
+        working-directory: launcher
+        run: cargo build --release --locked -p decode-launcher
+
+      - name: Package AppImage and stable download name
+        shell: bash
+        run: |
+          set -euo pipefail
+          DIST="$GITHUB_WORKSPACE/dist" launcher/packaging/linux/package.sh --skip-build --formats appimage
+          appimage="$(find dist -maxdepth 1 -type f -name 'decode-launcher-*-linux-x86_64.AppImage' -print -quit)"
+          test -n "$appimage" || { echo "AppImage was not generated"; exit 1; }
+          test -s "$appimage.zsync" || { echo "AppImage update metadata was not generated"; exit 1; }
+          cp "$appimage" dist/decode-launcher-linux-x86_64.AppImage
+          versioned_name="$(basename "$appimage")"
+          (cd dist && sha256sum "$versioned_name" decode-launcher-linux-x86_64.AppImage > SHA256SUMS-AppImage.txt)
+          "$appimage" --appimage-extract-and-run --version
+
+      - name: Resolve latest published release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+          test -n "$tag"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Upload AppImage to the latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release.outputs.tag }}
+          files: |
+            dist/decode-launcher-*-linux-x86_64.AppImage
+            dist/decode-launcher-linux-x86_64.AppImage
+            dist/decode-launcher-*-linux-x86_64.AppImage.zsync
+            dist/SHA256SUMS-AppImage.txt
+          fail_on_unmatched_files: true
