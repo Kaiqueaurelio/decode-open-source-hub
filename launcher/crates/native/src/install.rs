@@ -517,7 +517,7 @@ pub fn uninstall(
         InstallSource::Launcher if record.is_some_and(|r| r.kind == PackageKind::TarGz) => {
             linux::unintegrate(app, &path, record);
             linux::remove_tree(app, paths)
-        },
+        }
         #[cfg(target_os = "linux")]
         InstallSource::Launcher => remove_appimage(app, &path, record),
         other => Err(format!("{} can't be removed from here", other.label())),
