@@ -188,6 +188,7 @@ jobs:
           (cd "$GITHUB_WORKSPACE/dist" && sha256sum "$APP_ID-$version-linux-x86_64.AppImage" "$APP_ID-$version-linux-x86_64.AppImage.zsync" > "$APP_ID-$version-linux-x86_64.AppImage.sha256" && sha256sum --check "$APP_ID-$version-linux-x86_64.AppImage.sha256")
 
       - name: Upload compiled package artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: decode-${{ matrix.id }}-linux-x86_64
@@ -197,7 +198,7 @@ jobs:
             dist/*.AppImage
             dist/*.AppImage.zsync
             dist/*.AppImage.sha256
-          if-no-files-found: error
+          if-no-files-found: ignore
           retention-days: 14
 
   build-windows:
@@ -318,13 +319,14 @@ jobs:
           "$hash  $folder-portable.zip" | Out-File -Encoding ascii "dist/$folder-portable.zip.sha256"
 
       - name: Upload Windows build artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: decode-${{ matrix.id }}-windows-x64
           path: |
             dist/*-windows-x64-portable.zip
             dist/*-windows-x64-portable.zip.sha256
-          if-no-files-found: error
+          if-no-files-found: ignore
           retention-days: 14
 
   publish:
