@@ -10,6 +10,13 @@ on:
       - ".github/workflows/build-apps.yml"
     tags:
       - "v*"
+  pull_request:
+    branches: [main]
+    paths:
+      - "apps/**"
+      - "scripts/verify-artifacts.py"
+      - "scripts/apps-manifest.json"
+      - ".github/workflows/build-apps.yml"
   workflow_dispatch:
     inputs:
       release_tag:
@@ -18,6 +25,7 @@ on:
         type: string
 
 permissions:
+  actions: read
   contents: write
 
 concurrency:
@@ -92,7 +100,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Kaiqueaurelio/decodecad
-          ref: main
+          ref: d463899022f2148a45dd6c940d8eec10c9683b71
           path: apps/decode-cad-canonical
 
       - name: Install Linux build dependencies
@@ -128,6 +136,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           TAG_NAME: ${{ github.ref_name }}
           INPUT_TAG: ${{ inputs.release_tag }}
+          RUN_NUMBER: ${{ github.run_number }}
           PUBLISH_LATEST: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]') }}
           GH_TOKEN: ${{ github.token }}
           AWS_LC_SYS_CFLAGS_x86_64_unknown_linux_gnu: ${{ matrix.id == 'pdfcraft' && '-D__isoc23_sscanf=__isoc99_sscanf -D__isoc23_strtol=strtol' || '' }}
@@ -143,8 +152,10 @@ jobs:
               echo "Latest release tag is not semantic version: $latest" >&2
               exit 1
             fi
-          else
+          elif [[ "$GITHUB_REF" == refs/tags/v* ]]; then
             tag="$TAG_NAME"
+          else
+            tag="v0.0.0-ci.${RUN_NUMBER}"
           fi
           version="${tag#v}"
           folder="${APP_ID}-${version}-linux-x86_64"
@@ -245,7 +256,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Kaiqueaurelio/decodecad
-          ref: main
+          ref: d463899022f2148a45dd6c940d8eec10c9683b71
           path: apps/decode-cad-canonical
 
       - name: Install stable Rust
@@ -280,10 +291,13 @@ jobs:
           TAG_NAME: ${{ github.ref_name }}
           INPUT_TAG: ${{ inputs.release_tag }}
           GH_TOKEN: ${{ github.token }}
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
           if ($env:EVENT_NAME -eq "workflow_dispatch") {
             $tag = if ($env:INPUT_TAG) { $env:INPUT_TAG } else { "v0.0.0" }
-          } elseif ($env:TAG_NAME -eq "main") {
+          } elseif ($env:GITHUB_REF -like "refs/tags/v*") {
+            $tag = $env:TAG_NAME
+          } elseif ($env:GITHUB_REF -eq "refs/heads/main") {
             $latest = gh api "repos/$env:GITHUB_REPOSITORY/releases/latest" --jq .tag_name
             if ($latest -match '^v(\d+)\.(\d+)\.(\d+)$') {
               $tag = "v$($Matches[1]).$($Matches[2]).$([int]$Matches[3] + 1)"
@@ -291,7 +305,7 @@ jobs:
               throw "Latest release tag is not semantic version: $latest"
             }
           } else {
-            $tag = $env:TAG_NAME
+            $tag = "v0.0.0-ci.$env:RUN_NUMBER"
           }
           $version = $tag.TrimStart("v")
           $folder = "$($env:APP_ID)-$version-windows-x64"
@@ -314,9 +328,9 @@ jobs:
           retention-days: 14
 
   publish:
-    name: Attach real binaries to GitHub Release
+    name: Validate and publish available binaries
     needs: [build-linux, build-windows]
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]'))
+    if: ${{ always() && (startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]'))) }}
     runs-on: ubuntu-latest
     steps:
       - name: Resolve next release tag for one-time main-branch publish
@@ -336,12 +350,28 @@ jobs:
           fi
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
 
-      - name: Download all compiled packages
+      - name: Download all compiled packages that completed
+        id: downloads
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           pattern: decode-*-*
           path: dist
           merge-multiple: true
+
+      - name: Summarize matrix jobs that failed
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          echo "### Build matrix failures" >> "$GITHUB_STEP_SUMMARY"
+          echo "Run: [$GITHUB_RUN_ID]($run_url)" >> "$GITHUB_STEP_SUMMARY"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs?per_page=100" \
+            --jq '.jobs[] | select(.conclusion == "failure") | "- \(.name) — [job \(.id)](\(.html_url))"' \
+            | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Preserve existing release assets when creating a new release
         if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]'))
@@ -357,6 +387,16 @@ jobs:
           gh release download "$previous_tag" --repo "$GITHUB_REPOSITORY" --dir dist/previous
           rm -f dist/previous/SHA256SUMS.txt
 
+      - name: Validate artifact names, checksums and matrix coverage
+        id: verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          python3 scripts/verify-artifacts.py dist --allow-missing --summary "$GITHUB_STEP_SUMMARY"
+          count="$(find dist -maxdepth 1 -type f | grep -E '/[a-z0-9]+-[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?-(linux-x86_64|windows-x64)-' | wc -l)"
+          echo "asset_count=$count" >> "$GITHUB_OUTPUT"
+
       - name: Create release checksum manifest
         shell: bash
         run: |
@@ -370,12 +410,9 @@ jobs:
           if compgen -G 'dist/*-linux-x86_64.AppImage' > /dev/null; then (cd dist && sha256sum *-linux-x86_64.AppImage) >> dist/SHA256SUMS.txt; fi
           if compgen -G 'dist/*-linux-x86_64.AppImage.zsync' > /dev/null; then (cd dist && sha256sum *-linux-x86_64.AppImage.zsync) >> dist/SHA256SUMS.txt; fi
           if compgen -G 'dist/*-windows-x64-portable.zip' > /dev/null; then (cd dist && sha256sum *-windows-x64-portable.zip) >> dist/SHA256SUMS.txt; fi
-          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 13
-          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.AppImage' | wc -l)" -eq 13
-          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.AppImage.zsync' | wc -l)" -eq 13
-          test "$(find dist -maxdepth 1 -name '*-windows-x64-portable.zip' | wc -l)" -eq 13
 
-      - name: Publish packages to the selected release
+      - name: Publish available packages to the selected release
+        if: steps.verify.outputs.asset_count != '0'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && inputs.release_tag || (startsWith(github.ref, 'refs/tags/v') && github.ref_name) || steps.target.outputs.tag }}
