@@ -145,11 +145,20 @@ jobs:
           (cd "$GITHUB_WORKSPACE/dist" && sha256sum "$folder.tar.gz" > "$folder.tar.gz.sha256" && sha256sum --check "$folder.tar.gz.sha256")
           version_var="$(printf '%s_VERSION' "$APP_ID" | tr '[:lower:]' '[:upper:]')"
           export "$version_var=$version"
-          DIST="$GITHUB_WORKSPACE/dist" "apps/${{ matrix.directory }}/packaging/linux/package.sh" --formats appimage
+          package_script="apps/${{ matrix.directory }}/packaging/linux/package.sh"
+          if [[ "$APP_ID" == "cadcraft" ]]; then
+            # The canonical CAD source uses ai.storyteller.* desktop assets and emits decode-cad.
+            # Align its desktop ID, final asset stem and AppImageUpdate pattern with the launcher.
+            sed -i 's/^APP_ID=com\.decode\.cadcraft$/APP_ID=ai.storyteller.cadcraft/' "$package_script"
+            sed -i 's/^BASENAME="decode-cad-/BASENAME="cadcraft-/' "$package_script"
+            sed -i 's/decode-cad-\*-linux-/cadcraft-*-linux-/' "$package_script"
+          fi
+          DIST="$GITHUB_WORKSPACE/dist" "$package_script" --formats appimage
           appimage="$GITHUB_WORKSPACE/dist/$APP_ID-$version-linux-x86_64.AppImage"
-          test -x "$appimage" || { echo "AppImage not generated: $appimage"; exit 1; }
+          test -f "$appimage" && test -x "$appimage" || { echo "AppImage missing or not executable: $appimage"; exit 1; }
           test -s "$appimage.zsync" || { echo "AppImage update metadata missing: $appimage.zsync"; exit 1; }
           "$appimage" --appimage-extract-and-run --version
+          (cd "$GITHUB_WORKSPACE/dist" && sha256sum "$APP_ID-$version-linux-x86_64.AppImage" "$APP_ID-$version-linux-x86_64.AppImage.zsync" > "$APP_ID-$version-linux-x86_64.AppImage.sha256" && sha256sum --check "$APP_ID-$version-linux-x86_64.AppImage.sha256")
 
       - name: Upload compiled package artifact
         uses: actions/upload-artifact@v4
@@ -160,6 +169,7 @@ jobs:
             dist/*.tar.gz.sha256
             dist/*.AppImage
             dist/*.AppImage.zsync
+            dist/*.AppImage.sha256
           if-no-files-found: error
           retention-days: 14
 
@@ -346,6 +356,7 @@ jobs:
           if compgen -G 'dist/*-windows-x64-portable.zip' > /dev/null; then (cd dist && sha256sum *-windows-x64-portable.zip) >> dist/SHA256SUMS.txt; fi
           test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 13
           test "$(find dist -maxdepth 1 -name '*-linux-x86_64.AppImage' | wc -l)" -eq 13
+          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.AppImage.zsync' | wc -l)" -eq 13
           test "$(find dist -maxdepth 1 -name '*-windows-x64-portable.zip' | wc -l)" -eq 13
 
       - name: Publish packages to the selected release
@@ -359,6 +370,7 @@ jobs:
             dist/*-linux-x86_64.tar.gz
             dist/*-linux-x86_64.AppImage
             dist/*-linux-x86_64.AppImage.zsync
+            dist/*-linux-x86_64.AppImage.sha256
             dist/*-windows-x64-portable.zip
             dist/SHA256SUMS.txt
           fail_on_unmatched_files: false
