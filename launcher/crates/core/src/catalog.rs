@@ -293,7 +293,7 @@ mod tests {
             if a.id == "cadcraft" {
                 assert_eq!(a.repo, "Kaiqueaurelio/decodecad");
             } else {
-                assert_eq!(a.repo, format!("Kaiqueaurelio/{}", a.id));
+                assert_eq!(a.repo, "Kaiqueaurelio/decode-open-source-hub");
             }
             assert_eq!(a.name.to_lowercase().replace("decode", "") + "craft", a.id);
         }

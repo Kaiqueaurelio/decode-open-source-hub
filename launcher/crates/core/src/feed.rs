@@ -450,11 +450,11 @@ mod tests {
               "latest_release": {{
                 "tag": "v0.6.0", "version": "0.6.0", "name": "DecodePhoto v0.6.0",
                 "published_at": "2026-10-09T10:00:00Z",
-                "html_url": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/tag/v0.6.0",
+                "html_url": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v0.6.0",
                 "prerelease": false, "notes_markdown": "Notes",
                 "assets": [
                   {{ "name": "photocraft-0.6.0-macos-universal.dmg", "size_bytes": 123,
-                     "download_url": "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.6.0/photocraft-0.6.0-macos-universal.dmg",
+                     "download_url": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.6.0/photocraft-0.6.0-macos-universal.dmg",
                      "sha256": "{HASH}", "platform": {{ "os": "macos", "arch": "universal", "package_type": "dmg" }} }},
                   {{ "name": "evil.dmg", "size_bytes": 1, "download_url": "https://evil.example/evil.dmg", "sha256": null }}
                 ]
@@ -527,7 +527,7 @@ mod tests {
         let moved = sample()
             .replace(
                 "\"repo_renames\": []",
-                r#""repo_renames": [{"old_name": "Kaiqueaurelio/photocraft", "new_name": "Kaiqueaurelio/decode-open-source-hub-app", "renamed_at": null}]"#,
+                r#""repo_renames": [{"old_name": "Kaiqueaurelio/decode-open-source-hub", "new_name": "Kaiqueaurelio/decode-open-source-hub-app", "renamed_at": null}]"#,
             )
             .replace(
                 "\"name\": \"DecodePhoto\", \"repo\": \"Kaiqueaurelio/decode-open-source-hub\"",
@@ -537,12 +537,12 @@ mod tests {
         let feed = Feed::parse(&moved).unwrap();
         assert_eq!(feed.repo_for(app("photocraft")), "Kaiqueaurelio/decode-open-source-hub-app");
         let FeedAnswer::Fresh(Some(r)) = feed.answer(app("photocraft"), NOW) else { panic!() };
-        assert!(
-            r.assets[0].url.starts_with("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft-app/releases/download/")
-        );
+        assert!(r.assets[0].url.starts_with("https://github.com/Kaiqueaurelio/decode-open-source-hub-app/releases/download/"));
         // The same entry without the rename: the repo doesn't match, so GitHub decides.
-        let unannounced = moved
-            .replace(r#"{"old_name": "Kaiqueaurelio/photocraft", "new_name": "Kaiqueaurelio/decode-open-source-hub-app", "renamed_at": null}"#, "");
+        let unannounced = moved.replace(
+            r#"{"old_name": "Kaiqueaurelio/decode-open-source-hub", "new_name": "Kaiqueaurelio/decode-open-source-hub-app", "renamed_at": null}"#,
+            "",
+        );
         let feed = Feed::parse(&unannounced).unwrap();
         assert_eq!(feed.answer(app("photocraft"), NOW), FeedAnswer::AskGitHub);
     }
@@ -571,8 +571,8 @@ mod tests {
         // The feed advertises a legitimate tag but points the asset at another repository by
         // climbing out with `../` after the approved prefix (CWE-180).
         let escaped = sample().replace(
-            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.6.0/photocraft-0.6.0-macos-universal.dmg",
-            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/../../../../attacker/repo/releases/download/v99/photocraft-0.6.0-macos-universal.dmg",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.6.0/photocraft-0.6.0-macos-universal.dmg",
+            "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/../../../../attacker/repo/releases/download/v99/photocraft-0.6.0-macos-universal.dmg",
         );
         let FeedAnswer::Fresh(Some(r)) = Feed::parse(&escaped).unwrap().answer(app("photocraft"), NOW) else { panic!() };
         assert!(r.assets.is_empty(), "the traversing download must be rejected");
@@ -581,10 +581,8 @@ mod tests {
     #[test]
     fn a_local_mirror_is_trusted_only_when_asked_for_and_never_goes_stale() {
         const MIRROR: &str = "http://127.0.0.1:8787/";
-        let local = sample().replace(
-            "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.6.0/",
-            "http://127.0.0.1:8787/photocraft/v0.6.0/",
-        );
+        let local = sample()
+            .replace("https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.6.0/", "http://127.0.0.1:8787/photocraft/v0.6.0/");
         // Without the mirror, the local link is dropped like any other stranger's.
         let FeedAnswer::Fresh(Some(r)) = Feed::parse(&local).unwrap().answer(app("photocraft"), NOW) else { panic!() };
         assert!(r.assets.is_empty());
