@@ -27,7 +27,7 @@ concurrency:
 jobs:
   build-linux:
     name: Build ${{ matrix.id }} (Linux x86_64)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 90
     strategy:
       fail-fast: false
@@ -93,7 +93,7 @@ jobs:
             libx11-dev libxkbcommon-dev libwayland-dev libxrandr-dev \
             libxi-dev libxcursor-dev libxinerama-dev libxfixes-dev \
             libgl1-mesa-dev libasound2-dev libudev-dev \
-            libfontconfig1-dev libfreetype6-dev libxcb1-dev mesa-vulkan-drivers
+            libfontconfig1-dev libfreetype6-dev libxcb1-dev mesa-vulkan-drivers zsync
 
       - name: Install stable Rust
         uses: dtolnay/rust-toolchain@stable
@@ -143,6 +143,13 @@ jobs:
           tar -czf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" -C "$RUNNER_TEMP/decode-package" "$folder"
           tar -tzf "$GITHUB_WORKSPACE/dist/$folder.tar.gz" | grep -F "$folder/bin/$APP_ID"
           (cd "$GITHUB_WORKSPACE/dist" && sha256sum "$folder.tar.gz" > "$folder.tar.gz.sha256" && sha256sum --check "$folder.tar.gz.sha256")
+          version_var="$(printf '%s_VERSION' "$APP_ID" | tr '[:lower:]' '[:upper:]')"
+          export "$version_var=$version"
+          DIST="$GITHUB_WORKSPACE/dist" "apps/${{ matrix.directory }}/packaging/linux/package.sh" --skip-build --formats appimage
+          appimage="$GITHUB_WORKSPACE/dist/$APP_ID-$version-linux-x86_64.AppImage"
+          test -x "$appimage" || { echo "AppImage not generated: $appimage"; exit 1; }
+          test -s "$appimage.zsync" || { echo "AppImage update metadata missing: $appimage.zsync"; exit 1; }
+          "$appimage" --appimage-extract-and-run --version
 
       - name: Upload compiled package artifact
         uses: actions/upload-artifact@v4
@@ -151,6 +158,8 @@ jobs:
           path: |
             dist/*.tar.gz
             dist/*.tar.gz.sha256
+            dist/*.AppImage
+            dist/*.AppImage.zsync
           if-no-files-found: error
           retention-days: 14
 
@@ -332,8 +341,11 @@ jobs:
             (cd dist/previous && sha256sum *) >> dist/SHA256SUMS.txt
           fi
           if compgen -G 'dist/*-linux-x86_64.tar.gz' > /dev/null; then (cd dist && sha256sum *-linux-x86_64.tar.gz) >> dist/SHA256SUMS.txt; fi
+          if compgen -G 'dist/*-linux-x86_64.AppImage' > /dev/null; then (cd dist && sha256sum *-linux-x86_64.AppImage) >> dist/SHA256SUMS.txt; fi
+          if compgen -G 'dist/*-linux-x86_64.AppImage.zsync' > /dev/null; then (cd dist && sha256sum *-linux-x86_64.AppImage.zsync) >> dist/SHA256SUMS.txt; fi
           if compgen -G 'dist/*-windows-x64-portable.zip' > /dev/null; then (cd dist && sha256sum *-windows-x64-portable.zip) >> dist/SHA256SUMS.txt; fi
           test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 13
+          test "$(find dist -maxdepth 1 -name '*-linux-x86_64.AppImage' | wc -l)" -eq 13
           test "$(find dist -maxdepth 1 -name '*-windows-x64-portable.zip' | wc -l)" -eq 13
 
       - name: Publish packages to the selected release
@@ -345,6 +357,8 @@ jobs:
           files: |
             dist/previous/*
             dist/*-linux-x86_64.tar.gz
+            dist/*-linux-x86_64.AppImage
+            dist/*-linux-x86_64.AppImage.zsync
             dist/*-windows-x64-portable.zip
             dist/SHA256SUMS.txt
           fail_on_unmatched_files: false
