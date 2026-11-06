@@ -62,6 +62,30 @@ O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter 
 
 ---
 
+## ⬇️ Baixar aplicativos Decode
+
+Escolha o aplicativo para baixar seu pacote Linux **x86_64** diretamente da última release. Os botões apontam para os arquivos publicados no GitHub Releases.
+
+<p align="center">
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-cad-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20CAD-Baixar%20Linux-14b8a6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode CAD para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-deck-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Deck-Baixar%20Linux-f43f5e?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Deck para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-design-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Design-Baixar%20Linux-8b5cf6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Design para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-effect-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Effects-Baixar%20Linux-ec4899?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Effects para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-fig-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Fig-Baixar%20Linux-00b887?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Fig para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-film-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Film-Baixar%20Linux-a855f7?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Film para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-grid-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Grid-Baixar%20Linux-22c55e?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Grid para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-light-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Light-Baixar%20Linux-f59e0b?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Light para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-pdf-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20PDF-Baixar%20Linux-06b6d4?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode PDF para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-photo-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Foto-Baixar%20Linux-3b82f6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Foto para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-sound-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Sound-Baixar%20Linux-38bdf8?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Sound para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-vector-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Vetor-Baixar%20Linux-f97316?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Vetor para Linux"></a>
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-word-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Word-Baixar%20Linux-2563eb?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Word para Linux"></a>
+</p>
+
+> **Nota:** esses botões baixam os pacotes Linux .tar.gz da última release. Para outros sistemas operacionais ou para conferir todos os arquivos disponíveis, [abra a página de Releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest). A disponibilidade de cada pacote depende dos arquivos publicados nessa release.
+
+---
+
 ## O que você encontra
 
 - **Aplicativos próprios listados:** DecodeCraft, DecodeCraftX e DecodeClip. O Decode Launcher é listado separadamente como utilitário. O catálogo não inclui aplicativos upstream ou de terceiros.
