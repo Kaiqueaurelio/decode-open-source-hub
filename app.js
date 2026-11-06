@@ -912,22 +912,66 @@
 
   function loadCatalog() {
     if (errorState) errorState.hidden = true;
-    fetch("data/software.json?v=" + Date.now())
+
+    function applyCatalog(data) {
+      allSoftware = data;
+      renderCategories();
+      renderStatusTabs();
+      renderPlatformOptions();
+      render();
+      if (errorState) {
+        errorState.hidden = false;
+        errorState.textContent = "Sem conexão: exibindo o último catálogo salvo.";
+        errorState.setAttribute("role", "status");
+      }
+    }
+
+    fetch("data/software.json", { cache: "no-cache" })
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP error " + res.status);
         return res.json();
       })
       .then(function (data) {
-        allSoftware = Array.isArray(data) ? data : [];
+        if (!Array.isArray(data) || data.length === 0) {
+          throw new Error("Catálogo vazio ou inválido.");
+        }
+        allSoftware = data;
+        try {
+          localStorage.setItem("decode-catalog-cache", JSON.stringify(data));
+          localStorage.setItem("decode-catalog-cache-time", new Date().toISOString());
+        } catch (storageError) {
+          console.warn("Não foi possível salvar cache do catálogo:", storageError);
+        }
         renderCategories();
         renderStatusTabs();
         renderPlatformOptions();
         render();
+        if (errorState) {
+          errorState.hidden = true;
+          errorState.textContent = "";
+        }
       })
       .catch(function (err) {
         console.error("Falha ao carregar catálogo:", err);
-        if (errorState) errorState.hidden = false;
+        var cached = null;
+        try {
+          cached = JSON.parse(localStorage.getItem("decode-catalog-cache") || "null");
+        } catch (storageError) {
+          console.warn("Cache do catálogo indisponível:", storageError);
+        }
+        if (Array.isArray(cached) && cached.length > 0) {
+          applyCatalog(cached);
+          return;
+        }
+        allSoftware = [];
+        if (errorState) {
+          errorState.hidden = false;
+          errorState.textContent = "Não foi possível carregar o catálogo. Verifique sua conexão e tente novamente.";
+          errorState.setAttribute("role", "alert");
+        }
         if (softwareGrid) softwareGrid.innerHTML = "";
+        if (loadMoreWrap) loadMoreWrap.hidden = true;
+        if (resultCount) resultCount.textContent = "Catálogo indisponível";
       });
   }
 
