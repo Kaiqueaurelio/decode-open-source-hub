@@ -131,7 +131,7 @@ pub fn install_at(
         #[cfg(target_os = "freebsd")]
         PackageKind::TarGz => freebsd::install_tree(app, &file, job.paths).map(|(bin, files, root)| Some(record(&version, kind, bin, files, root))),
         #[cfg(target_os = "linux")]
-        PackageKind::TarGz => linux::install_tree(app, &file, job.paths).map(|path| {
+        PackageKind::TarGz => linux::install_tree(app, &file, job.paths, destination.as_deref(), previous).map(|path| {
             let files = linux::integrate(app, &path, &[], previous);
             Some(record(&version, kind, path, files, false))
         }),
@@ -211,6 +211,7 @@ pub fn occupied(
         PackageKind::Dmg => folder.map(|f| f.join(format!("{}.app", app.name))),
         #[cfg(target_os = "linux")]
         PackageKind::AppImage => folder.or_else(crate::detect::linux::appimage_dir).map(|f| f.join(&asset.name)),
+        PackageKind::TarGz => folder.map(|f| f.join(app.id)),
         _ => None,
     };
     Ok(target.filter(|t| std::fs::symlink_metadata(t).is_ok()))
@@ -225,19 +226,22 @@ fn destination(
     previous: Option<&Record>,
     locations: &InstallLocations,
 ) -> Result<Option<PathBuf>, String> {
-    if kind == PackageKind::PortableZip && previous.is_some_and(|record| record.kind == PackageKind::PortableZip) {
+    if matches!(kind, PackageKind::PortableZip | PackageKind::TarGz) && previous.is_some_and(|record| record.kind == kind) {
         return Ok(None);
     }
     if let Some(inst) = existing {
         let exe = Path::new(&inst.location);
         return Ok(match kind {
             PackageKind::AppImage => previous.filter(|r| r.kind == kind).and_then(|r| r.path.parent()).map(Path::to_path_buf),
+            PackageKind::TarGz => previous.filter(|r| r.kind == kind).and_then(|_| exe.parent()?.parent().map(Path::to_path_buf)),
             PackageKind::Msi => exe.parent().filter(|_| exe.is_absolute()).map(Path::to_path_buf),
             _ => None,
         });
     }
     let Some(folder) = locations.folder(app.id) else { return Ok(None) };
-    if !matches!(kind, PackageKind::Dmg | PackageKind::AppImage | PackageKind::Msi | PackageKind::PortableZip) || process::in_sandbox() {
+    if !matches!(kind, PackageKind::Dmg | PackageKind::AppImage | PackageKind::Msi | PackageKind::PortableZip | PackageKind::TarGz)
+        || process::in_sandbox()
+    {
         return Err("custom install folders aren't supported on this system".into());
     }
     let parent = selected_folder(folder, kind != PackageKind::Msi)?;
@@ -516,7 +520,7 @@ pub fn uninstall(
         #[cfg(target_os = "linux")]
         InstallSource::Launcher if record.is_some_and(|r| r.kind == PackageKind::TarGz) => {
             linux::unintegrate(app, &path, record);
-            linux::remove_tree(app, paths)
+            linux::remove_tree(app, paths, record)
         }
         #[cfg(target_os = "linux")]
         InstallSource::Launcher => remove_appimage(app, &path, record),
@@ -1044,14 +1048,27 @@ pub(crate) mod linux {
     /// installer when no native package, Flatpak or AppImage exists, and the sandbox fallback
     /// when the host has no usable Flatpak. `bin` and `share` are swapped in one at a time, so
     /// an update leaves the app's own `home/` beside them untouched.
-    pub fn install_tree(app: &DecodeApp, file: &Path, paths: &Paths) -> Result<PathBuf, String> {
+    pub fn install_tree(
+        app: &DecodeApp,
+        file: &Path,
+        paths: &Paths,
+        destination: Option<&Path>,
+        previous: Option<&Record>,
+    ) -> Result<PathBuf, String> {
         let staged = paths.cache.join(format!("{}.new", app.id));
-        let result = unpack_tree(app, file, &staged, paths);
+        let result = unpack_tree(app, file, &staged, paths, destination, previous);
         let _ = std::fs::remove_dir_all(&staged);
         result
     }
 
-    fn unpack_tree(app: &DecodeApp, file: &Path, staged: &Path, paths: &Paths) -> Result<PathBuf, String> {
+    fn unpack_tree(
+        app: &DecodeApp,
+        file: &Path,
+        staged: &Path,
+        paths: &Paths,
+        destination: Option<&Path>,
+        previous: Option<&Record>,
+    ) -> Result<PathBuf, String> {
         let tree = tree::unpack(app, file, staged)?;
         // Verify tree root is strictly within staged and is not a symlink (CWE-59).
         let rel_tree = tree.strip_prefix(staged).map_err(|_| "staging layout escapes staging".to_string())?;
@@ -1067,7 +1084,14 @@ pub(crate) mod linux {
         // (e.g. a symlinked app binary) must never disturb the installed tree it replaces.
         let staged_bin = tree.join("bin").join(app.id);
         make_runnable_within(&tree, &staged_bin)?;
-        let root = paths.apps().join(app.id);
+        let root = previous
+            .filter(|r| r.kind == PackageKind::TarGz)
+            .and_then(|r| r.path.parent()?.parent().map(Path::to_path_buf))
+            .or_else(|| destination.map(|parent| parent.join(app.id)))
+            .unwrap_or_else(|| paths.apps().join(app.id));
+        if root.exists() && std::fs::symlink_metadata(&root).is_ok_and(|meta| meta.file_type().is_symlink()) {
+            return Err("the selected install folder contains a symlinked app directory".into());
+        }
         std::fs::create_dir_all(&root).map_err(|e| format!("couldn't create {} ({e})", root.display()))?;
         for dir in ["bin", "share"] {
             if tree.join(dir).is_dir() {
@@ -1112,13 +1136,23 @@ pub(crate) mod linux {
 
     /// Removes a tree the launcher unpacked in [`install_tree`], keeping the app's `home/`: the
     /// settings and projects in it are the user's, not the installer's. Only the two folders the
-    /// launcher put there are removed, and only inside the launcher's own apps folder.
-    pub fn remove_tree(app: &DecodeApp, paths: &Paths) -> Result<(), String> {
-        let root = paths.apps().join(app.id);
+    /// launcher put there are removed from the app's recorded install root.
+    pub fn remove_tree(app: &DecodeApp, paths: &Paths, record: Option<&Record>) -> Result<(), String> {
+        let root = record
+            .filter(|r| r.kind == PackageKind::TarGz)
+            .and_then(|r| r.path.parent()?.parent().map(Path::to_path_buf))
+            .filter(|path| path.file_name().is_some_and(|name| name == app.id))
+            .unwrap_or_else(|| paths.apps().join(app.id));
+        if std::fs::symlink_metadata(&root).is_ok_and(|meta| meta.file_type().is_symlink()) {
+            return Err("the app install root is a symlink".into());
+        }
         let mut removed = false;
         for dir in ["bin", "share"] {
             let path = root.join(dir);
-            if path.starts_with(paths.apps()) && path.is_dir() {
+            if std::fs::symlink_metadata(&path).is_ok_and(|meta| meta.file_type().is_symlink()) {
+                return Err(format!("the app's {dir} folder is a symlink"));
+            }
+            if path.is_dir() {
                 std::fs::remove_dir_all(&path).map_err(|e| format!("couldn't remove {} ({e})", path.display()))?;
                 removed = true;
             }
@@ -1837,7 +1871,7 @@ mod tests {
             package: None,
         };
         assert_eq!(destination(app, PackageKind::Msi, Some(&msi), Some(&old), &unavailable).unwrap(), Some(dir.path().join("MSI/DecodePhoto")));
-        assert!(destination(app, PackageKind::TarGz, None, None, &locations).unwrap_err().contains("aren't supported"));
+        assert_eq!(destination(app, PackageKind::TarGz, None, None, &locations).unwrap(), Some(dir.path().to_path_buf()));
     }
 
     #[test]
@@ -2171,6 +2205,27 @@ mod tests {
 
     #[cfg(unix)]
     #[test]
+    fn linux_tarball_fallback_installs_and_removes_under_the_custom_folder() {
+        let app = DecodeApp::by_id("wordcraft").unwrap();
+        let dir = tempfile::tempdir().unwrap();
+        let archive = dir.path().join("wordcraft.tar.gz");
+        tarball(&archive, &["wordcraft-0.3.0-linux-x86_64/bin/wordcraft"]);
+        let custom = dir.path().join("Custom Apps");
+        std::fs::create_dir(&custom).unwrap();
+        let paths = Paths::under(&dir.path().join("launcher-data"));
+
+        let binary = linux::install_tree(app, &archive, &paths, Some(&custom), None).unwrap();
+        assert_eq!(binary, custom.join("wordcraft/bin/wordcraft"));
+        assert!(binary.is_file());
+        assert_eq!(std::fs::read(&binary).unwrap(), b"hi");
+
+        let installed = record("0.3.0", PackageKind::TarGz, binary, Vec::new(), false);
+        linux::remove_tree(app, &paths, Some(&installed)).unwrap();
+        assert!(!custom.join("wordcraft/bin").exists());
+    }
+
+    #[cfg(unix)]
+    #[test]
     fn tree_files_does_not_traverse_directory_symlinks() {
         let dir = tempfile::tempdir().unwrap();
         let root = dir.path().join("root");
@@ -2226,7 +2281,7 @@ mod tests {
             ],
         );
 
-        let bin = linux::install_tree(app, &file, &paths).unwrap();
+        let bin = linux::install_tree(app, &file, &paths, None, None).unwrap();
         let root = paths.apps().join("wordcraft");
         assert_eq!(bin, root.join("bin").join("wordcraft"));
         assert!(bin.is_file(), "the app's binary wasn't unpacked");
@@ -2237,14 +2292,14 @@ mod tests {
         let home = paths.app_home(app.id);
         std::fs::create_dir_all(home.join(".config/wordcraft")).unwrap();
         std::fs::write(home.join(".config/wordcraft/settings.toml"), "keep me").unwrap();
-        linux::install_tree(app, &file, &paths).unwrap();
+        linux::install_tree(app, &file, &paths, None, None).unwrap();
         assert_eq!(std::fs::read_to_string(home.join(".config/wordcraft/settings.toml")).unwrap(), "keep me");
 
         // Removing the install takes the tree and nothing else.
-        linux::remove_tree(app, &paths).unwrap();
+        linux::remove_tree(app, &paths, None).unwrap();
         assert!(!bin.exists() && !root.join("share").exists());
         assert!(home.join(".config/wordcraft/settings.toml").is_file(), "the app's settings were removed with it");
-        assert!(linux::remove_tree(app, &paths).is_err(), "a second removal says there is nothing there");
+        assert!(linux::remove_tree(app, &paths, None).is_err(), "a second removal says there is nothing there");
     }
 
     #[cfg(target_os = "linux")]
@@ -2259,7 +2314,7 @@ mod tests {
         // A working install the rejected update must leave untouched.
         let good = dir.path().join("wordcraft-0.3.0-linux-x86_64.tar.gz");
         tarball(&good, &["wordcraft-0.3.0-linux-x86_64/bin/wordcraft"]);
-        let bin = linux::install_tree(app, &good, &paths).unwrap();
+        let bin = linux::install_tree(app, &good, &paths, None, None).unwrap();
         assert_eq!(std::fs::read_to_string(&bin).unwrap(), "hi");
 
         // A file outside the install tree that the archive tries to chmod through a symlink.
@@ -2286,7 +2341,7 @@ mod tests {
         b.into_inner().unwrap().finish().unwrap();
         drop(std::io::stdout().flush());
 
-        let result = linux::install_tree(app, &file, &paths);
+        let result = linux::install_tree(app, &file, &paths, None, None);
         assert!(result.is_err(), "a symlink binary must be rejected: {result:?}");
         assert!(result.unwrap_err().contains("symlink"));
         // The external file keeps its original mode: the chmod never reached it.
@@ -2622,7 +2677,7 @@ mod tests {
         let release = Release { version: version::parse("99.0.0"), tag: "v99.0.0".into(), ..Release::default() };
         let asset = Asset {
             name: "photocraft-0.4.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.4.0/photocraft-0.4.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.4.0/photocraft-0.4.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         let stop = Stop::default();
@@ -2634,7 +2689,7 @@ mod tests {
         // A matching artifact passes the guard (it fails later for unrelated reasons, not the bind).
         let good = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v99.0.0/photocraft-99.0.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v99.0.0/photocraft-99.0.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &good).is_ok());
@@ -2642,7 +2697,7 @@ mod tests {
         // URL filename mismatch is rejected (CWE-494).
         let bad_url_name = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v99.0.0/other.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v99.0.0/other.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &bad_url_name).is_err());
@@ -2650,7 +2705,8 @@ mod tests {
         // URL tag mismatch is rejected.
         let bad_tag = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/unparsed_tag/photocraft-99.0.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/unparsed_tag/photocraft-99.0.0-linux-x86_64.AppImage"
+                .into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &bad_tag).is_err());

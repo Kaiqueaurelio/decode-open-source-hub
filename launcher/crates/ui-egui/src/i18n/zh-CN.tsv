@@ -328,8 +328,9 @@ figcraft	Interface design and prototyping	界面设计与原型制作
 	Browse…	浏览…
 	Use default	使用默认
 	New installs use this folder. Updates stay in their current location.	新安装的应用使用此文件夹。更新时保留当前位置。
-	Custom folders use AppImage on Linux.	在 Linux 上，自定义文件夹使用 AppImage。
-	On Linux, custom folders use AppImage format.	在 Linux 上，自定义文件夹使用 AppImage。
+	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Linux 自定义文件夹优先使用 AppImage；如果没有，则使用经过校验的 tar.gz。
+	Custom folders use AppImage on Linux.	Linux 自定义文件夹使用 AppImage。
+	On Linux, custom folders use AppImage format.	在 Linux 上，自定义文件夹使用 AppImage 格式。
 	The system manages install locations here.	此环境中的安装位置由系统管理。
 @msg	couldn't use install folder {path}: {reason}	无法使用安装文件夹 {path}：{reason}
 @msg	this release has no AppImage for a custom install folder	此版本没有可用于自定义安装文件夹的 AppImage

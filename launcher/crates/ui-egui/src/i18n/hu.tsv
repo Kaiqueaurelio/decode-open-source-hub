@@ -361,8 +361,9 @@ filter	Installed	Telepítve
 	Browse…	Tallózás…
 	Use default	Alapértelmezett használata
 	New installs use this folder. Updates stay in their current location.	Az új telepítések ezt a mappát használják. A frissítések a jelenlegi helyükön maradnak.
-	Custom folders use AppImage on Linux.	Linuxon az egyéni mappákhoz AppImage szükséges.
-	On Linux, custom folders use AppImage format.	Linuxon az egyéni mappákhoz AppImage szükséges.
+	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	A Linux egyéni mappái AppImage-et használnak, ha elérhető; ellenkező esetben az indító ellenőrzött tar.gz fájlt használ.
+	Custom folders use AppImage on Linux.	A Linux egyéni mappái AppImage-et használnak.
+	On Linux, custom folders use AppImage format.	Linuxon az egyéni mappák AppImage formátumot használnak.
 	The system manages install locations here.	Itt a rendszer kezeli a telepítési helyeket.
 @msg	couldn't use install folder {path}: {reason}	a(z) {path} telepítési mappa nem használható: {reason}
 @msg	this release has no AppImage for a custom install folder	ez a kiadás nem tartalmaz AppImage-fájlt egyéni telepítési mappához

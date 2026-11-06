@@ -1,0 +1,61 @@
+{
+  "apps": [
+    {
+      "id": "cadcraft",
+      "name": "DecodeCAD"
+    },
+    {
+      "id": "deckcraft",
+      "name": "DecodeDeck"
+    },
+    {
+      "id": "designcraft",
+      "name": "DecodeDesign"
+    },
+    {
+      "id": "effectcraft",
+      "name": "DecodeEffect"
+    },
+    {
+      "id": "figcraft",
+      "name": "DecodeFig"
+    },
+    {
+      "id": "filmcraft",
+      "name": "DecodeFilm"
+    },
+    {
+      "id": "gridcraft",
+      "name": "DecodeGrid"
+    },
+    {
+      "id": "lightcraft",
+      "name": "DecodeLight"
+    },
+    {
+      "id": "pdfcraft",
+      "name": "DecodePdf"
+    },
+    {
+      "id": "photocraft",
+      "name": "DecodePhoto"
+    },
+    {
+      "id": "soundcraft",
+      "name": "DecodeSound"
+    },
+    {
+      "id": "vectorcraft",
+      "name": "DecodeVector"
+    },
+    {
+      "id": "wordcraft",
+      "name": "DecodeWord"
+    }
+  ],
+  "planned_formats": {
+    "linux-x86_64": [
+      "AppImage"
+    ]
+  }
+}
