@@ -329,7 +329,8 @@ filter	Installed	Nainstalováno
 	Use default	Použít výchozí
 	New installs use this folder. Updates stay in their current location.	Nové instalace používají tuto složku. Aktualizace zůstávají v aktuálním umístění.
 	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Vlastní složky v Linuxu používají AppImage, je-li k dispozici; jinak spouštěč použije ověřený soubor tar.gz.
-	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Vlastní složky v Linuxu používají AppImage, je-li k dispozici; jinak spouštěč použije ověřený soubor tar.gz.
+	Custom folders use AppImage on Linux.	Vlastní složky v Linuxu používají AppImage.
+	On Linux, custom folders use AppImage format.	Vlastní složky v Linuxu používají formát AppImage.
 	The system manages install locations here.	Umístění instalací zde spravuje systém.
 @msg	couldn't use install folder {path}: {reason}	instalační složku {path} nelze použít: {reason}
 @msg	this release has no AppImage for a custom install folder	toto vydání nemá AppImage pro vlastní instalační složku

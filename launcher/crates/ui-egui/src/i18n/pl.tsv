@@ -363,7 +363,8 @@ filter	Installed	Zainstalowane
 	Use default	Użyj domyślnego
 	New installs use this folder. Updates stay in their current location.	Nowe instalacje używają tego folderu. Aktualizacje pozostają w obecnej lokalizacji.
 	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Niestandardowe foldery w systemie Linux używają AppImage, jeśli jest dostępny; w przeciwnym razie program użyje zweryfikowanego pliku tar.gz.
-	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Niestandardowe foldery w systemie Linux używają AppImage, jeśli jest dostępny; w przeciwnym razie program użyje zweryfikowanego pliku tar.gz.
+	Custom folders use AppImage on Linux.	Niestandardowe foldery w systemie Linux używają AppImage.
+	On Linux, custom folders use AppImage format.	W systemie Linux niestandardowe foldery używają formatu AppImage.
 	The system manages install locations here.	W tym środowisku system zarządza lokalizacjami instalacji.
 @msg	couldn't use install folder {path}: {reason}	nie można użyć folderu instalacji {path}: {reason}
 @msg	this release has no AppImage for a custom install folder	to wydanie nie zawiera AppImage dla własnego folderu instalacji

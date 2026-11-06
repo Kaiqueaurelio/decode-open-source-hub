@@ -349,7 +349,8 @@ filter	Installed	Instalados
 	Use default	Usar padrão
 	New installs use this folder. Updates stay in their current location.	Novas instalações usam esta pasta. As atualizações mantêm o local atual.
 	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Pastas personalizadas no Linux usam AppImage quando disponível; caso contrário, o Launcher usa um tar.gz verificado.
-	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	Pastas personalizadas no Linux usam AppImage quando disponível; caso contrário, o Launcher usa um tar.gz verificado.
+	Custom folders use AppImage on Linux.	Pastas personalizadas usam AppImage no Linux.
+	On Linux, custom folders use AppImage format.	No Linux, as pastas personalizadas usam o formato AppImage.
 	The system manages install locations here.	O sistema gerencia os locais de instalação neste ambiente.
 @msg	couldn't use install folder {path}: {reason}	não foi possível usar a pasta de instalação {path}: {reason}
 @msg	this release has no AppImage for a custom install folder	esta versão não tem um AppImage para uma pasta de instalação personalizada
