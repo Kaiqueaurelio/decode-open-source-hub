@@ -145,7 +145,7 @@ jobs:
           (cd "$GITHUB_WORKSPACE/dist" && sha256sum "$folder.tar.gz" > "$folder.tar.gz.sha256" && sha256sum --check "$folder.tar.gz.sha256")
           version_var="$(printf '%s_VERSION' "$APP_ID" | tr '[:lower:]' '[:upper:]')"
           export "$version_var=$version"
-          DIST="$GITHUB_WORKSPACE/dist" "apps/${{ matrix.directory }}/packaging/linux/package.sh" --skip-build --formats appimage
+          DIST="$GITHUB_WORKSPACE/dist" "apps/${{ matrix.directory }}/packaging/linux/package.sh" --formats appimage
           appimage="$GITHUB_WORKSPACE/dist/$APP_ID-$version-linux-x86_64.AppImage"
           test -x "$appimage" || { echo "AppImage not generated: $appimage"; exit 1; }
           test -s "$appimage.zsync" || { echo "AppImage update metadata missing: $appimage.zsync"; exit 1; }
