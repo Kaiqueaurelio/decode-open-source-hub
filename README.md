@@ -1,218 +1,58 @@
-# Decode Launcher & Open Source Hub
+# Decode Open Source Hub
 
-[![Decode Launcher CI](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/launcher-ci.yml/badge.svg)](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/launcher-ci.yml)
-[![Catalog checks](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/catalog-check.yml/badge.svg)](https://github.com/Kaiqueaurelio/decode-open-source-hub/actions/workflows/catalog-check.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Rust](https://img.shields.io/badge/Rust-stable-orange.svg?logo=rust)](https://www.rust-lang.org/)
+Este repositório reúne o catálogo web e o código-fonte do **Decode Launcher** e da Decode App Suite. O Launcher está em estágio alpha; a disponibilidade abaixo é conferida contra os arquivos da release mais recente, não inferida apenas do código-fonte.
 
-**Catálogo web responsivo e código-fonte do Decode Launcher nativo em Rust, reunindo a suíte de aplicativos criativos open source sob a identidade Decode.**
+## Decode Launcher
 
-Este repositório reúne o catálogo informativo e o código-fonte do **Decode Launcher**, com identidade própria e paridade funcional com a suíte de aplicativos. Consulte a [matriz de paridade funcional](docs/decode-launcher-parity.md) para detalhes técnicos de cada componente.
+Baixe os pacotes disponíveis na [última release](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest):
 
-## 📥 Baixar o Decode Launcher (Hub Oficial)
+- [Windows x64 · instalador](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest)
+- [Windows x64 · portátil](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest)
+- [Linux x86_64 · AppImage](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) (quando publicado)
+- [Linux x86_64 · tar.gz](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest)
+- [macOS · pacote](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) (quando publicado)
 
-O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter atualizada toda a suíte de softwares criativos Decode no seu computador (com atualizações automáticas via GitHub Releases). No Linux, baixe o AppImage para escolher uma pasta de instalação personalizada em Configurações; novos aplicativos serão instalados nessa pasta em formato AppImage.
+Confirme os arquivos disponíveis na página da release antes de instalar. No Linux, o Launcher usa AppImage para uma pasta personalizada quando disponível e recorre ao tar.gz verificado quando a release não publica o AppImage do aplicativo.
 
-<p align="center">
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe">
-    <img src="https://img.shields.io/badge/Windows%20Installer-.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows .exe">
-  </a>
-  &nbsp;
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip">
-    <img src="https://img.shields.io/badge/Windows%20Portable-.zip-238636?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Portable .zip">
-  </a>
-  &nbsp;
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz">
-    <img src="https://img.shields.io/badge/Linux%20x86__64-.tar.gz-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux .tar.gz">
-  </a>
-  &nbsp;
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.AppImage">
-    <img src="https://img.shields.io/badge/Linux%20AppImage-Custom%20folder-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux AppImage for a custom installation folder">
-  </a>
-  &nbsp;
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz">
-    <img src="https://img.shields.io/badge/macOS%20Universal-.tar.gz-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS .tar.gz">
-  </a>
-</p>
+## Disponibilidade dos aplicativos
 
-<p align="center">
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v0.9.0">
-    <img src="https://img.shields.io/badge/GitHub%20Release-v0.9.0-8957e5?style=flat-square&logo=github&logoColor=white" alt="GitHub Release v0.9.0">
-  </a>
-  &nbsp;
-  <a href="https://decode-open-source-hub.vercel.app">
-    <img src="https://img.shields.io/badge/Cat%C3%A1logo%20Web-Online-00C7B7?style=flat-square&logo=vercel&logoColor=white" alt="Catálogo Web Online">
-  </a>
-  &nbsp;
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/badge/C%C3%B3digo--Fonte-.ZIP-gray?style=flat-square&logo=github" alt="Código-Fonte Completo">
-  </a>
-</p>
+Esta tabela é gerada a partir do manifesto da suíte e dos artefatos realmente anexados à release mais recente. `Planejado` indica um formato configurado no pipeline, mas ainda ausente da release. `Não publicado` significa que a release consultada não contém esse pacote.
 
-### Detalhes dos Pacotes Oficiais:
+<!-- RELEASE_SUPPORT_START -->
+Release consultada: [v0.9.4](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v0.9.4).
 
-| Sistema Operacional | Formato | Botão de Download Direto | Instruções Rápidas |
-| :--- | :--- | :--- | :--- |
-| **🪟 Windows (Instalador)** | `.exe` | [**⬇️ Baixar (.exe)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe) | Execute o instalador no Windows 10/11. |
-| **🪟 Windows (Portátil)** | `.zip` | [**⬇️ Baixar (.zip)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip) | Extraia o arquivo e execute direto sem instalar. |
-| **🐧 Linux (AppImage)** | `.AppImage` | [**⬇️ Baixar AppImage**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.AppImage) | Execute o AppImage; escolha a pasta personalizada em Configurações. |
-| **🐧 Linux (x86_64)** | `.tar.gz` | [**⬇️ Baixar (.tar.gz)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz) | Extraia e rode o executável `decode-launcher`. |
-| **🍎 macOS (Intel / Apple Silicon)** | `.tar.gz` | [**⬇️ Baixar (.tar.gz)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz) | Extraia e execute no macOS. |
+| Aplicativo | Linux x86_64 · tar.gz | Linux x86_64 · AppImage | Windows x64 · ZIP portátil | macOS |
+|---|---|---|---|---|
+| DecodeCAD | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/cadcraft-0.9.4-linux-x86_64.tar.gz) · `cadcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/cadcraft-0.9.4-windows-x64-portable.zip) · `cadcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeDeck | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/deckcraft-0.9.4-linux-x86_64.tar.gz) · `deckcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/deckcraft-0.9.4-windows-x64-portable.zip) · `deckcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeDesign | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/designcraft-0.9.4-linux-x86_64.tar.gz) · `designcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/designcraft-0.9.4-windows-x64-portable.zip) · `designcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeEffect | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/effectcraft-0.9.4-linux-x86_64.tar.gz) · `effectcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/effectcraft-0.9.4-windows-x64-portable.zip) · `effectcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeFig | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/figcraft-0.9.4-linux-x86_64.tar.gz) · `figcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/figcraft-0.9.4-windows-x64-portable.zip) · `figcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeFilm | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/filmcraft-0.9.4-linux-x86_64.tar.gz) · `filmcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/filmcraft-0.9.4-windows-x64-portable.zip) · `filmcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeGrid | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/gridcraft-0.9.4-linux-x86_64.tar.gz) · `gridcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/gridcraft-0.9.4-windows-x64-portable.zip) · `gridcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeLight | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/lightcraft-0.9.4-linux-x86_64.tar.gz) · `lightcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/lightcraft-0.9.4-windows-x64-portable.zip) · `lightcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodePdf | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/pdfcraft-0.9.4-linux-x86_64.tar.gz) · `pdfcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/pdfcraft-0.9.4-windows-x64-portable.zip) · `pdfcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodePhoto | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/photocraft-0.9.4-linux-x86_64.tar.gz) · `photocraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/photocraft-0.9.4-windows-x64-portable.zip) · `photocraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeSound | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/soundcraft-0.9.4-linux-x86_64.tar.gz) · `soundcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/soundcraft-0.9.4-windows-x64-portable.zip) · `soundcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeVector | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/vectorcraft-0.9.4-linux-x86_64.tar.gz) · `vectorcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/vectorcraft-0.9.4-windows-x64-portable.zip) · `vectorcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+| DecodeWord | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/wordcraft-0.9.4-linux-x86_64.tar.gz) · `wordcraft-0.9.4-linux-x86_64.tar.gz` | Planejado | [Disponível](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/wordcraft-0.9.4-windows-x64-portable.zip) · `wordcraft-0.9.4-windows-x64-portable.zip` | Não publicado |
+<!-- RELEASE_SUPPORT_END -->
 
-> 💡 **Instalação rápida no terminal Linux:**
-> ```bash
-> curl -sL https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz | tar -xz
-> ./decode-launcher
-> ```
+## Catálogo e desenvolvimento
 
----
+O catálogo web apresenta os projetos registrados em [`data/software.json`](data/software.json). Os 13 aplicativos que o Launcher gerencia estão listados em [`scripts/apps-manifest.json`](scripts/apps-manifest.json); a disponibilidade binária de cada plataforma é determinada pelos assets da release.
 
-## ⬇️ Baixar aplicativos Decode
-
-Os botões abaixo baixam os pacotes Linux **x86_64**. Para Windows **x64**, [abra os downloads da última release](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) e escolha o arquivo `<app>-<versão>-windows-x64-portable.zip` do aplicativo desejado. A release publica os 13 aplicativos para ambos os sistemas.
-
-<p align="center">
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-cad-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20CAD-Baixar%20Linux-14b8a6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode CAD para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-deck-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Deck-Baixar%20Linux-f43f5e?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Deck para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-design-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Design-Baixar%20Linux-8b5cf6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Design para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-effect-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Effects-Baixar%20Linux-ec4899?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Effects para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-fig-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Fig-Baixar%20Linux-00b887?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Fig para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-film-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Film-Baixar%20Linux-a855f7?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Film para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-grid-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Grid-Baixar%20Linux-22c55e?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Grid para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-light-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Light-Baixar%20Linux-f59e0b?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Light para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-pdf-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20PDF-Baixar%20Linux-06b6d4?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode PDF para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-photo-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Foto-Baixar%20Linux-3b82f6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Foto para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-sound-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Sound-Baixar%20Linux-38bdf8?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Sound para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-vector-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Vetor-Baixar%20Linux-f97316?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Vetor para Linux"></a>
-  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-word-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20Word-Baixar%20Linux-2563eb?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode Word para Linux"></a>
-</p>
-
-> **Nota:** esses botões baixam os pacotes Linux .tar.gz da última release. Para outros sistemas operacionais ou para conferir todos os arquivos disponíveis, [abra a página de Releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest). A disponibilidade de cada pacote depende dos arquivos publicados nessa release.
-
----
-
-## O que você encontra
-
-- **Aplicativos próprios listados:** DecodeCraft, DecodeCraftX e DecodeClip. O Decode Launcher é listado separadamente como utilitário. O catálogo não inclui aplicativos upstream ou de terceiros.
-- **Decode Launcher:** utilitário nativo em Rust, com links para o código-fonte e suas releases.
-- Busca por nome, finalidade, recursos e palavras-chave.
-- Filtros por categoria e sistema operacional, ordenação e cartões com links para download, site, código-fonte e licença.
-- Interface web responsiva com modos de grade e tabela, busca sincronizada, filtros por estágio, categoria e plataforma, ícones e links oficiais.
-- Código-fonte Rust do launcher em `launcher/`, com crates para catálogo/release, backend nativo, UI egui, shell desktop, WebAssembly e scripts de empacotamento.
-- Matriz de paridade funcional que documenta os recursos do Decode Launcher e seu estado de implementação.
-- **Integração upstream documentada:** [mapa de funcionalidades e plano de portabilidade](launcher-upstream/UPSTREAM-REFERENCE.md), com limites de marca/licença e pontos a validar.
-- Dados estruturados em JSON, validador, testes automatizados e fluxo de validação no GitHub Actions.
-
-## 📥 Downloads e Acesso aos Aplicativos da Suíte
-
-O catálogo lista apenas os aplicativos próprios mantidos neste repositório (DecodeCraft, DecodeCraftX e DecodeClip) e o Decode Launcher. Projetos de terceiros ou upstream não devem aparecer como aplicativos próprios.
-
-### Links Diretos de Download:
-- 🚀 **[Releases e Binários Compilados (GitHub Releases)](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)**
-- 📦 **[Baixar Código-Fonte Completo de Todos os Apps (.ZIP)](https://github.com/Kaiqueaurelio/decode-open-source-hub/archive/refs/heads/main.zip)**
-- 🌐 **[Catálogo Web Interativo (Vercel)](https://decode-open-source-hub-catalog.vercel.app)**
-
-### Aplicativos próprios listados
-
-| Aplicativo | Código-fonte |
-| :--- | :--- |
-| **DecodeCraft** | [apps/decode-craft](apps/decode-craft/) |
-| **DecodeCraftX** | [apps/decode-craftx](apps/decode-craftx/) |
-| **DecodeClip** | [apps/decode-clip](apps/decode-clip/) |
-| **Decode Launcher** | [launcher](launcher/) |
-
-O catálogo não deve listar aplicativos upstream/de terceiros como produtos próprios. Consulte as releases para confirmar quais binários estão publicados antes de divulgar um download.
-
-## Fontes e referências
-
-- [Catálogo oficial Decode Open Source Hub](https://decode-open-source-hub-catalog.vercel.app/)
-- [Suíte de Aplicativos (Monorepo)](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps)
-- [Código-fonte do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/launcher)
-- [Releases e Downloads do Decode Launcher](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases)
-## Princípios de Engenharia da Suíte Decode
-
-A suíte segue 6 princípios fundamentais:
-
-1. **Código Aberto:** Licenças permissivas (MIT ou Apache-2.0) com repositório transparente e monorepo auditável.
-2. **Nativo em Rust, Sem Electron:** Compilação direta para código de máquina em macOS, Windows e Linux com aceleração por GPU via WGPU. Sem Chromium e sem WebViews pesadas.
-3. **Familiar desde o 1º Dia:** Workflows, atalhos de teclado e painéis alinhados às ferramentas líderes de mercado.
-4. **Seus Arquivos, Sua Máquina:** Arquitetura local-first, formatos padronizados, sem cloud compulsória e sem telemetria invasiva.
-5. **Pronto para Agentes & IA:** Automação e controle via CLI, canal de eventos JSON e integração com servidores MCP (Model Context Protocol).
-6. **Também no Navegador:** Compilação cruzada para WebAssembly (WASM), permitindo execução instantânea na web sem instalação.
-
-## Decode Launcher nativo
-
-O **Decode Launcher** é um projeto nativo em Rust que centraliza a descoberta, instalação, abertura e atualização dos aplicativos da Decode App Suite. O projeto oferece suporte para Linux (incluindo AppImage, DEB, RPM e Flatpak), Windows, macOS, FreeBSD e WebAssembly, além de verificação de downloads por SHA-256.
-
-**Status do projeto:** early alpha. A disponibilidade de pacotes varia por versão, sistema e arquitetura. Veja sempre a página de [releases](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) antes de baixar.
-
-O código-fonte completo do launcher está integrado em `launcher/`, com identidade visual Decode, suíte de testes passando e integração contínua (CI) automatizada via GitHub Actions. A matriz de paridade em [docs/decode-launcher-parity.md](docs/decode-launcher-parity.md) lista as verificações e recursos de cada plataforma.
-
-## Executar localmente
-
-Requer Python 3 apenas para servir os arquivos; não exige Node.js, npm ou compilação.
+Para servir o catálogo localmente, use Python 3:
 
 ```bash
-git clone https://github.com/Kaiqueaurelio/decode-open-source-hub.git
-cd decode-open-source-hub
 python3 -m http.server 8080
 ```
 
-Abra [http://localhost:8080](http://localhost:8080). Use um servidor HTTP porque a interface carrega `data/software.json`; abrir `index.html` diretamente pode ser bloqueado pelo navegador.
-
-## Estrutura do projeto
-
-- `index.html`: página principal e metadados.
-- `styles.css`: identidade visual e layout responsivo.
-- `app.js`: busca, filtros, ordenação e cartões.
-- `data/software.json`: registros do catálogo.
-- `data/schema.json`: esquema dos registros.
-- `scripts/validate_catalog.py`: validação de escopo e estrutura.
-- `tests/test_catalog.py`: testes automatizados.
-- `docs/catalog-guidelines.md`: regras de manutenção do catálogo.
-- `docs/verification.md`: processo e limites de verificação.
-- `docs/decode-launcher-parity.md`: matriz de paridade funcional e checklist de portabilidade do Decode Launcher.
-- `launcher/Cargo.toml`: workspace Rust do launcher.
-- `launcher/apps/`: shell desktop e aplicação web.
-- `launcher/crates/core/`: catálogo, releases e parsing.
-- `launcher/crates/native/`: detecção, downloads e instalação nativa.
-- `launcher/crates/ui-egui/`: interface compartilhada e traduções.
-- `launcher/packaging/`: scripts de empacotamento por plataforma.
-- `launcher/LICENSE-MIT`, `launcher/LICENSE-APACHE`, `launcher/NOTICE`, `launcher/ATTRIBUTION.md`: licenças e atribuições de dependências.
-
-## Validar e testar
+Abra `http://localhost:8080`. Para validar catálogo e scripts:
 
 ```bash
 python3 scripts/validate_catalog.py
 python3 -m unittest discover -s tests -v
 ```
 
-Esses testes verificam estrutura e regras codificadas, garantindo consistência e integridade das informações.
-
-## Compilar e testar o launcher Rust
-
-Requer Rust estável, Cargo e dependências nativas da plataforma. No Linux, instale os pacotes de cabeçalho do sistema gráfico antes de compilar.
-
-```bash
-cd launcher
-cargo fmt --all -- --check
-cargo test --workspace --locked
-```
-
-Os testes do workspace validam os componentes do launcher em Linux, Windows, macOS, FreeBSD e WebAssembly.
-
-## Licenças e atribuição
-
-- Código do Decode Open Source Hub: MIT, veja [LICENSE](LICENSE).
-- Textos e dados editoriais originais: CC BY 4.0, veja [LICENSE-DATA.md](LICENSE-DATA.md).
-- Código do Decode Launcher: MIT OR Apache-2.0, veja `launcher/LICENSE-MIT` e `launcher/LICENSE-APACHE`.
-- Aplicativos catalogados: respeite a licença e os avisos em cada repositório correspondente.
-- Marcas, nomes e ativos de terceiros mantêm seus termos próprios.
-
-## Atualização do catálogo
-
-Ao atualizar os aplicativos da suíte Decode, mantenha `data/software.json`, `data/schema.json`, o validador e os testes sincronizados. O launcher é mantido como utilitário integrado de gerenciamento.
-
----
-
-**Decode Open Source Hub** — catálogo oficial de código aberto e Decode Launcher da comunidade Decode.
+Para testar o Launcher, consulte [`launcher/AGENTS.md`](launcher/AGENTS.md) e execute `cargo test --workspace --locked` ou `cargo xtask ci` dentro de `launcher/`.
