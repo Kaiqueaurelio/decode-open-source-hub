@@ -250,7 +250,15 @@ jobs:
             $tag = if ($env:INPUT_TAG) { $env:INPUT_TAG } else { "v0.0.0" }
           } elseif ($env:TAG_NAME -eq "main") {
             $latest = gh api "repos/$env:GITHUB_REPOSITORY/releases/latest" --jq .tag_name
-            if ($latest -match '^v(\d+)\.(\d+)\.(\d+)
+            if ($latest -match '^v(\d+)\.(\d+)\.(\d+)$') {
+              $tag = "v$($Matches[1]).$($Matches[2]).$([int]$Matches[3] + 1)"
+            } else {
+              throw "Latest release tag is not semantic version: $latest"
+            }
+          } else {
+            $tag = $env:TAG_NAME
+          }
+          $version = $tag.TrimStart("v")
           $folder = "$($env:APP_ID)-$version-windows-x64"
           $binary = "apps/$($env:DIRECTORY)/target/release/$($env:APP_PACKAGE).exe"
           if (-not (Test-Path $binary)) { throw "Binary not generated: $binary" }
