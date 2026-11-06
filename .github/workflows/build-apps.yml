@@ -78,7 +78,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check out the pinned Craft Fonts input
-        if: matrix.id == 'lightcraft'
+        if: matrix.id == 'lightcraft' || matrix.id == 'deckcraft'
         uses: actions/checkout@v4
         with:
           repository: storytold/craft-fonts
@@ -128,8 +128,6 @@ jobs:
           INPUT_TAG: ${{ inputs.release_tag }}
           PUBLISH_LATEST: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]') }}
           GH_TOKEN: ${{ github.token }}
-          CRAFT_FONTS_DIR: ${{ matrix.id == 'lightcraft' && format('{0}/apps/craft-fonts', github.workspace) || '' }}
-          CRAFT_FONTS_REQUIRED: ${{ matrix.id == 'lightcraft' && '1' || '' }}
           AWS_LC_SYS_CFLAGS_x86_64_unknown_linux_gnu: ${{ matrix.id == 'pdfcraft' && '-D__isoc23_sscanf=__isoc99_sscanf -D__isoc23_strtol=strtol' || '' }}
         run: |
           set -euo pipefail
@@ -159,6 +157,9 @@ jobs:
           version_var="$(printf '%s_VERSION' "$APP_ID" | tr '[:lower:]' '[:upper:]')"
           export "$version_var=$version"
           package_script="apps/${{ matrix.directory }}/packaging/linux/package.sh"
+          if [[ "$APP_ID" == "deckcraft" || "$APP_ID" == "lightcraft" ]]; then
+            export CRAFT_FONTS_DIR="$GITHUB_WORKSPACE/apps/craft-fonts"
+          fi
           if [[ "$APP_ID" == "cadcraft" ]]; then
             # The canonical CAD source uses ai.storyteller.* desktop assets and emits decode-cad.
             # Align its desktop ID, final asset stem and AppImageUpdate pattern with the launcher.
