@@ -1,0 +1,75 @@
+name: Decode Launcher Quick Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "launcher/**"
+      - ".github/workflows/quick-check.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "launcher/**"
+      - ".github/workflows/quick-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: decode-launcher-quick-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quick-linux:
+    name: Workspace check and core/native tests (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev
+
+      - name: Install stable Rust
+        run: |
+          rustup toolchain install stable --profile minimal --component rustfmt
+          rustup default stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: launcher -> target
+
+      - name: Check formatting
+        working-directory: launcher
+        run: cargo fmt --all -- --check
+
+      - name: Check complete workspace
+        working-directory: launcher
+        run: cargo check --workspace --locked
+
+      - name: Test core and native packages
+        working-directory: launcher
+        run: cargo test -p decode-launcher-core -p decode-launcher-native --locked
+
+  quick-windows:
+    name: Windows workspace check
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: launcher -> target
+
+      - name: Check complete workspace
+        working-directory: launcher
+        run: cargo check --workspace --locked
