@@ -64,7 +64,7 @@ O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter 
 
 ## ⬇️ Baixar aplicativos Decode
 
-Escolha o aplicativo para baixar seu pacote Linux **x86_64** diretamente da última release. Os botões apontam para os arquivos publicados no GitHub Releases.
+Os botões abaixo baixam os pacotes Linux **x86_64**. Para Windows **x64**, [abra os downloads da última release](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest) e escolha o arquivo `<app>-<versão>-windows-x64-portable.zip` do aplicativo desejado. A release publica os 13 aplicativos para ambos os sistemas.
 
 <p align="center">
   <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-cad-release-package.tar.gz"><img src="https://img.shields.io/badge/Decode%20CAD-Baixar%20Linux-14b8a6?style=for-the-badge&logo=linux&logoColor=white" alt="Baixar Decode CAD para Linux"></a>
