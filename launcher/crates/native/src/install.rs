@@ -2677,7 +2677,7 @@ mod tests {
         let release = Release { version: version::parse("99.0.0"), tag: "v99.0.0".into(), ..Release::default() };
         let asset = Asset {
             name: "photocraft-0.4.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.4.0/photocraft-0.4.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.4.0/photocraft-0.4.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         let stop = Stop::default();
@@ -2689,7 +2689,7 @@ mod tests {
         // A matching artifact passes the guard (it fails later for unrelated reasons, not the bind).
         let good = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v99.0.0/photocraft-99.0.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v99.0.0/photocraft-99.0.0-linux-x86_64.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &good).is_ok());
@@ -2697,7 +2697,7 @@ mod tests {
         // URL filename mismatch is rejected (CWE-494).
         let bad_url_name = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v99.0.0/other.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v99.0.0/other.AppImage".into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &bad_url_name).is_err());
@@ -2705,7 +2705,8 @@ mod tests {
         // URL tag mismatch is rejected.
         let bad_tag = Asset {
             name: "photocraft-99.0.0-linux-x86_64.AppImage".into(),
-            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/unparsed_tag/photocraft-99.0.0-linux-x86_64.AppImage".into(),
+            url: "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/unparsed_tag/photocraft-99.0.0-linux-x86_64.AppImage"
+                .into(),
             ..Asset::default()
         };
         assert!(bind_artifact_version(app, &release, &bad_tag).is_err());

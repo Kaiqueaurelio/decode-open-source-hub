@@ -146,13 +146,13 @@ fn release(id: &str, v: &str, at: i64) -> Release {
         version: version::parse(v),
         name: format!("v{v}"),
         published_at: Some(at),
-        html_url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/tag/v{v}"),
+        html_url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v{v}"),
         notes: "## What's Changed\n* Faster things by @a in https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/x/pull/1".into(),
         prerelease: false,
         assets: vec![Asset {
             name: name.clone(),
             size: 150 << 20,
-            url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/{id}/releases/download/v{v}/{name}"),
+            url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v{v}/{name}"),
             sha256: None,
         }],
     }
@@ -1277,7 +1277,7 @@ fn links_open_the_right_pages() {
     // The footer's Decode links and each card's own pages.
     let github = all_opened(&mut h, "GitHub");
     assert!(github.contains(&"https://github.com/Kaiqueaurelio/decode-open-source-hub".to_string()), "{github:?}");
-    assert!(github.contains(&"https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft".to_string()), "{github:?}");
+    assert!(github.contains(&"https://github.com/Kaiqueaurelio/decodecad".to_string()), "{github:?}");
     let sites = all_opened(&mut h, "Website");
     assert!(sites.contains(&"https://kaiqueaurelio.github.io/decode-open-source-hub/".to_string()), "{sites:?}");
     // Social icons in the footer.
@@ -1288,14 +1288,15 @@ fn links_open_the_right_pages() {
     h.run_steps(3);
     // The first card is the first installed app by name.
     let url = click_opens(&mut h, "All releases").unwrap_or_default();
-    assert!(url.starts_with("https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/") && url.ends_with("/releases"), "{url}");
+    assert_eq!(url, "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases");
 }
 
 /// An asset URL can come straight from GitHub's release JSON; it must not reach the opener when
 /// it carries an opener metacharacter, whether it is shown on a card or in the launcher dialog.
 #[test]
 fn hostile_release_asset_urls_never_reach_the_opener() {
-    const HOSTILE: &str = "https://github.com/Kaiqueaurelio/decode-open-source-hub/tree/main/apps/photocraft/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg|calc.exe";
+    const HOSTILE: &str =
+        "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.5.0/photocraft-0.5.0-macos-universal.dmg|calc.exe";
 
     let mut ev = events();
     for event in &mut ev {
