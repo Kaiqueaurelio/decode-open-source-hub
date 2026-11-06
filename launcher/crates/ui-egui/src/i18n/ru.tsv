@@ -357,7 +357,8 @@ filter	Installed	Установлены
 	Use default	Использовать по умолчанию
 	New installs use this folder. Updates stay in their current location.	Новые приложения устанавливаются в эту папку. При обновлении текущее расположение сохраняется.
 	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	В Linux для выбранной папки используется AppImage, если он доступен; иначе программа использует проверенный tar.gz.
-	Linux custom folders use AppImage when available; otherwise, the launcher uses a verified tar.gz.	В Linux для выбранной папки используется AppImage, если он доступен; иначе программа использует проверенный tar.gz.
+	Custom folders use AppImage on Linux.	Для установки в выбранную папку в Linux используется AppImage.
+	On Linux, custom folders use AppImage format.	В Linux для установки в выбранную папку используется формат AppImage.
 	The system manages install locations here.	В этой среде расположением приложений управляет система.
 @msg	couldn't use install folder {path}: {reason}	не удалось использовать папку установки {path}: {reason}
 @msg	this release has no AppImage for a custom install folder	в этом выпуске нет AppImage для установки в выбранную папку
