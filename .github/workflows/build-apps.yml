@@ -77,6 +77,14 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Check out the pinned Craft Fonts input
+        if: matrix.id == 'lightcraft'
+        uses: actions/checkout@v4
+        with:
+          repository: storytold/craft-fonts
+          ref: b076417b5880bd4154bd22f00695b1d28c6bea83
+          path: apps/craft-fonts
+
       - name: Check out canonical DecodeCAD source
         if: matrix.id == 'cadcraft'
         uses: actions/checkout@v4
@@ -106,6 +114,8 @@ jobs:
 
       - name: Build the actual application binary
         working-directory: apps/${{ matrix.directory }}
+        env:
+          AWS_LC_SYS_CFLAGS_x86_64_unknown_linux_gnu: ${{ matrix.id == 'pdfcraft' && '-D__isoc23_sscanf=__isoc99_sscanf -D__isoc23_strtol=strtol' || '' }}
         run: cargo build --release --locked -p ${{ matrix.package }}
 
       - name: Package executable in the layout expected by Decode Launcher
@@ -118,6 +128,9 @@ jobs:
           INPUT_TAG: ${{ inputs.release_tag }}
           PUBLISH_LATEST: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[publish-decode-apps]') }}
           GH_TOKEN: ${{ github.token }}
+          CRAFT_FONTS_DIR: ${{ matrix.id == 'lightcraft' && format('{0}/apps/craft-fonts', github.workspace) || '' }}
+          CRAFT_FONTS_REQUIRED: ${{ matrix.id == 'lightcraft' && '1' || '' }}
+          AWS_LC_SYS_CFLAGS_x86_64_unknown_linux_gnu: ${{ matrix.id == 'pdfcraft' && '-D__isoc23_sscanf=__isoc99_sscanf -D__isoc23_strtol=strtol' || '' }}
         run: |
           set -euo pipefail
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
