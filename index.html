@@ -153,7 +153,6 @@
     <div id="active-filters"></div>
     <button id="clear-filters" type="button"></button>
     <div id="load-more-wrap"><button id="load-more" type="button"></button></div>
-    <div id="error-state"></div>
     <form id="search-form"></form>
   </div>
 
@@ -187,7 +186,8 @@
 
   <!-- Main Grid Section -->
   <main class="launcher-main-container" id="lineup">
-    <div class="software-grid" id="software-grid" aria-live="polite">
+    <p id="error-state" class="catalog-status" role="status" hidden></p>
+    <div class="software-grid id="software-grid" aria-live="polite">
       <div class="software-card app-decode-craft" id="card-decode-craft" data-slug="decode-craft">
         <span aria-hidden="true" class="card-hover-accent" style="background:#a855f7;"></span>
         <div class="card-header-bar">
