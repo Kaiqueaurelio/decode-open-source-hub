@@ -479,12 +479,14 @@ fn run_install(
         .cloned()
         .ok_or("the latest release hasn't been found yet. Check for updates first.")?;
     let (asset, kind) = planned_asset(app, &release, platform, options, existing, record).ok_or_else(|| {
-        if platform.os == decode_launcher_core::Os::Linux
-            && options.install_locations.folder(app.id).is_some()
-            && existing.is_none()
-            && record.is_none()
-        {
-            "this release has no AppImage for a custom install folder".to_string()
+        if custom_linux_folder(app, platform, options, existing, record) {
+            format!(
+                "This release has no AppImage for {name} {version} on {platform}, and no compatible tar.gz fallback is available. Open the release page: {url}",
+                name = app.name,
+                version = release.version_label(),
+                platform = platform.label(),
+                url = release.html_url,
+            )
         } else {
             format!("{} {} has no download for {}", app.name, release.version_label(), platform.label())
         }
@@ -609,19 +611,29 @@ fn planned_asset(
     record: Option<&crate::manifest::Record>,
 ) -> Option<(Asset, PackageKind)> {
     let stems: Vec<&str> = app.stems().collect();
-    let custom_linux = platform.os == decode_launcher_core::Os::Linux
-        && !process::in_sandbox()
-        && existing.is_none()
-        && record.is_none()
-        && options.install_locations.folder(app.id).is_some();
+    let custom_linux = custom_linux_folder(app, platform, options, existing, record);
     let kinds = if existing.is_none() && record.is_some_and(|r| r.kind == PackageKind::PortableZip) {
         vec![PackageKind::PortableZip]
     } else if custom_linux {
-        vec![decode_launcher_core::PackageKind::AppImage]
+        vec![decode_launcher_core::PackageKind::AppImage, decode_launcher_core::PackageKind::TarGz]
     } else {
         install::choose_kinds(app, existing, record, &options.kinds)
     };
     pick_asset(release, &stems, platform, &kinds).map(|(a, k)| (a.clone(), k))
+}
+
+fn custom_linux_folder(
+    app: &DecodeApp,
+    platform: Platform,
+    options: &BackendOptions,
+    existing: Option<&Installed>,
+    record: Option<&crate::manifest::Record>,
+) -> bool {
+    platform.os == decode_launcher_core::Os::Linux
+        && !process::in_sandbox()
+        && existing.is_none()
+        && record.is_none()
+        && options.install_locations.folder(app.id).is_some()
 }
 
 /// Tells the UI whether `app` has a paused download waiting, or a finished one to install.
@@ -1428,7 +1440,13 @@ mod tests {
             .flat_map(|t| suffixes.iter().map(move |s| format!("{APP}-{version}-{t}{s}")))
             .map(|name| Asset { url: format!("https://example.invalid/{name}"), name, size: 3, sha256: None })
             .collect();
-        Release { assets, ..Release::default() }
+        Release {
+            tag: format!("v{version}"),
+            version: Some(version.parse().unwrap()),
+            html_url: format!("https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/tag/v{version}"),
+            assets,
+            ..Release::default()
+        }
     }
 
     #[cfg(windows)]
@@ -1467,7 +1485,7 @@ mod tests {
 
     #[cfg(target_os = "linux")]
     #[test]
-    fn a_custom_linux_folder_requires_appimage_without_package_fallback() {
+    fn a_custom_linux_folder_prefers_appimage_then_falls_back_to_verified_tarball() {
         if process::in_sandbox() {
             return;
         }
@@ -1481,6 +1499,16 @@ mod tests {
         let mut release = release("0.5.0");
         assert_eq!(planned_asset(app, &release, platform, &options, None, None).unwrap().1, PackageKind::AppImage);
         release.assets.retain(|a| !a.name.ends_with(".AppImage"));
+        assert_eq!(planned_asset(app, &release, platform, &options, None, None).unwrap().1, PackageKind::TarGz);
+        release.assets.retain(|a| !a.name.ends_with(".tar.gz"));
+        let message = format!(
+            "This release has no AppImage for {} {} on {}, and no compatible tar.gz fallback is available. Open the release page: {}",
+            app.name,
+            release.version_label(),
+            platform.label(),
+            release.html_url
+        );
+        assert!(message.contains("0.5.0") && message.contains("Linux x64") && message.contains("Open the release page"));
         assert!(planned_asset(app, &release, platform, &options, None, None).is_none());
         let existing =
             Installed { version: None, source: decode_launcher_core::InstallSource::Deb, location: "/usr/bin/photocraft".into(), package: None };
