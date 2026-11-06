@@ -11,7 +11,7 @@ Este repositório reúne o catálogo informativo e o código-fonte do **Decode L
 
 ## 📥 Baixar o Decode Launcher (Hub Oficial)
 
-O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter atualizada toda a suíte de softwares criativos Decode no seu computador (com atualizações automáticas via GitHub Releases).
+O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter atualizada toda a suíte de softwares criativos Decode no seu computador (com atualizações automáticas via GitHub Releases). No Linux, baixe o AppImage para escolher uma pasta de instalação personalizada em Configurações; novos aplicativos serão instalados nessa pasta em formato AppImage.
 
 <p align="center">
   <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe">
@@ -24,6 +24,10 @@ O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter 
   &nbsp;
   <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz">
     <img src="https://img.shields.io/badge/Linux%20x86__64-.tar.gz-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux .tar.gz">
+  </a>
+  &nbsp;
+  <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.AppImage">
+    <img src="https://img.shields.io/badge/Linux%20AppImage-Custom%20folder-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux AppImage for a custom installation folder">
   </a>
   &nbsp;
   <a href="https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz">
@@ -51,6 +55,7 @@ O **Decode Launcher** é o aplicativo oficial para gerenciar, instalar e manter 
 | :--- | :--- | :--- | :--- |
 | **🪟 Windows (Instalador)** | `.exe` | [**⬇️ Baixar (.exe)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher.exe) | Execute o instalador no Windows 10/11. |
 | **🪟 Windows (Portátil)** | `.zip` | [**⬇️ Baixar (.zip)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-windows-x64.zip) | Extraia o arquivo e execute direto sem instalar. |
+| **🐧 Linux (AppImage)** | `.AppImage` | [**⬇️ Baixar AppImage**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.AppImage) | Execute o AppImage; escolha a pasta personalizada em Configurações. |
 | **🐧 Linux (x86_64)** | `.tar.gz` | [**⬇️ Baixar (.tar.gz)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-linux-x86_64.tar.gz) | Extraia e rode o executável `decode-launcher`. |
 | **🍎 macOS (Intel / Apple Silicon)** | `.tar.gz` | [**⬇️ Baixar (.tar.gz)**](https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/download/v0.9.0/decode-launcher-macos.tar.gz) | Extraia e execute no macOS. |
 
