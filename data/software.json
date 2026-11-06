@@ -131,7 +131,7 @@
     "featured": true,
     "downloadWindows": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-windows-x64.zip",
     "downloadWindowsExe": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher.exe",
-    "downloadLinux": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.tar.gz",
+    "downloadLinux": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-linux-x86_64.AppImage",
     "downloadMacOS": "https://github.com/Kaiqueaurelio/decode-open-source-hub/releases/latest/download/decode-launcher-macos.tar.gz"
   },
   {
