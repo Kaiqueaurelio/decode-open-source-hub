@@ -93,6 +93,13 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("cargo test --workspace --locked", readme)
         self.assertNotIn("o código do launcher nativo ainda não foi importado", readme.lower())
 
+    def test_catalog_has_offline_cache_fallback(self):
+        script = (ROOT / "app.js").read_text(encoding="utf-8")
+        self.assertIn('decode-catalog-cache', script)
+        self.assertIn('cache: "no-cache"', script)
+        self.assertIn("Sem conexão: exibindo o último catálogo salvo.", script)
+        self.assertIn("Catálogo indisponível", script)
+
     def test_validator_passes(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "validate_catalog.py")],
