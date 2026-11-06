@@ -222,6 +222,14 @@ jobs:
           workspaces: |
             apps/${{ matrix.directory }} -> target
 
+      - name: Prepare canonical DecodeCAD workspace
+        if: matrix.id == 'cadcraft'
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "apps/decode-cad-canonical/Cargo.toml")) {
+            throw "Canonical DecodeCAD repository did not provide Cargo.toml at the expected path."
+          }
+
       - name: Build Windows application
         working-directory: apps/${{ matrix.directory }}
         shell: pwsh
@@ -313,8 +321,8 @@ jobs:
           if [[ -d dist/previous ]]; then
             (cd dist/previous && sha256sum *) >> dist/SHA256SUMS.txt
           fi
-          if compgen -G '*-linux-x86_64.tar.gz' > /dev/null; then sha256sum *-linux-x86_64.tar.gz >> dist/SHA256SUMS.txt; fi
-          if compgen -G '*-windows-x64-portable.zip' > /dev/null; then sha256sum *-windows-x64-portable.zip >> dist/SHA256SUMS.txt; fi
+          if compgen -G 'dist/*-linux-x86_64.tar.gz' > /dev/null; then (cd dist && sha256sum *-linux-x86_64.tar.gz) >> dist/SHA256SUMS.txt; fi
+          if compgen -G 'dist/*-windows-x64-portable.zip' > /dev/null; then (cd dist && sha256sum *-windows-x64-portable.zip) >> dist/SHA256SUMS.txt; fi
           test "$(find dist -maxdepth 1 -name '*-linux-x86_64.tar.gz' | wc -l)" -eq 13
           test "$(find dist -maxdepth 1 -name '*-windows-x64-portable.zip' | wc -l)" -eq 13
 
